@@ -1,0 +1,61 @@
+\documentclass[a4paper]{report}
+
+%Import thesis style file
+\usepackage{baththesis}
+%Define thesis style macros and names
+\title{THESIS TITLE}
+\author{William Graham}
+\degree{DEGREE NAME}
+\department{Mathematical Sciences}
+\degreemonthyear{DEGREE year/month/date}
+
+%Image and page layout packages
+\usepackage{graphicx}
+\usepackage{subcaption} %allows subfigures
+\usepackage[bottom]{footmisc} %footnotes go below figures
+\usepackage{parskip} %adds line space between paragraphs by default
+%Declare location of image files
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+\graphicspath{{./Diagrams/Diagram_PDFs/} {./Diagrams/Numerical_Results/}}
+
+%Allows for more options when enumerating lists (roman, lettering, etc)
+\usepackage{enumerate}
+
+%\input imports all commands from the target files
+\input{./Preamble/PreambleMaths.tex} %maths commands, variables, and other packages
+
+%labelling hacks
+\newcommand\labelthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\begin{document}
+
+%Title page --- provided the information sent to baththesis is correct, this should auto-generate
+\maketitle
+
+%The summary uses a redefined abstract environment
+\abstract{look, some words!}
+
+%Introductory chapter begins
+\input{./Chapters/Introduction/Intro.tex}
+
+%Theory and Preliminaries chapter begins
+\input{./Chapters/Theory-Prelims/Theory-Prelims.tex}
+\input{./Chapters/Theory-Prelims/QuantumGraphs.tex}
+\input{./Chapters/Theory-Prelims/SingularStructureSpaces.tex}
+
+%Scalar equation chapter begins
+\input{./Chapters/Scalar-System/Scalar-System.tex}
+
+%Curl-curl equation chapter begins
+\input{./Chapters/Curl-Curl/Curl-Curl.tex}
+
+%1st order Maxwell / Sing Inclusions chapter begins
+
+%Conclusions chapter begins
+\input{./Chapters/Conclusion/Conc.tex}
+
+\newpage %have a new page to start the bibliography
+\bibliographystyle{acm}
+\bibliography{./BibFiles/BTandSS.bib,./BibFiles/MiscRefs.bib,./BibFiles/PCFsAndEM.bib,./BibFiles/QuantumGraphs.bib}
+
+\end{document}
