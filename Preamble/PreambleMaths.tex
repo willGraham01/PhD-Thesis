@@ -115,13 +115,20 @@
 \newcommand{\ddiff}[2]{\dfrac{\mathrm{d}^2 #1}{\mathrm{d} {#2}^2}}	%2nd deriv
 \newcommand{\pddiff}[2]{\dfrac{\partial^2 #1}{\partial {#2}^2}}		%2nd partial derivative
 \newcommand{\grad}{\nabla}											%grad operator
+\newcommand{\ograd}{\grad^{(0)}}									%grad operator with 0 superscript
 \newcommand{\tgrad}{\nabla^{\qm}}									%grad operator with qm superscript
 \newcommand{\kgrad}{\grad^{(\wavenumber)}}							%grad with wavenumber superscript
-\newcommand{\ktgrad}{\grad^{\kt}}				%grad with wavenumber, qm superscript
-\newcommand{\curl}[1]{\grad_{#1}\wedge}							%curl with subscript #1
-\newcommand{\kcurl}[1]{\grad_{#1}^{(\wavenumber)}\wedge}			%k-curl with measure subscript #1
-\newcommand{\ktcurl}[1]{\grad_{#1}^{\kt}\wedge}		%k,theta-curl with measure subscript #1
+\newcommand{\ktgrad}{\grad^{\kt}}									%grad with wavenumber, qm superscript
 \newcommand{\laplacian}{\Delta}						%laplacian operator, can have subscripts attached
+%%for curls, there are two options for formatting - only use one set and don't mix-and-match!
+%%%%set 1: writes \nabla\wedge notation
+%\newcommand{\curl}[1]{\grad_{#1}\wedge}							%curl with subscript #1
+%\newcommand{\kcurl}[1]{\grad_{#1}^{(\wavenumber)}\wedge}			%k-curl with measure subscript #1
+%\newcommand{\ktcurl}[1]{\grad_{#1}^{\kt}\wedge}					%k,theta-curl with measure subscript #1
+%%%%set 2: writes \mathrm{curl}
+\newcommand{\curl}[1]{\mathrm{curl}_{#1}}							%curl with subscript #1
+\newcommand{\kcurl}[1]{\mathrm{curl}_{#1}^{(\wavenumber)}}	 		%k-curl with measure subscript #1
+\newcommand{\ktcurl}[1]{\mathrm{curl}_{#1}^{\kt}}					%k,theta-curl with measure subscript #1
 
 %displaying integrals
 \newcommand{\integral}[3]{\int_{#1}#2 \ \mathrm{d}#3}			%integral, domain #1, integrand #2, measure #3

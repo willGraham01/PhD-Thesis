@@ -1,0 +1,59 @@
+\section{Singular Measures} \label{sec:SingularMeasures}
+\tstk{introduction, in which we should probably define what we mean by a singular structure, or refer back to where it has already been introduced and properly defined.}
+
+Let 
+\begin{align*}
+	\ddom:= \left[0,T_1\right)\times\left[0,T_2\right), 
+\end{align*}
+and $\dddom = \ddom \times \bracs{0,\infty}$.
+Let $\graph = \bracs{\vertSet,\edgeSet}$ be an embedded graph in $\ddom$ \tstk{this needs to come after QGs then}, and for each $I_{jk}\in \edgeSet$, define the (Borel) measure $\lambda_{jk}$ as the measure that supports the one-dimensional Lebesgue measure on (or ``along") $I_{jk}$:
+\begin{align*}
+	\lambda_{jk}\bracs{B} = \lambda_{1}\bracs{r_{jk}^{-1}\bracs{B \cap I_{jk}}},
+	&\quad\text{for all Borel } B.
+\end{align*}
+Here, $\lambda_1$ is the Lebesgue measure on $\reals$, and $r_{jk}$ is the parametrisation of the edge $I_{jk}$ (\tstk{general notation and assumptions}).
+Then set $\ddmes$ to be the (Borel) measure defined by
+\begin{align*}
+	\ddmes\bracs{B} = \sum_{v_j\in \vertSet}\sum_{j\conLeft k} \lambda_{jk}\bracs{B}.
+\end{align*}
+We refer to $\ddmes$ as the ``singular measure that supports $\graph$"; or alternatively the ``singular measure on $\graph$", or the ``(singular) measure that supports the edges of $\graph$".
+For a graph embedded into a 2D domain, the singular measure $\ddmes$ is illustrated in figure \ref{fig:Diagram_SingularMeasure2D}.
+\begin{figure}[b!]
+	\centering
+	\includegraphics[scale=0.85]{Diagram_SingularMeasure2D.pdf}
+	\caption{\label{fig:Diagram_SingularMeasure2D} For a graph embedded in $\reals^2$, the $\ddmes$-measure of any Borel set $B$ is obtained from summing the contributions of each $\lambda_{jk}$, as indicated by the thickened lines.
+	Sets that do not intersect $\graph$ have zero measure.}
+\end{figure}
+
+Now for each $v_j\in\vertSet$ let $\delta_j$ be a point-mass measure centred on $v_j$, namely
+\begin{align*}
+	\delta_j\bracs{B} &= \begin{cases} 1, & v_j\in B, \\ 0, & v_j\not\in B, \end{cases}
+\end{align*}
+and let
+\begin{align*}
+	\nu\bracs{B} = \sum_{v_j\in\vertSet}\alpha_j\delta_j\bracs{B},
+	\quad\text{for all Borel } B,
+\end{align*}
+where each $\alpha_j$ is the coupling constant at the vertex $v_j$, and set $\dddmes = \ddmes + \nu$.
+\tstk{here, can mention how ``extruding" the graph into the $x_3$-direction would provide another singular measure on the induced planes --- this is the opposite to what we are doing, using a Fourier transform in the $x_3$-direction so that we can FORGET about the $x_3$-dependence!}
+The measures $\dddmes$, $\ddmes$, and $\nu$ will be key to our measure-theoretic formulations, enabling us to establish notions of derivatives on a domains with no interior (or no ``area" in the Lebesgue-sense).
+
+\tstk{again, we are assuming we have established some notion of singular structure layout!}
+When we come to consider variational problems on our singular structure, it is helpful to take both a Fourier and Gelfand transform due to the features our singular structure possesses.
+The result of these transforms being that the usual gradient operator is (effectively) replaced by the operator $\ktgrad$ in \eqref{eq:PeriodCellCurlCurlStrongForm}.
+Clearly, the Fourier transform in the $x_3$ direction introduces the Fourier variable (physically, the ``wavenumber") $\wavenumber$ and replaces derivatives with respect to $x_3$ by multiplication by a constant $\rmi\wavenumber$.
+The Gelfand transform then affects the components of the gradient operator which act in the $\bracs{x_1,x_2}$-plane, where we have a periodic structure.
+Recall that we pose \eqref{eq:WholeSpaceCurlCurl} on a periodic, embedded graph $\graph$ in $\reals^2$, and the Gelfand transform to move us to a family of problems on the period cell of $\graph$.
+As a result, we introduce the quasi-momentum
+\begin{align*}
+	\qm=\bracs{\qm_1,\qm_2}\in\left[-\frac{\pi}{T_1},\frac{\pi}{T_1}\right)\times\left[-\frac{\pi}{T_2},\frac{\pi}{T_2}\right)
+\end{align*}
+define the ``shifted" gradient operator $\ktgrad$ on smooth functions $\phi\in\smooth{\ddom}$ by
+\begin{align*}
+	\ktgrad\phi &= \begin{pmatrix} \partial_1\phi + \rmi\qm_1\phi \\ \partial_2\phi + \rmi\qm_2\phi \\ \rmi\wavenumber\phi \end{pmatrix},
+\end{align*}
+and the ``shifted" curl operator $\ktcurl{}$ which acts on smooth functions $\Phi=\bracs{\phi_1, \phi_2, \phi_3}^{\top}\in\smooth{\ddom}^3$ as
+\begin{align*}
+	\ktcurl{}\Phi &= \begin{pmatrix} \bracs{\partial_2 + \rmi\qm_2}\phi_3 - i\wavenumber\phi_2 \\ i\wavenumber\phi_1 - \bracs{\partial_1 + \rmi\qm_1}\phi_3 \\ \bracs{\partial_1 + \rmi\qm_1}\phi_2 - \bracs{\partial_2 + \rmi\qm_2}\phi_1 \end{pmatrix}.
+\end{align*}
+Note that $\phi$ and $\Phi$ are functions of two variables $\bracs{x_1,x_2}\in\ddom$ --- a Fourier transform removes the dependence on the variable $x_3$, allowing us to work on an embedded graph in the $\bracs{x_1,x_2}$-plane rather than on planes in 3 dimensions corresponding to the ``extrusion" of the graph.

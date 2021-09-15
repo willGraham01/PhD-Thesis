@@ -27,6 +27,10 @@
 %labelling hacks
 \newcommand\labelthis{\addtocounter{equation}{1}\tag{\theequation}}
 
+%can use the \includeonly{} command to specify which chapters to update and include in the document,
+%to save on rendering time. This will also retain equation/section numbering from skipped sections too.
+\includeonly{./Chapters/Theory-Prelims/Theory-Prelims}
+
 \begin{document}
 
 %Title page --- provided the information sent to baththesis is correct, this should auto-generate
@@ -36,23 +40,21 @@
 \abstract{look, some words!}
 
 %Introductory chapter begins
-\input{./Chapters/Introduction/Intro.tex}
+\include{./Chapters/Introduction/Intro}
 
 %Theory and Preliminaries chapter begins
-\input{./Chapters/Theory-Prelims/Theory-Prelims.tex}
-\input{./Chapters/Theory-Prelims/QuantumGraphs.tex}
-\input{./Chapters/Theory-Prelims/SingularStructureSpaces.tex}
+\include{./Chapters/Theory-Prelims/Theory-Prelims}
 
 %Scalar equation chapter begins
-\input{./Chapters/Scalar-System/Scalar-System.tex}
+\include{./Chapters/Scalar-System/Scalar-System}
 
 %Curl-curl equation chapter begins
-\input{./Chapters/Curl-Curl/Curl-Curl.tex}
+\include{./Chapters/Curl-Curl/Curl-Curl}
 
 %1st order Maxwell / Sing Inclusions chapter begins
 
 %Conclusions chapter begins
-\input{./Chapters/Conclusion/Conc.tex}
+\include{./Chapters/Conclusion/Conc}
 
 \newpage %have a new page to start the bibliography
 \bibliographystyle{acm}

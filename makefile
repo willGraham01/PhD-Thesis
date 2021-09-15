@@ -6,7 +6,7 @@ NAME := ThesisWG270
 # directory containing tikz .tex files
 TIKZDIR := ./Diagrams
 # directory to place rendered tikz pictures as pdfs
-TIKZ_PDF_DUMP := $(TIKZDIR)/Diagram_PDFs#folder to contain all the tikz pdfs
+TIKZ_PDF_DUMP := $(TIKZDIR)/Diagram_PDFs
 # all tikz tex filenames, without extensions
 TIKZ_FNAMES := $(shell ls -p $(TIKZDIR)/ | grep -v / | sed -e 's/\.tex$///' | tr '\n' ' ')
 # create pdf filenames for tikz files
@@ -15,7 +15,7 @@ TIKZ_PDFS := $(addprefix $(TIKZDIR)/, $(TIKZ_FNAMES:=.pdf))
 # render article, report, paper, etc
 MKLATEX := latexmk -bibtex -pdf -latexoption=""
 # render tikz figures in .tex files in $(TIKZDIR)/
-MKTIKZ := latexmk -cd -pdf -outdir=$(TIKZ_PDF_DUMP)
+MKTIKZ := latexmk -cd -pdf -outdir=./Diagram_PDFs
 # clear auxillary files produced by latexmk
 SOFT_CLEAN := latexmk -c
 # clear auxillary files and pdfs produced by fdb_latexmk
