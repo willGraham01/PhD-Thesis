@@ -20,6 +20,7 @@
 # *.ps
 # *.eps
 *.pdf
+!/Diagrams/Numerical_Results/*.pdf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl

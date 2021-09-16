@@ -12,9 +12,7 @@ This is seperate from PhD-Work-Git repository to avoid repository bloat; as such
 - `.tex` files that contain TikZ diagrams. These are stored in the `Diagrams` folder. The diagram `.pdf`s can be produced from the `makefile`, and are placed into the sub-folder `Diagram_PDFs`.
 - `.tex` files containing preamble. These are stored in the `Preamble` folder and contain either preamble for thesis prose (including macros defining notation for reoccuring objects) or for TikZ diagrams (which are indirectly used in the `.tex` files for TikZ-produced images). Any established notations or conventions should be placed into the preamble files.
 - `.bib` files containing reference information. These are stored in the `BibFiles` folder, as multiple `.bib` files. `ThesisWG270.tex` reads in all of these files to produce one bibliography.
-
-**Still to be included**
-- Numerical code and generated diagrams folder and convention
+- `.pdf` files produced from Numerical Code. These are stored in the `Diagrams/Numerical_Results/` folder, and should be the *only* `.pdf` files included in the repository. Commits that change these figures should be absolutely certain this is necessary, as saving a binary file's changes leads to bloat in the `.git/` directory.
 
 ### `makefile` Targets
 The `makefile` has the following targets.
