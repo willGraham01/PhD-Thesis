@@ -11,12 +11,18 @@ The axis along which the extrusion takes place is the \emph{fibre axis}.
 	\includegraphics[scale=0.5]{Diagram_ShrinkToSingularSquareCell.pdf}
 	\caption{\label{fig:Diagram_ShrinkToSingularSquareCell} The ``singular structures" that form the domains (or pieces of the domains) of the problems that we will consider. On the left, the period cell of a 2 dimensional periodic material extruded into 3 dimensions. On the right, the corresponding singular-structure that comes about as a ``limit" of the physical structure.}
 \end{figure}
-Typically when faced with (a differential equation on a) domain like that described, one uses a Fourier transform along the fibre axis and a Floquet or Gelfand transform in the periodic directions to reduce the complexity in analysing the problem.
-In this instance, such a procedure would bring us back to a problem on the unit/period cell (in $\reals^2$) of the periodic structure, with artefacts from the transforms we applied.
-However, we are interested in studying wave-propagation problems on so called \emph{singular structures}.
-These are domains which contain no interior (or have no area) from the perspective of the space they are embedded into.
-We will chose to represent singular structure by metric graphs embedded into $\reals^2$ (see section \ref{ssec:EmbeddedGraphs}), which again we can extrude into $\reals^3$ to provide a structure formed of a union of planes, and mimicking the structure of a photonic crystal (or a photonic fibre yet to have a core drilled out).
-Of course, we then apply a Fourier transform along the fibre axis and a Gelfand transform (or Floquet \tstk{serena and kirill use this one}) in the periodic cross-section to reduce the problem to a family of more manageable problems on the unit cell, as described above.
+Typically when faced with (a differential equation on a) domain like that described, one uses a Fourier transform along the fibre axis and a Gelfand transform (or alternatively a Floquet transform) in the periodic directions to reduce the complexity in analysing the problem.
+Such a procedure would bring us back to a problem on the unit/period cell (in $\reals^2$) of the periodic structure, with artefacts from the transforms we applied.
+However, we are interested in studying wave-propagation problems on so called \emph{singular structures} ---
+regions which possess no interior (or have no area) from the perspective of the space they are embedded into.
+The geometry of our singular structures will reflect that of the aforementioned thin-structure materials studied in photonics, \tstk{limit argument mention here}.
+The natural way for us to do this is as follows: take a (periodic) metric graph in $\reals^2$ (see section \ref{ssec:EmbeddedGraphs}), and extrude the edges of this graph into the $x_3$ direction to create a 3-dimensional structure which is a union of planes induced by the graph edges.
+This creates a region that mimics the structure of a photonic crystal (or a photonic fibre yet to have a core drilled out), with an ``infinitely thin", periodic cross-sectional pattern.
+Of course, we then apply a Fourier transform along the fibre axis, and a Gelfand transform (or Floquet \tstk{serena and kirill use this one}) in the periodic cross-section to reduce the problem to a family of more manageable problems on the unit cell.
 
-As such, the domains we will consider in this work will be some set $\graph$ with empty interior, represented as an embedded graph, contained in a (bounded) subset of $\reals^2$ (the unit cell of a periodic domain).
-Wanting to pose ``differential equations" on a domain with no interior raises several questions as to how one can understand the notation of a derivative (and other derivative-like operations like the curl) on such a structure, and \tstk{boundary conditions, how to start???}
+As such, the domains that will be considered will consist of a metric graph $\graph$ embedded into a region $\ddom\subset\reals^2$, which should also be thought of as the ``unit cell" of the periodic singular structure.
+The graph $\graph$ itself represents the singular structure we are interested in working on (or more precisely, the cross-section of the singular structure included by the extrusion of $\graph$).
+We will write ``a domain $\ddom$" (or similar) when we wish to refer to such a region $\ddom$ containing an embedded metric graph as just described, and ``a singular structure" to refer to the graph contained in such a domain.
+Although $\ddom$ is only a subset of $\reals^2$ thanks to the use of a Fourier transform, it is important to remember that the graph $\graph$ represents a union of planes in 3 dimensions, particularly when we come to define (and interpret) gradient-like operators on functions defined on these singular structures.
+Of course, wanting to pose ``differential equations" on a domain with no interior raises several questions as to how one can understand the notion of a derivative --- clearly the ``usual" 2-dimensional definition of a gradient will not suffice for a singular structure!
+This leads us to define and study Sobolev spaces of functions with gradients (and later curls) with respect to a Borel measure, as in section \tstk{section ref!}
