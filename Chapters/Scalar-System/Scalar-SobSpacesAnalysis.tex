@@ -1,4 +1,4 @@
-\section{Sobolev functions on the edges of an embedded graph} \label{ssec:ScalarSobSpaces}
+\section{Sobolev Spaces of Functions with Gradients} \label{ssec:3DGradSobSpaces}
 \tstk{proper introductory section here? Also, need to change from $x_1$-parallel to $x_2$-parallel throughout! Otherwise things are going to get really annoying}
 
 \tstk{have done some setup to be able to lead with...}
@@ -317,13 +317,14 @@ The reason for observing that the collection $B_{\nu}$ is a basis of $\ltwo{\ddo
 
 Given that the measure $\dddmes = \ddmes + \nu$, propositions \ref{prop:3DGradZeroChar} and \ref{prop:NuGradZeroChar} allow us to understand $\gradZero{\ddom}{\dddmes}$.
 Intuitively, $\gradZero{\ddom}{\dddmes}$ is made up of linear combinations of gradients of zero with respect to $\ddmes$ and $\nu$, although we will qualify this statement since the functions (or rather, equivalence classes of functions) that live in $\gradZero{\ddom}{\ddmes}$ and $\gradZero{\ddom}{\nu}$ are defined on different parts of $\graph$.
-\begin{theorem}[``Characterisation" of $\gradZero{\ddom}{\dddmes}$]
+\begin{theorem}[``Characterisation" of $\gradZero{\ddom}{\dddmes}$] \label{thm:3DdddmesCharGradZero}
 	Let $\tilde{g}\in\ltwo{\ddom}{\dddmes}^3$ and define
 	\begin{align*}
 		g_\mu(x) = \begin{cases} \tilde{g}(x) & x\neq v_j, \ \forall v_j\in\vertSet, \\ 0 & x=v_j, \ v_j\in\vertSet, \end{cases}
 		\qquad
-		g_\nu(x) = \begin{cases} 0 & x\neq v_j, \ \forall v_j\in\vertSet, \\ \tilde{g}\bracs{v_j} & x=v_j, \ v_j\in\vertSet. \end{cases}
+		g_\nu(x) = \begin{cases} 0 & x\neq v_j, \ \forall v_j\in\vertSet, \\ \tilde{g}\bracs{v_j} & x=v_j, \ v_j\in\vertSet, \end{cases}
 	\end{align*}
+	so $\tilde{g} = g_\mu + g_\nu$ (in $\ltwo{\ddom}{\dddmes}^3$).
 	Then
 	\begin{align*}
 		\tilde{g}\in\gradZero{\ddom}{\dddmes} \quad\Leftrightarrow\quad
@@ -337,9 +338,50 @@ Intuitively, $\gradZero{\ddom}{\dddmes}$ is made up of linear combinations of gr
 	\end{align*}
 	so any approximating sequence for $\tilde{g}$ also converges to $g_\mu$ in $\ltwo{\ddom}{\ddmes}^3$ and $g_\nu$ in $\ltwo{\ddom}{\nu}^3$.
 	
-	$\bracs{\Leftarrow}$ For the left-directed implication,
+	$\bracs{\Leftarrow}$ For the left-directed implication, it will be sufficient for us to show the result holds when $g_\mu=0$ and then for when $g_\nu=0$, since we can use linearity of $\gradZero{\ddom}{\dddmes}$ to then complete the proof.
+	With this in mind, notice that the Extension lemma \ref{lem:3DExtensionLemmaGrads} and proposition \ref{prop:3DBSubsetGradZero} deal with the case $g_\nu=0$, demonstrating that $\tilde{g}\in\gradZero{\ddom}{\dddmes}$.
+	For the case when $g_\mu=0$, we can again take without loss of generality $g_\nu$ to be non-zero at exactly one vertex $v_j\in\vertSet$ (as again, we can then use linearity of $\gradZero{\ddom}{\dddmes}$).
+	Let this be the case, so $g_\mu=0$ and $g_\nu=0$ except at the vertex $v=\bracs{v_1,v_2}^\top\in\vertSet$, where $g_\nu(v) =: g = \bracs{g_1,g_2,0}^\top$.
+	Consider smooth functions $\phi_n$ for each $n\in\naturals$ where
+	\begin{align*}
+		\phi_n(x) &= \bracs{x_1-v_1}g_1 + \bracs{x_2-v_2}g_2, &\text{when } \abs{x-v}\leq\recip{n}, \\
+		\phi_n(x) &= 0, &\text{when } \abs{x-v}\geq\frac{2}{n}.
+	\end{align*}
+	Note that $\phi_n(v)=0$ and $\grad\phi_n=g$ for every $n\in\naturals$.
+	Since $\abs{\phi_n(x)}\leq\recip{n}\abs{g_\nu(v)}$ when $\abs{x-v}=\recip{n}$, we can also chose $\phi_n$ so that there exists a constant $c$ independent of $n$ such that $\abs{\grad\phi_n(x)}\leq c\abs{g_\nu(v)}$ whenever $\recip{n}\leq\abs{x-v}\leq\frac{2}{n}$.
+	Then
+	\begin{align*}
+		\integral{\ddom}{ \abs{\phi_n}^2 }{\dddmes}
+		&= \integral{B_{2/n}(v)}{ \abs{\phi_n}^2 }{\ddmes} + \alpha_v\abs{\phi_n(v)}^2
+		\leq \integral{B_{2/n}(v)}{ \recip{n^2}\abs{g}^2 }{\ddmes} \\
+		&= \frac{2\abs{g}^2 \mathrm{deg}(v)}{n^3} \rightarrow 0, \\
+		\integral{\ddom}{ \abs{\ograd\phi_n - \tilde{g}}^2 }{\dddmes}
+		&= \integral{B_{2/n}(v)}{ \abs{\ograd\phi_n}^2 }{\ddmes} + \alpha_v\abs{\ograd\phi_n(v) - g}^2
+		\leq c\abs{g}^2\integral{B_{2/n}(v)}{}{\ddmes} \\
+		&= \frac{2c\abs{g}^2\mathrm{deg}(v)}{n} \rightarrow 0,
+	\end{align*}
+	where $\mathrm{deg}(v)$ denotes the degree of the vertex $v$.
+	The sequence $\phi_n$ thus serves as an approximating sequence for $g_\nu$, so $g_\nu\in\gradZero{\ddom}{\dddmes}$, and since $\gradZero{\ddom}{\dddmes}$ is a linear subspace, the proof is complete.
 \end{proof}
 
 \subsection{Tangential Gradients} \label{ssec:3DTangGradients}
+Thanks to theorem \ref{thm:3DdddmesCharGradZero}, we have an explicit description of gradients of zero with respect to $\dddmes$.
+This will allow us to determine the form of the tangential gradients that functions $u\in\ktgradSob{\ddom}{\dddmes}$ due to the requirement that they be orthogonal to $\gradZero{\ddom}{\dddmes}$.
+We will begin by studying tangential gradients with respect to $\ddmes$ and $\nu$, since theorem \ref{thm:3DdddmesCharGradZero} will then allow us to use this information in deducing the form of tangential gradients with respect to $\dddmes$.
+\begin{prop} \label{prop:3DTangGradParallel}
+	\sloppy Suppose that the edge $I_{jk}$ is parallel to the $x_2$-axis, and that $u\in\ktgradSob{\ddom}{\lambda_{jk}}$.
+	Let $\tilde{u} = u\circ r_{jk}$.
+	Then $\tilde{u}\in\gradSob{\interval{I_{jk}}}{y}$ and
+	\begin{align*}
+		\ktgrad_{\lambda_{jk}}u = 
+		\begin{pmatrix}
+			0 \\ u' + \rmi\qm_2 u \\ \rmi\wavenumber u
+		\end{pmatrix},
+	\end{align*}
+	where $u' := \tilde{u}'\circ r_{jk}^{-1}$.
+\end{prop}
+The proof is a special case of the argument presented for the result which follows.
+Take note of the fact that the notation $u'$, whilst suggestive, does not suggest any derivative-like properties of the function $u$ --- only after composing $u$ with $r_{jk}$ do we obtain anything.
+This will be important when we come to look at tangential gradients with respect to $\ddmes$.
 
 \subsection{Geometric Interpretation} \label{ssec:3DGradGeometric}
