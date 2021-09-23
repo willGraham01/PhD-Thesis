@@ -347,7 +347,7 @@ Intuitively, $\gradZero{\ddom}{\dddmes}$ is made up of linear combinations of gr
 		\phi_n(x) &= \bracs{x_1-v_1}g_1 + \bracs{x_2-v_2}g_2, &\text{when } \abs{x-v}\leq\recip{n}, \\
 		\phi_n(x) &= 0, &\text{when } \abs{x-v}\geq\frac{2}{n}.
 	\end{align*}
-	Note that $\phi_n(v)=0$ and $\grad\phi_n=g$ for every $n\in\naturals$.
+	Note that $\phi_n(v)=0$ and $\grad\phi_n(v)=g$ for every $n\in\naturals$.
 	Since $\abs{\phi_n(x)}\leq\recip{n}\abs{g_\nu(v)}$ when $\abs{x-v}=\recip{n}$, we can also chose $\phi_n$ so that there exists a constant $c$ independent of $n$ such that $\abs{\grad\phi_n(x)}\leq c\abs{g_\nu(v)}$ whenever $\recip{n}\leq\abs{x-v}\leq\frac{2}{n}$.
 	Then
 	\begin{align*}
@@ -370,18 +370,140 @@ This will allow us to determine the form of the tangential gradients that functi
 We will begin by studying tangential gradients with respect to $\ddmes$ and $\nu$, since theorem \ref{thm:3DdddmesCharGradZero} will then allow us to use this information in deducing the form of tangential gradients with respect to $\dddmes$.
 \begin{prop} \label{prop:3DTangGradParallel}
 	\sloppy Suppose that the edge $I_{jk}$ is parallel to the $x_2$-axis, and that $u\in\ktgradSob{\ddom}{\lambda_{jk}}$.
-	Let $\tilde{u} = u\circ r_{jk}$.
-	Then $\tilde{u}\in\gradSob{\interval{I_{jk}}}{y}$ and
+	Let $\widetilde{u} = u\circ r_{jk}$.
+	Then $\widetilde{u}\in\gradSob{\interval{I_{jk}}}{y}$ and
 	\begin{align*}
 		\ktgrad_{\lambda_{jk}}u = 
 		\begin{pmatrix}
 			0 \\ u' + \rmi\qm_2 u \\ \rmi\wavenumber u
 		\end{pmatrix},
 	\end{align*}
-	where $u' := \tilde{u}'\circ r_{jk}^{-1}$.
+	where $u' := \widetilde{u}'\circ r_{jk}^{-1}$.
 \end{prop}
 The proof is a special case of the argument presented for the result which follows.
-Take note of the fact that the notation $u'$, whilst suggestive, does not suggest any derivative-like properties of the function $u$ --- only after composing $u$ with $r_{jk}$ do we obtain anything.
-This will be important when we come to look at tangential gradients with respect to $\ddmes$.
+Given the association between $\ltwo{\ddom}{\lambda_{jk}}$ and $\ltwo{\interval{I_{jk}}}{y}$, we have elected to use prime notation $u'$ to indicate that $u$ possesses some (analogue of) a classical derivative (almost everywhere).
+This is of course due to $\widetilde{u}\in\gradSob{\interval{I_{jk}}}{y}$ being (almost everywhere) absolutely continuous. \tstk{Evan's PDE book is a good reference for this}
+The function $\widetilde{u}$ also possesses a trace into $y=0$ and $y=\abs{I_{jk}}$, and so $u$ also has well-defined traces onto the vertices $v_j$ and $v_k$ \emph{from the edge $I_{jk}$}.
+Importantly though, $u'$ is only a ``derivative" on the edge $I_{jk}$ --- there is no a priori requirement that these derivatives (or even $u$ itself) behave at shared vertices.
+For example, if a vertex $v_j$ is shared between two edges $I_{jk}$ and $I_{jl}$, there is no guarantee that that the traces $u_{jk}\bracs{v_j}$ and $u_{jl}\bracs{v_l}$ coincide. 
+We shall address this matter when we come to look at tangential gradients with respect to $\ddmes$.
+
+\begin{cory} \label{cory:3DTangGradRotated}
+	Let $I_{jk}\in\edgeSet$ and suppose that $u\in\ktgradSob{\ddom}{\lambda_{jk}}$.
+	Set $\widetilde{u} = u\circ r_{jk}$.
+	Then $u\in\gradSob{\interval{I_{jk}}}{y}$ and 
+	\begin{align*}
+		\ktgrad_{\lambda_{jk}}u = \bracs{u'+\rmi\qm_{jk}u}\hat{e}_{jk} + \rmi\wavenumber u\hat{x}_3,
+	\end{align*}
+	where $\qm_{jk}:=\qm\cdot e_{jk} = \bracs{R_{jk}\qm}_2$, and $u' = \widetilde{u}'\circ r_{jk}^{-1}$.
+\end{cory}
+\begin{proof}
+	Since $\ktgrad_{\lambda_{jk}}u$ is orthogonal to $\gradZero{\ddom}{\lambda_{jk}}$ and given proposition \ref{prop:3DGradZeroRotated}, we have that for any $g\in\ltwo{\ddom}{\lambda_{jk}}$,
+	\begin{align*}
+		0 &= \integral{\ddom}{ \ktgrad_{\lambda_{jk}}u \cdot \overline{g}\hat{n}_{jk} }{\lambda_{jk}}
+		= \integral{\ddom}{ \overline{g}\bracs{\ktgrad_{\lambda_{jk}}u\cdot\hat{n}_{jk}} }{\lambda_{jk}},
+	\end{align*}
+	and so $\ktgrad_{\lambda_{jk}}u\cdot\hat{n}_{jk}=0$.
+	As such, we can write
+	\begin{align*}
+		\ktgrad_{\lambda_{jk}}u = v_{jk}\hat{e}_{jk} + v_3\hat{x}_3,
+	\end{align*}
+	for some $v_{jk},v_3\in\ltwo{\ddom}{\lambda_{jk}}$.
+	Now take an approximating sequence for $\phi_n$ for $u$, so the following convergences (in $\ltwo{\ddom}{\lambda_{jk}}$) hold
+	\begin{align*}
+		\phi_n \rightarrow u, \quad 
+		\begin{pmatrix}
+			\bracs{ \partial_1 + \rmi\qm_1 }\phi_n \\
+			\bracs{ \partial_2 + \rmi\qm_2 }\phi_n \\
+			\rmi\wavenumber\phi_n
+		\end{pmatrix}
+		\rightarrow v_{jk}\hat{e}_{jk} + v_3\hat{x}_3.
+	\end{align*}
+	Clearly we must have that $v_3 = \rmi\wavenumber u$.
+	Additionally, we have that
+	\begin{align*}
+		\begin{pmatrix}
+			\bracs{ \partial_1 + \rmi\qm_1 }\phi_n \\
+			\bracs{ \partial_2 + \rmi\qm_2 }\phi_n
+		\end{pmatrix}
+		\rightarrow v_{jk}e_{jk},
+		\quad \implies
+		\begin{pmatrix}
+			\partial_1\phi_n \\
+			\partial_2\phi_n
+		\end{pmatrix}
+		\cdot e_{jk}
+		\rightarrow v_{jk} - \rmi\bracs{\qm\cdot e_{jk}}u = v_{jk} - \rmi\qm_{jk}u
+	\end{align*}
+	Write $\widetilde{\phi}_n = \phi_n\circ r_{jk}$ and $\widetilde{v}_{jk}=v_{jk}\circ r_{jk}$, then the above implies that
+	\begin{align*}
+		\int_0^{\abs{I_{jk}}} \abs{ \widetilde{\phi}_n'(y) - \widetilde{v}_{jk}(y) + \rmi\qm_{jk}  }^2
+		&= \integral{\ddom}{ \abs{ \grad\phi_n\cdot e_{jk} - v_{jk} + \rmi\qm_{jk}u }^2 }{\lambda_{jk}} \\
+		&\rightarrow 0 \toInfty{n}.
+	\end{align*}
+	We can also deduce that $\widetilde{\phi}_n\rightarrow \widetilde{u}$ in $\ltwo{\interval{I_{jk}}}{y}$ too, which implies that $\widetilde{u}\in\gradSob{\interval{I_{jk}}}{y}$ with $\widetilde{u}' = \widetilde{v}_{jk} - \rmi\qm_{jk}\widetilde{u}$.
+	Rearranging for $\widetilde{v}_{jk}$ and undoing the change of variables $r_{jk}$ then provides the result.
+\end{proof}
+
+Corollary \ref{cory:3DTangGradRotated} provides us with an explicit expression for the tangential gradient of a function on one edge of $\graph$.
+Given that proposition \ref{prop:3DGradZeroChar} informs us that the set of gradients of zero on $\graph$ can be formed from combining gradients of zero on each edge, we can now obtain an expression for $\ktgrad_{\ddmes}u$ on any edge $I_{jk}$.
+However, this is not all that can be deduced about functions $u\in\ktgradSob{\ddom}{\ddmes}$ --- we can also address the issue of the value that $u$ should take at the vertices of $\graph$.
+Given that $u$ possesses a trace from each edge into the vertices, we should expect a matching condition to relate these traces at vertices common to multiple edges.
+Indeed, we will see that $u$ must be continuous at the vertices --- that is, the trace of $u$ from each edge into a common vertex are identical.
+\begin{theorem} \label{thm:3DTangGradGraph}
+	We have that
+	\begin{align*}
+		u\in\ktgradSob{\ddom}{\ddmes} \quad\Rightarrow\quad
+		\begin{cases}
+			\mathrm{(i)} \ u\in\ktgradSob{\ddom}{\lambda_{jk}}, & \forall I_{jk}\in\edgeSet, \\
+			\mathrm{(ii)} \ \ktgrad_{\ddmes}u = \ktgrad_{\lambda_{jk}}u, & \text{on every } I_{jk}, \\
+			\mathrm{(iii)} \ u \text{ is continuous at } v_j, & \forall v_j\in\vertSet.
+		\end{cases}
+	\end{align*}
+\end{theorem}
+\tstk{Zhikov converse mention, claims converse holds but only gives elasticity case proof, and uses a proposition which seems like it's just wrong}
+Our approach is as follows; first we show that (i) and (ii) hold by appealing to an approximating sequence and using proposition \ref{prop:3DGradZeroChar}.
+For (iii), we also demonstrate that any approximating sequence for $u$ is also Cauchy in the uniform norm on each edge $I_{jk}$, and so must converge by completeness of the uniform norm, and the limit must be $u^{(jk)}$.
+This will be enough to deduce that $\phi_n$ converges uniformly on the ``junction region" surrounding each vertex $v_j$, and since $\phi_n$ is chosen to be continuous over all of $\ddom$, we will obtain continuity of $u$ at the vertices.
+\begin{proof}
+	Suppose $u\in\ktgradSob{\ddom}{\ddmes}$ and let $\phi_n$ be an approximating sequence for $u$.
+	Since $\norm{\cdot}_{\ltwo{\ddom}{\lambda_{jk}}} \leq \norm{\cdot}_{\ltwo{\ddom}{\ddmes}}$, we have that 
+	\begin{align} \label{eq:3DTangGradProofApproxSequence}
+		\phi_n\lconv{\ltwo{\ddom}{\lambda_{jk}}} u, 
+		\quad
+		\ktgrad\phi_n\lconv{\ltwo{\ddom}{\lambda_{jk}}^3}\ktgrad_{\ddmes}u,
+	\end{align}
+	and so $u\in\ktgradSob{\ddom}{\lambda_{jk}}$ by definition.
+	To show that $\ktgrad_{\ddmes}u = \ktgrad_{\lambda_{jk}}u$ on $I_{jk}$, we must show that $\ktgrad_{\ddmes}u$ is orthogonal to $\gradZero{\ddom}{\lambda_{jk}}$ (and then by uniqueness of tangential gradients the desired equality follows).
+	So take any $g\in\gradZero{\ddom}{\lambda_{jk}}$; we have that the function
+	\begin{align*}
+		\widetilde{g} = \begin{cases} g & x\in I_{jk}, \\ 0 & x\not\in I_{jk} \end{cases}
+	\end{align*}
+	is an element of $\gradZero{\ddom}{\ddmes}$ by proposition \ref{prop:3DGradZeroChar}.
+	Therefore, 
+	\begin{align*}
+		0 &= \integral{\ddom}{ \ktgrad_{\ddmes}u\cdot\overline{\widetilde{g}} }{\ddmes}
+		= \integral{\ddom}{ \ktgrad_{\ddmes}u\cdot\overline{g} }{\lambda_{jk}},
+	\end{align*}
+	and since $g\in\gradZero{\ddom}{\lambda_{jk}}$ was arbitrary, we have that $\ktgrad_{\ddmes}u$ is orthogonal (in $\ltwo{\ddom}{\lambda_{jk}}$) to $\gradZero{\ddom}{\lambda_{jk}}$.
+	As such, we must have that (ii) holds.
+	
+	Next, consider a vertex $v_j\in\vertSet$ and its connecting edges $I_{jk}$.
+	For each such $k$ with $j\con k$, we will denote composition of functions with the map $r_{jk}$ by an overhead tilde for brevity.
+	Given \eqref{eq:3DTangGradProofApproxSequence}, corollary \ref{cory:3DTangGradRotated}, (i) and (ii) we can conclude that
+	\begin{align*}
+		\widetilde{\phi}_n \lconv{\ltwo{\interval{I_{jk}}}{y}} \widetilde{u},
+		\quad
+		\widetilde{\phi}_n' \lconv{\ltwo{\interval{I_{jk}}}{y}} \widetilde{u}'.
+	\end{align*}
+	As the embedding
+	\begin{align*}
+		W^{1,2}\bracs{\interval{I_{jk}},\md y} = \gradSob{\interval{I_{jk}}}{y} \hookrightarrow C^{0,\recip{2}}\sqbracs{0,\abs{I_{jk}}}
+	\end{align*}
+	is compact, we conclude that $\widetilde{\phi}_n$ is Cauchy in the $C^{0,\recip{2}}$-norm, and hence also Cauchy in the uniform norm,
+	\begin{align*}
+		\norm{\widetilde{\phi}_n}_{\sup_{jk}} := \sup_{I_{jk}}\abs{\widetilde{\phi}_n}.
+	\end{align*}
+\end{proof}
 
 \subsection{Geometric Interpretation} \label{ssec:3DGradGeometric}
