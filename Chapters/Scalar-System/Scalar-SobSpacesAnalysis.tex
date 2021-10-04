@@ -1,4 +1,4 @@
-\section{Sobolev Spaces of Functions with Gradients} \label{ssec:3DGradSobSpaces}
+\section{Sobolev Spaces of Functions with Gradients} \label{sec:3DGradSobSpaces}
 \tstk{proper introductory section here? Also, need to change from $x_1$-parallel to $x_2$-parallel throughout! Otherwise things are going to get really annoying}
 
 \tstk{have done some setup to be able to lead with...}
@@ -244,7 +244,11 @@ The fact that we can also extend elements of $\gradZero{\ddom}{\ddmes}$, and hen
 Having dealt with the behaviour of gradients of zero on the edges of the graph $\graph$, we turn our attention to their behaviour at the vertices, induced by the measure $\nu$.
 This analysis is far more straightforward than for $\ddmes$, in no small part due to the fact that the vertices of $\graph$ are isolated from each other, and so there are no problems centred around one vertex's proximity to another.
 Let us begin by defining some useful functions and constants.
-Set $d := \recip{2}\min\clbracs{\abs{I_{jk}} \setVert I_{jk}\in\edgeSet}$, which exists and is strictly greater than 0 since $\graph$ is finite.
+Set 
+\begin{align} \label{eq:HalfMinDistBetweenVertsDef}
+	d := \recip{2}\min\clbracs{\abs{I_{jk}} \setVert I_{jk}\in\edgeSet},
+\end{align}
+which exists and is strictly greater than 0 since $\graph$ is finite.
 For $c\in\complex$, let $\varphi_c:\reals^2\rightarrow\complex$ be a smooth function such that
 \begin{align} \label{eq:NuSmoothVertexFunctionDef}
 	\varphi_c(0) = 0, \quad
@@ -498,12 +502,96 @@ This will be enough to deduce that $\phi_n$ converges uniformly on the ``junctio
 	\end{align*}
 	As the embedding
 	\begin{align*}
-		W^{1,2}\bracs{\interval{I_{jk}},\md y} = \gradSob{\interval{I_{jk}}}{y} \hookrightarrow C^{0,\recip{2}}\sqbracs{0,\abs{I_{jk}}}
+		W^{1,2}\bracs{\interval{I_{jk}},\md y} = \gradSob{\interval{I_{jk}}}{y} \hookrightarrow C^{0,\recip{2}}\bracs{\sqbracs{0,\abs{I_{jk}}}}
 	\end{align*}
-	is compact, we conclude that $\widetilde{\phi}_n$ is Cauchy in the $C^{0,\recip{2}}$-norm, and hence also Cauchy in the uniform norm,
+	is compact, \tstk{do we even need compactness? Continuity of the embedding (which we get from Morrey's inequality) suffices to preserve Cauchy-ness of sequences does it not?} we conclude that $\widetilde{\phi}_n$ is Cauchy in the $C^{0,\recip{2}}$-norm, and hence also Cauchy in the uniform norm,
 	\begin{align*}
 		\norm{\widetilde{\phi}_n}_{\sup_{jk}} := \sup_{I_{jk}}\abs{\widetilde{\phi}_n}.
 	\end{align*}
+	As the space of continuous functions is complete with respect to the uniform norm, we conclude that $\widetilde{\phi}_n$ converges (uniformly) on the interval $\interval{I_{jk}}$.
+	Furthermore, this limit must be $\widetilde{u}$, which itself must be continuous as it is the uniform limit of continuous functions.
+	We can conclude from this that (by ``undoing" the change of variables $r_{jk}$),
+	\begin{align*}
+		\sup_{I_{jk}}\abs{\phi_n - u} \rightarrow 0 \toInfty{n}.
+	\end{align*}
+	Therefore, $\phi_n$ also converges uniformly to $u$ on the ``junction region" $J\bracs{v_j} = \bigcup_{j\con k}I_{jk}$, since one has that
+	\begin{align*}
+		\sup_{J\bracs{v_j}}\abs{\phi_n - u} = \sup_{j\con k}\sup_{I_{jk}}\abs{\phi_n - u} \rightarrow 0 \toInfty{n}
+	\end{align*}
+	due to the uniform convergence on each edge.
+	Thus, $u$ is also the uniform limit of continuous functions on $J\bracs{v_j}$, and thus is continuous on $J\bracs{v_j}$.
+	In particular, it is continuous at the vertex $v_j\in J\bracs{v_j}$, completing the proof.
+\end{proof}
+\tstk{here, we can mention Zhikov's statement of the converse of this result and how it hinges on a proposition that is presented without a proof (and which is also just wrong)}
+
+In comparison to $\ktgradSob{\ddom}{\ddmes}$, the gradients of functions in $\ktgradSob{\ddom}{\nu}$ are rather simple, owing to the fact that $\gradZero{\ddom}{\nu}$ encompasses a large proportion of $\ltwo{\ddom}{\dddmes}^3$.
+\begin{cory}[Characterisation of $\ktgradSob{\ddom}{\nu}$] \label{cory:NuTangGradChar}
+	It holds that:
+	\begin{enumerate}[(i)]
+		\item If $u\in\ktgradSob{\ddom}{\nu}$ then $\ktgrad_{\nu}u = \bracs{0,0,\rmi\wavenumber u}^\top$.
+		\item If $u\in\ltwo{\ddom}{\nu}$, then $u\in\ktgradSob{\ddom}{\nu}$.
+	\end{enumerate}
+\end{cory}
+That is to say, every $\ltwo{\ddom}{\nu}$ function possesses a tangential gradient, and that tangential gradient is simply the function $\bracs{0,0,\rmi\wavenumber u}^\top\in\ltwo{\ddom}{\nu}^3$.
+\begin{proof}
+	\begin{enumerate}[(i)]
+		\item Suppose that $u\in\ktgradSob{\ddom}{\nu}$ with $\ktgrad_{\nu}u = \bracs{v_1,v_2,v_3}^\top$.
+		Since $\ktgrad_{\nu}u\perp\gradZero{\ddom}{\nu}$, and given proposition \ref{prop:NuGradZeroChar}, we must have that $v_1 = v_2 = 0$.
+		Now let $\phi_n$ be an approximating sequence for $u$.
+		Since $\phi_n\rightarrow u$, we must have that $\rmi\wavenumber\phi_n\rightarrow\rmi\wavenumber u$, which forces $v_3 = \rmi\wavenumber u$.
+		\item If $u\in\ltwo{\ddom}{\nu}$, for each $v_j\in\vertSet$ let $\psi_j$ denote the smooth ``bump" function centred on $v_j$ with
+		\begin{align*}
+			\psi_j\bracs{v_j} = 1, \quad \supp\bracs{\psi_j}\subset B_d\bracs{v_j},
+		\end{align*}
+		where $d$ is as in \eqref{eq:HalfMinDistBetweenVertsDef}.
+		Setting $\phi\bracs{x} = \sum_{v_j\in\vertSet}u\bracs{v_j}\psi_j\bracs{x}$, we have that $\phi\in\smooth{\ddom}$ and that $\phi = u$ in $\ltwo{\ddom}{\nu}$.
+		Therefore, $\bracs{u, \ktgrad\phi}\in W^{\kt}_{\nu,\mathrm{grad}}$, and hence there exists some $\ktgrad_\nu u\in\gradZero{\ddom}{\nu}^\perp$ such that $u\in\ktgradSob{\ddom}{\nu}$.
+	\end{enumerate}
 \end{proof}
 
+Finally, we can use our understanding of gradients of zero and tangential gradients to infer the behaviour of $\ktgrad_{\dddmes}u$.
+\begin{theorem} \label{thm:dddmesTangGradImplication}
+	Let $\bracs{u,\ktgrad_{\dddmes}u}\in\ktgradSob{\ddom}{\dddmes}$.
+	Then
+	\begin{enumerate}[(i)]
+		\item $\bracs{u,\ktgrad_{\dddmes}u}\in\ktgradSob{\ddom}{\ddmes}$, and
+		\item $\bracs{u,\ktgrad_{\dddmes}u}\in\ktgradSob{\ddom}{\nu}$.
+	\end{enumerate}
+\end{theorem}
+That is to say, the behaviour of the tangential gradient $\ktgrad_{\dddmes}u$ inherits the behaviour of the tangential gradients of $u$ on the edges and at the vertices.
+\begin{proof}
+	Taking an approximating sequence $\phi_n$ for $u$ and given that
+	\begin{align*}
+		\norm{\cdot}_{\ltwo{\ddom}{\dddmes}}^2 = \norm{\cdot}_{\ltwo{\ddom}{\ddmes}}^2 + \norm{\cdot}_{\ltwo{\ddom}{\nu}}^2,
+	\end{align*}
+	we can quickly conclude that $\bracs{u,\ktgrad_{\dddmes}u}\in W_{\ddmes, \mathrm{grad}}^{\kt}$ and $\bracs{u,\ktgrad_{\dddmes}u}\in W_{\nu, \mathrm{grad}}^{\kt}$, so it just remains to show that $\ktgrad_{\dddmes}u$ coincides with the tangential gradients with respect to $\ddmes$ and $\nu$.
+	However theorem \ref{thm:3DdddmesCharGradZero} handles this, as it ensures that any gradient of zero (with respect to $\ddmes$ or $\nu$) can be extended by zero to form a gradient of zero with respect to $\dddmes$, to which $\ktgrad_{\dddmes}u$ is orthogonal.
+	By means of illustration, for any $g\in\gradZero{\ddom}{\ddmes}$ then $\tilde{g}\in\gradZero{\ddom}{\dddmes}$ where
+	\begin{align*}
+		\tilde{g} &= 
+		\begin{cases} g(x) & x\neq v_j, \ \forall v_j\in\vertSet \\ 0 & x=v_j, \ v_j\in\vertSet, \end{cases}
+	\end{align*}
+	by theorem \ref{thm:3DdddmesCharGradZero}.
+	Therefore,
+	\begin{align*}
+		0 &= \integral{\ddom}{ \ktgrad_{\dddmes}u\cdot\overline{\tilde{g}} }{\dddmes}
+		= \integral{\ddom}{ \ktgrad_{\dddmes}u\cdot\overline{g} }{\ddmes} + \integral{\ddom}{ 0 }{\nu} \\
+		&= \integral{\ddom}{ \ktgrad_{\dddmes}u\cdot\overline{g} }{\ddmes}.
+	\end{align*}
+	Thus, $\ktgrad_{\dddmes}u$ coincides with $\ktgrad_{\ddmes}u$ on the edges, and $\ktgrad_{\nu}u$ at the vertices, and we are done.
+\end{proof}
+This concludes our investigation into the gradient Sobolev spaces, specifically the behaviour of functions that possess tangential gradients.
+In the following section \ref{ssec:3DGradGeometric} we provide a geometric interpretation of the tangential gradient that highlights the connection between the singular measures, the geometry of the singular structure, and the notion of ``gradient" that the measures provide.
+We will come to utilise the knowledge of tangential gradients in section \tstk{ help section \ref{sec:}}, where knowing their functional form is essential to allow us to obtain a quantum graph problem from the problem \tstk{problem equation refs}
+
 \subsection{Geometric Interpretation} \label{ssec:3DGradGeometric}
+The intuition behind the form of the tangential gradients (and gradients of zero) with respect to the various measures $\lambda_{jk}, \ddmes, \nu$, and $\dddmes$ can be summarised with the colloquial phrase ``tangential gradients only reflect behaviour that the measure can see".
+Let us be more precise, and first consider the measure $\lambda_{jk}$ for a fixed $I_{jk}$ and the associated gradients of zero and tangential gradients.
+Suppose that we have a (sufficiently smooth) function $u$ defined on $\ddom$ that satisfies $u=0$ (or any constant value) on $I_{jk}$, from the perspective of $\lambda_{jk}$ this $u$ is the zero function,\footnote{more precisely, $u$ is represented by the zero function in $\ltwo{\ddom}{\lambda_{jk}}$.} regardless of whether $u$ is zero on the whole of $\ddom$ or not.
+So despite $u=0$ in $\ltwo{\ddom}{\lambda_{jk}}$, it can have any profile in the direction $n_{jk}$ \emph{as it crosses} $I_{jk}$.
+Indeed, the measure $\lambda_{jk}$ is unable to deduce whether (for $x\in I_{jk}$) $u(x+hn_{jk})$ is different from $u(x)$ for $h\neq0$, given the only information it can have about $u$ are its values on $I_{jk}$.
+Consequentially, $\lambda_{jk}$ can have no concept of $\pdiff{u}{n_{jk}}$ --- changing the profile of $u$ across the edge $I_{jk}$ does not change $u$ on $I_{jk}$, and consequentially the component of any ``gradient" directed along $n_{jk}$ corresponds to no change in the function $u$ from the perspective of $\lambda_{jk}$, making this component a gradient of zero.
+In contrast, the measure $\lambda_{jk}$ can evaluate expressions like $u(x+he_{jk})-u(x)$ --- that is, changes in the function along $I_{jk}$ are detected by the measure $\lambda_{jk}$.
+Such changes correspond to $\pdiff{u}{e_{jk}}$ being non-zero, and thus we find that tangential gradients are directed along $e_{jk}$ (and provide a ``derivative" in this direction too).
+This also highlights the reason for defining the gradients of zero and tangential gradients as in \tstk{section ref} --- given a tangential gradient $\ktgrad_{\lambda_{jk}}u$, $\lambda_{jk}$ can reconstruct the function $u$ along the edge $I_{jk}$, but cannot determine what $u$ is doing across $I_{jk}$.
+Ergo, every function has a gradient that is unique up to a gradient of zero, because there is no way for $\lambda_{jk}$ to determine what $u$ looks like across (and thus outside of) $I_{jk}$.
