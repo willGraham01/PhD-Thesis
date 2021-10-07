@@ -63,14 +63,14 @@ Before doing so however, we outline some further standing assumptions and notati
 	Let $e_{jk} = \bracs{e_1^{(jk)}, e_2^{(jk)}}^\top$ be the unit vector parallel to $I_{jk}$ and directed from $v_j$ to $v_k$ (that is, directed ``left to right", or in the direction of the edge $I_{jk}$).
 	Set
 	\begin{align} \label{eq:EdgeParameterisation}
-		r_{jk}:\sqbracs{0, l_{jk}} \ni x \mapsto v_j + xe_{jk} \in I_{jk},
+		r_{jk}:\sqbracs{0, l_{jk}} \ni y \mapsto v_j + ye_{jk} \in I_{jk},
 	\end{align}
-	and note that $r_{jk}'(x) = e_{jk}$.
+	and note that $r_{jk}'(y) = e_{jk}, \abs{r_{jk}'(y)}=1$ for all $y\in\sqbracs{0, l_{jk}}$.
 	Let $n_{jk} = \bracs{n_1^{(jk)}, n_2^{(jk)}}^\top$ be the unit normal to $I_{jk}$ so the frame $y_{jk} := \bracs{n_{jk}, e_{jk}}$ can be obtained by an orthogonal rotation $R_{jk}\in\mathrm{SO}(2)$ of the (canonical) axis vectors $x = \bracs{x_1, x_2}$, formally by $x = R_{jk}y_{jk}$ (where no summation over $j,k$ is implied).
 	Note that, under this setup, we have that $e_1^{(jk)} = - n_2^{(jk)}$ and $e_2^{(jk)} = n_1^{(jk)}$.
 	Finally, write $\widehat{n}_{jk} = \bracs{ n_{jk}, 0 }^\top\in\reals^3$ and $\widehat{e}_{jk} = \bracs{ e_{jk}, 0 }^\top\in\reals^3$, and $\widehat{x}_3 = \bracs{0,0,1}^\top$.
 \end{assumption}
-\tstk{check assumptions are consistent throughout the work!}
+\tstk{check assumptions are consistent throughout the work! In particular, you define the $l_{jk}$ here, does this clash with other notation in the paper????}
 
 \subsection{Function spaces} \label{ssec:FunctionSpaces}
 Consider the following function spaces:
@@ -81,7 +81,7 @@ Consider the following function spaces:
 		H^2\bracs{\graph} := \bigoplus_{I_{jk}\in \edgeSet} H^2_\mathrm{grad}\bracs{I_{jk}, \md y}. &
 	\end{align}
 \end{subequations}
-We define $u^{(jk)} = u\vert_{I_{jk}}$ to be the restriction of a function $u$ defined on $\graph$ to the edge $I_{jk}$, extended by zero to the other edges of the graph. \tstk{this will have repercussions in the scalar chapter! might need one convention for scalar- and one for vector valued functions}
+We define $u^{(jk)} = u\vert_{I_{jk}}$ to be the restriction of a function $u$ defined on $\graph$ to the edge $I_{jk}$ (extended by zero to the other edges of the graph when evaluated at points outside $I_{jk}$).
 If $u$ is a vector field, then the subscript $u_{i}$ will be used to denote the $i$\textsuperscript{th} component of $u$.
 The shorthand $u^{(jk)}\bracs{v_j}$ and $u^{(jk)}\bracs{v_k}$ will be used for the values $u^{(jk)}\bracs{0}$ and $u^{(jk)}\bracs{l_{jk}}$, respectively.
 If additionally $u$ is continuous at a vertex $v_j$, we will use the notation $u\bracs{v_j}$ for this value.
@@ -93,7 +93,15 @@ We also use a notion of ``signed derivative" at the endpoints of an edge:
 	\end{align}
 \end{subequations}
 for a differentiable function $u$ on $\graph$ --- we will occasionally use prime notation to denote differentiation by $y$ in the interest of brevity.
-One can think of the formulae \eqref{eq:SignedDerivConvention} as defining an ``exterior facing" derivative at each endpoint, bearing in mind that the edge $I_{jk}$ is directed from $v_j$ to $v_k$.
+We use similar notation for the ``shifted, signed derivative",
+\begin{subequations} \label{eq:SignedDerivConventionShifted}
+	\begin{align*}
+		\bracs{\pdiff{}{n}+ \rmi\qm}u_{jk}\bracs{v_j} &= -\bracs{u_{jk}' + \rmi\qm u_{jk}}\bracs{v_j} = -\lim_{x\rightarrow0} \bracs{ u_{jk}'(x)+\rmi\qm u_{jk}(x) }, \\
+		\bracs{\pdiff{}{n}+ \rmi\qm}u_{jk}\bracs{v_k} &= \bracs{u_{jk}' + \rmi\qm u_{jk}}\bracs{v_k} = \lim_{x\rightarrow l_{jk}} \bracs{ u_{jk}'(x)+\rmi\qm u_{jk}(x) },
+	\end{align*}
+\end{subequations}
+as is appropriate for use after application of a Gelfand transform.
+One can think of the formulae \eqref{eq:SignedDerivConvention}-\eqref{eq:SignedDerivConventionShifted} as defining an ``exterior facing" derivative at each endpoint, bearing in mind that the edge $I_{jk}$ is directed from $v_j$ to $v_k$.
 
 Before discussing differential operators on metric graphs, we introduce some additional notation for convenience: $j\conLeft k$ stands for ``an edge with endpoints $v_j$ and $v_k$, with $v_j$ on the left", and $j\con k$ is used to mean ``an edge with endpoints $v_j$ and $v_k$", whenever the direction of the edge is not important.
 We also use $j \conRight k$ alongside $k\conLeft j$.

@@ -1,0 +1,61 @@
+\section{Chapter Introduction} \label{sec:ScalarEqnChapterIntro}
+This work is motivated by a desire to study wave propagation in a medium that exhibits (periodic) micro-structure, so a natural starting point from which we develop our framework for singular structures is the wave equation,
+\begin{align} \label{eq:WaveEquation}
+	- A \laplacian u = f^2 \rho u,
+\end{align}
+where $f$ is the frequency of a propagating wave, whilst $A$ and $\rho$ correspond to material properties.
+In the context of elastic waves, $A$ and $\rho$ represent the elastic modulus and mass density respectively, whilst in the electromagnetic context they represent the electric permittivity and magnetic permeability of the medium (the polarisation dictating which of these properties $A$ and $\rho$ represent).
+It is also convenient to non-dimensionalise \eqref{eq:WaveEquation} by introducing a dimensionless variable $\hat{x} = \frac{x}{l}$, where $l>0$ is the spatial extent of the medium, obtaining
+\begin{align} \label{eq:WaveEquationNonDim}
+	- \laplacian_{\hat{x}}\hat{u}\bracs{\hat{x}} = z \hat{u}\bracs{\hat{x}},
+	\quad
+	z = \frac{\bracs{fl}^2\rho}{A}.
+\end{align} 
+Here $\hat{u}\bracs{\hat{x}} = u\bracs{l\hat{x}}$, and the parameter $z$ represents the (square of the) ratio of the spatial extent of the medium against the wavelength of propagating waves, up to a constant.
+In the context of electromagnetic waves, we have
+\begin{align*}
+	z = \frac{\bracs{fl}^2\eps_{\mathrm{r}}\mu_{\mathrm{r}}}{c^2},
+\end{align*}
+where $\eps_{\mathrm{r}}$ and $\mu_{\mathrm{r}}$ are, respectively, the relative (electric) permittivity and (magnetic) permeability of the medium, and $c$ is the speed of light in vacuum. \tstk{jackson cassent refs?}
+To avoid notational clutter in equations, we will write $\omega^2=z$ where convenient.
+The spectrum (that is, the set of $z=\omega^2$ in \eqref{eq:WaveEquation} that are allowed in some sense)  provides access to the frequencies of waves that can propagate in a physical material (by ``re-dimensionalising" $z$ via \eqref{eq:WaveEquationNonDim}), which determines the use of the structure itself as a waveguide.
+The focus of this chapter will be on quantitatively encapsulating the structure of the spectrum for all problems of the form \eqref{eq:WaveEquation} on our singular-structure domains, via analysis of the spaces $\ktgradSob{\ddom}{\dddmes}$ and the derivation of a quantum graph problem.
+We will also discuss how objects such as the $M$-matrix (introduced in section \ref{ssec:MMatrix}) can be used to aid the analysis of the spectrum of such problems, both numerically and analytically.
+
+We now precisely formulate the problem that we wish to consider.
+Let $\graph$ be the period graph of a (periodic) metric graph embedded into $\reals^2$, with unit cell $\ddom\subset\reals^2$ (see section \ref{sec:SingularStructures}).
+In this chapter, we will concern ourselves with the analysis of the ``wave equation"
+\begin{align} \label{eq:SingularScalarWaveEqnWholeSpace}
+	-\grad_{\dddmes}^2 u = \omega^2 u, \quad\text{in } \reals^2,
+\end{align}
+which we transform into a family of problems on the unit cell $\ddom$ by means of a Gelfand transform, providing us with
+\begin{align} \label{eq:SingularScalarWaveEqn}
+	-\bracs{\tgrad_{\dddmes}}^2 u = \omega^2 u, \quad\text{in } \ddom,
+\end{align}
+for each $\qm$ in the dual cell of $\ddom$.
+Of course, we interpret \eqref{eq:SingularScalarWaveEqn} in a variational (or weak) sense, as the problem of finding $u\in\ktgradSob{\ddom}{\dddmes}, \omega^2>0$ such that
+\begin{align*}
+	\integral{\ddom}{ \tgrad_{\dddmes}u\cdot\overline{\tgrad_{\dddmes}\phi} }{\dddmes} 
+	&= \omega^2\integral{\ddom}{ u\overline{\phi} }{\dddmes}, \quad\forall\phi\in\smooth{\ddom}.
+\end{align*}
+We will demonstrate that solutions to \eqref{eq:SingularScalarWaveEqn} satisfy the quantum graph problem
+\begin{subequations} \label{eq:SingularWaveEqnQGProblem}
+	\begin{align}
+		-\bracs{\diff{}{y} + \rmi\qm_{jk}}^2 u^{(jk)} &= \omega^2 u^{(jk)}, \quad &y\in\interval{I_{jk}}, \ \forall I_{jk}\in\edgeSet, \label{eq:SingularWaveEqnQGProblem-1} \\
+		u \text{ is continuous at } & v_j, \quad &\forall v_j\in\vertSet, \label{eq:SingularWaveEqnQGProblem-2} \\
+		\sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}u^{(jk)}\bracs{v_j} &= \omega^2\alpha_j u\bracs{v_j}, \quad &\forall v_j\in\vertSet. \label{eq:SingularWaveEqnQGProblem-3}
+	\end{align}
+\end{subequations}
+The $\qm_{jk}$ are rotations of the quasi-momentum $\qm$, and can be computed given the orientation of the edge $I_{jk}\in\edgeSet$.
+It should be noted that problems like \eqref{eq:SingularWaveEqnQGProblem} belong to the class of problems with generalised resolvents, since the spectral parameter $\omega^2$ appears in the boundary condition \eqref{eq:SingularWaveEqnQGProblem-3}, which we will elaborate on later \tstk{be sure to elaborate on this later! Also the refs!}.
+Our interest lies in those problems for which $\Re\bracs{\alpha_j}>0$ (physically, this ensures causality in our problem) and $\Im\bracs{\alpha_j} = 0$.
+Of course there is nothing that mathematically forbids the coupling constants $\alpha_j$ being complex-valued, but the restrictions ensure we retain a link to physical applications. 
+Indeed, taking $\Im\bracs{\alpha_j} > 0$ (respectively $\Im\bracs{\alpha_j} < 0$) would correspond to placing an energy sink (respectively source) at the vertex $v_j$, whist $\Re\bracs{\alpha_j}<0$ would ``reverse causality" in the solution --- physically speaking, the problem would correspond to a system in which the past depends on the future.
+
+The analysis of the Sobolev space $\gradSobQM{\ddom}{\dddmes}$, and in particular understanding the tangential gradient $\tgrad_{\dddmes}u$, is central to the derivation of \eqref{eq:SingularWaveEqnQGProblem}.
+However, the analysis involved is lengthy and so can be found at the end of the chapter in section \ref{sec:3DGradSobSpaces}.
+We will provide a short overview of this analysis in section \ref{sec:ScalarDerivation}, before going through the derivation of \eqref{eq:SingularWaveEqnQGProblem} from \eqref{eq:SingularScalarWaveEqn}.
+Section \ref{sec:ScalarDiscussion} then provides an explicit expression for the $M$-matrix of \eqref{eq:SingularWaveEqnQGProblem}, and opens a discussion into the methodology and considerations for using it to analyse the spectrum of \eqref{eq:SingularWaveEqnQGProblem}.
+We then employ this approach with a selection of examples in section \ref{sec:ScalarExamples}, before concluding.
+By the end of this chapter we will have a solid basis from which to develop our framework for handling ``derivatives" on singular-structures further. 
+This will bring us naturally towards the analysis of the curl-of-the-curl equation \tstk{ref} and an investigation into the first-order Maxwell system, in which we generalise our approach to handle vector fields and their curls with respect to the measure $\dddmes$.
