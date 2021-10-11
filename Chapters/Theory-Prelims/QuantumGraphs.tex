@@ -70,7 +70,6 @@ Before doing so however, we outline some further standing assumptions and notati
 	Note that, under this setup, we have that $e_1^{(jk)} = - n_2^{(jk)}$ and $e_2^{(jk)} = n_1^{(jk)}$.
 	Finally, write $\widehat{n}_{jk} = \bracs{ n_{jk}, 0 }^\top\in\reals^3$ and $\widehat{e}_{jk} = \bracs{ e_{jk}, 0 }^\top\in\reals^3$, and $\widehat{x}_3 = \bracs{0,0,1}^\top$.
 \end{assumption}
-\tstk{check assumptions are consistent throughout the work! In particular, you define the $l_{jk}$ here, does this clash with other notation in the paper????}
 
 \subsection{Function spaces} \label{ssec:FunctionSpaces}
 Consider the following function spaces:
@@ -171,7 +170,7 @@ One could look to transform a problem with $\omega^2$-dependent $\delta$-type ve
 This comes at the cost of having to determine the appropriate (unitary) transform to apply to \eqref{eq:3DQGFullSystem}; but the theory of section \ref{ssec:MMatrix} would apply to the transformed problem, could be used to analyse the spectrum, and then the inverse transform applied.
 
 \subsection{The $M$-Matrix} \label{ssec:MMatrix}
-We next provide a brief overview of the $M$-matrix, a tool for characterising the spectrum of a quantum graph, \tstk{which we implement in section \ref{sec:SystemDerivation}.}
+We next provide a brief overview of the $M$-matrix, a tool for characterising the spectrum of a quantum graph which we will exploit in section \ref{sec:ScalarDiscussion}.
 The $M$-matrix is a generalisation of the classical Weyl-Titchmarsh $m$-function, and a particular case of the abstract $M$-operator, as it appears in the theory of boundary triples (more information on the $M$-operator can be found in \cite{kochubei1975extensions, kochubei1980characteristic, gorbachuk1991boundary, brown2008boundary, brown2020functional, cherednichenko2020scattering, cherednichenko2018functional}, whilst information for the $m$-function can be found in \cite{titchmarsh1962eigenfunction, atkinson1964discrete}).
 Here we restrict ourselves to a short review the specific theory relevant to the present work.
 Let $\mathcal{A}$ be a differential operator on a graph $\graph$, and consider the maps
@@ -216,4 +215,4 @@ When it is possible to prescribe an embedded ``realisation" $\graph$ of $\tilde{
 In our work, we elect to prescribe an embedding because our examples are motivated by physical structures (see section \ref{sec:Intro}), and it is therefore more convenient, and not to mention much more intuitive, to define a graph along with its embedding into physical space.
 However, it should be held in mind that the embedded, periodic quantum graph $\graph$ we chose to represent a given singular structure may not be the only possible realisation of an abstract periodic quantum graph $\tilde{\graph}$.
 This means that the spectrum obtained for any given quantum graph (or singular-structure) may coincide with that of multiple others, so long as they also represent an embedding of $\tilde{\graph}$, despite the $M$-matrices appearing to be different.
-\tstk{In section \ref{ssec:EmbeddingDependentExample} we provide a concrete example to compliment this discussion.}
+In section \ref{ssec:EmbeddingDependentExample} we provide a concrete example to compliment this discussion.

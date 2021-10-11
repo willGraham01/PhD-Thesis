@@ -7,6 +7,7 @@ This issue is resolved by not abandoning what we believe are the ingredients of 
 As we will be working with each of the measures $\dddmes, \ddmes$, and $\nu$ above individually before combining our knowledge of each, what we present here is stated in terms of a generic measure $\rho$.
 }
 
+The overarching idea behind this procedure is for us to construct an analogy to a Sobolev space for the measure $\rho$, and hence obtain a concept of (weak) derivative.
 Define
 \begin{align*}
 	W^{\kt}_{\rho,\mathrm{grad}} &:= \overline{\clbracs{ \bracs{\phi, \ktgrad\phi} \setVert \phi\in\smooth{\ddom} }},
@@ -16,20 +17,21 @@ where the closure is taken in $\ltwo{\ddom}{\rho}\times\ltwo{\ddom}{\rho}^3$, an
 	W^{\kt}_{\rho,\mathrm{curl}} &:= \overline{\clbracs{ \bracs{\Phi, \ktcurl{}\Phi} \setVert \Phi\in\bracs{\smooth{\ddom}}^3 }},
 \end{align*}
 where the closure is taken in $\ltwo{\ddom}{\rho}^3\times\ltwo{\ddom}{\rho}^3$.
-The idea is to construct an analogy to a Sobolev space for the measure $\rho$, and hence obtain a concept of (weak) derivative. \tstk{this sentence might be more useful elsewhere, but the following sentence does depend on it}
-However notice that if $\bracs{u,g_1}, \bracs{0, g_2}\in W^{\kt}_{\rho,\mathrm{grad}}$ then we also have that $\bracs{u, g_1+g_2}\in W^{\kt}_{\rho,\mathrm{grad}}$, so ``gradients" (in reference to the second element of a pair in $W^{\kt}_{\rho,\mathrm{grad}}$) are not unique --- both $g_1$ and $g_1+g_2$ are ``gradients" of $u$.
-A similar pattern emerges for the elements of $W^{\kt}_{\rho,\mathrm{curl}}$.
+This mimics the ``$H$"-definition of classical Sobolev spaces (when $\rho$ is the Lebesgue measure), however for general measures $\rho$ the Meyers-Serrin ``$H=W$" theorem doesn't hold due to the lack of the integration by parts technique.
+We would like to call the second element of a pair $\bracs{u,g}\in W^{\kt}_{\rho,\mathrm{grad}}$ ``the gradient" of the function $u$, however notice that if $\bracs{u,g_1}, \bracs{0, g_2}\in W^{\kt}_{\rho,\mathrm{grad}}$ then we also have that $\bracs{u, g_1+g_2}\in W^{\kt}_{\rho,\mathrm{grad}}$.
+As such, the term ``gradient" being used in reference to the second element of a pair in $W^{\kt}_{\rho,\mathrm{grad}}$ does not indicate a \emph{unique} function --- both $g_1$ and $g_1+g_2$ are ``gradients" of $u$ in this sense.
+An analogous deduction can be made for ``curl" and the second member of elements of $W^{\kt}_{\rho,\mathrm{curl}}$.
 Whilst non-uniqueness of ``gradients" (in the aforementioned sense) is not an active hindrance \tstk{Zhikov, Kirill \& Serena deal with this fine)}, for our purposes it is convenient for us to define the set of ``($\rho$)-gradients of zero" as
 \begin{align*}
-	\gradZero{\ddom}{\rho} &= \clbracs{ g\in \ltwo{\ddom}{\rho}^3 \setVert \bracs{0,g}\in W^{\kt}_\rho,\mathrm{grad}}, \\
+	\gradZero{\ddom}{\rho} &= \clbracs{ g\in \ltwo{\ddom}{\rho}^3 \setVert \bracs{0,g}\in W^{\kt}_{\rho,\mathrm{grad}}}, \\
 	&= \clbracs{ g\in\ltwo{\ddom}{\rho}^3 \setVert \exists\phi_n\in\smooth{\ddom} \text{ s.t. } \phi_n \lconv{\ltwo{\ddom}{\rho}}0, \ktgrad\phi_n\lconv{\ltwo{\ddom}{\rho}^3} g }, \labelthis\label{eq:GradZeroSequenceDef}
 \end{align*}
 and analogously define the set of ``($\rho$)-curls of zero" as
 \begin{align*}
-	\curlZero{\ddom}{\rho} &= \clbracs{ c\in \ltwo{\ddom}{\rho}^3 \setVert \bracs{0,c}\in W^{\kt}_\rho,\mathrm{curl}}, \\
+	\curlZero{\ddom}{\rho} &= \clbracs{ c\in \ltwo{\ddom}{\rho}^3 \setVert \bracs{0,c}\in W^{\kt}_{\rho,\mathrm{curl}}}, \\
 	&= \clbracs{ c\in\ltwo{\ddom}{\rho}^3 \setVert \exists\Phi^n\in\smooth{\ddom}^3 \text{ s.t. } \Phi^n\lconv{\ltwo{\ddom}{\rho}^3}0, \ \ktcurl{}\Phi\lconv{\ltwo{\ddom}{\rho}^3} c}. \labelthis\label{eq:CurlZeroSequenceDef}
 \end{align*}
-Given an element $g\in\gradZero{\ddom}{\rho}$, we will refer to a sequence $\phi_n$ as in \eqref{eq:GradZeroSequenceDef} as an ``approximating sequence" for $g$, and will make use of the phrase ``take an approximating sequence $\phi_n$ for $g$" (or similar) to mean ``let $\phi_n$ be a sequence as in \eqref{eq:GradZeroSequenceDef} for the element $g$ of $\gradZero{\ddom}{\rho}$.
+Given an element $g\in\gradZero{\ddom}{\rho}$, we will refer to a sequence $\phi_n$ as in \eqref{eq:GradZeroSequenceDef} as an ``approximating sequence" for $g$, and will make use of the phrase ``take an approximating sequence $\phi_n$ for $g$" (or similar) to mean ``let $\phi_n$ be a sequence as in \eqref{eq:GradZeroSequenceDef} for the element $g$ of $\gradZero{\ddom}{\rho}$".
 We also adopt a similar convention for elements $c\in\curlZero{\ddom}{\rho}$ and ``approximating sequences" as in \eqref{eq:CurlZeroSequenceDef}.
 
 The sets $\gradZero{\ddom}{\rho}$ and $\curlZero{\ddom}{\rho}$ do not depend on $\kt$, as the following proposition demonstrates.
@@ -62,7 +64,7 @@ The sets $\gradZero{\ddom}{\rho}$ and $\curlZero{\ddom}{\rho}$ do not depend on 
 	Given the formulae above, we must also have that $\grad^{\bracs{0, 0}}\phi_n\rightarrow g$, so $g\in \gradZero{\ddom}{\rho}^{\bracs{0, 0}}$.
 	The reverse implication, and the proof for $\rho$-curls of zero, is similar.
 \end{proof}
-Proposition \ref{prop:ZeroInvariantUnderQM-Wavenumber} will be helpful later \tstk{section refs} when we want to understand the form/ behaviour of gradients (and curls) of zero for the measures $\dddmes, \ddmes$, and $\nu$.
+Proposition \ref{prop:ZeroInvariantUnderQM-Wavenumber} will be helpful later (section \ref{sec:3DGradSobSpaces} \tstk{section refs}) when we want to understand the behaviour of gradients (and curls) of zero for the measures $\dddmes, \ddmes$, and $\nu$.
 Another useful (although expected) property of the sets $\gradZero{\ddom}{\rho}$ and $\curlZero{\ddom}{\rho}$ is that they are closed, linear subspaces of $\ltwo{\ddom}{\rho}^3$.
 \begin{prop}
 	The sets $\gradZero{\ddom}{\rho}$ and $\curlZero{\ddom}{\rho}$ are closed, linear subspaces of $\ltwo{\ddom}{\rho}^3$.
@@ -144,8 +146,19 @@ We can also perform analogous steps for $\curlZero{\ddom}{\rho}$, which allows u
 \end{definition}
 Like with tangential gradients; we will use the shorthand $u\in\ktcurlSob{\ddom}{\rho}$ to refer to the element $\bracs{u, \ktcurl{\rho}u}\in\ktcurlSob{\ddom}{\rho}$, since each $u$ has a unique $\ktcurl{\rho}u$ that is orthogonal to $\curlZero{\ddom}{\rho}$, and when the context is clear will refer to $\ktcurl{\rho}u$ as the ``tangential curl" or ``$\kt$-tangential curl".
 
+Having now assigned a meaning to (tangential) gradients and curls for the measure $\rho$, we can also define what it means for a vector field $u$ to be $\kt$-divergence-free with respect to $\rho$.
+\begin{definition}[$\kt$-divergence-free] \label{def:ktDivFree}
+	A vector field $u\in\ltwo{\ddom}{\rho}^3$ is said to be $\kt$-divergence-free with respect to $\rho$ if
+	\begin{align*}
+		0 &= \integral{\ddom}{ u\cdot\overline{g} }{\rho}, \qquad\forall\bracs{v,g}\in W^{\kt}_{\rho,\mathrm{grad}}.
+	\end{align*}
+	When the context is clear, we simply shorten ``$\kt$-divergence-free with respect to $\rho$" to ``$\kt$-divergence-free".
+\end{definition}
+Intuitively, we have setup ``divergence-free" vector fields to be those that are orthogonal (in $\ltwo{\ddom}{\rho}^3$) to all gradients of $\ltwo{\ddom}{\rho}$-functions, including gradients of zero.
+\tstk{Helmholtz decomp stuff, L2\_Decomposition.pdf. Might go at end with the other div-free result? Also might want to save this for the Maxwell chapter discussion to flesh out that chapter, as it's a focal point there (even though we can prove the statements in general for $\rho$).}
+
 To conclude this section, we provide some simple results which will prove useful throughout our analysis.
-First, it is useful to note that functions with tangential curls or gradients can also be approximated by smooth functions.
+First, it is useful to note that (by construction) functions with tangential gradients or curls can also be approximated by smooth functions.
 \begin{cory} \label{cory:SobSpaceApproxSequences}
 	\begin{align*}
 		\ktgradSob{\ddom}{\rho} &= \clbracs{ \bracs{u, \ktgrad_{\rho}u} \setVert \exists\phi_n\in\smooth{\ddom} \text{ s.t. } \right. \\ 
@@ -207,7 +220,6 @@ Since our definitions of $\gradZero{\ddom}{\rho}, \curlZero{\ddom}{\rho}$ and ta
 \end{proof}
 In particular, proposition \ref{prop:CurlIgnoresGradients} informs us that the $\kt$-tangential curl of either a $\kt$-tangential gradient, or a gradient of zero, is zero.
 
-\tstk{you haven't defined divergence-free yet????}
 Another remark that deserves to be made is that given the construction of $W^{\kt}_{\rho,\mathrm{grad}}$, it is sufficient to only test orthogonality of $u$ against smooth gradients when checking if a field is divergence free.
 \begin{cory} \label{cory:DivFreeSufficient}
 	If
@@ -225,4 +237,4 @@ Another remark that deserves to be made is that given the construction of $W^{\k
 		= \lim_{n\rightarrow\infty} 0 = 0.
 	\end{align*}
 \end{proof}
-Corollary \ref{cory:DivFreeSufficient} does mean that definition \ref{def:} can be weakened, however we chose to present the definition of ``divergence free" in this manner to maintain parallels to the usual intuition of a divergence free field being orthogonal to \emph{all} gradients.
+Corollary \ref{cory:DivFreeSufficient} does mean that definition \ref{def:ktDivFree} can be weakened, however we chose to present the definition of ``divergence free" in this manner to maintain parallels to the usual intuition of a divergence free field being orthogonal to \emph{all} gradients.
