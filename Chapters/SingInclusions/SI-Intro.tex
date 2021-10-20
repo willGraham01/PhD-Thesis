@@ -17,14 +17,14 @@ The graph $\graph$ and the periodic boundaries of $\ddom$ naturally break $\ddom
 We will refer to the edges $I_{jk}\in\edgeSet$ as the ``(singular) inclusions", and refer to the $\ddom_i$ as the ``bulk (regions)" or ``(dielectric) composite regions".
 Additionally, we denote by $\lambda_2$ the two-dimensional Lebesgue measure on $\ddom$ and write
 \begin{align*}
-	\compMes := \lambda_2 + \dddmes,
+	\compMes := \lambda_2 + \ddmes,
 \end{align*}
 where we shall refer to $\compMes$ as the ``composite" measure on $\ddom$ with respect to the graph $\graph$.
-\tstk{haven't done $\nu$ additions yet, so for the time being need to mention that we also take $\alpha_j=0$ for every vertex.}
+\tstk{haven't done $\nu$ additions yet, mention this because using the tilde notation is somewhat unfortunate.}
 Also, define $\compMes_{jk} = \lambda_2 + \lambda_{jk}$ for each edge $I_{jk}$.
 
 Note that our singular inclusions are not merely interfaces; at an interface one simply has matching conditions between the solutions (to a suitable differential problem) approaching from one side of the interface and from the other.
 The interface itself has no size or bulk, and there are no dynamics happening along these interfaces beyond the matching conditions imposed --- the behaviour of the solution is determined in the bulk, and then matched to the expected (or physically relevant) interface conditions.
 Singular inclusions on the other hand retain a notion of length and thus will give rise to dynamics along the edges of $\graph$, which will be coupled to the dynamics in the composite regions $\ddom_i$.
 That is to say, the behaviour of a solution is not determined by the behaviour in the bulk regions, then matched to the other regions via the inclusions which separate them.
-In fact, we will see that it is even possible to reformulate a problem on the composite domain into a problem posed solely on the graph $\graph$, where the interplay between the solution in the bulk and on the edges is encoded in the non-locality of the resulting problem.
+In fact, we will see that it is even possible to reformulate a problem on the composite domain into a problem posed solely on the graph $\graph$, where the interplay between the solution in the bulk and on the edges is en1coded in the non-locality of the resulting problem.
