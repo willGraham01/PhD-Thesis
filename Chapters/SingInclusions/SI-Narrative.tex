@@ -1,0 +1,49 @@
+\section{The Narrative (placeholder section)}
+
+To reiterate our overarching goal, we wish to study wave propagation on these composite domains, and so we will be studying the ``wave equation"
+\begin{align} \label{eq:SI-WaveEqn}
+	-\bracs{\tgrad_{\compMes}}^2 u = \omega^2 u \qquad\text{in } \ddom,
+\end{align}
+for some solution $u$.
+At this point we should consider what our intuition is telling us about the behaviour we expect from any solutions $u$, and accordingly the appropriate function space to pose \eqref{eq:SI-WaveEqn} in.
+A good starting point is to consider how we expect our solutions to behave if we could (n\"{i}avely) interpret \eqref{eq:SI-WaveEqn} in a strong sense.
+Away from any singular inclusions, \eqref{eq:SI-WaveEqn} would look like the usual Helmholtz problem on a bounded domain in $\reals^2$, and so we expect our solution to possess sufficient regularity to be differentiated twice in the bulk.
+We also know that solutions to the ``wave equation" on the inclusions possess two derivatives along the edges of $\graph$ (\tstk{chapter ref!}), and are tied together through the vertex conditions.
+Finally, we must consider what should happen in the vicinity of the singular inclusions --- here we have (what we expect to be) a twice differentiable function in a bulk region $\ddom_i$ approaching its boundary, and so there should be ($L^2$) traces of $u$ and its normal derivative onto this boundary.
+However, this boundary coincides with a selection of the singular inclusions, so the function $u$ on these inclusions should ``feel" the affect of these traces.
+A partial converse is also expected; on the singular inclusions $u$ is twice differentiable along the inclusion, and given that $u$ \emph{also} has a trace onto the inclusions, we expect that these traces should match the function values.
+That is, we might expect that \eqref{eq:SI-WaveEqn} can be reformulated into a system that consists of the following components:
+\begin{enumerate}[(a)]
+	\item A (Helmholtz-like) PDE in each of the bulk regions, the solution to which has boundary traces matching the solution to a quantum graph problem on the inclusions.
+	\item A 2nd-order quantum graph problem on the singular inclusions, with the edge ODEs involving or being influenced by the traces from the bulk regions.
+	\item Conditions at the vertices of the graph to tie the quantum graph problem, and hence the PDE problems, together.
+\end{enumerate}
+
+With our expectations laid out, we can move towards formulating \eqref{eq:SI-WaveEqn} accurately.
+Consider the form $b$ defined on functions $(u,v)\in\tgradSob{\ddom}{\compMes}\times\tgradSob{\ddom}{\compMes}$ where\footnote{Of course, we can be less stringent with this definition and define $b$ on smooth functions, which are (by construction) dense in $\tgradSob{\ddom}{\compMes}$.}
+\begin{align*}
+	b(u,v) &= \integral{\ddom}{ \tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}v} }{\compMes}
+	= \ip{\tgrad_{\compMes}u}{\tgrad_{\compMes}v}_{\ltwo{\ddom}{\compMes}^2}.
+\end{align*}
+Clearly $b$ is symmetric and satisfies $b(u,u)\geq 0$ with equality if and only if $u=0$, and thus defines a self-adjoint operator $\mathrm{A} := -\bracs{\tgrad_{\compMes}}^2$ by
+\begin{align*} 
+	\dom\bracs{ \mathrm{A} } &= \clbracs{ u\in\tgradSob{\ddom}{\compMes} \setVert \exists f\in\ltwo{\ddom}{\compMes} \text{ s.t. } \right.
+	\\
+	& \qquad
+	\left. \integral{\ddom}{ \tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}v} }{\compMes} = \integral{\ddom}{ f\overline{v}}{\compMes}, \quad \forall v\in\tgradSob{\ddom}{\compMes} }, \labelthis\label{eq:CompLaplaceOpDom}
+\end{align*}
+with action
+\begin{align*}
+	\mathrm{A}u = -\bracs{\tgrad_{\compMes}}^2 u = f,
+\end{align*}
+where $u$ and $f$ are related as in \eqref{eq:CompLaplaceOpDom}.
+Equation \eqref{eq:SI-WaveEqn} is then the eigenvalue equation for the operator $\mathcal{A}$, equivalent to the problem of finding $\omega^2>0$ and non-zero $u\in\tgradSob{\ddom}{\compMes}$ such that
+\begin{align} \label{eq:SI-WeakWaveEqn}
+	\integral{\ddom}{ \tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}\phi} }{\compMes}
+	&= \omega^2 \integral{\ddom}{ u\overline{\phi} }{\compMes}, \quad\forall\phi\in\smooth{\ddom}.
+\end{align}
+\tstk{worth remarking here how, again, the weak formulation of a familiar PDE is being used as the starting point for our analysis, and actually ends up being what we want to look at too!}
+
+At a glance, solutions $u$ to \eqref{eq:SI-WeakWaveEqn} appear to be far less regular than what we expect from our intuitive arguments above, and \eqref{eq:SI-WeakWaveEqn} itself is not in the form (a)-(c).
+However, much like in chapters \tstk{refs to 3 and 4} we can work from \eqref{eq:SI-WeakWaveEqn} and the definition of $\tgradSob{\ddom}{\compMes}$ to obtain a system as described by (a)-(c).
+This will be the subject of the next chapter.

@@ -49,10 +49,11 @@
 \newcommand{\charFunc}[1]{\mathcal{I}_{#1}}%{\mathbb{1}_{#1}}		%characteristic function of a set
 \newcommand{\sgn}{\mathrm{sgn}}
 
-\newcommand{\dddom}{\widetilde{\Omega}}			%3D domain notation
+\newcommand{\dddom}{\widetilde{\Omega}}		%3D domain notation
 \newcommand{\ddom}{\Omega}						%2D domain notation
-\newcommand{\dddmes}{\widetilde{\mu}}			%3D measure
-\newcommand{\ddmes}{\mu}						%2D measure
+\newcommand{\dddmes}{\widetilde{\mu}}			%2D sing. measure + point masses
+\newcommand{\ddmes}{\mu}						%2D sing. measure
+\newcommand{\compMes}{\tilde{\lambda}}			%2D composite (Leb + sing) measure
 
 \newcommand{\graph}{\mathbb{G}}					%graph variable
 \newcommand{\vertSet}{\mathcal{V}}					%set of vertices rather than big V
@@ -95,6 +96,7 @@
 \newcommand{\ltwo}[2]{L^{2}\bracs{#1,\mathrm{d}#2}}						%general L^2 space
 \newcommand{\gradSob}[2]{H^1_\mathrm{grad}\bracs{#1, \mathrm{d}#2}}		%gradient Sobolev space
 \newcommand{\gradSobQM}[2]{H^1_{\qm, \mathrm{grad}}\bracs{#1, \mathrm{d}#2}} %gradient + i\qm Sobolev space
+\newcommand{\tgradSob}[2]{H^1_{\qm, \mathrm{grad}}\bracs{#1, \mathrm{d}#2}} %coz words and standardisation
 \newcommand{\ktgradSob}[2]{H^1_{\wavenumber,\qm,\mathrm{grad}}\bracs{#1, \mathrm{d}#2}}	%k,\qm-gradient Sobolev space
 \newcommand{\curlSob}[2]{H^1_\mathrm{curl}\bracs{#1, \mathrm{d}#2}}		%curl Sobolev space
 \newcommand{\tcurlSob}[2]{H^1_{\qm, \mathrm{curl}}\bracs{#1, \mathrm{d}#2}}		%curl + i\qm Sobolev space
@@ -102,6 +104,7 @@
 \newcommand{\ktcurlSob}[2]{H^1_{\wavenumber,\qm,\mathrm{curl}}\bracs{#1, \mathrm{d}#2}}	%k,\qm-curl Sobolev space
 \newcommand{\ktcurlSobDivFree}[2]{\mathcal{H}^{\kt}\bracs{#1, \mathrm{d}#2}}					%k,\qm-curl, divergence-free Sobolev space
 \newcommand{\supp}{\mathrm{supp}}										%support of a function
+\newcommand{\dom}{\mathrm{dom}}								%domain of function (or operator i guess)
 
 %grad and curl sets
 \newcommand{\gradZero}[2]{\mathcal{G}_{ #1, \mathrm{d}#2}\bracs{0}}		%gradients of zero for domain #1 with measure #2

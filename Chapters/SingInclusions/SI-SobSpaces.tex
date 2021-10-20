@@ -1,0 +1,36 @@
+\section{The Space $\tgradSob{\ddom}{\compMes}$} \label{sec:CompSobSpaces}
+\tstk{intro paragraph, etc}
+
+Throughout this section, let $\xi:\reals\rightarrow\reals$ be a smooth function such that
+\begin{align*}
+	\supp\bracs{\xi} = \sqbracs{-1,1}, \quad -1\leq\xi(y)\leq1 \ \forall y\in\sqbracs{-1,1}, \quad \xi(0)=0, \quad \xi'(0)=1.
+\end{align*}
+Note that we can choose $\xi$ such that there exists a $c>0$ s.t. $\abs{\xi'(y)}\leq c$ for all $y\in\sqbracs{-1,1}$.
+For some of the estimates we want to make below, we also need the following notation.
+\begin{definition}[Width in direction]
+	Let $\ddom\subset\reals^2$ and $\clbracs{n, e}$ be a pair of orthonormal vectors in $\reals^2$.
+	For each $\alpha\in\reals$, let $L_{\alpha} = \clbracs{x\in\ddom \setVert x = \alpha n + \beta e, \beta\in\reals}$ be the segment parallel to $e$ a ``signed distance" $\alpha$ from the diagonal $e$.
+	Let $\lambda_{\alpha}$ be the singular measure that supports $L_{\alpha}$.
+	Then the \emph{width of $\ddom$ in the direction $e$}, denoted $\ddom_e$, is defined to be $\ddom_e := \sup_{\alpha}\clbracs{\lambda_{\alpha}(L_{\alpha})}$.
+\end{definition}
+Note that $\ddom$ is always assumed bounded so the supremum exists, and if $\ddom$ is closed then is is a maximum and is attained for some $\alpha'$.
+
+\tstk{don't things need to be periodic though!?}
+\begin{lemma}
+	Let $I_{jk}\in\edgeSet$, and for $n\in\naturals$ define the function
+	\begin{align*}
+		\xi_n:\ddom\rightarrow\reals, \qquad \xi_n(x) = \recip{n}\xi\bracs{n\bracs{x-v_j}\cdot n_{jk}},
+	\end{align*}
+	Then $\xi_n\in\smooth{\ddom}$ for any $n\in\naturals$, and we have that
+	\begin{align*}
+		\xi_n \lconv{\ltwo{\ddom}{\compMes_{jk}}} 0, \qquad
+		\grad\xi_n \lconv{\ltwo{\ddom}{\compMes_{jk}}^2} n_{jk}\charFunc{jk},
+	\end{align*}
+	$\toInfty{n}$.
+\end{lemma}
+\begin{proof}
+	The $\xi_n$ are clearly smooth by composition, so we move onto establishing the convergences.
+	Note that for any $x\in I_{jk}$, we have that $x = v_j + \beta e_{jk}$ for some $\beta\geq0$, and thus $\bracs{x-v_j}\cdot n_{jk} = 0$.
+	Therefore, $\xi_n(x) = \recip{n}\xi(0) = 0$ whenever $x\in I_{jk}$.
+	Additionally, $\grad\xi_n(x) = n_{jk}\xi'\bracs{n\bracs{x-v_j}\cdot n_{jk}}$ so we also have that $\grad\xi_n(x) = n_{jk}$ whenever $x\in I_{jk}$.
+\end{proof}

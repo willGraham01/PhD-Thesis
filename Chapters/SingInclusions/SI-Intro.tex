@@ -1,0 +1,30 @@
+\section{Chapter Introduction} \label{sec:SingIncChapterIntro}
+
+The focus of the previous chapters \tstk{refs} rested solely on the singular structure itself and how to understand the notion of a derivative (or curl) on such a structure.
+Once established, it was shown that a quantum graph problem can be obtained from a more abstract variational formulation, and the spectrum of such a problem analysed via tools like the $M$-matrix.
+This choice to ignore or neglect the ``bulk" of our domain ($\ddom\setminus\graph$) reflects a physical situation where we expect there to be no field (or propagation) in this region.
+In the context of electromagnetism for example, this would represent some (singular) dielectric material surrounded by conductors --- there would be no field in the conducting regions, and only ``along" the dielectric materials.
+Of course, photonic crystals (and the fibres they are manufactured into) do not consist of a (thin, periodic) dielectric encased in a conducting material; rather they are composed of a (thin, periodic) dielectric material surrounded by \emph{another} dielectric material.
+This is where the motivation for our final problem stems from --- we will examine a problem on a (two dimensional) domain with \emph{singular} inclusions.
+We would like to view such a problem as (some appropriate) limit of a problem on a domain with thin-structure inclusions, as the thickness of such inclusions tends to zero.
+There have been studies related to this topic, \tstk{Kirill-Evans, Zhikov-Past. on how what we're doing here is similar to this stuff, but is not it exactly.}
+
+\subsection{Notation and Conventions} \label{ssec:SINotation}
+Let us formalise the notation and terminology we will us to describe the domain we will be working with in this section.
+As usual, we take $\ddom$ and $\graph$ to be a singular structure domain, with $\graph$ being the period graph of some embedded, metric graph and $\ddom$ the unit cell, which is identified with the torus \tstk{as in section where this was all established}.
+The domain $\ddom$ will henceforth be referred to as the ``composite domain".
+The graph $\graph$ and the periodic boundaries of $\ddom$ naturally break $\ddom$ into a disjoint union of (open) polygonal regions (or subdomains); we label these $\ddom_i$ for $i\in\Lambda$ for some appropriate (finite) index set $\Lambda$, and we then have that $\ddom = \graph\cup\bigcup_{i\in\Lambda}\ddom_i$.
+We will refer to the edges $I_{jk}\in\edgeSet$ as the ``(singular) inclusions", and refer to the $\ddom_i$ as the ``bulk (regions)" or ``(dielectric) composite regions".
+Additionally, we denote by $\lambda_2$ the two-dimensional Lebesgue measure on $\ddom$ and write
+\begin{align*}
+	\compMes := \lambda_2 + \dddmes,
+\end{align*}
+where we shall refer to $\compMes$ as the ``composite" measure on $\ddom$ with respect to the graph $\graph$.
+\tstk{haven't done $\nu$ additions yet, so for the time being need to mention that we also take $\alpha_j=0$ for every vertex.}
+Also, define $\compMes_{jk} = \lambda_2 + \lambda_{jk}$ for each edge $I_{jk}$.
+
+Note that our singular inclusions are not merely interfaces; at an interface one simply has matching conditions between the solutions (to a suitable differential problem) approaching from one side of the interface and from the other.
+The interface itself has no size or bulk, and there are no dynamics happening along these interfaces beyond the matching conditions imposed --- the behaviour of the solution is determined in the bulk, and then matched to the expected (or physically relevant) interface conditions.
+Singular inclusions on the other hand retain a notion of length and thus will give rise to dynamics along the edges of $\graph$, which will be coupled to the dynamics in the composite regions $\ddom_i$.
+That is to say, the behaviour of a solution is not determined by the behaviour in the bulk regions, then matched to the other regions via the inclusions which separate them.
+In fact, we will see that it is even possible to reformulate a problem on the composite domain into a problem posed solely on the graph $\graph$, where the interplay between the solution in the bulk and on the edges is encoded in the non-locality of the resulting problem.
