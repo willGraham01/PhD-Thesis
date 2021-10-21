@@ -29,7 +29,7 @@ Furthermore, for $\alpha\in\reals$ let $\mathbf{I}^{\alpha} = \cup_{\abs{\alpha'
 		\end{align*}
 		$\toInfty{n}$.
 		\item Write $\hat{\lambda} = \lambda_2 + \dddmes$.
-		For every $v_j\in\vertSet$, the functions $\eta_n^j$ defined in \tstk{def place!} are such that
+		For every $v_j\in\vertSet$, the functions $\eta_n^j$ defined in \eqref{eq:SmoothEtaDef} are such that
 		\begin{align*}
 			\eta_n^j \lconv{\ltwo{\ddom}{\compMes}} 1,
 			&\qquad
@@ -131,7 +131,7 @@ First we show that we can extend an edge gradient of zero to a composite gradien
 	\end{align*}
 \end{lemma}
 \begin{proof}
-	By the characterisation \tstk{ref to result in previous chapter} we can write $g = g_{jk}n_{jk}$ for some $g_{jk}\in\ltwo{\ddom}{\lambda_{jk}}$.
+	By the characterisation proposition \ref{prop:3DGradZeroRotated} we can write $g = g_{jk}n_{jk}$ for some $g_{jk}\in\ltwo{\ddom}{\lambda_{jk}}$.
 	Let $\phi_n$ be an approximating sequence for $g$, and notice that since $\grad\phi_n\rightarrow g$, we have that
 	\begin{align*}
 		\grad\phi_n\cdot n_{jk} \rightarrow g\cdot n_{jk} = g_{jk}, 
@@ -199,7 +199,7 @@ Now we need an extension lemma so that we can move from $\compMes_{jk}$ to $\com
 		\begin{align*}
 			g = \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ g_{jk} & x\in I_{jk}, \end{cases}
 		\end{align*}
-		and $\supp(g_{jk})\subset I_{jk}^n$ (where $I_{jk}^n$ is as in \tstk{ref to graph stuff}).
+		and $\supp(g_{jk})\subset I_{jk}^n$ (where $I_{jk}^n$ is as in \eqref{eq:ShortenedEdgeDef}).
 		Then the function
 		\begin{align*}
 			\tilde{g}(x) &:= \begin{cases} 0 & x\in\ddom\setminus\graph, \\ 0 & x\in\graph\setminus I_{jk}, \\ g_{jk}(x) & x\in I_{jk} \end{cases}
@@ -222,7 +222,7 @@ Now we need an extension lemma so that we can move from $\compMes_{jk}$ to $\com
 \end{prop}
 \begin{proof}
 	\begin{enumerate}[(i)]
-		\item Take an approximating sequence $\phi_l$ for $g$, and set $\psi_l = \chi_{jk}^n\phi_l\in\smooth{\ddom}$ for each $l\in\naturals$, where $\chi_{jk}^n$ is as in \tstk{ref!}.
+		\item Take an approximating sequence $\phi_l$ for $g$, and set $\psi_l = \chi_{jk}^n\phi_l\in\smooth{\ddom}$ for each $l\in\naturals$, where $\chi_{jk}^n$ is as in \eqref{eq:SmoothChiDef}.
 		Recall that we can without loss of generality assume that the only edge $\supp\chi_{jk}^n$ intersects is $I_{jk}$.
 		We then have that $\grad\psi_l = \chi_{jk}^n\grad\phi_l + \phi_l\grad\chi_{jk}^n$, and immediately see that $\psi_l\lconv{\ltwo{\ddom}{\compMes}}0$ since
 		\begin{align*}
@@ -288,7 +288,64 @@ The final wrap-up is now just to employ linearity of our spaces and measure to g
 	\end{align*}
 \end{theorem}
 \begin{proof}
+	($\Leftarrow$) The left-directed implication follows from proposition \ref{prop:3DGradZeroChar}, corollary \ref{cory:SI-GradZeroEdgeChar}(ii), and proposition \ref{prop:SI-GradZeroExtension}(iii). \newline
 	($\Rightarrow$) The right-directed implication is simply a result of any approximating sequence for $\tilde{g}$ also serving as an approximating sequence for $g_{\lambda_2}$ and $g_{\ddmes}$.
-	This also implies that $g_{\lambda_2} = 0$ (being a gradient of zero with respect to the Lebesgue measure), which demonstrates what we wanted to show. \newline
-	($\Leftrightarrow$) The left-directed implication follows from \tstk{char of $\dddmes$ grad zeros} and proposition \ref{prop:SI-GradZeroExtension}(iii), above.
+	This also implies that $g_{\lambda_2} = 0$ (being a gradient of zero with respect to the Lebesgue measure), which completes the proof.
 \end{proof}
+
+Having understood the set of gradients of zero, we are now able to deduce some important properties of the functions that live in $\tgradSob{\ddom}{\compMes}$.
+The most direct result that follows from theorem \ref{thm:SI-GradZeroChar} is that the tangential gradient $\tgrad_{\compMes}$ is the usual weak derivative (with respect to the Lebesgue measure) in the bulk regions, and equal to the tangential derivative with respect to $\ddmes$ on $\graph$.
+\begin{cory}
+	Suppose that $u\in\tgradSob{\ddom}{\compMes}$
+	Then 
+	\begin{align*}
+		\tgrad_{\compMes}u = \begin{cases} \grad u + \rmi\qm u & x\in\ddom\setminus\graph, \\ \tgrad_{\ddmes}u & x\in\graph, \end{cases}
+	\end{align*}
+	where $\grad u$ denotes the weak derivative of $u\in\gradSob{\ddom}{\lambda_2}$.
+\end{cory}
+\begin{proof}
+	The requirement that $\tgrad_{\compMes}u$ be orthogonal to $\gradZero{\ddom}{\compMes}$ and theorem \ref{thm:SI-GradZeroChar} implies that $\tgrad_{\compMes}u = \tgrad_{\ddmes}u$ on $\graph$.
+	For the bulk regions, we again notice that any approximating sequence $\phi_n$ for $u\in\tgradSob{\ddom}{\compMes}$ also serves as an approximating sequence in for $u\in\tgradSob{\ddom}{\lambda_2}$, and $\tgrad_{\lambda_2}u = \grad u + \rmi\qm u$.
+	This implies that $\tgrad_{\compMes}u = \grad u + \rmi\qm u$ ($\lambda_2$-almost-everywhere) in $\ddom\setminus\graph$, completing the proof.
+\end{proof}
+
+Functions in $\tgrad{\ddom}{\compMes}$ also exhibit additional regularity when approaching the edges of $\graph$ from the bulk regions $\ddom_i$, analogously to how functions in $\ktgradSob{\ddom}{\ddmes}$ exhibit continuity on approach the the vertices.
+This is not immediately obvious from the definition (by approximation of smooth functions) of $\tgradSob{\ddom}{\compMes}$; however now that we understand that our tangential gradients are essentially the familiar (weak) gradients with respect to $\lambda_2$ in the bulk and are equal to tangential gradients with respect to $\ddmes$ on $\graph$, we can establish this connection between the bulk and inclusions.
+\begin{theorem} \label{thm:SI-SobFuncEdgeContinuity}
+	Let $u\in\tgradSob{\ddom}{\compMes}$, and fix a bulk region $\ddom_i$.
+	Take $I_{jk}\in\edgeSet$ such that $\partial\ddom_i\cap I_{jk}\neq\emptyset$.
+	Denote the trace operator (that extends the classical trace of functions in $\smooth{\overline{\ddom}_i}\cap\gradSob{\ddom_i}{\lambda_2}$) on $\gradSob{\ddom_i}{\lambda_2}$ into $\ltwo{\partial\ddom_i}{S}$ by $\mathrm{Tr}_i$.
+	Then $\mathrm{Tr}_i(u)$ exists and $\mathrm{Tr}_i(u) = u_{jk}$ on $I_{jk}$.
+\end{theorem}
+\begin{proof}
+	Take an approximating sequence $\phi_n$ for $u\in\tgradSob{\ddom}{\compMes}$; clearly this sequence is also such that
+	\begin{align*}
+		\phi_n \lconv{\ltwo{\ddom_i}{\lambda_2}} u, &\qquad \grad\phi_n\lconv{\ddom_i}{\lambda_2}\grad u, \\
+		\phi_n \lconv{\ltwo{\ddom}{\lambda_{jk}}} u, &\qquad \tgrad\phi_n\lconv{\ddom}{\lambda_{jk}}\ktgrad_{\lambda_{jk}} u.
+	\end{align*}
+	Furthermore, since $\phi_n\in\smooth{\ddom}$ and $\overline{\ddom}_i\subset\ddom$ (since the boundary of $\ddom_i$ consists of a union of edges of $\graph\subset\ddom$), we have $\phi_n\in\smooth{\overline{\ddom}_i}$.
+	The regions $\ddom_i$ are also Lipschitz so the trace operator
+	\begin{align*}
+		\mathrm{Tr}_i: \gradSob{\ddom_i}{\lambda_2} \rightarrow \ltwo{\partial\ddom_i}{S},
+	\end{align*}
+	is linear and continuous.
+	Because $\phi_n\rightarrow u$ in $\gradSob{\ddom_i}{\lambda_2}$ and $\phi_n\in\smooth{\overline{\ddom}_i}\cap\gradSob{\ddom_i}{\lambda_2}$, we have that
+	\begin{align*}
+		u\vert_{\partial\ddom_i} := \mathrm{Tr}_i(u) = \lim_{n\rightarrow\infty}\phi_n\vert_{\partial\ddom_i},
+	\end{align*}
+	where the limit is taken in $\ltwo{\partial\ddom_i}{S}$.
+	In particular, we have that $\phi_n\lconv{\ltwo{I_{jk}}{S}}u\vert_{\partial\ddom_i}$ since $I_{jk}\subset\partial\ddom_i$.
+	However,
+	\begin{align*}
+		\norm{ \phi_n - u\vert_{\partial\ddom_i} }_{\ltwo{I_{jk}}{S}}
+		&= \integral{I_{jk}}{\abs{ \phi_n - u\vert_{\partial\ddom_i} }^2}{S}
+		= \int_0^{\abs{I_{jk}}} \abs{ \phi_n - u\vert_{\partial\ddom_i} }^2 \ \md y \\
+		&= \integral{\ddom}{\abs{ \phi_n - u\vert_{\partial\ddom_i} }^2}{\lambda_{jk}}
+		= \norm{ \phi_n - u\vert_{\partial\ddom_i} }_{\ltwo{\ddom}{\lambda_{jk}}},
+	\end{align*}
+	and so $\phi_n\rightarrow u\vert_{\partial\ddom_i}$ in $\ltwo{\ddom}{\lambda_{jk}}$.
+	But we know that $\phi_n\rightarrow u_{jk}$ in $\ltwo{\ddom}{\lambda_{jk}}$ too, so it must be the case that $u_{jk} = u\vert_{\partial\ddom_i}$, and we are done.
+\end{proof}
+Clearly theorem \ref{thm:SI-SobFuncEdgeContinuity} also implies that traces from any two bulk regions $\ddom_1$ and $\ddom_2$ onto a common inclusion (that is, a shared boundary) must coincide with each other, as they both coincide with the values of $u_{jk}$ on the shared edges.
+Also worth noting is that $u$ (restricted to the graph $\graph$) is continuous at the vertices (see theorem \ref{thm:3DTangGradGraph}), and thus combined with the previous remark should appear to be continuous in the vicinity of any graph edges too.
+Much like how theorem \ref{thm:3DTangGradGraph} established continuity of a function at the vertices of a graph, theorem \ref{thm:SI-SobFuncEdgeContinuity} will play an important part in our reformulation of the problem \eqref{eq:SI-WeakWaveEqn}.

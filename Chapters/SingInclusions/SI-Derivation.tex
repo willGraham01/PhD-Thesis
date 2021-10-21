@@ -1,0 +1,62 @@
+\section{Reformulation of the Composite Problem} \label{sec:SI-Derivation}
+\tstk{intro sentence etc}
+
+Our starting point is the problem \eqref{eq:SI-WeakWaveEqn}, repeated here for ease of reading: find $\omega^2>0$ and non-zero $u\in\tgradSob{\ddom}{\compMes}$ such that
+\begin{align*}
+	\integral{\ddom}{ \tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}\phi} }{\compMes}
+	&= \omega^2 \integral{\ddom}{ u\overline{\phi} }{\compMes}, \quad\forall\phi\in\smooth{\ddom}.
+\end{align*}
+We will need to make use of several standard integral identities, which we summarise below.
+Let $D$ be an open Lipschitz domain in $\reals^2$, let $u\vert_{\partial D}$ denote the trace (of a suitably regular) function $u$ on $D$ into $\ltwo{\partial D}{S}$, and $n^D$ denote the exterior normal on the boundary of $D$.
+\begin{itemize}
+	\item For $u,v\in\gradSob{D}{\lambda_2}$ and $j\in\clbracs{1,2}$,
+	\begin{align*}
+		\integral{D}{ v\partial_j u + u\partial_j v }{\lambda_2}
+		&= \integral{\partial D}{ u\vert_{\partial D}v\vert_{\partial D}n^D_j }{\lambda_2}.
+	\end{align*}
+	\item For $u\in H^2\bracs{D,\lambda_2}, v\in\gradSob{D}{\lambda_2}$,
+	\begin{align*}
+		\integral{D}{ \grad u\cdot \grad v }{\lambda_2} 
+		&=  - \integral{D}{ v\laplacian u }{\lambda_2} + \integral{\partial D}{ v\vert_{\partial D}\pdiff{u}{n^D}\vert_{\partial D} }{S}.
+	\end{align*}
+\end{itemize}
+From the above, we can deduce that whenever $u\in H^2\bracs{D,\lambda_2}$ and $v\in\gradSob{D}{\lambda_2}$, we have that
+\begin{align*}
+	\integral{D}{ \tgrad u\cdot\overline{\tgrad v} }{\lambda_2}
+	&= - \integral{D}{ \overline{v}\tgrad\cdot\tgrad u }{\lambda_2} + \integral{\partial D}{ \overline{v}\vert_{\partial D}\bracs{\tgrad u\cdot n^D}\vert_{\partial D} }{S}.
+\end{align*}
+
+We now begin the reformulation; throughout let us assume $\omega^2>0$ and $u\in\tgradSob{\ddom}{\compMes}$ solve \eqref{eq:SI-WeakWaveEqn}.
+Suppose that the test function $\phi$ in \eqref{eq:SI-WeakWaveEqn} has support contained within one of the bulk regions $\ddom_i$.
+This implies that \eqref{eq:SI-WeakWaveEqn} becomes
+\begin{align*}
+	\omega^2\integral{\ddom_i}{u\overline{\phi}}{\lambda_2} 
+	&= \integral{\ddom_i}{ \grad u\cdot\overline{\grad\phi} - \rmi\qm\overline{\phi}\cdot\tgrad u + \rmi\qm  u\cdot\overline{\phi} - \rmi^2\qm\cdot\qm u\overline{\phi} }{\lambda_2} \\
+	&= \integral{\ddom_i}{ \grad u\cdot\overline{\grad\phi} - 2\rmi\qm\overline{\phi}\cdot\tgrad u - \rmi^2\qm\cdot\qm u\overline{\phi} }{\lambda_2}, \\
+	%\implies
+	%\integral{\ddom_i}{ \grad u\cdot\overline{\grad\phi} }{\lambda_2} 
+	&= \integral{\ddom_i}{ \bracs{\omega^2 u + 2\rmi\qm\cdot\tgrad u + \rmi^2\qm\cdot\qm u} \overline{\phi} }{\lambda_2}, 
+\end{align*}
+which holds for all smooth $\phi$ with compact support in $\ddom_i$.
+Given that we also know that $u$ is $\ltwo{\partial\ddom_i}{S}$ (even $H^1$), this implies that $u\in H^2_{\mathrm{grad}}\bracs{\ddom_i, \md\lambda_2}$ with
+\begin{align*}
+	\laplacian u &= -\bracs{ \omega^2 u + 2\rmi\qm\cdot\tgrad u + \rmi^2\qm\cdot\qm u } &\qquad\text{in } \ddom_i, \\
+	\implies
+	\tgrad\cdot\tgrad u &= -\omega^2 u &\qquad\text{in } \ddom_i. \labelthis\label{eq:SI-BulkEqn}
+\end{align*}
+The additional regularity of the solution $u$ in the bulk regions provides equation \eqref{eq:SI-BulkEqn}, which matches our expectations in (a) of $u$ satisfying a Helmholtz-like equation in the bulk regions.
+
+Next, we turn to addressing what happens when we lie in the vicinity of an edge $I_{jk}\in\edgeSet$.
+For this, we need to introduce a local labelling system for the bulk regions that are adjacent to $I_{jk}$, as follows.
+Let $\ddom_{jk}^+$ be the bulk region whose boundary has non-empty intersection with $I_{jk}$ and whose exterior unit normal on $\partial\ddom_{jk}^+\cap I_{jk}$ is equal to $-n_{jk}$.
+Similarly let $\ddom_{jk}^-$ be the bulk region whose boundary has non-empty intersection with $I_{jk}$ and whose exterior unit normal on $\partial\ddom_{jk}^-\cap I_{jk}$ is equal to $n_{jk}$.
+Note the sign convention; this is chosen because the region $\ddom_{jk}^+$ is ``to the right" of $I_{jk}$ as viewed from the local coordinate system $y_{jk}=\bracs{n_{jk}, e_{jk}}$, and $\ddom_{jk}^-$ is ``on the left" --- see figure \ref{fig:Diagram_SI-AdjacentBulkRegions}.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=1.0]{Diagram_SI-AdjacentBulkRegions.pdf}
+	\caption{\label{fig:Diagram_SI-AdjacentBulkRegions} Labelling convention for regions adjacent to an edge $I_{jk}$.}
+\end{figure}
+
+
+
+So let us now take a smooth $\phi$ whose support intersects the interior of a single edge $I_{jk}$ and

@@ -89,10 +89,10 @@ Let $\eta\in\smooth{\ddom}$ have the properties
 	\eta(x) = 1 \text{ when } \abs{x} \geq 2.
 \end{align*}
 Then define
-\begin{align*}
+\begin{align} \label{eq:SmoothEtaDef}
 	\eta_j(x) = \eta\bracs{x-v_j}, \quad
 	\eta_j^n(x) = \eta_j\bracs{nx},
-\end{align*}
+\end{align}
 which are both smooth functions by composition.
 The functions $\eta_j^n$ will enable us to extend functions defined on one edge $I_{jk}$ to the whole of $\graph$ without worrying about proximity to the vertex $v_j$.
 Notice that $\eta_j^n\rightarrow 1 \toInfty{n}$ in $\ltwo{\ddom}{\ddmes}$ since
@@ -118,11 +118,11 @@ Let $I_{jk}\in\edgeSet$, $\eps>0$, and set
 	I_{jk}^\eps := \clbracs{ x\in I_{jk} \setVert \mathrm{dist}\bracs{x,\partial I_{jk}}\leq\recip{\eps} }.
 \end{align}
 Let $\chi_{jk}^\eps\in\smooth{\ddom}$ be such that
-\begin{align*}
+\begin{align} \label{eq:SmoothChiDef}
 	0 \leq \chi_{jk}^n \leq 1, \quad
 	\chi_{jk}^\eps(x) = 1 \text{ when } \mathrm{dist}\bracs{x, I_{jk}^\eps}\leq \recip{3\eps}, \quad
 	\chi_{jk}^\eps(x) = 0 \text{ when } \mathrm{dist}\bracs{x, I_{jk}^\eps}\geq \frac{2}{3\eps}.
-\end{align*}
+\end{align}
 As $\graph$ is finite, we can assume without loss of generality that the only edge of $\graph$ that $\supp\bracs{\chi_{jk}^\eps}$ intersect is $I_{jk}$ (otherwise, we just rescale the argument).
 We can also assemble $\chi_{jk}^\eps$ such that $\abs{ \ograd\chi_{jk}^{\eps} } \leq c\eps$ for some $c\geq 0$ independent of $\eps$.
 We can check the convergence of $\chi_{jk}^\eps \toInfty{\eps}$ in $\ltwo{\ddom}{\ddmes}$ to the characteristic function of the edge $I_{jk}$, denoted by $\charFunc{jk}$;

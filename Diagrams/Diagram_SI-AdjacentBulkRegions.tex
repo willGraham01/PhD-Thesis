@@ -1,0 +1,29 @@
+\documentclass[crop, tikz]{standalone}
+
+\usepackage[utf8]{inputenc}
+% 'crop' is the default for v1.0, before it was 'preview'
+%\usetikzlibrary{...}% tikz package already loaded by 'tikz' option
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+
+\begin{document}
+	\begin{tikzpicture}[]
+	
+		%edge I_{jk}
+		\draw[thick] (0,0) -- (4,2);
+		\filldraw[black] (0,0) circle (1pt) node[anchor=east] {$v_j$};
+		\filldraw[black] (4,2) circle (1pt) node[anchor=west] {$v_k$};
+		%local coordinate system
+		\begin{scope}[shift={(1.25,1)}]
+			\draw[->] (1.5,0) -- (2.5,0.5) node[anchor=north west] {$e_{jk}$};
+			\draw[->] (1.5,0) -- (2.0,-1.0) node[anchor=south west] {$n_{jk}$};
+		\end{scope}
+		%bulk region labels
+		\node[anchor=south] at (1,1) {$\Omega_{jk}^-$};
+		\node[anchor=north] at (2,0.5) {$\Omega_{jk}^+$};
+		%edge label
+		\node[anchor=south] at (0.55,.25) {$I_{jk}$};
+		
+	\end{tikzpicture}
+\end{document}

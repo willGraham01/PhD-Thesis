@@ -25,19 +25,19 @@ Consider the form $b$ defined on functions $(u,v)\in\tgradSob{\ddom}{\compMes}\t
 	b(u,v) &= \integral{\ddom}{ \tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}v} }{\compMes}
 	= \ip{\tgrad_{\compMes}u}{\tgrad_{\compMes}v}_{\ltwo{\ddom}{\compMes}^2}.
 \end{align*}
-Clearly $b$ is symmetric and satisfies $b(u,u)\geq 0$ with equality if and only if $u=0$, and thus defines a self-adjoint operator $\mathrm{A} := -\bracs{\tgrad_{\compMes}}^2$ by
+Clearly $b$ is symmetric and satisfies $b(u,u)\geq 0$ with equality if and only if $u=0$, and thus defines a self-adjoint operator $\mathcal{A} := -\bracs{\tgrad_{\compMes}}^2$ by
 \begin{align*} 
-	\dom\bracs{ \mathrm{A} } &= \clbracs{ u\in\tgradSob{\ddom}{\compMes} \setVert \exists f\in\ltwo{\ddom}{\compMes} \text{ s.t. } \right.
+	\dom\bracs{ \mathcal{A} } &= \clbracs{ u\in\tgradSob{\ddom}{\compMes} \setVert \exists f\in\ltwo{\ddom}{\compMes} \text{ s.t. } \right.
 	\\
 	& \qquad
 	\left. \integral{\ddom}{ \tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}v} }{\compMes} = \integral{\ddom}{ f\overline{v}}{\compMes}, \quad \forall v\in\tgradSob{\ddom}{\compMes} }, \labelthis\label{eq:CompLaplaceOpDom}
 \end{align*}
 with action
 \begin{align*}
-	\mathrm{A}u = -\bracs{\tgrad_{\compMes}}^2 u = f,
+	\mathcal{A}u = -\bracs{\tgrad_{\compMes}}^2 u = f,
 \end{align*}
 where $u$ and $f$ are related as in \eqref{eq:CompLaplaceOpDom}.
-Equation \eqref{eq:SI-WaveEqn} is then the eigenvalue equation for the operator $\mathcal{A}$, equivalent to the problem of finding $\omega^2>0$ and non-zero $u\in\tgradSob{\ddom}{\compMes}$ such that
+Equation \eqref{eq:SI-WaveEqn} is then the eigenvalue equation for the operator $\mathcal{A}$, interpreted as the problem of finding $\omega^2>0$ and non-zero $u\in\tgradSob{\ddom}{\compMes}$ such that
 \begin{align} \label{eq:SI-WeakWaveEqn}
 	\integral{\ddom}{ \tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}\phi} }{\compMes}
 	&= \omega^2 \integral{\ddom}{ u\overline{\phi} }{\compMes}, \quad\forall\phi\in\smooth{\ddom}.
@@ -45,5 +45,19 @@ Equation \eqref{eq:SI-WaveEqn} is then the eigenvalue equation for the operator 
 \tstk{worth remarking here how, again, the weak formulation of a familiar PDE is being used as the starting point for our analysis, and actually ends up being what we want to look at too!}
 
 At a glance, solutions $u$ to \eqref{eq:SI-WeakWaveEqn} appear to be far less regular than what we expect from our intuitive arguments above, and \eqref{eq:SI-WeakWaveEqn} itself is not in the form (a)-(c).
-However, much like in chapters \tstk{refs to 3 and 4} we can work from \eqref{eq:SI-WeakWaveEqn} and the definition of $\tgradSob{\ddom}{\compMes}$ to obtain a system as described by (a)-(c).
-This will be the subject of the next chapter.
+However, much like in sections \ref{sec:ScalarDerivation} and \ref{sec:VectorDerivation} we can work from \eqref{eq:SI-WeakWaveEqn} and the definition of $\tgradSob{\ddom}{\compMes}$ to obtain a system as described by (a)-(c).
+This requires us to first analyse the set $\tgradSob{\ddom}{\compMes}$, much in the same vein as did with $\ktgradSob{\ddom}{\dddmes}$ and $\ktcurlSob{\ddom}{\dddmes}$ before (\tstk{section ref}), and is the focus of section \ref{sec:CompSobSpaces}.
+However, we will summarise the key results for a function $u\in\tgradSob{\ddom}{\compMes}$ here:
+\begin{itemize}
+	\item The tangential gradient $\tgrad_{\compMes}u$ of $u$ is such that
+	\begin{align*}
+		\tgrad_{\compMes}u = \begin{cases} \grad u + \rmi\qm u & x\in\ddom\setminus\graph, \\ \tgrad_{\ddmes}u & x\in\graph, \end{cases}
+	\end{align*}
+	where $\grad u$ denotes the weak derivative of $u\in\gradSob{\ddom}{\lambda_2}$.
+	Essentially, in the bulk regions the function $u$ and its tangential gradient coincide with the familiar notion of a weak derivative (with respect to the Lebesgue measure).
+	One should note the parallels that can be drawn with the intuitive reasoning for the parts (a) and (b) above.
+	\item The function $u$ lives in $\gradSob{\ddom_i}{\lambda_2}$ for each of the bulk regions, and the traces of $u$ from $\ddom_i$ onto the inclusions $I_{jk}$ coincide with the values of $u_{jk}$ on the inclusions.
+	This is as close to a condition of ``continuity across the inclusions" as we can get.
+	Additionally, the $u_{jk}$ are is continuous at the vertices of $\graph$, as was the case for functions in $\ktgradSob{\ddom}{\dddmes}$.
+\end{itemize}
+This is all the information we need to begin reformulating \eqref{eq:SI-WeakWaveEqn} into the form (a)-(c), and begin to search for methods of solving the resulting problem.
