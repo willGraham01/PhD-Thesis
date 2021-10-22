@@ -38,7 +38,7 @@ This implies that \eqref{eq:SI-WeakWaveEqn} becomes
 	&= \integral{\ddom_i}{ \bracs{\omega^2 u + 2\rmi\qm\cdot\tgrad u + \rmi^2\qm\cdot\qm u} \overline{\phi} }{\lambda_2}, 
 \end{align*}
 which holds for all smooth $\phi$ with compact support in $\ddom_i$.
-Given that we also know that $u$ is $\ltwo{\partial\ddom_i}{S}$ (even $H^1$), this implies that $u\in H^2_{\mathrm{grad}}\bracs{\ddom_i, \md\lambda_2}$ with
+Given that we also know that $u$ is $\ltwo{\partial\ddom_i}{S}$ (even $H^1$), this implies that $u\in \gradgradSob{\ddom_i}{\lambda_2}$ with
 \begin{align*}
 	\laplacian u &= -\bracs{ \omega^2 u + 2\rmi\qm\cdot\tgrad u + \rmi^2\qm\cdot\qm u } &\qquad\text{in } \ddom_i, \\
 	\implies
@@ -56,7 +56,70 @@ Note the sign convention; this is chosen because the region $\ddom_{jk}^+$ is ``
 	\includegraphics[scale=1.0]{Diagram_SI-AdjacentBulkRegions.pdf}
 	\caption{\label{fig:Diagram_SI-AdjacentBulkRegions} Labelling convention for regions adjacent to an edge $I_{jk}$.}
 \end{figure}
+Now let's consider what happens to \eqref{eq:SI-WeakWaveEqn} when we take $\phi$ to have compact support that intersects (the interior of) an edge $I_{jk}$, the adjacent bulk regions $\ddom_{jk}^+$ and $\ddom_{jk}^-$, and no other parts of $\ddom$.
+Equation \eqref{eq:SI-WeakWaveEqn} then implies that
+\begin{align*}
+	\integral{\ddom}{ \omega^2 u\overline{\phi} - \tgrad_{\lambda_{jk}}u\cdot\overline{\tgrad_{\lambda_{jk}}\phi} }{\lambda_{jk}}
+	&= \integral{\ddom}{ \tgrad u\cdot\overline{\tgrad\phi} - \omega^2 u\overline{\phi} }{\lambda_2} \\
+	&= \integral{\ddom_{jk}^+}{ \tgrad u\cdot\overline{\tgrad\phi} - \omega^2 u\overline{\phi} }{\lambda_2}
+	+ \integral{\ddom_{jk}^-}{ \tgrad u\cdot\overline{\tgrad\phi} - \omega^2 u\overline{\phi} }{\lambda_2}.
+\end{align*}
+Next, we know that $u\in \gradgradSob{\ddom_{jk}^{\pm}}{\lambda_2}$ for both $\ddom_{jk}^+$ and $\ddom_{jk}^-$, and so $u$ and its normal derivative possess an $L^2$-trace onto $I_{jk}$.
+Using the notation $\tgrad u\cdot n_{jk} = \pdiff{u}{n_{jk}} + \rmi\qm u\cdot n_{jk}$; and denoting the trace of $u$ viewed as an element of $\gradgradSob{\ddom_{jk}^{\pm}}{\lambda_2}$ onto the boundary by $u^{\pm}$, we have that
+\begin{align*}
+	\integral{\ddom}{ \omega^2 u\overline{\phi} - \tgrad_{\lambda_{jk}}u\cdot\overline{\tgrad_{\lambda_{jk}}\phi} }{\lambda_{jk}}
+	&= \integral{\ddom_{jk}^+}{ -\overline{\phi}\bracs{ \tgrad\cdot\tgrad u + \omega^2 u } }{\lambda_2} \\
+	&\qquad + \integral{\ddom_{jk}^-}{ -\overline{\phi}\bracs{ \tgrad\cdot\tgrad u + \omega^2 u } }{\lambda_2} \\
+	&\qquad + \integral{\partial\ddom_{jk}^+}{ -\overline{\phi}\bracs{\tgrad u\cdot n_{jk}}^{+} }{S} \\
+	&\qquad + \integral{\partial\ddom_{jk}^-}{ \overline{\phi}\bracs{\tgrad u\cdot n_{jk}}^{-} }{S},
+\end{align*}
+since the exterior normal to $\ddom_{jk}^{\pm}$ is $\mp n_{jk}$.
+Given \eqref{eq:SI-BulkEqn} and the support of $\phi$, this further implies that
+\begin{align*}
+	\integral{\ddom}{ \omega^2 u\overline{\phi} - \tgrad_{\lambda_{jk}}u\cdot\overline{\tgrad_{\lambda_{jk}}\phi} }{\lambda_{jk}}
+	&= \integral{I_{jk}}{ \overline{\phi}\sqbracs{\bracs{\tgrad u\cdot n_{jk}}^- - \bracs{\tgrad u\cdot n_{jk}}^+} }{S} \\
+	&= \int_0^{\abs{I_{jk}}} \overline{\phi}\sqbracs{\bracs{\tgrad u\cdot n_{jk}}^- - \bracs{\tgrad u\cdot n_{jk}}^+} \ \md y.
+\end{align*}
+Changing variables via $r_{jk}$ in the integral on the left hand side, substituting the known form for the tangential gradients, and rearranging then provides us with
+\begin{align*}
+	\int_0^{\abs{I_{jk}}} \bracs{u^{(jk)}}'\overline{\phi}' \ \md y
+	&= \int_0^{\abs{I_{jk}}} \overline{\phi}\sqbracs{ \bracs{\tgrad u\cdot n_{jk}}^- - \bracs{\tgrad u\cdot n_{jk}}^+ \right. \\
+	&\qquad \left. - \omega^2 u^{(jk)} - 2\rmi\qm_{jk}\bracs{u^{(jk)}}' - \bracs{\rmi\qm_{jk}}^2 u^{(jk)} } \ \md y,
+\end{align*}
+which holds for all smooth $\phi$ with support contained in the interior of $I_{jk}$.
+Thus, we can deduce that $u^{(jk)}\in\gradgradSob{\interval{I_{jk}}}{y}$, and that
+\begin{align*}
+	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)} 
+	&= \omega^2 u^{(jk)} + \bracs{\tgrad u\cdot n_{jk}}^+ - \bracs{\tgrad u\cdot n_{jk}}^-,
+	&\qquad\text{in } \bracs{0,I_{jk}}.
+\end{align*}
+If we additionally recall that the trace of $u$ from the bulk regions $\ddom_{jk}^{\pm}$ is equal to $u^{(jk)}$, we can eliminate part of the trace-terms to obtain
+\begin{align} \label{eq:SI-InclusionEqn}
+	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)} 
+	&= \omega^2 u^{(jk)} + \bracs{\grad u\cdot n_{jk}}^+ - \bracs{\grad u\cdot n_{jk}}^-,
+	&\qquad\text{in } \bracs{0,I_{jk}}.
+\end{align}
+This provides us with part (b) from our intuitive argument --- on the edges of the graph we have the second-order differential equation from chapter \ref{ch:ScalarSystem}, but with the addition of a term capturing the differences in the trace of the normal derivative of $u$ from either side of the inclusion.
+It is worth remarking how, if our inclusions were merely interfaces, we would simply obtain an algebraic equation in the difference of the normal derivative traces on the $I_{jk}$.
+Giving the edges a notion of length, even though it is 1-dimensional length within a 2-dimensional domain, has resulted in this difference (or ``jump" in the normal derivatives) directly influencing the behaviour of $u$ on the inclusions.
+Conversely, the requirement that the traces of $u$ from $\ddom_{jk}^{\pm}$ be equal to $u^{(jk)}$ also means that the behaviour of $u$ on the inclusions will affect the solution in the bulk regions.
+This means we have something resembling a ``feedback loop"; the solution in the bulk exerts influence on the edges through the traces of the normal derivatives, and the solution on the inclusions exerts influence on the bulk via the requirement that the traces coincide with the values on the inclusion.
 
-
-
-So let us now take a smooth $\phi$ whose support intersects the interior of a single edge $I_{jk}$ and
+Finally, we should consider what happens to our solution $u$ to \eqref{eq:SI-WeakWaveEqn} when we are in the vicinity of a vertex, or more precisely when $\phi$ has support containing a vertex $v_j$ (and without loss of generality, no other vertices).
+The process is straightforward; we aim to proceed as before and use \eqref{eq:SI-BulkEqn} and \eqref{eq:SI-InclusionEqn} to cancel terms on the inclusions and in the bulk regions, leaving us with a ``vertex condition".
+However we require one final piece of temporary notation to transcribe the argument.
+Fix $v_j\in\vertSet$ and let $J(v_j) = \clbracs{I_{jk} \setVert j\con k}$, which is a finite set since $\graph$ is finite.
+For each $I_{jk}\in J(v_j)$, let $\beta_{jk}$ be the anticlockwise angle between the angle between the segment $I_{jk}$ and the $v_j+\hat{x}_1$ direction.
+The $\clbracs{\beta_{jk}}$ can then be ordered by size, and correspondingly we can also order the $I_{jk}\in J(v_j)$, writing
+\begin{align*}
+	\beta_{jk_1} < \beta_{jk_2} < ... < \beta_{jk_{\deg(v_j)}}, 
+	\qquad I_{jk_1} < I_{jk_2} < ... < I_{jk_{\deg(v_j)}}.
+\end{align*}
+Also adopt a cyclic convention, where $k_0 = k_{\deg(v_j)}$ and $k_{\deg(v_j)+1} = k_1$.
+Now, for each $l\in\clbracs{1,...,\deg(v_j)}$ let $\ddom_l$ be the bulk region that lies between (in the sense of the angles $\beta_{jk_{l-1}}$ and $\beta_{jk_l}$) $I_{jk_{l-1}}$ and $I_{jk_l}$.
+This notation can be visualised in figure \ref{fig:Diagram_SI-JunctionLabelling}.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=1.5]{Diagram_SI-JunctionLabelling.pdf}
+	\caption{\label{fig:Diagram_SI-JunctionLabelling} The labelling conventions for the bulk regions and edges surrounding a vertex.}
+\end{figure}
