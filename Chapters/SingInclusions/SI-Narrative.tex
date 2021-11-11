@@ -25,7 +25,7 @@ Consider the form $b$ defined on functions $(u,v)\in\tgradSob{\ddom}{\compMes}\t
 	b(u,v) &= \integral{\ddom}{ \tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}v} }{\compMes}
 	= \ip{\tgrad_{\compMes}u}{\tgrad_{\compMes}v}_{\ltwo{\ddom}{\compMes}^2}.
 \end{align*}
-Clearly $b$ is symmetric and satisfies $b(u,u)\geq 0$ with equality if and only if $u=0$, and thus defines a self-adjoint operator $\mathcal{A} := -\bracs{\tgrad_{\compMes}}^2$ by
+Clearly $b$ is symmetric and satisfies $b(u,u)\geq 0$ with equality if and only if $u=0$, and thus defines a self-adjoint operator $\mathcal{A} := -\bracs{\tgrad_{\compMes}}^2$ \tstk{provided we equip $\tgradSob{\ddom}{\compMes}$ with a suitable inner product, which'll just be the analogue of the usual Sobolev inner product} by
 \begin{align*} 
 	\dom\bracs{ \mathcal{A} } &= \clbracs{ u\in\tgradSob{\ddom}{\compMes} \setVert \exists f\in\ltwo{\ddom}{\compMes} \text{ s.t. } \right.
 	\\
@@ -42,7 +42,13 @@ Equation \eqref{eq:SI-WaveEqn} is then the eigenvalue equation for the operator 
 	\integral{\ddom}{ \tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}\phi} }{\compMes}
 	&= \omega^2 \integral{\ddom}{ u\overline{\phi} }{\compMes}, \quad\forall\phi\in\smooth{\ddom}.
 \end{align}
-\tstk{worth remarking here how, again, the weak formulation of a familiar PDE is being used as the starting point for our analysis, and actually ends up being what we want to look at too!}
+\tstk{this is the discussion about how we have a catch-22 between the variational formulation of our operator (proving it exists, is well defined, has discrete spectrum, etc, and generally being useful in an absract setting) vs the unfamiliarity of the objects involved making it difficult to comprehend and solve explicitly (which requires us to find an alternative, non-standard form only involving objects we are familiar with).}
+With $\ddom$ being bounded and $\mathcal{A}$ self-adjoint, the spectrum of $\mathcal{A}$ consists of a discrete set of values $\omega^2\in\reals$.
+Despite this relatively nice behaviour, the definition \eqref{eq:CompLaplaceOpDom} and the variational form \eqref{eq:SI-WeakWaveEqn} do not lend themselves particularly well to explicit solution (through numerical or analytical means).
+This places us in something of a catch-22; the variational formulation \eqref{eq:SI-WeakWaveEqn} is the ``standard" form of the eigenvalue problem for our operator $\mathcal{A}$ - and ensures that it exists, is well-defined, provides us with qualitative information about its spectrum, \tstk{and fits into the framework of existing theory concerning operators on Hilbert spaces - ask Kirill about how to word this point}.
+However, the objects involved (like $\tgrad_{\compMes}u$) and the integrals in \eqref{eq:SI-WeakWaveEqn} with respect to $\compMes$ are unfamiliar and difficult to work with directly --- we know some of their properties when restricted to different regions of $\ddom$, but not how to work directly with them to obtain a ``solution" to \eqref{eq:SI-WeakWaveEqn}.
+This motivates us to find an alternative formulation to \eqref{eq:SI-WeakWaveEqn} which only involves objects we are familiar with (usual gradients, regions coupled through boundary conditions, and similar), but the resulting system will not be in the ``standard form" that \eqref{eq:SI-WeakWaveEqn} is.
+Indeed, we shall see that the system we end up at will be in the form (a)-(c), but with the spectral parameter $\omega^2$ appearing in multiple places in the problem, and certainly not in appearing in a linear fashion.
 
 At a glance, solutions $u$ to \eqref{eq:SI-WeakWaveEqn} appear to be far less regular than what we expect from our intuitive arguments above, and \eqref{eq:SI-WeakWaveEqn} itself is not in the form (a)-(c).
 However, much like in sections \ref{sec:ScalarDerivation} and \ref{sec:VectorDerivation} we can work from \eqref{eq:SI-WeakWaveEqn} and the definition of $\tgradSob{\ddom}{\compMes}$ to obtain a system as described by (a)-(c).

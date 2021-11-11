@@ -97,7 +97,7 @@ If we additionally recall that the trace of $u$ from the bulk regions $\ddom_{jk
 \begin{align} \label{eq:SI-InclusionEqn}
 	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)} 
 	&= \omega^2 u^{(jk)} + \bracs{\grad u\cdot n_{jk}}^+ - \bracs{\grad u\cdot n_{jk}}^-,
-	&\qquad\text{in } \bracs{0,I_{jk}}.
+	&\qquad\text{in } I_{jk}.
 \end{align}
 This provides us with part (b) from our intuitive argument --- on the edges of the graph we have the second-order differential equation from chapter \ref{ch:ScalarSystem}, but with the addition of a term capturing the differences in the trace of the normal derivative of $u$ from either side of the inclusion.
 It is worth remarking how, if our inclusions were merely interfaces, we would simply obtain an algebraic equation in the difference of the normal derivative traces on the $I_{jk}$.
@@ -171,8 +171,8 @@ For each $\ddom_i$ and $\omega^2>0$, define the set $D_i$ by
 	&\quad v\vert_{\partial\ddom_i}=g, \ \left.\pdiff{v}{n}\right\vert_{\partial\ddom_i} = h \}.
 	\labelthis\label{eq:SI-DtNMapRegion}
 \end{align*}
-This allows us to define the Dirichlet to Neumann map $\dtn^i_\omega$ for the region $\ddom_i$ and $\omega^2$ as the operator with domain $\dom\bracs{\dtn^i_\omega} = D^i_\omega$ and action $\dtn^i_\omega g = h$, where $g,h$ are related as in \eqref{eq:SI-DtNMapRegion}. \tstk{this is only self adjoint if zero is not in it's spectrum, right?!}
-The Dirichlet to Neumann map allows us to further reformulate \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition}, and remove the ``bulk equation" \eqref{eq:SI-BulkEqn} entirely.
+This allows us to define the Dirichlet to Neumann map $\dtn^i_\omega$ for the region $\ddom_i$ and $\omega^2$ as the operator with domain $\dom\bracs{\dtn^i_\omega} = D^i_\omega$ and action $\dtn^i_\omega g = h$, where $g,h$ are related as in \eqref{eq:SI-DtNMapRegion}. \tstk{We need to be careful that $\omega^2$ is not an eigenvalue of the Dirichlet laplacian - otherwise this definition is anything but well-defined. As such, might be worth checking that an eigenfunction of the Dirichlet laplacian can never be (part of) a solution to our original problem?}
+The Dirichlet-to-Neumann (DtN) map allows us to further reformulate \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition}, and remove the ``bulk equation" \eqref{eq:SI-BulkEqn} entirely.
 Indeed, given that the traces from $\ddom_i$ are required to match the solution $u$ on the inclusions that form the boundary $\partial\ddom_i$, we have that 
 \begin{align*}
 	\bracs{\tgrad u\cdot n_{jk}}^+ = -\dtn^+_\omega u^{(jk)},
@@ -187,12 +187,13 @@ Now we can replace the corresponding terms in \eqref{eq:SI-InclusionEqn} and dro
 		- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)} 
 	&= \omega^2 u^{(jk)} - \bracs{ \dtn^+_\omega u^{(jk)} + \dtn^-_\omega u^{(jk)}},
 	&\qquad\text{on } I_{jk}, \label{eq:SI-NonLocalQGEdgeEquation}  \\
-	\sum_l \bracs{\pdiff{}{n}+\rmi\qm_{jk_l}} u^{(jk_l)}(v_j) &= 0,
+	\sum_{j\con k} \bracs{\pdiff{}{n}+\rmi\qm_{jk}} u^{(jk)}(v_j) &= 0,
 	&\qquad\text{at every } v_j\in\vertSet, \label{eq:SI-NonLocalQGVertexDeriv} \\
 	u \text{ is continuous,} & 
 	&\qquad\text{at every } v_j\in\vertSet. \label{eq:SI-NonLocalQGVertexCont}
 	\end{align}
 \end{subequations}
+\tstk{DtN maps have correct sign here, handwritten scans forgot the $n_{jk}$ convention!}
 The system \eqref{eq:SI-NonLocalQG} is formed of $\abs{\edgeSet}$ second-order differential equations \eqref{eq:SI-NonLocalQGEdgeEquation}, with $\sum_{v_j\in\vertSet}\clbracs{\deg(v_j)-1}$ vertex conditions from \eqref{eq:SI-NonLocalQGVertexCont} and a further $\abs{\vertSet}$ from \eqref{eq:SI-NonLocalQGVertexDeriv}.
 Therefore, there is at most one function $u$ that solves \eqref{eq:SI-NonLocalQG} for each $\omega^2>0$ since $2\abs{\edgeSet} = \abs{\vertSet} + \sum_{v_j\in\vertSet}\clbracs{\deg(v_j)-1}$ by the Handshake lemma.
 It is also easy to demonstrate that a solution $\omega^2, u$ to \eqref{eq:SI-NonLocalQG} also defines a solution $\omega^2, \tilde{u}$ to \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition}: we have $\tilde{u}=u$ on $\graph$, and in the bulk regions $\tilde{u}$ takes the values of the function $v$ in \eqref{eq:SI-DtNMapRegion} for $g=u$ (which exists since we assume $u$ solves \eqref{eq:SI-NonLocalQG} in the first place).
@@ -200,3 +201,13 @@ Conversely, a solution $\omega^2, \tilde{u}$ to \eqref{eq:SI-BulkEqn}-\eqref{eq:
 
 The problem \eqref{eq:SI-NonLocalQG} is inherently non-local --- notice that (for each edge $I_{jk}$) the terms $\dtn^{\pm}_\omega u^{(jk)}$ require information about the function $u$ on edges that form the boundary of one of the adjacent region $\ddom_{jk}^{\pm}$, which are not necessarily (directly) connected to $I_{jk}$ itself.
 As such, the price paid to remove \eqref{eq:SI-BulkEqn} from the formulation and move to the purely quantum graph problem \eqref{eq:SI-NonLocalQG} is the introduction of the non-local operator $\dtn^{\pm}_\omega$, which renders our previous approaches via the $M$-matrix (\tstk{chapter ref}) unusable.
+This also has implications when we attempt to solve \eqref{eq:SI-NonLocalQG} numerically, which is the subject of \tstk{create this section!}.
+
+\tstk{draw some parallels with QG from bulky vertex part - discussion follows}
+The system \eqref{eq:SI-NonLocalQG} has parallels with the system \tstk{ref} - in particular, we remark at how the ODEs on the edges \eqref{eq:SI-NonLocalQGEdgeEquation} depend in a non-standard way on the spectral parameter $\omega^2$.
+Most notably, the system \tstk{old system} has $\omega^2$ appearing in the vertex conditions, or to rephrase this, in the \emph{boundary conditions} for the ODEs on the edges $I_{jk}$.
+This appearance of $\omega^2$ in the vertex conditions was the direct affect of the measure $\nu$ providing the vertices with some ``size".
+In this section, rather than a graph with ``bulky vertices", we instead have a set of regions $\ddom_i$ with ``bulky edges" --- the singular inclusions.
+And again, we observe that bestowing a notion of length to our singular inclusions (through $\ddmes$) has caused $\omega^2$ to appear in what would be our boundary conditions for the regions $\ddom_i$, in the form of the terms involving the DtN maps from the adjacent regions in \eqref{eq:SI-NonLocalQGEdgeEquation}.
+\tstk{so we're now back in the realm of generalised resolvents?}
+By analogy, we should now expect the emergence of spectral gaps \tstk{in the spectrum of the periodic operator in the whole space}, and have again found ourselves in the context of a problem involving generalised resolvents.
