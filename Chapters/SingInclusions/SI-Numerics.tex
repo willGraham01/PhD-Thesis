@@ -85,7 +85,7 @@ Then we can proceed with discretisation of the above equations, at points $\tau_
 	-h^{-1}\bracs{h^{-1} + \rmi\qm_1}u_{p+1,q}
 	-h^{-1}\bracs{h^{-1} - \rmi\qm_1}u_{p-1,q} \\
 	&\qquad -h^{-1}\bracs{h^{-1} + \rmi\qm_2}u_{p,q+1}
-	-h^{-1}\bracs{h^{-1} - \rmi\qm_2}u_{p,q-1},
+	-h^{-1}\bracs{h^{-1} - \rmi\qm_2}u_{p,q-1}, \labelthis\label{eq:SI-FDMBulkDiscretise}
 \end{align*}
 using centred differences.
 For nodes $\tau_{p,q}\in I_{jk}$, our finite difference approximations become slightly more complex, as we are forced to consider the nearest nodes to $\tau_{p,q}$ that lie in the directions $e_{jk}$ and $n_{jk}$.
@@ -104,17 +104,19 @@ Then we have that
 	&\qquad - \bracs{h_{p,q}^{e_{jk}}}^{-1}\bracs{ \bracs{h_{p,q}^{e_{jK}}}^{-1} + \rmi\qm_{jk} }u_{p,q}^{+e_{jk}}
 	- \bracs{h_{p,q}^{e_{jk}}}^{-1}\bracs{ \bracs{h_{p,q}^{e_{jk}}}^{-1} - \rmi\qm_{jk} }u_{p,q}^{-e_{jk}} \\
 	&\qquad - \bracs{h_{p,q}^{+n_{jk}}}^{-1}u_{p,q}^{+n_{jk}}
-	- \bracs{h_{p,q}^{-n_{jk}}}^{-1}u_{p,q}^{-n_{jk}},
+	- \bracs{h_{p,q}^{-n_{jk}}}^{-1}u_{p,q}^{-n_{jk}}, \labelthis\label{eq:SI-GeneralEdgeDiscretise}
 \end{align*}
 which serves as our approximation at $\tau_{p,q}$ --- we have taken ``centred" differences along the edge $I_{jk}$ and one-sided derivatives from the adjacent regions to approximate the traces of the normal derivatives.
 Finally at those $\tau_{p,q}$ that are placed at the vertices $v_j\in\vertSet$, our finite difference approximation already assumes continuity of $u$ at these nodes, so instead we must enforce the vertex conditions here.
 To this end, we find that
-\begin{align*}
-	\bracs{ \pdiff{}{n} + \rmi\qm_{jk} } u^{(jk)}(v_j)
-	&= h_{p,q}^{+e_{jk}}\bracs{ u_{p,q} - u_{p,q}^{+e_{jk}} } - \rmi\qm_{jk}u_{p,q}, \\
-	\bracs{ \pdiff{}{n} + \rmi\qm_{jk} } u^{(kj)}(v_j)
-	&= h_{p,q}^{-e_{kj}}\bracs{ u_{p,q} - u_{p,q}^{-e_{kj}} } + \rmi\qm_{kj}u_{p,q},	
-\end{align*}
+\begin{subequations} \label{eq:SI-FDMGeneralVertex}
+	\begin{align}
+		\bracs{ \pdiff{}{n} + \rmi\qm_{jk} } u^{(jk)}(v_j)
+		&= h_{p,q}^{+e_{jk}}\bracs{ u_{p,q} - u_{p,q}^{+e_{jk}} } - \rmi\qm_{jk}u_{p,q}, \\
+		\bracs{ \pdiff{}{n} + \rmi\qm_{jk} } u^{(kj)}(v_j)
+		&= h_{p,q}^{-e_{kj}}\bracs{ u_{p,q} - u_{p,q}^{-e_{kj}} } + \rmi\qm_{kj}u_{p,q},	
+	\end{align}
+\end{subequations}
 which will allow us to compute the approximation to \eqref{eq:SI-VertexCondition}.
 These approximations then allow us to form a finite difference matrix $\mathcal{F}$\footnote{One final consideration we then have to make is to ensure that we adhere to periodic boundary conditions for any nodes that lie on $\partial\ddom$ when constructing $\mathcal{F}$.}, which acts on the vector $U$ with $U_{i} = u_{p,q}$ where $i = q + Np$.
 Then, we solve the (generalised) eigenvalue problem
@@ -145,11 +147,192 @@ Let $\ddom=\left[0,1\right)^2$ and $\graph$ be the period graph of the periodic 
 	\vertSet^* &= \clbracs{ v_{z_1,z_2} := \bracs{\recip{2},\recip{2}} + \bracs{z_1,z_2} \setVert z_1,z_2\in\integers }, \\
 	\edgeSet^* &= \clbracs{ I_{(z_1,z_2),(z_1+1,z_2)} := \sqbracs{ v_{z_1,z_2}, v_{z_1+1,z_2} }, I_{(z_1,z_2),(z_1,z_2+1)} := \sqbracs{ v_{z_1,z_2}, v_{z_1,z_2+1} } \setVert v_{z_1,z_2}\in\vertSet^* }.
 \end{align*}
-Thus, $\graph$ consists of one vertex $v_0=\bracs{\recip{2},\recip{2}}$ with one horizontal edge $I_h$ and one vertical edge $I_v$.
-\tstk{complete description}
+Thus, $\graph$ consists of one vertex $v_0=\bracs{\recip{2},\recip{2}}$ with one horizontal edge $I_h$ along $x_2=\recip{2}$ and one vertical edge $I_v$ along $x_1=\recip{2}$.
+It is easy to see that on $I_h$, $\qm_h = \qm_1$ and on $I_v$, $\qm_v = \qm_2$.
 
-With this geometry, let us use a uniform mesh of $N$ nodes in each axis direction with $N$ to odd.
-Place these nodes as $\tau_{p,q} = \bracs{(p-1)j, (q-1)h}$ for $p,q\in\clbracs{1,...,N}$.
-Note that the nodes $\tau_{N,q}$ and $\tau_{p,N}$ are not technically in $\ddom$, however it is convenient to include them so that encoding the periodic boundary conditions is easier amounts to ``enslaving" the nodal values $u_{p,N}$ to $u_{p,0}$ (and similarly $u_{N,q}$ to $u_{0,q}$).
-It also means that the nodes $\tau_{\frac{N-1}{2},q}$ and $\tau_{p,\frac{N-1}{2}}$ are precisely the nodes that lie on the singular inclusions, and $\tau_{\frac{N-1}{2},\frac{N-1}{2}}$ is placed at the vertex $v_0$.
-\tstk{complete section}
+With this geometry, let us use a uniform mesh consisting of $N$ nodes in each axis direction, with $N$ to odd.
+Place these nodes as $\tau_{p,q} = \bracs{(p-1)j, (q-1)h}$ for $p,q\in\clbracs{1,...,N}$ and mesh-width $h=\recip{N-1}$.
+Note that the nodes $\tau_{N,q}$ and $\tau_{p,N}$ are not technically in $\ddom$, however it is convenient to include them so that encoding the periodic boundary conditions is easier amounts to ``enslaving" the nodal values $u_{p,N}$ to $u_{p,0}$ (and similarly $u_{N,q}$ to $u_{0,q}$) --- as such, we also adopt the convention that $u_{p,-1}=u_{p,N-1}$ and $u_{-1,q}=u_{N-1,q}$.
+Furthermore, the nodes $\tau_{\frac{N-1}{2},q}$ and $\tau_{p,\frac{N-1}{2}}$ are precisely the nodes that lie on the singular inclusions, and $\tau_{\frac{N-1}{2},\frac{N-1}{2}}$ is placed at the vertex $v_0$, with all other nodes lying in the (interior of the) bulk regions.
+Upon discretising, we retain \eqref{eq:SI-FDMBulkDiscretise} at the nodes $\tau_{p,q}$ that lie in the bulk regions.
+For those $\tau_{p,q}$ that lie on the horizontal edge $I_h$ (that is, $\tau_{p,\frac{N-1}{2}}$ for $p\neq\frac{N-1}{2}$) the discretisation \eqref{eq:SI-GeneralEdgeDiscretise} becomes
+\begin{align*}
+	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)}_{p,q} - \bracs{\bracs{\grad u_{p,q}\cdot n_{jk}}^+ - \bracs{\grad u_{p,q}\cdot n_{jk}}^-}
+	& \approx \bracs{\qm_1^2 + 2h^{-1} + 2h^{-2}}u_{p,q} \\
+	& \quad - h^{-1}\bracs{h^{-1} + \rmi\qm_1}u_{p+1,q} \\
+	& \quad - h^{-1}\bracs{h^{-1} - \rmi\qm_1}u_{p-1,q} \\
+	& \quad - h^{-1}u_{p,q+1} - h^{-1}u_{p,q-1}. \labelthis\label{eq:SI-FDMHorzEdgeDiscretise}
+\end{align*}
+The ``nearest neighbour" nodes are simply the adjacent nodes in our uniform mesh (accounting for periodicity if we happen to be near the boundary of $\ddom$), and thus we have a far simpler expression than in \eqref{eq:SI-GeneralEdgeDiscretise}.
+Similarly, for nodes $\tau_{p,q}$ on the vertical edge $I_v$ (that is, $\tau_{\frac{N-1}{2},q}$ for $q\neq\frac{N-1}{2}$) we have that
+\begin{align*}
+	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)}_{p,q} - \bracs{\bracs{\grad u_{p,q}\cdot n_{jk}}^+ - \bracs{\grad u_{p,q}\cdot n_{jk}}^-}
+	& \approx \bracs{\qm_2^2 + 2h^{-1} + 2h^{-2}}u_{p,q} \\
+	& \quad - h^{-1}\bracs{h^{-1} + \rmi\qm_2}u_{p,q+1} \\
+	& \quad - h^{-1}\bracs{h^{-1} - \rmi\qm_2}u_{p,q-1} \\
+	& \quad - h^{-1}u_{p+1,q} - h^{-1}u_{p-1,q}. \labelthis\label{eq:SI-FDMVertEdgeDiscretise}
+\end{align*}
+Finally, at the central vertex $v_0 = \tau_{\frac{N-1}{2},\frac{N-1}{2}}$, we have that
+\begin{align} \label{eq:SI-FDMVertCond}
+	\sum_{j\con k}\bracs{ \pdiff{}{n} + \rmi\qm_{jk} }u^{(jk)}\bracs{v_0}
+	&\approx h^{-1} \bracs{ 4u_{p,q} - u_{p+1,q} - u_{p-1,q} - u_{p,q+1} - u_{p,q-1} },
+\end{align}
+where $p = q = \frac{N-1}{2}$.
+The matrix-valued $\beta\bracs{\omega^2}$ is also easily computed as
+\begin{align*}
+	\beta:\complex\rightarrow\complex^{(N-1)\times(N-1)}, 
+	\qquad \bracs{\beta\bracs{\omega^2}}_{jk} = \begin{cases} 1 & j=k\neq\frac{N-1}{2}, \\ 0 & \text{otherwise}. \end{cases}
+\end{align*}
+
+\tstk{this gives us the numerical results in the file \texttt{CompositeMedium\_PeriodicFDM.ipynb} - I can export the results we want to pdfs and import them as images here.
+Things to note are that the finite-difference matrix $\mathcal{F}$ is not Hermitian, but the eigenvalues appear to all be real.
+The eigenfunction plots are also quite nice, but we don't have anything to compare them to (true values, etc).
+We could do a crude sweep over the quasi-momentum values to see if the symmetry properties hold, and what the spectrum in general looks like as we vary the quasimomentum?
+It might also be worth timing the runs for comparison with the ``spectral" method, or working out the cost in FLOPs, time, etc for the scheme to run?
+Also need to mention how we have wasted a lot of our effort in solving in the bulk regions, when in reality we don't actually need the form of the function here...}
+
+\subsection{``Spectral Method" on the Inclusions} \label{ssec:SI-GraphMethod}
+\tstk{content of this section summarises \texttt{02-11-21\_NumericalSchemeOnGraphProposal.pdf}. Also, write an appropriate linking introduction here!}
+
+In this section we propose a method for solving \eqref{eq:SI-NonLocalQG} that avoids directly solving the ``Helmholtz-like" PDEs \eqref{eq:SI-BulkEqn} in each of the bulk regions.
+The price we pay for this is that our ODEs on each edge now involve the DtN map, which is a non-local operator and requires global knowledge of the function $u$ to evaluate.
+This non-locality also rules out a finite difference approach, as we have no way of expressing the action of the DtN map in terms of nearby function values.
+Instead, we take a starting point akin to that of ``spectral methods" and finite element methods for solving PDE problems; we will express our solution $u$ in terms of a set of basis functions, and then choose the coefficients of the basis expansion to satisfy the problem \eqref{eq:SI-NonLocalQG} as well as possible.
+\tstk{both of these methods do this, but the mentality is different. FEM methods use basis functions that are inherently local, whilst a spectral method will use functions that are nonzero over the whole domain. In practice, we will likely err towards the FEM approach.}
+\tstk{Note: if we want to find $u,\omega^2$ simultaneously (that is, actually solve the eigenvalue problem) we just adapt the final form of our numerical scheme).}
+
+Let $V\subset\htwo{\graph}$ be a finite-dimensional subspace with dimension $M$ and basis functions $\clbracs{\psi_m}_{m=1}^{M}$.
+Write the approximate solution $u_V\in V$ to \eqref{eq:SI-NonLocalQG} as
+\begin{align*}
+	u_V &= \sum_{m=1}^M u_m\psi_m, \qquad u_m\in\complex,
+\end{align*}
+for basis coefficients $u_m$ to be determined.
+\tstk{not being near the Dirichlet spectrum of the laplacian is important now!!!!}
+The operator $\dtn_{\omega}^i$ is self-adjoint and has compact resolvent (as its inverse is the Neumann to Dirichlet map), and thus possesses a sequence of eigenvalues $\lambda^i_n$ and eigenfunctions $\varphi_n^i$, where we list the $\lambda^i_n$ in ascending order (in $n$, for each $i$).
+These eigenfunctions also form a basis of the space $\ltwo{\partial\ddom_i}{S}$, and can be extended by zero to functions $\hat{\varphi}_n^i$ in $L^2\bracs{\graph}$.
+This means that we can represent each $\psi_m\vert_{\partial\ddom_i}$ as a sum of the $\varphi_n^i$ as
+\begin{align*}
+	\psi_m = \sum_{n=1}^{\infty} c_{m,n}^i \varphi_n^i, \quad c_{m,n}^i = \ip{\psi_m}{\varphi_n^i}_{\ltwo{\partial\ddom_i}{S}},
+\end{align*}
+and each of the $\hat{\varphi}_n^i$ as
+\begin{align*}
+	\hat{\varphi}_n^i = \sum_{n=1}^{\infty} \hat{c}_{n,m}^i \psi_m, \quad \hat{c}_{n,m}^i = \ip{\varphi_n^i}{\psi_m}_{L^2\bracs{\graph}}.
+\end{align*}
+Furthermore, extending $\varphi_n^i$ by zero implies that
+\begin{align*}
+	\hat{c}_{n,m}^i = \ip{\varphi_n^i}{\psi_m}_{L^2\bracs{\graph}} = \ip{\varphi_n^i}{\psi_m}_{\ltwo{\partial\ddom_i}{S}} = \overline{\ip{\psi_m}{\varphi_n^i}}_{\ltwo{\partial\ddom_i}{S}} = \overline{c}_{m,n}^i,
+\end{align*}
+which cuts down on the number of computations we need to perform.
+Choose a ``truncation index" $N_i$ for each $\ddom_i$, and define the matrices $B, C, L$ via
+\begin{align*}
+	B_{n,m} &= \ip{\tgrad\psi_m}{\tgrad\psi_n}_{L^2\bracs{\graph}}, \\
+	C_{n,m} &= \ip{\psi_m}{\psi_n}_{L^2\bracs{\graph}}, \\
+	L_{n,m} &= \sum_{v_j\in\vertSet}\sum_{j\conLeft k}
+	\sqbracs{ \sum_{p=1}^{N_+}c_{m,p}^+\lambda^+_p \sum_{q=1}^M \hat{c}_{p,q}^+ \ip{\psi_q}{\psi_n}_{L^2\bracs{I_{jk}}} + \sum_{p=1}^{N_-}c_{m,p}^-\lambda^-_p \sum_{q=1}^M \hat{c}_{p,q}^- \ip{\psi_q}{\psi_n}_{L^2\bracs{I_{jk}}} },
+\end{align*}
+where we use our usual $\pm$ notation for the regions $\ddom^{\pm}$ adjacent to an edge $I_{jk}$.
+\tstk{include this derivation in an appendix? It's long but straightforward}
+\tstk{the sum is not as daunting as it seems if we are clever with our choice of $\psi_m$ --- notably, if we take local basis functions (hats or tents) then the majority of the coefficients are zero, and }
+Setting $U = \bracs{u_1, ..., u_M}^\top$, our approximate solution $u_V$ can then be found by determining the solution to
+\begin{align*}
+	B U &= \bracs{\omega^2 C - L} U.
+\end{align*}
+Note that $B$ is the term in the above equation which does not depend on $\omega^2$ --- $L$ depends on $\omega^2$ through the eigenfunctions associated to the DtN map of the ``Helmholtz" operator $\laplacian_{\qm}+\omega^2$.
+This provides us with a system of $M$ algebraic equations in $M$ unknowns which we can solve for $U$, or if $\omega^2$ is unknown, we can solve as a generalised eigenvalue problem.
+However, at each step of the generalised eigenvalue problem, we will need to compute $L_{n,m}$ again, since $\omega$ will be iteratively updated, which in turn will require us to compute new eigenfunctions.
+\tstk{Note that, if we are interested in the resolvent equation (replace $\omega^2 u$ with $f$ in the original formulation) then we just replace $\omega^2 C$ with the column vector $F=\bracs{f_1,...,f_M}^\top$ where $f = \sum_{m=1}^M f_m\psi_m$.}
+Additionally, this method also requires us to know the $\lambda_n^i, \varphi_n^i$ a priori, or to have available a method for obtaining them, which we discuss in \tstk{section}.
+
+\subsubsection{Computing the DtN eigenvalues and eigenfunctions} \label{sssec:ComputingDtNEfuncs}
+We can compute the DtN operator's eigenvalues (and eigenfunctions) via the ``max-min" principle;
+\begin{align*}
+	\lambda^i_n &= \max_{S_{n-1}}\min_{\varphi\in S_{n-1}}\clbracs{ \frac{\ip{\varphi}{\dtn_{\omega}^i\varphi}_{\ltwo{\partial\ddom_i}{S}}}{\norm{\varphi}_{\ltwo{\partial\ddom_i}{S}}} \setVert \varphi\perp S_{n-1}},
+\end{align*}
+where $S_{n-1}$ is a subspace of $\ltwo{\partial\ddom_i}{S}$ with dimension $n-1$.
+The eigenfunction $\varphi_n^i$ associated with $\lambda^i_n$ is the $\varphi$ for which the ``max-min" is attained.
+Given the domain of $\dtn_{\omega}^i$, observe that
+\begin{align*}
+	\ip{\varphi}{\dtn_{\omega}^i\varphi}_{\ltwo{\partial\ddom_i}{S}}
+	&= \integral{\ddom_i}{ \tgrad \varphi\cdot\overline{\tgrad \varphi} + \varphi\overline{\laplacian_{\qm} \varphi} }{x} \\
+	&= \integral{\ddom_i}{ \tgrad \varphi\cdot\overline{\tgrad \varphi} - \omega^2 \varphi\overline{\varphi} }{x}
+	= \norm{\tgrad \varphi}_{\ltwo{\ddom_i}{x}} - \omega^2 \norm{\varphi}_{\ltwo{\ddom_i}{x}},
+\end{align*}
+and therefore
+\begin{align*}
+	\lambda^i_n 
+	&= \max_{S'_{n-1}}\min_{\varphi\in S'_{n-1}}\clbracs{ \frac{\norm{\tgrad \varphi}_{\ltwo{\ddom_i}{x}} - \omega^2 \norm{\varphi}_{\ltwo{\ddom_i}{x}}}{\norm{\varphi}_{\ltwo{\partial\ddom_i}{S}}} \setVert \varphi\perp S'_{n-1} }, \\
+	&= \max_{S'_{n-1}}\min_{\varphi\in S'_{n-1}}\clbracs{ \norm{\tgrad \varphi}_{\ltwo{\ddom_i}{x}} - \omega^2 \norm{\varphi}_{\ltwo{\ddom_i}{x}} \setVert \norm{\varphi}_{\ltwo{\partial\ddom_i}{S}}=1, \ \varphi\perp S'_{n-1} },
+\end{align*}
+\tstk{does this exist as our objective function doesn't have to behave nicely right? This is also tied to us having to avoid any eigenvalues of the dirichlet laplacian}
+where $S'_{n-1}$ is a subspace of $\gradgradSob{\ddom_i}{\lambda_2}$ with dimension $n-1$.
+We then have the following procedure available to extract the $\lambda_n^i, \varphi_n^i$:
+\begin{enumerate}
+	\item Solve
+	\begin{align*}
+		\lambda_1^i &= \min_{\substack{\varphi\in\gradgradSob{\ddom_i}{\lambda_2} \\ \norm{\varphi}_{\ltwo{\partial\ddom_i}{S}}=1}} \clbracs{ \norm{\tgrad \varphi}_{\ltwo{\ddom_i}{x}} - \omega^2 \norm{\varphi}_{\ltwo{\ddom_i}{x}} },
+	\end{align*}
+	to obtain $\lambda_1^i$.
+	The argmin of the above expression is the eigenfunction $\varphi_1^i$.
+	\item For $n>1$, the eigenfunctions $\varphi_k^i$ are known for $1\leq k\leq n-1$.
+	Furthermore, we also know that $\varphi_n^i$ is orthogonal to each of the $\varphi_k^i$, and so we know that the subspace in which the maximum will be attained is $S'_{n-1} = \mathrm{span}\clbracs{\varphi_k^i \setVert 1\leq k\leq n-1}$.
+	Thus, we solve
+	\begin{align*}
+		\lambda_n^i &= \min_{\substack{\varphi\in\gradgradSob{\ddom_i}{\lambda_2} \\ \norm{\varphi}_{\ltwo{\partial\ddom_i}{S}}=1}} \clbracs{ \norm{\tgrad \varphi}_{\ltwo{\ddom_i}{x}} - \omega^2 \norm{\varphi}_{\ltwo{\ddom_i}{x}} \setVert \varphi\perp\varphi_k^i, \text{ for each } 1\leq k\leq n-1 },
+	\end{align*}
+	with the argmin being the eigenfunction $\varphi_n^i$.
+\end{enumerate}
+We can numerically solve these minimisation problems via the method of Lagrange multipliers for example, but this would require us to settle for approximate $\varphi_n^i$ and eigenvalues.
+
+\section*{HYPOTHETICALS: Theory Needed, and Cost Estimations/ Summary}
+We summarise here the overall algorithm that we are proposing and where the largest ``computational costs" will come from.
+
+The procedure is as follows:
+\begin{enumerate}
+	\item Choose a finite-dimensional subspace $V\subset\gradgradSob{\graph}{\lambda_2}$ and a basis $\clbracs{\psi_m}_{m=1}^M$.
+	Recommend a basis of locally-defined functions, like ``tent" or ``hat" functions placed on nodes along the edges of $\graph$.
+	\item For each region $i$, compute the first $N_i$ eigenvalues $\lambda_n^i$ and eigenfunctions $\varphi_n^i$ for the map $\dtn_{\omega}^i$.
+	The choice of $N_i$ will be important here --- too high might lead to heavy computational cost, whilst too small might lead to inaccuracy.
+	A happy medium might n\"iavely seem to be choosing $N_i = M$ for every region, given that we are already working in a finite dimensional subspace for $u$, its shouldn't hurt to throw away the higher eigenvalues, but having less than $M$ might cause issues for the change of basis calculations.
+	\item Compute the coefficients $c_{m,n}^i$ and the entries of the matrices $B, C, L$.
+	The entries of $B$ and $C$ can be computed immediately after step 1, or analytically to save on numerical approximation of integrals.
+	It is also worth noting that $c_{m,n}^i=0$ whenever $\supp\bracs{\psi_m}\cap\partial\ddom_i = \emptyset$, and that $\hat{c}_{m,n}^i=\overline{c}_{n,m}^i$.
+	\item Solve the system $B U = \bracs{\omega^2 C - L} U$.
+	Note that if we are solving for $\omega^2$ and $u_V$, $L$ will need to be recomputed at each iteration of the solve.
+	Also, $B, C$, and $L$ are Hermitian, as can be seen from their (and the basis coefficients') definitions in terms of inner products.
+\end{enumerate}
+
+The key idea here is that $B,C$ only need to be computed once, and are only $M\times M$ in size (although will in general be dense matrices).
+The two \emph{major} costs will come in from steps 2 and 4:
+\begin{itemize}
+	\item Step 4 requires a matrix solve.
+	If we are using $\omega$ as a constant, or are looking at the resolvent problem, then this cost is that of solving an $M\times M$ system.
+	If however we are trying to find $\omega^2$ and $u_V$, then this cost is multiplied by the cost of computing the Steklov functions in step 2.
+	\item Step 2 requires us to determine the first $N_i$ of the DtN eigenfunctions (and eigenvalues), by solving $N_i$ constrained optimisation problems.
+	We also have to introduce a finite dimensional space $W\subset\gradgradSob{\ddom_i}{\lambda_2}$ to approximate the $\varphi_n^i$ in, which will affect the accuracy of the approximate solution $u_V$.
+	Let $W$ have dimension $p$ for the cost estimation that follows.
+	The cost for each optimisation problem should be of the order of another linear-system solve, but I'll need to double check.
+\end{itemize}
+Thus, I estimate the (major) cost of the numerical scheme to be (worst case, assuming we want to find $\omega^2$ too);
+\begin{align*}
+	\text{ cost } 
+	&= \bracs{ M\times M \text{ eigenvalue or linear system solve} } \\
+	& \quad\times \sum_{N_i}\bracs{ N_i \times (p\times p-\text{constrained optimisation problem solves}) }.
+\end{align*}
+The memory usage would be of the order of (worst case, assuming no $c_{m,n}^i$ are zero)
+\begin{align*}
+	\text{ memory }
+	&= (M+1)\sum_{i}N_i  &\qquad\text{for the } c_{m,n}^i \text{ and } \lambda_n^i, \\
+	& \ + 3M^2 &\qquad\text{for the entries of } B, C, L, \\
+	& \ + M^2\abs{\edgeSet} &\qquad\text{for each } \ip{\psi_q}{\psi_n}_{L^2\bracs{I_{jk}}},
+\end{align*}
+so would be of the order $M^2$ if we are choosing $N_i$ of the order $M$.
+There is also a memory cost accrued for the representation of the solution to each optimisation problem for the $\lambda_n^i$, however once we are done with computing the $\lambda_n^i$ for the region $\ddom_i$, we can compute any associated $c_{m,n}^i$ and then reuse the memory assigned to the representations.
+
+The theory that would then need to be filled in or investigated would be
+\begin{itemize}
+	\item Assurance that $u_V$ gets close to $u$ as the dimension of $V$ increases, or at least is optimal in $V$ (cf Cea's lemma).
+	\item The accuracy loss from truncation at $N_i$.
+	\item Accuracy loss from the representation of the $\varphi_n^i$.
+	\item Optimal (or necessary) conditions on $N_i$ and $p$ given $M$.
+	\item Any timesaves that we can make computationally or analytically --- for example, identical $\ddom_i$ have identical eigenfunctions (computational), and we can compute some of the inner products if we choose our $\psi_m$ cleverly (analytical).
+\end{itemize}

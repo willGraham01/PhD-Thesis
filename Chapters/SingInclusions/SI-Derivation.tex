@@ -168,10 +168,12 @@ For each $\ddom_i$ and $\omega^2>0$, define the set $D_i$ by
 	D^i_\omega = \{ \bracs{g,h}\in\ltwo{\partial\ddom_i}{S}\times\ltwo{\partial\ddom_i}{S} \ \vert \
 	& \exists v\in\gradgradSob{\ddom_i}{\lambda_2} \text{ s.t. } \\
 	&\quad \bracs{\laplacian_\qm + \omega^2}v = 0, \\
-	&\quad v\vert_{\partial\ddom_i}=g, \ \left.\pdiff{v}{n}\right\vert_{\partial\ddom_i} = h \}.
+	&\quad v\vert_{\partial\ddom_i}=g, \ \left.\bracs{\tgrad v\cdot n}\right\vert_{\partial\ddom_i} = h \}.
 	\labelthis\label{eq:SI-DtNMapRegion}
 \end{align*}
-This allows us to define the Dirichlet to Neumann map $\dtn^i_\omega$ for the region $\ddom_i$ and $\omega^2$ as the operator with domain $\dom\bracs{\dtn^i_\omega} = D^i_\omega$ and action $\dtn^i_\omega g = h$, where $g,h$ are related as in \eqref{eq:SI-DtNMapRegion}. \tstk{We need to be careful that $\omega^2$ is not an eigenvalue of the Dirichlet laplacian - otherwise this definition is anything but well-defined. As such, might be worth checking that an eigenfunction of the Dirichlet laplacian can never be (part of) a solution to our original problem?}
+This allows us to define the Dirichlet to Neumann map $\dtn^i_\omega$ for the region $\ddom_i$ and $\omega^2$ as the operator with domain $\dom\bracs{\dtn^i_\omega} = D^i_\omega$ and action $\dtn^i_\omega g = h$, where $g,h$ are related as in \eqref{eq:SI-DtNMapRegion}. 
+\tstk{Need the $\tgrad\cdot n$ here, since otherwise we don't satisfy the Green's identity}
+\tstk{We need to be careful that $\omega^2$ is not an eigenvalue of the Dirichlet laplacian - otherwise this definition is anything but well-defined. As such, might be worth checking that an eigenfunction of the Dirichlet laplacian can never be (part of) a solution to our original problem?}
 The Dirichlet-to-Neumann (DtN) map allows us to further reformulate \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition}, and remove the ``bulk equation" \eqref{eq:SI-BulkEqn} entirely.
 Indeed, given that the traces from $\ddom_i$ are required to match the solution $u$ on the inclusions that form the boundary $\partial\ddom_i$, we have that 
 \begin{align*}
