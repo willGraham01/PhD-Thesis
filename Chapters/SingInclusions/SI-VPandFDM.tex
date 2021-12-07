@@ -1,0 +1,193 @@
+\section{Numerical Approach to the Variational Problem and Strong Formulation}
+
+
+\tstk{fix this section's name once you decide what makes the cut. Also make a proper introduction here, or at least a lead-in.}
+
+In this section we explore various approaches to solving the systems \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition};
+\begin{align*}
+	\laplacian_\qm u 
+	&= -\omega^2 u 
+	&\text{in } \ddom_i, 
+	\tag{\ref{eq:SI-BulkEqn} revisited} \\
+	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)} 
+	&= \omega^2 u^{(jk)} + \bracs{\grad u\cdot n_{jk}}^+ - \bracs{\grad u\cdot n_{jk}}^-,
+	&\text{in } I_{jk}, 
+	\tag{\ref{eq:SI-InclusionEqn} revisited} \\
+	0 
+	&= \sum_l \bracs{\pdiff{}{n}+\rmi\qm_{jk_l}} u^{(jk_l)}(v_j) 
+	&\text{at } v_j\in\vertSet. 
+	\tag{\ref{eq:SI-VertexCondition} revisited}
+\end{align*}
+and (the equivalent) system \eqref{eq:SI-NonLocalQG};
+\begin{align*}
+	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)} 
+	&= \omega^2 u^{(jk)} - \bracs{ \dtn^+_\omega u^{(jk)} + \dtn^-_\omega u^{(jk)}},
+	&\qquad\text{on } I_{jk}, 
+	\tag{\ref{eq:SI-NonLocalQGEdgeEquation} revisited}  \\
+	\sum_{j\con k} \bracs{\pdiff{}{n}+\rmi\qm_{jk}} u^{(jk)}(v_j) 
+	&= 0,
+	&\qquad\forall v_j\in\vertSet, \tag{\ref{eq:SI-NonLocalQGVertexDeriv} revisited} \\
+	u \text{ is continuous,} 
+	& 
+	&\qquad\forall v_j\in\vertSet. \tag{\ref{eq:SI-NonLocalQGVertexCont} revisited}
+\end{align*}
+Crucially, both of these systems only involve objects that are (with the conclusion of chapter \tstk{curl-curl and scalar} familiar to us and which we can work with to find explicit solutions.
+There are additional differences that have been highlighted in section \tstk{ref}; notably that \eqref{eq:SI-NonLocalQG} is a non-local quantum graph problem on the inclusions only, which only requires us to determine the edge solutions $u_{jk}$, provided we have to hand a method for evaluating the action of the DtN map on $u$.
+This would allow us to extract the eigenvalues $\omega^2$ without examining (in detail) the behaviour of the eigenfunctions in the bulk regions --- we could of course recover this information about the behaviour in the bulk regions if we wished.
+In contrast, \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} requires us to determine the solution $u$ on the entirety of $\ddom$, including the bulk regions.
+This may require significantly more effort than only concerning ourselves with the solution on the graph, particularly if the spectrum is our primary concern, as opposed to the eigenfunctions.
+However the system \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} does not involve the DtN map, which (as we shall see in section \tstk{section}) can be the source of several complications for the solution process.
+
+%In what follows, we outline our ideas \tstk{and when they worked, implementations} for solving the above problems.
+%Our examples will focus on the simple ``cross in the plane" geometry introduced in \tstk{scalar examples section}, although because the bulk regions are now a major part of the problem, we can simplify our notation by shifting the period cell.
+%To this end, let $\ddom=\left[0,1\right)^2$ and $\graph=\bracs{\vertSet,\edgeSet}$ be the (period) graph of the periodic graph with vertices and edges
+%\begin{align*}
+%	v_{n,m} = \bracs{n,m}, &\quad n,m\in\integers,  \\
+%	I_{(n,m),(n+1,m)} = \sqbracs{v_{n,m},v_{n+1,m}}, 
+%	& \quad I_{(n,m),(n,m+1)} = \sqbracs{v_{n,m},v_{n,m+1}},
+%\end{align*}
+%which consists of four (quartered) vertices and four edges of unit length,
+%\begin{align*}
+%	\vertSet &= \clbracs{v_1 = \bracs{0,1}, \ v_2 = \bracs{1,1}, \ v_3 = \bracs{0,0}, \ v_4 = \bracs{0,1}}, \\
+%	\edgeSet &= \clbracs{ I_{12}, \ I_{31}, \ I_{34}, \ I_{42} }.
+%\end{align*}
+%This means that in our examples we only have to concern ourselves with a single bulk region $B = \ddom^{\circ} = \bracs{0,1}$, although we will be viewing $B$ from different perspectives depending on which edge in $\edgeSet$ we are currently examining.
+%For completeness, we also record the values of $\qm_{jk}$ for the edges; 
+%\begin{align*}
+%	\qm_{12} = \qm_{34} = \qm_1, \quad \qm_{31} = \qm_{42} = \qm_2.
+%\end{align*} 
+
+\subsection{Finite Difference Scheme} \label{ssec:FDMSingInc}
+\tstk{This is the content summary of \texttt{CompositeMedium\_PeriodicFDM.ipynb}}
+When attempting to solve the system \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} numerically, it is convenient to notice that we can move the ``trace" terms in \eqref{eq:SI-InclusionEqn} to the left-hand-side to obtain the slightly nicer looking system
+\begin{align*}
+	-\laplacian_\qm u 
+	&= \omega^2 u 
+	&\text{in } \ddom_i, \\
+	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)}  - \bracs{\bracs{\grad u\cdot n_{jk}}^+ - \bracs{\grad u\cdot n_{jk}}^-}
+	&= \omega^2 u^{(jk)},
+	&\text{in } I_{jk}, \\
+	\sum_l \bracs{\pdiff{}{n}+\rmi\qm_{jk_l}} u^{(jk_l)}(v_j) 
+	&= 0 
+	&\text{at } v_j\in\vertSet.
+\end{align*}
+We have now placed all differential operators on the left hand side of the equations, and our goal now is to devise a numerical scheme to approximate the action of the ``operators" on the left-hand-side of the above equations, and from that determine the spectrum of the problem.
+
+With this in mind, we can look to employ a n{\"i}ave finite-difference based numerical scheme to approximate the spectrum of our problem.
+We first discretise $\ddom$ into a \emph{suitable} mesh consisting of $N\times N$ nodes $\tau_{p,q} = \bracs{(p-1)h,(q-1)h}$ for $p,q\in\clbracs{1,...,N}$, with a mesh width of $h = \recip{N-1}$.
+We will highlight the conditions for a ``suitable" mesh as we proceed with the description, and discuss these points afterwards.
+Finally, let $u_{p,q} = u\bracs{\tau_{p,q}}$.
+In using a finite difference scheme, we are implicitly assuming that $u$ is smooth enough for us to approximate it through a Taylor series.
+However, since we are looking at the spectral problem any eigenfunctions $u$ will be smooth on each of the regions $\ddom_i$ and consequentially along each edge $I_{jk}$, so we can overlook concerns to do with regularity of $u$.
+Then we can proceed with discretisation of the above equations, at points $\tau_{p,q}\in\ddom_i$ in one of the bulk regions, we discretise as
+\begin{align*}
+	-\laplacian_\qm u\bracs{\tau_{p,q}} &\approx 
+	\bracs{\abs{\qm}^2 + 4h^{-2}}u_{p,q}
+	-h^{-1}\bracs{h^{-1} + \rmi\qm_1}u_{p+1,q}
+	-h^{-1}\bracs{h^{-1} - \rmi\qm_1}u_{p-1,q} \\
+	&\qquad -h^{-1}\bracs{h^{-1} + \rmi\qm_2}u_{p,q+1}
+	-h^{-1}\bracs{h^{-1} - \rmi\qm_2}u_{p,q-1}, \labelthis\label{eq:SI-FDMBulkDiscretise}
+\end{align*}
+using centred differences.
+For nodes $\tau_{p,q}\in I_{jk}$, our finite difference approximations become slightly more complex, as we are forced to consider the nearest nodes to $\tau_{p,q}$ that lie in the directions $e_{jk}$ and $n_{jk}$.
+To condense the notation we let;
+\begin{itemize}
+	\item $\tau_{p,q}^{\pm e_{jk}}$ denote the nearest node to $\tau_{p,q}$ in the direction $\pm e_{jk}$ from $\tau_{p,q}$, and set $h_{p,q}^{\pm e_{jk}} = \abs{ \tau_{p,q} - \tau_{p,q}^{\pm e_{jk}} }$.
+	\item $\tau_{p,q}^{\pm n_{jk}}$ denote the nearest node to $\tau_{p,q}$ in the direction $\pm n_{jk}$ from $\tau_{p,q}$, and set $h_{p,q}^{\pm n_{jk}} = \abs{ \tau_{p,q} - \tau_{p,q}^{\pm n_{jk}} }$.
+	\item $u_{p,q}^{\pm e_{jk}} = u\bracs{\tau_{p,q}^{\pm e_{jk}}}$ and $u_{p,q}^{\pm n_{jk}} = u\bracs{\tau_{p,q}^{\pm n_{jk}}}$.
+\end{itemize}
+Note that to be able to perform the above we must require that each of the nodes $\tau_{p,q}^{\pm e_{jk}}$, $\tau_{p,q}^{\pm n_{jk}}$ exist.
+Additionally, let us assume that $h_{p,q}^{e_{jk}} := h_{p,q}^{+e_{jk}}=h_{p,q}^{-e_{jk}}$ so that we can use central differences in the direction along $I_{jk}$ --- this is not a necessary property the mesh must have, as we could simply elect to use either forward or backward differences if $h_{p,q}^{+e_{jk}} \neq h_{p,q}^{-e_{jk}}$.
+Then we have that 
+\begin{align*}
+	&- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)}\bracs{\tau_{p,q}} - \bracs{\bracs{\grad u\bracs{\tau_{p,q}}\cdot n_{jk}}^+ - \bracs{\grad u\bracs{\tau_{p,q}}\cdot n_{jk}}^-} \\
+	&\qquad \approx \bracs{\qm_{jk}^2 + 2\bracs{h_{p,q}^{e_{jk}}}^{-1} + 2\bracs{h_{p,q}^{e_{jk}}}^{-2}}u_{p,q} \\
+	&\qquad - \bracs{h_{p,q}^{e_{jk}}}^{-1}\bracs{ \bracs{h_{p,q}^{e_{jK}}}^{-1} + \rmi\qm_{jk} }u_{p,q}^{+e_{jk}}
+	- \bracs{h_{p,q}^{e_{jk}}}^{-1}\bracs{ \bracs{h_{p,q}^{e_{jk}}}^{-1} - \rmi\qm_{jk} }u_{p,q}^{-e_{jk}} \\
+	&\qquad - \bracs{h_{p,q}^{+n_{jk}}}^{-1}u_{p,q}^{+n_{jk}}
+	- \bracs{h_{p,q}^{-n_{jk}}}^{-1}u_{p,q}^{-n_{jk}}, \labelthis\label{eq:SI-GeneralEdgeDiscretise}
+\end{align*}
+which serves as our approximation at $\tau_{p,q}$ --- we have taken ``centred" differences along the edge $I_{jk}$ and one-sided derivatives from the adjacent regions to approximate the traces of the normal derivatives.
+Finally at those $\tau_{p,q}$ that are placed at the vertices $v_j\in\vertSet$, our finite difference approximation already assumes continuity of $u$ at these nodes, so instead we must enforce the vertex conditions here.
+To this end, we find that
+\begin{subequations} \label{eq:SI-FDMGeneralVertex}
+	\begin{align}
+		\bracs{ \pdiff{}{n} + \rmi\qm_{jk} } u^{(jk)}(v_j)
+		&= h_{p,q}^{+e_{jk}}\bracs{ u_{p,q} - u_{p,q}^{+e_{jk}} } - \rmi\qm_{jk}u_{p,q}, \\
+		\bracs{ \pdiff{}{n} + \rmi\qm_{jk} } u^{(kj)}(v_j)
+		&= h_{p,q}^{-e_{kj}}\bracs{ u_{p,q} - u_{p,q}^{-e_{kj}} } + \rmi\qm_{kj}u_{p,q},	
+	\end{align}
+\end{subequations}
+which will allow us to compute the approximation to \eqref{eq:SI-VertexCondition}.
+These approximations then allow us to form a finite difference matrix $\mathcal{F}$\footnote{One final consideration we then have to make is to ensure that we adhere to periodic boundary conditions for any nodes that lie on $\partial\ddom$ when constructing $\mathcal{F}$.}, which acts on the vector $U$ with $U_{i} = u_{p,q}$ where $i = q + Np$.
+Then, we solve the (generalised) eigenvalue problem
+\begin{align} \label{eq:FDM-MatrixSystem}
+	\mathcal{F}U = \beta\bracs{\omega^2}U,
+\end{align}
+for $\omega^2, U$, where 
+\begin{align*}
+	\bracs{\beta\bracs{\omega^2}}_{nm} &= 
+	\begin{cases}
+ 		\omega^2 & n=m, n=q + Np, \text{ and } \tau_{p,q}\not\in\vertSet, \\
+ 		0 & \text{otherwise. }
+	\end{cases}
+\end{align*}
+The matrix-valued function $\beta$ ensures that the vertex condition is satisfied when solving \eqref{eq:FDM-MatrixSystem}, which can be done with a suitable generalised eigenvalue solver (note that $\beta\bracs{\omega^2}$ is easily computable, being a diagonal matrix).
+
+The major requirement that we make of our mesh is that the nodes $\tau_{p,q}^{\pm e_{jk}}$ and $\tau_{p,q}^{\pm n_{jk}}$ exist whenever we have $\tau_{p,q}\in I_{jk}$.
+Of course, this is not ideal if the edges of the graph $\graph$ are not aligned with the coordinate axes, as using a uniform mesh is no longer guarantees that such nodes will exist.
+Compounding this is that nodes are required to be placed on each of the edges $I_{jk}$ to ensure that \eqref{eq:SI-InclusionEqn} is discretised correctly and reflected in the finite difference matrix $\mathcal{F}$.
+This can be combated by using a non-uniform mesh and abandoning centred differences in the bulk regions.
+Instead, one should place nodes along the edges $I_{jk}$ first (including placing nodes at each of the vertices), and then place nodes non-uniformly in the bulk regions appropriately.
+The equation involving $\laplacian_{\qm}u_{p,q}$ must then change to reflect the mesh, but ultimately one can still assemble a system of the form \eqref{eq:FDM-MatrixSystem} that approximates \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition}.
+Alternatively, if looking to avoid a complex mesh, one could instead approximate the values like $u_{p,q}^{+e_{jk}}$ using interpolations of nearby nodal values, which would reduce the sparsity of the resulting matrix $\mathcal{F}$, but might avoid the need to use additional nodes.
+
+For illustrative purposes, let us provide a simple example.
+Let $\ddom=\left[0,1\right)^2$ and $\graph$ be the period graph of the periodic graph $\graph^*=\bracs{\vertSet^*,\edgeSet^*}$, where
+\begin{align*}
+	\vertSet^* &= \clbracs{ v_{z_1,z_2} := \bracs{\recip{2},\recip{2}} + \bracs{z_1,z_2} \setVert z_1,z_2\in\integers }, \\
+	\edgeSet^* &= \clbracs{ I_{(z_1,z_2),(z_1+1,z_2)} := \sqbracs{ v_{z_1,z_2}, v_{z_1+1,z_2} }, I_{(z_1,z_2),(z_1,z_2+1)} := \sqbracs{ v_{z_1,z_2}, v_{z_1,z_2+1} } \setVert v_{z_1,z_2}\in\vertSet^* }.
+\end{align*}
+Thus, $\graph$ consists of one vertex $v_0=\bracs{\recip{2},\recip{2}}$ with one horizontal edge $I_h$ along $x_2=\recip{2}$ and one vertical edge $I_v$ along $x_1=\recip{2}$.
+It is easy to see that on $I_h$, $\qm_h = \qm_1$ and on $I_v$, $\qm_v = \qm_2$.
+
+With this geometry, let us use a uniform mesh consisting of $N$ nodes in each axis direction, with $N$ to odd.
+Place these nodes as $\tau_{p,q} = \bracs{(p-1)j, (q-1)h}$ for $p,q\in\clbracs{1,...,N}$ and mesh-width $h=\recip{N-1}$.
+Note that the nodes $\tau_{N,q}$ and $\tau_{p,N}$ are not technically in $\ddom$, however it is convenient to include them so that encoding the periodic boundary conditions is easier amounts to ``enslaving" the nodal values $u_{p,N}$ to $u_{p,0}$ (and similarly $u_{N,q}$ to $u_{0,q}$) --- as such, we also adopt the convention that $u_{p,-1}=u_{p,N-1}$ and $u_{-1,q}=u_{N-1,q}$.
+Furthermore, the nodes $\tau_{\frac{N-1}{2},q}$ and $\tau_{p,\frac{N-1}{2}}$ are precisely the nodes that lie on the singular inclusions, and $\tau_{\frac{N-1}{2},\frac{N-1}{2}}$ is placed at the vertex $v_0$, with all other nodes lying in the (interior of the) bulk regions.
+Upon discretising, we retain \eqref{eq:SI-FDMBulkDiscretise} at the nodes $\tau_{p,q}$ that lie in the bulk regions.
+For those $\tau_{p,q}$ that lie on the horizontal edge $I_h$ (that is, $\tau_{p,\frac{N-1}{2}}$ for $p\neq\frac{N-1}{2}$) the discretisation \eqref{eq:SI-GeneralEdgeDiscretise} becomes
+\begin{align*}
+	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)}_{p,q} - \bracs{\bracs{\grad u_{p,q}\cdot n_{jk}}^+ - \bracs{\grad u_{p,q}\cdot n_{jk}}^-}
+	& \approx \bracs{\qm_1^2 + 2h^{-1} + 2h^{-2}}u_{p,q} \\
+	& \quad - h^{-1}\bracs{h^{-1} + \rmi\qm_1}u_{p+1,q} \\
+	& \quad - h^{-1}\bracs{h^{-1} - \rmi\qm_1}u_{p-1,q} \\
+	& \quad - h^{-1}u_{p,q+1} - h^{-1}u_{p,q-1}. \labelthis\label{eq:SI-FDMHorzEdgeDiscretise}
+\end{align*}
+The ``nearest neighbour" nodes are simply the adjacent nodes in our uniform mesh (accounting for periodicity if we happen to be near the boundary of $\ddom$), and thus we have a far simpler expression than in \eqref{eq:SI-GeneralEdgeDiscretise}.
+Similarly, for nodes $\tau_{p,q}$ on the vertical edge $I_v$ (that is, $\tau_{\frac{N-1}{2},q}$ for $q\neq\frac{N-1}{2}$) we have that
+\begin{align*}
+	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)}_{p,q} - \bracs{\bracs{\grad u_{p,q}\cdot n_{jk}}^+ - \bracs{\grad u_{p,q}\cdot n_{jk}}^-}
+	& \approx \bracs{\qm_2^2 + 2h^{-1} + 2h^{-2}}u_{p,q} \\
+	& \quad - h^{-1}\bracs{h^{-1} + \rmi\qm_2}u_{p,q+1} \\
+	& \quad - h^{-1}\bracs{h^{-1} - \rmi\qm_2}u_{p,q-1} \\
+	& \quad - h^{-1}u_{p+1,q} - h^{-1}u_{p-1,q}. \labelthis\label{eq:SI-FDMVertEdgeDiscretise}
+\end{align*}
+Finally, at the central vertex $v_0 = \tau_{\frac{N-1}{2},\frac{N-1}{2}}$, we have that
+\begin{align} \label{eq:SI-FDMVertCond}
+	\sum_{j\con k}\bracs{ \pdiff{}{n} + \rmi\qm_{jk} }u^{(jk)}\bracs{v_0}
+	&\approx h^{-1} \bracs{ 4u_{p,q} - u_{p+1,q} - u_{p-1,q} - u_{p,q+1} - u_{p,q-1} },
+\end{align}
+where $p = q = \frac{N-1}{2}$.
+The matrix-valued $\beta\bracs{\omega^2}$ is also easily computed as
+\begin{align*}
+	\beta:\complex\rightarrow\complex^{(N-1)\times(N-1)}, 
+	\qquad \bracs{\beta\bracs{\omega^2}}_{jk} = \begin{cases} 1 & j=k\neq\frac{N-1}{2}, \\ 0 & \text{otherwise}. \end{cases}
+\end{align*}
+
+\tstk{this gives us the numerical results in the file \texttt{CompositeMedium\_PeriodicFDM.ipynb} - I can export the results we want to pdfs and import them as images here.
+Things to note are that the finite-difference matrix $\mathcal{F}$ is not Hermitian, but the eigenvalues appear to all be real.
+The eigenfunction plots are also quite nice, but we don't have anything to compare them to (true values, etc).
+We could do a crude sweep over the quasi-momentum values to see if the symmetry properties hold, and what the spectrum in general looks like as we vary the quasimomentum?
+It might also be worth timing the runs for comparison with the ``spectral" method, or working out the cost in FLOPs, time, etc for the scheme to run?
+Also need to mention how we have wasted a lot of our effort in solving in the bulk regions, when in reality we don't actually need the form of the function here...}
