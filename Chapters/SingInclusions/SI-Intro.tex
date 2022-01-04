@@ -30,22 +30,18 @@ That is to say, the behaviour of a solution is no longer determined by the behav
 In fact, we will see that it is even possible to reformulate a problem on the composite domain into a problem posed solely on the graph $\graph$, where the interplay between the solution in the bulk and on the edges is encoded in the non-locality of the resulting problem.
 
 \subsection{Chapter Overview} \label{ssec:SIOverview}
-The focus of this chapter will be on the ``wave-equation"
+The focus of this chapter will be on the ``Helmholtz-equation" (thought of as a Fourier transformed ``wave-equation"),
 \begin{align} \label{eq:SI-WaveEqn}
 	-\bracs{\tgrad_{\compMes}}^2 u = \omega^2 u \qquad\text{in } \ddom,
 \end{align}
 now posed on our composite domain and respecting our singular skeleton.
-Our goal of studying the spectrum of \eqref{eq:SI-WaveEqn} will direct our analysis in this chapter as follows; foremost, \tstk{section ref where appropraite} we establish formal definitions of the appropriate function space for $u$ and the operator for which \eqref{eq:SI-WaveEqn} is the eigenvalue problem of, motivated by our approaches in chapters \tstk{scalar and curl}.
-This ensures that there are eigenfunctions and eigenvalues of \eqref{eq:SI-WaveEqn} to talk about, and we then move onto considerations for determining these.
-In doing so, we discover that \eqref{eq:SI-WaveEqn} possesses several equivalent formulations, each of which be the basis of a numerical scheme with benefits and hindrances with respect to the others.
-The first such formulations we consider  \tstk{add subsections!} come directly from the variational problem for the operator that defines \eqref{eq:SI-WaveEqn}, and the corresponding ``strong form" that we can derive using analysis of the function space that $u$ lives in.
-These formulations still require us to work with the unfamiliar gradients ($\tgrad_{\compMes}u$) or handle interplay between the solution in the bulk and on the skeleton; so in section \tstk{ref!} we formulate \eqref{eq:SI-WaveEqn} on the skeleton only.
-This highlights a ``trade-off" between the two approaches; in moving towards a problem on the skeleton only, we (in theory) reduce the dimensionality of any numerical scheme we want to employ (as the skeleton is 1D) and avoid having to handle tangential gradients with respect to $\compMes$ numerically.
-On the other hand, moving onto the skeleton results in the introduction of non-local effects into the equations on each $I_{jk}$ to compensate for the effect of the bulk regions, which presents new challenges.
-Finally, in section \tstk{ref!} we consider a problem in an ``extended space", whose solution is equivalent to solving \eqref{eq:SI-WaveEqn} \tstk{motivated by the use of a Strauss dilations}.
-This presents us with another, analogous trade-off between sections \tstk{vp vs Strauss} and \tstk{QG only vs VP} --- once again we reduce dimensionality in exchange for the introduction of unfamiliar objects and effects into our equations.
+Our goal of studying the spectrum of \eqref{eq:SI-WaveEqn} will direct our analysis in this chapter as follows; foremost, \tstk{section ref where appropriate} we establish formal definitions of the appropriate function space for $u$ and the operator for which \eqref{eq:SI-WaveEqn} is the eigenvalue problem of, motivated by our approaches in chapters \tstk{scalar and curl}.
+This ensures that there \emph{are} eigenfunctions and eigenvalues of \eqref{eq:SI-WaveEqn} to talk about, and we then move onto considerations for determining these.
+In doing so, we discover that \eqref{eq:SI-WaveEqn} possesses several equivalent formulations, each of which will be the basis of a numerical scheme with benefits and hindrances relative to the other formulations.
+The first such formulation we consider  \tstk{add subsections!} comes directly from the variational problem for the operator that defines \eqref{eq:SI-WaveEqn}, and the second comes from the corresponding ``strong form" that we can derive using analysis of the function space that $u$ lives in.
+These formulations still require us to work with the unfamiliar gradients ($\tgrad_{\compMes}u$) or handle interplay between the solution in the bulk and on the skeleton, which brings us to the third formulation in section \tstk{ref!} where we formulate \eqref{eq:SI-WaveEqn} on the skeleton only.
 
-In section \tstk{narrative section or whatever it becomes} we will formalise the problem \eqref{eq:SI-WaveEqn} and define the operator for which it is the eigenvalue problem of.
-We will then write down the variational problem for this operator with a view to determining its eigenvalues, and the equivalent ``strong form" problem that it gives rise to.
-Section \tstk{ref} will then explore some numerical methods for approximating the spectrum, and some of the difficulties that these schemes face.
-This will lead us into the aforementioned sections \tstk{QG and Strauss}, where we look for alternative formulations of \eqref{eq:SI-WaveEqn} and thus alternative methods of approximating the spectrum.
+Our investigation into each of these formulations will highlights several ``trade-offs" that are made as we move between the various formulations or numerical approaches to solving \eqref{eq:SI-WaveEqn}.
+For example, moving towards a problem on the skeleton only allows us to avoid handling tangential gradients with respect to $\compMes$ (and other non-classical objects) and theoretically reduces the dimensionality of any numerical scheme we want to employ because the skeleton is 1D.
+On the other hand, moving onto the skeleton also results in the introduction of non-local effects into the equations on each $I_{jk}$, to compensate for the effect of the bulk regions, which complicates the solutions process.
+We also establish a link between the first and second formulations by means of \tstk{motivated by the use of a Strauss dilations, extended spaces}, and speculate on the affect of introducing non-zero coupling constants at the vertices.

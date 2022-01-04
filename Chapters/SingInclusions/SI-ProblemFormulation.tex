@@ -11,12 +11,11 @@ A summary of the key results for a function $u\in\tgradSob{\ddom}{\compMes}$ is 
 	\begin{align*}
 		\tgrad_{\compMes}u = \begin{cases} \grad u + \rmi\qm u & x\in\ddom\setminus\graph, \\ \tgrad_{\ddmes}u & x\in\graph, \end{cases}
 	\end{align*}
-	where $\grad u$ denotes the weak derivative of $u\in\gradSob{\ddom}{\lambda_2}$.
+	where $\grad u$ denotes the weak gradient of $u\in\gradSob{\ddom}{\lambda_2}$.
 	Essentially, in the bulk regions the function $u$ and its tangential gradient coincide with the familiar notion of a weak derivative (with respect to the Lebesgue measure).
-	One should note the parallels that can be drawn with the intuitive reasoning for the parts (a) and (b) above.
 	\item The function $u$ lives in $\gradSob{\ddom_i}{\lambda_2}$ for each of the bulk regions, and the traces of $u$ from $\ddom_i$ onto the inclusions $I_{jk}$ coincide with the values of $u_{jk}$ on the inclusions.
 	This is as close to a condition of ``continuity across the inclusions" as we can get.
-	Additionally, the $u_{jk}$ are is continuous at the vertices of $\graph$, as was the case for functions in $\ktgradSob{\ddom}{\dddmes}$.
+	Additionally, the $u_{jk}$ are continuous at the vertices of $\graph$, as was the case for functions in $\ktgradSob{\ddom}{\dddmes}$.
 \end{itemize}
 We then consider (for a fixed $\qm$) the bilinear form $b_{\qm}$ defined on pairs $(u,v)\in\tgradSob{\ddom}{\compMes}\times\tgradSob{\ddom}{\compMes}$ where\footnote{Of course, we can be less stringent with this definition and define $b$ on smooth functions, which are (by construction) dense in $\tgradSob{\ddom}{\compMes}$.}
 \begin{align*}
@@ -46,15 +45,16 @@ Equation \eqref{eq:SI-WaveEqn} is then the eigenvalue equation for the operator 
 \end{align}
 \tstk{this is the discussion about how we have a catch-22 between the variational formulation of our operator (proving it exists, is well defined, has discrete spectrum, etc, and generally being useful in an abstract setting) vs the unfamiliarity of the objects involved making it difficult to comprehend and solve explicitly (which requires us to find an alternative, non-standard form only involving objects we are familiar with).}
 With $\ddom$ being bounded and $\mathcal{A}_{\qm}$ self-adjoint, the spectrum of $\mathcal{A}_{\qm}$ consists of a discrete set of values $\omega^2\in\reals$ (as we expect from the Gelfand transform and introduction of the quasi-momentum) and taking the union of the spectra of the $\mathcal{A}_{\qm}$ over $\qm$ will provide us with the spectrum of a periodic operator on $\reals^2$ with period cell $\ddom$.
-We can even utilise the min-max principle to write down a variational formulation whose solution determines the eigenvalues (and eigenfunctions) of $\mathcal{A}_{\qm}$.
-Yet despite these useful analytic properties, the definition \eqref{eq:CompLaplaceOpDom} and the variational form \eqref{eq:SI-WeakWaveEqn} do not lend themselves particularly well to explicit solution (through numerical or analytical means).
+We can even utilise the min-max principle to write down a variational formulation whose solution determines the eigenvalues (and eigenfunctions) of $\mathcal{A}_{\qm}$, which will form the basis of our numerical approach to solving this problem.
+Yet despite these useful analytic properties, \eqref{eq:CompLaplaceOpDom} and \eqref{eq:SI-WeakWaveEqn} do not lend themselves particularly well to explicit analytic solution, nor provide any insight into how to handle objects like $\tgrad_{\compMes}u$ numerically.
 This places us in something of a catch-22; the variational formulation \eqref{eq:SI-WeakWaveEqn} is the ``standard" form of the eigenvalue problem for our operator $\mathcal{A}_{\qm}$ - and ensures that it exists, is well-defined, provides us with qualitative information about its spectrum, \tstk{and fits into the framework of existing theory concerning operators on Hilbert spaces - ask Kirill about how to word this point}.
-However, the objects involved (like $\tgrad_{\compMes}u$) and the integrals in \eqref{eq:SI-WeakWaveEqn} with respect to $\compMes$ are unfamiliar --- we know some of their properties when restricted to different regions of $\ddom$, but not how to work directly with them to obtain a ``solution" to \eqref{eq:SI-WeakWaveEqn}.
-This motivates us to find an alternative formulation to \eqref{eq:SI-WeakWaveEqn} which only involves objects we are familiar with (usual gradients, regions coupled through boundary conditions, and similar), but the resulting system will not be in the ``standard form" that \eqref{eq:SI-WeakWaveEqn} is.
+However, the objects involved (like $\tgrad_{\compMes}u$) and the integrals in \eqref{eq:SI-WeakWaveEqn} with respect to $\compMes$ are unfamiliar both from an analytic and numerical standpoint --- we know some of their properties when restricted to different regions of $\ddom$, but not how to work directly with them to obtain a ``solution" (or approximation thereof) to \eqref{eq:SI-WeakWaveEqn}.
+This motivates us to find an alternative formulation to \eqref{eq:SI-WeakWaveEqn}, leading to the following  formulation in section \ref{ssec:SI-Derivation} which brings us to a problem involving objects we are familiar with from \tstk{scalar and curl, and classical Sob}, at the expense of sacrificing the variaitonal form and our ability to use the min-max principle.
 Indeed, we shall see that the system we end up at will have the spectral parameter $\omega^2$ appearing in multiple places in the problem, taking us towards the realm of problems with generalised resolvents.
+We will take this idea further in section \tstk{QGnonlocal ref} when we attempt to reformulate our problem on the skeleton, and discard the bulk regions.
 
 \subsection{Variational Problem and Strong Form of \eqref{eq:SI-WaveEqn}} \label{ssec:SI-Derivation}
-Now that \eqref{SI-WaveEqn} is well-defined through \eqref{eq:SI-WeakWaveEqn} and the operator $\mathcal{A}_{\qm}$, we can begin to consider our approach to solving it.
+Now that \eqref{eq:SI-WaveEqn} is well-defined through \eqref{eq:SI-WeakWaveEqn} and the operator $\mathcal{A}_{\qm}$, we can begin to consider our approach to solving it.
 As mentioned in section \ref{ssec:SI-WaveEqnSetup}, the fact that $\mathcal{A}_{\qm}$ is self-adjoint for each $\qm$ combined with the min-max principle implies that the eigenvalues $\omega_{n}^2$ (and eigenfunctions $u_n$) of $\mathcal{A}_{\qm}$ are the minimum values (respectively minimisers) of the following variational problem:
 \begin{align} \label{eq:SI-VarProb}
 	\omega_n^2 &:= \min_{u}\clbracs{ \integral{\ddom}{ \abs{\tgrad_{\compMes}u}^2 }{\compMes} \setVert \norm{u}_{\ltwo{\ddom}{\compMes}}=1, \ u\perp u_l \ \forall 1\leq l\leq n-1 }.,
@@ -66,9 +66,9 @@ First, we should consider what our intuition is telling us about the behaviour w
 A good starting point is to consider how we expect our solutions to behave if we could (n\"{i}avely) interpret \eqref{eq:SI-WeakWaveEqn} in a strong sense.
 Away from the skeleton, \eqref{eq:SI-WeakWaveEqn} looks like the usual Helmholtz problem on a bounded domain, and so we expect our solution to possess sufficient regularity to be differentiated twice in the bulk.
 We also know that solutions to the ``wave equation" on the inclusions possess two derivatives along the edges of $\graph$ (\tstk{chapter ref!}), and are tied together through the vertex conditions.
-Finally, we must consider what should happen in the vicinity of the singular inclusions --- here we have (what we expect to be) a twice differentiable function in a bulk region $\ddom_i$ approaching its boundary, and so there should be ($L^2$) traces of $u$ and its normal derivative onto this boundary.
+Finally, we must consider what should happen in the vicinity of the skeleton --- here we have (what we expect to be) a twice differentiable function in a bulk region $\ddom_i$ approaching its boundary, and so there should be ($L^2$) traces of $u$ and its normal derivative onto this boundary.
 However, this boundary coincides with (a subregion of) the skeleton, so the function $u$ should ``feel" the affect of these traces as it moves along the skeleton.
-A partial converse is also expected; the $u$ is twice differentiable along the skeleton, and given that $u$ \emph{also} has a trace onto the inclusions, we expect that these traces should match the function values.
+A partial converse is also expected; $u$ is twice differentiable along the skeleton, and given that $u$ \emph{also} has a trace onto the skeleton, we expect that these traces should be consistent with the function values from the bulk.
 In summary, we expect that \eqref{eq:SI-WeakWaveEqn} can be reformulated into a system (which we colloquially label a ``strong form") that consists of the following components:
 \begin{enumerate}[(a)]
 	\item A (Helmholtz-like) PDE in each of the bulk regions, the solution to which has boundary traces matching the solution to a quantum graph problem on the inclusions.
@@ -108,14 +108,12 @@ Suppose that the test function $\phi$ in \eqref{eq:SI-WeakWaveEqn} has support c
 This implies that \eqref{eq:SI-WeakWaveEqn} becomes
 \begin{align*}
 	\omega^2\integral{\ddom_i}{u\overline{\phi}}{\lambda_2} 
-	&= \integral{\ddom_i}{ \grad u\cdot\overline{\grad\phi} - \rmi\qm\overline{\phi}\cdot\tgrad u + \rmi\qm  u\cdot\overline{\phi} - \rmi^2\qm\cdot\qm u\overline{\phi} }{\lambda_2} \\
-	&= \integral{\ddom_i}{ \grad u\cdot\overline{\grad\phi} - 2\rmi\qm\overline{\phi}\cdot\tgrad u - \rmi^2\qm\cdot\qm u\overline{\phi} }{\lambda_2}, \\
-	%\implies
-	%\integral{\ddom_i}{ \grad u\cdot\overline{\grad\phi} }{\lambda_2} 
+	&= \integral{\ddom_i}{ \grad u\cdot\overline{\grad\phi} - \rmi\qm\overline{\phi}\cdot\tgrad u + \rmi\qm  u\cdot\overline{\grad\phi} - \rmi^2\qm\cdot\qm u\overline{\phi} }{\lambda_2} \\
+	&= \integral{\ddom_i}{ \grad u\cdot\overline{\grad\phi} - 2\rmi\qm\overline{\phi}\cdot\tgrad u - \rmi^2\qm\cdot\qm u\overline{\phi} }{\lambda_2}, \\ 
 	&= \integral{\ddom_i}{ \bracs{\omega^2 u + 2\rmi\qm\cdot\tgrad u + \rmi^2\qm\cdot\qm u} \overline{\phi} }{\lambda_2}, 
 \end{align*}
 which holds for all smooth $\phi$ with compact support in $\ddom_i$.
-Given that we also know that $u$ is $\ltwo{\partial\ddom_i}{S}$ (even $H^1$), this implies that $u\in \gradgradSob{\ddom_i}{\lambda_2}$ with
+Given that we also know that $u$ is $\ltwo{\partial\ddom_i}{S}$ (and is even $H^1$ in this space), this implies that $u\in \gradgradSob{\ddom_i}{\lambda_2}$ with
 \begin{align*}
 	\laplacian u &= -\bracs{ \omega^2 u + 2\rmi\qm\cdot\tgrad u + \rmi^2\qm\cdot\qm u } &\qquad\text{in } \ddom_i, \\
 	\implies
@@ -228,10 +226,11 @@ Thus, equation \eqref{eq:SI-WeakWaveEqn} becomes
 	&= \sum_l \bracs{\pdiff{}{n}+\rmi\qm_{jk_l}} u^{(jk_l)}(v_j), \labelthis\label{eq:SI-VertexCondition}
 \end{align*}
 since $\phi(v_j)$ is arbitrary.
-We find that, in addition to continuity of $u$ at each of the vertices, $u$ also adheres to a Kirchoff-like condition at each of the vertices. \tstk{like in Scalar chapter, if had point masses added, probably would be equal to $\alpha_j\omega^2 u$ here.}
+We find that, in addition to continuity of $u$ at each of the vertices, $u$ also adheres to a Kirchoff-like condition at each of the vertices. \tstk{like in Scalar chapter, if had point masses added, probably would be equal to $\alpha_j\omega^2 u$ here. Add a pointer to our Strauss section and extended spaces, where we present with the $\alpha_j$ there.}
 
 The equations \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition}, combined with the knowledge that $u^{(jk)}$ matches the traces of $u$ from the adjacent bulk regions, provides us with a reformulated system reflecting our intuition from (a)-(c).
-This system is also ``strong" in the sense that it is composed of two differential equations (the PDE \eqref{eq:SI-BulkEqn} on the bulk, and the ODE \eqref{eq:SI-InclusionEqn} on the skeleton) coupled through the vertex condition \eqref{eq:SI-VertexCondition} and the requirement that the traces from adjacent regions match the function values on the skeleton.
-This system however is still cumbersome to handle; we have a PDE coupled to an ODE on the inclusions which gives rise to two ``scales" on which a solution $u$ behaves, and we need resolution in both of them.
-However, the objects that we are required to work with are familiar notions of gradients, traces, and derivatives from calculus, which in turn we know how to handle numerically.
+We nominally call this system ``strong" since it is composed of two differential equations (the PDE \eqref{eq:SI-BulkEqn} on the bulk, and the ODE \eqref{eq:SI-InclusionEqn} on the skeleton) coupled through the vertex condition \eqref{eq:SI-VertexCondition} and the requirement that the traces from adjacent regions match the function values on the skeleton, all of which stemmed from the original variational (or ``weak") formulation \ref{eq:SI-WeakWaveEqn}.
+This system however is still somewhat cumbersome to handle; we have a PDE coupled to an ODE on the inclusions which gives rise to two ``scales" on which a solution $u$ behaves, and we need resolution in both of them.
+However, the objects that we are required to work with are \tstk{a combination of classical and objects from previous chapters}, which are arguably easier for us to work with analytically and handle numerically, largely due to the interaction between the bulk regions and skeleton being made explicit.
+\tstk{this is a fail safe, belongs when we talk about the numerical methods themselves.}
 The equations \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} and variational problem \eqref{eq:SI-VarProb} of course provide us with the same eigenvalues and eigenfunctions, as can be deduced from applying the Lagrange multiplier theorem to \eqref{eq:SI-VarProb}. \tstk{do this maybe? See notes from 23-11-21.}
