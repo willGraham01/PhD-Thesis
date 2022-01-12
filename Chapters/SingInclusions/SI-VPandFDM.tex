@@ -102,7 +102,7 @@ We have now placed everything except terms involving the spectral parameter on t
 Our idea is as follows; we recognise that $u$ is twice differentiable (in the familiar, classical sense) in each of the bulk regions and along each of the skeleton edges, so we can look to to approximate the spectrum of our problem by approximating $u$ through a (somewhat n{\"i}ave) finite-difference approximation in each of the bulk regions and skeleton edges, and tying these ``region-wise" approximations together.
 To this end, we take each of the bulk regions $\ddom_i$, and place nodes $\tau_j\in\overline{\ddom}_{i}$ appropriately, so as to write finite difference approximations for $\laplacian_{\qm}u$ at each node $\tau_j\in\ddom_i$.
 Note that, since $u$ is not required to be differentiable (in the classical sense) across the skeleton, it is important that any finite difference approximation at $\tau_j$ only uses the values of $u$ at other nodes in $\overline{\ddom}_{i}$.
-In placing nodes in $\overline{\ddom}_{i}$, we will also end up with nodes placed on the portion of the skeleton (and vertices) that form part of the boundary of $\ddom_i$.
+In placing nodes in $\overline{\ddom}_{i}$, we will also end up with nodes placed on the portion of the skeleton (and vertices) that form part of $\partial\ddom_i$.
 Since $u$ is twice differentiable along the skeleton, the placement of these nodes allows us to derive finite-difference approximations for the derivatives in \eqref{eq:SI-FDMSkeleton}.
 The traces of the normal derivates (in \eqref{eq:SI-FDMSkeleton}) can also be approximated via one-sided differences using suitable nodes from each of the adjacent bulk regions.
 Finally, an approximation for \eqref{eq:SI-FDMVertex} can be derived for nodes that lie at vertices $v_j\in\vertSet$, using the nodes that lie on edges that connect to $v_j$.
@@ -167,7 +167,7 @@ We now insert these finite difference approximations \eqref{eq:SI-FDMBulkDiscret
 		-h^{-1}\bracs{h^{-1} - \rmi\qm_1}u_{p-1,q} & & \\
 		\quad -h^{-1}\bracs{h^{-1} + \rmi\qm_2}u_{p,q+1}
 		-h^{-1}\bracs{h^{-1} - \rmi\qm_2}u_{p,q-1}
-		& = \omega^2 u_{p,q}, &\quad p,q\neq\frac{N-1}{2}, \labelthis\label{eq:SI-FDMBulk} \\
+		& = \omega^2 u_{p,q}, &\quad p,q\neq\frac{N-1}{2}, \labelthis\label{eq:SI-FDMBulkDiscEqns} \\
 		\bracs{\qm_1^2 + 2h^{-1} + 2h^{-2}}u_{p,q} \\
 		- h^{-1}\bracs{h^{-1} + \rmi\qm_1}u_{p+1,q}
 		- h^{-1}\bracs{h^{-1} - \rmi\qm_1}u_{p-1,q} & & \\
@@ -179,7 +179,7 @@ We now insert these finite difference approximations \eqref{eq:SI-FDMBulkDiscret
 		- h^{-1}u_{p+1,q} - h^{-1}u_{p-1,q}
 		&= \omega^2 u_{p,q}, &\quad p=\frac{N-1}{2}, q\neq\frac{N-1}{2}, \labelthis\label{eq:SI-FDMVEdge} \\
 		h^{-1} \bracs{ 4u_{p,q} - u_{p+1,q} - u_{p-1,q} - u_{p,q+1} - u_{p,q-1} }
-		&= 0, & p=q=\frac{N-1}{2}, \labelthis\label{eq:SI-FDMVertex}
+		&= 0, & p=q=\frac{N-1}{2}, \labelthis\label{eq:SI-FDMDiscVertex}
 	\end{align*}
 \end{subequations}
 where $p,q\in\clbracs{0,...,N-1}$.
@@ -187,27 +187,54 @@ This system can then be written in matrix form as
 \begin{align} \label{eq:SI-FDMMatrixEqn}
 	\mathcal{F}U &= \omega^2 B U,
 \end{align}
-where $B=\mathrm{diag}\bracs{1,...,1,0,1,...,1}$ is a (negative semi-definite) diagonal matrix with the zero in the row corresponding to the equation \eqref{eq:SI-FDMVertex}.
+where $B=\mathrm{diag}\bracs{1,...,1,0,1,...,1}$ is a (negative semi-definite) diagonal matrix with the zero in the row corresponding to the equation \eqref{eq:SI-FDMDiscVertex}.
 The equation \eqref{eq:SI-FDMMatrixEqn} can then be solved using a generalised eigenvalue solver to recover the approximate eigenvalues $\omega^2$ and eigenvectors $U$.
 
 \tstk{this gives us the numerical results in the file \texttt{CompositeMedium\_PeriodicFDM.ipynb} - I can export the results we want to pdfs and import them as images here.
 Things to note are that the finite-difference matrix $\mathcal{F}$ is not Hermitian, but the eigenvalues appear to all be real.
 The eigenfunction plots are also quite nice, but we don't have anything to compare them to (true values, etc).
-We could do a crude sweep over the quasi-momentum values to see if the symmetry properties hold, and what the spectrum in general looks like as we vary the quasimomentum?
-It might also be worth timing the runs for comparison with the ``spectral" method, or working out the cost in FLOPs, time, etc for the scheme to run?
+Comparison with the ``spectral" method is also a must, certainly for the results we have obtained --- maybe give the difference in spectral values found for a fixed theta, and varying the mesh width and $M$ (in VP)?
 Also need to mention how we have wasted a lot of our effort in solving in the bulk regions, when in reality we don't actually need the form of the function here...}
 
 \tstk{now reflections on how this method might get much more complicated}
 Our example using the cross-in-the-plane geometry illustrates the principle behind this approach; use finite differences to approximate $u$ in each $\ddom_i$ and along each $I_{jk}$, and tie approximations from adjacent bulk regions together through the nodal values along the common edge of the skeleton.
 Compared to the variational approach in section \ref{ssec:SI-VP}, this approach avoids working with $\compMes$ directly and instead allows us to work solely in terms of classical derivatives, approximating them through Taylor's theorem.
-However by choosing to approximate our function locally within each region, and then ``stitch" these approximations together, we can run into complications when deciding on a mesh for our domain.
-These complications quickly emerge when one considers taking this approach with a skeleton with (some) edges not aligned to the coordinate axes.
-Firstly, consider the requirements of the node placement within the bulk regions --- each node $\tau$ must either be on the boundary of the bulk region, or have neighbours in each of the coordinate directions that lie within the (closure of) the bulk region.
+However by choosing to approximate our function within each region and then ``stitch" these approximations together, we must choose our mesh in such a way as to abide by this decision, which can lead to some further considerations.
+Let us begin by considering the requirements of the placement of nodes within the bulk regions --- each node must have neighbours in each of the coordinate directions that lie within the (closure of) the bulk region.
+Now, consider a bulk region like that in figure \ref{fig:Diagram_FDMMeshIssue}, where a part of the skeleton is not aligned to the coordinate axes.
+\begin{figure}[t]
+	\centering
+	\begin{subfigure}[t]{0.3\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{Diagram_FDMMeshIssue-a.pdf}
+		\caption{\label{fig:Diagram_FDMMeshIssue-a} A uniform mesh does not ensure that nodes in the bulk regions have neighbouring nodes which will provide us with a $C^2$-approximation, nor that every vertex has a node placed at it.}
+	\end{subfigure}
+	~
+	\begin{subfigure}[t]{0.3\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{Diagram_FDMMeshIssue-b.pdf}
+		\caption{\label{fig:Diagram_FDMMeshIssue-b} Placing additional nodes along the skeleton edges, ensuring nodes in the bulk region have neighbours that lie within that same bulk region or on its boundary.}
+	\end{subfigure}
+	~
+	\begin{subfigure}[t]{0.3\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{Diagram_FDMMeshIssue-c.pdf}
+		\caption{\label{fig:Diagram_FDMMeshIssue-c} The nearest nodes in the directions $\pm n_{jk}$ from the skeleton may be far from the edge or not exist at all (left highlighted node). Interpolation (right highlighted node) offers a solution, provided the bulk region is meshed well.}
+	\end{subfigure}
+	\caption{\label{fig:Diagram_FDMMeshIssue} An illustration of the complications encountered and considerations to be made when setting up a finite difference based approach for a general skeleton.}
+\end{figure}
+As we can quickly realise, uniform mesh will not be sufficient in this case, nor in general when the skeleton has edges that are not aligned to the coordinate axes. 
+In figure \ref{fig:Diagram_FDMMeshIssue-a}, the highlighted node in the bulk region has no neighbour ``below" that lies within the same bulk region or its boundary, so a centred difference approximation to $\laplacian_{\qm}u$ at this node cannot be used.
+One could argue that a suitable value for $u$ ``below" the highlighted node could be read off from interpolating values between nodes along the edge (then applying the knowledge that $u$ is continuous across the skeleton).
+However there is no assurance that this interpolation will produce an accurate value for $u$, particularly if we are in the situation in figure \ref{fig:Diagram_FDMMeshIssue-a} where there are only two nodes along the diagonal edge, and the lower-left vertex doesn't even have a node placed at it.
+To address this meshing complication, one can introduce additional nodes along the skeleton (and at the vertices) where necessary, as in figure \ref{fig:Diagram_FDMMeshIssue-b} (highlighted in blue).
+This results in every node in the bulk regions having suitable neighbours in the coordinate directions, and has the additional bonus of improving the approximation of the derivative of $u$ along the skeleton.
+Our expense is that we have given up a uniform distance between all nodes, which will require us to take slightly more care when deriving difference equations at each node and assembling the matrix $\mathcal{F}$.
+We also may end up compounding another issue when we come to approximate the normal derivative traces in \eqref{eq:SI-FDMSkeleton}, which we highlight in figure \ref{fig:Diagram_FDMMeshIssue-c} --- if an edge is not aligned with the coordinate axes, where are the nearest nodes in the directions $\pm n_{jk}$ from the edge?
+There is the possibility that such a node is far from the edge, again resulting in a poor approximation to the trace of the normal derivative, or that such a node may not even exist (see the leftmost highlighted node in figure \ref{fig:Diagram_FDMMeshIssue-c}).
+We again have the option of interpolating a value for $u$ in the bulk regions, schematically illustrated at the right highlighted node in figure \ref{fig:Diagram_FDMMeshIssue-c} --- the values at the orange points can be interpolated from nodes in the bulk region, provided we have already made sensible mesh choices within the adjacent bulk regions\footnote{Note that we cannot simply decide to make the mesh in the bulk region finer, so that a node is placed in the position we want to interpolate. In general, doing so will end up in us requiring more nodes on the skeleton through the issue in figure \ref{fig:Diagram_FDMMeshIssue-a}, sending us in circles!}.
+These issues arise due to how the skeleton (or more precisely, each edge of the skeleton) is effectively using a different coordinate system (for its derivatives) to the bulk regions, which is why this issue disappears when the edges of the skeleton are aligned to the coordinate axes --- the ``neighbouring" nodes we need on the skeleton are in the directions $e_{jk}, n_{jk}$ rather than the coordinate directions $x_1, x_2$.
+Whilst the complications this brings can be combatted in the manners discussed above, it does highlight the need for care when setting up and implementing this approach for general skeleton geometries.
+Contrastingly, the variational approach in \ref{ssec:SI-VP} does not run into these issues since (in that approach) we have made the choice to work with $\compMes$ directly and approximate the related gradients globally (over the whole domain) rather than utilising their properties on sub-regions.
 
-%To illustrate the root of these problems, consider what happens if we attempt to use a uniform mesh for a skeleton geometry like that in figure \ref{fig:Diagram_CompMesMeshNearestNeighbours}.
-%\begin{figure}
-%	\centering
-%	\includegraphics[scale=1.0]{Diagram_CompMesMeshNearestNeighbours.pdf}
-%	\caption{\label{fig:Diagram_CompMesMeshNearestNeighbours} With a uniform mesh and general skeleton $\graph$, there is no guarantee that a node in a bulk region has ``neighbours" that are also within that bulk region. There is also no guarantee that \emph{any} nodes will be placed along a given edge, or that they will be ``close" to other nodes on the edge.}
-%\end{figure}
-%Here we can see several problems with the mesh; first, $u$ is only twice differentiable in each of the bulk regions, and so
+\tstk{could have a final paragraph or two commenting on a finite element based approach, which is a middle ground between the two approaches discussed here. It uses the variational form, but the basis functions that we'll be using would be local...}
