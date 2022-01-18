@@ -29,7 +29,7 @@ and solve the minimisation problem (that arises from substituting \eqref{eq:SI-V
 This minimisation problem will be discrete (solving for the $M+1$ independent variables $u_m$), and can be handled using optimisation methods.
 
 None of the steps above are prohibited for the problem \eqref{eq:SI-MinProblem}, and so we can proceed with the aforementioned ideas.
-We will illustrate this implementation for the "cross-in-the-plane" geometry first introduced in \tstk{example reference}\footnote{For convenience, we have translated the period cell by $\bracs{\recip{2},\recip{2}}$ with regards to how this geometry was handled in \tstk{ref}. This just allows us to avoid carrying additional constant terms around in our computations, and we would obtain the same results as if we didn't apply any translation.}; we take $\ddom=\left[0,1\right)^2$, and let $\graph$ be the period graph with a single vertex $v_0=\bracs{0,0}^\top$, and two ``looping" edges $I_h = \sqbracs{0,1}\times\clbracs{0}$, $I_v=\clbracs{0}\times\sqbracs{0,1}$.
+We will illustrate this implementation for the "cross-in-the-plane" geometry first introduced in \tstk{example reference --- note, we might already mention this in the intro to this section, so could potentially avoid repetition}\footnote{For convenience, we have translated the period cell by $\bracs{\recip{2},\recip{2}}$ with regards to how this geometry was handled in \tstk{ref}. This just allows us to avoid carrying additional constant terms around in our computations, and we would obtain the same results as if we didn't apply any translation.}; we take $\ddom=\left[0,1\right)^2$, and let $\graph$ be the period graph with a single vertex $v_0=\bracs{0,0}^\top$, and two ``looping" edges $I_h = \sqbracs{0,1}\times\clbracs{0}$, $I_v=\clbracs{0}\times\sqbracs{0,1}$.
 Our first task is to decide on the basis functions $\varphi_m$ that we want to use to approximate $u$.
 From the standpoint of accuracy (and typically speed) of the numerical solution there are several properties that it is desirable for this basis to have; orthonormality between the $\varphi_m$, similar shape to that expected of $u$, and of course periodicity.
 This is where problems concerning the unfamiliar nature of our space $\tgradSob{\ddom}{\compMes}$ begin to arise, as the choice of basis is considerably more complex --- as choosing the behaviour of $\varphi_m$ in the bulk regions then restricts what $\varphi_m$ can do on the skeleton, and vice-versa. 
@@ -81,7 +81,6 @@ Due to the finite dimension of our problem (through the truncation at order $M$ 
 \tstk{time to display some nice figures, maybe some comparisons between the two methods etc? Could also do a run of this with $\alpha_3\neq0$ just to see what on earth happens!}
 
 \subsection{Finite Difference Scheme} \label{ssec:FDMSingInc}
-\tstk{This is the content summary of \texttt{CompositeMedium\_PeriodicFDM.ipynb}}
 As an alternative to working directly from the variational problem \ref{prob:DiscVarProb}, we can instead choose to work from our ``strong formulation" \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition}.
 Before we do so, it is convenient to notice that we can move the ``trace" terms in \eqref{eq:SI-InclusionEqn} to the left-hand-side to obtain the slightly nicer (in terms of the numerics that follow) looking system
 \begin{subequations} \label{eq:SI-FDMEquationsToDisc}
@@ -106,13 +105,13 @@ In placing nodes in $\overline{\ddom}_{i}$, we will also end up with nodes place
 Since $u$ is twice differentiable along the skeleton, the placement of these nodes allows us to derive finite-difference approximations for the derivatives in \eqref{eq:SI-FDMSkeleton}.
 The traces of the normal derivates (in \eqref{eq:SI-FDMSkeleton}) can also be approximated via one-sided differences using suitable nodes from each of the adjacent bulk regions.
 Finally, an approximation for \eqref{eq:SI-FDMVertex} can be derived for nodes that lie at vertices $v_j\in\vertSet$, using the nodes that lie on edges that connect to $v_j$.
-We will come to highlight some of the difficulties with this procedure \tstk{where?}, but assuming we have approximations for the gradient- and derivative-like objects, we can then approximate the action of the left-hand-side of \eqref{eq:SI-FDMEquationsToDisc} via the action of a matrix $\mathcal{F}$ on the vector $U = \bracs{u_j}^\top$, where $u_j:=u\bracs{\tau_j}$.
+We will come to discuss some of the difficulties with the general application of this procedure after our illustrative example.
+For now, assuming we have approximations for the gradient- and derivative-like objects, we can then approximate the action of the left-hand-side of \eqref{eq:SI-FDMEquationsToDisc} via the action of a matrix $\mathcal{F}$ on the vector $U = \bracs{u_j}^\top$, where $u_j:=u\bracs{\tau_j}$.
 As a result, we can then approximate the system \eqref{eq:SI-FDMEquationsToDisc} by the matrix-eigenvalue problem involving $\mathcal{F}$.
 
-\tstk{once you have the plots ready, rephrase this to something like ``we will begin by demonstrating this idea for the X-in-plane geometry, and it's coincidence with the results from the previous VP method".}
-Let us begin by illustrating this approach using the ``Cross in the plane" geometry \tstk{section ref}.
+Let us begin by illustrating this approach using the ``cross in the plane" geometry \tstk{section ref}.
 We first discretise $\ddom$ into a uniform mesh consisting of $N\times N$ nodes $\tau_{p,q} = \bracs{(p-1)h,(q-1)h}$ for $p,q\in\clbracs{1,...,N}$, with a mesh width of $h = \recip{N-1}$, and write $u_{p,q} = u\bracs{\tau_{p,q}}$.
-It is important to note at this early stage that we can utilise a uniform mesh thanks to the rather simple geometry of the skeleton, and in general the meshing process will be more complex (which we will address \tstk{where? soon? after this description?})
+It is important to note at this early stage that we can utilise a uniform mesh thanks to the rather simple geometry of the skeleton, and in general the meshing process will be more complex (see the discussion at the end of this section).
 Note that there is no need to place nodes along both of the periodic edges of $\ddom$, so long as we keep track of which nodes are connected by periodicity, but for notational purposes it is convenient to include such nodes in our description.
 Proceeding with the discretisation of the above equations, $u$ is twice differentiable in the bulk region $\ddom^{\circ}$, and so at points $\tau_{p,q}\not\in\graph$ we can discretise as
 \begin{align*}
@@ -130,7 +129,7 @@ Also worth noting is that, should one choose not to use (or be unable to use) a 
 For nodes $\tau_{p,q}\in I_{jk}$ (for either $I_{jk}=I_h$ or $I_v$), our finite difference approximations become slightly more complex as we are forced to consider the nearest nodes to $\tau_{p,q}$ that lie in the directions $e_{jk}$ and $n_{jk}$.
 This is because $u$ is twice differentiable \emph{along the skeleton}, so we must approximate $\bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)}$ through finite differences along the edge $I_{jk}$, which will involve the values of $u$ at the nodes ``adjacent" to $\tau_{p,q}$ in the $e_{jk}$ and $-e_{jk}$ directions.
 For the normal-derivative trace terms, we use one-sided finite differences to approximate these values at $\tau_{p,q}$, which involves the values of $u$ at the nodes ``adjacent" to $\tau_{p,q}$ in the $n_{jk}$ and $-n_{jk}$ directions.
-In general, these requirements will contribute to the complications with meshing the domain as discussed in \tstk{where?!}, but since the edges are aligned with the coordinate axes in the cross-in-the-plane geometry, the vectors $e_{jk}$ and $n_{jk}$ are also aligned with the coordinate axes and the discretisation proceeds easily.
+For general skeleton geometries these requirements will contribute to the complications with meshing the domain, but since the edges are aligned with the coordinate axes in the cross-in-the-plane geometry, the vectors $e_{jk}$ and $n_{jk}$ are also aligned with the coordinate axes and the discretisation proceeds easily.
 Those $\tau_{p,q}$ that lie on the horizontal edge $I_h$ have $q=\frac{N-1}{2}$ and $p\neq\frac{N-1}{2}$, so our finite difference approximation is
 \begin{align*}
 	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u_{p,q} - \bracs{\bracs{\grad u_{p,q}\cdot n_{jk}}^+ - \bracs{\grad u_{p,q}\cdot n_{jk}}^-}
@@ -236,5 +235,6 @@ We again have the option of interpolating a value for $u$ in the bulk regions, s
 These issues arise due to how the skeleton (or more precisely, each edge of the skeleton) is effectively using a different coordinate system (for its derivatives) to the bulk regions, which is why this issue disappears when the edges of the skeleton are aligned to the coordinate axes --- the ``neighbouring" nodes we need on the skeleton are in the directions $e_{jk}, n_{jk}$ rather than the coordinate directions $x_1, x_2$.
 Whilst the complications this brings can be combatted in the manners discussed above, it does highlight the need for care when setting up and implementing this approach for general skeleton geometries.
 Contrastingly, the variational approach in \ref{ssec:SI-VP} does not run into these issues since (in that approach) we have made the choice to work with $\compMes$ directly and approximate the related gradients globally (over the whole domain) rather than utilising their properties on sub-regions.
+\tstk{convergence experiments to the analytic solutions that we know about --- Dirichlet laplacian solutions...}
 
 \tstk{could have a final paragraph or two commenting on a finite element based approach, which is a middle ground between the two approaches discussed here. It uses the variational form, but the basis functions that we'll be using would be local...}

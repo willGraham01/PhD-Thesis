@@ -1,11 +1,11 @@
-\section{Reformulation of \eqref{eq:SI-WaveEqn} as a Non-Local Quantum Graph Problem}
+\section{Reformulation of \eqref{eq:SI-WaveEqn} as a Non-Local Quantum Graph Problem} \label{sec:SI-NonLocalQG}
 
 \tstk{intro stuff}
 
-The two formulations in sections \tstk{VP, FDM and where the formulations were first written down} provide us with two methods by which we can approximate the spectrum of \tstk{wave eqn ref}.
-In both of these methods we are forced to handle the interaction between the bulk regions and skeleton in some way; either through the global approximation we use (\tstk{var prob}) or through how we tie the various approximations in the bulk regions and skeleton together (\tstk{FDM}).
+The discussions in sections \ref{ssec:SI-VP} and \ref{ssec:FDMSingInc} provide us with two methods by which we can approximate the spectrum of \eqref{eq:SI-WaveEqn}.
+In both of these methods we are forced to handle the interaction between the bulk regions and skeleton in some way; either through the global approximation we use (if using the variational problem) or through how we tie the various approximations in the bulk regions and skeleton together (if using the finite difference based approach).
 The question we ask here is whether we can take this one step further; can we entirely remove the equations in the bulk regions from our formulation, replacing them with a suitable term (or terms) in the equations along the skeleton?
-Our objective is to arrive at a quantum graph problem, which are relatively well understood when compared to the measure-theoretic formulation \tstk{ref} that we begun with.
+Our objective is to arrive at a quantum graph problem, which are relatively well understood when compared to the measure-theoretic formulation \eqref{eq:SI-WaveEqn} that we begun with.
 We also expect to see some kind of reward in dimension or complexity reduction, as a quantum graph is ultimately a set of one-dimensional intervals.
 
 \subsection{Reduction to a Quantum Graph Problem} \label{ssec:SI-ToQG}
@@ -13,7 +13,7 @@ In order to investigate how we should look to reduce \tstk{wave equation} to a q
 We already know that the eigenfunction itself is continuous across the skeleton, so the function values on the boundary of each bulk region coincide with the function values on the skeleton.
 Furthermore, we also observe that the normal derivative of the eigenfunction from the adjacent regions affects the behaviour along the skeleton.
 So, the question is whether we can express the (traces of the) normal derivatives from the adjacent regions in terms of the values of our function on the skeleton, given that we know \tstk{bulk eqn} is satisfied in each bulk region?
-Essentially, we are asking whether we can determine the Neumann data of a function that satisfies \tstk{bulk eqn}, given its Dirichlet values on the boundary.
+Essentially, we are asking whether we can determine the Neumann data of a function that satisfies \eqref{eq:SI-BulkEqn}, given its Dirichlet values on the boundary.
 This draws our attention to the Dirichlet-to-Neumann map for the \tstk{wave? Helmholtz?} equation on $\ddom_i$, which we define as follows.
 
 For each $\ddom_i$ and $\omega^2>0$ \tstk{that is not an eigenvalue of the Dirichlet laplacian!!!}, define the set $D_i$ by

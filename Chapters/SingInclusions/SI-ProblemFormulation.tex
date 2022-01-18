@@ -13,9 +13,9 @@ A summary of the key results for a function $u\in\tgradSob{\ddom}{\compMes}$ is 
 	\end{align*}
 	where $\grad u$ denotes the weak gradient of $u\in\gradSob{\ddom}{\lambda_2}$.
 	Essentially, in the bulk regions the function $u$ and its tangential gradient coincide with the familiar notion of a weak derivative (with respect to the Lebesgue measure).
-	\item The function $u$ lives in $\gradSob{\ddom_i}{\lambda_2}$ for each of the bulk regions, and the traces of $u$ from $\ddom_i$ onto the inclusions $I_{jk}$ coincide with the values of $u_{jk}$ on the inclusions.
+	\item The function $u$ lives in $\gradSob{\ddom_i}{\lambda_2}$ for each of the bulk regions, and the traces of $u$ from $\ddom_i$ onto the inclusions $I_{jk}$ coincide with the values of $u^{(jk)}$ on the inclusions.
 	This is as close to a condition of ``continuity across the inclusions" as we can get.
-	Additionally, the $u_{jk}$ are continuous at the vertices of $\graph$, as was the case for functions in $\ktgradSob{\ddom}{\dddmes}$.
+	Additionally, the $u^{(jk)}$ are continuous at the vertices of $\graph$, as was the case for functions in $\ktgradSob{\ddom}{\dddmes}$.
 \end{itemize}
 We then consider (for a fixed $\qm$) the bilinear form $b_{\qm}$ defined on pairs $(u,v)\in\tgradSob{\ddom}{\compMes}\times\tgradSob{\ddom}{\compMes}$ where\footnote{Of course, we can be less stringent with this definition and define $b$ on smooth functions, which are (by construction) dense in $\tgradSob{\ddom}{\compMes}$.}
 \begin{align*}
@@ -51,7 +51,7 @@ This places us in something of a catch-22; the variational formulation \eqref{eq
 However, the objects involved (like $\tgrad_{\compMes}u$) and the integrals in \eqref{eq:SI-WeakWaveEqn} with respect to $\compMes$ are unfamiliar both from an analytic and numerical standpoint --- we know some of their properties when restricted to different regions of $\ddom$, but not how to work directly with them to obtain a ``solution" (or approximation thereof) to \eqref{eq:SI-WeakWaveEqn}.
 This motivates us to find an alternative formulation to \eqref{eq:SI-WeakWaveEqn}, leading to the following  formulation in section \ref{ssec:SI-Derivation} which brings us to a problem involving objects we are familiar with from \tstk{scalar and curl, and classical Sob}, at the expense of sacrificing the variaitonal form and our ability to use the min-max principle.
 Indeed, we shall see that the system we end up at will have the spectral parameter $\omega^2$ appearing in multiple places in the problem, taking us towards the realm of problems with generalised resolvents.
-We will take this idea further in section \tstk{QGnonlocal ref} when we attempt to reformulate our problem on the skeleton, and discard the bulk regions.
+We will take this idea further in section \ref{sec:SI-NonLocalQG} when we attempt to reformulate our problem on the skeleton, and discard the bulk regions.
 
 \subsection{Variational Problem and Strong Form of \eqref{eq:SI-WaveEqn}} \label{ssec:SI-Derivation}
 Now that \eqref{eq:SI-WaveEqn} is well-defined through \eqref{eq:SI-WeakWaveEqn} and the operator $\mathcal{A}_{\qm}$, we can begin to consider our approach to solving it.
@@ -60,7 +60,7 @@ As mentioned in section \ref{ssec:SI-WaveEqnSetup}, the fact that $\mathcal{A}_{
 	\omega_n^2 &:= \min_{u}\clbracs{ \integral{\ddom}{ \abs{\tgrad_{\compMes}u}^2 }{\compMes} \setVert \norm{u}_{\ltwo{\ddom}{\compMes}}=1, \ u\perp u_l \ \forall 1\leq l\leq n-1 }.,
 \end{align} 
 where the eigenvalues are numbered in ascending order, and the orthogonality condition is meant with respect to the inner product in $\ltwo{\ddom}{\compMes}$.
-We will discuss a numerical approach to solving \eqref{eq:SI-VarProb} in section \tstk{ref}, but for now we look for an alternative formulation to work with.
+We will discuss a numerical approach to solving \eqref{eq:SI-VarProb} in section \ref{ssec:SI-VP}, but for now we look for an alternative formulation to work with.
 
 First, we should consider what our intuition is telling us about the behaviour we expect from any solutions $u$ to \eqref{eq:SI-WeakWaveEqn}.
 A good starting point is to consider how we expect our solutions to behave if we could (n\"{i}avely) interpret \eqref{eq:SI-WeakWaveEqn} in a strong sense.
@@ -77,7 +77,7 @@ In summary, we expect that \eqref{eq:SI-WeakWaveEqn} can be reformulated into a 
 \end{enumerate}
 
 At a glance, solutions $u$ to \eqref{eq:SI-WeakWaveEqn} appear to be less regular than what we expect from our intuitive arguments above, and \eqref{eq:SI-WeakWaveEqn} itself is not in the form (a)-(c).
-However, much like in sections \ref{sec:ScalarDerivation} and \ref{sec:VectorDerivation} we can work from \eqref{eq:SI-WeakWaveEqn} and the definition of $\tgradSob{\ddom}{\compMes}$ to obtain a system as described by (a)-(c).
+However, much like in sections \ref{sec:ScalarDerivation} and \tstk{sec:VectorDerivation} we can work from \eqref{eq:SI-WeakWaveEqn} and the definition of $\tgradSob{\ddom}{\compMes}$ to obtain a system as described by (a)-(c)\footnote{As we will later remark in section \ref{ssec:SI-VP}, this system can also be derived from an application of the Lagrange multiplier theorem to the variational problem \eqref{eq:SI-MinProblem}.}.
 Our starting point is the problem \eqref{eq:SI-WeakWaveEqn}, repeated here for ease of reading: find $\omega^2>0$ and non-zero $u\in\tgradSob{\ddom}{\compMes}$ such that
 \begin{align*}
 	\integral{\ddom}{ \tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}\phi} }{\compMes}
@@ -89,7 +89,7 @@ Let $D$ be an open Lipschitz domain, let $u\vert_{\partial D}$ denote the trace 
 	\item For $u,v\in\gradSob{D}{\lambda_2}$ and $j\in\clbracs{1,2}$,
 	\begin{align*}
 		\integral{D}{ v\partial_j u + u\partial_j v }{\lambda_2}
-		&= \integral{\partial D}{ u\vert_{\partial D}v\vert_{\partial D}n^D_j }{\lambda_2}.
+		&= \integral{\partial D}{ u v n^D_j }{S}.
 	\end{align*}
 	\item For $u\in H^2\bracs{D,\lambda_2}, v\in\gradSob{D}{\lambda_2}$,
 	\begin{align*}
@@ -227,6 +227,7 @@ Thus, equation \eqref{eq:SI-WeakWaveEqn} becomes
 \end{align*}
 since $\phi(v_j)$ is arbitrary.
 We find that, in addition to continuity of $u$ at each of the vertices, $u$ also adheres to a Kirchoff-like condition at each of the vertices. \tstk{like in Scalar chapter, if had point masses added, probably would be equal to $\alpha_j\omega^2 u$ here. Add a pointer to our Strauss section and extended spaces, where we present with the $\alpha_j$ there.}
+\tstk{restate system here so that it looks nicer??}
 
 The equations \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition}, combined with the knowledge that $u^{(jk)}$ matches the traces of $u$ from the adjacent bulk regions, provides us with a reformulated system reflecting our intuition from (a)-(c).
 We nominally call this system ``strong" since it is composed of two differential equations (the PDE \eqref{eq:SI-BulkEqn} on the bulk, and the ODE \eqref{eq:SI-InclusionEqn} on the skeleton) coupled through the vertex condition \eqref{eq:SI-VertexCondition} and the requirement that the traces from adjacent regions match the function values on the skeleton, all of which stemmed from the original variational (or ``weak") formulation \ref{eq:SI-WeakWaveEqn}.
