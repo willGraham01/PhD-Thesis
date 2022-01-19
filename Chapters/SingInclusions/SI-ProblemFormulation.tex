@@ -229,7 +229,21 @@ since $\phi(v_j)$ is arbitrary.
 We find that, in addition to continuity of $u$ at each of the vertices, $u$ also adheres to a Kirchoff-like condition at each of the vertices. \tstk{like in Scalar chapter, if had point masses added, probably would be equal to $\alpha_j\omega^2 u$ here. Add a pointer to our Strauss section and extended spaces, where we present with the $\alpha_j$ there.}
 \tstk{restate system here so that it looks nicer??}
 
-The equations \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition}, combined with the knowledge that $u^{(jk)}$ matches the traces of $u$ from the adjacent bulk regions, provides us with a reformulated system reflecting our intuition from (a)-(c).
+The equations \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition},
+\begin{subequations}
+	\begin{align*}
+		-\laplacian_\qm u 
+		&= \omega^2 u 
+		&\text{in } \ddom_i, \tag{\eqref{eq:SI-BulkEqn} restated} \\
+		- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)}  
+		&= \omega^2 u^{(jk)} + \bracs{\bracs{\grad u\cdot n_{jk}}^+ - \bracs{\grad u\cdot n_{jk}}^-}
+		&\text{in } I_{jk}, \tag{\eqref{eq:SI-InclusionEqn} restated} \\
+		\sum_k \bracs{\pdiff{}{n}+\rmi\qm_{jk}} u^{(jk)}(v_j) 
+		&= 0 
+		&\text{at } v_j\in\vertSet, \tag{\eqref{eq:SI-VertexCondition} restated}
+	\end{align*}
+\end{subequations}
+combined with the knowledge that $u^{(jk)}$ matches the traces of $u$ from the adjacent bulk regions, provides us with a reformulated system reflecting our intuition from (a)-(c).
 We nominally call this system ``strong" since it is composed of two differential equations (the PDE \eqref{eq:SI-BulkEqn} on the bulk, and the ODE \eqref{eq:SI-InclusionEqn} on the skeleton) coupled through the vertex condition \eqref{eq:SI-VertexCondition} and the requirement that the traces from adjacent regions match the function values on the skeleton, all of which stemmed from the original variational (or ``weak") formulation \ref{eq:SI-WeakWaveEqn}.
 This system however is still somewhat cumbersome to handle; we have a PDE coupled to an ODE on the inclusions which gives rise to two ``scales" on which a solution $u$ behaves, and we need resolution in both of them.
 However, the objects that we are required to work with are \tstk{a combination of classical and objects from previous chapters}, which are arguably easier for us to work with analytically and handle numerically, largely due to the interaction between the bulk regions and skeleton being made explicit.
