@@ -10,6 +10,8 @@ We begin by examining the variational problem \eqref{eq:SI-VarProb},
 \begin{align*} 
 	\omega_n^2 &:= \min_{u}\clbracs{ \integral{\ddom}{ \abs{\tgrad_{\compMes}u}^2 }{\compMes} \setVert \norm{u}_{\ltwo{\ddom}{\compMes}}=1, \ u\perp u_l \ \forall 1\leq l\leq n-1 }. \tag{\eqref{eq:SI-VarProb} restated}
 \end{align*}
+\tstk{this is a fail safe, belongs when we talk about the numerical methods themselves.}
+The equations \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} and variational problem \eqref{eq:SI-VarProb} of course provide us with the same eigenvalues and eigenfunctions, as can be deduced from applying the Lagrange multiplier theorem to \eqref{eq:SI-VarProb}. \tstk{do this maybe? See notes from 23-11-21.}
 Our interest is in determining the eigenvalues $\omega_n^2$, however we also need to determine the eigenfunctions $u_n$ since we need $u_n$ to be orthogonal to each of $u_l, 1\leq l\leq n-1$.
 Given that we can obtain the eigenvalue $\omega_n^2$ from the eigenfunction $u_n$ by evaluating the integral in \eqref{eq:SI-VarProb}, we will focus our discussion on the approximation (and computation) of the eigenfunctions.
 We also drop the explicit subscript $n$, and just consider the problem of determining the function $u\in\tgradSob{\ddom}{\compMes}$ which solves the optimisation problem

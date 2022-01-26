@@ -244,8 +244,16 @@ The equations \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition},
 	\end{align*}
 \end{subequations}
 combined with the knowledge that $u^{(jk)}$ matches the traces of $u$ from the adjacent bulk regions, provides us with a reformulated system reflecting our intuition from (a)-(c).
-We nominally call this system ``strong" since it is composed of two differential equations (the PDE \eqref{eq:SI-BulkEqn} on the bulk, and the ODE \eqref{eq:SI-InclusionEqn} on the skeleton) coupled through the vertex condition \eqref{eq:SI-VertexCondition} and the requirement that the traces from adjacent regions match the function values on the skeleton, all of which stemmed from the original variational (or ``weak") formulation \ref{eq:SI-WeakWaveEqn}.
+
+We nominally call the system \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} ``strong" since it no longer involves integration against test functions.
+Indeed, the system is composed of two differential equations (the PDE \eqref{eq:SI-BulkEqn} on the bulk, and the ODE \eqref{eq:SI-InclusionEqn} on the skeleton) coupled through the vertex condition \eqref{eq:SI-VertexCondition} and the requirement that the traces from adjacent regions match the function values on the skeleton, all of which stemmed from the original variational (or ``weak") formulation \ref{eq:SI-WeakWaveEqn}.
 This system however is still somewhat cumbersome to handle; we have a PDE coupled to an ODE on the inclusions which gives rise to two ``scales" on which a solution $u$ behaves, and we need resolution in both of them.
 However, the objects that we are required to work with are \tstk{a combination of classical and objects from previous chapters}, which are arguably easier for us to work with analytically and handle numerically, largely due to the interaction between the bulk regions and skeleton being made explicit.
-\tstk{this is a fail safe, belongs when we talk about the numerical methods themselves.}
-The equations \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} and variational problem \eqref{eq:SI-VarProb} of course provide us with the same eigenvalues and eigenfunctions, as can be deduced from applying the Lagrange multiplier theorem to \eqref{eq:SI-VarProb}. \tstk{do this maybe? See notes from 23-11-21.}
+
+There are also parallels to be drawn between the system \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} and \tstk{scalar/curl chapter system} --- in particular, we remark at how the ODEs on the skeleton \eqref{eq:SI-InclusionEqn} depend in a non-standard way on the spectral parameter $\omega^2$.
+Most notably, the system \tstk{scalar/curl chapter system} has $\omega^2$ appearing in the vertex conditions, or to rephrase this, in what would normally simply be the \emph{boundary conditions} for the ODEs on the edges $I_{jk}$.
+This appearance of $\omega^2$ in the vertex conditions was the direct affect of the measure $\nu$ providing the vertices with some ``size".
+Here, rather than a graph with ``bulky vertices", we instead have a set of regions $\ddom_i$ with ``bulky boundaries" (the singular inclusions).
+And again, we observe that bestowing a notion of length to our singular inclusions (through $\ddmes$) has caused $\omega^2$ to appear in what would normally be our boundary conditions for the regions $\ddom_i$.
+In \tstk{conclusion ref} we will explore how reintroducing the point masses at the vertices will cause the coupling constants and spectral parameter $\omega^2$ to also be present in \eqref{eq:SI-VertexCondition}.
+\tstk{so we're now back in the realm of generalised resolvents? We should now expect the possibility of spectral gaps being opened up. Also, we'll return to this when we talk about Strauss extensions and hypothesise about adding the vertex measure $\nu$ back in.}
