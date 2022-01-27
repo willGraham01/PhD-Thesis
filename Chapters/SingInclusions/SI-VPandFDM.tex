@@ -188,14 +188,55 @@ This system can then be written in matrix form as
 \begin{align} \label{eq:SI-FDMMatrixEqn}
 	\mathcal{F}U &= \omega^2 B U,
 \end{align}
-where $B=\mathrm{diag}\bracs{1,...,1,0,1,...,1}$ is a (negative semi-definite) diagonal matrix with the zero in the row corresponding to the equation \eqref{eq:SI-FDMDiscVertex}.
-The equation \eqref{eq:SI-FDMMatrixEqn} can then be solved using a generalised eigenvalue solver to recover the approximate eigenvalues $\omega^2$ and eigenvectors $U$.
+where $B=\mathrm{diag}\bracs{1,...,1,0,1,...,1}$ is a (positive semi-definite) diagonal matrix with the zero in the row corresponding to the equation \eqref{eq:SI-FDMDiscVertex}.
+The equation \eqref{eq:SI-FDMMatrixEqn} can then be solved using a generalised eigenvalue solver to obtain the approximate eigenvalues $\omega^2$ and eigenvectors $U$.
 
 \tstk{this gives us the numerical results in the file \texttt{CompositeMedium\_PeriodicFDM.ipynb} - I can export the results we want to pdfs and import them as images here.
 Things to note are that the finite-difference matrix $\mathcal{F}$ is not Hermitian, but the eigenvalues appear to all be real.
 The eigenfunction plots are also quite nice, but we don't have anything to compare them to (true values, etc).
 Comparison with the ``spectral" method is also a must, certainly for the results we have obtained --- maybe give the difference in spectral values found for a fixed theta, and varying the mesh width and $M$ (in VP)?
 Also need to mention how we have wasted a lot of our effort in solving in the bulk regions, when in reality we don't actually need the form of the function here...}
+The approximate eigenvalues computed by the finite difference scheme are displayed in figure \ref{fig:CompositeCross-FDM-SpectralBands}, using $N=251$ grid-points in each of the coordinate directions.
+\begin{figure}[b!]
+	\centering
+	\includegraphics[scale=1.0]{CompositeCross-FDM-SpectralBands.pdf}
+	\caption{\label{fig:CompositeCross-FDM-SpectralBands} The approximate eigenvalues computed by the finite-difference scheme, sorted into spectral bands for the cross-in-the-plane geometry. Eigenvalues corresponding to the extremities of the quasi-momentum are plotted in red.}
+\end{figure}
+Those points plotted in red correspond to eigenvalues that were computed at quasi-momentum values of $\bracs{0,0}^\top$, $\bracs{-\pi,0}^\top$, $\bracs{0,-\pi}^\top$, $\bracs{-\pi,-\pi}^\top$, from which we can observe that these points typically form the endpoints of each of the spectral bands.
+A notable exception to this is band 6, for which the eigenvalues at the extremities of the band are not obtained at any of these quasi-momentum values.
+However by examining the eigenvalues in this band as functions of $\qm$, \tstk{insert figure for band 6?}, it can be noticed that these extreme eigenvalues occur at quasi-momentum values where one of the components is either 0 (for the minimum values) or $-\pi$ (for the maximum values).
+Furthermore, the eigenvalues in each band are symmetric in $\qm$, which we expected due to the symmetry of the cross-in-the-plane geometry.
+\tstk{analytic solutions and convergence rates - maybe move the ``analytic solutions we know" to the first time we (re)-introduce the X-in-plane geometry?}
+We can also illustrate the rate of convergence of this numerical scheme to some of the eigenvalues and eigenfunctions that we can compute analytically.
+Observe that, for $n,m\in\naturals$ the function
+\begin{align*}
+	u_{n,m}(x) &= \e^{-\rmi\qm\cdot x}\sin\bracs{n\pi x_1}\sin\bracs{m\pi x_2},
+\end{align*}
+is an eigenfunction of the Dirichlet laplacian on $[0,1)^2$, and so solves \eqref{eq:SI-BulkEqn} with $\omega^2 = \bracs{n^2+m^2}\pi^2$ with $u=0$ on the skeleton.
+In the event that both
+\begin{itemize}
+	\item ($n$ is even and $\qm_1=0$) or ($n$ is odd and $\qm_1=-\pi$),
+	\item ($m$ is even and $\qm_2=0$) or ($m$ is odd and $\qm_2=-\pi$),
+\end{itemize}
+hold, then $u_{n,m}$ is also an eigenfunction of \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} with the same eigenvalue (this causes the trace terms in \eqref{eq:SI-InclusionEqn} to cancel each other). \tstk{this is relevant later when we try to reduce to the graph... as we've found a Dirichlet eigenfunction that solves our problem!}
+In these cases, we expect that the error in the approximate eigenvalue is of the order of $N^-2$, since our scheme makes use of centred differences in the bulk region, and on the skeleton the eigenfunction should be identically zero.
+Indeed, this is what we observe numerically for each $n,m$, as shown in figure \ref{}
+\begin{figure}[h]
+	\centering
+	\begin{subfigure}[t]{0.35\textwidth}
+		\centering
+		\includegraphics[scale=0.35]{CompositeCross-FDM-DEV-LogError.pdf}
+		\caption{\label{fig:CompositeCross-FDM-DEV-LogError} Logarithm of the error in the eigenvalue $2\pi^2$ ($n=m=1$) computed by the finite difference approximation against $\log(N)$. The gradient of the slope is approximately $-2.004$.}
+	\end{subfigure}
+	~
+	\begin{subfigure}[t]{0.65\textwidth}
+		\centering
+		\includegraphics[scale=0.65]{CompositeCross-FDM-DEV-Function.pdf}
+		\caption{\label{fig:CompositeCross-FDM-DEV-Function} The approximation to $u_{1,1}$ as computed by the finite difference scheme.}
+	\end{subfigure}
+	\caption{\label{fig:}}
+\end{figure}
+\tstk{plot titles need work. Also, spectral plot is causing much lag, maybe pdf output not the best?}
 
 \tstk{now reflections on how this method might get much more complicated}
 Our example using the cross-in-the-plane geometry illustrates the principle behind this approach; use finite differences to approximate $u$ in each $\ddom_i$ and along each $I_{jk}$, and tie approximations from adjacent bulk regions together through the nodal values along the common edge of the skeleton.
