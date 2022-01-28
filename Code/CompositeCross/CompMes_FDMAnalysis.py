@@ -38,10 +38,10 @@ def ReadEvals_FDM(fname, funsToo=False):
         valInfo: (nPts^2, 2+nEvals) complex, rows contain (in order) theta1/pi, theta2/pi, omega_1, ... , omega_n.
         efs: (nEvals*nPts^2, N*N) complex, row i*nEvals+j contains the eigenvector for the eigenvalue at valInfo[i,2+j]
     '''
-    
+
     valInfo = np.loadtxt(fname, delimiter=',', dtype=complex)
     valInfo[:,:2] *= pi
-    
+
     # if we want the eigenfunctions too...
     if funsToo:
         try:
@@ -68,7 +68,7 @@ def AppendEvalRuns(infoArrays):
     OUTPUTS:
         stack: float array, array formed from vertical stacking
     '''
-    
+
     if type(infoArrays)==list:
         stack = np.vstack(tuple(infoArrays))
     else:
@@ -86,13 +86,13 @@ def GetBand(band, evs, tol=1e-8):
     OUTPUTS:
         bandInfo: (nRuns,3) float, columns 0,1 are the quasimomentum values corresponding to the eigenvalue at column 2.
     '''
-    
+
     # this is the number of eigenvalues per QM that was computed
     nEvals = np.shape(evs)[1] - 2
     # check that we have information on this band
     if band>nEvals:
         raise ValueError('Want band %d but only have information up to band %d' % (band, nEvals))
-        
+
     # check for imaginary eigenvalues
     tf = RealEvalIndices(evs[:,1+band], tol=tol)
     if not tf.all():
@@ -111,7 +111,7 @@ def LoadAllFromKey(searchPath, funsToo=False):
     OUTPUTS:
         allEvals: (nRuns,2+nEvals) complex, eigenvalue information arrays
     '''
-    
+
     allFiles = glob.glob(searchPath, recursive=False)
     evList = []
     # only return the eigenfunctions if they were asked for
@@ -145,7 +145,7 @@ def LoadAllFromKey(searchPath, funsToo=False):
             # record e'val array
             evList.append(e)
         # combine e'value arrays
-        allEvals = AppendEvalRuns(evList)        
+        allEvals = AppendEvalRuns(evList)
     return allEvals, allVecs
 
 #%% Data analysis/ handling
@@ -159,7 +159,7 @@ def Multiplicities(evs, rtol=1e-5, atol=1e-8):
     OUTPUTS:
         bands: list of numpy arrays, bands[i][j,:] = [theta0, theta1, omega_j]
     '''
-    
+
     # initialise band storage
     bands = []
     # how many eigenvalues are there for us to look at?
@@ -216,7 +216,7 @@ def Multiplicities(evs, rtol=1e-5, atol=1e-8):
                 for group in evalGroups:
                     # group[0] is the lowest band the repeat appears in
                     # group[1] is the highest band the repeat appears in
-                    
+
                     # check 1: what is the min. distance from you to any other eigenvalue in these bands?
                     # you should be close to the other values in the bands
                     dists = np.zeros((np.shape(evs)[0]-1,group[1]-group[0]+1),dtype=complex)
@@ -263,17 +263,17 @@ def PlotEvals(evs, pType='scatter', title=''):
     elif np.char.equal('heat', pType):
         ax = fig.add_subplot()
         # use tricontourf since we don't have 2D array of data
-        dataDisp = ax.tricontourf(evs[:,0]/pi, evs[:,1]/pi, evs[:,2], cmap=plt.cm.viridis)        
+        dataDisp = ax.tricontourf(evs[:,0]/pi, evs[:,1]/pi, evs[:,2], cmap=plt.cm.viridis)
     else:
         ax = fig.add_subplot(projection='3d')
         ax.set_zlabel(r'$\omega$')
-        if np.char.equal('scatter', pType):    
+        if np.char.equal('scatter', pType):
             dataDisp = ax.scatter(evs[:,0]/pi, evs[:,1]/pi, evs[:,2], c=evs[:,2], cmap=plt.cm.viridis)
         elif np.char.equal('surf', pType):
             dataDisp = ax.plot_trisurf(evs[:,0]/pi, evs[:,1]/pi, evs[:,2], cmap=plt.cm.viridis, linewidth=0, antialiased=False)
         else:
             raise ValueError('Unrecognised plot type %s, valid types are scatter, surf, contour, heat')
-    
+
     # set axis labels and figure title
     ax.set_xlabel(r'$\frac{\theta_1}{\pi}$')
     ax.set_ylabel(r'$\frac{\theta_2}{\pi}$')
@@ -282,7 +282,7 @@ def PlotEvals(evs, pType='scatter', title=''):
         ax.set_title(title)
     # create colourbar
     fig.colorbar(dataDisp, ax=ax)
-        
+
     return fig, ax
 
 def PlotBands(bands, markQMExtremes=False, intermediateExtremes=False, lines=False):
@@ -296,7 +296,7 @@ def PlotBands(bands, markQMExtremes=False, intermediateExtremes=False, lines=Fal
     OUTPUTS:
         fig, ax: matplotlib figure handles, containing a plot of the spectral bands
     '''
-    
+
     fig, ax = plt.subplots(1)
     ax.set_xlabel(r'$\omega$')
     ax.set_title(r'Spectral bands (FDM)')
@@ -317,7 +317,7 @@ def PlotBands(bands, markQMExtremes=False, intermediateExtremes=False, lines=Fal
     # set custom labels for axis
     ax.set_yticks(yticks)
     ax.set_yticklabels(yticklabels)
-    
+
     # mark QM extreme values if requested
     if markQMExtremes or intermediateExtremes:
         # extreme QM values are (0,0) and (-pi,-pi).
@@ -361,7 +361,7 @@ if __name__=='__main__':
 
     parser = argparse.ArgumentParser(description='Plotting and results analysis script for the Cross-in-Plane geometry eigenvalues, computed via the Finite Difference Scheme.')
     parser.add_argument('path_to_file', type=str, help='<Required> Path to file containing results of FDM eigenvalue solve.')
-    parser.add_argument('-fOut', default='./FDM_Results/', type=str, help='<Default .> File location to save plot outputs to.')
+    parser.add_argument('-fOut', default='./FDM_Results/', type=str, help='<Default ./FDM_Results/> File location to save plot outputs to.')
     parser.add_argument('-e', action='store_true', help='If passed,  eigenvalues corresponding to extreme QM values [0,0] and [-pi,-pi] will be highlighted in spectral plot.')
     parser.add_argument('-i', action='store_true', help='If passed,  eigenvalues corresponding to extreme QM values [-pi,0] and [0,-pi] will be highlighted in spectral plot.')
     parser.add_argument('-l', action='store_true', help='If passed, plots bands using lines between extreme eigenvalues, rather than scatter. .pdf output will be smaller in size, but should only be used if the spectrum is known to consist of (or previous plots demonstrate that it consists of) continuous bands.')
@@ -371,42 +371,42 @@ if __name__=='__main__':
     parser.add_argument('-t', default='surf', choices=['contour', 'heat', 'scatter', 'surf'], help='Type of plot to make for eigenvalues against QM. Options are')
 
     # extract input arguments and get the setup ready
-    args = parser.parse_args() 
- 
+    args = parser.parse_args()
+
     # get timestamp for saving plots later
     now = args.fOut + 'FDM_' + datetime.today().strftime('%Y-%m-%d-%H-%M')
-    
+
     # load the data that we have been passed
     searchPath = args.path_to_file #'nPts51-N251-10evals.csv'
-    
+
     allEvals, allEvecs = LoadAllFromKey(searchPath, funsToo=False)
-    
+
     # this is the number of bands we tried to compute
     nEvals = np.shape(allEvals)[1] - 2
     # get all the bands, and put them into a list
     if args.multi:
         bands = Multiplicities(allEvals)
-    else:    
+    else:
         bands = []
         for n in range(nEvals):
             bands.append(GetBand(n+1, allEvals, tol=1e-5))
     # if we don't want all the bands involved, truncate now
     if args.maxB:
         bands = bands[0:args.maxB]
-        
+
 #%% Now create the figures that were requested
-    
+
     # spectral band plot
     specFig, specAx = PlotBands(bands, markQMExtremes=args.e, intermediateExtremes=args.i, lines=args.l)
     specFig.savefig(now + '_SpectralBands.pdf', bbox_inches='tight')
     plt.close(specFig)
-    
+
     # if you want to plot the eigenvalues as functions of QM
     if args.b:
         for bi, b in enumerate(bands):
             f, a = PlotEvals(b, pType=args.t, title=r'$\omega$ values in band %d' % (bi))
             f.savefig(now + '_Band%d.pdf' % bi, bbox_inches='tight')
-    
+
     # close all figure windows
     plt.close('all')
     sys.exit(0)
