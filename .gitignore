@@ -24,6 +24,7 @@
 
 ## Python caches from script executions
 *__pycache__/
+*.npz
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl

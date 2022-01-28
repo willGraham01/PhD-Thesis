@@ -13,7 +13,7 @@ Observe that, for $\Omega=(0,1)^2$ and $\theta\in[-\pi,\pi)^2$, the eigenpairs o
     -\Delta_{\theta}u = \lambda u, \qquad u\vert_{\partial\Omega} = 0,
 \end{align*}
 
-are given by 
+are given by
 
 \begin{align*}
     u_{nm}(x,y) &= \mathrm{e}^{-\mathrm{i}\theta\cdot\mathbf{x}}\sin\left(n\pi x\right)\sin\left(m\pi y\right), \\
@@ -33,7 +33,7 @@ This provides us with the eigenfunction and eigenvalue
 
 \begin{align*}
     U(x,y) &= \mathrm{e}^{\mathrm{i}\pi(x+y)}\sin\left(\pi x\right)\sin\left(\pi y\right), \\
-    \lambda =: \omega^2 &= 2\pi^2, 
+    \lambda =: \omega^2 &= 2\pi^2,
     \qquad \implies \omega \approx 4.442882938.
 \end{align*}
 
@@ -66,14 +66,14 @@ def Make_AnalyticU(n=1,m=1):
     OUTPUTS:
         U(x,y): function, evaluates the analytic solution U at the coordinate pairs (x,y)
     '''
-    
+
     # set the quasi-momentum to the correct value given the parity of n and m
     theta = -np.pi * np.ones((2,), dtype=float)
     if n%2==0:
         theta[0] = 0.
     if m%2==0:
-        theta[1] = 0.    
-    
+        theta[1] = 0.
+
     def U(x,y):
         '''
         Analytic solution U(x,y) as defined above.
@@ -82,10 +82,10 @@ def Make_AnalyticU(n=1,m=1):
         OUTPUTS:
             uVals: (n,n) float, value of U at the coordinate pairs
         '''
-        
+
         uVals = exp(-1.j*(theta[0]*x + theta[1]*y)) * sin(n*pi*x) * sin(m*pi*y)
         return uVals
-    
+
     return U
 
 def PlotAnalytic(N, n=1, m=1, levels=10):
@@ -98,7 +98,7 @@ def PlotAnalytic(N, n=1, m=1, levels=10):
     OUTPUTS:
         uFig, uAx: matplotlib figure handles, heatmaps of the real and imaginary parts of the analytic solution
     '''
-    
+
     # gridpoints used
     x = y = np.linspace(0,1, num=N)
     X, Y = np.meshgrid(x,y)
@@ -114,8 +114,8 @@ def PlotAnalytic(N, n=1, m=1, levels=10):
         a.set_ylabel(r'$x_2$')
     uAx[0].set_title(r'$\Re (u)$')
     uAx[1].set_title(r'$\Im (u)$')
-    uFig.suptitle(r'Analytic Solution')
-    
+    uFig.suptitle(r'$u_{%d,%d}$' % (n,m))
+
     # if more levels than meshpoints in each dimension, could be difficult! Throw a warning
     if levels >= N:
         print('Number of contour levels exceeds or equals N!')
@@ -123,7 +123,7 @@ def PlotAnalytic(N, n=1, m=1, levels=10):
     # remember matplotlib convention! X, Y, Z triples where Z has shape (M,N) where X of shape (N,) and Y of shape (M). Generated data with meshgrid, so should be auto-compatable...
     rCon = uAx[0].contourf(x, y, np.real(uVals), levels=levels)
     iCon = uAx[1].contourf(x, y, np.imag(uVals), levels=levels)
-    
+
     # make colourbars
     rDiv = make_axes_locatable(uAx[0])
     rCax = rDiv.append_axes("right", size="5%", pad=0.05)
@@ -134,12 +134,12 @@ def PlotAnalytic(N, n=1, m=1, levels=10):
     # space things out a bit better
     uFig.tight_layout()
     uFig.subplots_adjust(top=1.3)
-    
+
     return uFig, uAx
-    
+
 def TranslateFDM(u):
     '''
-    Translates an eigenfunction from the FDM onto the domain of the VP. 
+    Translates an eigenfunction from the FDM onto the domain of the VP.
     The domains are identical, however the period cell was viewed in different ways: FDM has the central vertex at (1/2,1/2), whilst VP had the vertex at (0,0).
     As such, we need to move the entries of the vector u containing the FDM entries, so that we can view the two functions over the same reference domain.
     INPUTS:
@@ -147,10 +147,10 @@ def TranslateFDM(u):
     OUTPUTS:
         uShift: ((N-1)**2,) complex, eigenfunction u but now on the reference domain of VP
     '''
-    
+
     # N from FDM; FDM has shape ((N-1)*(N-1),) due to the periodicity constraint
     N = int(np.sqrt( np.shape(u)[0] ) + 1)
-    
+
     # FDM uses vertex at (1/2,1/2), whereas VP uses vertex at (0,0), so we need to translate by periodicity
     # this is compounded by the "repeated values" on the slave nodes in each of the arrays. So we don't want to re-insert the slave nodes just yet, as we want to translate first
     # for ease, let's move from our vector to the matrix representation
@@ -161,7 +161,7 @@ def TranslateFDM(u):
     swaps[N//2:,N//2:] = matFDM[0:N//2,0:N//2] # bottom right to top left
     swaps[0:N//2,N//2:] = matFDM[N//2:,0:N//2] # bottom right to top left
     swaps[N//2:,0:N//2] = matFDM[0:N//2,N//2:] # top left to bottom right
-    
+
     uShift = swaps.reshape(((N-1)*(N-1),)) # replace vector of grid values
     return uShift
 
@@ -184,9 +184,9 @@ if __name__=="__main__":
     parser.add_argument('-plotBest', action='store_true', help='If passed, creates a plot of the best numerical approximation to the eigenfunction that was computed.')
     parser.add_argument('-logH', action='store_true', help='If passed, the convergence rate plot will be created with the log of the error against the mesh width h rather than the number of mesh points N.')
     parser.add_argument('-NoSparse', action='store_false', help='If passed, FDMs will be constructed without using sparse storage. Not recommended.')
-    parser.add_argument('-load', default='', type=str, help='If provided with the path to an .npz file, the data to be plotted will be loaded from this file rather than computed by the script. The .npz file should contain two arrays of the same length, NVals (ints) and sqErrors (float). Passing a filename will suppress the use of Nmax, Nmin, Nstep, Nlogscale, n, m, nEvals, and sd.')
-    
-    args = parser.parse_args()    
+    parser.add_argument('-load', default='', type=str, help='If provided with the path to an .npz file, the data to be plotted will be loaded from this file rather than computed by the script. The .npz file should contain two arrays of the same length, NVals (ints) and sqErrors (float). Passing a filename will suppress the use of Nmax, Nmin, Nstep, Nlogscale, nEvals, and sd. plotU will still function with the input values of n and m.')
+
+    args = parser.parse_args()
     # check compatibility
     if args.n<1 or args.m<1:
         raise ValueError('(n,m) = (%d,%d) cannot be less than 1' % (args.n,args.m))
@@ -205,7 +205,7 @@ if __name__=="__main__":
     m = args.m
     # derive values from n,m
     lbda = (n*n + m*m)*pi*pi
-    omega = np.sqrt(lbda)    
+    omega = np.sqrt(lbda)
     # set alpha3 to be zero, but you could change this if you wanted I guess. U would still be an analytic solution in this case since the value of the function at the vertex is 0 anyway...
     alpha3 = args.a3
     # set the quasi-momentum to the fixed value
@@ -232,14 +232,16 @@ if __name__=="__main__":
     # storage for the eigenvalues and the eigenvectors that were found will be in a dictionary, whose keys match the values in NVals
     # each value will be a list containing the (square) eigenvalue found and the corresponding eigenfunction approximation
     results = {}
-    
+
 #%% If you want to look at the analytic solution
-    
+
     if args.plotU:
         uF, uA = PlotAnalytic(NVals[-1], n=n, m=m)
         saveStr = now + '_AnalyticSol.pdf'
         uF.savefig(saveStr, bbox_inches='tight')
-    
+        # save memory space
+        plt.close(uF)
+
 #%% Was the data provided in an .npz file?
     if args.load:
         # filename was provided, load this data instead
@@ -256,7 +258,7 @@ if __name__=="__main__":
                 sqEvals = np.asarray([sqEvals])
                 eVecs = eVecs.reshape((eVecs.shape[0],1))
             results[N] = [sqEvals, eVecs]
-        
+
         # now analyse the results... first check that our eigenvalues were all real
         # this will store the difference from the correct eigenvalue for each N
         sqErrors = np.zeros_like(NVals, dtype=float)
@@ -269,7 +271,7 @@ if __name__=="__main__":
             else:
                 # at least one eigenvalue is bad...
                 raise ValueError('%d non-real eigenvalues found for N=%d' % (np.sum(nRealEvals), N))
-                
+
             # identify the eigenvalue found that is closest to the true lbda
             sqDiffs = lbda - results[N][0]
             bestEvalInd = np.argmin(np.abs(sqDiffs))
@@ -282,9 +284,9 @@ if __name__=="__main__":
         # if requested, save data to file
         if args.sd:
             np.savez(now+'saveData', NVals=NVals, sqErrors=sqErrors)
-                
+
 #%% Create the remaining plots that you asked for
-    
+
     # plot the error as a function of N?
     if errorPlots:
         erFig, erAx = plt.subplots(1)
@@ -315,13 +317,13 @@ if __name__=="__main__":
             print(' k_0: %.5f \n k_1: %.5f' % (polyFit[-1], polyFit[0]))
         erFig.savefig(now + '_Error.pdf', bbox_inches='tight')
         logFig.savefig(now + '_LogError.pdf', bbox_inches='tight')
-            
+
     # plot the best (in terms of eigenvalue error) approximate eigenfunction
     if plotBest:
         bestFig, bestAx = plt.subplots(ncols=2, sharey=False)
         minN = NVals[np.argmin(sqErrors)] # this value of N had the eigenvalue closest to the true value
         uBest = TranslateFDM(results[minN][1][:,results[minN][2]])
-        
+
         x = y = np.linspace(0,1, num=N)
         uBest = InsertSlaveNodes(minN, uBest, mat=True)
         for a in bestAx:
@@ -330,8 +332,8 @@ if __name__=="__main__":
             a.set_ylabel(r'$x_2$')
         bestAx[0].set_title(r'$\Re (u)$')
         bestAx[1].set_title(r'$\Im (u)$')
-        bestFig.suptitle(r'Best approximating eigenfunction')
-        
+        #bestFig.suptitle(r'Best approximating eigenfunction')
+
         # if more levels than meshpoints in each dimension, could be difficult! Throw a warning
         if levels >= N:
             print('Number of contour levels exceeds or equals N!')
@@ -348,7 +350,7 @@ if __name__=="__main__":
         bestFig.colorbar(iCon, cax=iCax)
         # space things out a bit better
         bestFig.tight_layout()
-        bestFig.subplots_adjust(top=1.3) #moves top title closer again
+        #bestFig.subplots_adjust(top=1.3) #moves top title closer again
         print('Best approximation occurs when N=%d, eigenvalue index %d' % (minN, results[minN][2]))
         bestFig.savefig(now + '_BestApprox.pdf', bbox_inches='tight')
 
