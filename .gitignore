@@ -22,9 +22,10 @@
 *.pdf
 !/Diagrams/Numerical_Results/*.pdf
 
-## Python caches from script executions
+## Python caches and outputs from script executions
 *__pycache__/
 *.npz
+*.xcf
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl

@@ -3,7 +3,43 @@
 
 In this section we turn to numerical schemes for handling the variational problem \eqref{eq:SI-VarProb} and the strong formulation \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition}.
 For each formulation, we will outline the numerical scheme we have chosen to pursue and, importantly, the methods in which we can handle the non-standard integrals and gradients with respect to $\compMes$ numerically.
-Where appropriate we will use the "cross-in-the-plane" geometry from the example in section \tstk{ref!!}, now equipped with $\compMes$, to illustrate the results of these methods.
+
+We will use the "cross-in-the-plane" geometry from the example in section \tstk{ref!!} (now equipped with $\compMes$) to illustrate the results of these methods.
+For convenience, we have translated the period cell by $-\bracs{\recip{2},\recip{2}}$, which allows us to avoid carrying additional constant terms around in what follows.
+Recall that this geometry consists of a skeleton $\graph$ within $\ddom=\left[0,1\right)^2$, with a single vertex $v_0=\bracs{0,0}^\top$, and two ``looping" edges $I_h = \sqbracs{0,1}\times\clbracs{0}$, $I_v=\clbracs{0}\times\sqbracs{0,1}$.
+The quasi-momentum parameters $\qm_{jk}$ are easily computable as $\qm_h = \qm_1$ and $\qm_v = \qm_2$, and we only have a single bulk region, $\ddom_i = \ddom^{\circ}=\bracs{0,1}^2$.
+There are a number of properties that we expect of our eigenvalues due to the symmetric nature of our geometry, notably the following:
+\begin{prop}[Cross in the plane symmetries] \label{prop:CrossInPlaneSymmetries}
+	If $\omega^2, u\bracs{x_1,x_2}$ is a solution to \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} at $\qm = \bracs{\qm_1,\qm_2}\in\left[-\pi,\pi\right)^2$, then:
+	\begin{itemize}
+		\item $\omega^2, u\bracs{1-x_1,x_2}$ is a solution to \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} at $\qm = \bracs{-\qm_1, \qm_2}$.
+		\item $\omega^2, u\bracs{x_1,1-x_2}$ is a solution to \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} at $\qm = \bracs{\qm_1, -\qm_2}$.
+		\item $\omega^2, u\bracs{x_2,x_1}$ is a solution to \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} at $\qm = \bracs{\qm_2, \qm_1}$.
+	\end{itemize}
+\end{prop}
+\tstk{proof?}
+
+Additionally for the cross-in-the-plane geometry, we can obtain analytic expressions for a subset of the eigenfunctions and eigenvalues --- namely those inherited from the Dirichlet laplacian on $\bracs{0,1}^2$.
+Observe that for $n,m\in\naturals$ the function
+\begin{align*}
+	u_{n,m}(x) &= \e^{-\rmi\qm\cdot x}\sin\bracs{n\pi x_1}\sin\bracs{m\pi x_2},
+\end{align*}
+is an eigenfunction of the Dirichlet laplacian $-\laplacian_{\qm}$,
+\begin{align*}
+	-\laplacian_{\qm}u &= \omega_{n,m}^2 u, &\qquad \text{on } \bracs{0,1}^2, \\
+	u\bracs{0,x_2} = u\bracs{1,x_2} &= u\bracs{x_1,0} = u\bracs{x_1,1} = 0,
+\end{align*}
+where $\omega_{n,m}^2 = \bracs{n^2+m^2}\pi^2$.
+It is clear that $u_{n,m}$ also solves \eqref{eq:SI-BulkEqn} with $\omega^2 = \omega_{n,m}^2$ and has $u=0$ on the skeleton, and furthermore is such that $u_{n,m}\in\tgradSob{\ddom}{\compMes}$.
+In the event that both
+\begin{itemize}
+	\item ($n$ is even and $\qm_1=0$) or ($n$ is odd and $\qm_1=-\pi$),
+	\item ($m$ is even and $\qm_2=0$) or ($m$ is odd and $\qm_2=-\pi$),
+\end{itemize}
+hold, then $u_{n,m}$ is also an eigenfunction of \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} with the same eigenvalue (the quasi-momentum values are required to ensure that the normal derivative traces cancel out in \eqref{eq:SI-InclusionEqn}).
+Of course, one can also substitute $\omega^2_{n,m}, u_{n,m}$ and into \eqref{eq:SI-WaveEqn} to arrive at the same conclusion.
+Knowing that \eqref{eq:SI-WaveEqn} shares eigenvalues with the Dirichlet laplacian will have consequences for us in section \ref{sec:NonLocalQG}, when we attempt to reduce \eqref{eq:SI-WaveEqn} to a quantum graph problem.
+For now however, $u_{n,m}$ and $\omega_{n,m}^2$ provide some suitable test cases for our numerical schemes.
 
 \subsection{Variational Problem} \label{ssec:SI-VP}
 We begin by examining the variational problem \eqref{eq:SI-VarProb},
@@ -30,8 +66,7 @@ The traditional idea when attempting to approximate a minimising function is to 
 and solve the minimisation problem (that arises from substituting \eqref{eq:SI-VPTruncatedBasis} into \eqref{eq:SI-MinProblem}) in the coefficients of the basis expansion that remain --- the choice of $M$ determines the accuracy in the approximate eigenfunction (and hence eigenvalue).
 This minimisation problem will be discrete (solving for the $M+1$ independent variables $u_m$), and can be handled using optimisation methods.
 
-None of the steps above are prohibited for the problem \eqref{eq:SI-MinProblem}, and so we can proceed with the aforementioned ideas.
-We will illustrate this implementation for the "cross-in-the-plane" geometry first introduced in \tstk{example reference --- note, we might already mention this in the intro to this section, so could potentially avoid repetition}\footnote{For convenience, we have translated the period cell by $\bracs{\recip{2},\recip{2}}$ with regards to how this geometry was handled in \tstk{ref}. This just allows us to avoid carrying additional constant terms around in our computations, and we would obtain the same results as if we didn't apply any translation.}; we take $\ddom=\left[0,1\right)^2$, and let $\graph$ be the period graph with a single vertex $v_0=\bracs{0,0}^\top$, and two ``looping" edges $I_h = \sqbracs{0,1}\times\clbracs{0}$, $I_v=\clbracs{0}\times\sqbracs{0,1}$.
+None of the steps above are prohibited for the problem \eqref{eq:SI-MinProblem} and so we can proceed with the aforementioned ideas, illustrating the implementation for the cross-in-the-plane geometry.
 Our first task is to decide on the basis functions $\varphi_m$ that we want to use to approximate $u$.
 From the standpoint of accuracy (and typically speed) of the numerical solution there are several properties that it is desirable for this basis to have; orthonormality between the $\varphi_m$, similar shape to that expected of $u$, and of course periodicity.
 This is where problems concerning the unfamiliar nature of our space $\tgradSob{\ddom}{\compMes}$ begin to arise, as the choice of basis is considerably more complex --- as choosing the behaviour of $\varphi_m$ in the bulk regions then restricts what $\varphi_m$ can do on the skeleton, and vice-versa. 
@@ -40,7 +75,7 @@ As a general approach, one can choose a basis in similar fashion to how this is 
 Then, use ``tent" or ``hat" functions centred on each node $\tau_i$ for the truncated basis functions $\varphi_m$.
 This allows sufficient flexibility in the behaviour of $u$ on the edges and in the bulk regions, at the expense of requiring a new mesh for every new graph geometry.
 
-Fortunately, the geometry of our ``cross-in-the-plane" example is rather simple, since the two edges $I_h, I_v$ are aligned with the coordinate axes.
+Fortunately, the geometry of our cross-in-the-plane example is rather simple, since the two edges $I_h, I_v$ are aligned with the coordinate axes.
 This makes computing integrals on the skeleton much simpler, and traces from the bulk region can be computed with relative ease, so we can avoid taking the approach of meshing $\ddom$ as described above.
 Instead, we can opt to choose a basis in a way more akin to spectral methods --- by choosing ``global" basis functions rather than the ``local" tent-basis functions that meshing $\ddom$ would utilise.
 Combined with the fact that we only have one bulk region that spans the entire period cell, the natural candidate for our basis functions would be the 2D Fourier basis $\e^{2\pi\rmi(\alpha x + \beta y)}$.
@@ -111,7 +146,7 @@ We will come to discuss some of the difficulties with the general application of
 For now, assuming we have approximations for the gradient- and derivative-like objects, we can then approximate the action of the left-hand-side of \eqref{eq:SI-FDMEquationsToDisc} via the action of a matrix $\mathcal{F}$ on the vector $U = \bracs{u_j}^\top$, where $u_j:=u\bracs{\tau_j}$.
 As a result, we can then approximate the system \eqref{eq:SI-FDMEquationsToDisc} by the matrix-eigenvalue problem involving $\mathcal{F}$.
 
-Let us begin by illustrating this approach using the ``cross in the plane" geometry \tstk{section ref}.
+Let us begin by illustrating this approach using the cross in the plane geometry.
 We first discretise $\ddom$ into a uniform mesh consisting of $N\times N$ nodes $\tau_{p,q} = \bracs{(p-1)h,(q-1)h}$ for $p,q\in\clbracs{1,...,N}$, with a mesh width of $h = \recip{N-1}$, and write $u_{p,q} = u\bracs{\tau_{p,q}}$.
 It is important to note at this early stage that we can utilise a uniform mesh thanks to the rather simple geometry of the skeleton, and in general the meshing process will be more complex (see the discussion at the end of this section).
 Note that there is no need to place nodes along both of the periodic edges of $\ddom$, so long as we keep track of which nodes are connected by periodicity, but for notational purposes it is convenient to include such nodes in our description.
@@ -191,36 +226,25 @@ This system can then be written in matrix form as
 where $B=\mathrm{diag}\bracs{1,...,1,0,1,...,1}$ is a (positive semi-definite) diagonal matrix with the zero in the row corresponding to the equation \eqref{eq:SI-FDMDiscVertex}.
 The equation \eqref{eq:SI-FDMMatrixEqn} can then be solved using a generalised eigenvalue solver to obtain the approximate eigenvalues $\omega^2$ and eigenvectors $U$.
 
-\tstk{this gives us the numerical results in the file \texttt{CompositeMedium\_PeriodicFDM.ipynb} - I can export the results we want to pdfs and import them as images here.
-Things to note are that the finite-difference matrix $\mathcal{F}$ is not Hermitian, but the eigenvalues appear to all be real.
-The eigenfunction plots are also quite nice, but we don't have anything to compare them to (true values, etc).
-Comparison with the ``spectral" method is also a must, certainly for the results we have obtained --- maybe give the difference in spectral values found for a fixed theta, and varying the mesh width and $M$ (in VP)?
-Also need to mention how we have wasted a lot of our effort in solving in the bulk regions, when in reality we don't actually need the form of the function here...}
 The approximate eigenvalues computed by the finite difference scheme are displayed in figure \ref{fig:CompositeCross-FDM-SpectralBands}, using $N=251$ grid-points in each of the coordinate directions.
 \begin{figure}[b!]
 	\centering
-	\includegraphics[scale=1.0]{CompositeCross-FDM-SpectralBands.pdf}
+	\includegraphics[scale=0.5]{CompositeCross-FDM-SpectralBands.pdf}
 	\caption{\label{fig:CompositeCross-FDM-SpectralBands} The approximate eigenvalues computed by the finite-difference scheme, sorted into spectral bands for the cross-in-the-plane geometry. Eigenvalues corresponding to the extremities of the quasi-momentum are plotted in red.}
 \end{figure}
 Those points plotted in red correspond to eigenvalues that were computed at quasi-momentum values of $\bracs{0,0}^\top$, $\bracs{-\pi,0}^\top$, $\bracs{0,-\pi}^\top$, $\bracs{-\pi,-\pi}^\top$, from which we can observe that these points typically form the endpoints of each of the spectral bands.
-A notable exception to this is band 6, for which the eigenvalues at the extremities of the band are not obtained at any of these quasi-momentum values.
-However by examining the eigenvalues in this band as functions of $\qm$, \tstk{insert figure for band 6?}, it can be noticed that these extreme eigenvalues occur at quasi-momentum values where one of the components is either 0 (for the minimum values) or $-\pi$ (for the maximum values).
-Furthermore, the eigenvalues in each band are symmetric in $\qm$, which we expected due to the symmetry of the cross-in-the-plane geometry.
-\tstk{analytic solutions and convergence rates - maybe move the ``analytic solutions we know" to the first time we (re)-introduce the X-in-plane geometry?}
-We can also illustrate the rate of convergence of this numerical scheme to some of the eigenvalues and eigenfunctions that we can compute analytically.
-Observe that, for $n,m\in\naturals$ the function
-\begin{align*}
-	u_{n,m}(x) &= \e^{-\rmi\qm\cdot x}\sin\bracs{n\pi x_1}\sin\bracs{m\pi x_2},
-\end{align*}
-is an eigenfunction of the Dirichlet laplacian on $[0,1)^2$, and so solves \eqref{eq:SI-BulkEqn} with $\omega^2 = \bracs{n^2+m^2}\pi^2$ with $u=0$ on the skeleton.
-In the event that both
-\begin{itemize}
-	\item ($n$ is even and $\qm_1=0$) or ($n$ is odd and $\qm_1=-\pi$),
-	\item ($m$ is even and $\qm_2=0$) or ($m$ is odd and $\qm_2=-\pi$),
-\end{itemize}
-hold, then $u_{n,m}$ is also an eigenfunction of \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} with the same eigenvalue (this causes the trace terms in \eqref{eq:SI-InclusionEqn} to cancel each other). \tstk{this is relevant later when we try to reduce to the graph... as we've found a Dirichlet eigenfunction that solves our problem!}
-In these cases, we expect that the error in the approximate eigenvalue is of the order of $N^-2$, since our scheme makes use of centred differences in the bulk region, and on the skeleton the eigenfunction should be identically zero.
-Indeed, this is what we observe numerically for each $n,m$, as shown in figure \ref{}
+Much like the quantum graph case, we do not expect this to occur for general geometries --- there even appears to be a notable example of this in band 6, for which the eigenvalues at the extremities of the band are not obtained at any of these quasi-momentum values.
+However by examining the eigenvalues in this band as functions of $\qm$, as in figure \ref{fig:FDM_2022-01-28-09-33_AllBands}, it can be noticed that these extreme eigenvalues occur at quasi-momentum values where one of the components is either 0 (for the minimum values) or $-\pi$ (for the maximum values).
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=\textwidth]{FDM_2022-01-28-09-33_AllBands.pdf}
+	\caption{\label{fig:FDM_2022-01-28-09-33_AllBands} The eigenvalues $\omega$ in each spectral band, plotted as functions of the quasi-momentum $\qm$. Observe the symmetries that are expected from proposition \ref{prop:CrossInPlaneSymmetries}.}
+\end{figure}
+Furthermore, we also notice the eigenvalues in each band obey the symmetries in $\qm$ as expected from \ref{prop:CrossInPlaneSymmetries}.
+
+We can also illustrate the rate of convergence of the numerical scheme to the eigenvalues $\omega_{n,m}^2 = \bracs{n^2+m^2}\pi^2$.
+In these cases, we expect that the error in the approximate eigenvalue is of the order of $N^{-2}$, since our scheme makes use of centred differences in the bulk region, and on the skeleton the eigenfunction should be identically zero.
+Indeed, this is what we observe numerically for each $n,m$, as shown in figure \tstk{place several log errors onto one axis. Then accompany with the ``analytic solution vs best approximation" plots}
 \begin{figure}[h]
 	\centering
 	\begin{subfigure}[t]{0.35\textwidth}
@@ -236,7 +260,9 @@ Indeed, this is what we observe numerically for each $n,m$, as shown in figure \
 	\end{subfigure}
 	\caption{\label{fig:}}
 \end{figure}
-\tstk{plot titles need work. Also, spectral plot is causing much lag, maybe pdf output not the best?}
+\tstk{plot titles need work}
+\tstk{The eigenfunction plots are also quite nice, but we don't have anything to compare them to (true values, etc).
+Comparison with the ``spectral" method is also a must, certainly for the results we have obtained --- maybe give the difference in spectral values found for a fixed theta, and varying the mesh width and $M$ (in VP)?}
 
 \tstk{now reflections on how this method might get much more complicated}
 Our example using the cross-in-the-plane geometry illustrates the principle behind this approach; use finite differences to approximate $u$ in each $\ddom_i$ and along each $I_{jk}$, and tie approximations from adjacent bulk regions together through the nodal values along the common edge of the skeleton.
