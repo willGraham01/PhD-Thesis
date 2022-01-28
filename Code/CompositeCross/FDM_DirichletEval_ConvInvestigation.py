@@ -179,12 +179,12 @@ if __name__=="__main__":
     parser.add_argument('-nEvals', default=5, type=int, help='<Default 5> Number of eigenvalues to compute near to analytic eigenvalue. Computing more "nearby" eigenvalues can help when the mesh is coarse.')
     parser.add_argument('-a3', default=0.0, type=float, help='<Default 0.> Coupling constant value at v_3.')
     parser.add_argument('-fOut', default='./', type=str, help='<Default .> File location to save outputs (all plots and numerical data) to.')
-    parser.add_argument('-sd', action='store_true', help='If passed, writes the error and N values out to an .npz file.')
+    parser.add_argument('-sd', action='store_true', help='If passed, writes the error, N, n, and m values out to an .npz file.')
     parser.add_argument('-plotU', action='store_true', help='If passed, creates a plot of the analytic solution in the same directory as the convergence rate plots.')
     parser.add_argument('-plotBest', action='store_true', help='If passed, creates a plot of the best numerical approximation to the eigenfunction that was computed.')
     parser.add_argument('-logH', action='store_true', help='If passed, the convergence rate plot will be created with the log of the error against the mesh width h rather than the number of mesh points N.')
     parser.add_argument('-NoSparse', action='store_false', help='If passed, FDMs will be constructed without using sparse storage. Not recommended.')
-    parser.add_argument('-load', default='', type=str, help='If provided with the path to an .npz file, the data to be plotted will be loaded from this file rather than computed by the script. The .npz file should contain two arrays of the same length, NVals (ints) and sqErrors (float). Passing a filename will suppress the use of Nmax, Nmin, Nstep, Nlogscale, nEvals, and sd. plotU will still function with the input values of n and m.')
+    parser.add_argument('-load', default='', type=str, help='If provided with the path to an .npz file, the data to be plotted will be loaded from this file rather than computed by the script. The .npz file should contain two arrays of the same length, NVals (ints) and sqErrors (float). any other variables contained inside will be ignored. Passing this flag will suppress the use of Nmax, Nmin, Nstep, Nlogscale, nEvals, and sd. plotU will still function with the input values of n and m.')
 
     args = parser.parse_args()
     # check compatibility
@@ -283,7 +283,7 @@ if __name__=="__main__":
             results[N].append(bestEvalInd)
         # if requested, save data to file
         if args.sd:
-            np.savez(now+'saveData', NVals=NVals, sqErrors=sqErrors)
+            np.savez(now+'saveData', NVals=NVals, sqErrors=sqErrors, n=n, m=m)
 
 #%% Create the remaining plots that you asked for
 
