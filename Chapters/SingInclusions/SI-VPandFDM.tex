@@ -167,34 +167,33 @@ For nodes $\tau_{p,q}\in I_{jk}$ (for either $I_{jk}=I_h$ or $I_v$), our finite 
 This is because $u$ is twice differentiable \emph{along the skeleton}, so we must approximate $\bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)}$ through finite differences along the edge $I_{jk}$, which will involve the values of $u$ at the nodes ``adjacent" to $\tau_{p,q}$ in the $e_{jk}$ and $-e_{jk}$ directions.
 For the normal-derivative trace terms, we use one-sided finite differences to approximate these values at $\tau_{p,q}$, which involves the values of $u$ at the nodes ``adjacent" to $\tau_{p,q}$ in the $n_{jk}$ and $-n_{jk}$ directions.
 For general skeleton geometries these requirements will contribute to the complications with meshing the domain, but since the edges are aligned with the coordinate axes in the cross-in-the-plane geometry, the vectors $e_{jk}$ and $n_{jk}$ are also aligned with the coordinate axes and the discretisation proceeds easily.
-Those $\tau_{p,q}$ that lie on the horizontal edge $I_h$ have $q=\frac{N-1}{2}$ and $p\neq\frac{N-1}{2}$, so our finite difference approximation is
+\tstk{check geometry is correct: FDM was originally done with vertex in centre, not in corner}
+Those $\tau_{p,q}$ that lie on the horizontal edge $I_h$ have $q=0$ and $p\neq0$, so our finite difference approximation is
 \begin{align*}
-	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u_{p,q} - \bracs{\bracs{\grad u_{p,q}\cdot n_{jk}}^+ - \bracs{\grad u_{p,q}\cdot n_{jk}}^-}
-	& \approx \bracs{\qm_1^2 + 2h^{-1} + 2h^{-2}}u_{p,q} \\
-	& \quad - h^{-1}\bracs{h^{-1} + \rmi\qm_1}u_{p+1,q} \\
-	& \quad - h^{-1}\bracs{h^{-1} - \rmi\qm_1}u_{p-1,q} \\
-	& \quad - h^{-1}u_{p,q+1} - h^{-1}u_{p,q-1}, \labelthis\label{eq:SI-FDMHorzEdgeDiscretise}
+	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u_{p,0} - \bracs{\bracs{\grad u_{p,0}\cdot n_{jk}}^+ - \bracs{\grad u_{p,0}\cdot n_{jk}}^-}
+	& \approx \bracs{\qm_1^2 + 2h^{-1} + 2h^{-2}}u_{p,0} \\
+	& \quad - h^{-1}\bracs{h^{-1} + \rmi\qm_1}u_{p+1,0} \\
+	& \quad - h^{-1}\bracs{h^{-1} - \rmi\qm_1}u_{p-1,0} \\
+	& \quad - h^{-1}u_{p,1} - h^{-1}u_{p,-1}. \labelthis\label{eq:SI-FDMHorzEdgeDiscretise}
 \end{align*}
-(where we reiterate $q=\frac{N-1}{2}$ and $p\neq\frac{N-1}{2}$).
-Here we have used centred differences along the edge $I_h$, identifying that the nodes $\tau_{p-1,q}, \tau_{p+1,q}$ are the adjacent nodes in the $x_1 (= e_h)$ direction.
-The traces cause the introduction of the terms $u_{p,q-1}$ and $u_{p,q+1}$, since $-x_2 = n_h$.
-Analogously, nodes $\tau_{p,q}$ on the vertical edge $I_v$ have $p=\frac{N-1}{2}$ and $q\neq\frac{N-1}{2}$, and the finite difference approximation is
+Here we have used centred differences along the edge $I_h$, identifying that the nodes $\tau_{p-1,0}, \tau_{p+1,0}$ are the adjacent nodes in the $x_1 (= e_h)$ direction.
+The traces cause the introduction of the terms $u_{p,-1}$ and $u_{p,1}$, since $-x_2 = n_h$.
+Analogously, nodes $\tau_{p,q}$ on the vertical edge $I_v$ have $p=0$ and $q\neq0$, and the finite difference approximation is
 \begin{align*}
-	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2_{p,q} - \bracs{\bracs{\grad u_{p,q}\cdot n_{jk}}^+ - \bracs{\grad u_{p,q}\cdot n_{jk}}^-}
-	& \approx \bracs{\qm_2^2 + 2h^{-1} + 2h^{-2}}u_{p,q} \\
-	& \quad - h^{-1}\bracs{h^{-1} + \rmi\qm_2}u_{p,q+1} \\
-	& \quad - h^{-1}\bracs{h^{-1} - \rmi\qm_2}u_{p,q-1} \\
-	& \quad - h^{-1}u_{p+1,q} - h^{-1}u_{p-1,q}. \labelthis\label{eq:SI-FDMVertEdgeDiscretise}
+	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2_{0,q} - \bracs{\bracs{\grad u_{0,q}\cdot n_{jk}}^+ - \bracs{\grad u_{0,q}\cdot n_{jk}}^-}
+	& \approx \bracs{\qm_2^2 + 2h^{-1} + 2h^{-2}}u_{0,q} \\
+	& \quad - h^{-1}\bracs{h^{-1} + \rmi\qm_2}u_{0,q+1} \\
+	& \quad - h^{-1}\bracs{h^{-1} - \rmi\qm_2}u_{0,q-1} \\
+	& \quad - h^{-1}u_{1,q} - h^{-1}u_{-1,q}. \labelthis\label{eq:SI-FDMVertEdgeDiscretise}
 \end{align*}
 
-Finally, we come to the node $\tau_{\frac{N-1}{2},\frac{N-1}{2}}$ placed at the vertex $v_0$.
+Finally, we come to the node $\tau_{0,0}$ placed at the vertex $v_0$.
 Our finite difference approximation already enforces that $u$ be continuous at $v_0$, so we just have to enforce the vertex condition at this node.
 Here we again approximate each (signed) normal derivative by a one-sided finite difference from the adjacent edges, giving us
 \begin{align} \label{eq:SI-FDMVertCond}
-	\sum_{j\con k}\bracs{ \pdiff{}{n} + \rmi\qm_{jk} }u_{\frac{N-1}{2},\frac{N-1}{2}}
-	&\approx h^{-1} \bracs{ 4u_{p,q} - u_{p+1,q} - u_{p-1,q} - u_{p,q+1} - u_{p,q-1} },
+	\sum_{j\con k}\bracs{ \pdiff{}{n} + \rmi\qm_{jk} }u_{0,0}
+	&\approx h^{-1} \bracs{ 4u_{0,0} - u_{1,0} - u_{-1,0} - u_{0,1} - u_{0,-1} }.
 \end{align}
-where $p = q = \frac{N-1}{2}$.
 We now insert these finite difference approximations \eqref{eq:SI-FDMBulkDiscretise}-\eqref{eq:SI-FDMVertCond} into \eqref{eq:SI-FDMEquationsToDisc}, which provides the following system in the $\bracs{N-1}^2$ nodal values $u_{p,q}$;
 \begin{subequations} \label{eq:SI-FDMDiscreteEqns}
 	\begin{align*}
@@ -203,19 +202,19 @@ We now insert these finite difference approximations \eqref{eq:SI-FDMBulkDiscret
 		-h^{-1}\bracs{h^{-1} - \rmi\qm_1}u_{p-1,q} & & \\
 		\quad -h^{-1}\bracs{h^{-1} + \rmi\qm_2}u_{p,q+1}
 		-h^{-1}\bracs{h^{-1} - \rmi\qm_2}u_{p,q-1}
-		& = \omega^2 u_{p,q}, &\quad p,q\neq\frac{N-1}{2}, \labelthis\label{eq:SI-FDMBulkDiscEqns} \\
-		\bracs{\qm_1^2 + 2h^{-1} + 2h^{-2}}u_{p,q} \\
-		- h^{-1}\bracs{h^{-1} + \rmi\qm_1}u_{p+1,q}
-		- h^{-1}\bracs{h^{-1} - \rmi\qm_1}u_{p-1,q} & & \\
-		\quad - h^{-1}u_{p,q+1} - h^{-1}u_{p,q-1}
-		&= \omega^2 u_{p,q}, &\quad p\neq\frac{N-1}{2}, q=\frac{N-1}{2}, \labelthis\label{eq:SI-FDMHEdge} \\
-		\bracs{\qm_2^2 + 2h^{-1} + 2h^{-2}}u_{p,q} \\
-		- h^{-1}\bracs{h^{-1} + \rmi\qm_2}u_{p,q+1}
-		- h^{-1}\bracs{h^{-1} - \rmi\qm_2}u_{p,q-1} & & \\
-		- h^{-1}u_{p+1,q} - h^{-1}u_{p-1,q}
-		&= \omega^2 u_{p,q}, &\quad p=\frac{N-1}{2}, q\neq\frac{N-1}{2}, \labelthis\label{eq:SI-FDMVEdge} \\
-		h^{-1} \bracs{ 4u_{p,q} - u_{p+1,q} - u_{p-1,q} - u_{p,q+1} - u_{p,q-1} }
-		&= 0, & p=q=\frac{N-1}{2}, \labelthis\label{eq:SI-FDMDiscVertex}
+		& = \omega^2 u_{p,q}, &\quad p,q\neq0, \labelthis\label{eq:SI-FDMBulkDiscEqns} \\
+		\bracs{\qm_1^2 + 2h^{-1} + 2h^{-2}}u_{p,0} \\
+		- h^{-1}\bracs{h^{-1} + \rmi\qm_1}u_{p+1,0}
+		- h^{-1}\bracs{h^{-1} - \rmi\qm_1}u_{p-1,0} & & \\
+		\quad - h^{-1}u_{p,1} - h^{-1}u_{p,-1}
+		&= \omega^2 u_{p,0}, &\quad p\neq0, q=0, \labelthis\label{eq:SI-FDMHEdge} \\
+		\bracs{\qm_2^2 + 2h^{-1} + 2h^{-2}}u_{0,q} \\
+		- h^{-1}\bracs{h^{-1} + \rmi\qm_2}u_{0,q+1}
+		- h^{-1}\bracs{h^{-1} - \rmi\qm_2}u_{0,q-1} & & \\
+		- h^{-1}u_{1,q} - h^{-1}u_{-1,q}
+		&= \omega^2 u_{0,q}, &\quad p=0, q\neq0, \labelthis\label{eq:SI-FDMVEdge} \\
+		h^{-1} \bracs{ 4u_{0,0} - u_{1,0} - u_{-1,0} - u_{0,1} - u_{0,-1} }
+		&= 0, & p=q=0, \labelthis\label{eq:SI-FDMDiscVertex}
 	\end{align*}
 \end{subequations}
 where $p,q\in\clbracs{0,...,N-1}$.
@@ -235,32 +234,45 @@ The approximate eigenvalues computed by the finite difference scheme are display
 Those points plotted in red correspond to eigenvalues that were computed at quasi-momentum values of $\bracs{0,0}^\top$, $\bracs{-\pi,0}^\top$, $\bracs{0,-\pi}^\top$, $\bracs{-\pi,-\pi}^\top$, from which we can observe that these points typically form the endpoints of each of the spectral bands.
 Much like the quantum graph case, we do not expect this to occur for general geometries --- there even appears to be a notable example of this in band 6, for which the eigenvalues at the extremities of the band are not obtained at any of these quasi-momentum values.
 However by examining the eigenvalues in this band as functions of $\qm$, as in figure \ref{fig:FDM_2022-01-28-09-33_AllBands}, it can be noticed that these extreme eigenvalues occur at quasi-momentum values where one of the components is either 0 (for the minimum values) or $-\pi$ (for the maximum values).
-\begin{figure}[p]
+\begin{figure}[b!]
 	\centering
 	\includegraphics[width=\textwidth]{FDM_2022-01-28-09-33_AllBands.pdf}
 	\caption{\label{fig:FDM_2022-01-28-09-33_AllBands} The eigenvalues $\omega$ in each spectral band, plotted as functions of the quasi-momentum $\qm$. Observe the symmetries that are expected from proposition \ref{prop:CrossInPlaneSymmetries}.}
 \end{figure}
-Furthermore, we also notice the eigenvalues in each band obey the symmetries in $\qm$ as expected from \ref{prop:CrossInPlaneSymmetries}.
+Furthermore, we also notice that the eigenvalues within each band obey the symmetries in $\qm$ as expected from \ref{prop:CrossInPlaneSymmetries}.
 
-We can also illustrate the rate of convergence of the numerical scheme to the eigenvalues $\omega_{n,m}^2 = \bracs{n^2+m^2}\pi^2$.
+Finally, we can also test the rate of convergence of the numerical scheme to the eigenvalues $\omega_{n,m}^2 = \bracs{n^2+m^2}\pi^2$.
 In these cases, we expect that the error in the approximate eigenvalue is of the order of $N^{-2}$, since our scheme makes use of centred differences in the bulk region, and on the skeleton the eigenfunction should be identically zero.
-Indeed, this is what we observe numerically for each $n,m$, as shown in figure \tstk{place several log errors onto one axis. Then accompany with the ``analytic solution vs best approximation" plots}
+This is what we observe numerically, and is illustrated in figure \ref{fig:CompositeCross-FDM-DEV} for $n,m\in\clbracs{1,2,3}$. \tstk{you're missing $2,2$!}
 \begin{figure}[h]
 	\centering
-	\begin{subfigure}[t]{0.35\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
-		\includegraphics[scale=0.35]{CompositeCross-FDM-DEV-LogError.pdf}
-		\caption{\label{fig:CompositeCross-FDM-DEV-LogError} Logarithm of the error in the eigenvalue $2\pi^2$ ($n=m=1$) computed by the finite difference approximation against $\log(N)$. The gradient of the slope is approximately $-2.004$.}
+		\includegraphics[scale=0.45]{CompositeCross-FDM-DEV-LogError.pdf}
+		\caption{\label{fig:CompositeCross-FDM-DEV-LogError} Logarithm of the error in the eigenvalue against $\log(N)$, for a selection of $n,m$ values.}
 	\end{subfigure}
 	~
-	\begin{subfigure}[t]{0.65\textwidth}
+	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
-		\includegraphics[scale=0.65]{CompositeCross-FDM-DEV-Function.pdf}
-		\caption{\label{fig:CompositeCross-FDM-DEV-Function} The approximation to $u_{1,1}$ as computed by the finite difference scheme.}
+		\begin{tabular}[b]{| c | c | c |}
+			\hline
+			$\bracs{n,m}$ & Intercept & Gradient \\
+			\hline
+			$\bracs{1, 1}$ & $5.14236963$ & $-2.04617746$ \\
+			\hline
+			$\bracs{1, 3}$ & $4.96573274$ & $-2.01780686$ \\
+			\hline
+			$\bracs{2, 1}$ & $4.13409172$ & $-1.99296061$ \\
+			\hline
+			$\bracs{2, 3}$ & $5.95893392$ & $-2.03031478$ \\
+			\hline
+			$\bracs{3, 3}$ & $6.14879571$ & $-2.03187802$ \\
+			\hline
+		\end{tabular}
+		\caption{\label{fig:CompositeCross-FDM-DEV-LoBF} Line of best fit (via least squares regression) for each pair $\bracs{n,m}$.}
 	\end{subfigure}
-	\caption{\label{fig:}}
+	\caption{\label{fig:CompositeCross-FDM-DEV} Convergence rate for the FDM method to the analytic eigenvalues shared with the Dirichlet laplacian. Observe that the estimated gradient, hence convergence rate with $N$, is approximately $-2$ as expected.}
 \end{figure}
-\tstk{plot titles need work}
 \tstk{The eigenfunction plots are also quite nice, but we don't have anything to compare them to (true values, etc).
 Comparison with the ``spectral" method is also a must, certainly for the results we have obtained --- maybe give the difference in spectral values found for a fixed theta, and varying the mesh width and $M$ (in VP)?}
 
