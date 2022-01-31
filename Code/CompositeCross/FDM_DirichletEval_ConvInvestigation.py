@@ -199,7 +199,7 @@ if __name__=="__main__":
         sys.exit(1)
 
     # get timestamp for saving plots later
-    now = args.fOut + 'FDM_' + datetime.today().strftime('%Y-%m-%d-%H-%M')
+    now = args.fOut + 'FDM_n%d_m%d_' % (args.n, args.m) + datetime.today().strftime('%Y-%m-%d-%H-%M')
     # define the analytic constants here
     n = args.n
     m = args.m
