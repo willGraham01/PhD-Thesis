@@ -20,9 +20,11 @@ structure a material on the same scale as the wavelength of optical light will d
 With the advancement of fabrication techniques to allow for these structures to be physically manufactured, the development and study of materials known as ``photonic crystals" begun in earnest.
 These photonic crystals are materials composed of a periodic microstructure (on the aforementioned length scale), typically a periodic arrangement (``matrix") of one dielectric material within another.
 They can be used as cladding for a traditional optical fibre in the same manner as described above, by encasing a core material of a higher refractive index within the photonic crystal --- such fibres are referred to as ``photonic crystal fibres" (PCFs).
-However more radical designs for PCFs utilise the fact that, depending on their wavelength (or equivalently frequency), certain modes of light cannot propagate through a given photonic crystal.
-These intervals or ranges of wavelengths at which light propagation within the crystal is forbidden are referred to as \emph{photonic band gaps}, and their compliment as \emph{bands}.
-Photonic band gaps offer an alternative method of ``guidance", rather than having light undergo TIR within a core material, instead these modes can be confined to the core by virtue of having a wavelength within one of these band gaps.
+However more radical designs for PCFs utilise the fact that, depending on their frequency (or equivalently wavelength), certain modes of light cannot propagate through a given photonic crystal.
+Due to the inhomogeneity of the photonic crystal, waves propagating (or attempting to propagate) within it undergo multiple scattering and are subject to interference.
+At certain frequencies, a wave attempting to propagate through the crystal may be subject to cumulative destructive inference off the inclusions, effectively forbidding wave propagation within the crystal at that frequency.
+These intervals or ranges of frequencies at which light cannot propagate within the crystal are referred to as \emph{photonic} or \emph{frequency band gaps}, and their compliment as \emph{bands}.
+These photonic band gaps offer an alternative method of ``guidance", rather than having light undergo TIR within a core material, instead these modes can be confined to the core by virtue of having a frequency within one of these band gaps.
 Since such a mode of light cannot propagate in the surrounding crystal, it is confined, and can propagate along the core (provided its propagation \emph{is} supported by the core).
 From these ideas came several new designs for PCFs, the first being the design and manufacture of ``hollow-core"\footnote{The name coming from the fact that the first such fibres were typically made from a photonic crystal of glass periodically punctured with air holes, surrounding a larger air cavity that played the role of the core. The core consisting of air rather than a solid dielectric material gave rise to the term ``hollow".} fibres schematically illustrated in figure \ref{fig:Diagram_PCF-AirHollowConfine.pdf}.
 \begin{figure}[b!]
@@ -77,28 +79,30 @@ This model is still based on the physical origins of the band-gaps being due to 
 But the numerical scheme is only needed to the extent of root-finding for analytic expressions, and produces band-gap plots that are in good agreement with the more fully-fledged numerical models, provided certain scaling between parameters is adhered to.
 This makes such approaches useful when speed is more important than high accuracy, or when an intuitive picture of the band-structure is required.
 
-The idea or discovery of band-gaps emerging from core resonances has been treated mathematically as well, although there are some conflicts in the terms used in the mathematical literature and more physically-focused literature discussed previously (which we come to shortly).
-Work in \cite{cooper2014band} demonstrates mathematically how one can achieve resonant phenomena in any structure that has an inclusion with a refractive index contrast, using the time-harmonic system of Maxwell equations
-\begin{align*}
-	\grad\wedge\mathbf{E} &= i\omega\mu_{P}\mathbf{H}, &\quad \grad\wedge\mathbf{H} &= -i\omega\varepsilon_{P}\mathbf{E},
-\end{align*}
-as the starting point of the analysis.
-The time-harmonic Maxwell system arises from seeking ``Bloch wave" solutions in the fibre via an ansatz of the form $\hat{\mathbf{E}}=\mathbf{E}e^{i\bracs{\wavenumber x_3-\omega t}}$ (and similarly for the magnetic field), where $x_3$ is the axis of the fibre and $\wavenumber$ the component of the wave-vector in $x_3$.
-Equivalently one can view this as taking a Fourier transform along the axis of the fibre.
-We can demonstrate resonance phenomena as follows; first we label the inclusion as the region $Q_1$ with permittivity $\eps_{Q_1}$, and the surrounding matrix as $Q_2$ with permittivity $\eps_{Q_2}$ with $\eps_{Q_1}>\eps_{Q_2}$ and $Q_1\cup Q_2\subset\bracs{0,1}^2$.
-Then due to the refractive index contrast between the $Q_1$ and $Q_2$ the parameter
-\begin{align*}
-	\alpha &= \sqrt{\omega^2\mu_{P}\eps_{P} - \wavenumber^2}
-\end{align*}
-can be made small in $Q_1$ but finite in $Q_2$; provided we remain close to the lower ``light line", or formally sit on the line $\omega^2\mu_{P}\bracs{\eps_{Q_1}-\epsilon} = \wavenumber^2$ for some small $\epsilon>0$.
-This in turn causes any light waves incident on the structure with wavelength of the order $1$ to have this shrink to the order of $\epsilon^{-2}$ in the region $Q_1$, causing them to resonate with the inclusion.
-The term ``resonance" is commonly used by the community in this context, however there appears to be some conflict between the physical and mathematical communities over it's precise definition.
-There also comes a difficulty in reconciling this conflict; largely due to the different viewpoints of the two communities, with more physically-motivated works such as \cite{birks2004scaling} presenting results in terms of different quantities to those like \cite{cooper2014band}.
-Whilst these works are not contradictory there is no doubt that there is a need to determine which mathematical regimes are consistent with applications to PCFs, and specify that for the purposes of applications we are working in these.
-Having highlighted this issue, we remark that it is currently under our consideration; but it in itself does not prevent us from considering the mathematical problems that interest us that we shall come to in sections \ref{sec:OurPhysicalSetup} and \ref{sec:VariationalProblemLitReview}.
-However since we make a point that the problems we consider are motivated by applications to PCFs, it is something that should be addressed in the future.
 
 \tstk{this stuff needs to be saved for later, or recycled elsewhere. Leaving it here in comments for the time being}
+%
+%The idea or discovery of band-gaps emerging from core resonances has been treated mathematically as well, although there are some conflicts in the terms used in the mathematical literature and more physically-focused literature discussed previously (which we come to shortly).
+%Work in \cite{cooper2014band} demonstrates mathematically how one can achieve resonant phenomena in any structure that has an inclusion with a refractive index contrast, using the time-harmonic system of Maxwell equations
+%\begin{align*}
+%	\grad\wedge\mathbf{E} &= i\omega\mu_{P}\mathbf{H}, &\quad \grad\wedge\mathbf{H} &= -i\omega\varepsilon_{P}\mathbf{E},
+%\end{align*}
+%as the starting point of the analysis.
+%The time-harmonic Maxwell system arises from seeking ``Bloch wave" solutions in the fibre via an ansatz of the form $\hat{\mathbf{E}}=\mathbf{E}e^{i\bracs{\wavenumber x_3-\omega t}}$ (and similarly for the magnetic field), where $x_3$ is the axis of the fibre and $\wavenumber$ the component of the wave-vector in $x_3$.
+%Equivalently one can view this as taking a Fourier transform along the axis of the fibre.
+%We can demonstrate resonance phenomena as follows; first we label the inclusion as the region $Q_1$ with permittivity $\eps_{Q_1}$, and the surrounding matrix as $Q_2$ with permittivity $\eps_{Q_2}$ with $\eps_{Q_1}>\eps_{Q_2}$ and $Q_1\cup Q_2\subset\bracs{0,1}^2$.
+%Then due to the refractive index contrast between the $Q_1$ and $Q_2$ the parameter
+%\begin{align*}
+%	\alpha &= \sqrt{\omega^2\mu_{P}\eps_{P} - \wavenumber^2}
+%\end{align*}
+%can be made small in $Q_1$ but finite in $Q_2$; provided we remain close to the lower ``light line", or formally sit on the line $\omega^2\mu_{P}\bracs{\eps_{Q_1}-\epsilon} = \wavenumber^2$ for some small $\epsilon>0$.
+%This in turn causes any light waves incident on the structure with wavelength of the order $1$ to have this shrink to the order of $\epsilon^{-2}$ in the region $Q_1$, causing them to resonate with the inclusion.
+%The term ``resonance" is commonly used by the community in this context, however there appears to be some conflict between the physical and mathematical communities over it's precise definition.
+%There also comes a difficulty in reconciling this conflict; largely due to the different viewpoints of the two communities, with more physically-motivated works such as \cite{birks2004scaling} presenting results in terms of different quantities to those like \cite{cooper2014band}.
+%Whilst these works are not contradictory there is no doubt that there is a need to determine which mathematical regimes are consistent with applications to PCFs, and specify that for the purposes of applications we are working in these.
+%Having highlighted this issue, we remark that it is currently under our consideration; but it in itself does not prevent us from considering the mathematical problems that interest us that we shall come to in sections \ref{sec:OurPhysicalSetup} and \ref{sec:VariationalProblemLitReview}.
+%However since we make a point that the problems we consider are motivated by applications to PCFs, it is something that should be addressed in the future.
+%
 %
 %\section{Introduction to the Problems we shall Consider} \label{sec:OurPhysicalSetup}
 %Having reviewed several existing models for PCFs in section \ref{sec:ExistingPCFModels}, we now set about introducing the problems that we will be analysing.
