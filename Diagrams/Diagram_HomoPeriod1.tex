@@ -1,0 +1,47 @@
+\documentclass[crop, tikz]{standalone}
+
+\usepackage[utf8]{inputenc}
+% 'crop' is the default for v1.0, before it was 'preview'
+%\usetikzlibrary{...}% tikz package already loaded by 'tikz' option
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{calc}
+
+%hexagon drawing variables
+\def\ly{0.866025} %sin(pi/3) = sqrt(3)/2
+\def\lx{0.5} %cos(pi/3) = 0.5
+\def\hexSize{5} %size of the hexagon that'll be the extent of the fibre cross section
+\def\coreSize{0.2} %size of hollow cores
+\def\coreSep{0.5} %separation between core CENTRES HORIZONTALLY
+\def\coreSepHeight{0.4464} %separation between core CENTRES VERTICALLY
+
+\newcommand{\hexagon}[4]{
+\begin{scope}[shift={#2}]
+	\draw[#3, fill=#4] (-#1*\lx, #1*\ly) -- (#1*\lx, #1*\ly) -- (#1,0) -- (#1*\lx, -#1*\ly) -- (-#1*\lx, -#1*\ly) -- (-#1,0) -- cycle;
+\end{scope}
+} %\hexagon{centre-to-corner-length}{shift (x,y)}{line spec}{fill colour} [none is allowed for fillcolour]
+
+\begin{document}
+\begin{tikzpicture}[]
+	
+	% period cell boundary
+	\filldraw[black!10!white, draw=black, dashed] (0,0) rectangle (4,4);
+
+	% draw inclusion, label parts of the domain
+	\filldraw[black!20!white, draw=black] plot [smooth cycle, tension=2.5] coordinates {(1.5,1.5) (2.5,1.5) (2.5,2.5) (1.5,2.5)};
+	\node[anchor=north west] at (0,4) {$Q_1$};
+	\node[anchor=south] at (2,2.3) {$Q_0$};
+
+	% indicate length scales
+	% period cell size
+	\draw[<->] (0,4.2) -- (4,4.2); \node[anchor=south] at (2,4.2) {$1$};
+	% inclusion size
+	\draw[<->] (1.0,0.875) -- (3.0,0.875); \node[anchor=north] at (2.0,0.875) {$l$};
+	% draw example material params: go for soft inclusion (a(x)=a) inside stiff matrix (a(x)=1)
+	\node[anchor=north] at (2,2.2) {$a(x)=a$};
+	\node[anchor=north] at (1.0,3.5) {$a(x)=1$};
+
+\end{tikzpicture}
+\end{document}
