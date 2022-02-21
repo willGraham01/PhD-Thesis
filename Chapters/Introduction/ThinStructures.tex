@@ -1,5 +1,39 @@
-\section{Mathematical Treatment of Composite, Periodic Media} \label{sec:MathHomLR}
+\section{Wave Propagation in Periodic Media} \label{sec:MathIntro}
 \tstk{this is the section where I plan to talk about how band-gaps, 2-composite media, etc, have been treated in the mathematical community. Also need to talk about work on thin structures, and setup the stage for convergence to QGs.}
+
+Wave propagation in electromagnetism is governed by the system of Maxwell equations; \tstk{fields bold here, so later can use non-bold E,H etc.}
+\begin{align*}
+	\grad\cdot D = \rho_f, &\qquad
+	\curl{}E = -\pdiff{B}{t}, \\
+	\grad\cdot B = 0, &\qquad
+	 \curl{}H = J_f + \pdiff{D}{t},
+\end{align*}
+where the fields $E$, $D$, $H$, and $B$ represent (respectively) the electric field, electric displacement field, magnetic field, and magnetic induction field, and the functions $\rho_f$ and $J_f$ are the (free) electric charge density and (free) electric current density respectively.
+This system is incomplete without constitutive relations informing us how $D$ and $B$ depend on $E$ and $H$, and we will concern ourselves with the linear approximations
+\begin{align*}
+	D = \epsilon_m E, \qquad B = \mu_{m}H,
+\end{align*}
+where $\epsilon_m$ (respectively $\mu_m$) is the electric permittivity (magnetic permeability) of the material.
+These may also be found written as
+\begin{align*}
+	\epsilon_{m} = \epsilon_{r}\epsFS, \qquad \mu_{m} = \mu_{r}\muFS,
+\end{align*}
+where $\epsFS$ (respectively $\muFS$) is the permittivity (permeability) of free space, and $\epsilon_{r}$ ($\mu_{r}$) is the relative permittivity (permeability) of the medium.
+Further to our consideration of photonic crystals, we also treat $\epsilon_m$ and $\mu_m$ as time-independent, scalar-valued functions of position $x$, which is suitable for studying inhomogeneous, isotropic media such as photonic crystals\footnote{For a more general material the constitutive relations can be much more complex, potentially being non-linear and spatially varying. 
+Other effects such as hysteresis in ferromagnets can introduce time dependencies, whilst Lorentz materials have material parameters that depend on the frequency of incident electromagnetic radiation.}.
+Under these constitutive relations and in the absence of free charges and currents, the Maxwell system reduces to
+\begin{subequations} \label{eq:MaxwellSystem}
+	\begin{align}
+		\grad\cdot \epsilon_m E = 0, &\qquad
+		\curl{}E = -\mu_m\pdiff{H}{t}, \\
+		\grad\cdot \mu_m H = 0, &\qquad
+		 \curl{}H = \epsilon_m \pdiff{E}{t}.
+	\end{align}
+\end{subequations}
+One can then seek time-harmonic solutions (or more precisely, take a Fourier transform in time),
+\begin{align*}
+	
+\end{align*}
 
 %At their heart, photonic crystals are simply periodic mediums whose period cell consists of a set of (dielectric material) inclusions embedded into another (background, or ``matrix") material.
 %With developing interest in designing photonic crystals, there have been a number of studies dedicated to understanding the factors which contribute to the opening of spectral band gaps in periodic, composite media (the wider class of materials into which photonic crystals fall).
@@ -12,6 +46,7 @@ where $A(x)$ represents the material properties relevant to wave propagation, an
 For example, in the acoustic setting $A$ would represent the ratio of the elastic modulus and mass density, whilst in the electromagnetic setting would represent the (inverse) product of the electric permittivity $\epsilon_{m}$ and magnetic permeability $\mu_{m}$.
 Although a good starting point, we note that the wave equation is not capable of describing all the dynamics of wave propagation.
 In the acoustic setting one would need to consider the equations of elasticity for a complete description of wave propagation; whilst in the electromagnetic setting one would need to consider the Maxwell system
+Wave propagation in photonic crystals is governed by the system of Maxwell equations;
 \begin{subequations} \label{eq:MaxwellSystem}
 	\begin{align}
 		\grad\cdot E &= \rho, \\
