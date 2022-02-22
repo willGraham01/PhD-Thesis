@@ -1,17 +1,15 @@
-\section{Wave Propagation in Periodic Media} \label{sec:MathIntro}
-\tstk{this is the section where I plan to talk about how band-gaps, 2-composite media, etc, have been treated in the mathematical community. Also need to talk about work on thin structures, and setup the stage for convergence to QGs.}
-
-Wave propagation in electromagnetism is governed by the system of Maxwell equations; \tstk{fields bold here, so later can use non-bold E,H etc.}
+\section{The Maxwell Equations and Related Systems} \label{sec:MathIntro}
+Wave propagation in electromagnetic contexts is governed by the system of Maxwell equations;
 \begin{align*}
-	\grad\cdot D = \rho_f, &\qquad
-	\curl{}E = -\pdiff{B}{t}, \\
-	\grad\cdot B = 0, &\qquad
-	 \curl{}H = J_f + \pdiff{D}{t},
+	\grad\cdot \mathbf{D} = \rho_f, &\qquad
+	\curl{}\mathbf{E} = -\pdiff{\mathbf{B}}{t}, \\
+	\grad\cdot \mathbf{B} = 0, &\qquad
+	 \curl{}\mathbf{H} = J_f + \pdiff{\mathbf{D}}{t},
 \end{align*}
-where the fields $E$, $D$, $H$, and $B$ represent (respectively) the electric field, electric displacement field, magnetic field, and magnetic induction field, and the functions $\rho_f$ and $J_f$ are the (free) electric charge density and (free) electric current density respectively.
-This system is incomplete without constitutive relations informing us how $D$ and $B$ depend on $E$ and $H$, and we will concern ourselves with the linear approximations
+where the vector fields $\mathbf{E}$, $\mathbf{D}$, $\mathbf{H}$, and $\mathbf{B}$ represent (respectively) the electric field, electric displacement field, magnetic field, and magnetic induction field, and the functions $\rho_f$ and $J_f$ are the (free) electric charge density and (free) electric current density respectively.
+This system is incomplete without constitutive relations informing us how $\mathbf{D}$ and $\mathbf{B}$ depend on $\mathbf{E}$ and $\mathbf{H}$, and we will concern ourselves with the linear approximations
 \begin{align*}
-	D = \epsilon_m E, \qquad B = \mu_{m}H,
+	\mathbf{D} = \epsilon_m \mathbf{E}, \qquad \mathbf{B} = \mu_{m}\mathbf{H},
 \end{align*}
 where $\epsilon_m$ (respectively $\mu_m$) is the electric permittivity (magnetic permeability) of the material.
 These may also be found written as
@@ -22,160 +20,242 @@ where $\epsFS$ (respectively $\muFS$) is the permittivity (permeability) of free
 Further to our consideration of photonic crystals, we also treat $\epsilon_m$ and $\mu_m$ as time-independent, scalar-valued functions of position $x$, which is suitable for studying inhomogeneous, isotropic media such as photonic crystals\footnote{For a more general material the constitutive relations can be much more complex, potentially being non-linear and spatially varying. 
 Other effects such as hysteresis in ferromagnets can introduce time dependencies, whilst Lorentz materials have material parameters that depend on the frequency of incident electromagnetic radiation.}.
 Under these constitutive relations and in the absence of free charges and currents, the Maxwell system reduces to
-\begin{subequations} \label{eq:MaxwellSystem}
+\begin{align*}
+	\grad\cdot \epsilon_m \mathbf{E} = 0, &\qquad
+	\curl{}\mathbf{E} = -\mu_m\pdiff{\mathbf{H}}{t}, \\
+	\grad\cdot \mu_m \mathbf{H} = 0, &\qquad
+	 \curl{}\mathbf{H} = \epsilon_m \pdiff{\mathbf{E}}{t}.
+\end{align*}
+One can then seek time-harmonic solutions (or more precisely, take a Fourier transform in time), and write the resulting system in matrix form as
+\begin{align*}
+	\begin{pmatrix}
+		0 & -\recip{\rmi\epsilon_m}\curl{} \\
+		\recip{\rmi\mu_m}\curl{} & 0
+	\end{pmatrix}
+	\begin{pmatrix} E \\ H	\end{pmatrix}
+	&=
+	\omega	\begin{pmatrix}	E \\ H	\end{pmatrix},
+\end{align*}
+and so we are left facing the spectral problem for the Maxwell operator 
+\begin{align*}
+	\mathcal{M} &:=
+	\begin{pmatrix}
+		0 & -\recip{\rmi\epsilon_m}\curl{} \\
+		\recip{\rmi\mu_m}\curl{} & 0
+	\end{pmatrix}.
+\end{align*}
+In defining $\mathcal{M}$ we need to ensure that it is self-adjoint, and typically this not difficult if the domain we are considering is smooth (or the whole of $\reals^3$) --- even the regularity of $\epsilon_m$ and $\mu_m$ tends not to be an issue in these contexts.
+However there is significantly more work that needs to be done for domains with (possibly non-smooth) metallic inclusions or boundaries, with the work of \tstk{Birman and Solomyak; L2-Theory of the Maxwell operator in arbitrary domains (1987) and Self-adjoint Maxwell operator in arbitrary domains (Leningrad journal)} providing a detailed study of the Maxwell operator in these contexts.
+For the purposes of this review, we can define the Maxwell operator by assigning it the domain
+\begin{align*}
+	\dom{\mathcal{M}} = \left\{ \bracs{E,H} \ \middle\vert \right. 
+	&
+	\left. E\in L^2\bracs{\ddom, \epsilon_m\md x}^3, \ H\in L^2\bracs{\ddom, \mu_m\md x}^3, \right. \\
+	&
+	\left. \curl{}E, \ \curl{}H\in\ltwo{\ddom}{x}^3, \right. \\
+	&
+	\left. \grad\cdot \epsilon_m E = 0, \ \grad\cdot \mu_m H = 0 \right\},
+\end{align*}
+where the derivatives are understood in the weak (or distributional) sense, and $\ddom\subset\reals^3$ is our domain.
+The weighted spaces $L^2\bracs{\ddom, w\md x}^3$ consist of the square-integrable functions $f:\reals^3\rightarrow\complex^3$ equipped with the norm
+\begin{align*}
+	\norm{ f }_{L^2\bracs{\ddom, w\md x}^3} &= \integral{\ddom}{\abs{f(x)}^2 w(x)}{x}.
+\end{align*}
+Under this setup, the Maxwell operator $\mathcal{M}$ is self-adjoint (see \tstk{Birman-Solomyak lemma 2.2}).
+The spectrum of $\mathcal{M}$ then determines the frequencies of light that can propagate in the medium, with any intervals in $\omega$ that are absent from the spectrum of $\mathcal{M}$ corresponding to band gaps.
+
+Even with the Maxwell operator being self-adjoint, it is still not elliptic and has eigenvalues that extend across the whole real line (that is, to both $\pm\infty$), making direct analysis of it difficult.
+To tackle this, $\mathcal{M}$ is applied to itself (also referred to as squaring the operator) to produce a positive-definite operator whose action decouples the $E$ and $H$ fields, resulting in the ``curl-of-the-curl" spectral problems
+\begin{subequations} \label{eq:Intro-CurlCurlEqns}
 	\begin{align}
-		\grad\cdot \epsilon_m E = 0, &\qquad
-		\curl{}E = -\mu_m\pdiff{H}{t}, \\
-		\grad\cdot \mu_m H = 0, &\qquad
-		 \curl{}H = \epsilon_m \pdiff{E}{t}.
+		\epsilon_m^{-1}\curl{}\bracs{\mu_m^{-1}\curl{}E} &= \omega^2 E, \\
+		\mu_m^{-1}\curl{}\bracs{\epsilon_m^{-1}\curl{}H} &= \omega^2 H,
 	\end{align}
 \end{subequations}
-One can then seek time-harmonic solutions (or more precisely, take a Fourier transform in time),
+the eigenvalues $\omega^2$ \emph{of either problem} then determining the eigenvalues of $\mathcal{M}$.
+If the mediums properties are independent of one of the coordinates (say $x_3$), so $\epsilon_m(x)=\epsilon_m(x_1,x_2)$ and $\mu_m(x)=\mu_m(x_1,x_2)$ only, then one can also consider the waves propagating in the $\bracs{x_1,x_2}$-plane.
+In this case, the action of $\mathcal{M}$ decouples into separate actions on the transverse electric (TM) field $\bracs{E_1,E_2,0,0,0,H}^\top$ and transverse magnetic (TM) field $\bracs{0,0,E_3,H_1,H_2,0}^\top$, yielding the equations
+\begin{subequations} \label{eq:Intro-AcousticApprox}
+	\begin{align}
+		-\mu_m^{-1}\grad\cdot\epsilon_m^{-1}E_3(x_1,x_2) &= \omega^2 E_3(x_1,x_2), \\
+		-\epsilon_m^{-1}\grad\cdot\mu_m^{-1}H_3(x_1,x_2) &= \omega^2 H_3(x_1,x_2).
+	\end{align}
+\end{subequations}
+These equations may also be referred to as ``acoustic approximations", as they also appear when studying acoustic waves in periodic media.
+
+Having provided an outline of the important governing equations and operators that describe wave propagation in photonic crystals, we move on to discussing how their physical structure is represented.
+A periodic composite medium can be modelled by filling the space $\reals^d$ with translations of a period cell $Q=[0,1)^d$ that is further divided into two regions, the ``inclusion" $Q_0$ and ``background" $Q_1$ with $Q_0\subset Q$ and $Q_1=Q\setminus\overline{Q_0}$.
+Since we are primarily concerned with spectral problems, working directly in $\reals^d$ with our chosen operator is often inconvenient \tstk{WHY? doesn't need to be precise right now} and so one often looks to apply a transform to aid in the analysis of such problems.
+When faced with a differential operator with constant coefficients (or coefficients constant in one particular coordinate direction), one typically utilises a Fourier transform to turn the action of differentiation into the action of multiplication by (a function of) the dual variable.
+In this context we have an operator $\mathcal{A}$ with\footnote{Think of $\mathcal{A}$ as being one of \eqref{eq:Intro-CurlCurlEqns} or \eqref{eq:Intro-AcousticApprox} with $\epsilon_m$ and $\mu_m$ $Q$-periodic.} periodic, rather than constant, coefficients.
+The natural transform to apply in this context is the Gelfand (or Floquet) transform, first we introduce the dual cell $B=[-\pi,\pi)^d$ to $Q$, which is also referred to as the Brillouin zone in solid state physics.
+We then define the Gelfand transform $\hat{u}$ of the function $u$ as 
 \begin{align*}
-	
+	\hat{u}(x, \qm) &= \sum_{n\in\integers^d} u(x+n)\e^{\rmi\qm(x+n)},
 \end{align*}
+where the variable $\qm$ is called the \emph{quasi-momentum}, the analogue of the dual variable in the Fourier transform.
+We will go into more details in section \tstk{which section?!}, but the net effect of this transform is that we can replace the spectral problem for $\mathcal{A}$ with the spectral problem for each member of a family of operators $\mathcal{A}_{\qm}$ parametrised by the quasi-momentum.
+Importantly, since each $\mathcal{A}_{\qm}$ now acts on a compact domain, under ellipticity assumptions these operators (have compact resolvents and thus) possess discrete spectra.
+This allows us to order the eigenvalues $\lambda_j\bracs{\qm}$, $j\in\naturals$, of $\mathcal{A}_{\qm}$ in ascending order.
+The (continuous) functions $\lambda_j$ of $\qm$ are called the dispersion branches, and it holds that the spectrum of $\mathcal{A}$ is equal to the union of the spectra of the $\mathcal{A}_\qm$.
+\tstk{got to here}
+
+\tstk{maybe new section for Photonic crystal domain setup? IDK, but you need some kind of linking sentence here}
+
+A periodic composite medium can be modelled by filling the space $\reals^d$ with translations of a period cell $Q=[0,1)^d$ that is further divided into two regions, the ``inclusion" $Q_0$ and ``background" $Q_1$ with $Q_0\subset Q$ and $Q_1=Q\setminus\overline{Q_0}$.
+The dielectric constant $\epsilon_m$ for this material is also $Q$-periodic, and suppose that it takes the values
+\begin{align*}
+	\epsilon_m(x) &= \begin{cases} \epsilon_0 & x\in Q_0, \\ \epsilon_1 & x\in Q_1, \end{cases}
+\end{align*}
+in the unit cell.
+Finally, suppose that the inclusion $Q_0$ is of size $\delta<1$, so fills a volume of the order $\delta^d$ \tstk{make figure}.
+This physical setup represents our photonic crystal and contains three length scales of interest; the size of the inclusion $\delta$, and the wavelength of any propagating waves in $Q_0$ (through $\epsilon_0$) and in $Q_1$ (through $\epsilon_1$).
+Before proceeding with any mathematical analysis, one typically looks to non-dimensionalise the domain (and associated governing equations) to obtain a system with a set of free parameters.
+Doing so allows for a general understanding of the behaviour of the system with respect to the non-dimensional parameters, which can then be related back to particular physical setups by ``re-dimensionalising".
+Regrettably this process of non-dimensionalising is often skipped over in the mathematics literature, which has implications for the resulting studies which we highlight \tstk{when we talk about missing length scales, EP/KZ, etc}.
+To ensure that our link to physical reality is not severed, we will carry out this process in detail here.
 
 %At their heart, photonic crystals are simply periodic mediums whose period cell consists of a set of (dielectric material) inclusions embedded into another (background, or ``matrix") material.
 %With developing interest in designing photonic crystals, there have been a number of studies dedicated to understanding the factors which contribute to the opening of spectral band gaps in periodic, composite media (the wider class of materials into which photonic crystals fall).
-Before discussing the relevant results in the literature, we provide a toy setup for the study of wave propagation in a composite, periodic medium, to aid in contextualising what follows.
-A suitable governing equation for wave propagation is the wave equation;
-\begin{align*}
-	-\grad\cdot A(x)\grad u(x,t) &= \pdiff{u}{t}(x,t),
-\end{align*}
-where $A(x)$ represents the material properties relevant to wave propagation, and is spatially varying if the material is non-homogeneous.
-For example, in the acoustic setting $A$ would represent the ratio of the elastic modulus and mass density, whilst in the electromagnetic setting would represent the (inverse) product of the electric permittivity $\epsilon_{m}$ and magnetic permeability $\mu_{m}$.
-Although a good starting point, we note that the wave equation is not capable of describing all the dynamics of wave propagation.
-In the acoustic setting one would need to consider the equations of elasticity for a complete description of wave propagation; whilst in the electromagnetic setting one would need to consider the Maxwell system
-Wave propagation in photonic crystals is governed by the system of Maxwell equations;
-\begin{subequations} \label{eq:MaxwellSystem}
-	\begin{align}
-		\grad\cdot E &= \rho, \\
-		\curl{}E &= -\pdiff{\bracs{\mu_{m}^{-1}H}}{t}, \\
-		\grad\cdot \bracs{\mu_{m}^{-1}H} &= 0, \\
-		 \curl{}\bracs{\mu_{m}^{-1}H} &= J + \pdiff{\bracs{\epsilon_{m}E}}{t},
-	\end{align}
-\end{subequations}
-where $E$ and $H$ represent the electric and magnetic fields respectively, $\rho$ is the electric charge density, and $J$ the electric current density. 
-The scalar wave equation typically emerges as a special case of these vectorial systems; in the context of electromagnetism in the absence of wave sources ($\rho=J=0$ in \eqref{eq:MaxwellSystem}) each component of $E$ satisfies the wave equation, for example.
-We will continue to use the wave equation for illustrative purposes in this section, but our discussion of the literature will cover these more general, vectorial, governing equations.
-
-Seeking a Bloch wave solution $u(x,t) = \hat{u}(x)\e^{\rmi\omega t}$ and de-dimensionalising the wave equation via $y=lx, l>0$\footnote{In the event we are looking at a finite medium, $l$ is typically the spatial extent of the medium. For studying periodic materials, $l$ can typically be taken to be the period of the medium so that the period cell has unit non-dimensional length.} and $a(y) = \hat{A}A(x/l)$, one obtains the eigenvalue problem
-\begin{align*}
-	-\grad_{y}\cdot a\bracs{y}\grad_{y} U(y) = z U(y),
-	&\qquad 
-	z = \frac{\omega^2 l^2}{\hat{A}},
-\end{align*}
-where $U(y)=\hat{u}(x/l)$.
-In the event that $a$ is constant, the parameter $z$ represents (up to a constant) the square of the ratio of the spatial extent of the medium against the wavelength of propagating waves.
-Again in the electromagnetic setting for example, one has
-\begin{align*}
-	z &= l^2 \omega^2 \epsilon_{m}\mu_{m}
-	= \frac{l^2 \omega^2 \epsilon_{m}\mu_{m}}{\epsilon_0\mu_0 c^2},
-\end{align*}
-where $\epsilon_0, \mu_0$ are the permittivity and permeability of vacuum, and $c$ the speed of light (in vacuum).
-As such, throughout this work we will consider the (de-dimensionalised) ``wave equation"\footnote{Although it would be more precisely this is a Helmholtz equation.} to be the equation
-\begin{align} \label{eq:Intro-GeneralWaveEqn}
-	-\grad\cdot a(x)\grad u(x) &= \omega^2 u(x), 
-\end{align}
-for $x\in\ddom$, for some suitable domain $\ddom$, and we will also illustrate some of the concepts from the relevant literature using this equation as an example.
-Working with non-dimensional units also allows to qualitatively describe the structure of the spectrum of these problems, and the physically-inclined reader can then obtain the physical wave-frequencies by reversing the process described above.
-In a slight abuse of notation, we will continue to use $\omega^2 = z$ for the spectral parameter as it will be convenient for us to use the square-root of $z$ at certain points in what follows.
-
-\tstk{Here, discuss studies on periodic structures with period 1, and with microstructure/ inclusions. No homogenisation yet.}
-At their heart, photonic crystals are simply periodic materials whose period cell consists of a set of (dielectric material) inclusions embedded into another (background, or ``matrix") material.
-With developing interest in designing photonic crystals, there have been a number of studies dedicated to understanding the factors which contribute to the opening of spectral band gaps in periodic, composite media (the wider class of materials into which photonic crystals fall).
-A periodic composite medium can be modelled by filling the space $\reals^d$ with translations of a period cell $Q=[0,1)^d$ that is further divided into two regions, the ``inclusion" $Q_0$ and ``background" $Q_1$ with $Q_0\subset Q$ and $Q_1=Q\setminus\overline{Q_0}$.
-One also typically specifies the relative size of the inclusion to the size of the period cell, which we will denote by $0<l<1$ (so if the side of the period cell is of unit length, the inclusion $Q_0$ has volume of the order $l^d$).
-The material properties are then represented by a $Q$-periodic function $a(x)$;
-\begin{align*}
-	a(x) &= \begin{cases} a & x\in Q_i, \\ 1 & x\in Q_j, \end{cases}
-	\qquad i,j\in\clbracs{0,1}, \ i\neq j.
-\end{align*}
-with the regions $Q_0$ and $Q_1$ typically labelled the ``soft" (where $a(x)=a$) and ``stiff" ($a(x)=1$), and the constant $a$ representing the contrast between the material parameters, see figure \ref{fig:Diagram_HomoPeriod1} for an illustration.
-\begin{figure}[t]
-	\centering
-	\begin{subfigure}[t]{0.3\textwidth}
-		\centering
-		\includegraphics[scale=1.0]{Diagram_HomoPeriod1.pdf}
-		\caption{\label{fig:Diagram_HomoPeriod1} Schematic illustration for the period cell of a composite, periodic medium.}
-	\end{subfigure}
-	~
-	\begin{subfigure}[t]{0.3\textwidth}
-		\centering
-		\includegraphics[scale=1.0]{Diagram_HomoHighFreq.pdf}
-		\caption{\label{fig:Diagram_HomoHighFreq} The domain $\ddom_h$ for the high-frequency approximation.}
-	\end{subfigure}
-	~
-	\begin{subfigure}[t]{0.3\textwidth}
-		\centering
-		\includegraphics[scale=1.0]{Diagram_HomoFiniteFreq.pdf}
-		\caption{\label{fig:Diagram_HomoFiniteFreq} The domain $\ddom_f$ for the finite-frequency approximation.}
-	\end{subfigure}
-	\caption{\label{fig:Diagram_HomoFreqRanges} The period cell of a periodic, composite medium and the corresponding domains of the high and finite frequency approximations.}	
-\end{figure}
-With this domain setup and a suitable governing equation, one can then look to determine whether the material exhibits spectral band gaps, dispersion effects, or explore the behaviour of the material under certain limits such as $l\rightarrow0$ or $a\rightarrow\infty$.
-The high-contrast limit $a\rightarrow\infty$ for \eqref{eq:Intro-GeneralWaveEqn} was explored in \tstk{Kirill-Sasha-Luis Op Norm Resolvant Asymptotic Analysis} on (a domain with similar structure to) $Q$, who proved convergence to a limiting problem and in particular established an asymptotic approximation for the limiting spectrum.
-Although this study only worked on a finite domain $Q$ rather than a periodic medium filling $\reals^d$ with period cell $Q$, the analysis is highly relevant if one uses a Gelfand or Floquet transform (\tstk{section ref}) to study the periodic problem.
-The study \tstk{Fig. Kuchment: Band-Gap structure of periodic dielectric and acoustic media (scalar)} focused on the spectrum of the operator $-\grad\cdot a\bracs{y}\grad$ for a composite, periodic medium with $Q=[0,1)^3$, and stiff inclusions $Q_0$ being cubes of side length $l = 1-\delta$.
-Here it was proved that provided that $\delta, a\delta^{-1}$ and $a^{-1}\delta^2$ are sufficiently small, the existence of spectral gaps is guaranteed, and can even be opened up in any finite part of the spectrum.
-The follow-up study \tstk{F.Kuch: Band-gap structure of the spectrum of periodic Maxwell operators} established similar results on existence of spectral band gaps for the operator $\curl{}\bracs{a(x)\curl{}\cdot}$, an operator closely related to the Maxwell system \eqref{eq:MaxwellSystem}.
-\tstk{more studies?!?! Cooper-K-S relevant here?}
-
-\tstk{now we talk about homogenisation theory, first we should outline what it's all about.}
-The periodic nature of the material properties (encoded in the function $a(x)$) and the desire to understand the effective properties of the medium naturally lends itself to study through the process of homogenisation.
-Broadly speaking, homogenisation theory looks to take a problem on an inhomogeneous material and derive (in some limit) an ``effective" problem for that material in terms of some ``homogenised" or ``effective" material properties.
-Then by establishing convergence results for the solution of the original problem to those of the effective problem, one ensures that the approximation is valid under certain parameter regimes and can replace the potentially complex original problem with the effective problem, which is usually more tractable to analysis.
-We will attempt to illustrate some of these frameworks; suppose our interest lies in studying the eigenvalues of the wave equation \tstk{perhaps it would be better here to write the resolvent form first, IE with $\omega^2 u + f$ on the RHS. Then we can talk about proving convergence of the solutions $u_\eps$ to $u_0$ as well as convergence of the spectra.}
-\begin{align*} 
-	\mathcal{A}u &:= -\grad\cdot a(x)\grad u = \omega^2 u, \qquad x\in\reals^d,
-\end{align*}
-where $\reals^d$ is filled with a periodic, composite medium with unit cell $Q=Q_0\cup Q_1$ as described above.
-To approximate the spectrum of $\mathcal{A}$ at high frequency, we introduce the parameter $\eps\ll 1$ and consider the problem
-\begin{align} \label{eq:Homo-HighFreqApprox}
-	\mathcal{A}_{\eps}u_{\eps}(x) &:= -\grad\cdot a\bracs{\frac{x}{\eps}}\grad u_{\eps}(x) = \omega^2 u_{\eps}(x), \qquad x\in\ddom_{h}:=[0,1)^d,
-\end{align}
-with periodic boundary conditions on $\ddom_h$, in the limit as $\eps\rightarrow0$ (see figure \ref{fig:Diagram_HomoHighFreq}).
-Using the theory and techniques from homogenisation theory, we would look to derive an effective problem of the form
-\begin{align} \label{eq:Homo-HighFreqApproxEffective}
-	\mathcal{A}_0 u_0(x) &:= -\grad\cdot a_{\mathrm{hom}}\grad u_0(x) = \omega^2 u_0(x), \qquad x\in\ddom_h,
-\end{align} 
-where $a_{\mathrm{hom}}$ represents the homogenised or effective material properties, which in general may be spatially or frequency dependent (as we will discuss shortly).
-We would then look to study this effective problem, and prove convergence (in an appropriate norm) of the spectrum of the operator $\mathcal{A}_{\eps}$ to that of $\mathcal{A}_0$.
-The convergence results ensure that $\mathcal{A}_0$ serves as a faithful approximation to our original problem (at high frequencies), and thus its behaviour is reflective of the original problem we set out to model.
-Alternative frequency approximations, such as the finite frequency approximation, are also realisable and adhere to a similar ethos.
-In the finite frequency regime, we introduce the length scale $L>0$ and form the domain
-\begin{align*}
-	\ddom_f &= \bigcup_{T\in\clbracs{0,...,L}^d}\bracs{Q + T}\subset[0,L)^d,
-\end{align*}
-again imposing periodic boundary conditions, and study the ``limit" of the problem
-\begin{align*}
-	\mathcal{A}_L u_L(x) &:= -\grad\cdot a(x)\grad u_L(x) = \omega^2 u_L(x), \qquad x\in\ddom_f
-\end{align*}
-as $L\rightarrow\infty$ (figure \ref{fig:Diagram_HomoFreqRanges}).
-The two regimes are related through appropriate length and frequency scaling, indeed if we make the domain-length-scale substitution $y = \frac{x}{\eps}$ into the high frequency problem we observe that
-\begin{align*}
-	-\grad\cdot a\bracs{\frac{x}{\eps}}\grad u_{\eps}(x) &= \omega^2 u_{\eps}(x), &\qquad x\in\ddom_h, \\
-	\Leftrightarrow -\eps\grad_{y}\cdot \eps a(y)\grad_{y}u_{L}(y) &= \omega^2 u_{L}(y), &\qquad y\in\ddom_f,
-\end{align*}
-where $L = \recip{\eps}$.
-Thus, we can transition between the high and finite frequency approximations using the length and frequency scale transforms $x \mapsto \eps x$ and $\omega \mapsto \frac{\omega}{\eps}$.
-
-\tstk{this is where we will talk about relevant studies, in particular critical contrast leading to time dissipative systems and band-gaps. We will need to link this back to our work; the link is that critical contrast provides a means of inducing band-gaps in the effective medium. Our work will introduce this ``contrast" effect in an alternative manner. Also, we touch on generalised resolvents, which we will need to mention in the next section too}
-Having decided on a frequency regime to work in, the interest now lies in studying the effective problem and determining under what conditions the effective material exhibits time (or spatial) dispersion, which can result in interesting phenomena such as band-gaps, or metamaterial behaviour\footnote{Metamaterial behaviour is when the parameters describing the physical properties of the material appear to take negative or other unphysical values within certain frequency (or spatial) ranges.}.
-When handling such media, we typically face an (effective) problem in the frequency domain of the form
-\begin{align} \label{eq:DispersiveEqn}
-	-\grad\cdot A\grad u &= \beta(\omega)u,
-\end{align}
-for some frequency-dependent $\beta(\omega)$ and constant $A$.
-If $\beta(\omega) = \omega^2 b(\omega)I$ then rearranging \eqref{eq:DispersiveEqn} provides the form
-\begin{align} \label{eq:DispersiveEqn-FreqDepA}
-	-\grad\cdot A(\omega)\grad u &= \omega^2 u,
-\end{align}
-where the physical interpretation of $A$ implies that the material parameters exhibit non-trivial dependence on the frequency, and the relation to \eqref{eq:Homo-HighFreqApproxEffective} ($A(\omega)=a_{\mathrm{hom}}$) is clear.
-When considering the wave equation in a strong elliptic setting (that is, the function $a(x/\eps)$ in \eqref{eq:Homo-HighFreqApprox} and its inverse are uniformly bounded), homogenisation theory establishes \tstk{as reported in Kirill-Yulia-Sasha crit contrast, pointing to the references M. Sh. Birman and T. A. Suslina, Second order periodic differential operators. Threshold properties
-and homogenization and V. V. Zhikov, Spectral approach to asymptotic diffusion problems. (Russian)} that the effective medium is described by an equation of the form \eqref{eq:Homo-HighFreqApproxEffective} with $a_{\mathrm{hom}}$ a constant matrix, leaving no room for time-dispersion.
-This result is also reported to carry over into the vector setting, including the Maxwell system for example.
-By dropping the assumption of uniform ellipticity on $a$ the analysis becomes much more complicated, but by using the technique of two scale convergence \tstk{do I need to elaborate on what this is (and why things are more complicated)?} the study \tstk{Zhikov, Extension method two scale convergence} was able to obtain an effective problem of the form \eqref{eq:DispersiveEqn-FreqDepA}.
-This technique allows for the derivation of effective problems of materials under \emph{critical contrast}\footnote{Also referred to as \emph{high-contrast} problems/materials.}, meaning that the components of the medium $Q_0$ and $Q_1$ must have specific relative material properties governed by the size of the period cell.
-In the high frequency context above, this means that the parameters $a$ and $l$ must be made to scale in a particular fashion with $\eps$.
-Further developments \tstk{Kirill-Sasha-Luis, both papers} have demonstrated that a material being under critical contrast is sufficient for the resulting effective medium to be time-dispersive, although there is no definitive answer as to whether it is necessary. \tstk{further studies? A nice study to end on, that would link nicely to our singular structure considerations, is here: https://epubs.siam.org/doi/epdf/10.1137/1.9780898717594.ch7 by Kuchment, talking about both asymptotic limits and the resulting graph problems.}
+%Before discussing the relevant results in the literature, we provide a toy setup for the study of wave propagation in a composite, periodic medium, to aid in contextualising what follows.
+%A suitable governing equation for wave propagation is the wave equation;
+%\begin{align*}
+%	-\grad\cdot A(x)\grad u(x,t) &= \pdiff{u}{t}(x,t),
+%\end{align*}
+%where $A(x)$ represents the material properties relevant to wave propagation, and is spatially varying if the material is non-homogeneous.
+%For example, in the acoustic setting $A$ would represent the ratio of the elastic modulus and mass density, whilst in the electromagnetic setting would represent the (inverse) product of the electric permittivity $\epsilon_{m}$ and magnetic permeability $\mu_{m}$.
+%Although a good starting point, we note that the wave equation is not capable of describing all the dynamics of wave propagation.
+%In the acoustic setting one would need to consider the equations of elasticity for a complete description of wave propagation; whilst in the electromagnetic setting one would need to consider the Maxwell system
+%Wave propagation in photonic crystals is governed by the system of Maxwell equations;
+%\begin{subequations} \label{eq:MaxwellSystem}
+%	\begin{align}
+%		\grad\cdot E &= \rho, \\
+%		\curl{}E &= -\pdiff{\bracs{\mu_{m}^{-1}H}}{t}, \\
+%		\grad\cdot \bracs{\mu_{m}^{-1}H} &= 0, \\
+%		 \curl{}\bracs{\mu_{m}^{-1}H} &= J + \pdiff{\bracs{\epsilon_{m}E}}{t},
+%	\end{align}
+%\end{subequations}
+%where $E$ and $H$ represent the electric and magnetic fields respectively, $\rho$ is the electric charge density, and $J$ the electric current density. 
+%The scalar wave equation typically emerges as a special case of these vectorial systems; in the context of electromagnetism in the absence of wave sources ($\rho=J=0$ in \eqref{eq:MaxwellSystem}) each component of $E$ satisfies the wave equation, for example.
+%We will continue to use the wave equation for illustrative purposes in this section, but our discussion of the literature will cover these more general, vectorial, governing equations.
+%
+%Seeking a Bloch wave solution $u(x,t) = \hat{u}(x)\e^{\rmi\omega t}$ and de-dimensionalising the wave equation via $y=lx, l>0$\footnote{In the event we are looking at a finite medium, $l$ is typically the spatial extent of the medium. For studying periodic materials, $l$ can typically be taken to be the period of the medium so that the period cell has unit non-dimensional length.} and $a(y) = \hat{A}A(x/l)$, one obtains the eigenvalue problem
+%\begin{align*}
+%	-\grad_{y}\cdot a\bracs{y}\grad_{y} U(y) = z U(y),
+%	&\qquad 
+%	z = \frac{\omega^2 l^2}{\hat{A}},
+%\end{align*}
+%where $U(y)=\hat{u}(x/l)$.
+%In the event that $a$ is constant, the parameter $z$ represents (up to a constant) the square of the ratio of the spatial extent of the medium against the wavelength of propagating waves.
+%Again in the electromagnetic setting for example, one has
+%\begin{align*}
+%	z &= l^2 \omega^2 \epsilon_{m}\mu_{m}
+%	= \frac{l^2 \omega^2 \epsilon_{m}\mu_{m}}{\epsilon_0\mu_0 c^2},
+%\end{align*}
+%where $\epsilon_0, \mu_0$ are the permittivity and permeability of vacuum, and $c$ the speed of light (in vacuum).
+%As such, throughout this work we will consider the (de-dimensionalised) ``wave equation"\footnote{Although it would be more precisely this is a Helmholtz equation.} to be the equation
+%\begin{align} \label{eq:Intro-GeneralWaveEqn}
+%	-\grad\cdot a(x)\grad u(x) &= \omega^2 u(x), 
+%\end{align}
+%for $x\in\ddom$, for some suitable domain $\ddom$, and we will also illustrate some of the concepts from the relevant literature using this equation as an example.
+%Working with non-dimensional units also allows to qualitatively describe the structure of the spectrum of these problems, and the physically-inclined reader can then obtain the physical wave-frequencies by reversing the process described above.
+%In a slight abuse of notation, we will continue to use $\omega^2 = z$ for the spectral parameter as it will be convenient for us to use the square-root of $z$ at certain points in what follows.
+%
+%\tstk{Here, discuss studies on periodic structures with period 1, and with microstructure/ inclusions. No homogenisation yet.}
+%At their heart, photonic crystals are simply periodic materials whose period cell consists of a set of (dielectric material) inclusions embedded into another (background, or ``matrix") material.
+%With developing interest in designing photonic crystals, there have been a number of studies dedicated to understanding the factors which contribute to the opening of spectral band gaps in periodic, composite media (the wider class of materials into which photonic crystals fall).
+%A periodic composite medium can be modelled by filling the space $\reals^d$ with translations of a period cell $Q=[0,1)^d$ that is further divided into two regions, the ``inclusion" $Q_0$ and ``background" $Q_1$ with $Q_0\subset Q$ and $Q_1=Q\setminus\overline{Q_0}$.
+%One also typically specifies the relative size of the inclusion to the size of the period cell, which we will denote by $0<l<1$ (so if the side of the period cell is of unit length, the inclusion $Q_0$ has volume of the order $l^d$).
+%The material properties are then represented by a $Q$-periodic function $a(x)$;
+%\begin{align*}
+%	a(x) &= \begin{cases} a & x\in Q_i, \\ 1 & x\in Q_j, \end{cases}
+%	\qquad i,j\in\clbracs{0,1}, \ i\neq j.
+%\end{align*}
+%with the regions $Q_0$ and $Q_1$ typically labelled the ``soft" (where $a(x)=a$) and ``stiff" ($a(x)=1$), and the constant $a$ representing the contrast between the material parameters, see figure \ref{fig:Diagram_HomoPeriod1} for an illustration.
+%\begin{figure}[t]
+%	\centering
+%	\begin{subfigure}[t]{0.3\textwidth}
+%		\centering
+%		\includegraphics[scale=1.0]{Diagram_HomoPeriod1.pdf}
+%		\caption{\label{fig:Diagram_HomoPeriod1} Schematic illustration for the period cell of a composite, periodic medium.}
+%	\end{subfigure}
+%	~
+%	\begin{subfigure}[t]{0.3\textwidth}
+%		\centering
+%		\includegraphics[scale=1.0]{Diagram_HomoHighFreq.pdf}
+%		\caption{\label{fig:Diagram_HomoHighFreq} The domain $\ddom_h$ for the high-frequency approximation.}
+%	\end{subfigure}
+%	~
+%	\begin{subfigure}[t]{0.3\textwidth}
+%		\centering
+%		\includegraphics[scale=1.0]{Diagram_HomoFiniteFreq.pdf}
+%		\caption{\label{fig:Diagram_HomoFiniteFreq} The domain $\ddom_f$ for the finite-frequency approximation.}
+%	\end{subfigure}
+%	\caption{\label{fig:Diagram_HomoFreqRanges} The period cell of a periodic, composite medium and the corresponding domains of the high and finite frequency approximations.}	
+%\end{figure}
+%With this domain setup and a suitable governing equation, one can then look to determine whether the material exhibits spectral band gaps, dispersion effects, or explore the behaviour of the material under certain limits such as $l\rightarrow0$ or $a\rightarrow\infty$.
+%The high-contrast limit $a\rightarrow\infty$ for \eqref{eq:Intro-GeneralWaveEqn} was explored in \tstk{Kirill-Sasha-Luis Op Norm Resolvant Asymptotic Analysis} on (a domain with similar structure to) $Q$, who proved convergence to a limiting problem and in particular established an asymptotic approximation for the limiting spectrum.
+%Although this study only worked on a finite domain $Q$ rather than a periodic medium filling $\reals^d$ with period cell $Q$, the analysis is highly relevant if one uses a Gelfand or Floquet transform (\tstk{section ref}) to study the periodic problem.
+%The study \tstk{Fig. Kuchment: Band-Gap structure of periodic dielectric and acoustic media (scalar)} focused on the spectrum of the operator $-\grad\cdot a\bracs{y}\grad$ for a composite, periodic medium with $Q=[0,1)^3$, and stiff inclusions $Q_0$ being cubes of side length $l = 1-\delta$.
+%Here it was proved that provided that $\delta, a\delta^{-1}$ and $a^{-1}\delta^2$ are sufficiently small, the existence of spectral gaps is guaranteed, and can even be opened up in any finite part of the spectrum.
+%The follow-up study \tstk{F.Kuch: Band-gap structure of the spectrum of periodic Maxwell operators} established similar results on existence of spectral band gaps for the operator $\curl{}\bracs{a(x)\curl{}\cdot}$, an operator closely related to the Maxwell system \eqref{eq:MaxwellSystem}.
+%\tstk{more studies?!?! Cooper-K-S relevant here?}
+%
+%\tstk{now we talk about homogenisation theory, first we should outline what it's all about.}
+%The periodic nature of the material properties (encoded in the function $a(x)$) and the desire to understand the effective properties of the medium naturally lends itself to study through the process of homogenisation.
+%Broadly speaking, homogenisation theory looks to take a problem on an inhomogeneous material and derive (in some limit) an ``effective" problem for that material in terms of some ``homogenised" or ``effective" material properties.
+%Then by establishing convergence results for the solution of the original problem to those of the effective problem, one ensures that the approximation is valid under certain parameter regimes and can replace the potentially complex original problem with the effective problem, which is usually more tractable to analysis.
+%We will attempt to illustrate some of these frameworks; suppose our interest lies in studying the eigenvalues of the wave equation \tstk{perhaps it would be better here to write the resolvent form first, IE with $\omega^2 u + f$ on the RHS. Then we can talk about proving convergence of the solutions $u_\eps$ to $u_0$ as well as convergence of the spectra.}
+%\begin{align*} 
+%	\mathcal{A}u &:= -\grad\cdot a(x)\grad u = \omega^2 u, \qquad x\in\reals^d,
+%\end{align*}
+%where $\reals^d$ is filled with a periodic, composite medium with unit cell $Q=Q_0\cup Q_1$ as described above.
+%To approximate the spectrum of $\mathcal{A}$ at high frequency, we introduce the parameter $\eps\ll 1$ and consider the problem
+%\begin{align} \label{eq:Homo-HighFreqApprox}
+%	\mathcal{A}_{\eps}u_{\eps}(x) &:= -\grad\cdot a\bracs{\frac{x}{\eps}}\grad u_{\eps}(x) = \omega^2 u_{\eps}(x), \qquad x\in\ddom_{h}:=[0,1)^d,
+%\end{align}
+%with periodic boundary conditions on $\ddom_h$, in the limit as $\eps\rightarrow0$ (see figure \ref{fig:Diagram_HomoHighFreq}).
+%Using the theory and techniques from homogenisation theory, we would look to derive an effective problem of the form
+%\begin{align} \label{eq:Homo-HighFreqApproxEffective}
+%	\mathcal{A}_0 u_0(x) &:= -\grad\cdot a_{\mathrm{hom}}\grad u_0(x) = \omega^2 u_0(x), \qquad x\in\ddom_h,
+%\end{align} 
+%where $a_{\mathrm{hom}}$ represents the homogenised or effective material properties, which in general may be spatially or frequency dependent (as we will discuss shortly).
+%We would then look to study this effective problem, and prove convergence (in an appropriate norm) of the spectrum of the operator $\mathcal{A}_{\eps}$ to that of $\mathcal{A}_0$.
+%The convergence results ensure that $\mathcal{A}_0$ serves as a faithful approximation to our original problem (at high frequencies), and thus its behaviour is reflective of the original problem we set out to model.
+%Alternative frequency approximations, such as the finite frequency approximation, are also realisable and adhere to a similar ethos.
+%In the finite frequency regime, we introduce the length scale $L>0$ and form the domain
+%\begin{align*}
+%	\ddom_f &= \bigcup_{T\in\clbracs{0,...,L}^d}\bracs{Q + T}\subset[0,L)^d,
+%\end{align*}
+%again imposing periodic boundary conditions, and study the ``limit" of the problem
+%\begin{align*}
+%	\mathcal{A}_L u_L(x) &:= -\grad\cdot a(x)\grad u_L(x) = \omega^2 u_L(x), \qquad x\in\ddom_f
+%\end{align*}
+%as $L\rightarrow\infty$ (figure \ref{fig:Diagram_HomoFreqRanges}).
+%The two regimes are related through appropriate length and frequency scaling, indeed if we make the domain-length-scale substitution $y = \frac{x}{\eps}$ into the high frequency problem we observe that
+%\begin{align*}
+%	-\grad\cdot a\bracs{\frac{x}{\eps}}\grad u_{\eps}(x) &= \omega^2 u_{\eps}(x), &\qquad x\in\ddom_h, \\
+%	\Leftrightarrow -\eps\grad_{y}\cdot \eps a(y)\grad_{y}u_{L}(y) &= \omega^2 u_{L}(y), &\qquad y\in\ddom_f,
+%\end{align*}
+%where $L = \recip{\eps}$.
+%Thus, we can transition between the high and finite frequency approximations using the length and frequency scale transforms $x \mapsto \eps x$ and $\omega \mapsto \frac{\omega}{\eps}$.
+%
+%\tstk{this is where we will talk about relevant studies, in particular critical contrast leading to time dissipative systems and band-gaps. We will need to link this back to our work; the link is that critical contrast provides a means of inducing band-gaps in the effective medium. Our work will introduce this ``contrast" effect in an alternative manner. Also, we touch on generalised resolvents, which we will need to mention in the next section too}
+%Having decided on a frequency regime to work in, the interest now lies in studying the effective problem and determining under what conditions the effective material exhibits time (or spatial) dispersion, which can result in interesting phenomena such as band-gaps, or metamaterial behaviour\footnote{Metamaterial behaviour is when the parameters describing the physical properties of the material appear to take negative or other unphysical values within certain frequency (or spatial) ranges.}.
+%When handling such media, we typically face an (effective) problem in the frequency domain of the form
+%\begin{align} \label{eq:DispersiveEqn}
+%	-\grad\cdot A\grad u &= \beta(\omega)u,
+%\end{align}
+%for some frequency-dependent $\beta(\omega)$ and constant $A$.
+%If $\beta(\omega) = \omega^2 b(\omega)I$ then rearranging \eqref{eq:DispersiveEqn} provides the form
+%\begin{align} \label{eq:DispersiveEqn-FreqDepA}
+%	-\grad\cdot A(\omega)\grad u &= \omega^2 u,
+%\end{align}
+%where the physical interpretation of $A$ implies that the material parameters exhibit non-trivial dependence on the frequency, and the relation to \eqref{eq:Homo-HighFreqApproxEffective} ($A(\omega)=a_{\mathrm{hom}}$) is clear.
+%When considering the wave equation in a strong elliptic setting (that is, the function $a(x/\eps)$ in \eqref{eq:Homo-HighFreqApprox} and its inverse are uniformly bounded), homogenisation theory establishes \tstk{as reported in Kirill-Yulia-Sasha crit contrast, pointing to the references M. Sh. Birman and T. A. Suslina, Second order periodic differential operators. Threshold properties
+%and homogenization and V. V. Zhikov, Spectral approach to asymptotic diffusion problems. (Russian)} that the effective medium is described by an equation of the form \eqref{eq:Homo-HighFreqApproxEffective} with $a_{\mathrm{hom}}$ a constant matrix, leaving no room for time-dispersion.
+%This result is also reported to carry over into the vector setting, including the Maxwell system for example.
+%By dropping the assumption of uniform ellipticity on $a$ the analysis becomes much more complicated, but by using the technique of two scale convergence \tstk{do I need to elaborate on what this is (and why things are more complicated)?} the study \tstk{Zhikov, Extension method two scale convergence} was able to obtain an effective problem of the form \eqref{eq:DispersiveEqn-FreqDepA}.
+%This technique allows for the derivation of effective problems of materials under \emph{critical contrast}\footnote{Also referred to as \emph{high-contrast} problems/materials.}, meaning that the components of the medium $Q_0$ and $Q_1$ must have specific relative material properties governed by the size of the period cell.
+%In the high frequency context above, this means that the parameters $a$ and $l$ must be made to scale in a particular fashion with $\eps$.
+%Further developments \tstk{Kirill-Sasha-Luis, both papers} have demonstrated that a material being under critical contrast is sufficient for the resulting effective medium to be time-dispersive, although there is no definitive answer as to whether it is necessary. \tstk{further studies? A nice study to end on, that would link nicely to our singular structure considerations, is here: https://epubs.siam.org/doi/epdf/10.1137/1.9780898717594.ch7 by Kuchment, talking about both asymptotic limits and the resulting graph problems.}
