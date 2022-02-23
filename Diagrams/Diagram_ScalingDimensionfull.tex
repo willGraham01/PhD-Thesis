@@ -26,22 +26,23 @@
 \begin{document}
 \begin{tikzpicture}[]
 	
-	% period cell boundary
-	\filldraw[black!10!white, draw=black, dashed] (0,0) rectangle (4,4);
+
+	% period cell boundary, weird start b/c of tikz cutoff behaviour
+	\filldraw[black!10!white, draw=black, dashed] (0,-0.01) rectangle (6,6);
 
 	% draw inclusion, label parts of the domain
-	\filldraw[black!20!white, draw=black] plot [smooth cycle, tension=2.5] coordinates {(1.5,1.5) (2.5,1.5) (2.5,2.5) (1.5,2.5)};
-	\node[anchor=north west] at (0,4) {$Q_1$};
-	\node[anchor=south] at (2,2.3) {$Q_0$};
+	\filldraw[black!20!white, draw=black] plot [smooth cycle, tension=2.5] coordinates {(2,2) (4,2) (4,4) (2,4)};
+	\node[anchor=north west] at (0,6) {$Q_1$};
+	\node[anchor=south] at (3,4) {$Q_0$};
 
 	% indicate length scales
 	% period cell size
-	\draw[<->] (0,4.2) -- (4,4.2); \node[anchor=south] at (2,4.2) {$1$};
+	\draw[<->] (0,6.2) -- (6,6.2); \node[anchor=south] at (3,6.2) {$l$};
 	% inclusion size
-	\draw[<->] (1.0,0.875) -- (3.0,0.875); \node[anchor=north] at (2.0,0.875) {$l$};
+	\draw[<->] (1,0.875) -- (5.0,0.875); \node[anchor=north] at (3.0,0.875) {$l\delta$};
 	% draw example material params: go for soft inclusion (a(x)=a) inside stiff matrix (a(x)=1)
-	\node[anchor=north] at (2,2.2) {$a(x)=a$};
-	\node[anchor=north] at (1.0,3.5) {$a(x)=1$};
+	\node[anchor=center, align=center] at (3,3) {$\epsilon_m(x)=\epsilon^{\mathrm{inc}}$ \\ $\mu_m(x)=\mu^{\mathrm{inc}}$};
+	\node[anchor=north, align=center] at (1.5,5.5) {$\epsilon_m(x)=\epsilon^{\mathrm{bulk}}$ \\ $\mu_m(x)=\mu^{\mathrm{bulk}}$};
 
 \end{tikzpicture}
 \end{document}
