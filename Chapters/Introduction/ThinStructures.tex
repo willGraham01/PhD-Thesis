@@ -12,11 +12,6 @@ This system is incomplete without constitutive relations informing us how $\math
 	\mathbf{D} = \epsilon_m \mathbf{E}, \qquad \mathbf{B} = \mu_{m}\mathbf{H},
 \end{align*}
 where $\epsilon_m$ (respectively $\mu_m$) is the electric permittivity (magnetic permeability) of the material.
-These may also be found written as
-\begin{align*}
-	\epsilon_{m} = \epsilon_{r}\epsFS, \qquad \mu_{m} = \mu_{r}\muFS,
-\end{align*}
-where $\epsFS$ (respectively $\muFS$) is the permittivity (permeability) of free space, and $\epsilon_{r}$ ($\mu_{r}$) is the relative permittivity (permeability) of the medium.
 Further to our consideration of photonic crystals, we also treat $\epsilon_m$ and $\mu_m$ as time-independent, scalar-valued functions of position $x$, which is suitable for studying inhomogeneous, isotropic media such as photonic crystals\footnote{For a more general material the constitutive relations can be much more complex, potentially being non-linear and spatially varying. 
 Other effects such as hysteresis in ferromagnets can introduce time dependencies, whilst Lorentz materials have material parameters that depend on the frequency of incident electromagnetic radiation.}.
 Under these constitutive relations and in the absence of free charges and currents, the Maxwell system reduces to
@@ -26,7 +21,7 @@ Under these constitutive relations and in the absence of free charges and curren
 	\grad\cdot \mu_m \mathbf{H} = 0, &\qquad
 	 \curl{}\mathbf{H} = \epsilon_m \pdiff{\mathbf{E}}{t}.
 \end{align*}
-One can then seek time-harmonic solutions (or more precisely, take a Fourier transform in time), and write the resulting system in matrix form as
+One can then seek time-harmonic solutions (or more precisely, take a Fourier transform in time), and write the resulting system in matrix form as \tstk{the div free conditions have disappeared!}
 \begin{align*}
 	\begin{pmatrix}
 		0 & -\recip{\rmi\epsilon_m}\curl{} \\
@@ -83,37 +78,69 @@ In this case, the action of $\mathcal{M}$ decouples into separate actions on the
 \end{subequations}
 These equations may also be referred to as ``acoustic approximations", as they also appear when studying acoustic waves in periodic media.
 
-Having provided an outline of the important governing equations and operators that describe wave propagation in photonic crystals, we move on to discussing how their physical structure is represented.
+\tstk{possibly move to AFTER scaling discussions so $Q$ being unit size isn't too restrictive?}
+Having provided an outline of the important governing equations and operators that describe wave propagation in photonic crystals, we move on to a brief discussion of the spectra of periodic media.
 A periodic composite medium can be modelled by filling the space $\reals^d$ with translations of a period cell $Q=[0,1)^d$ that is further divided into two regions, the ``inclusion" $Q_0$ and ``background" $Q_1$ with $Q_0\subset Q$ and $Q_1=Q\setminus\overline{Q_0}$.
 Since we are primarily concerned with spectral problems, working directly in $\reals^d$ with our chosen operator is often inconvenient \tstk{WHY? doesn't need to be precise right now} and so one often looks to apply a transform to aid in the analysis of such problems.
 When faced with a differential operator with constant coefficients (or coefficients constant in one particular coordinate direction), one typically utilises a Fourier transform to turn the action of differentiation into the action of multiplication by (a function of) the dual variable.
-In this context we have an operator $\mathcal{A}$ with\footnote{Think of $\mathcal{A}$ as being one of \eqref{eq:Intro-CurlCurlEqns} or \eqref{eq:Intro-AcousticApprox} with $\epsilon_m$ and $\mu_m$ $Q$-periodic.} periodic, rather than constant, coefficients.
-The natural transform to apply in this context is the Gelfand (or Floquet) transform, first we introduce the dual cell $B=[-\pi,\pi)^d$ to $Q$, which is also referred to as the Brillouin zone in solid state physics.
+Here, we have an operator $\mathcal{A}$ with\footnote{Think of $\mathcal{A}$ as being one of \eqref{eq:Intro-CurlCurlEqns} or \eqref{eq:Intro-AcousticApprox} with $\epsilon_m$ and $\mu_m$ $Q$-periodic.} periodic, rather than constant, coefficients.
+The natural transform to apply is the Gelfand (or Floquet) transform, which first requires us to introduce the dual cell $B=[-\pi,\pi)^d$ to $Q$, which is also referred to as the Brillouin zone in solid state physics.
 We then define the Gelfand transform $\hat{u}$ of the function $u$ as 
 \begin{align*}
 	\hat{u}(x, \qm) &= \sum_{n\in\integers^d} u(x+n)\e^{\rmi\qm(x+n)},
 \end{align*}
 where the variable $\qm$ is called the \emph{quasi-momentum}, the analogue of the dual variable in the Fourier transform.
-We will go into more details in section \tstk{which section?!}, but the net effect of this transform is that we can replace the spectral problem for $\mathcal{A}$ with the spectral problem for each member of a family of operators $\mathcal{A}_{\qm}$ parametrised by the quasi-momentum.
+We will go into more details in section \tstk{which section?!}, restricting ourselves to a short summary of the key affects of this transform.
+The foremost effect of this transform is that we can replace the spectral problem for $\mathcal{A}$ with the spectral problem for each member of a family of operators $\mathcal{A}_{\qm}$ parametrised by the quasi-momentum.
 Importantly, since each $\mathcal{A}_{\qm}$ now acts on a compact domain, under ellipticity assumptions these operators (have compact resolvents and thus) possess discrete spectra.
-This allows us to order the eigenvalues $\lambda_j\bracs{\qm}$, $j\in\naturals$, of $\mathcal{A}_{\qm}$ in ascending order.
-The (continuous) functions $\lambda_j$ of $\qm$ are called the dispersion branches, and it holds that the spectrum of $\mathcal{A}$ is equal to the union of the spectra of the $\mathcal{A}_\qm$.
-\tstk{got to here}
-
-\tstk{maybe new section for Photonic crystal domain setup? IDK, but you need some kind of linking sentence here}
-
-A periodic composite medium can be modelled by filling the space $\reals^d$ with translations of a period cell $Q=[0,1)^d$ that is further divided into two regions, the ``inclusion" $Q_0$ and ``background" $Q_1$ with $Q_0\subset Q$ and $Q_1=Q\setminus\overline{Q_0}$.
-The dielectric constant $\epsilon_m$ for this material is also $Q$-periodic, and suppose that it takes the values
+This allows us to order the eigenvalues $\lambda_j\bracs{\qm}$, $j\in\naturals$, of $\mathcal{A}_{\qm}$ in ascending order in $j$.
+The (continuous) functions $\lambda_j$ of $\qm$ are called the dispersion branches\footnote{Alternative names include dispersion relations, or (spectral) band functions.}, and it holds that the spectrum of $\mathcal{A}$ is equal to the union of the spectra of the $\mathcal{A}_\qm$ --- that is, the projection of the graphs of the $y=\lambda_j(\qm)$ onto the $y$ axis provides the spectrum of $\mathcal{A}$.
+Explicitly, we have that
 \begin{align*}
-	\epsilon_m(x) &= \begin{cases} \epsilon_0 & x\in Q_0, \\ \epsilon_1 & x\in Q_1, \end{cases}
+	\sigma\bracs{\mathcal{A}} &= \bigcup_{\qm\in B} \sigma\bracs{\mathcal{A}_{\qm}}
+	= \bigcup_{j\in\naturals} \mathrm{Im}\bracs{\lambda_j\bracs{\qm}}
+	= \bigcup_{j\in\naturals} \sqbracs{ \min_{\qm}\lambda_j, \max_{\qm}\lambda_j },
 \end{align*}
-in the unit cell.
-Finally, suppose that the inclusion $Q_0$ is of size $\delta<1$, so fills a volume of the order $\delta^d$ \tstk{make figure}.
-This physical setup represents our photonic crystal and contains three length scales of interest; the size of the inclusion $\delta$, and the wavelength of any propagating waves in $Q_0$ (through $\epsilon_0$) and in $Q_1$ (through $\epsilon_1$).
-Before proceeding with any mathematical analysis, one typically looks to non-dimensionalise the domain (and associated governing equations) to obtain a system with a set of free parameters.
-Doing so allows for a general understanding of the behaviour of the system with respect to the non-dimensional parameters, which can then be related back to particular physical setups by ``re-dimensionalising".
-Regrettably this process of non-dimensionalising is often skipped over in the mathematics literature, which has implications for the resulting studies which we highlight \tstk{when we talk about missing length scales, EP/KZ, etc}.
-To ensure that our link to physical reality is not severed, we will carry out this process in detail here.
+the final equality coming from the fact that the branches $\lambda_j$ are continuous functions of $\qm$, and the interval $\sqbracs{ \min_{\qm}\lambda_j, \max_{\qm}\lambda_j }$ being labelled the $j^{\text{th}}$ spectral band of $\mathcal{A}$.
+This highlights where the band-gap structure of these composite materials comes from, whenever $\max_{\qm}\lambda_{j-1} < \min_{\qm}\lambda_{j}$, there is a corresponding gap between the end of the $(j-1)^{\text{th}}$ band and the beginning of the $j^{\text{th}}$.
+It is known that for ordinary differential equations of second order the inequality $\max_{\qm}\lambda_{j-1} \leq \min_{\qm}\lambda_{j}$ holds, so the spectral bands cannot overlap but may touch \tstk{refs? Pointed to a book by a couple of the references that say this: M. Reed and B. Simon, Methods of Modern Mathematical Physics, Vol. IV:Analysis of Operators}.
+As such, it is conceivable that alterations to the material may open up gaps between adjacent bands.
+In two dimensions (or higher) the spectral bands can and usually do overlap, which makes the task of designing a material with band gaps harder though not impossible.
+
+\subsection{Domains, Non-dimensionalisation, and length scales}
+We now turn specifically towards the setup of domains that model photonic crystals, and the process of non-dimensionalising the governing equations and consideration of the various free parameters that emerge from this process.
+Regrettably, this process is often skipped over in the mathematical literature, with most works electing to start from a non-dimensionalised system.
+Whilst there is nothing wrong with choosing to start here, it can lead to one making implicit (or unnoticed) assumptions about the physical system (or domain) that is being modelled, and confusing to a newcomer to the field.
+As such, we will provide an explicit account of this process, and highlight where the aforementioned assumptions on the physical system might arise if one is not careful.
+
+A periodic medium can be modelled by specifying a period cell $Q=[0,l)^d$, $l>0$, and then taking a union of translated copies of this period cell
+\begin{align*}
+	\bigcup_{n\in\integers^d} (Q + nl),
+\end{align*}
+to fill the whole of $\reals^d$.
+Note that the requirement that $Q$ be (hyper-) cubic in shape is not restrictive, as long as the material is periodic in $d$ linearly independent directions one can apply a linear transform to produce a (hyper-) cubic period cell.
+For a composite such as a photonic crystal, this period cell $Q$ is then further divided into two regions, the \emph{inclusions} $Q_0$ with $\overline{Q_0}\subset Q$ and the \emph{bulk} (also called \emph{matrix} or \emph{background}) $Q_1:=Q\setminus \overline{Q_0}$.
+The electric permittivity and magnetic permeability of the medium are then defined as the $Q$-periodic functions with
+\begin{align*}
+	\epsilon_m(x) = \begin{cases} \epsilon^{\mathrm{inc}} & x\in Q_0, \\ \epsilon^{\mathrm{mat}} & x\in Q_1, \end{cases}
+	\qquad
+	\mu_m(x) = \begin{cases} \mu^{\mathrm{inc}} & x\in Q_0, \\ \mu^{\mathrm{mat}} & x\in Q_1. \end{cases}
+\end{align*}
+We now wish to treat the system of Maxwell equations mathematically, and so proceed to write the equations in a dimensionless way.
+
+These may also be found written as
+\begin{align*}
+	\epsilon_{m} = \epsilon_{r}\epsFS, \qquad \mu_{m} = \mu_{r}\muFS,
+\end{align*}
+where $\epsFS$ (respectively $\muFS$) is the permittivity (permeability) of free space, and $\epsilon_{r}$ ($\mu_{r}$) is the relative permittivity (permeability) of the medium.
+\begin{figure}[t]
+	\centering
+	\begin{subfigure}[t]{0.3\textwidth}
+		\centering
+		\includegraphics[scale=1.0]{Diagram_HomoPeriod1.pdf}
+		\caption{\label{fig:Diagram_HomoPeriod1} Schematic illustration for the period cell of a composite, periodic medium.}
+	\end{subfigure}
+\end{figure}
 
 %At their heart, photonic crystals are simply periodic mediums whose period cell consists of a set of (dielectric material) inclusions embedded into another (background, or ``matrix") material.
 %With developing interest in designing photonic crystals, there have been a number of studies dedicated to understanding the factors which contribute to the opening of spectral band gaps in periodic, composite media (the wider class of materials into which photonic crystals fall).
