@@ -113,15 +113,15 @@ holds, so the spectral bands cannot overlap but may touch \tstk{refs? Pointed to
 As such, it is conceivable that alterations to the material may open up gaps between adjacent bands.
 In two dimensions (or higher) the spectral bands can and usually do overlap, which makes the task of designing a material with band gaps harder though not impossible.
 
-\subsection{Non-dimensionalisation of the Maxwell System}
+\subsection{Non-dimensionalisation of the Maxwell System} \label{ssec:Intro-NonDimMax}
 We now turn specifically towards the setup of domains that model photonic crystals, and the process of non-dimensionalising the governing equations and consideration of the various free parameters that emerge from this process.
 Regrettably, this process is often skipped over in the mathematical literature, with most works electing to start from a non-dimensionalised system.
 Whilst there is nothing wrong with choosing to start here, it can lead to one making implicit (or unnoticed) assumptions about the physical system (or domain) that is being modelled (see \tstk{part of lit review where this comes in}), and confusing to a newcomer to the field.
 As such, we will provide an explicit account of this process, and highlight where the aforementioned assumptions on the physical system might arise if one is not careful.
 
-A periodic medium can be modelled by specifying a period cell $Q=[0,l)^d$, $l>0$, and then taking a union of translated copies of this period cell
+A periodic medium can be modelled by specifying a period cell $Q=[0,L)^d$, $L>0$, and then taking a union of translated copies of this period cell
 \begin{align*}
-	\bigcup_{n\in\integers^d} (Q + nl),
+	\bigcup_{n\in\integers^d} (Q + nL),
 \end{align*}
 to fill the whole of $\reals^d$.
 Note that the requirement that $Q$ be (hyper-) cubic in shape is not restrictive, as long as the material is periodic in $d$ linearly independent directions one can apply a linear transform to produce a (hyper-) cubic period cell.
@@ -132,7 +132,7 @@ The electric permittivity and magnetic permeability of the medium are then defin
 	\qquad
 	\mu_m(x) = \begin{cases} \mu^{\mathrm{inc}} & x\in Q_0, \\ \mu^{\mathrm{bulk}} & x\in Q_1, \end{cases}
 \end{align*}
-and we also suppose that the inclusions have a characteristic size $l\delta$, $0<\delta<1$, giving the period cell illustrated in figure \ref{fig:Diagram_ScalingDimensionfull}.
+and we also suppose that the inclusions have a characteristic size $l$, $0<l<L$, giving the period cell illustrated in figure \ref{fig:Diagram_ScalingDimensionfull}.
 \begin{figure}[t]
 	\centering
 	\begin{subfigure}[t]{0.45\textwidth}
@@ -153,9 +153,9 @@ Introduce the dimensionless ``electric" and ``magnetic" fields $\tilde{E}$ and $
 \begin{align*}
 	H = \hat{h}\tilde{H}, 
 	\qquad E = \hat{h}\bracs{\frac{\mu^{\mathrm{bulk}}}{\epsilon^{\mathrm{bulk}}}}^{\recip{2}}\tilde{E},
-	\qquad x = l\tilde{x},
+	\qquad x = L\tilde{x},
 \end{align*}
-where $\hat{h}$ is a constant with the units of magnetic field ($\mathrm{A}\mathrm{m}^{-1}$), and $\epsFS$ and $\muFS$ are (respectively) the permittivity and permeability of vacuum.
+where $\hat{h}$ is a constant with the units of magnetic field (Amperes per metre, $\mathrm{A}\mathrm{m}^{-1}$), and $\epsFS$ and $\muFS$ are (respectively) the permittivity and permeability of vacuum.
 The Maxwell system
 \begin{align*}
 	\mu_m^{-1}\curl{}E &= -\rmi\omega H, \\
@@ -164,16 +164,16 @@ The Maxwell system
 then becomes
 \begin{align*}
 	\mu_m^{-1}(x) \ \curl{\tilde{x}}\tilde{E} 
-	&= -\rmi\omega l\bracs{\frac{\epsilon^{\mathrm{bulk}}}{\mu^{\mathrm{bulk}}}}^{\recip{2}} \tilde{H}, \\
+	&= -\rmi\omega L\bracs{\frac{\epsilon^{\mathrm{bulk}}}{\mu^{\mathrm{bulk}}}}^{\recip{2}} \tilde{H}, \\
 	\epsilon_m^{-1}(x) \ \curl{\tilde{x}}\tilde{H} 
-	&= \rmi\omega l\bracs{\frac{\mu^{\mathrm{bulk}}}{\epsilon^{\mathrm{bulk}}}}^{\recip{2}} \tilde{E},
+	&= \rmi\omega L\bracs{\frac{\mu^{\mathrm{bulk}}}{\epsilon^{\mathrm{bulk}}}}^{\recip{2}} \tilde{E},
 \end{align*}
 Multiplying by $\mu^{\mathrm{bulk}}$ in the first equation, and $\epsilon^{\mathrm{bulk}}$ in the second then gives us
 \begin{align*}
 	\bracs{\frac{\mu_m}{\mu^{\mathrm{bulk}}}}^{-1}(x) \ \curl{\tilde{x}}\tilde{E} 
-	&= -\rmi\omega l\bracs{\epsilon^{\mathrm{bulk}}\mu^{\mathrm{bulk}}}^{\recip{2}} \tilde{H}, \\
+	&= -\rmi\omega L\bracs{\epsilon^{\mathrm{bulk}}\mu^{\mathrm{bulk}}}^{\recip{2}} \tilde{H}, \\
 	\bracs{\frac{\epsilon_m}{\epsilon^{\mathrm{bulk}}}}^{-1}(x) \ \curl{\tilde{x}}\tilde{H} 
-	&= \rmi\omega l\bracs{\epsilon^{\mathrm{bulk}}\mu^{\mathrm{bulk}}}^{\recip{2}} \tilde{E}.
+	&= \rmi\omega L\bracs{\epsilon^{\mathrm{bulk}}\mu^{\mathrm{bulk}}}^{\recip{2}} \tilde{E}.
 \end{align*}
 Defining the relative permittivity and permeabilities
 \begin{align*}
@@ -188,9 +188,9 @@ then noting that the frequency in the bulk $\omega_{\mathrm{bulk}}$ and waveleng
 we finally obtain
 \begin{align*}
 	\mu_r^{-1} \ \curl{\tilde{x}}\tilde{E} 
-	&= -\rmi\frac{\omega}{\omega_{\mathrm{bulk}}} \frac{l}{\lambda_{\mathrm{bulk}}} \tilde{H}, \\
+	&= -\rmi\frac{\omega}{\omega_{\mathrm{bulk}}} \frac{L}{\lambda_{\mathrm{bulk}}} \tilde{H}, \\
 	\eps_r^{-1} \ \curl{\tilde{x}}\tilde{H} 
-	&= \rmi\frac{\omega}{\omega_{\mathrm{bulk}}} \frac{l}{\lambda_{\mathrm{bulk}}} \tilde{E}.
+	&= \rmi\frac{\omega}{\omega_{\mathrm{bulk}}} \frac{L}{\lambda_{\mathrm{bulk}}} \tilde{E}.
 \end{align*}
 This results in the domain setup illustrated in figure \ref{fig:Diagram_ScalingDimensionless}: we are now studying the (dimensionless) equations
 \begin{subequations}
@@ -201,7 +201,7 @@ This results in the domain setup illustrated in figure \ref{fig:Diagram_ScalingD
 		&= \rmi z \tilde{E},
 	\end{align}
 \end{subequations}
-for $\tilde{x}\in\reals^d$, with a period cell $\widetilde{Q} = \recip{l}Q = [0,1)^d$, an inclusion $\widetilde{Q}_0 = \recip{l}Q_0$ of size $\delta$, a bulk region $\widetilde{Q}_1 = \recip{l}Q_1$, and (dimensionless) relative permittivity and permeability
+for $\tilde{x}\in\reals^d$, with a period cell $\widetilde{Q} = \recip{L}Q = [0,1)^d$, an inclusion $\widetilde{Q}_0 = \recip{L} Q_0$ of size $0<\delta:=\frac{l}{L}<1$, a bulk region $\widetilde{Q}_1 = \recip{L}Q_1$, and (dimensionless) relative permittivity and permeability
 \begin{align*}
 	\eps_r\bracs{\tilde{x}} = 
 	\begin{cases} 
@@ -217,25 +217,32 @@ for $\tilde{x}\in\reals^d$, with a period cell $\widetilde{Q} = \recip{l}Q = [0,
 \end{align*}
 From here, one can derive the dimensionless ``curl-of-the-curl" equations and acoustic approximations.
 
+The non-dimensionalisation process provides us with a problem that possesses three independent \emph{dimensionless} parameters,
+\begin{align*}
+	\delta = \frac{l}{L}, \qquad
+	\eps = \frac{\epsilon^{\mathrm{inc}}}{\epsilon^{\mathrm{bulk}}}, \qquad
+	\mu = \frac{\mu^{\mathrm{inc}}}{\mu^{\mathrm{bulk}}}.
+\end{align*}
 It is worth noting that our choice of non-dimensionalisation is not the only possible choice, one could choose to non-dimensionalise $E$ as
 \begin{align*}
 	E = \hat{h}\bracs{\frac{\mu^{\mathrm{inc}}}{\epsilon^{\mathrm{inc}}}}^{\recip{2}}\tilde{E},
 \end{align*}
 in which case one would still obtain a dimensionless system with three free parameters akin to figure \ref{fig:Diagram_ScalingDimensionless}, only with the values of $\epsilon_r$ and $\mu_r$ being unity on the inclusion and the ratio of bulk to inclusion properties on $\tilde{Q}_1$.
+Depending on the geometry of the period cell, it can also be convenient to define $l$ as the typical size of the region $Q_1$, and have $\delta$ represent the ratio of the sizes of $Q_1$ to the period cell instead --- this is typically the case when $Q_1$ looks like a thickened graph (see section \tstk{section?}).
 Importantly, all of these independent parameters refer to \emph{contrasts} between physical properties, rather than \emph{being} physical properties themselves.
 This distinction is often not highlighted (or even acknowledged) in the mathematical literature \tstk{notable exceptions including K-Serena, and their reference?}.
 The non-dimensional Maxwell system \eqref{eq:Intro-NonDimMaxwell} is simply introduced as \emph{the} Maxwell system, and the parameters $\eps, \mu$ introduced under the names electric permittivity and magnetic permeability rather than as the contrasts between these physical properties.
+An additional note worth mentioning here is that the non-magnetic assumption, $\mu^{\mathrm{inc}}=\mu^{\mathrm{bulk}}=\muFS$, is often employed when studying photonic crystals.
+In such contexts there is often no significant difference in the physical permeabilities of the inclusion and bulk material, and mathematical studies will often only introduce the parameter $\eps$ and present the reader with a problem that has two independent parameters.
+For the remainder of this review, we will adopt the non-magnetic assumption so that our notation and language is consistent with the literature, however we will later return to exploring this idea of additional parameters emerging from the non-dimensionalising process \tstk{make section ref when it exists}.
 
-The non-dimensionalisation process provides us with a problem that possesses three independent \emph{dimensionless} parameters,
-\begin{align*}
-	\delta, \qquad
-	\eps = \frac{\epsilon^{\mathrm{inc}}}{\epsilon^{\mathrm{bulk}}}, \qquad
-	\mu = \frac{\mu^{\mathrm{inc}}}{\mu^{\mathrm{bulk}}}.
-\end{align*}
-The benefits of this process are that all possible behaviours of the Maxwell system are characterised by the values these three parameters take, and the (non-dimensional) spectrum is qualitatively representative of the physical frequencies, and can be obtained via the transform $z = \frac{\omega}{\omega_{\mathrm{bulk}}} \frac{l}{\lambda_{\mathrm{bulk}}}$.
-It is therefore natural to consider the various asymptotic limits of these free parameters and the resulting asymptotic problems.
+The benefits of non-dimensionalising are that all possible behaviours of the Maxwell system are characterised by the values these independent parameters take, and the (non-dimensional) spectrum is qualitatively representative of the physical frequencies, and can be obtained via the transform $z = \frac{\omega}{\omega_{\mathrm{bulk}}} \frac{l}{\lambda_{\mathrm{bulk}}}$.
+Given that the various regimes of these parameters govern the behaviour of the system, it is natural to consider the various asymptotic limits of these free parameters and the resulting asymptotic problems.
 Typically these asymptotic (or effective) problems are easier to handle analytically and numerically than the original system --- which is particularly pronounced for the Maxwell system --- and can reveal effects that are otherwise hard to notice.
-Such studies lean heavily on the theory of homogenisation, which we discuss in \tstk{lit review section}.
+Such studies lean heavily on the theory of homogenisation, for which we provide a brief overview in \tstk{lit review section}.
+Of particular interest is the study of materials under \emph{critical contrast}, that is when the independent parameters\footnote{As aforementioned, we are adopting the non-magnetic approximation here, however these concepts easily generalise to when there are more than two independent parameters.} $\delta$ and $\eps$ are made to scale in particular proportion to one another.
+The passage to the limit $\delta\rightarrow0$ also has interesting implications, as the size of the inclusion shrinks to zero, which brings us to the discussion in \tstk{next section ref}.
+Throughout the rest of this work, we shall drop the overhead tilde notation on our non-dimensional fields and independent variables for brevity, and use $\omega$ for the non-dimensional spectral parameter rather than $z$.
 
 %The high-contrast limit $a\rightarrow\infty$ for \eqref{eq:Intro-GeneralWaveEqn} was explored in \tstk{Kirill-Sasha-Luis Op Norm Resolvant Asymptotic Analysis} on (a domain with similar structure to) $Q$, who proved convergence to a limiting problem and in particular established an asymptotic approximation for the limiting spectrum.
 %Although this study only worked on a finite domain $Q$ rather than a periodic medium filling $\reals^d$ with period cell $Q$, the analysis is highly relevant if one uses a Gelfand or Floquet transform (\tstk{section ref}) to study the periodic problem.
