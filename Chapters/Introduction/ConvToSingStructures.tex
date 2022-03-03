@@ -14,9 +14,8 @@ In order to be more precise, let us illustrate this ethos using the (non-dimensi
 \begin{align} \label{eq:Intro-WaveEqnHomo}
 	-\grad\cdot A(x)\grad u(x) &= \omega^2 u(x),
 \end{align}
-in the domain with period cell $Q$ described in section \ref{ssec:Intro-NonDimMax}.
-In the standard notation within homogenisation theory, the material properties are represented by a (matrix-valued) function $A(x)$, and the dependence on the independent parameters of the problem is often made explicit in the notation.
-In this case, we have $A(x)=A^{\delta,\eps}(x)=\eps_{\mathrm{r}}^{-1}(x)$, with the $\delta$-dependence coming from the piecewise constant behaviour of $\eps_{\mathrm{r}}$ over $Q$.
+in the domain with period cell $Q=[0,1)^d$ described in section \ref{ssec:Intro-NonDimMax}.
+In the standard notation within homogenisation theory the material properties are represented by a (matrix-valued) $Q$-periodic function $A(x)$, which in this case is $A(x)\eps_{\mathrm{r}}^{-1}(x)$.
 The process of homogenisation would look to replace the wave equation \eqref{eq:Intro-WaveEqnHomo} with an equation of the form
 \begin{align}
 	-\grad\cdot A^{0}\grad u

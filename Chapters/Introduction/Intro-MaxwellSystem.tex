@@ -180,7 +180,7 @@ Defining the relative permittivity and permeabilities
 	\eps_r\bracs{\tilde{x}} = \frac{\epsilon_m(x)}{\epsilon^{\mathrm{bulk}}},
 	\qquad \mu_r\bracs{\tilde{x}} = \frac{\mu_m(x)}{\mu^{\mathrm{bulk}}},
 \end{align*}
-then noting that the frequency in the bulk $\omega_{\mathrm{bulk}}$ and wavelength in the bulk $\lambda_{\mathrm{bulk}}$ are related by 
+then setting
 \begin{align*}
 	\omega_{\mathrm{bulk}} \lambda_{\mathrm{bulk}}
 	&= \bracs{\epsilon^{\mathrm{bulk}}\mu^{\mathrm{bulk}}}^{-\recip{2}},
@@ -216,6 +216,7 @@ for $\tilde{x}\in\reals^d$, with a period cell $\widetilde{Q} = \recip{L}Q = [0,
 	\end{cases}
 \end{align*}
 From here, one can derive the dimensionless ``curl-of-the-curl" equations and acoustic approximations.
+Upon completion of this section, we shall drop the overhead tilde notation on our non-dimensional fields and independent variables for brevity, and adopt $\omega$ as the symbol for the non-dimensional spectral parameter rather than $z$.
 
 The non-dimensionalisation process provides us with a problem that possesses three independent \emph{dimensionless} parameters,
 \begin{align*}
@@ -236,13 +237,10 @@ An additional note worth mentioning here is that the non-magnetic assumption, $\
 In such contexts there is often no significant difference in the physical permeabilities of the inclusion and bulk material, and mathematical studies will often only introduce the parameter $\eps$ and present the reader with a problem that has two independent parameters.
 For the remainder of this review, we will adopt the non-magnetic assumption so that our notation and language is consistent with the literature, however we will later return to exploring this idea of additional parameters emerging from the non-dimensionalising process \tstk{make section ref when it exists}.
 
-The benefits of non-dimensionalising are that all possible behaviours of the Maxwell system are characterised by the values these independent parameters take, and the (non-dimensional) spectrum is qualitatively representative of the physical frequencies, and can be obtained via the transform $z = \frac{\omega}{\omega_{\mathrm{bulk}}} \frac{l}{\lambda_{\mathrm{bulk}}}$.
+The benefits of non-dimensionalising are that all possible behaviours of the Maxwell system are characterised by the values these independent parameters take, and the (non-dimensional) spectrum is qualitatively representative of the physical frequencies, and can be obtained via the transform $z = \frac{\omega}{\omega_{\mathrm{bulk}}} \frac{L}{\lambda_{\mathrm{bulk}}}$.
 Given that the various regimes of these parameters govern the behaviour of the system, it is natural to consider the various asymptotic limits of these free parameters and the resulting asymptotic problems.
 Typically these asymptotic (or effective) problems are easier to handle analytically and numerically than the original system --- which is particularly pronounced for the Maxwell system --- and can reveal effects that are otherwise hard to notice.
-Such studies lean heavily on the theory of homogenisation, for which we provide a brief overview in \tstk{lit review section}.
-Of particular interest is the study of materials under \emph{critical contrast}, that is when the independent parameters\footnote{As aforementioned, we are adopting the non-magnetic approximation here, however these concepts easily generalise to when there are more than two independent parameters.} $\delta$ and $\eps$ are made to scale in particular proportion to one another.
-The passage to the limit $\delta\rightarrow0$ also has interesting implications, as the size of the inclusion shrinks to zero, which brings us to the discussion in \tstk{next section ref}.
-Throughout the rest of this work, we shall drop the overhead tilde notation on our non-dimensional fields and independent variables for brevity, and use $\omega$ for the non-dimensional spectral parameter rather than $z$.
+A discussion of these asymptotic limits and their relation to homogenisation of so called \emph{critical contrast} materials is the focal point of the next section (\tstk{ref}).
 
 %The high-contrast limit $a\rightarrow\infty$ for \eqref{eq:Intro-GeneralWaveEqn} was explored in \tstk{Kirill-Sasha-Luis Op Norm Resolvant Asymptotic Analysis} on (a domain with similar structure to) $Q$, who proved convergence to a limiting problem and in particular established an asymptotic approximation for the limiting spectrum.
 %Although this study only worked on a finite domain $Q$ rather than a periodic medium filling $\reals^d$ with period cell $Q$, the analysis is highly relevant if one uses a Gelfand or Floquet transform (\tstk{section ref}) to study the periodic problem.
