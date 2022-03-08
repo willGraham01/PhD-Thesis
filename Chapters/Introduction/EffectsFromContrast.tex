@@ -1,0 +1,118 @@
+\section{Asymptotic Studies and Dispersive Effects} 
+\tstk{Rename when you get the chance, to something more appropriate}
+
+\tstk{linking intro too; here we are going to motivate the idea of critical contrast and how it causes band-gaps and other effects to emerge, when the size of the inclusion is fixed. This will then be a natural point to talk about some of the missing gaps WRT K-Fig studies and the missing ``homogenisation" problem? Then we'll talk about thickened graphs and the limit as width goes to zero. This will motivate our singular structures, and also show that dissipative effects can emerge from geometric, as well as material, properties. Then, this should provide a natural segway into what we are planning to talk about: our starting point of singular structures to introduce contrast effects, the gaps in the literature that this work is related to (is this the limiting problem of some other system?), and our objectives in carrying out this research}
+
+\tstk{this discussion would be more appropriate after the non-dimensionalisation argument, however I can't reconcile Kirill's ``wavelengths only" to my relative permittivity and permeability setting. Once you have this reconciliation, this part will be nicer. Also, you might want to re-jig the non-dimensionalisation section to save redefining everything here... :L }
+
+\subsection{Critical Contrast}
+\tstk{linking sentence}
+
+Let us begin with the study of \tstk{Zhikov 2000 double-porosity (extension of 2 scale method)}; here the study was concerned with the homogenisation problem for the operator $\mathcal{A}^{\eps}$,
+\begin{align*}
+	\mathcal{A}^{\eps} := -\grad\cdot A^{\eps}(\eps^{-1}x)\grad,
+\end{align*}
+in the limit as $\eps\rightarrow0$, where $A^{\eps}(y)$ is a $Q=[0,1)^d$-periodic function taking the value $\eps^2$ on $Q_0$ and $1$ on $Q_1$ (see the bottom-left domain in figure \ref{fig:Diagram_HL-Zhikov}).
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.75]{Diagram_HL-Zhikov.pdf}
+	\caption{\label{fig:Diagram_HL-Zhikov} An illustration of how homogenisation of materials under critical contrast interlaces with asymptotic studies of photonic crystal-like materials.}
+\end{figure}
+A limiting operator $\mathcal{A}$ is derived, and the convergence of the solutions to $\mathcal{A}^{\eps}u^{\eps}=f^{\eps}$ to the solution $u$ of $\mathcal{A}u=f$ is obtained --- this convergence being in the so-called two-scale sense \tstk{rather than what? The classical homogenisation arguments that lead to resolvent convergence?}.
+The spectrum of the limiting operator $\mathcal{A}$ is also shown to be the Hausdorff limit of the spectra of the operators $\mathcal{A}^{\eps}$ as $\eps\rightarrow0$.
+Crucially, the limiting operator $\mathcal{A}$ possesses an infinite set of spectral band-gaps, whose location is described by a function $\beta\bracs{\omega}$.
+The existence of gaps in the limiting spectrum is unusual, and can be attributed to the matrix $A^{\eps}$ itself being dependent on $\eps^2$.
+Indeed, suppose we were to consider the similar homogenisation problem for the operators
+\begin{align*}
+	\mathcal{B}^{\eps} := -\grad\cdot B(\eps^{-1}x)\grad,
+\end{align*}
+again as $\eps\rightarrow0$, but with $B(y)$ identical to $A(y)$ except taking the value $b\neq b(\eps)$ on $Q_1$.
+Setting $y=\eps^{-1}x$, we find that
+\begin{align*}
+	\mathcal{B}^{\eps}u = \omega^2 u 
+	\quad\Leftrightarrow \quad &
+	-\recip{\eps^2}\grad\cdot B(y)\grad u = \omega^2 u, \\
+	\quad\Leftrightarrow \quad &
+	-\grad\cdot B(y)\grad u = \nu^2 u,
+\end{align*}
+where $\nu = \omega\eps$.
+The operator $-\grad\cdot B(y)\grad u$ has $[0,1)^d$-periodic coefficients, and acts on the domain with period cell as illustrated on the right of figure \ref{fig:Diagram_HL-Zhikov}.
+Due to the periodic coefficients, the spectrum and thus eigenvalues $\nu^2$ will form (possibly overlapping) bands --- so in the limit $\eps\rightarrow0$ and with $\omega = \eps^{-1}\nu$, the spectrum of $\mathcal{B}^{\eps}$ extends to the positive real line as one ``inflates" the bands by $\eps^{-2}$.
+Consequentially we don't observe band-gaps in the limiting operator for $\mathcal{B}^{\eps}$, as the first band in particular is stretched to cover the whole real line.
+However by ensuring that $b$ scales with the parameter $\eps$ in a particular way, we \emph{do} observe band-gaps (and additional phenomena such as time-memory).
+This introduces us to the idea of \emph{critical contrast} or \emph{high contrast}; a material whose parameters are scaled in proportion to the size of the period cell is said to be under \emph{critical contrast}. \tstk{also resonnance????}
+
+The question now is how do materials under critical contrast relate to the finite-periodic, composite materials (the notation for which we adopt from section \ref{sec:Intro-Maxwell})?
+To address this, we turn to the study of \tstk{Hempel-Lienau} who studied a periodic composite material with the setup in the top-left of figure \ref{fig:Diagram_HL-Zhikov}; here the period cell and inclusion are of a fixed size, and the operator $\mathcal{A}^\kappa:=-\grad\cdot\tilde{A}\grad$ is studied\footnote{\tstk{H and L} actually study a slightly more general version of this operator.} where $A=1$ on $Q_0$ and $A=\kappa\gg 1$ on $Q_1$.
+The asymptotic limit $\kappa\rightarrow\infty$ was then explored --- physically, this corresponds to our expectation that low-index inclusions need to be surrounded by a high-index bulk material to open spectral band-gaps.
+Writing the spectrum of $\mathcal{A}^\kappa$ as the set
+\begin{align*}
+	\sigma\bracs{\mathcal{A}^\kappa} = \bigcup_{i\in\naturals}\sqbracs{a_i^\kappa,b_i^\kappa},
+\end{align*}
+for (possibly overlapping) bands $I_i^\kappa = \sqbracs{a_i^\kappa,b_i^\kappa}$, it was shown that there exist constants $\alpha_i < \beta_i < \alpha_{i+1}$ such that
+\begin{align*}
+	a_i^\kappa \rightarrow \alpha_i, \qquad b_i^\kappa \rightarrow \beta_i, \qquad \toInfty{\kappa}.
+\end{align*}
+The analysis also demonstrated that the $\beta_i$ were the eigenvalues of the Dirichlet Laplacian on $\bigcup_{i\in\integers^d}Q_0$, and the $\alpha_i$ the limits (as $\kappa\rightarrow\infty$) of the eigenvalues of the operator with action $-\grad\cdot \tilde{A}\grad u$ with domain $Q_0$, under Neumann boundary conditions.
+Additional results about the density of states were also proven, the main takeaway being that the spectrum concentrates near the endpoints $\beta_i$ of the bands as $\kappa$ increases. \tstk{follow up studies? Friedlander, etc}
+Importantly, this limit of the spectrum is the same as that of the aforementioned limiting operator $\mathcal{B}$.
+Indeed, upon identifying $\kappa=\eps^{-2}$ (so $\kappa\rightarrow\infty \Leftrightarrow \eps\rightarrow0$) and $\tilde{A}=\eps^{-2}B$ it is clear why the two problems share the same spectrum under the respective limits, although it should be noted that this is one of the only common features of the two problems --- in most other respects they behave differently.
+\tstk{here, we could also introduce resonance WRT Hempel-Lienau, the inclusion parameter being 1 and the off-inclusion parameter being far greater than 1. Also, this links back to the physical interpretation that PCFs work through anti-resonances...}
+This is also an opportune time for us to introduce the concept of resonance; a material experiences resonance when exactly one of the non-dimensional parameters is of order unity, and the remainder are much larger than unity.
+In the setup of \tstk{H-L, above} we observe precisely this situation --- we have $\lambda^{\mathrm{bulk}}\gg L$, whilst $\lambda^{\mathrm{inc}}\sim L$ (the parameter $\delta$ is absent from this formulation as a variable sized inclusion was not considered).
+One can then attribute resonance to the emergence of band-gaps \tstk{and other dissipative stuff} in the asymptotic limit, with the vast differences in wavelengths in each of the material components that are required becoming impossible to achieve at higher contrasts.
+
+\tstk{Now, we can talk about what happens if we free up $\delta$, or if we want to look at the Maxwell or curl-curl operator instead. This will lead us into talking about the results of Kuchment-Figotin, although the other two ``parts" of the picture in figure 1-4 are missing. Other possible references that are important here are:}
+
+\subsection{Thin Structures in the $\delta\rightarrow0$ limit}
+
+Graphically, the ``limit" $\delta\rightarrow0$ in these domain setups is rather intuitive --- one can visualise the region $Q_1$ becoming increasingly fine, getting closer to a collection of connected line segments as $\delta$ decreases to 0.
+This raises the natural question as to whether it is reasonable (or even possible) to appeal to this visual intuition and approximate a photonic crystal as a \emph{singular structure} embedded into a 2 or 3 dimensional matrix.
+Figure \ref{fig:Diagram_ShrinkToSingularSquareCell} illustrates this process for a 2-dimensional geometry that is extruded into 3 dimensions.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{Diagram_ShrinkToSingularSquareCell.pdf}
+	\caption{\label{fig:Diagram_ShrinkToSingularSquareCell} A visual illustration of the $\delta\rightarrow0$ limit in a ``fibre-like" geometry. The cross sectional geometry (dark cross) shrinks to a collection of line segments, resulting in a union of planes whose cross-section is a graph-like structure.}
+\end{figure}
+The resulting ``singular structure" is a region embedded into a space in which it has no volume (or area in two dimensions); in the illustration the resulting planes have no volume from the perspective of $\reals^3$.
+If we remain true to our photonic crystal setup, the rest of $\reals^d$ upon taking the ``limit" $\delta\rightarrow0$ is taken up by the ``inclusion" $Q_0$.
+However, relevant to our studies in \tstk{sections} will be the study of so called \emph{thin-structures}.
+Such thin-structures $G_{\delta}$ consist only of the region (formed by translations of) $Q_1$, that is $G_{\delta} = \bigcup_{l\in\integers^d}(l+Q_1)$.
+In almost all contexts one is typically looking at a thin-structure domain that is akin to a ``thickened graph"; one takes a graph $\graph$, embeds it into $\reals^d$, and inflates the edges into tubes of radius $\sim\delta$ and the vertices into junctions regions connecting the ends of these tubes.
+In the interest of avoiding addressing several technicalities and detracting from the focus of our review, one can think of $G_{\delta}$ as being the surface of (or volume enclosed by) the resulting ``inflated" structure --- the illustration in figure \ref{fig:Diagram_ThickenedGraph} provides a sufficient visualisation.
+\begin{figure}[b]
+	\centering
+	\includegraphics[scale=1.0]{Diagram_ThickenedGraph.pdf}
+	\caption{\label{fig:Diagram_ThickenedGraph} A schematic illustration of a thickened graph $G_{\delta}$, consisting of tubes whose central axes are the edges of the underlying graph $\graph$, meeting at inflated vertex regions. The graph $\graph$ consists of the dashed edges and connecting vertex.}
+\end{figure}
+Then by construction, $G_{\delta}$ converges in the eyeball norm as $\delta\rightarrow0$ to the (metric) graph $\graph$, whose edges are correspond to the central axes of the tubes and whose vertices correspond to the centre of the collapsing junction regions.
+Since $\graph$ is embedded into real space, each edge $e$ can be bestowed a length $l_e>0$ and a corresponding interval $I_e=\sqbracs{0,l_e}$ where we associate $0,l_e\in I_e$ with the vertices at either end of $e$.
+In turn, one can now define a derivative along these edges, and thus can equip $\graph$ with (the analogue of) a differential operator --- a graph equipped with such an operator is called a \emph{quantum graph}, and the system of equations and ``boundary conditions" defined by this operator a \emph{quantum graph problem}.
+Since the intervals $I_e$ do not convey the connectivity of $\graph$, the ``boundary conditions" for quantum graph problems arise in the form of matching conditions at the vertices.
+A more precise description and introduction is provided in section \tstk{section ref}, however for the purposes of understanding here it is enough to think of such quantum graph problems as consisting of ODEs on each edge, whose solutions are coupled together through matching conditions at the vertices.
+
+The use of quantum graphs as approximations to physical processes and the study of the spectra of the associated operators has a rather rich history thanks \tstk{get refs for this, Kuch-Zheng is a good place to start} to interests from mesoscopic physics\footnote{Broadly speaking, this is a branch of condensed matter physics focusing on materials whose size ranges from a few molecules or atoms to micrometres.}.
+\tstk{Although we do not delve into the details, such quantum graph problems are known to describe thin superconducting structures called ``quantum wires", ``molecular wires", and free-electron theory of conjugated molecules.}
+In each of these contexts there is difficulty in identifying the \emph{correct} quantum graph problem. Whilst the graph itself is easily identifiable, the resulting vertex conditions are not due to complications in coming from the behaviour of the solutions within the junction regions of $G_{\delta}$ as $\delta$ decreases.
+Heuristic arguments and physical intuition led to the standard practice of imposing the matching of function values and adherence to Kirchoff conditions\footnote{Kirchoff conditions correspond to the sum of incoming derivatives being zero at each vertex, akin to the Kirchoff's first law of ``net zero current" through junctions in electric circuits.} as the vertex conditions.
+These long-standing assumptions seeming justified with the study of \tstk{Kuchment-Zheng, themselves extending J. Rubinstein and M. Schatzman} establishing convergence of the spectrum of the Neumann laplacian on $G_{\delta}$ to the spectrum of a quantum graph problem.
+In particular, the vertex conditions associated with the ``limiting" spectral problem were continuity of $u$ at the vertices of $\graph$, and a Kirchoff condition at each vertex\footnote{This is a simplification in the interest of providing the reader with an overall idea of the key concepts. The study \tstk{Kuchment and Zheng} results in a weighted sum in the Kirchoff condition, with the weights coming from technicalities in the precise definition of $G_{\delta}$.}.
+However, the studies \tstk{Exner-Post and Exner standalone} later demonstrated that this was not the complete story, and that the ``approximate" quantum graph problem ad a more general dependence on the original domain.
+Specifically, the relative scaling of the volume of the inflated edges $V_{\mathrm{edge}}$ with $\delta$ to the volume of the junction regions $V_{\mathrm{vertex}}$ determined the resulting vertex conditions in the limiting quantum graph problem;
+\begin{itemize}
+	\item If $V_{\mathrm{edge}}\ll V_{\mathrm{vertex}}\rightarrow0$ as $\delta\rightarrow0$, then the resulting ``limit" problem is just a quantum graph problem with (homogeneous) Dirichlet conditions at each of the vertices.
+	This case is referred to as Dirichlet decoupling; the resulting limit problem is just a collection of independent ODEs along the edges of the graph $\graph$, intuitively the result of the vertices being ``too big" when compared to the edges and thus preventing any interaction between the edges.
+	\item If $V_{\mathrm{vertex}}\ll V_{\mathrm{edge}}\rightarrow0$ as $\delta\rightarrow0$, the edges dominate in the limit problem and one obtains the same boundary conditions as \tstk{Kuch-Zheng} found in their study.
+	Intuitively, since the vertices ``disappear" before the edges as $\delta\rightarrow0$, the resulting problem (and it's solutions) must have strict matching conditions where the edges meet --- resulting in continuity and a net flux of 0 (Kirchoff condition) at each vertex.
+	\item Of particular interest though is when $\frac{V_{\mathrm{edge}}}{V_{\mathrm{vertex}}}\rightarrow c>0$ as $\delta\rightarrow0$, that is when the volume of the tubes and junctions are of the same order of $\eps$.
+	This is an intermediary for the other two cases, the effect of decoupling the edges (large junctions) is balanced by the need for consistency between edges (large tubes).
+	The resulting vertex conditions still require continuity at each of the vertices, but one obtains a non-standard Kirchoff condition where the sum of fluxes into each vertex equals a ``coupling constant"\footnote{These constants are determined from the ratio $\frac{V_{\mathrm{edge}}}{V_{\mathrm{vertex}}}$.} multiplying the function value at that vertex (rather than 0).
+\end{itemize}
+\tstk{vertex size wasn't considered previously as important, however we see here that the geometry is a non-trivial factor! Also, now we end up in QG problems that correspond to generalised resolvents, and give rise to dispersion effects etc. IE, we have interesting problems to hand!}
+
+There has also been interest in the study of the equations of elasticity on thin-structures and the resulting ``singular" limits.
+\tstk{Zhikov 2002} studied the problem of homogenisation for periodic thin-structure of thickness $\delta$, looking to derive the resulting effective problem in the ``long-wavelength" regime.
+In this work determination of the effective problem in the so-called critical scaling regime $\delta\sim\eps$ of the thickness $h$ with the period $\eps$ was noted as being an open problem, with the resulting homogenised operator being different to that in the non-critical scaling regimes.
+This work was followed up in \tstk{Zhikov-Pastuk, 2003}, in which these differences were identified and the effective problem in the critical setting presented.
+A method for passing to the limit in the equations of elasticity on a bounded thin-structure domain as the thickness $\delta\rightarrow0$ was also developed in \tstk{Zhikov-Past 2006}, the resulting system being a quantum graph problem with Kirchoff matching conditions at each of the vertices.
+\tstk{again, there is an absence here of the notion of a vertex size --- this study is implicitly placing itself in the edge-dominated case. An analysis akin to EP-KZ might produce additional effects that are realisable from the geometric scalings.}
