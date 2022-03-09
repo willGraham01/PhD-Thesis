@@ -29,10 +29,13 @@
 
 %can use the \includeonly{} command to specify which chapters to update and include in the document,
 %to save on rendering time. This will also retain equation/section numbering from skipped sections too.
-%\includeonly{./Chapters/Introduction/Intro}
-%\includeonly{./Chapters/Theory-Prelims/Theory-Prelims}
-%\includeonly{./Chapters/Scalar-System/Scalar-System}
-\includeonly{./Chapters/SingInclusions/SingInclusions}
+\includeonly{
+./Chapters/Introduction/Intro,
+%./Chapters/Theory-Prelims/Theory-Prelims,
+%./Chapters/Scalar-System/Scalar-System,
+%./Chapters/Curl-Curl/Curl-Curl,
+%./Chapters/SingInclusions/SingInclusions,
+}
 
 \begin{document}
 
@@ -61,7 +64,7 @@
 %\include{./Chapters/Conclusion/Conc}
 
 \newpage %have a new page to start the bibliography
-%\bibliographystyle{acm}
-%\bibliography{./BibFiles/BTandSS.bib,./BibFiles/MiscRefs.bib,./BibFiles/PCFsAndEM.bib,./BibFiles/QuantumGraphs.bib}
+\bibliographystyle{acm}
+\bibliography{./BibFiles/Thesis_MasterBib.bib}
 
 \end{document}

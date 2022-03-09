@@ -1,5 +1,5 @@
 \section{The Maxwell Equations and Derived Systems} \label{sec:Intro-Maxwell}
-Wave propagation in electromagnetic contexts is governed by the system of Maxwell equations;
+Wave propagation in electromagnetic contexts is governed by the system of Maxwell equations; \tstk{Jackson, Cassent for some flavour?}
 \begin{align*}
 	\grad\cdot \mathbf{D} = \rho_f, &\qquad
 	\curl{}\mathbf{E} = -\pdiff{\mathbf{B}}{t}, \\
@@ -43,7 +43,7 @@ The equations involving the curl can be written in matrix form, and correspond t
 \end{align*}
 We will come to call $\mathcal{M}$ the Maxwell operator, however we need to be slightly careful in defining it so that we respect the divergence-free conditions, and end up with a self adjoint operator.
 Typically this not difficult if the domain we are considering is smooth (or the whole of $\reals^d$), even the regularity of $\epsilon_m$ and $\mu_m$ tends not to be an issue in these contexts.
-However there is significantly more work that needs to be done for domains with (possibly non-smooth) metallic inclusions or boundaries, with the work of \tstk{Birman and Solomyak; L2-Theory of the Maxwell operator in arbitrary domains (1987, in english on IOP science but originally in russian) and Self-adjoint Maxwell operator in arbitrary domains (Leningrad journal)} providing a detailed study of the Maxwell operator in these contexts.
+However there is significantly more work that needs to be done for domains with (possibly non-smooth) metallic inclusions or boundaries, with the work of \cite{birman1987l2, birman1989selfadjoint} providing a detailed study of the Maxwell operator in these contexts.
 For the purposes of this review, we can define the Maxwell operator $\mathcal{M}$ by assigning it the domain
 \begin{align*}
 	\dom{\mathcal{M}} = \left\{ \bracs{E,H} \ \middle\vert \right. 
@@ -59,7 +59,7 @@ The weighted spaces $L^2\bracs{\ddom, w\md x}^3$ consist of the square-integrabl
 \begin{align*}
 	\norm{ f }_{L^2\bracs{\ddom, w\md x}^3} &= \integral{\ddom}{\abs{f(x)}^2 w(x)}{x}.
 \end{align*}
-Under this setup, the Maxwell operator $\mathcal{M}$ is self-adjoint (see \tstk{Birman-Solomyak lemma 2.2}), and the ``Maxwell system" is the spectral problem for this operator.
+Under this setup, the Maxwell operator $\mathcal{M}$ is self-adjoint and the ``Maxwell system" is the spectral problem for this operator.
 The spectrum of $\mathcal{M}$ determines the frequencies of light that can propagate in the medium, with any intervals in $\omega$ that are absent from the spectrum of $\mathcal{M}$ corresponding to band gaps.
 
 Even with the Maxwell operator being self-adjoint, it is still not elliptic and has eigenvalues that extend across the whole real line (that is, to both $\pm\infty$), making direct analysis of it difficult.
