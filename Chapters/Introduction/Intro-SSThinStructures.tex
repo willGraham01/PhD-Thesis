@@ -1,0 +1,89 @@
+\subsection{Thin Structures in the $\delta\rightarrow0$ limit} \label{ssec:Intro-ThinStructures}
+
+Graphically, the ``limit" $\delta\rightarrow0$ in these domain setups is rather intuitive --- one can visualise the region $Q_1$ becoming increasingly fine, getting closer to a collection of connected line segments as $\delta$ decreases to 0.
+This raises the natural question as to whether it is reasonable (or even possible) to appeal to this visual intuition and approximate a photonic crystal as a \emph{singular structure} embedded into a 2 or 3 dimensional matrix.
+Figure \ref{fig:Diagram_ShrinkToSingularSquareCell} illustrates this process for a 2-dimensional geometry that is extruded into 3 dimensions.
+\begin{figure}[h]
+	\centering
+	\includegraphics[scale=0.5]{Diagram_ShrinkToSingularSquareCell.pdf}
+	\caption{\label{fig:Diagram_ShrinkToSingularSquareCell} A visual illustration of the $\delta\rightarrow0$ limit in a ``fibre-like" geometry. The cross sectional geometry (dark cross) shrinks to a collection of line segments, resulting in a union of planes whose cross-section is a graph-like structure.}
+\end{figure}
+The resulting ``singular structure" is a region embedded into a space in which it has no volume (or area in two dimensions); in the illustration the resulting planes have no volume from the perspective of $\reals^3$.
+If we remain true to our photonic crystal setup, the rest of $\reals^d$ upon taking the ``limit" $\delta\rightarrow0$ is taken up by the ``inclusion" $Q_0$.
+However, relevant to our studies in \tstk{sections} will be the study of so called \emph{thin-structures}.
+Such thin-structures $G_{\delta}$ consist only of the region (formed by translations of) $Q_1$, that is $G_{\delta} = \bigcup_{l\in\integers^d}(l+Q_1)$.
+In almost all contexts one is typically looking at a thin-structure domain that is akin to a ``thickened graph"; one takes a graph $\graph$, embeds it into $\reals^d$, and inflates the edges into tubes of radius $\sim\delta$ and the vertices into junctions regions connecting the ends of these tubes.
+In the interest of avoiding addressing several technicalities and detracting from the focus of our review, one can think of $G_{\delta}$ as being the surface of (or volume enclosed by) the resulting ``inflated" structure --- the illustration in figure \ref{fig:Diagram_ThickenedGraph} provides a sufficient visualisation.
+\begin{figure}[t]
+	\centering
+	\includegraphics[scale=1.0]{Diagram_ThickenedGraph.pdf}
+	\caption{\label{fig:Diagram_ThickenedGraph} A schematic illustration of a thickened graph $G_{\delta}$, consisting of tubes whose central axes are the edges of the underlying graph $\graph$, meeting at inflated vertex regions. The graph $\graph$ consists of the dashed edges and connecting vertex.}
+\end{figure}
+
+By design, the thin-structure $G_{\delta}$ converges in the eyeball norm as $\delta\rightarrow0$ to the (metric) graph $\graph$, whose edges are correspond to the central axes of the tubes and whose vertices correspond to the centre of the collapsing junction regions.
+Since $\graph$ is embedded into real space, each edge $I_{jk}$ which connects the vertex $v_j$ to $v_k$ can be bestowed a length $l_{jk}>0$ and a corresponding interval $\sqbracs{0,l_{jk}}$ where we associate $0\in\sqbracs{0,l_{jk}}$ to $v_j$ and $l_{jk}\in\sqbracs{0,l_{jk}}$ to $v_k$.
+A function defined on a quantum graph $u$ is then specified by its restriction to each of the $I_{jk}$, denoted by $u^{(jk)}$, and the values $u$ takes at the vertices of the graph.
+With this notion of length, one can now define a derivative for $u$ along the edges, and thus can equip $\graph$ with (the analogue of) a differential operator.
+Since the intervals associated to the edges $I_{jk}$ do not convey the connectivity of $\graph$, the ``boundary conditions" for these differential operators come in the form of matching conditions at the vertices.
+A graph equipped with such an operator is called a \emph{quantum graph}, and the system of equations and ``boundary conditions" defined by this operator a \emph{quantum graph problem}.
+A more precise description and introduction is provided in section \tstk{section ref}, and a more complete overview of the field can be found in \cite{berkolaiko2013introduction}, however it is sufficient for this introduction to think of such a quantum graph problem as consisting of an ODE on each of the intervals associated to $I_{jk}$, coupled through matching conditions at the vertices.
+Standard Neumann or Dirichlet conditions on $u$ at each vertex can be used as the vertex conditions, however these tend to neglect (or to an extent, suppress) the underlying graph structure, which allows for more adventurous conditions to be used.
+More common choices of vertex conditions are continuity of the function $u$ though the vertices\footnote{That is whenever two edges $I_{jk}$ and $I_{kl}$ share a common vertex, the restrictions $u^{(jk)}$ and $u^{(kl)}$ must take the same value at the shared vertex $v_k$.} and the Kirchoff condition,
+\begin{align*}
+	\sum_{v_k \text{ connects to } v_j} 
+	\pdiff{u^{(jk)}}{n}\bracs{v_j} = \alpha_j u(v_j),
+\end{align*}
+where $\pdiff{u^{(jk)}}{n}\bracs{v_j}$ denotes the \emph{incoming} derivative to $v_j$, and $\alpha_j$ is a (``coupling") constant. 
+The Kirchoff condition corresponds relates the flux at each vertex to the function value, when the coupling constant (or function value) at $v_j$ is zero, it's form and interpretation is analogous to Kirchoff's first law of ``net zero current" through junctions in electric circuits.
+
+The use of quantum graphs as approximations to physical processes and the study of the spectra of the associated operators has a rather rich history thanks \tstk{get refs for this, Kuch-Zheng is a good place to start} to interests from mesoscopic physics\footnote{Broadly speaking, this is a branch of condensed matter physics focusing on materials whose size ranges from a few molecules or atoms to micrometres.}.
+\tstk{Although we do not delve into the details, such quantum graph problems are known to describe thin superconducting structures called ``quantum wires", ``molecular wires", and free-electron theory of conjugated molecules.}
+In each of these contexts there is difficulty in identifying the \emph{correct} quantum graph problem. Whilst the graph itself is easily identifiable, the resulting vertex conditions are not due to complications in coming from the behaviour of the solutions within the junction regions of $G_{\delta}$ as $\delta$ decreases.
+Heuristic arguments and physical intuition led to the standard practice of imposing continuity and Kirchoff conditions as the vertex conditions in the ``approximating" quantum graphs for these applications.
+These long-standing assumptions seemed justified with the study of \tstk{\cite{kuchment2001convergence} themselves extending J. Rubinstein and M. Schatzman}, which established convergence of the spectrum of the Neumann laplacian on $G_{\delta}$ (which we will denote by $\mathcal{G}_{\delta}$) to the spectrum of a quantum graph problem (defined by an operator we denote by $\mathcal{G}$).
+Precisely, the result
+\begin{align*}
+	\lim_{\delta\rightarrow0} \lambda_n\bracs{\mathcal{G}_{\delta}} = \lambda_n\bracs{\mathcal{G}}
+\end{align*}
+we proved for every $n\in\naturals$, where $\lambda_n\bracs{\mathcal{G}_{\delta}}$ and $\lambda_n\bracs{\mathcal{G}}$ are the eigenvalues of the respective operators ordered in ascending order.
+The argument that was utilised revolved around representing the eigenvalues of $\mathcal{G}_{\delta}$ and $\mathcal{G}$ via the minimax principle, and a method of translating functions on $G_{\delta}$ to $\graph$ and back so that the increase in the Rayleigh quotient could be controlled.
+Convergence of the resolvent was proved in \tstk{Satio - in \cite{exner2005convergence}, [27]th reference} when the underlying graph had no loops or cycles.
+In particular, the vertex conditions associated with $\mathcal{G}$ were continuity of $u$ at the vertices of $\graph$, and a Kirchoff condition at each vertex\footnote{This is a simplification in the interest of providing the reader with an overall idea of the key concepts. The study \cite{kuchment2001convergence} allowed for a slightly more general, weighted domain $G_{\delta}$ which results in a weighted sum in the Kirchoff condition, and also allows the presence of an external field.}, justifying the heuristic arguments that had come before.
+
+However, the study \cite{exner2005convergence} later demonstrated that this was not the complete story.
+Starting from the domain\footnote{The study \cite{exner2005convergence} actually considers the more general setup where one is working with manifolds, and differential operators on these manifolds. Here, we present the results in a manner contextualized to our review.} $G_{\delta}$, one can define the volume of the inflated edges $V_{\mathrm{edge}}$ as a function of the thickness $\delta$ and volume of the junction regions $V_{\mathrm{vertex}}$, which also scales with $\delta$.
+In the limit $\delta\rightarrow0$, the spectrum of $\mathcal{G}_{\delta}$ coincides with the spectrum of an operator $\tilde{\mathcal{G}}$ which depends on the relative scaling between $V_{\mathrm{vertex}}$ and $V_{\mathrm{edge}}$.
+\begin{itemize}
+	\item (``Thick vertex" setup) If $V_{\mathrm{edge}}\ll V_{\mathrm{vertex}}\rightarrow0$ as $\delta\rightarrow0$, then $\tilde{\mathcal{G}}$ defines a quantum graph problem with (homogeneous) Dirichlet conditions at each of the vertices.
+	This case is referred to as Dirichlet decoupling; the resulting limit problem is just a collection of independent ODEs along the edges of the graph $\graph$, intuitively the result of the vertices being ``too big" when compared to the edges and thus preventing any interaction between the edges.
+	\item (``Thick edge" setup) If $V_{\mathrm{vertex}}\ll V_{\mathrm{edge}}\rightarrow0$ as $\delta\rightarrow0$, the edges dominate in the limit problem and one obtains $\tilde{\mathcal{G}} = \mathcal{G}$ from the study \cite{kuchment2001convergence}.
+	Intuitively, since the vertices ``disappear" before the edges as $\delta\rightarrow0$, the resulting problem (and it's solutions) must have strict matching conditions where the edges meet --- resulting in continuity and a net flux of 0 (Kirchoff condition) at each vertex.
+	\item (``Borderline/critical" case) Of particular interest is when $\frac{V_{\mathrm{edge}}}{V_{\mathrm{vertex}}}\rightarrow c>0$ as $\delta\rightarrow0$, that is when the volume of the tubes and junctions are of the same order of $\delta$.
+	This is an intermediary for the other two cases, the effect of decoupling the edges (large junctions) is balanced by the need for consistency between edges (large tubes).
+	The spectral problem for the resulting operator $\tilde{\mathcal{G}}$ can be shown to define a quantum graph problem whose vertex conditions are continuity at each of the vertices, but along with a ``non-standard" Kirchoff condition at the vertices,
+	\begin{align*}
+	\sum_{v_k \text{ connects to } v_j} 
+	\pdiff{u^{(jk)}}{n}\bracs{v_j} = \lambda\alpha_j u(v_j).
+	\end{align*}
+	Here, $\alpha_j$ is the aforementioned coupling constant and $\lambda$ is the \emph{spectral parameter} for $\tilde{\mathcal{G}}$ --- in physical terms, one can say that the strength of any coupling at a vertex is proportional to the system's energy.
+	Mathematically, the operator $\tilde{\mathcal{G}}$ is said to have a generalised resolvent --- we elaborate on this in what follows.
+\end{itemize}
+Of particular interest is the operator $\tilde{\mathcal{G}}$ in the borderline case; it is not an operator on a quantum graph per say, but its spectral problem $\tilde{\mathcal{G}}\lambda = \lambda u$ can be interpreted as a quantum graph problem with the spectral parameter appearing in the boundary (or vertex) conditions.
+More precisely, the operator $\tilde{\mathcal{G}}$ acts in an ``extended" (or ``larger") function space, rather than the standard function spaces for functions on metric graphs, \tstk{and is said to possess a ``generalised resolvent" - define this, what is it?}
+The quantum graph problem with the non-standard Kirchoff condition belongs to the class of problems with generalised resolvents, \tstk{the refs for this?}, and the operator $\tilde{\mathcal{G}}$ is the so-called ``Strauss extension" or ``dilation" of this problem.
+\tstk{as we will see, our starting point addresses multiple issues here: we can ``start" from an intuitive operator and problem to arrive at this non-standard QG problem. Also, this makes the job of ``guessing" the limiting problem much easier!}
+
+To conclude our discussion of the literature, we highlight that at present there are no results which extend the studies \cite{kuchment2001convergence, exner2005convergence} into the Maxwell setting (that is, to either the curl-of-the-curl equation or the full Maxwell system).
+By contrast, there has been considerable interest in the study of the equations of elasticity on thin-structures and the resulting ``singular" limits.
+The work \cite{zhikov2002homogenization} studied the problem of homogenisation for periodic thin-structure of thickness $\delta$, looking to derive the resulting effective problem in the ``long-wavelength" regime.
+In this work determination of the effective problem in the so-called critical scaling regime $\delta\sim\eps$ of the thickness $\delta$ with the period $\eps$ was noted as being an open problem, with the resulting homogenised operator being different to that in the non-critical scaling regimes.
+This work was followed up in \cite{zhikov2003homogenization}, in which these differences were identified and the effective problem in the critical setting presented.
+A method for passing to the limit in the equations of elasticity on a bounded thin-structure domain as the thickness $\delta\rightarrow0$ was also developed in \cite{zhikov2006derivation}, the resulting system being a quantum graph problem with Kirchoff matching conditions at each of the vertices.
+We highlight these results because, akin to \cite{kuchment2001convergence}, these studies do not account for the possible ``borderline" scaling case --- only the edge thickness $\delta$ is present in the studies.
+For this reason it is likely that results similar to those presented by \cite{exner2005convergence} can be derived within the context of elasticity too, however this remains unexplored in the literature.
+
+The work of chapters \tstk{1 and 2} will be particularly relevant to the aforementioned studies and the ``limiting" quantum graph problems.
+In these chapters we will take the ``limiting" singular structure as our starting point, and pose a variational problem upon this singular structure.
+This will require us to setup and study appropriate function spaces \tstk{section ref}, before then demonstrating the relationship between the abstract variational problem and the various ``limiting" quantum graph problems discussed above --- including the generalised resolvent problem.
+We will also go into detail about how one can explicitly solve the resulting quantum graph problems, before looking to extend our results into the Maxwell setting, and indicating some of the challenges that this brings.
+The theory we establish in these chapters will also be valuable to us in chapter \tstk{composite measure}, when we come to study a ``photonic crystal with singular inclusions".
