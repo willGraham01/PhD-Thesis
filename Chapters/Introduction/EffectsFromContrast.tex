@@ -8,7 +8,7 @@
 \subsection{Critical Contrast}
 \tstk{linking sentence}
 
-Let us begin with the study of \tstk{Zhikov 2000 double-porosity (extension of 2 scale method)}; here the study was concerned with the homogenisation problem for the operator $\mathcal{A}^{\eps}$,
+Let us begin with the study of \cite{zhikov2000extension}, that was concerned with the homogenisation problem for the operator $\mathcal{A}^{\eps}$,
 \begin{align*}
 	\mathcal{A}^{\eps} := -\grad\cdot A^{\eps}(\eps^{-1}x)\grad,
 \end{align*}
@@ -43,7 +43,7 @@ However by ensuring that $b$ scales with the parameter $\eps$ in a particular wa
 This introduces us to the idea of \emph{critical contrast} or \emph{high contrast}; a material whose parameters are scaled in proportion to the size of the period cell is said to be under \emph{critical contrast}. \tstk{also resonnance????}
 
 The question now is how do materials under critical contrast relate to the finite-periodic, composite materials (the notation for which we adopt from section \ref{sec:Intro-Maxwell})?
-To address this, we turn to the study of \tstk{Hempel-Lienau} who studied a periodic composite material with the setup in the top-left of figure \ref{fig:Diagram_HL-Zhikov}; here the period cell and inclusion are of a fixed size, and the operator $\mathcal{A}^\kappa:=-\grad\cdot\tilde{A}\grad$ is studied\footnote{\tstk{H and L} actually study a slightly more general version of this operator.} where $A=1$ on $Q_0$ and $A=\kappa\gg 1$ on $Q_1$.
+To address this, we turn to the study of \cite{hempel2000spectral} who studied a periodic composite material with the setup in the top-left of figure \ref{fig:Diagram_HL-Zhikov}; here the period cell and inclusion are of a fixed size, and the operator $\mathcal{A}^\kappa:=-\grad\cdot\tilde{A}\grad$ is studied\footnote{\tstk{H and L} actually study a slightly more general version of this operator.} where $A=1$ on $Q_0$ and $A=\kappa\gg 1$ on $Q_1$.
 The asymptotic limit $\kappa\rightarrow\infty$ was then explored --- physically, this corresponds to our expectation that low-index inclusions need to be surrounded by a high-index bulk material to open spectral band-gaps.
 Writing the spectrum of $\mathcal{A}^\kappa$ as the set
 \begin{align*}
@@ -59,7 +59,7 @@ Importantly, this limit of the spectrum is the same as that of the aforementione
 Indeed, upon identifying $\kappa=\eps^{-2}$ (so $\kappa\rightarrow\infty \Leftrightarrow \eps\rightarrow0$) and $\tilde{A}=\eps^{-2}B$ it is clear why the two problems share the same spectrum under the respective limits, although it should be noted that this is one of the only common features of the two problems --- in most other respects they behave differently.
 \tstk{here, we could also introduce resonance WRT Hempel-Lienau, the inclusion parameter being 1 and the off-inclusion parameter being far greater than 1. Also, this links back to the physical interpretation that PCFs work through anti-resonances...}
 This is also an opportune time for us to introduce the concept of resonance; a material experiences resonance when exactly one of the non-dimensional parameters is of order unity, and the remainder are much larger than unity.
-In the setup of \tstk{H-L, above} we observe precisely this situation --- we have $\lambda^{\mathrm{bulk}}\gg L$, whilst $\lambda^{\mathrm{inc}}\sim L$ (the parameter $\delta$ is absent from this formulation as a variable sized inclusion was not considered).
+In the setup of \cite{hempel2000spectral} we observe precisely this situation --- we have $\lambda^{\mathrm{bulk}}\gg L$, whilst $\lambda^{\mathrm{inc}}\sim L$ (the parameter $\delta$ is absent from this formulation as a variable sized inclusion was not considered).
 One can then attribute resonance to the emergence of band-gaps \tstk{and other dissipative stuff} in the asymptotic limit, with the vast differences in wavelengths in each of the material components that are required becoming impossible to achieve at higher contrasts.
 
 \tstk{Now, we can talk about what happens if we free up $\delta$, or if we want to look at the Maxwell or curl-curl operator instead. This will lead us into talking about the results of Kuchment-Figotin, although the other two ``parts" of the picture in figure 1-4 are missing. Other possible references that are important here are:}
@@ -113,14 +113,12 @@ Precisely, the result
 \end{align*}
 we proved for every $n\in\naturals$, where $\lambda_n\bracs{\mathcal{G}_{\delta}}$ and $\lambda_n\bracs{\mathcal{G}}$ are the eigenvalues of the respective operators ordered in ascending order.
 The argument that was utilised revolved around representing the eigenvalues of $\mathcal{G}_{\delta}$ and $\mathcal{G}$ via the minimax principle, and a method of translating functions on $G_{\delta}$ to $\graph$ and back so that the increase in the Rayleigh quotient could be controlled.
-However it is important to note that this result was purely about the convergence of the eigenvalues, and nothing was said about the behaviour of the eigenfunctions nor anything about resolvent problem.
-With this in mind, this study only justifies the physical intuition in this one particular case, and
-there is very little that actually links the operators $\mathcal{G}_{\delta}$ and $\mathcal{G}$ --- there is no convergence in the operator-norm sense, for example.
-As such, whilst the vertex conditions associated with $\mathcal{G}$ were continuity of $u$ at the vertices of $\graph$, and a Kirchoff condition at each vertex\footnote{This is a simplification in the interest of providing the reader with an overall idea of the key concepts. The study \cite{kuchment2001convergence} allowed for a slightly more general, weighted domain $G_{\delta}$ which results in a weighted sum in the Kirchoff condition, and also allows the presence of an external field.}, there is no guarantee that these are also the correct vertex conditions when attempting to ``approximate" the resolvent problem for $\mathcal{G}_{\delta}$. \tstk{although, in \cite{exner2005convergence}, they provide a reference that DOES provide this result apparently! see their [27]th reference}
+Convergence of the resolvent was proved in \tstk{Satio - in \cite{exner2005convergence}, [27]th reference} when the underlying graph had no loops or cycles.
+In particular, the vertex conditions associated with $\mathcal{G}$ were continuity of $u$ at the vertices of $\graph$, and a Kirchoff condition at each vertex\footnote{This is a simplification in the interest of providing the reader with an overall idea of the key concepts. The study \cite{kuchment2001convergence} allowed for a slightly more general, weighted domain $G_{\delta}$ which results in a weighted sum in the Kirchoff condition, and also allows the presence of an external field.}, justifying the heuristic arguments that had come before.
 
-The study \cite{exner2005convergence} later demonstrated that even this was not the complete story.
+However, the study \cite{exner2005convergence} later demonstrated that this was not the complete story.
 Starting from the domain\footnote{The study \cite{exner2005convergence} actually considers the more general setup where one is working with manifolds, and differential operators on these manifolds. Here, we present the results in a manner contextualized to our review.} $G_{\delta}$, one can define the volume of the inflated edges $V_{\mathrm{edge}}$ as a function of the thickness $\delta$ and volume of the junction regions $V_{\mathrm{vertex}}$, which also scales with $\delta$.
-In the limit $\delta\rightarrow0$, the spectrum of $\mathcal{G}_{\delta}$ coincides with the spectrum of an operator $\tilde{\mathcal{G}}$ which defines a quantum graph problem, but the vertex conditions imposed by this operator depend on the relative scaling between $V_{\mathrm{vertex}}$ and $V_{\mathrm{edge}}$.
+In the limit $\delta\rightarrow0$, the spectrum of $\mathcal{G}_{\delta}$ coincides with the spectrum of an operator $\tilde{\mathcal{G}}$ which depends on the relative scaling between $V_{\mathrm{vertex}}$ and $V_{\mathrm{edge}}$.
 \begin{itemize}
 	\item (``Thick vertex" setup) If $V_{\mathrm{edge}}\ll V_{\mathrm{vertex}}\rightarrow0$ as $\delta\rightarrow0$, then $\tilde{\mathcal{G}}$ defines a quantum graph problem with (homogeneous) Dirichlet conditions at each of the vertices.
 	This case is referred to as Dirichlet decoupling; the resulting limit problem is just a collection of independent ODEs along the edges of the graph $\graph$, intuitively the result of the vertices being ``too big" when compared to the edges and thus preventing any interaction between the edges.
@@ -136,16 +134,22 @@ In the limit $\delta\rightarrow0$, the spectrum of $\mathcal{G}_{\delta}$ coinci
 	Here, $\alpha_j$ is the aforementioned coupling constant and $\lambda$ is the \emph{spectral parameter} for $\tilde{\mathcal{G}}$ --- in physical terms, one can say that the strength of any coupling at a vertex is proportional to the system's energy.
 	We elaborate further on this in what follows.
 \end{itemize}
-\tstk{note that KZ missed out the extra cases, likely because they skipped over the proper non-dim process?}
 Of particular interest is the operator $\tilde{\mathcal{G}}$ in the borderline case; it is not an operator on a quantum graph per say, but its spectral problem $\tilde{\mathcal{G}}\lambda = \lambda u$ can be interpreted as a quantum graph problem with the spectral parameter appearing in the boundary (or vertex) conditions.
-More precisely, the operator $\tilde{\mathcal{G}}$ acts in an ``extended" (or ``larger") function space, rather than the standard function spaces for functions on metric graphs.
+More precisely, the operator $\tilde{\mathcal{G}}$ acts in an ``extended" (or ``larger") function space, rather than the standard function spaces for functions on metric graphs, \tstk{and is said to possess a ``generalised resolvent" - define this, what is it?}
 The quantum graph problem with the non-standard Kirchoff condition belongs to the class of problems with generalised resolvents, \tstk{the refs for this?}, and the operator $\tilde{\mathcal{G}}$ is the so-called ``Strauss extension" or ``dilation" of this problem.
 \tstk{as we will see, our starting point addresses multiple issues here: we can ``start" from an intuitive operator and problem to arrive at this non-standard QG problem. Also, this makes the job of ``guessing" the limiting problem much easier!}
 
-To conclude our discussion, we highlight that at present there are no results in the literature which extend the studies \cite{kuchment2001convergence, exner2005convergence} into the Maxwell setting (that is, to either the curl-of-the-curl equation or the full Maxwell system).
+To conclude our discussion of the literature, we highlight that at present there are no results which extend the studies \cite{kuchment2001convergence, exner2005convergence} into the Maxwell setting (that is, to either the curl-of-the-curl equation or the full Maxwell system).
 By contrast, there has been considerable interest in the study of the equations of elasticity on thin-structures and the resulting ``singular" limits.
 The work \cite{zhikov2002homogenization} studied the problem of homogenisation for periodic thin-structure of thickness $\delta$, looking to derive the resulting effective problem in the ``long-wavelength" regime.
 In this work determination of the effective problem in the so-called critical scaling regime $\delta\sim\eps$ of the thickness $\delta$ with the period $\eps$ was noted as being an open problem, with the resulting homogenised operator being different to that in the non-critical scaling regimes.
 This work was followed up in \cite{zhikov2003homogenization}, in which these differences were identified and the effective problem in the critical setting presented.
 A method for passing to the limit in the equations of elasticity on a bounded thin-structure domain as the thickness $\delta\rightarrow0$ was also developed in \cite{zhikov2006derivation}, the resulting system being a quantum graph problem with Kirchoff matching conditions at each of the vertices.
-Akin to \cite{kuchment2001convergence}, these studies do not account for the possible ``borderline" scaling case, with only the edge thickness $\delta$ being studied --- for this reason it is likely that results similar to those presented by \cite{exner2005convergence} exist within the context of elasticity too, however this remains an open problem.
+We highlight these results because, akin to \cite{kuchment2001convergence}, these studies do not account for the possible ``borderline" scaling case --- only the edge thickness $\delta$ is present in the studies.
+For this reason it is likely that results similar to those presented by \cite{exner2005convergence} can be derived within the context of elasticity too, however this remains unexplored in the literature.
+
+The work of chapters \tstk{1 and 2} will be particularly relevant to the aforementioned studies and the ``limiting" quantum graph problems.
+In these chapters we will take the ``limiting" singular structure as our starting point, and pose a variational problem upon this singular structure.
+This will require us to setup and study appropriate function spaces \tstk{section ref}, before then demonstrating the relationship between the abstract variational problem and the various ``limiting" quantum graph problems discussed above --- including the generalised resolvent problem.
+We will also go into detail about how one can explicitly solve the resulting quantum graph problems, before looking to extend our results into the Maxwell setting, and indicating some of the challenges that this brings.
+The theory we establish in these chapters will also be valuable to us in chapter \tstk{composite measure}, when we come to study a ``photonic crystal with singular inclusions".
