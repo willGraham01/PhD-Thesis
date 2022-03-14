@@ -1,27 +1,45 @@
-\section{Domains and Singular Structures} \label{sec:SingularStructures}
+\section{Research Overview} \label{sec:Intro-ProblemIntroduction}
 
-\tstk{making this section just so that I can definitively have a place where whenever I talk about ``one of our usual domains", I can point the reader back to here.}
+\tstk{This section will serve as the link between our literature review and the work that is carried out in the thesis. It is a conclusion of sorts to the introduction, as it should set the reader up for any of the following chapters, and the ``information" chapter.}
 
-The domains that we will come to consider are motivated by applications in photonics, and from photonic crystals specifically.
-As such, the domains we choose to consider will reflect the structure of such a material, however possess a ``singular component" in place of the fine or `thin-structure" that a physical photonic crystal exhibits.
-Precisely, in this work we consider a \emph{photonic crystal} to be a 2 dimensional, periodic material in $\reals^2$ that is then extruded into $\reals^3$, see figure \ref{fig:Diagram_ShrinkToSingularSquareCell}.
-The axis along which the extrusion takes place is the \emph{fibre axis}.
-\begin{figure}
-	\centering
-	\includegraphics[scale=0.5]{Diagram_ShrinkToSingularSquareCell.pdf}
-	\caption{\label{fig:Diagram_ShrinkToSingularSquareCell} The ``singular structures" that form the domains (or pieces of the domains) of the problems that we will consider. On the left, the period cell of a 2 dimensional periodic material extruded into 3 dimensions. On the right, the corresponding singular-structure that comes about as a ``limit" of the physical structure.}
-\end{figure}
-Typically when faced with (a differential equation on a) domain like that described, one uses a Fourier transform along the fibre axis and a Gelfand transform (or alternatively a Floquet transform) in the periodic directions to reduce the complexity in analysing the problem.
-Such a procedure would bring us back to a problem on the unit/period cell (in $\reals^2$) of the periodic structure, with artefacts from the transforms we applied.
-However, we are interested in studying wave-propagation problems on so called \emph{singular structures} --- regions which possess no interior (or have no area) from the perspective of the space they are embedded into.
-The geometry of our singular structures will reflect that of the aforementioned thin-structure materials studied in photonics, \tstk{limit argument mention here}.
-The natural way for us to do this is as follows: take a (periodic) metric graph in $\reals^2$ (see section \ref{ssec:EmbeddedGraphs}), and extrude the edges of this graph into the $x_3$ direction to create a 3-dimensional structure which is a union of planes induced by the graph edges.
-This creates a region that mimics the structure of a photonic crystal (or a photonic fibre yet to have a core drilled out), with an ``infinitely thin", periodic cross-sectional pattern.
-Of course, we then apply a Fourier transform along the fibre axis, and a Gelfand transform (or Floquet \tstk{serena and kirill use this one}) in the periodic cross-section to reduce the problem to a family of more manageable problems on the unit cell.
+As we have already mentioned in our review \tstk{previous sections}, our interest lies in studying problems involving so-called singular structures, akin to the visual ``limits" discussed in the aforementioned sections.
+Whilst we postpone the more involved and formal definitions to chapter \tstk{theory chapter}; here we provide the reader with an overview of the various problems that are considered, some further motivation and ideas behind why we consider such problems, and then direct them to the details in the subsequent sections.
+Before we begin, let us establish some notation and concepts that will be integral to our discussion, foremost amongst them the notion of a singular structure.
+A singular structure is a subset $S\subset\reals^d$ with $d$-dimensional Lebesgue measure is zero, perhaps more useful is its description as a region or object which has no area from the perspective of the space into which is is embedded.
+We will always choose to represent singular structures through a graph $\graph=\bracs{\vertSet,\edgeSet}$, where each vertex is associated with a point in $\reals^d$ and each edge to the line segment joining the (points associated to the) vertices at each endpoint.
+In addition, we will place a ``coupling constant" $\alpha_j$ at each $v_j\in\vertSet$, which we think of as playing the role of the ratio $V_{\mathrm{edge}} / V_{\mathrm{vertex}}$ as described in section \ref{ssec:Intro-ThinStructures}.
 
-As such, the domains that will be considered will consist of a metric graph $\graph$ embedded into a region $\ddom\subset\reals^2$, which should also be thought of as the ``unit cell" of the periodic singular structure.
-The graph $\graph$ itself represents the singular structure we are interested in working on (or more precisely, the cross-section of the singular structure included by the extrusion of $\graph$).
-We will write ``a domain $\ddom$" (or similar) when we wish to refer to such a region $\ddom$ containing an embedded metric graph as just described, and ``a singular structure" to refer to the graph contained in such a domain.
-Although $\ddom$ is only a subset of $\reals^2$ thanks to the use of a Fourier transform, it is important to remember that the graph $\graph$ represents a union of planes in 3 dimensions, particularly when we come to define (and interpret) gradient-like operators on functions defined on these singular structures.
-Of course, wanting to pose ``differential equations" on a domain with no interior raises several questions as to how one can understand the notion of a derivative --- clearly the ``usual" 2-dimensional definition of a gradient will not suffice for a singular structure!
-This leads us to define and study Sobolev spaces of functions with gradients (and later curls) with respect to a Borel measure, as in section \tstk{section ref!}
+Now that we have a singular structure, we then have to ask how we can define differential equations (or more precisely, operators) on them.
+To motivate this thought process, let us take a singular structure (represented by a graph) $\graph$ and consider the more familiar setup of a differential equation complimented by boundary conditions on the corresponding thickened graph $G_{\delta}$.
+For illustrative purposes, we will consider the system
+\begin{subequations} \label{eq:Intro-ThinToSingularSys}
+	\begin{align}
+		-\grad\cdot\grad u &= f, \qquad x\in G_{\delta}, \label{eq:Intro-ThinToSingularDE} \\
+		\pdiff{u}{n}\big\vert_{\partial G_{\delta}} &= 0. \label{eq:Intro-ThinToSingularBC}
+	\end{align}
+\end{subequations}
+Now consider which pieces of this formulation either change or cease to have clear meaning as $\delta$ shrinks to zero:
+\begin{enumerate}
+	\item The most notable effect is the loss of a distinction between the boundary $\partial G_{\delta}$ and the interior of $G_{\delta}$ when $\delta$ ``reaches" zero and becomes the singular structure $\graph$ --- the edges of this graph correspond to the overlap between what was previously two parts of the boundary of $G_{\delta}$.
+	\item Furthermore, the graph $\graph$ has no interior to speak of and so the ``differential equation" \eqref{eq:Intro-ThinToSingularDE} becomes meaningless.
+	Where or how do we pose this if our new domain doesn't have any interior?
+\end{enumerate}
+We can address our first observation by realising that it is only our explicit separation of the boundary condition \eqref{eq:Intro-ThinToSingularBC} and differential equation \eqref{eq:Intro-ThinToSingularDE} that leads to this problem.
+Instead we can consider the variational formulation for \eqref{eq:Intro-ThinToSingularSys}, to find $u$ such that
+\begin{align} \label{eq:Intro-ThinToSingularVar}
+	\integral{G_{\delta}}{ \grad u\cdot \overline{\grad\phi} }{x} 
+	&= \integral{G_{\delta}}{ f\overline{\phi} }{x}, \qquad\forall\phi\in V_{\mathrm{test}},
+\end{align}
+for some suitable set of test functions $V_{\mathrm{test}}$ (typically the set of smooth functions on the domain $G_{\delta}$).
+Notably the equation \eqref{eq:Intro-ThinToSingularVar} ``combines" the boundary condition and differential equation in \eqref{eq:Intro-ThinToSingularSys}, in the sense that one can obtain \eqref{eq:Intro-ThinToSingularDE} by considering the test functions whose support does not intersect the boundary of $G_{\delta}$, then \eqref{eq:Intro-ThinToSingularBC} from those that do.
+This would potentially allow us to circumnavigate the coincidence of the interior of our singular structure with what was previously the boundary of our thin structure, however we are not out of the woods yet.
+If we simply replace the domain of integration $G_{\delta}$ with $\graph$ in \eqref{eq:Intro-ThinToSingularVar}, both sides of the equation are identically zero in lieu of $\graph$s singular nature --- which is another incarnation of the second observation we made.
+To address this we have to stop viewing our singular structure from the perspective of the Lebesgue measure, and instead properly view our singular structure as an embedded object in a higher dimensional space.
+This leads us to introduce the notion of singular measures that support graphs embedded into $\reals^d$, and pose variational problems of the form \eqref{eq:Intro-ThinToSingularVar} with respect to these measures, and on the singular domain $\graph$. \tstk{section ref}
+Changing measure in this way forces us to change the notion of area, and thus integration and correspondingly differentiation too.
+The classical gradient is no longer appropriate for studying problems on singular structures, and again there is difficulty in defining this object in the classical sense involving limits.
+Similar problems emerge for the interpretation of the curl and divergence of vector fields.
+However, if we can overcome these final difficulties, the resulting variational problems we are left with have a striking resemblance to their classical analogues --- in fact, the only differences being the measure in the variational problem and the ``Sobolev space" that our solution $u$ belongs to.
+This motivates our study of the so-called ``non-classical" Sobolev spaces \tstk{section?} and later generalisation to curls and divergences in chapter \tstk{ref!} and ``composite materials" in chapter \tstk{ref!}.
+
+We now outline the arrangement of the content of this work. In chapter....
