@@ -10,7 +10,7 @@ Figure \ref{fig:Diagram_ShrinkToSingularSquareCell} illustrates this process for
 \end{figure}
 The resulting ``singular structure" is a region embedded into a space in which it has no volume (or area in two dimensions); in the illustration the resulting planes have no volume from the perspective of $\reals^3$.
 If we remain true to our photonic crystal setup, the rest of $\reals^d$ upon taking the ``limit" $\delta\rightarrow0$ is taken up by the ``inclusion" $Q_0$.
-However, relevant to our studies in \tstk{sections} will be the study of so called \emph{thin-structures}.
+However, relevant to our studies in (and motivation for) chapters \ref{ch:ScalarSystem} and \ref{ch:CurlCurl} will be the study of so called \emph{thin-structures}.
 Such thin-structures $G_{\delta}$ consist only of the region (formed by translations of) $Q_1$, that is $G_{\delta} = \bigcup_{l\in\integers^d}(l+Q_1)$.
 In almost all contexts one is typically looking at a thin-structure domain that is akin to a ``thickened graph"; one takes a graph $\graph$, embeds it into $\reals^d$, and inflates the edges into tubes of radius $\sim\delta$ and the vertices into junctions regions connecting the ends of these tubes.
 In the interest of avoiding addressing several technicalities and detracting from the focus of our review, one can think of $G_{\delta}$ as being the surface of (or volume enclosed by) the resulting ``inflated" structure --- the illustration in figure \ref{fig:Diagram_ThickenedGraph} provides a sufficient visualisation.
@@ -25,8 +25,8 @@ Since $\graph$ is embedded into real space, each edge $I_{jk}$ which connects th
 A function defined on a quantum graph $u$ is then specified by its restriction to each of the $I_{jk}$, denoted by $u^{(jk)}$, and the values $u$ takes at the vertices of the graph.
 With this notion of length, one can now define a derivative for $u$ along the edges, and thus can equip $\graph$ with (the analogue of) a differential operator.
 Since the intervals associated to the edges $I_{jk}$ do not convey the connectivity of $\graph$, the ``boundary conditions" for these differential operators come in the form of matching conditions at the vertices.
-A graph equipped with such an operator is called a \emph{quantum graph}, and the system of equations and ``boundary conditions" defined by this operator a \emph{quantum graph problem}.
-A more precise description and introduction is provided in section \tstk{section ref}, and a more complete overview of the field can be found in \cite{berkolaiko2013introduction}, however it is sufficient for this introduction to think of such a quantum graph problem as consisting of an ODE on each of the intervals associated to $I_{jk}$, coupled through matching conditions at the vertices.
+A graph equipped with such an operator is called a \emph{quantum graph}, and the system of equations and ``boundary conditions" defined by this operator a \emph{quantum graph problem} --- we provide a more precise description and introduction in section \ref{sec:QuantumGraphs}, and a more complete overview of the field can be found in \cite{berkolaiko2013introduction}.
+However it is sufficient for this introduction to think of such a quantum graph problem as consisting of an ODE on each of the intervals associated to $I_{jk}$, coupled through matching conditions at the vertices.
 Standard Neumann or Dirichlet conditions on $u$ at each vertex can be used as the vertex conditions, however these tend to neglect (or to an extent, suppress) the underlying graph structure, which allows for more adventurous conditions to be used.
 More common choices of vertex conditions are continuity of the function $u$ though the vertices\footnote{That is whenever two edges $I_{jk}$ and $I_{kl}$ share a common vertex, the restrictions $u^{(jk)}$ and $u^{(kl)}$ must take the same value at the shared vertex $v_k$.} and the Kirchoff condition,
 \begin{align*}
@@ -82,8 +82,8 @@ A method for passing to the limit in the equations of elasticity on a bounded th
 We highlight these results because, akin to \cite{kuchment2001convergence}, these studies do not account for the possible ``borderline" scaling case --- only the edge thickness $\delta$ is present in the studies.
 For this reason it is likely that results similar to those presented by \cite{exner2005convergence} can be derived within the context of elasticity too, however this remains unexplored in the literature.
 
-The work of chapters \tstk{1 and 2} will be particularly relevant to the aforementioned studies and the ``limiting" quantum graph problems.
+The work of chapters \ref{ch:ScalarSystem} and \ref{ch:CurlCurl} will be particularly relevant to the aforementioned studies and the ``limiting" quantum graph problems.
 In these chapters we will take the ``limiting" singular structure as our starting point, and pose a variational problem upon this singular structure.
-This will require us to setup and study appropriate function spaces \tstk{section ref}, before then demonstrating the relationship between the abstract variational problem and the various ``limiting" quantum graph problems discussed above --- including the generalised resolvent problem.
+This will require us to setup and study appropriate function spaces (section \ref{sec:BorelMeasSobSpaces}), before then demonstrating the relationship between the abstract variational problem and the various ``limiting" quantum graph problems discussed above --- including the generalised resolvent problem.
 We will also go into detail about how one can explicitly solve the resulting quantum graph problems, before looking to extend our results into the Maxwell setting, and indicating some of the challenges that this brings.
-The theory we establish in these chapters will also be valuable to us in chapter \tstk{composite measure}, when we come to study a ``photonic crystal with singular inclusions".
+The theory we establish in these chapters will also be valuable to us in chapter \ref{ch:SingInc}, when we come to study a ``photonic crystal with singular inclusions".
