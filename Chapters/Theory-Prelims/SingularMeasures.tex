@@ -1,28 +1,37 @@
 \section{Singular Measures} \label{sec:SingularMeasures}
 \tstk{introduction, in which we should probably define what we mean by a singular structure, or refer back to where it has already been introduced and properly defined.}
 
+\tstk{clean up here, we want to use $[0,1)^2$ for the period cells, but should probably stay in $d$ dimensions for the first part at least (up to Gelfand transform, or as far as generality will take us).}
 Let 
 \begin{align*}
 	\ddom:= \left[0,T_1\right)\times\left[0,T_2\right), 
 \end{align*}
 and $\dddom = \ddom \times \bracs{0,\infty}$.
-Let $\graph = \bracs{\vertSet,\edgeSet}$ be an embedded graph in $\ddom$, and for each $I_{jk}\in \edgeSet$, define the (Borel) measure $\lambda_{jk}$ as the measure that supports the one-dimensional Lebesgue measure on (or ``along") $I_{jk}$:
+Let $\graph = \bracs{\vertSet,\edgeSet}$ be an embedded graph in $\ddom$, and for each $I_{jk}\in \edgeSet$, define the (Borel) measure $\lambda_{jk}$ as the measure that supports the one-dimensional Lebesgue measure $\lambda_1$ on (or ``along") $I_{jk}$:
 \begin{align*}
 	\lambda_{jk}\bracs{B} = \lambda_{1}\bracs{r_{jk}^{-1}\bracs{B \cap I_{jk}}},
 	&\quad\text{for all Borel } B.
 \end{align*}
-Here, $\lambda_1$ is the Lebesgue measure on $\reals$, and $r_{jk}$ is the parametrisation of the edge $I_{jk}$ (assumption \ref{ass:MeasTheoryProblemSetup}).
+Here, $r_{jk}$ is the parametrisation of the edge $I_{jk}$ as per assumption \ref{ass:MeasTheoryProblemSetup}.
 Then set $\ddmes$ to be the (Borel) measure defined by
 \begin{align*}
 	\ddmes\bracs{B} = \sum_{v_j\in \vertSet}\sum_{j\conLeft k} \lambda_{jk}\bracs{B}.
 \end{align*}
-We refer to $\ddmes$ as the ``singular measure that supports $\graph$"; or alternatively the ``singular measure on $\graph$", or the ``(singular) measure that supports the edges of $\graph$".
+We refer to $\ddmes$ as the ``\emph{singular measure} that supports $\graph$"; or alternatively the ``singular measure on $\graph$", or the ``(singular) measure that supports the edges of $\graph$".
 For a graph embedded into a 2D domain, the singular measure $\ddmes$ is illustrated in figure \ref{fig:Diagram_SingularMeasure2D}.
 \begin{figure}[b!]
 	\centering
-	\includegraphics[scale=0.85]{Diagram_SingularMeasure2D.pdf}
-	\caption{\label{fig:Diagram_SingularMeasure2D} For a graph embedded in $\reals^2$, the $\ddmes$-measure of any Borel set $B$ is obtained from summing the contributions of each $\lambda_{jk}$, as indicated by the thickened lines.
-	Sets that do not intersect $\graph$ have zero measure.}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\centering
+		\includegraphics[scale=0.85]{Diagram_SingularMeasure2D.pdf}
+		\caption{\label{fig:Diagram_SingularMeasure2D} For a graph embedded in $\reals^2$, the $\ddmes$-measure of any Borel set $B$ is obtained from summing the contributions of each $\lambda_{jk}$, as indicated by the thickened lines. Sets that do not intersect $\graph$ have zero measure.}
+	\end{subfigure}
+	~
+	\begin{subfigure}[t]{0.45\textwidth}
+		\centering
+		\includegraphics[scale=0.85]{Diagram_SingularMeasure3D.pdf}
+		\caption{\label{fig:Diagram_SingularMeasure3D} An extension of the concept of a singular measure to 3 dimensions. The red portions of each edge indicate the contributions from each edge to the measure of the cube $B$.}
+	\end{subfigure}
 \end{figure}
 
 Now for each $v_j\in\vertSet$ let $\delta_j$ be a point-mass measure centred on $v_j$, namely
