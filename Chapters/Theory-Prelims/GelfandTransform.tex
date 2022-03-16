@@ -1,0 +1,85 @@
+\section{The Gelfand Transform} \label{sec:TP-GelfandTransform}
+We will begin with a more detailed overview of the Gelfand transform, for our study of (the spectrum of) differential operators.
+Let $Q=[0,1)^d$ (which will shortly be the period cell of some periodic differential operator), and construct the ``dual cell" or Brillouin zone to $Q$, $B=[-\pi,\pi)^d$, and define the \emph{Gelfand transform} of a (sufficiently fast decaying) function $u\in L^2(\reals^d)$ as  \tstk{refs???}
+\begin{align*}
+	\hat{u}\bracs{x,\qm} = \sum_{m\in\integers^d}u(x+m)\e^{-\rmi\qm\cdot(x+m)}.
+\end{align*}
+The parameter $\qm\in B$ is called the \emph{quasi-momentum} --- it is the analogue of the dual variable $\kappa$ introduced when taking the Fourier transform of a function.
+The function $\hat{u}$ is $Q$-periodic in $x$, and satisfies the equality
+\begin{align} \label{eq:GelfandTransform}
+	\hat{u}\bracs{x,\qm+2\pi m'} &= \e^{-2\pi m'\rmi\cdot x}\hat{u}\bracs{x,\qm},
+\end{align}
+for any $m'\in\integers^d$.
+Therefore, provided we know the values of the function $\hat{u}$ on $Q\times B$, we can reconstruct $\hat{u}$ for any $x\in\reals^d$.
+Furthermore, for each fixed $\qm\in B$ the image of $\hat{u}\bracs{\cdot,\qm}$ is the space of $Q$-periodic functions, or more precisely the space of functions on the torus whose ``unravelling" \tstk{whats the correct terminology here?} into $\reals^d$ is $Q$ --- this new domain is compact and is central to the decomposition that follows.
+
+Now consider a differential operator $\mathcal{A} = \mathcal{A}\bracs{\grad}$ in $\reals^d$ with $Q$-periodic coefficients, for example the acoustic approximation operator $-\grad\cdot a(x)\grad u$ for some $Q$-periodic $a(x)$.
+Through a short computation, we can deduce that
+\begin{align*}
+	\widehat{\sqbracs{\mathcal{A}\bracs{\grad_x}u}}(x,\qm) &= \sqbracs{\mathcal{A}\bracs{\grad_x + \rmi\qm}}\hat{u}\bracs{x,\qm},
+\end{align*}
+where we have used the subscript $x$ to indicate that the gradient operator $\grad$ still acts on the ``spatial" variable $x$.
+Denote by $\mathcal{A}_{\qm}$ the operator $\mathcal{A}\bracs{\grad+\rmi\qm}$ for each $\qm\in B$ --- each of these operators now acts on the space of $Q$-periodic functions, or rather the space of functions defined on the torus, which we denote by $D_{\mathcal{A}}$.
+The Gelfand transform has effectively ``expanded" the operator $\mathcal{A}$ which acted on (functions on) $\reals^d$ into the family of operators $\mathcal{A}_{\qm}$ parametrised by $\qm$.
+Typically one sees $\mathcal{A}$ written as a ``direct integral" of operators
+\begin{align*}
+	\mathcal{A} &= \int_{B}^{\bigoplus}\mathcal{A}_{\qm} \ \md\qm,
+\end{align*}
+\tstk{notation found where? M.Reed and B.Simon, Methods of Modern Mathematical Physics, 1978 is apparently one place} which can be thought of as the generalisation of a direct sum over a countable index to a continuous index ($\qm$).
+Perhaps more helpful is the interpretation that the action of the original operator $\mathcal{A}$ can be thought of as acting independently on an infinite number of copies of $D_{\mathcal{A}}$ indexed by $\qm$, the action on each of these copies spaces being $\mathcal{A}_{\qm}$.
+To draw a complete analogy, consider a Hilbert space $H$ and an operator $T$ on $H$ which acts independently on two (closed) subspaces $H_1, H_2$, such that $H = H_1 \oplus H_2$.
+We could denote by $T_i$ the restriction of $T$ to $H_i$ ($i=1,2$), and then write the action of $T$ as
+\begin{align*}
+	Tu &= \begin{pmatrix} T_1 & 0 \\ 0 & T_2 \end{pmatrix}
+	\begin{pmatrix} u_1 \\ u_2	\end{pmatrix},
+\end{align*}
+for any element $u = u_1 + u_2$ for $u_i\in H_i$ (an example of this would be the decoupling of Maxwell operator $\mathcal{M}$ into the TE and TM modes, see the discussion in section \ref{sec:Intro-Maxwell} around equation \eqref{eq:Intro-AcousticApprox}).
+By studying the operators $T_1$ and $T_2$, we can deduce the behaviour of the operator $T$, and in particular deduce its spectrum from the union of the spectra of the $T_i$.
+The direct integral notation extends this to when an operator $\mathcal{A}$ cannot be broken down into a countable (or finite) direct sum, and analogous conclusions apply: the action of $\mathcal{A}$ on a function $u$ could be deduced from the ``sum" of actions of the $\mathcal{A}_{\qm}$ on $\hat{u}(\cdot,\qm)$,
+\begin{align*}
+	\mathcal{A}u = \int_{B}^{\bigoplus}\mathcal{A}_{\qm}\hat{u}\bracs{\cdot,\qm} \ \md\qm,
+\end{align*}
+and the spectrum of $\mathcal{A}$ is formed from the union of the spectra of $\mathcal{A}_{\qm}$ over $\qm$, 
+\begin{align*}
+	\sigma\bracs{\mathcal{A}} = \bigcup_{\qm\in B}\sigma\bracs{\mathcal{A}_{\qm}}.
+\end{align*}
+As mentioned in section \ref{sec:Intro-Maxwell}, the space $D_{\mathcal{A}}$ consists of functions defined on a compact domain, and so provided that the $\mathcal{A}_{\qm}$ satisfy suitable ellipticity conditions, each of these operators will have compact resolvent, and thus a discrete spectrum of eigenvalues.
+\tstk{change the introduction to match the notation in this section?}
+This allows us to order the eigenvalues $\lambda_i\bracs{\qm}$ of $\mathcal{A}_{\qm}$ in ascending order, and when viewed as functions of $\qm$, these $\lambda_i$ are called \emph{dispersion branches}, or individual branches of the \emph{dispersion relations}.
+They are also continuous in $\qm$, and thus allow the spectrum of the original operator $\mathcal{A}$ to be written as
+\begin{align*}
+	\sigma\bracs{\mathcal{A}} &= \bigcup_{i\in\naturals}\sqbracs{ \min_{\qm}\lambda_j, \max_{\qm}\lambda_j },
+\end{align*}
+where the interval $\sqbracs{ \min_{\qm}\lambda_j, \max_{\qm}\lambda_j }$ is labelled as the $j^{\text{th}}$ spectral band of $\mathcal{A}$.
+
+The Gelfand transform will be an incredibly useful tool for us in our analysis of variational problems on periodic, singular structures.
+As such we introduce some shorthand for the ``$\qm$-shifted" gradient operator that the transform introduces, in $\reals^2$ we denote
+\begin{align*}
+	\tgrad = \grad + \rmi\qm 
+	= \begin{pmatrix} \partial_1 + \rmi\qm_1 \\ \partial_2 + \rmi\qm_2 \end{pmatrix},
+\end{align*}
+which acts analogously to the usual gradient operator $\grad$.
+In chapter \ref{ch:CurlCurl}, we will be considering a singular structure that has been extruded into three dimensions, and so will also need to consider the operator
+\begin{align*}
+	\ktgrad = 
+	\begin{pmatrix} \partial_1 + \rmi\qm_1 \\ \partial_2 + \rmi\qm_2 \\ \rmi\wavenumber \end{pmatrix},
+\end{align*}
+which is the result of a Gelfand transform in the $\bracs{x_1,x_2}$-plane and a Fourier transform in the $x_3$ (extruded) direction.
+We also denote by $\ktcurl{}$ the ``curl" operator obtained after applying the Gelfand transform, so formally
+\begin{align*}
+	\ktcurl{}\phi &= \ktgrad\wedge\phi
+	= 
+	\begin{pmatrix}
+		\bracs{\partial_1+\rmi\qm_1}\phi_3 - \rmi\wavenumber\phi_1 \\
+		\rmi\wavenumber\phi_2 - \bracs{\partial_2+\rmi\qm_2}\phi_3 \\
+		\bracs{\partial_2+\rmi\qm_2}\phi_1 - \bracs{\partial_1+\rmi\qm_1}\phi_2
+	\end{pmatrix}
+\end{align*}
+for a suitably differentiable vector-valued function $\phi$, and $\wedge$ denotes the vector-cross product.
+
+Before we continue, it is worth mentioning here that an alternative to the Gelfand transform, the \emph{Floquet transform} is also widely used in the study of periodic differential equations.
+Whilst these transforms serve essentially the same purpose in aiding the analysis of differential operators with periodic coefficients, there is a subtle difference in the manner in which they do this.
+Under the Floquet transform, one obtains a similar ``direct integral" representation of the original operator $\mathcal{A}$ parametrised by $\qm$, however under this representation the ``decomposed" operators $\mathcal{A}_{\qm}$ have the same differential action, but act on different function spaces.
+By contrast, the Gelfand transform elects to preserve the underlying function spaces at the expense of an alteration to the action of the differential operators.
+Which of the two transforms is used typically comes down to personal preference in most cases, and there are even places in the literature where the two names are used interchangeably.
+Throughout this work, we will continue to use the Gelfand transform as introduced in this section through equation \eqref{eq:GelfandTransform}.
