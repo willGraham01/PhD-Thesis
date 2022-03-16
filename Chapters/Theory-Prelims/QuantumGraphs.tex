@@ -93,14 +93,13 @@ We also use a notion of \emph{exterior normal} or \emph{signed derivative} at th
 	\end{align}
 \end{subequations}
 for a differentiable function $u$ on $\graph$ --- we will occasionally use prime notation to denote differentiation by $y$ in the interest of brevity.
-We use similar notation for the when we consider a differential operator that has been shifted due to an application of the Gelfand transform \tstk{HAVE YOU INTRODUCED GELFAND YET?},
+We use similar notation for the when we consider a differential operator that has been shifted due to an application of the Gelfand transform (section \ref{sec:TP-GelfandTransform}),
 \begin{subequations} \label{eq:SignedDerivConventionShifted}
 	\begin{align*}
 		\bracs{\pdiff{}{n}+ \rmi\qm}u_{jk}\bracs{v_j} &= -\bracs{u_{jk}' + \rmi\qm u_{jk}}\bracs{v_j} = -\lim_{x\rightarrow0} \bracs{ u_{jk}'(x)+\rmi\qm u_{jk}(x) }, \\
-		\bracs{\pdiff{}{n}+ \rmi\qm}u_{jk}\bracs{v_k} &= \bracs{u_{jk}' + \rmi\qm u_{jk}}\bracs{v_k} = \lim_{x\rightarrow l_{jk}} \bracs{ u_{jk}'(x)+\rmi\qm u_{jk}(x) },
+		\bracs{\pdiff{}{n}+ \rmi\qm}u_{jk}\bracs{v_k} &= \bracs{u_{jk}' + \rmi\qm u_{jk}}\bracs{v_k} = \lim_{x\rightarrow l_{jk}} \bracs{ u_{jk}'(x)+\rmi\qm u_{jk}(x) }.
 	\end{align*}
 \end{subequations}
-as is appropriate for use after application of a Gelfand transform.
 As hinted at by the name, the formulae \eqref{eq:SignedDerivConvention}-\eqref{eq:SignedDerivConventionShifted} can be thought of as the analogue of the exterior normal at the boundary for regions in $\reals^d$.
 
 Before discussing differential operators on metric graphs, we introduce some additional notation for convenience.
@@ -210,7 +209,6 @@ Assuming one has a method for evaluating the $M$-matrix, the eigenvalues of $\ma
 \end{align*}
 In section \ref{sec:Discussion} we will expand on how this result provides access to the spectrum of $\mathcal{A}$, and utilise these ideas in the examples of section \ref{sec:Examples}.
 
-\tstk{this needs to come after we've seen the Gelfand transform}
 Before continuing, we address a detail concerning how we formulate our quantum graph problems and the definition of the $M$-matrix.
 In this work we will prescribe an embedded, periodic graph $\graph$ (usually in $\reals^2$) to represent our singular-structure; a consequence of this being that upon taking a Gelfand transform the family of operators on the period graph $\graph_{\mathcal{P}}$ contains dependencies on the choice of geometry assigned by the embedding, as well as on the quasi-momentum $\qm$.
 For example, there may be dependencies on the angle between the edges and the co-ordinate axes (which is not unexpected given how the constants $\qm_{jk}$ in \eqref{eq:3DQGFullSystem} are derived, see section \ref{sec:3DSystemDerivation} or appendix \ref{app:3dMuAnalysis} for details), and if the family of operators on $\graph_{\mathcal{P}}$ contains such dependencies, so too will the resulting family of $M$-matrices.

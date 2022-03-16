@@ -86,7 +86,7 @@ Having provided an outline of the important governing equations and operators th
 Since we are primarily concerned with spectral problems, working directly in $\reals^d$ with our chosen operator is often inconvenient \tstk{WHY? doesn't need to be precise right now} and so one often looks to apply a transform to aid in the analysis of such problems.
 When faced with a differential operator with constant coefficients (or coefficients constant in one particular coordinate direction), one typically utilises a Fourier transform to turn the action of differentiation into the action of multiplication by (a function of) the dual variable.
 Here, we have an operator $\mathcal{A}$ with\footnote{Think of $\mathcal{A}$ as being one of \eqref{eq:Intro-CurlCurlEqns} or \eqref{eq:Intro-AcousticApprox} with $\epsilon_m$ and $\mu_m$ periodic.} periodic (with respect to some period cell $Q$), rather than constant, coefficients.
-The natural transform to apply is the Gelfand (or Floquet) transform, which first requires us to introduce the dual cell $B=[-\pi,\pi)^d$ to $Q$, which is also referred to as the Brillouin zone in solid state physics.
+The natural transform to apply is the Gelfand (or Floquet) transform, which first requires us to introduce the dual cell (also termed the Brillouin zone in solid state physics) $B=[-\pi,\pi)^d$ to $Q$.
 We then define the Gelfand transform $\hat{u}$ of the function $u$ as 
 \begin{align*}
 	\hat{u}(x, \qm) &= \sum_{n\in\integers^d} u(x+n)\e^{\rmi\qm(x+n)},
