@@ -1,14 +1,15 @@
 \section{Singular Measures} \label{sec:SingularMeasures}
-\tstk{introduction, in which we should probably define what we mean by a singular structure, or refer back to where it has already been introduced and properly defined.}
+Now that we have established how we can represent singular structures through embedded graphs, we move on to the introduction of the singular measures which will allow us to pose meaningful variational problems on these structures.
+The introduction of these measures also necessitates a change in the way we view gradients, curls, and divergences, which is the subject of section \ref{sec:BorelMeasSobSpaces}, and is our solution to the problems discussed in section \ref{sec:Intro-ProblemIntroduction}.
 
 Let $\ddom\subset\reals^d$, and let $\mathcal{B}_{\ddom}$ denote the Borel sigma algebra for $\ddom$ (with the topology inherited from $\reals^d$).
 A (Borel) measure $\rho$ on the measurable space $\bracs{\ddom,\mathcal{B}_{\ddom}}$ is called \emph{singular} if there exist two disjoint sets $S_1,S_2\in \mathcal{B}_{\ddom}$ such that $\rho$ is zero on all (measurable) subsets of $S_1$ and the $d$-dimensional Lebesgue measure $\lambda_d$ is zero on all subsets of $S_2$.
-The textbook example of a singular measure is the point-mass (or ``$\delta$-function") measure placed at a point $x_0\in\reals^d$,
+The textbook example of a singular measure is the point-mass (or ``$\delta$-function") measure placed at a point $x_0\in\ddom$,
 \begin{align*}
 	\delta_{x_0}\bracs{B} &= \begin{cases} 1 & x_0\in B, \\ 0 & x_0\not\in B, \end{cases}
 	\qquad \forall B\in\mathcal{B}_{\ddom},
 \end{align*}
-for which we can take $S_1=\reals^d\setminus\clbracs{x_0}$ and $S_2=\clbracs{x_0}$.
+for which we can take $S_1=\ddom\setminus\clbracs{x_0}$ and $S_2=\clbracs{x_0}$.
 In addition to point masses, we will also want to consider singular measures which support our singular structures.
 Let $\graph=\bracs{\vertSet, \edgeSet}$ be a metric graph embedded into $\reals^d$.
 For each $I_{jk}\in\edgeSet$ define the (Borel) measure $\lambda_{jk}$ as the measure which supports the one-dimensional measure $\lambda_1$ on (or ``along") $I_{jk}$,
