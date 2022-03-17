@@ -3,9 +3,13 @@
 
 \usepackage{amssymb}
 \usepackage{amsmath}
-%\usepackage{mathtools}
 
-%theorems and lemma etc setup using amsthm
+%% EDITING FOR TYPO/ADDITIONS THAT ARE REQUIRED
+\usepackage{xcolor}
+\newcommand{\tstk}[1]{\textcolor{red}{\textbf{#1}} \newline}
+
+%% THEOREMS AND LEMMAS, ETC using amsthm
+
 \usepackage{amsthm}
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
@@ -26,12 +30,21 @@
 \theoremstyle{definition}
 \newtheorem{conjecture}[theorem]{Conjecture}
 
-\allowdisplaybreaks %allows equations in the same align environment to split over multiple pages.
+%% EQUATION FORMATING THROUGHOUT DOCUMENT
 
-%tstk always need be there
-\newcommand{\tstk}[1]{\textbf{#1} \newline}
+% allows equations in the same align environment to split over multiple pages.
+\allowdisplaybreaks 
 
-%this adds extra functionality to pmatrix, vmatrix, bmatrix etc by allowing you to pass an optional argument in [FACTOR] to multiply the default spacing between elements by FACTOR
+%% EQUATION FUNCTIONALITY - SHORTHAND, LARGE OPERATOR FORMATTING, ETC
+
+% UNITS AND OPERATORS
+\newcommand{\rmi}{\mathrm{i}}					% imaginary unit i (RoMan font i)
+\newcommand{\e}{\mathrm{e}}						% Euler number e (Roman font e)
+\newcommand{\md}{\mathrm{d}}					% differential d (Roman d)
+\newcommand{\charFunc}[1]{\mathcal{I}_{#1}}	% characteristic function of a set
+\newcommand{\sgn}{\mathrm{sgn}}				% sign function of an input
+
+% MATRIX DISPLAY: adds extra functionality to pmatrix, vmatrix, bmatrix etc by allowing you to pass an optional argument in [FACTOR] to multiply the default spacing between elements by FACTOR
 \makeatletter
 \renewcommand*\env@matrix[1][\arraystretch]{%
   \edef\arraystretch{#1}%
@@ -41,112 +54,115 @@
   }
 \makeatother
 
-%begin the macros via newcommand. Try to group them up reasonably!
+% SHORTHAND
+\newcommand{\recip}[1]{\frac{1}{#1}}								% writes 1/{#1}
+\renewcommand{\vec}[1]{\mathbf{#1}}								% vectors are bold, no overhead arrow
+\newcommand{\lconv}[1]{\overset{#1}{\longrightarrow}}				% convergence with #1 above arrow
+\newcommand{\toInfty}[1]{ \ \text{as} \ #1 \rightarrow\infty}		% writes out "as #1 tends to infty"
 
-%notation and variable use throughout the file
-\renewcommand{\vec}[1]{\mathbf{#1}}				%vectors are bold, not overline arrow
-\newcommand{\recip}[1]{\frac{1}{#1}}			%fast reciprocal as a fraction
-\newcommand{\interval}[1]{\sqbracs{0,\abs{#1}}}	%creates the closed interval from 0 to the length of the input #1, denoted by absolute value
-\newcommand{\eps}{\varepsilon}					%pretty epsilons
-\newcommand{\charFunc}[1]{\mathcal{I}_{#1}}%{\mathbb{1}_{#1}}		%characteristic function of a set
-\newcommand{\sgn}{\mathrm{sgn}}
+% (standard) INTEGRAL AND DIFFERENTIAL OPERATORS
+% integral display: \integral{domain}{integrand}{measure/integral variable}
+\newcommand{\integral}[3]{\int_{#1}#2 \ \mathrm{d}#3}
+% derivatives of various types
+\newcommand{\diff}[2]{\dfrac{\mathrm{d}#1}{\mathrm{d}#2}}				% complete derivative d#1/d#2
+\newcommand{\pdiff}[2]{\dfrac{\partial #1}{\partial #2}}				% partial derivative p#1/p#2
+\newcommand{\ddiff}[2]{\dfrac{\mathrm{d}^2 #1}{\mathrm{d} {#2}^2}}	% 2nd complete deriv
+\newcommand{\pddiff}[2]{\dfrac{\partial^2 #1}{\partial {#2}^2}}		% 2nd partial derivative
+\newcommand{\grad}{\nabla}												% gradient operator
+\newcommand{\laplacian}{\Delta}										% Laplacian
+\newcommand{\curl}[1]{\mathrm{curl}_{#1}}								% curl with subscript #1
+\newcommand{\dmap}{\Gamma_0}											% Dirichlet map
+\newcommand{\nmap}{\Gamma_1}											% Neumann map
+\newcommand{\dtn}{\mathcal{D}}											% Dirichlet-to-Neumann map
 
-\newcommand{\dddom}{\widetilde{\Omega}}		%3D domain notation
-\newcommand{\ddom}{\Omega}						%2D domain notation
-\newcommand{\dddmes}{\widetilde{\mu}}			%2D sing. measure + point masses
-\newcommand{\ddmes}{\mu}						%2D sing. measure
-\newcommand{\compMes}{\tilde{\lambda}}			%2D composite (Leb + sing) measure
+% BRACKETS AND NORMS - encloses inputs in relevent bracers
+\newcommand{\bracs}[1]{\left( #1 \right)}					% ( brackets )
+\newcommand{\sqbracs}[1]{\left[ #1 \right]}				% [ square bracers ]
+\newcommand{\clbracs}[1]{\left\{ #1 \right\}}				% { curly bracers }
+\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}			% | absolute value |
+\newcommand{\norm}[1]{\lvert\lvert #1 \rvert\rvert}		% || norm ||
+\newcommand{\setVert}{\ \middle\vert \ }					% vertical bar for the middle of sets
+\newcommand{\ip}[2]{\left\langle #1 , #2 \right\rangle}	% < inner , product >
 
-\newcommand{\graph}{\mathbb{G}}					%graph variable
-\newcommand{\vertSet}{\mathcal{V}}					%set of vertices rather than big V
-\newcommand{\edgeSet}{\mathcal{E}}					%set of edges rather than large E, \graph = (V,E)
-\newcommand{\wavenumber}{\kappa}				%fourier variable or wavenumber, not to confuse with jk subscripts!
-\newcommand{\qm}{\theta}						%quasi-momentum parameter
-\newcommand{\kt}{\bracs{\wavenumber, \qm}}		%(k, theta) pair
-\newcommand{\dmap}{\Gamma_0}					%Dirichlet map
-\newcommand{\nmap}{\Gamma_1}					%Neumann map
-\newcommand{\dgmap}{\dmap^{\graph}}			%Dirichlet and Neumann maps with graph script for distinction
-\newcommand{\ngmap}{\nmap^{\graph}}
-\newcommand{\dtn}{\mathcal{D}}					%Dirichlet-to-Neumann map
-\newcommand{\ag}{\mathcal{A}_\graph}			%caligraphic A with graph script for distinction
-\newcommand{\effFreq}{\Lambda}					%Effective frequency sqrt(w^2-\wavenumber^2)
-\newcommand{\conLeft}{\stackrel{\rightarrow}{\smash{\sim}\rule{0pt}{0.4ex}}} %j connects to k, j left
-\newcommand{\conRight}{\stackrel{\leftarrow}{\smash{\sim}\rule{0pt}{0.4ex}}} %j connects to k, j right
-\newcommand{\con}{\sim}							%j connects to k, indifferent of direction
+% STANDARD SETS
+\newcommand{\naturals}{\mathbb{N}}			% natural numbers
+\newcommand{\integers}{\mathbb{Z}}			% integers
+\newcommand{\rationals}{\mathbb{Q}}		% rational numbers
+\newcommand{\reals}{\mathbb{R}}			% real numbers
+\newcommand{\complex}{\mathbb{C}}			% complex numbers
 
-%standard sets
-\newcommand{\naturals}{\mathbb{N}}			%natural numbers
-\newcommand{\integers}{\mathbb{Z}}			%integers
-\newcommand{\rationals}{\mathbb{Q}}			%rational numbers
-\newcommand{\reals}{\mathbb{R}}				%real numbers
-\newcommand{\complex}{\mathbb{C}}			%complex numbers
+\newcommand{\smooth}[1]{C^{\infty}\bracs{#1}}				% smooth functions
+\newcommand{\psmooth}[1]{C^{\infty}_{\#}\bracs{#1}}		% periodic smooth functions
+\newcommand{\csmooth}[1]{C^{\infty}_{0}\bracs{#1}}			% compactly supported smooth functions
+\newcommand{\ltwo}[2]{L^{2}\bracs{#1,\mathrm{d}#2}}		% L^2(domain, measure) space
+\newcommand{\htwo}[1]{H^2_\mathrm{grad}\bracs{#1}}			% H^2_{gradients}(domain)
+\newcommand{\supp}{\mathrm{supp}}							% support of a function
+\newcommand{\dom}{\mathrm{dom}}							% domain of an operator
 
-%physical constants
-\newcommand{\epsFS}{\epsilon_0}			%permittivity of free space
-\newcommand{\muFS}{\mu_0}					%permeability of free space
+%% MACROS FOR THESIS NOTATION
 
-%other notations
-\newcommand{\rmi}{\mathrm{i}}				%imaginary unit i (RoMan font i)
-\newcommand{\e}{\mathrm{e}}					%Euler number, e (Roman font e)
+%creates the closed interval from 0 to the length of the input #1, denoted by absolute value
+\newcommand{\interval}[1]{\sqbracs{0,\abs{#1}}}
 
-%brackets and norms
-\newcommand{\bracs}[1]{\left( #1 \right)}				%encloses input in brackets
-\newcommand{\sqbracs}[1]{\left[ #1 \right]}				%encloses input in square brackets
-\newcommand{\clbracs}[1]{\left\{ #1 \right\}}			%encloses input in curly bracers
-\newcommand{\abs}[1]{\left\lvert #1 \right\rvert}					%absolute value
-\newcommand{\norm}[1]{\lvert\lvert #1 \rvert\rvert}		%norm 
-\newcommand{\setVert}{\ \middle\vert \ }					%vertical bar for the middle of sets
-\newcommand{\ip}[2]{\left\langle #1 , #2 \right\rangle}	%inner product
+% SYMBOLS, CONSTANTS, COMMON VARIABLES
+\newcommand{\eps}{\varepsilon}					% pretty epsilons to distingush from physical constants
+\newcommand{\epsFS}{\epsilon_0}				% permittivity of free space
+\newcommand{\muFS}{\mu_0}						% permeability of free space
+\newcommand{\wavenumber}{\kappa}				% fourier variable or wavenumber
+\newcommand{\qm}{\theta}						% quasi-momentum parameter
+\newcommand{\kt}{\bracs{\wavenumber, \qm}}		% (\wavenumber, \qm) pair
+\newcommand{\effFreq}{\Lambda}					% Effective frequency sqrt(w^2-\wavenumber^2)
 
-%function sets
-\newcommand{\smooth}[1]{C^{\infty}\bracs{#1}}							%smooth functions
-\newcommand{\ltwo}[2]{L^{2}\bracs{#1,\mathrm{d}#2}}						%general L^2 space
-\newcommand{\gradSob}[2]{H^1_\mathrm{grad}\bracs{#1, \mathrm{d}#2}}		%gradient Sobolev space
-\newcommand{\gradSobQM}[2]{H^1_{\qm, \mathrm{grad}}\bracs{#1, \mathrm{d}#2}} %gradient + i\qm Sobolev space
-\newcommand{\tgradSob}[2]{H^1_{\qm, \mathrm{grad}}\bracs{#1, \mathrm{d}#2}} %coz words and standardisation
-\newcommand{\ktgradSob}[2]{H^1_{\wavenumber,\qm,\mathrm{grad}}\bracs{#1, \mathrm{d}#2}}	%k,\qm-gradient Sobolev space
-\newcommand{\curlSob}[2]{H^1_\mathrm{curl}\bracs{#1, \mathrm{d}#2}}		%curl Sobolev space
-\newcommand{\tcurlSob}[2]{H^1_{\qm, \mathrm{curl}}\bracs{#1, \mathrm{d}#2}}		%curl + i\qm Sobolev space
-\newcommand{\kcurlSob}[2]{H^1_{\wavenumber,\mathrm{curl}}\bracs{#1, \mathrm{d}#2}}	%k-curl Sobolev space
-\newcommand{\ktcurlSob}[2]{H^1_{\wavenumber,\qm,\mathrm{curl}}\bracs{#1, \mathrm{d}#2}}	%k,\qm-curl Sobolev space
-\newcommand{\ktcurlSobDivFree}[2]{\mathcal{H}^{\kt}\bracs{#1, \mathrm{d}#2}}					%k,\qm-curl, divergence-free Sobolev space
-\newcommand{\gradgradSob}[2]{H^2_\mathrm{grad}\bracs{#1, \mathrm{d}#2}} %H^2, only really used for Leb. measure
-\newcommand{\htwo}[1]{H^2_\mathrm{grad}\bracs{#1}}				% H^2, but without measure tag
-\newcommand{\supp}{\mathrm{supp}}										%support of a function
-\newcommand{\dom}{\mathrm{dom}}								%domain of function (or operator i guess)
+% DOMAINS + MEASURES
+\newcommand{\dddom}{\widetilde{\Omega}}		% 3D domain notation
+\newcommand{\ddom}{\Omega}						% 2D domain notation
+\newcommand{\dddmes}{\widetilde{\mu}}			% 2D sing. measure + point masses
+\newcommand{\ddmes}{\mu}						% 2D sing. measure
+\newcommand{\compMes}{\tilde{\lambda}}			% 2D composite (Leb + sing) measure
 
-%grad and curl sets
-\newcommand{\gradZero}[2]{\mathcal{G}_{ #1, \mathrm{d}#2}\bracs{0}}		%gradients of zero for domain #1 with measure #2
-\newcommand{\kgradZero}[2]{\mathcal{G}_{ #1, \mathrm{d}#2}^{(\wavenumber)}\bracs{0}}	%k-gradients of zero for domain #1 with measure #2
-\newcommand{\curlZero}[2]{\mathcal{C}_{ #1, \mathrm{d}#2}\bracs{0}}	%curls of zero for domain #1 with measure #2
-\newcommand{\kcurlZero}[2]{\mathcal{C}_{ #1, \mathrm{d}#2}^{(\wavenumber)}\bracs{0}}	%k-curls of zero for domain #1 with measure #2
+% GRAPHS
+\newcommand{\graph}{\mathbb{G}}					% graph variable
+\newcommand{\vertSet}{\mathcal{V}}					% set of vertices rather than big V
+\newcommand{\edgeSet}{\mathcal{E}}					% set of edges rather than large E, \graph = (V,E)
+\newcommand{\dgmap}{\dmap^{\graph}}				% Dirichlet map with graph superscript
+\newcommand{\ngmap}{\nmap^{\graph}}				% Neumann map with graph superscript
+\newcommand{\ag}{\mathcal{A}_\graph}				%caligraphic A with graph script for distinction
 
-%derivatives and grad-like symbols
-\newcommand{\diff}[2]{\dfrac{\mathrm{d}#1}{\mathrm{d}#2}}			%complete derivative d#1/d#2
-\newcommand{\pdiff}[2]{\dfrac{\partial #1}{\partial #2}}			%partial derivative p#1/p#2
-\newcommand{\ddiff}[2]{\dfrac{\mathrm{d}^2 #1}{\mathrm{d} {#2}^2}}	%2nd deriv
-\newcommand{\pddiff}[2]{\dfrac{\partial^2 #1}{\partial {#2}^2}}		%2nd partial derivative
-\newcommand{\grad}{\nabla}											%grad operator
-\newcommand{\ograd}{\grad^{(0)}}									%grad operator with 0 superscript
-\newcommand{\tgrad}{\nabla^{\qm}}									%grad operator with qm superscript
-\newcommand{\kgrad}{\grad^{(\wavenumber)}}							%grad with wavenumber superscript
-\newcommand{\ktgrad}{\grad^{\kt}}									%grad with wavenumber, qm superscript
-\newcommand{\laplacian}{\Delta}						%laplacian operator, can have subscripts attached
-%%for curls, there are two options for formatting - only use one set and don't mix-and-match!
-%%%%set 1: writes \nabla\wedge notation
-%\newcommand{\curl}[1]{\grad_{#1}\wedge}							%curl with subscript #1
-%\newcommand{\kcurl}[1]{\grad_{#1}^{(\wavenumber)}\wedge}			%k-curl with measure subscript #1
-%\newcommand{\ktcurl}[1]{\grad_{#1}^{\kt}\wedge}					%k,theta-curl with measure subscript #1
-%%%%set 2: writes \mathrm{curl}
-\newcommand{\curl}[1]{\mathrm{curl}_{#1}}							%curl with subscript #1
-\newcommand{\kcurl}[1]{\mathrm{curl}_{#1}^{(\wavenumber)}}	 		%k-curl with measure subscript #1
-\newcommand{\ktcurl}[1]{\mathrm{curl}_{#1}^{\kt}}					%k,theta-curl with measure subscript #1
+% GRAPH CONNECTIONS
+\newcommand{\conLeft}{\stackrel{\rightarrow}{\smash{\sim}\rule{0pt}{0.4ex}}}	% j connects to k, j left
+\newcommand{\conRight}{\stackrel{\leftarrow}{\smash{\sim}\rule{0pt}{0.4ex}}}	% j connects to k, j right
+\newcommand{\con}{\sim} 														% j connects to k
 
-%displaying integrals
-\newcommand{\integral}[3]{\int_{#1}#2 \ \mathrm{d}#3}			%integral, domain #1, integrand #2, measure #3
-\newcommand{\md}{\mathrm{d}}									%differential d
+% SHIFTED GRADIENT OPERATORS
+\newcommand{\ograd}{\grad^{(0)}}								% grad operator with 0 superscript
+\newcommand{\tgrad}{\nabla^{\qm}}								% grad operator with qm superscript
+\newcommand{\kgrad}{\grad^{(\wavenumber)}}						% grad with wavenumber superscript
+\newcommand{\ktgrad}{\grad^{\kt}}								% grad with wavenumber, qm superscript
+\newcommand{\kcurl}[1]{\mathrm{curl}_{#1}^{(\wavenumber)}}	 	% k-curl with measure subscript #1
+\newcommand{\ktcurl}[1]{\mathrm{curl}_{#1}^{\kt}}				% k,theta-curl with measure subscript #1
 
-%convergence
-%\newcommand{\lconv}[1]{\xrightarrow{#1}}							%convergence with #1 above the rightarrow - requires mathtools
-\newcommand{\lconv}[1]{\overset{#1}{\longrightarrow}}				%convergence with #1 above the rightarrow
-\newcommand{\toInfty}[1]{ \ \text{as} \ #1 \rightarrow\infty}		%writes out "as #1 tends to infty"
+% GRAD/CURL OF ZERO SETS: format is \command{domain}{measure}
+\newcommand{\gradZero}[2]{\mathcal{G}_{ #1, \mathrm{d}#2}\bracs{0}}					% gradients of zero
+\newcommand{\kgradZero}[2]{\mathcal{G}_{ #1, \mathrm{d}#2}^{(\wavenumber)}\bracs{0}}	% k-gradients of zero
+\newcommand{\curlZero}[2]{\mathcal{C}_{ #1, \mathrm{d}#2}\bracs{0}}					% curls of zero
+\newcommand{\kcurlZero}[2]{\mathcal{C}_{ #1, \mathrm{d}#2}^{(\wavenumber)}\bracs{0}}	% k-curls of zero
+
+% SOBOLEV SPACES: format is \command{domain}{measure}
+\newcommand{\gradSob}[2]{H^1_\mathrm{grad}\bracs{#1, \mathrm{d}#2}}			% gradient SS
+\newcommand{\tgradSob}[2]{H^1_{\qm, \mathrm{grad}}\bracs{#1, \mathrm{d}#2}} 	% t-gradient SS
+\newcommand{\gradSobQM}[2]{\tgradSob{#1}{#2}}									% t-gradient SS, legacy
+
+%\wavenumber,\qm-gradient Sobolev space
+\newcommand{\ktgradSob}[2]{H^1_{\wavenumber,\qm,\mathrm{grad}}\bracs{#1, \mathrm{d}#2}}	
+
+\newcommand{\curlSob}[2]{H^1_\mathrm{curl}\bracs{#1, \mathrm{d}#2}}						% curl SS
+\newcommand{\tcurlSob}[2]{H^1_{\qm, \mathrm{curl}}\bracs{#1, \mathrm{d}#2}}				% t-curl SS
+\newcommand{\kcurlSob}[2]{H^1_{\wavenumber,\mathrm{curl}}\bracs{#1, \mathrm{d}#2}}		% k-curl SS
+
+%\wavenumber,\qm-curl Sobolev space
+\newcommand{\ktcurlSob}[2]{H^1_{\wavenumber,\qm,\mathrm{curl}}\bracs{#1, \mathrm{d}#2}}
+%\wavenumber,\qm-curl, divergence-free Sobolev space
+\newcommand{\ktcurlSobDivFree}[2]{\mathcal{H}^{\kt}\bracs{#1, \mathrm{d}#2}}	
+				
+%H^2(domain, measure), only really used for Leb. measure
+\newcommand{\gradgradSob}[2]{H^2_\mathrm{grad}\bracs{#1, \mathrm{d}#2}} 
