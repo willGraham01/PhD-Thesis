@@ -1,0 +1,47 @@
+\section{Introduction to the Domains and Problems we will Consider} \label{sec:TP-DomainSetup}
+In this section we setup the domains on which we will be working throughout chapters \ref{ch:ScalarSystem}-\ref{ch:SingInc}, and establish the notation that we shall use going forward.
+Each chapter will contain a short recap of the relevant notation, but unless otherwise stated uses the setup and notation established here.
+
+Let $\hat{\graph}$ be a periodic graph embedded into $\reals^2$ and $\upsilon$ be the singular measure supporting $\hat{\graph}$.
+Suppose that $\hat{\graph}$ has unit cell $\ddom=[0,1)^2$ and unit graph $\graph=\bracs{\vertSet, \edgeSet}$, and adopt assumption \ref{ass:MeasTheoryProblemSetup} for $\graph$.
+Define the measures $\lambda_{jk}$, $\ddmes$, $\nu$, $\dddmes$, and $\compMes$ as they appear in section \ref{sec:SingularMeasures} for $\graph$.
+Throughout, we always associate $\ddom$ with the (surface of a) torus, by identifying the ``left and right" boundaries $\clbracs{x_0=0}$ and $\clbracs{x_0=1}$ with each other, and the ``top and bottom" boundaries $\clbracs{x_1=1}$ and $\clbracs{x_1=1}$ similarly.
+
+In chapter \ref{ch:ScalarSystem}, we will be only be concerned with the 2D domain $\ddom$.
+We will define the family of operators $-\laplacian_{\qm}$ through the (bilinear) form 
+\begin{align*}
+	b(u,v) = \integral{\ddom}{ \tgrad_{\dddmes} u\cdot\overline{\tgrad_{\dddmes} v} }{\dddmes},
+	\qquad u,v\in\tgradSob{\ddom}{\dddmes},
+\end{align*}
+which will provide us with the (spectral, variational) problem of finding $\omega^2>0, u\in\tgradSob{\ddom}{\dddmes}$ such that
+\begin{align*}
+	\integral{\ddom}{ \tgrad_{\dddmes} u\cdot\overline{\tgrad_{\dddmes}\phi} }{\dddmes}
+	&= \omega^2\integral{\ddom}{ u\overline{\phi} }{\dddmes},
+	\qquad\forall\phi\in\psmooth{\ddom}.
+\end{align*}
+As discussed in section \ref{ssec:SobSpacesAndGelfand}, the union of the spectra $\sigma\bracs{-\laplacian_{\qm}}$ over the quasi-momentum $\qm$ provides us with the spectrum of the periodic operator $-\laplacian$ on $\reals^2$, defined through the form
+\begin{align} \label{eq:TP-2DWaveEqnWholeSpace}
+	\integral{\reals^2}{ \grad u\cdot\overline{\grad v} }{\upsilon}
+	\qquad u,v\in\gradSob{\reals^2}{\upsilon}.
+\end{align}
+Aside from replacement of the Lebesgue measure with the singular measure $\dddmes$ (and the corresponding replacement of gradients), \eqref{eq:TP-2DWaveEqnWholeSpace} is markedly similar to the weak formulation for the acoustic approximation.
+Our analysis of the operators $-\laplacian_{\qm}$ will lead us to a quantum graph problem on $\graph$, and analysis of the spectrum via the $M$-matrix.
+We derive an explicit formula for the $M$-matrix (for given $\kt$) in terms of the geometry of $\graph$, and discuss the numerical and analytic techniques that this makes available to us, complimenting this with examples.
+
+We then look to extend the work in chapter \ref{ch:ScalarSystem} to encompass the (analogue of the) curl-of-the-curl equation, which will require us to consider the domain $\dddom = \ddom\times[0,\infty)$.
+This geometry corresponds to a collection of planes parallel to the $x_3$-axis, and it is not difficult to show that the product measure $\dddmes\times\lambda_1$ corresponds to a singular measure that supports these induced planes (along with a contribution from the measure $\nu$ at the extruded vertices).
+Note that we will not be considering a graph embedded into three dimensions, since such a problem has rather trivial nature, as discussed in section \tstk{section, curls of zero are everything on 3D graphs}.
+
+Finally, in chapter \ref{ch:SingInc} we will return to the two-dimensional domain $\ddom$, however equip it with the composite measure $\compMes$ rather than the singular measure $\dddmes$.
+In this case the graph $\graph$ naturally breaks the domain $\ddom$ into disjoint (open) sets $\ddom_i$, for $i$ in some index set, where
+\begin{itemize}
+	\item For every $i$, the domain $\ddom_i$ is an $n$-gon, whose boundary $\partial\ddom_i$ is equal to the union of $n$ (distinct) edges of $\graph$.
+	Note that this implies that $\ddom_i$ is a Lipschitz domain.
+	\item We have that
+	\begin{align*}
+		\ddom = \graph \cup \bigcup_{i}\ddom_i,
+		\qquad
+		\emptyset = \graph \cap \bigcup_{i}\ddom_i.
+	\end{align*}
+\end{itemize}
+In this chapter we will refer to the regions $\ddom_i$ as the \emph{bulk regions} and the graph $\graph$ (and its constituent edges) as the \emph{skeleton}, to sidestep a philosophical debate about whether $\graph$ or the $\ddom_i$ are the ``inclusions".
