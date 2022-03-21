@@ -1,9 +1,11 @@
 \section{Sobolev Spaces with Respect to Borel Measures} \label{sec:BorelMeasSobSpaces}
 In this section we introduce the ``non-classical" Sobolev spaces with respect to Borel measures, the final ingredient that we require to pose variational problems on our singular structures.
-Since we will be working with a number of different measures as introduced in section \ref{sec:SingularMeasures}, the content of this section is presented with respect to a general Borel measure $\rho$ defined on (a subset of) $\reals^2$.
+Since we will be working with a number of different measures (section \ref{sec:SingularMeasures}) in two dimensions (or occasionally three), the content of this section is presented with respect to a general Borel measure $\rho$ defined on (a subset of) $\reals^2$.
 Let $\ddom\subset\reals^2$, and denote by $\smooth{\ddom}$ the set of infinitely differentiable (\emph{smooth}) functions on $\ddom$ (uniformly extended to the boundary if applicable), $\csmooth{\ddom}$ the set of smooth functions with compact support within $\ddom$, and $\psmooth{\ddom}$ the set of infinitely differentiable functions on $\reals^2$ that are $\ddom$-periodic.
-Let $\rho$ be a Borel measure on $\ddom$, and recall the shifted gradient ($\ktgrad$) and curl operators ($\ktcurl{}$) operators introduced in section \ref{sec:TP-GelfandTransform}.
+Let $\rho$ be a Borel measure on $\ddom$, and denote by $\ltwo{\ddom}{\rho}$ the space of $\rho$-square-integrable functions on $\ddom$.
 Our overarching goal is to construct an analogy to a Sobolev space for the measure $\rho$, and hence obtain a concept of (weak) derivative.
+We will predominantly work ``post-Gelfand transform", hence our definitions will involve the shifted gradient ($\ktgrad$) and curl operators ($\ktcurl{}$) operators introduced in section \ref{sec:TP-GelfandTransform}.
+Section \ref{ssec:SobSpacesAndGelfand} clarifies the relationship between the spaces we introduce here and the non-classical Sobolev spaces one would consider when studying a periodic problem in $\reals^3$.
 \tstk{also need the whole ``periodic, but can ignore b/c graphs" lecture, although this might go in the first appendix to chapter 3}
 
 Let us begin by defining
@@ -15,12 +17,11 @@ where the closure is taken in $\ltwo{\ddom}{\rho}\times\ltwo{\ddom}{\rho}^3$, an
 	W^{\kt}_{\rho,\mathrm{curl}} &:= \overline{\clbracs{ \bracs{\Phi, \ktcurl{}\Phi} \setVert \Phi\in\bracs{\psmooth{\ddom}}^3 }},
 \end{align*}
 where the closure is taken in $\ltwo{\ddom}{\rho}^3\times\ltwo{\ddom}{\rho}^3$.
-This mimics the ``$H$"-definition of classical Sobolev spaces (when $\rho$ is the Lebesgue measure), however for general measures $\rho$ the Meyers-Serrin ``$H=W$" theorem doesn't hold due to the lack of the integration by parts technique.
-We also use smooth periodic functions, and the $\ktgrad$ operator in place of the usual gradient operator to reflect our application of the Gelfand transform --- see section \ref{ssec:SobSpacesAndGelfand}.
+This mimics the ``$H$"-definition of classical Sobolev spaces (when $\rho$ is the Lebesgue measure), however for general measures $\rho$ the Meyers-Serrin ``$H=W$" theorem doesn't hold due to the lack of the integration by parts technique. \tstk{but you do have the partial integration by parts technique for graphs, right Will?}
 We would like to call the second element of a pair $\bracs{u,g}\in W^{\kt}_{\rho,\mathrm{grad}}$ ``the gradient" of the function $u$, however notice that if $\bracs{u,g_1}, \bracs{0, g_2}\in W^{\kt}_{\rho,\mathrm{grad}}$ then we also have that $\bracs{u, g_1+g_2}\in W^{\kt}_{\rho,\mathrm{grad}}$.
 As such, the term ``gradient" being used in reference to the second element of a pair in $W^{\kt}_{\rho,\mathrm{grad}}$ does not indicate a \emph{unique} function --- both $g_1$ and $g_1+g_2$ are ``gradients" of $u$ in this sense.
 An analogous deduction can be made for ``curl" and the second member of elements of $W^{\kt}_{\rho,\mathrm{curl}}$.
-Whilst non-uniqueness of ``gradients" (in the aforementioned sense) is not an active hindrance \tstk{Zhikov, Kirill \& Serena deal with this fine)}, for our purposes it is convenient for us to define the set of ``($\rho$)-gradients of zero" as
+The non-uniqueness of ``gradients" (in the aforementioned sense) is not a major hindrance \tstk{Zhikov, Kirill \& Serena deal with this fine)}, but it requires us to define and study the set of ``($\rho$)-gradients of zero" as
 \begin{align*}
 	\gradZero{\ddom}{\rho} &= \clbracs{ g\in \ltwo{\ddom}{\rho}^3 \setVert \bracs{0,g}\in W^{\kt}_{\rho,\mathrm{grad}}}, \\
 	&= \clbracs{ g\in\ltwo{\ddom}{\rho}^3 \setVert \exists\phi_n\in\psmooth{\ddom} \text{ s.t. } \phi_n \lconv{\ltwo{\ddom}{\rho}}0, \ktgrad\phi_n\lconv{\ltwo{\ddom}{\rho}^3} g }, \labelthis\label{eq:GradZeroSequenceDef}
@@ -32,6 +33,7 @@ and analogously define the set of ``($\rho$)-curls of zero" as
 \end{align*}
 Given an element $g\in\gradZero{\ddom}{\rho}$, we will refer to a sequence $\phi_n$ as in \eqref{eq:GradZeroSequenceDef} as an ``approximating sequence" for $g$, and will make use of the phrase ``take an approximating sequence $\phi_n$ for $g$" (or similar) to mean ``let $\phi_n$ be a sequence as in \eqref{eq:GradZeroSequenceDef} for the element $g$ of $\gradZero{\ddom}{\rho}$".
 We also adopt a similar convention for elements $c\in\curlZero{\ddom}{\rho}$ and ``approximating sequences" as in \eqref{eq:CurlZeroSequenceDef}.
+The functions that belong to these sets can be thought of as the functions that are changing (or vector fields that are rotating) in such a way that the measure $\rho$ cannot see these changes, whilst $\lambda_d$ can --- concrete interpretations for the measures we study in depth can be found in \tstk{appendices with curl and gradient interpretations}.
 
 One may notice the absence of any $\kt$ labelling on the sets $\gradZero{\ddom}{\rho}$ and $\curlZero{\ddom}{\rho}$, which is due to their independence of these quantities, as demonstrated in proposition \ref{prop:ZeroInvariantUnderQM-Wavenumber} below.
 This is not unexpected --- given that $\phi_n$ converging to zero, adding $\phi_n$ multiplied by a combination of the quasi-momentum $\qm$ and Fourier variable $\wavenumber$ is not going to change any behaviour.
@@ -61,7 +63,7 @@ This is not unexpected --- given that $\phi_n$ converging to zero, adding $\phi_
 	\end{align*}
 	(as in \eqref{eq:GradZeroSequenceDef}).
 	But $\rmi\bracs{\qm_1, \qm_2, 0}^{\top}\phi_n\rightarrow 0$, as does $\rmi\wavenumber\phi_n$.
-	Given the formulae above, we must also have that $\grad^{\bracs{0, 0}}\phi_n\rightarrow g$, so $g\in \gradZero{\ddom}{\rho}^{\bracs{0, 0}}$.
+	Given the formulae above, we must also have that $\grad^{\bracs{0, 0}}\phi_n\rightarrow g$, so $g\in \gradZero{\ddom}{\rho}$.
 	The reverse implication, and the proof for $\rho$-curls of zero, is similar.
 \end{proof}
 
@@ -131,9 +133,19 @@ This allows construction of the ``Sobolev space" of gradients with respect to th
 	\end{align*}
 	is called the ``Sobolev space of $\kt$-gradients with respect to the measure $\rho$".
 	We call the member $\ktgrad_{\rho}u$ of the pair $\bracs{u, \ktgrad_{\rho}u}\in\ktgradSob{\ddom}{\rho}$ the ``$\kt$-tangential gradient of $u$ with respect to $\rho$".
+	When the context is clear, we will simply refer to $\ktgrad_{\rho}u$ as the ``tangential gradient" or ``$\kt$-tangential gradient".
+	Additionally, it is enough to specify the first member $u$ of the pair $\bracs{u, \ktgrad_{\rho}u}$ due to the uniqueness of $\kt$-tangential gradients, so we will often write $u\in\ktgradSob{\ddom}{\rho}$ as shorthand.
+	\tstk{We can equip $\ktgradSob{\ddom}{\rho}$ with the inner product and norm
+	\begin{align*}
+		\ip{u}{v}_{\ktgradSob{\ddom}{\rho}} 
+		&= \integral{\ddom}{u\overline{v}}{\rho}
+		+ \integral{\ddom}{\ktgrad_{\rho}u \cdot \overline{\ktgrad_{\rho}v}}{\rho}, \\
+		\norm_{\ktgradSob{\ddom}{\rho}}^2 &= \ip{u}{u}_{\ktgradSob{\ddom}{\rho}}
+		= \norm{u}_{\ltwo{\ddom}{\rho}}^2 + \norm{\ktgrad_{\rho}u}_{\ltwo{\ddom}{\rho}^3},
+	\end{align*}		
+	to make it a Hilbert space.}
 \end{definition}
-When the context is clear, we will simply refer to $\ktgrad_{\rho}u$ as the ``tangential gradient" or ``$\kt$-tangential gradient".
-Additionally, it is enough to specify the first member $u$ of the pair $\bracs{u, \ktgrad_{\rho}u}$ due to the uniqueness of $\kt$-tangential gradients, so we will often write $u\in\ktgradSob{\ddom}{\rho}$ as shorthand.
+
 
 We can also perform analogous steps for $\curlZero{\ddom}{\rho}$, which allows us to define the ``Sobolev space" of curls with respect to the measure $\rho$:
 \begin{definition}[Sobolev Space of Curls] \label{def:CurlSobSpace}
@@ -145,6 +157,7 @@ We can also perform analogous steps for $\curlZero{\ddom}{\rho}$, which allows u
 	The member $\ktcurl{\rho}u$ of the pair $\bracs{u, \ktcurl{\rho}u}$ is the ``$\kt$-tangential curl of $u$ with respect to $\rho$".
 \end{definition}
 Like with tangential gradients; we will use the shorthand $u\in\ktcurlSob{\ddom}{\rho}$ to refer to the element $\bracs{u, \ktcurl{\rho}u}\in\ktcurlSob{\ddom}{\rho}$, since each $u$ has a unique $\ktcurl{\rho}u$ that is orthogonal to $\curlZero{\ddom}{\rho}$, and when the context is clear will refer to $\ktcurl{\rho}u$ as the ``tangential curl" or ``$\kt$-tangential curl".
+\tstk{norm as well}
 
 Having now assigned a meaning to (tangential) gradients and curls for the measure $\rho$, we can also define what it means for a vector field $u$ to be $\kt$-divergence-free with respect to $\rho$.
 \begin{definition}[$\kt$-divergence-free] \label{def:ktDivFree}
@@ -240,26 +253,26 @@ Another remark that deserves to be made is that given the construction of $W^{\k
 Corollary \ref{cory:DivFreeSufficient} does mean that definition \ref{def:ktDivFree} can be weakened, however we chose to present the definition of ``divergence free" in this manner to maintain parallels to the usual intuition of a divergence free field being orthogonal to \emph{all} gradients.
 
 \subsection{Other Sobolev Spaces, and the image under the Gelfand Transform} \label{ssec:SobSpacesAndGelfand}
-Upon recalling section \ref{sec:TP-GelfandTransform}, the reader may noticed that our notation and construction of the Sobolev spaces $\ktgradSob{\ddom}{\rho}$ and $\ktcurlSob{\ddom}{\rho}$ is heavily suggestive of being the result of the combination of a Gelfand transform in the first two coordinate directions and a Fourier transform in the third.
-Indeed, our choice to use periodic smooth functions and the shifted gradient operator to construct these spaces was not a coincidence.
 One can define analogous ``non-classical" Sobolev spaces on $\reals^d$ (or subsets thereof) through an analogous procedure to the above; let $\upsilon$ be a Borel measure on $\reals^d$ and define \tstk{check: you need compactly supported smooth functions here right? Otherwise they're not going to be sufficiently fast decaying!}
 \begin{align*}
-	W_{\upsilon,\mathrm{grad}} := \overline{ \clbracs{ \bracs{\phi, \grad\phi} \setVert \phi\in\smooth{\reals^d} } },
+	W_{\upsilon,\mathrm{grad}} := \overline{ \clbracs{ \bracs{\phi, \grad\phi} \setVert \phi\in\csmooth{\reals^d} } },
 \end{align*}
 with the closure taken in $\ltwo{\reals^d}{\upsilon}\times\ltwo{\reals^d}{\upsilon}^d$.
 One can again define a set of gradients of zero, demonstrate that it forms a closed linear subspace of $\ltwo{\reals^d}{\upsilon}^d$, and construct the Sobolev space $\gradSob{\reals^d}{\upsilon}$ consisting of functions $u$ and their tangential gradients $\grad_{\upsilon}u$ --- for further information, the interested reader can see \tstk{Zhikov, with section ref}.
 We can also define the Sobolev space $\tgradSob{\ddom}{\rho}$ via the same procedure by first considering the closure of pairs $\bracs{\phi, \tgrad\phi}, \phi\in\psmooth{\ddom}$ in $\ltwo{\ddom}{\rho}\times\ltwo{\ddom}{\rho}^2$.
 
+Upon recalling section \ref{sec:TP-GelfandTransform}, the reader may notice that our notation and construction of the Sobolev spaces $\ktgradSob{\ddom}{\rho}$ and $\ktcurlSob{\ddom}{\rho}$ is heavily suggestive of being the result of the combination of a Gelfand transform in the first two coordinate directions and a Fourier transform in the third.
+Indeed, our choice to use periodic smooth functions and the shifted gradient operator to construct these spaces was not a coincidence.
 Now suppose that $\hat{\graph}$ is a periodic graph embedded into $\reals^2$ with period cell $\ddom$, and let $\upsilon$ be one of the singular measures detailed in section \ref{sec:SingularMeasures} with respect to the graph $\hat{\graph}$.
-Consider the extrusion $\dddom:=\hat{\graph}\times[0,\infty)\subset\reals^3$ equipped with the product measure $\upsilon\times\lambda_1$, and the image of the set
+Let $\graph$ be the period graph of $\hat{\graph}$ and let $\rho$ be the ``restriction" of the measure $\upsilon$ to $\ddom$.
+Finally, consider the extrusion $\dddom:=\hat{\graph}\times[0,\infty)\subset\reals^3$ equipped with the product measure $\upsilon\times\lambda_1$, and the image of the set
 \begin{align*}
-	\clbracs{ \bracs{\phi, \grad\phi} \setVert \phi\in\smooth{\dddom} }
+	\clbracs{ \bracs{\phi, \grad\phi} \setVert \phi\in\csmooth{\dddom} }
 \end{align*}
 under a Gelfand transform in the $\bracs{x_1,x_2}$-plane and a Fourier transform in the $x_3$ plane.
 For given quasi-momentum $\qm$ and Fourier variable (wavenumber) $\kappa$, the resulting functions belong to the set
 \begin{align*}
 	\clbracs{ \bracs{\phi, \ktgrad\phi} \setVert \phi\in\psmooth{\ddom} }.
 \end{align*}
-By virtue of how we chose to construct the space $\gradSob{\dddom}{\bracs{\upsilon\times\lambda_1}}$, we have that the image of a function $u\in\gradSob{\dddom}{\bracs{\upsilon\times\lambda_1}}$ will be some $\hat{u}\in\ktgradSob{\ddom}{\rho}$ where $\rho$ is the restriction of the measure $\upsilon$ to the period cell $\ddom$.
-Similar conclusions can be drawn for the spaces $\curlSob{\dddom}{\bracs{\upsilon\times\lambda_1}}$ and $\ktcurlSob{\ddom}{\rho}$ and, if one does not consider an extrusion (hence nor a Fourier transform), the spaces $\gradSob{\reals^2}{\upsilon}$ and $\tgradSob{\ddom}{\rho}$.
-Since the Gelfand and Fourier transforms are isometries, we can also make the reverse associations.
+By virtue of how we chose to construct the space $\gradSob{\dddom}{\bracs{\upsilon\times\lambda_1}}$, we have that the image of a function $u\in\gradSob{\dddom}{\bracs{\upsilon\times\lambda_1}}$ will be some $\hat{u}\in\ktgradSob{\ddom}{\rho}$.
+Similar conclusions can be drawn for the spaces $\curlSob{\dddom}{\bracs{\upsilon\times\lambda_1}}$ and $\ktcurlSob{\ddom}{\rho}$ and the spaces $\gradSob{\reals^2}{\upsilon}$ and $\tgradSob{\ddom}{\rho}$.
