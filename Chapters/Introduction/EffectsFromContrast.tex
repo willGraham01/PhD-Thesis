@@ -7,8 +7,26 @@
 \input{./Chapters/Introduction/Intro-SSThinStructures.tex}
 
 % now begin the discussion of critical contrast
-\subsection{Critical Contrast}
-\tstk{linking sentence}
+\subsection{Critical, or High Contrast Composites}
+\tstk{linking paragraph...}
+We have seen that there are a variety of effective problems that one can obtain from the $\delta\rightarrow0$ limit of a thin structure in section \tstk{ref, previous section!}.
+In this section, we put the shoe on the other foot so to speak, and focus on the various behaviours that can emerge when considering asymptotic limits of the material properties, or ratio of wavelengths in the various components of the medium.
+In this section, the studies we discuss typically concern periodic, composite materials whose domains are described in the manner introduced in \tstk{section for composite materials}.
+Throughout, we will phrase our discussion in terms of the values of the non-dimensional length parameters \tstk{refer to equation for this!} to avoid confusion where possible, and treat the composite as having material parameters described by the (possibly matrix-valued) $Q$-periodic function $A(y)$.
+
+Studies of such materials typically rely on techniques from homogenisation theory to determine ``effective" material properties in the asymptotic limit of interest.
+For example, consider the operator $\mathcal{A}=-\grad\cdot A\grad$ on such a composite domain.
+One regime of interest is the ``long wave" (or low frequency) regime, where one attempts to garner information about the lowest spectral band of a composite material.
+Accordingly, the parameter $\eps\ll 1$ is introduced and we consider the (sequence of) operators $\mathcal{A}^{\eps} = -\grad\cdot A\bracs{\eps^{-1}x}\grad$ in the limit $\eps\rightarrow0$.
+We then derive an ``effective" operator $\mathcal{A}^{\mathrm{hom}} = -\grad\cdot A^{\mathrm{hom}}\grad$ that describes the resulting limit, and look to formalise the relationship between $\mathcal{A}^{\mathrm{hom}}$ and the $\mathcal{A}^{\eps}$.
+The matrix $A^{\mathrm{hom}}$ is sometimes labelled or interpreted as the ``effective" material properties.
+Typically one desires convergence of $\mathcal{A}^{\eps}$ to $\mathcal{A}^{\mathrm{hom}}$ as $\eps\rightarrow0$ in the norm-resolvent sense, namely that the family of solutions $u_{\eps}$ to the problems $\mathcal{A}^{\eps}u_{\eps}=f_{\eps}$ converges to the solution $u$ of the effective problem $\mathcal{A}^{\mathrm{hom}}u = f$, for any suitable initial data $f_{\eps}\rightarrow f$.
+However one may also establish weaker results, for example coincidence of the spectrum of $\mathcal{A}^{\mathrm{hom}}$ with the limit of $\sigma\bracs{\mathcal{A}^{\eps}}$ \tstk{cf KZ and EP discussion earlier!} (which would otherwise be implied by norm-resolvent convergence).
+This convergence in turn ensures that the effective problem faithfully describes the behaviour of the composite material within this regime, and one typically hopes that the effective problem is more mailable to analysis than its counterpart.
+These studies can also reveal interesting material effects within such regimes that might otherwise be lost or go unnoticed --- the design of materials to open spectral band gaps is one such effect that is desired, however other dispersive effects such as metamaterial behaviour (where the effective material properties appear to take unphysical values) can also emerge from these limits.
+
+\tstk{now, standard techniques not working, etc.}
+
 
 Let us begin with the study of \cite{zhikov2000extension}, that was concerned with the homogenisation problem for the operator $\mathcal{A}^{\eps}$,
 \begin{align*}
