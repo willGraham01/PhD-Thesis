@@ -13,7 +13,7 @@ We will define the family of operators $-\laplacian_{\qm}$ through the (bilinear
 	b(u,v) = \integral{\ddom}{ \tgrad_{\dddmes} u\cdot\overline{\tgrad_{\dddmes} v} }{\dddmes},
 	\qquad u,v\in\tgradSob{\ddom}{\dddmes},
 \end{align*}
-which will provide us with the (spectral, variational) problem of finding $\omega^2>0, u\in\tgradSob{\ddom}{\dddmes}$ such that
+which will provide us with the (spectral, variational) problem of finding $\omega^2>0$, $u\in\tgradSob{\ddom}{\dddmes}$ such that
 \begin{align*}
 	\integral{\ddom}{ \tgrad_{\dddmes} u\cdot\overline{\tgrad_{\dddmes}\phi} }{\dddmes}
 	&= \omega^2\integral{\ddom}{ u\overline{\phi} }{\dddmes},
@@ -33,7 +33,7 @@ This geometry corresponds to a collection of planes parallel to the $x_3$-axis, 
 Note that we will not be considering a graph embedded into three dimensions, since such a problem has rather trivial nature, as discussed in section \tstk{section, curls of zero are everything on 3D graphs}.
 
 Finally, in chapter \ref{ch:SingInc} we will return to the two-dimensional domain $\ddom$, however equip it with the composite measure $\compMes$ rather than the singular measure $\dddmes$.
-In this case the graph $\graph$ naturally breaks the domain $\ddom$ into disjoint (open) sets $\ddom_i$, for $i$ in some index set, where
+In this case the graph $\graph$ naturally breaks the domain $\ddom$ into disjoint (open) sets $\ddom_i$, for $i$ in some index set, where:
 \begin{itemize}
 	\item For every $i$, the domain $\ddom_i$ is an $n$-gon, whose boundary $\partial\ddom_i$ is equal to the union of $n$ (distinct) edges of $\graph$.
 	Note that this implies that $\ddom_i$ is a Lipschitz domain.

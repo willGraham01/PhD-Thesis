@@ -95,23 +95,23 @@ where the variable $\qm$ is called the \emph{quasi-momentum}, the analogue of th
 We will go into more details in section \ref{sec:TP-GelfandTransform}, restricting ourselves to a short summary of the key affects of this transform.
 The foremost effect of this transform is that we can replace the spectral problem for $\mathcal{A}$ with the spectral problem for each member of a family of operators $\mathcal{A}_{\qm}$ parametrised by the quasi-momentum.
 Importantly, since each $\mathcal{A}_{\qm}$ now acts on a compact domain, under ellipticity assumptions these operators (have compact resolvents and thus) possess discrete spectra.
-This allows us to order the eigenvalues $\omega_j\bracs{\qm}$, $j\in\naturals$, of $\mathcal{A}_{\qm}$ in ascending order in $j$.
-The (continuous) functions $\omega_j$ of $\qm$ are called the dispersion branches\footnote{Alternative names include dispersion relations, or (spectral) band functions.}, and it holds that the spectrum of $\mathcal{A}$ is equal to the union of the spectra of the $\mathcal{A}_\qm$ --- that is, the projection of the graphs of the $y=\omega_j(\qm)$ onto the $y$ axis provides the spectrum of $\mathcal{A}$.
+This allows us to order the eigenvalues $\lambda_j\bracs{\qm}$, $j\in\naturals$, of $\mathcal{A}_{\qm}$ in ascending order in $j$.
+The (continuous) functions $\lambda_j$ of $\qm$ are called the dispersion branches\footnote{Alternative names include dispersion relations, or (spectral) band functions.}, and it holds that the spectrum of $\mathcal{A}$ is equal to the union of the spectra of the $\mathcal{A}_\qm$ --- that is, the projection of the graphs $y=\lambda_j(\qm)$ onto the $y$ axis provides the spectrum of $\mathcal{A}$.
 Explicitly, we have that
 \begin{align*}
 	\sigma\bracs{\mathcal{A}} &= \bigcup_{\qm\in B} \sigma\bracs{\mathcal{A}_{\qm}}
-	= \bigcup_{j\in\naturals} \mathrm{Im}\bracs{\omega_j\bracs{\qm}}
-	= \bigcup_{j\in\naturals} \sqbracs{ \min_{\qm}\omega_j, \max_{\qm}\omega_j },
+	= \bigcup_{j\in\naturals} \mathrm{Im}\bracs{\lambda_j\bracs{\qm}}
+	= \bigcup_{j\in\naturals} \sqbracs{ \min_{\qm}\lambda_j, \max_{\qm}\lambda_j },
 \end{align*}
-the final equality coming from the fact that the branches $\omega_j$ are continuous functions of $\qm$, and the interval $\sqbracs{ \min_{\qm}\omega_j, \max_{\qm}\omega_j }$ being labelled the $j^{\text{th}}$ spectral band of $\mathcal{A}$.
-This highlights where the band-gap structure of these composite materials comes from, whenever $\max_{\qm}\omega_{j-1} < \min_{\qm}\omega_{j}$, there is a corresponding gap between the end of the $(j-1)^{\text{th}}$ band and the beginning of the $j^{\text{th}}$.
-It is known that for ordinary differential equations of second order the inequality 
-\begin{align*}
-	\max_{\qm}\omega_{j-1} \leq \min_{\qm}\omega_{j}
-\end{align*}
-holds, so the spectral bands cannot overlap but may touch \tstk{refs? Pointed to a book by a couple of the references that say this: M. Reed and B. Simon, Methods of Modern Mathematical Physics, Vol. IV:Analysis of Operators}.
+the final equality coming from the fact that the branches $\lambda_j$ are continuous functions of $\qm$, and the interval $\sqbracs{ \min_{\qm}\lambda_j, \max_{\qm}\lambda_j }$ being labelled the $j^{\text{th}}$ spectral band of $\mathcal{A}$.
+This highlights where the band-gap structure of these composite materials comes from, whenever 
+\begin{align} \label{eq:Intro-DispersionBranchGapIneq}
+	\max_{\qm}\lambda_{j-1} < \min_{\qm}\lambda_{j},
+\end{align}
+there is a corresponding gap between the end of the $(j-1)^{\text{th}}$ band and the beginning of the $j^{\text{th}}$.
+It is known that for ordinary differential equations of second order the strict version of the inequality in \eqref{eq:Intro-DispersionBranchGapIneq} holds, so the spectral bands cannot overlap but may touch \tstk{refs? Pointed to a book by a couple of the references that say this: M. Reed and B. Simon, Methods of Modern Mathematical Physics, Vol. IV:Analysis of Operators}.
 As such, it is conceivable that alterations to the material may open up gaps between adjacent bands.
-In two dimensions (or higher) the spectral bands can and usually do overlap, which makes the task of designing a material with band gaps harder though not impossible.
+In two dimensions (or higher) the spectral bands can and usually do overlap, which makes the task of designing a material with band gaps harder though not impossible. \tstk{BK book also has some notes on this for QG systems too that can go here.}
 
 \subsection{Non-dimensionalisation of the Maxwell System} \label{ssec:Intro-NonDimMax}
 We now turn specifically towards the setup of domains that model photonic crystals, and the process of non-dimensionalising the governing equations and consideration of the various free parameters that emerge from this process.
