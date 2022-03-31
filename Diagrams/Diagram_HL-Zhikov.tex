@@ -32,18 +32,18 @@
 	\def\bulk{black!10!white}
 
 	% Hempel-Lienau setup
-	\begin{scope}[shift={(0,4)}]
+	\begin{scope}[shift={(8,0)}]
 		\filldraw[fill=\bulk, draw=black, dashed] (0,0) rectangle (4,4);
 		\filldraw[fill=\inc, draw=black] plot [smooth cycle, tension=2.5] coordinates {(1.5,1.5) (2.5,1.5) (2.5,2.5) (1.5,2.5)};
 		\draw[<->] (0,-0.1) -- (4,-0.1); 
 		\node[anchor=north] at (2,-0.1) {$1$};
-		\node[anchor=north west] at (0,3.9) {$\tilde{A}(x)=\kappa$};
-		\node[anchor=center] at (2,2) {$\tilde{A}(x)=1$};
-		\node[anchor=south] at (2,4) {$\mathcal{A}^{\kappa}=-\grad\cdot \tilde{A}\grad $};
+		\node[anchor=north west] at (0,3.9) {$\tilde{A}^{\sigma}(x)=\sigma$};
+		\node[anchor=center] at (2,2) {$\tilde{A}^{\sigma}(x)=1$};
+		\node[anchor=south] at (2,4) {$\mathcal{A}^{\sigma}=-\grad\cdot \tilde{A}^{\sigma}\grad $};
 	\end{scope}
 
 	% Zhikov double porosity model setup
-	\begin{scope}[shift={(0,-4)}]
+	\begin{scope}[shift={(0,0)}]
 		\filldraw[fill=\bulk, draw=black, dashed] (0,0) rectangle (4,4);
 		\filldraw[fill=\inc, draw=black] plot [smooth cycle, tension=2.5] coordinates {(1.5,1.5) (2.5,1.5) (2.5,2.5) (1.5,2.5)};
 		\draw[<->] (0,-0.1) -- (4,-0.1); 
@@ -54,37 +54,11 @@
 	\end{scope}
 
 	% link H-L to Zhikov
-	\begin{scope}[shift={(2,2)}, scale=1.0]
-		\draw[<->, thick] (0,-1) -- (0,1);
-		\node[anchor=east] at (0,0) {$\kappa=\varepsilon^{-2}$};
+	\begin{scope}[shift={(6,2)}, scale=1.0]
+		\draw[<->, thick] (-1,0) -- (1,0);
+		\node[anchor=north] at (0,0) {$\sigma=\varepsilon^{-2}$};
 	\end{scope}
-
-	% The periodic operator for which we have to "zoom in" on the spectrum at 0
-	\begin{scope}[shift={(9,0)}]
-		\filldraw[fill=\bulk, draw=black, dashed] (0,0) rectangle (4,4);
-		\filldraw[fill=\inc, draw=black] plot [smooth cycle, tension=2.5] coordinates {(1.5,1.5) (2.5,1.5) (2.5,2.5) (1.5,2.5)};
-		\draw[<->] (0,-0.1) -- (4,-0.1); 
-		\node[anchor=north] at (2,-0.1) {$1$};
-		\node[anchor=north west] at (0,3.9) {$B(y)=1$};
-		\node[anchor=center] at (2,2) {$B(y)=b$};
-		\node[anchor=south] at (2,4) {$-\grad\cdot B(y)\grad $};
-	\end{scope}
-
-	% link Zhikov to low-freq spectrum
-	\begin{scope}[shift={(4.5,-2)}, scale=1.0]
-		\draw[<-] (0,0) -- (4,2);
-		\node[anchor=south, rotate=26.57] at (2,1) {Under critical contrast,};
-		\node[anchor=north, rotate=26.57] at (2,1) {$b=\varepsilon^{-2}$};
-	\end{scope}
-
-% 	% Band-gap spectrum, sketch
-% 	\begin{scope}[shift={(0,0)}]
-% 		\draw[->] (0,-0.1) -- (0,1) node[anchor=south] {Band no.};
-% 		\draw[->] (-0.1,0) -- (4,0) node[anchor=west] {$\omega^2$};
-% 		\draw[thick] (0,0.25) -- (1,0.25);
-% 		\draw[thick] (2,0.25) -- (2.5,0.25);
-% 		\draw[thick] (3,0.25) -- (3.25,0.25);
-% 	\end{scope}
 
 \end{tikzpicture}
+
 \end{document}
