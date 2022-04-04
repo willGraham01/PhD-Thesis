@@ -1,0 +1,107 @@
+\subsection{Critical, or High Contrast Composites} \label{ssec:Intro-CritContrast}
+We have seen that there are a variety of effective problems that one can obtain from the $\delta\rightarrow0$ limit of a thin structure in section \ref{ssec:Intro-ThinStructures}.
+Now we put the shoe on the other foot, and focus on the various behaviours that can emerge when considering asymptotic limits of the material properties (or rather, limits of the dimensionless quantities that are derived from them).
+The studies discussed here typically concern periodic, composite materials whose domains are described in the manner introduced in section \ref{ssec:Intro-NonDimMax} and are thus more reflective of physical photonic crystals than the thin domains considered previously.
+
+Studies of such materials typically rely on techniques from homogenisation theory to determine ``effective" material properties in the asymptotic limit of interest.
+For example, consider the operator $\mathcal{A}=-\grad\cdot A\grad$ on such a composite domain --- the (possibly matrix-valued) function $A$ describes the ``non-dimensional" material parameters, and throughout we will assume it is $Q$-periodic.
+One regime of interest is the ``long wave" (or low frequency) regime, where one attempts to garner information about the lowest spectral band of a composite material.
+Accordingly, the (small) parameter $\eps\ll 1$ is introduced and we consider the (sequence of) operators $\mathcal{A}^{\eps} = -\grad\cdot A\bracs{\eps^{-1}x}\grad$ in the limit $\eps\rightarrow0$.
+We then derive an ``effective" operator $\mathcal{A}^{\mathrm{hom}} = -\grad\cdot A^{\mathrm{hom}}\grad$ that describes the resulting limit, and look to formalise the relationship between $\mathcal{A}^{\mathrm{hom}}$ and the $\mathcal{A}^{\eps}$.
+The matrix $A^{\mathrm{hom}}$ is sometimes labelled or interpreted as the ``effective" material properties.
+Typically one desires convergence of $\mathcal{A}^{\eps}$ to $\mathcal{A}^{\mathrm{hom}}$ as $\eps\rightarrow0$ in the norm-resolvent sense, namely that the family of solutions $u_{\eps}$ to the problems $\mathcal{A}^{\eps}u_{\eps}=f_{\eps}$ converges to the solution $u$ of the effective problem $\mathcal{A}^{\mathrm{hom}}u = f$, for any suitable initial data $f_{\eps}\rightarrow f$.
+However one may also establish weaker results, for example coincidence of the spectrum of $\mathcal{A}^{\mathrm{hom}}$ with the limit of $\sigma\bracs{\mathcal{A}^{\eps}}$ \tstk{cf KZ and EP discussion earlier!} (which would otherwise be implied by norm-resolvent convergence).
+This convergence in turn ensures that the effective problem faithfully describes the behaviour of the composite material within this regime, and one typically hopes that the effective problem is more mailable to analysis than its counterpart.
+These studies can also reveal interesting material effects within such regimes that might otherwise be lost or go unnoticed.
+The design of materials to open spectral band gaps is one such effect that is desired, however other dispersive effects such as metamaterial behaviour \tstk{ref?} --- where the effective material properties appear to take unphysical values --- can also emerge from these limits.
+In these settings, one is typically expecting to obtain an effective problem where the effective material properties $A^{\mathrm{hom}}$ depend non-trivially on the frequency variable $\omega$.
+
+The asymptotic treatment of composite materials has seen considerable interest due to the aforementioned motivations.
+However, it has been known to both the mathematical and physical community for some time that the toolbox of standard homogenisation theory is unable to capture the correct asymptotic behaviour for composite materials.
+It has been reported \tstk{proved, no? Reported in K-E-K-Nab Unified Approach, pointing to the references: M. Sh. Birman and T. A. Suslina, Second order periodic differential operators. Threshold properties and homogenization, St. Petersburg Math. J. 15 (2004), no. 5, 639–714 and V. V. Zhikov, Spectral approach to asymptotic diffusion problems. (Russian), Differentsial’nye uravneniya 25 (1989), no. 1, 44–50. } in the uniformly elliptic setting, that is where the matrix $\mathcal{A}(\eps^{-1}x)$ and its inverse are uniformly bounded, that the resulting effective problem has $A^{\mathrm{hom}}$ being a constant matrix, which leaves no room for time dispersive effects.
+If one drops the assumption of uniform ellipticity, the resulting analysis becomes more complicated and the standard toolbox of asymptotic study is no longer sufficient for describing the effective problem.
+Indeed the inadequacy of standard techniques in such contexts has been reported in works such as \cite{nicorovici1995photonic} \tstk{later paper implies this is part of a series of works though}, which highlighted ``non-commuting limits" when considering wave scattering off a periodic composite material.
+In such a problem there are two scales to consider; the wavenumber of the incident wave $\wavenumber$ and the refractive index of the inclusions within the composite, $N$ (which is proportional to the square root of the relative electric permittivity of the inclusions, to maintain a connection to the dimensionless quantities introduced in section \ref{sec:Intro-Maxwell}).
+In order to study the first spectral band\footnote{This is also referred to as the lowest spectral band, or the ``acoustic band" in the literature.} in the case when the inclusions are highly conducting; we can either consider the case when the inclusions are perfectly conducting ($N\rightarrow\infty$) for fixed $\wavenumber$ and then take the ``static-limit" $\wavenumber\rightarrow0$, \emph{or} consider the static limit ($\wavenumber\rightarrow0$) at a high but finite refractive index and then take $N\rightarrow\infty$.
+However the two approaches produce different effective materials --- the explanation provided in \cite{movchan2001noncommuting} is that the trajectory in $\bracs{N^{-1},\wavenumber}$-space that one takes as these values approach the origin must be of the form $N^{-1}=\wavenumber^p$, with $p<1$ for homogenisation to be satisfactory, otherwise the problem being considered is ``singularly perturbed" and boundary layer effects emerge near the inclusion-matrix interface which are not handled by the homogenisation process.
+However, there have been a number of developments aimed at expanding the tools of homogenisation theory to handle contexts such as the above, where the material parameters scale in particular relation to the size of an incident wave or the size of the period cell.
+
+Let us begin with the study of \cite{zhikov2000extension}, that was concerned with the homogenisation problem for the operator $\mathcal{A}^{\eps}$,
+\begin{align*}
+	\mathcal{A}^{\eps} := -\grad\cdot A^{\eps}(\eps^{-1}x)\grad,
+\end{align*}
+in the limit as $\eps\rightarrow0$, where $A^{\eps}(y)=\eps^2$ on $Q_0$ and $1$ on $Q_1$\footnote{This setup corresponds to a periodic structure with low-index inclusions, as opposed to the high-index inclusions considered in \cite{movchan2001noncommuting} \tstk{and other McPhedran papers?}.}, see the domain on the left in figure \ref{fig:Diagram_HL-Zhikov}.
+\begin{figure}[b]
+	\centering
+	\includegraphics[scale=1.0]{Diagram_HL-Zhikov.pdf}
+	\caption{\label{fig:Diagram_HL-Zhikov} A material under critical contrast (left) as studied in \cite{zhikov2000extension}, and a material at resonance studied in \ref{hempel2000spectral} (right).}
+\end{figure}
+Materials such as this are said to be under ``critical contrast"; the (dimensionless) material properties scale in certain proportion to the size of the period cell $\eps$, analogous to (although not exactly) the relation between refractive index and incident wavenumber mentioned earlier.
+A limiting operator $\mathcal{A}$, and the convergence of the solutions to $\mathcal{A}^{\eps}u^{\eps}=f^{\eps}$ to the solution $u$ of $\mathcal{A}u=f$ is obtained --- however this convergence is in the so-called two-scale sense rather than the standard ``norm-resolvent" sense of classical homogenisation.
+The spectrum of the limiting operator $\mathcal{A}$ is also shown to be the Hausdorff limit of the spectra of the operators $\mathcal{A}^{\eps}$ as $\eps\rightarrow0$, and demonstrates dissipative properties.
+It is argued (and demonstrated) that two-scale convergence ensures that not only do the solutions $u^{\eps}$ converge to $u$, but the energy of the system also converges (in this two-scale sense) to the energy of the effective problem --- something which is not always guaranteed by classical homogenisation in contexts such as this. \tstk{isn't there also a study that does this in the scattering context - would be good to have this since McPhedran was doing scattering too? G. Bouchitté and D. Felbacq, Homogenization near resonances and artificial magnetism from dielectrics, C. R. Math. Acad. Sci. Paris 339 (2004), no. 5, 377–382.}
+Furthermore, it is also demonstrated that if $A^{\eps}(y)\propto\eps^p$ on $Q_0$ for $p<2$, the effective problem coincides with that obtained through classical homogenisation, whilst for $p>2$ the effective problem is again the ``two-scale limit" of the original problem.
+This allows us to obtain an effective problem for materials under critical contrast, where previous homogenisation techniques fell short --- however the convergence obtained is not the standard norm-resolvent convergence we are used to from classical homogenisation.
+
+In a related development, the study \cite{hempel2000spectral} proved the band-gap structure of the resulting spectrum, although starting from a different domain, illustrated in right of figure \ref{fig:Diagram_HL-Zhikov}.
+The period cell and inclusion are of a fixed size in this study, and the operator considered is $\widetilde{\mathcal{A}}^\sigma:=-\grad\cdot\tilde{A}\grad$ is studied\footnote{The study \cite{hempel2000spectral} actually concerns a slightly more general version of this operator.} where $\widetilde{A}=1$ on $Q_0$ and $\widetilde{A}=\sigma\gg 1$ on $Q_1$.
+The asymptotic limit $\kappa\rightarrow\infty$ was then explored, with the deduction that the endpoints of the spectral bands correspond to the Dirchlet and (the limits of the) Neumann eigenvalues of the Laplacian on the inclusions $Q_0$.
+Additional results about the density of states were also proven, the main takeaway being that the spectrum concentrates near the right-endpoints of the bands as $\sigma$ increases. \tstk{Friedlander 2002 proves these same results (even referencing HL) but using a different method involving DtN maps, and under slightly stricter assumptions on the boundary of the domain; Selden on the asymptotics of the integrated DoS, etc}
+Upon identifying $\sigma=\eps^{-2}$ (so $\sigma\rightarrow\infty \Leftrightarrow \eps\rightarrow0$) it is clear why the effective problems for $\mathcal{A}^{\eps}$ and $\widetilde{\mathcal{A}}^{\sigma}$ (under the respective limits) possess the same spectra, although it should be noted that this is one of the only common features of the two problems --- in most other respects they behave differently.
+This association between $\mathcal{A}^{\eps}$ and $\widetilde{\mathcal{A}}^{\sigma}$ also proves a good time for us to introduce another term (or concept) that is often thrown around in the literature and hard to nail down --- that of resonance.
+We can observe that, with the size of the period cell being unity in the setup of \cite{hempel2000spectral}, the material considered cannot be under critical contrast.
+However, this material is under (or at) \emph{resonance} --- exactly one of the non-dimensional parameters describing this material ($\sigma$) is large, whilst the others are of order unity.
+The term ``resonance" typically brings with it connotations from more physically minded contexts, one things of resonance as a phenomenon where the frequency of a periodic driving force is close to the natural frequency of the system on which it acts, causing a large spike in the amplitude of the response of the system.
+This intuition still holds; observe that in terms of the dimensionless parameters \eqref{eq:Intro-NonDimLengthScales} we have $\delta\in\bracs{0,1}$, $\hat{l}^{\mathrm{inc}}=1$, and $\hat{l}^{\mathrm{bulk}}=\sigma\gg 1$, the wavelength within the bulk $\lambda^{\mathrm{bulk}}$ has been ``driven" in response to the periodic structure of the material.
+Through these two studies one can see a correspondence between materials ``under resonance" and those at ``critical contrast", both phenomena can result in the emergence of band-gaps or other dissipative effects, despite seeing to correspond to very different material setups.
+
+The studies discussed above, whilst illustrative and helpful in demonstrating how it is possible for dissipative effects to emerge, still fall short of definitively establishing these effects as a direct consequence of being under critical contrast (or at resonance).
+The work of \tstk{Kirill-Ershova-Kiselev-Naboko papers} attempts to rectify this by generalising the approach taken when performing homogenisation in the uniformly elliptic setting.
+This analysis provides norm-resolvent estimates for the solution of the effective problem, and establishes critical contrast (hence resonance) as a sufficient condition for the presence of dissipative effects, amongst other results.
+In terms of addressing the scattering problem, \tstk{need to address this too...!}
+
+\tstk{now, why did we bother talking about any of this in the first place?}
+
+
+%\tstk{rework?}
+%Crucially, the limiting operator $\mathcal{A}$ possesses an infinite set of spectral band-gaps, whose location is described by a function $\beta\bracs{\omega}$.
+%The existence of gaps in the limiting spectrum is unusual, and can be attributed to the matrix $A^{\eps}$ itself being dependent on $\eps^2$.
+%Indeed, suppose we were to consider the similar homogenisation problem for the operators
+%\begin{align*}
+%	\mathcal{B}^{\eps} := -\grad\cdot B(\eps^{-1}x)\grad,
+%\end{align*}
+%again as $\eps\rightarrow0$, but with $B(y)$ identical to $A(y)$ except taking the value $b\neq b(\eps)$ on $Q_1$.
+%Setting $y=\eps^{-1}x$, we find that
+%\begin{align*}
+%	\mathcal{B}^{\eps}u = \omega^2 u 
+%	\quad\Leftrightarrow \quad &
+%	-\recip{\eps^2}\grad\cdot B(y)\grad u = \omega^2 u, \\
+%	\quad\Leftrightarrow \quad &
+%	-\grad\cdot B(y)\grad u = \nu^2 u,
+%\end{align*}
+%where $\nu = \omega\eps$.
+%The operator $-\grad\cdot B(y)\grad u$ has $[0,1)^d$-periodic coefficients, and acts on the domain with period cell as illustrated on the right of figure \ref{fig:Diagram_HL-Zhikov}.
+%Due to the periodic coefficients, the spectrum and thus eigenvalues $\nu^2$ will form (possibly overlapping) bands --- so in the limit $\eps\rightarrow0$ and with $\omega = \eps^{-1}\nu$, the spectrum of $\mathcal{B}^{\eps}$ extends to the positive real line as one ``inflates" the bands by $\eps^{-2}$.
+%Consequentially we don't observe band-gaps in the limiting operator for $\mathcal{B}^{\eps}$, as the first band in particular is stretched to cover the whole real line.
+%However by ensuring that $b$ scales with the parameter $\eps$ in a particular way, we \emph{do} observe band-gaps (and additional phenomena such as time-memory).
+%This introduces us to the idea of \emph{critical contrast} or \emph{high contrast}; a material whose parameters are scaled in proportion to the size of the period cell is said to be under \emph{critical contrast}. \tstk{also resonnance????}
+
+%The question now is how do materials under critical contrast relate to the finite-periodic, composite materials (the notation for which we adopt from section \ref{sec:Intro-Maxwell})?
+%To address this, we turn to the study of \cite{hempel2000spectral} who studied a periodic composite material with the setup in the top-left of figure \ref{fig:Diagram_HL-Zhikov}; here the period cell and inclusion are of a fixed size, and the operator $\mathcal{A}^\kappa:=-\grad\cdot\tilde{A}\grad$ is studied\footnote{\tstk{H and L} actually study a slightly more general version of this operator.} where $A=1$ on $Q_0$ and $A=\kappa\gg 1$ on $Q_1$.
+%The asymptotic limit $\kappa\rightarrow\infty$ was then explored --- physically, this corresponds to our expectation that low-index inclusions need to be surrounded by a high-index bulk material to open spectral band-gaps.
+%Writing the spectrum of $\mathcal{A}^\kappa$ as the set
+%\begin{align*}
+%	\sigma\bracs{\mathcal{A}^\kappa} = \bigcup_{i\in\naturals}\sqbracs{a_i^\kappa,b_i^\kappa},
+%\end{align*}
+%for (possibly overlapping) bands $I_i^\kappa = \sqbracs{a_i^\kappa,b_i^\kappa}$, it was shown that there exist constants $\alpha_i < \beta_i < \alpha_{i+1}$ such that
+%\begin{align*}
+%	a_i^\kappa \rightarrow \alpha_i, \qquad b_i^\kappa \rightarrow \beta_i, \qquad \toInfty{\kappa}.
+%\end{align*}
+%The analysis also demonstrated that the $\beta_i$ were the eigenvalues of the Dirichlet Laplacian on $\bigcup_{i\in\integers^d}Q_0$, and the $\alpha_i$ the limits (as $\kappa\rightarrow\infty$) of the eigenvalues of the operator with action $-\grad\cdot \tilde{A}\grad u$ with domain $Q_0$, under Neumann boundary conditions.
+%Additional results about the density of states were also proven, the main takeaway being that the spectrum concentrates near the endpoints $\beta_i$ of the bands as $\kappa$ increases. \tstk{follow up studies? Friedlander, etc}
+%Importantly, this limit of the spectrum is the same as that of the aforementioned limiting operator $\mathcal{B}$.
+%Indeed, upon identifying $\kappa=\eps^{-2}$ (so $\kappa\rightarrow\infty \Leftrightarrow \eps\rightarrow0$) and $\tilde{A}=\eps^{-2}B$ it is clear why the two problems share the same spectrum under the respective limits, although it should be noted that this is one of the only common features of the two problems --- in most other respects they behave differently.
+%\tstk{here, we could also introduce resonance WRT Hempel-Lienau, the inclusion parameter being 1 and the off-inclusion parameter being far greater than 1. Also, this links back to the physical interpretation that PCFs work through anti-resonances...}
+%This is also an opportune time for us to introduce the concept of resonance; a material experiences resonance when exactly one of the non-dimensional parameters is of order unity, and the remainder are much larger than unity.
+%In the setup of \cite{hempel2000spectral} we observe precisely this situation --- we have $\lambda^{\mathrm{bulk}}\gg L$, whilst $\lambda^{\mathrm{inc}}\sim L$ (the parameter $\delta$ is absent from this formulation as a variable sized inclusion was not considered).
+%One can then attribute resonance to the emergence of band-gaps \tstk{and other dissipative stuff} in the asymptotic limit, with the vast differences in wavelengths in each of the material components that are required becoming impossible to achieve at higher contrasts.
