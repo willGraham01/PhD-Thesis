@@ -85,23 +85,24 @@ These equations may also be referred to as ``acoustic approximations", as they a
 Having provided an outline of the important governing equations and operators that describe wave propagation in photonic crystals, we move on to a brief discussion of the spectra of periodic media.
 Since we are primarily concerned with spectral problems, working directly in $\reals^d$ with our chosen operator is often inconvenient \tstk{WHY? doesn't need to be precise right now} and so one often looks to apply a transform to aid in the analysis of such problems.
 When faced with a differential operator with constant coefficients (or coefficients constant in one particular coordinate direction), one typically utilises a Fourier transform to turn the action of differentiation into the action of multiplication by (a function of) the dual variable.
-Here, we have an operator $\mathcal{A}$ with\footnote{Think of $\mathcal{A}$ as being one of \eqref{eq:Intro-CurlCurlEqns} or \eqref{eq:Intro-AcousticApprox} with $\epsilon_m$ and $\mu_m$ periodic.} periodic (with respect to some period cell $Q$), rather than constant, coefficients.
+Here, we have an operator $\mathcal{A}$ with\footnote{Think of $\mathcal{A}$ as being one of \eqref{eq:Intro-CurlCurlEqns} or \eqref{eq:Intro-AcousticApprox} with $\epsilon_m$ and $\mu_m$ periodic.} periodic coefficients with respect to the period cell $Q=[0,1)^d$.
 The natural transform to apply is the Gelfand (or Floquet) transform, which first requires us to introduce the dual cell (also termed the Brillouin zone in solid state physics) $B=[-\pi,\pi)^d$ to $Q$.
-We then define the Gelfand transform $\hat{u}$ of the function $u$ as 
+We then define the Gelfand transform $\gelfand u$ of the function $u$ as 
 \begin{align*}
-	\hat{u}(x, \qm) &= \sum_{n\in\integers^d} u(x+n)\e^{\rmi\qm(x+n)},
+	\gelfand u(x, \qm) &= \sum_{n\in\integers^d} u(x+n)\e^{\rmi\qm(x+n)},
 \end{align*}
 where the variable $\qm$ is called the \emph{quasi-momentum}, the analogue of the dual variable in the Fourier transform.
 We will go into more details in section \ref{sec:TP-GelfandTransform}, restricting ourselves to a short summary of the key affects of this transform.
 The foremost effect of this transform is that we can replace the spectral problem for $\mathcal{A}$ with the spectral problem for each member of a family of operators $\mathcal{A}_{\qm}$ parametrised by the quasi-momentum.
 Importantly, since each $\mathcal{A}_{\qm}$ now acts on a compact domain, under ellipticity assumptions these operators (have compact resolvents and thus) possess discrete spectra.
 This allows us to order the eigenvalues $\lambda_j\bracs{\qm}$, $j\in\naturals$, of $\mathcal{A}_{\qm}$ in ascending order in $j$.
-The (continuous) functions $\lambda_j$ of $\qm$ are called the dispersion branches\footnote{Alternative names include dispersion relations, or (spectral) band functions.}, and it holds that the spectrum of $\mathcal{A}$ is equal to the union of the spectra of the $\mathcal{A}_\qm$ --- that is, the projection of the graphs $y=\lambda_j(\qm)$ onto the $y$ axis provides the spectrum of $\mathcal{A}$.
+The (continuous) functions $\lambda_j$ of $\qm$ are called the \emph{dispersion branches}, or alternatively the \emph{dispersion relations} or \emph{(spectral) band functions}.
+It holds that the spectrum of $\mathcal{A}$ is equal to the union of the spectra of the $\mathcal{A}_\qm$ --- that is, the projection of the graphs $y=\lambda_j(\qm)$ onto the $y$ axis provides the spectrum of $\mathcal{A}$.
 Explicitly, we have that
 \begin{align*}
 	\sigma\bracs{\mathcal{A}} &= \bigcup_{\qm\in B} \sigma\bracs{\mathcal{A}_{\qm}}
-	= \bigcup_{j\in\naturals} \mathrm{Im}\bracs{\lambda_j\bracs{\qm}}
-	= \bigcup_{j\in\naturals} \sqbracs{ \min_{\qm}\lambda_j, \max_{\qm}\lambda_j },
+	= \bigcup_{j\in\naturals} \lambda_j\bracs{B}
+	= \bigcup_{j\in\naturals} \sqbracs{ \min_{\qm\in B}\lambda_j, \max_{\qm\in B}\lambda_j },
 \end{align*}
 the final equality coming from the fact that the branches $\lambda_j$ are continuous functions of $\qm$, and the interval $\sqbracs{ \min_{\qm}\lambda_j, \max_{\qm}\lambda_j }$ being labelled the $j^{\text{th}}$ spectral band of $\mathcal{A}$.
 This highlights where the band-gap structure of these composite materials comes from, whenever 
@@ -109,15 +110,15 @@ This highlights where the band-gap structure of these composite materials comes 
 	\max_{\qm}\lambda_{j-1} < \min_{\qm}\lambda_{j},
 \end{align}
 there is a corresponding gap between the end of the $(j-1)^{\text{th}}$ band and the beginning of the $j^{\text{th}}$.
-It is known that for ordinary differential equations of second order the strict version of the inequality in \eqref{eq:Intro-DispersionBranchGapIneq} holds, so the spectral bands cannot overlap but may touch \tstk{refs? Pointed to a book by a couple of the references that say this: M. Reed and B. Simon, Methods of Modern Mathematical Physics, Vol. IV:Analysis of Operators}.
+It is known that for ordinary differential equations of second order the strict version of the inequality in \eqref{eq:Intro-DispersionBranchGapIneq} holds, so the spectral bands cannot overlap but may touch \cite[chapter XIII]{reed1978iv} \tstk{other refs? pointed to \cite{reed1978iv} by most, Kuchment's review also summarises this, but again points to this reference!}.
 As such, it is conceivable that alterations to the material may open up gaps between adjacent bands.
 In two dimensions (or higher) the spectral bands can and usually do overlap, which makes the task of designing a material with band gaps harder though not impossible. \tstk{BK book also has some notes on this for QG systems too that can go here.}
 
 \subsection{Non-dimensionalisation of the Maxwell System} \label{ssec:Intro-NonDimMax}
 We now turn specifically towards the setup of domains that model photonic crystals, and the process of non-dimensionalising the governing equations and consideration of the various free parameters that emerge from this process.
 Regrettably, this process is often skipped over in the mathematical literature, with most works electing to start from a non-dimensionalised system.
-Whilst there is nothing wrong with choosing to start here, it can lead to one making implicit (or unnoticed) assumptions about the physical system (or domain) that is being modelled (see \tstk{part of lit review where this comes in}), and confusing to a newcomer to the field.
-As such, we will provide an explicit account of this process, and highlight where the aforementioned assumptions on the physical system might arise if one is not careful.
+Whilst there is nothing wrong with choosing to start here, there are several sets of non-dimensional parameters that one can choose to express the resulting system in, and it is important to keep track of what each set represents when interpreting physical behaviour.
+This can also lead to some rather confusing (and seemingly conflicting) language in the literature, and as such we provide an explicit account of this process.
 
 A periodic medium can be modelled by specifying a period cell $Q=[0,L)^d$, $L>0$, and then taking a union of translated copies of this period cell
 \begin{align*}
@@ -148,7 +149,7 @@ and we also suppose that the inclusions have a characteristic size $L-l$, $0<l<L
 	\end{subfigure}
 \end{figure}
 
-We now wish to treat the system of Maxwell equations mathematically, and so proceed to write the equations with respect to dimensionless variables. \tstk{following the example in K-Serena, or perhaps their reference?}.
+We now wish to treat the system of Maxwell equations mathematically, and so proceed to write the equations with respect to dimensionless variables. \tstk{following the example in K-Serena, or perhaps their reference: Barenblatt, G. I., 2003. Scaling, Cambridge University Press}.
 Introduce the dimensionless ``electric" and ``magnetic" fields $\tilde{E}$ and $\tilde{H}$ and corresponding dimensionless ``spatial" variable $\tilde{x}$ by
 \begin{align*}
 	H = \hat{h}\tilde{H}, 
@@ -180,7 +181,7 @@ Defining the relative permittivity and permeabilities
 	\eps_r\bracs{\tilde{x}} = \frac{\epsilon_m(x)}{\epsilon^{\mathrm{bulk}}},
 	\qquad \mu_r\bracs{\tilde{x}} = \frac{\mu_m(x)}{\mu^{\mathrm{bulk}}},
 \end{align*}
-then defining
+and the ``bulk frequency"
 \begin{align*}
 	\omega_{\mathrm{bulk}}
 	&= L^{-1}\bracs{\epsilon^{\mathrm{bulk}}\mu^{\mathrm{bulk}}}^{-\recip{2}},
@@ -217,7 +218,8 @@ for $\tilde{x}\in\reals^d$, with a period cell $\widetilde{Q} = \recip{L}Q = [0,
 \end{align*}
 From here, one can derive the dimensionless ``curl-of-the-curl" equations and acoustic approximations.
 
-It is worth noting that our choice of non-dimensionalisation is not the only possible choice, one could choose to non-dimensionalise $E$ as
+Now we highlight that our choice of non-dimensionalisation is far from unique, and there are several alternatives one could choose from.
+For example, we could non-dimensionalise $E$ as
 \begin{align*}
 	E = \hat{h}\bracs{\frac{\mu^{\mathrm{inc}}}{\epsilon^{\mathrm{inc}}}}^{\recip{2}}\tilde{E},
 \end{align*}
@@ -255,8 +257,9 @@ Here we have three independent, dimensionless parameters
 \end{align}
 which are all ratios of lengths.
 Having all the dimensionless parameters represent ratios of lengths is typically done to make the description of the phenomenons of \emph{resonance} and \emph{critical contrast} more intuitive, which will be done in section \ref{ssec:Intro-CritContrast}.
-In fact, in the mathematical literature the non-dimensional Maxwell system (under the non-magnetic assumption) \eqref{eq:Intro-NonDimMaxwellLengths} is simply introduced as \emph{the} Maxwell system, and one typically sees the notation ``$\eps$" for $\lambda_r^2$ in \eqref{eq:Intro-NonDimMaxwellLengths}.
-This can lead to some confusion on the part of a new researcher in the field, as it is common to see such an ``$\eps$" used implicitly as both the (square) ratio of lengths $\lambda_r^2$ (as it appears in \eqref{eq:Intro-NonDimMaxwellLengths}) and as the relative permittivity $\eps_r$ (as it appears in \eqref{eq:Intro-NonDimMaxwell} in the literature).
+In fact, in the mathematical literature the non-dimensional Maxwell system (under the non-magnetic assumption) \eqref{eq:Intro-NonDimMaxwellLengths} is simply introduced as \emph{the} Maxwell system, and one typically sees the notation ``$\eps^{-1}$" for $\lambda_r^2$ in \eqref{eq:Intro-NonDimMaxwellLengths}.
+This can lead to some confusion on the part of a new researcher in the field, as it is common to see such an ``$\eps$" used implicitly as both the (reciprocal square) ratio of lengths $\lambda_r^2$ (as it appears in \eqref{eq:Intro-NonDimMaxwellLengths}) and as the relative permittivity $\eps_r$ (as it appears in \eqref{eq:Intro-NonDimMaxwell} in the literature).
+As such, publications may talk about $\eps$ as if it were a ratio of length scales, whilst others may refer to seemingly the same quantity as a contrast between permittivites.
 
 The benefits of non-dimensionalising are that all possible behaviours of the Maxwell system are characterised by the values these independent parameters take, and the (non-dimensional) spectrum is qualitatively representative of the physical frequencies, and can be obtained through ``re-dimensionalising" the spectral parameter $z$.
 Given that the various regimes of these parameters govern the behaviour of the system, it is natural to consider the various asymptotic limits of these free parameters and the resulting asymptotic problems.
@@ -306,8 +309,6 @@ Upon completion of this section, we now drop the overhead tilde notation on our 
 %\begin{align*}
 %	-\grad\cdot a\bracs{\frac{x}{\eps}}\grad u_{\eps}(x) &= \omega^2 u_{\eps}(x), &\qquad x\in\ddom_h, \\
 %	\Leftrightarrow -\eps\grad_{y}\cdot \eps a(y)\grad_{y}u_{L}(y) &= \omega^2 u_{L}(y), &\qquad y\in\ddom_f,
-\tstk{now, why did we bother talking about any of this in the first place?}
-
 
 %\end{align*}
 %where $L = \recip{\eps}$.
