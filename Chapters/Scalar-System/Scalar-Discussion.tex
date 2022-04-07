@@ -8,7 +8,7 @@ We will follow up on this in section \ref{sec:Examples}, where we provide some e
 \subsection{General formula for the $M$-matrix} \label{ssec:MMatrixResult}
 One of the foremost advantages of the $M$-matrix is that we can explicitly (and analytically) compute its entries for any (finite period) metric graph $\graph$ on which the system \eqref{eq:SingularWaveEqnQGProblem} is posed.
 We also break from assumption \ref{ass:MeasTheoryProblemSetup}, and allow for the period graph to include looping edges (edges whose endpoints correspond to same vertex), since such loops do not effect the (procedure in the) proof of the result.
-The inclusion of looping edges is mostly for completeness, since when we come to use the $M$-matrix to determine the eigenvalues of \eqref{eq:SingularWaveEqnQGProblem}, we will want to introduce ``artificial vertices" (section \ref{ssec:ArtificialVertices}) to break these loops.
+The inclusion of looping edges is mostly for completeness, since when we come to use the $M$-matrix to determine the eigenvalues of \eqref{eq:SingularWaveEqnQGProblem}, we will want to introduce \emph{artificial vertices} (section \ref{ssec:ArtificialVertices}) to break these loops.
 The following proposition provides the entries of the $M$-matrix.
 \begin{prop}[$M$-matrix entries] \label{prop:M-MatrixEntries}
 	Let $\graph=\bracs{\vertSet,\edgeSet}$ be an embedded graph on which the problem \eqref{eq:SingularWaveEqnQGProblem} is posed.
@@ -78,9 +78,9 @@ Also recall the convention for summing over $j\con k$:
 	\begin{align*}
 		\bracs{\nmap u}_j &= -\sum_{j\con l} \bracs{\pdiff{}{n}+\rmi\qm_{jl}}u^{(jl)}\bracs{v_j},
 	\end{align*}
-	which yields the desired result.
+	which yields the desired result for $\bracs{\nmap u}_j$.
+	Since $M(\dmap u) = \nmap u$, and the $e_k$ are a basis for $\complex^{\abs{V}}$, we have also deduced the $k^{\text{th}}$ column of the $M$-matrix.
 \end{proof}
-
 Proposition \ref{prop:M-MatrixEntries} also explicitly demonstrates that the $M$-matrix (in the context of \eqref{eq:SingularWaveEqnQGProblem}) is parametrised by $\qm$, and so we shall denote it by $M_{\qm}$ henceforth.
 The dependence of $M_\qm$ on $\qm$ is due to our decision to specify our singular structure (comprising the domain in which \eqref{eq:SingularScalarWaveEqnWholeSpace} was posed) as an embedded, periodic metric graph and then apply the Gelfand transform (see section \ref{ssec:MMatrix}).
 In the following section, we continue our analysis of the $M$-matrix and outline how it can be used to recover the eigenvalues $z=\omega^2$ of \eqref{eq:SingularWaveEqnQGProblem}, and thus \eqref{eq:SingularScalarWaveEqnWholeSpace}.
@@ -135,7 +135,7 @@ The product notation should be understood analogously to the summation notation 
 The zeros of $H^{(2)}$ exactly coincide with the poles of $M_\qm$, both $H^{(1)}_\qm$ and $H^{(2)}$ are analytic, and the matrix $H^{(1)}_\qm$ even has its entry at position $jk$ bounded (uniformly in $\omega$) by the number of (direct) connections between $v_j$ and $v_k$.
 
 Recall that (section \ref{ssec:MMatrix}) we need to determine those $z$ for which the matrix $M_\qm(z)-B(z)$ has at least one zero eigenvalue, where we have $B(z) = -z\alpha$.
-Note the dependence of $B$ on $z$ --- this was raised in section \ref{ssec:DiffOpsOnGraphs}.
+Note the dependence of $B$ on $z$ --- this was raised in section \ref{ssec:DiffOpsOnGraphs} \tstk{you mean it was put off here - this discussion should go after we derive the scalar system}.
 Now let $\beta_j\bracs{z}, j\in\clbracs{1,...,\abs{\vertSet}}$ denote the eigenvalue branches of the matrix $M_\qm(z)-B(z)$.
 Also set $\mathfrak{M}_\qm(z) = H^{(1)}_\qm(z) - H^{(2)}(z)B(z)$, and let $\widetilde{\beta}_j\bracs{z}, j\in\clbracs{1,...,\abs{\vertSet}}$ denote the eigenvalue branches of $\mathfrak{M}_\qm$.
 The matrix $\mathfrak{M}_\qm$ is analytic, and so has at least one zero eigenvalue at those $z$ for which there exists a $w\in\complex^{\abs{\vertSet}}\setminus\clbracs{0}$ such that
@@ -157,19 +157,19 @@ Checking the limit in \eqref{eq:EigenvalueBranchLimit} is not necessary for all 
 	z_0 \neq \bracs{ \frac{n\pi}{l_{jk}} }^2, \quad j\conLeft k, \ n\in\naturals_{0},
 \end{align*}
 the limit in \eqref{eq:EigenvalueBranchLimit} is clearly zero, and so $z_0$ belongs to the spectrum of \eqref{eq:SingularWaveEqnQGProblem}.
-As we will discuss in section \ref{ssec:ApproachConsiderations}, checking the limit \eqref{eq:EigenvalueBranchLimit} may not be necessary at all, given known results about the spectra of periodic quantum graph problems.
+As we will discuss in section \ref{ssec:ApproachConsiderations}, checking the limit \eqref{eq:EigenvalueBranchLimit} may not be necessary at all, given known results about the spectra of periodic quantum graph problems. \tstk{closure result - it suffices to examine spectrum on a dense subset of the Brilliouin zone then take the closure}
 Considerations concerning which of the two equations (\eqref{eq:QGGenEvalSolveNoPoles} or \eqref{eq:QGDetSolveCondition}) should be used for determining the spectrum $\sigma_\qm$ are also discussed in section \ref{ssec:ApproachConsiderations}.
 In any event, \eqref{eq:SingularScalarWaveEqnWholeSpace} has now been reduced to a more accessible (family of) matrix-eigenvalue problems for $\mathfrak{M}_\qm$.
 
 \subsection{Artificial Vertices and Splitting Edges} \label{ssec:ArtificialVertices}
 As noted in section section \ref{ssec:MMatrix}, it is required that the underlying graph $\graph$ contains no looping edges and has all edge-lengths pairwise irrationally-related.
 Failure to ensure that this condition is met may result in the ``loss" of certain eigenvalues when using the $M$-matrix to determine the spectrum of \eqref{eq:SingularWaveEqnQGProblem} --- these are highlighted explicitly in section \ref{ssec:Example1DLoop}.
-Of course, the graphs motivated by physical applications generally do not adhere to these restrictions, so it is necessary to introduce ``artificial" or ``dummy" vertices.
-These artificial vertices ``split" edges of the original graph, removing any loops and ensuring all (new) edges have irrationally-related lengths.
+Of course, the graphs motivated by physical applications generally do not adhere to these restrictions, so it is necessary to introduce \emph{artificial} or \emph{dummy} vertices.
+These artificial vertices split edges of the original graph, removing any loops and ensuring all (new) edges have irrationally-related lengths.
 
-Introducing an artificial vertex to split an edge is as intuitive as it sounds --- suppose $\graph=\bracs{\vertSet, \edgeSet}$ and one wishes to ``split" the edge $I_{jk}$ (where it may be the case that $j=k$).
+Introducing an artificial vertex to split an edge is as intuitive as it sounds --- suppose $\graph=\bracs{\vertSet, \edgeSet}$ and one wishes to split the edge $I_{jk}$ (where it may be the case that $j=k$).
 Place a vertex $v_l$ at some point along the edge $I_{jk}$, and replace $I_{jk}$ with the edges $I_{jl}$ and $I_{lk}$, to obtain a new graph $\graph^*$.
-The total length of the edges must be preserved, so $\abs{I_{jk}} = \abs{I_{jl}}+\abs{I_{lk}}$, but the lengths of the new edges should be chosen in accordance with the requirements above in mind.
+The total length of the edges must be preserved, so $l_{jk} = l_{jl} + l_{lk}$, but the lengths of the new edges should be chosen in accordance with the requirements above in mind.
 Furthermore, a zero coupling constant should be placed at the artificial vertex $v_l$ --- this ensures matching of the solution $u$ and its derivative at the artificial vertex, as would have been the case along the original edge if it had not been split.
 The quasi-momentum parameters should also satisfy $\qm_{jl}=\qm_{lk}=\qm_{jk}$ (although this is a by-product of having straight edges, see assumption \ref{ass:MeasTheoryProblemSetup}).
 This ensures (via \eqref{eq:SingularWaveEqnQGProblem-2} and \eqref{eq:SingularWaveEqnQGProblem-3}) that any eigenvalues $\omega^2$ of \eqref{eq:SingularWaveEqnQGProblem} on $\graph^*$ are also eigenvalues of \eqref{eq:SingularWaveEqnQGProblem} on $\graph$, with the eigenfunction $u^{(jk)}$ being related to $u^{(jl)}$ and $u^{(lk)}$ in the obvious manner.

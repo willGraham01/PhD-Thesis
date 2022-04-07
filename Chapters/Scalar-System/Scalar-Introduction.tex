@@ -1,14 +1,13 @@
 \section{Chapter Introduction} \label{sec:ScalarEqnChapterIntro}
 This chapter aims to provide a concrete introduction to variational problems on singular structures, and their link to the quantum graph problems that arise in the asymptotic limit of thin structures as the thickness shrinks to zero.
-We will concern ourselves with the study of the acoustic (or wave) equation on a singular structure, and the corresponding non-classical Sobolev spaces of functions possessing gradients with respect to the measure that supports this singular structure.
+We will concern ourselves with the study of the acoustic (or wave) equation on a singular structure, and the corresponding non-classical Sobolev spaces of functions possessing gradients with respect to the measure $\dddmes$.
 By understanding this function space we will be able to derive a quantum graph problem, or more precisely a problem of generalised resolvent type, from our original variational problem.
-From here, we will turn our attention to the use of the $M$-matrix to solve the resulting quantum graph problems and recover the spectrum of 
+This will solidify the link between our variational problems and the limits of thin structure problems as discussed in section \ref{ssec:Intro-ThinStructures}, with our non-classical Sobolev spaces forming the natural ``extended" spaces.
+Finally, we will turn our attention to the use of the $M$-matrix to analyse the spectrum of the resulting quantum graph problems, and provide some examples for specific singular structure geometries.
 
-\tstk{got to here with review, upon writing draft of chapters 1 and 2}
-
-We now precisely formulate the problem that we wish to consider.
-Let $\graph$ be the period graph of a (periodic) metric graph embedded into $\reals^2$, with unit cell $\ddom\subset\reals^2$ (see section \ref{sec:SingularStructures}).
-In this chapter, we will concern ourselves with the analysis of the ``wave equation"
+We now precisely formulate the problem that we wish to consider. \tstk{redo this by defining the operator $-\laplacian_{\dddmes,\qm}$ first, then saying it relates to the full space problem}
+Let $\graph$ be the period graph of a (periodic) metric graph embedded into $\reals^2$, with unit cell $\ddom\subset\reals^2$ (see section \ref{sec:TP-OurProblems}).
+In this chapter, we will concern ourselves with the analysis of the acoustic equation\footnote{In order to avoid sounding monotonous, we will also refer to \eqref{eq:SingularScalarWaveEqnWholeSpace} as the wave equation.}
 \begin{align} \label{eq:SingularScalarWaveEqnWholeSpace}
 	-\grad_{\dddmes}^2 u = \omega^2 u, \quad\text{in } \reals^2,
 \end{align}
@@ -41,5 +40,4 @@ However, the analysis involved is lengthy and so can be found at the end of the 
 We will provide a short overview of this analysis in section \ref{sec:ScalarDerivation}, before going through the derivation of \eqref{eq:SingularWaveEqnQGProblem} from \eqref{eq:SingularScalarWaveEqn}.
 Section \ref{sec:ScalarDiscussion} then provides an explicit expression for the $M$-matrix of \eqref{eq:SingularWaveEqnQGProblem}, and opens a discussion into the methodology and considerations for using it to analyse the spectrum of \eqref{eq:SingularWaveEqnQGProblem}.
 We then employ this approach with a selection of examples in section \ref{sec:ScalarExamples}, before concluding.
-By the end of this chapter we will have a solid basis from which to develop our framework for handling ``derivatives" on singular-structures further. 
-This will bring us naturally towards the analysis of the curl-of-the-curl equation \tstk{ref} and an investigation into the first-order Maxwell system, in which we generalise our approach to handle vector fields and their curls with respect to the measure $\dddmes$.
+By the end of this chapter we will have a solid basis from which to develop our framework for handling ``derivatives" on singular-structures, naturally bringing us towards the analysis of the curl-of-the-curl equation \tstk{ref} and an investigation into the first-order Maxwell system.
