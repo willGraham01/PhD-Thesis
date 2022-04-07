@@ -11,3 +11,22 @@
 
 % finally, talk about when both $\delta$ and $\eps$ are present, and lead into Research Overview
 \subsection{Double limits in $\eps$ and $\delta$.} \label{ssec:Intro-DoubleLimits}
+So far we have considered the result of a shrinking domain thickness given fixed material properties, and then various asymptotic limits of high contrast materials with fixed inclusion sizes. 
+It is natural to ask whether any consideration has been put into considering the effects that might emerge when both the (relative) size $\delta$ of the region $Q_1$ shrinks to zero \emph{and} the contrast in the material properties increases to infinity.
+The series of papers \tstk{Kuchment-Figotin refs} was dedicated to investigating the spectral properties that emerge in the aforementioned limits, for a variety of operators relevant to models of wave propagation.
+This series begins \tstk{scalar model, Kuch-Fig} studying the acoustic equation on a non-magnetic composite material whose period cell $Q$ is the unit square in $\reals^2$, and whose inclusion $Q_0$ is a smaller square of side length $1-\delta$.
+The region $Q_1$ is therefore shrinking as $\delta\rightarrow0$ (visually, to a singular structure) and possesses (``dimensionless") dielectric constant $\eps_m$ which is equal to $\eps$ on $Q_1$ and $1$ on $Q_0$.
+For sufficiently small values of $\delta$, $\bracs{\delta\eps}^{-1}$, and $\eps\delta^2$, it is demonstrated that spectral gaps open, that the spectrum concentrates near the eigenvalues of the Neumann Laplacian on (the union of all periodic translations of) $Q_0$, and an estimate for the width of the spectral bands is also provided.
+This was followed up by \tstk{Maxwell/ photonic crystals study} consideration of the curl-of-the-curl equation in $\reals^3$, on a domain that was the extrusion into 3 dimensions of the 2D domain described previously.
+In the asymptotic regime $\eps\delta^{\frac{3}{2}}\ll 1$, $\eps\delta\gg1$, gaps in the spectrum once again begin to open --- details on the structure of the spectrum and estimates regarding the width of the spectral bands are again provided.
+Finally, analysis of the acoustic approximation when the region $Q_0$ was a polygon \tstk{check: F-K describe their domain in $\reals^d$, but then I think just work in $d=2$ for the entire paper...} was considered, in the limit as $\delta\rightarrow0$, and $\bracs{\delta\eps}^{-1}\rightarrow W<\infty$. \tstk{obtain a QG problem... also this series of papers and this result appears in Kuchment's review paper too.}
+Note that since the region $Q_0$ is a polygon, the region $Q_1$ can be thought of as a thickening of some graph $\graph$ embedded into $\reals^2$.
+Under these assumptions, it is shown that the spectrum of the acoustic equation on such a medium converges to the spectrum of the problem
+\begin{align} \label{eq:Intro-KuchFigQGLimit}
+	-\laplacian u &= \lambda\bracs{\delta_{\graph} + W}u,
+\end{align}
+where $\lambda$ is the spectral parameter and $\delta_{\graph}$ is the delta function supporting the graph $\graph$.
+Note that this convergence is not in the norm-resolvent sense, and only demonstrates coincidence of the limit of the acoustic equation as $\delta\rightarrow0$, $\bracs{\delta\eps}^{-1}\rightarrow W<\infty$ with the spectrum of the problem \eqref{eq:Intro-KuchFigQGLimit}.
+This is of particular interest to our work in chapter \ref{ch:SingInclusions}, where we will consider a composite medium with one of the components being a singular structure, and look to obtain (and solve) a non-local quantum graph problem from our singular structure formulation.
+However we note that our approach via singular structures is motivated by geometric contrasts, rather than the combination of geometric and material contrasts that these studies consider.
+\tstk{anything that goes beyond these studies? I don't think there is.}
