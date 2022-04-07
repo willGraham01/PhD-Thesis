@@ -1,26 +1,10 @@
 \section{Chapter Introduction} \label{sec:ScalarEqnChapterIntro}
-This work is motivated by a desire to study wave propagation in a medium that exhibits (periodic) micro-structure, so a natural starting point from which we develop our framework for singular structures is the wave equation,
-\begin{align} \label{eq:WaveEquation}
-	- A \laplacian u = f^2 \rho u,
-\end{align}
-where $f$ is the frequency of a propagating wave, whilst $A$ and $\rho$ correspond to material properties.
-In the context of elastic waves, $A$ and $\rho$ represent the elastic modulus and mass density respectively, whilst in the electromagnetic context they represent the electric permittivity and magnetic permeability of the medium (the polarisation dictating which of these properties $A$ and $\rho$ represent).
-It is also convenient to non-dimensionalise \eqref{eq:WaveEquation} by introducing a dimensionless variable $\hat{x} = \frac{x}{l}$, where $l>0$ is the spatial extent of the medium, obtaining
-\begin{align} \label{eq:WaveEquationNonDim}
-	- \laplacian_{\hat{x}}\hat{u}\bracs{\hat{x}} = z \hat{u}\bracs{\hat{x}},
-	\quad
-	z = \frac{\bracs{fl}^2\rho}{A}.
-\end{align} 
-Here $\hat{u}\bracs{\hat{x}} = u\bracs{l\hat{x}}$, and the parameter $z$ represents the (square of the) ratio of the spatial extent of the medium against the wavelength of propagating waves, up to a constant.
-In the context of electromagnetic waves, we have
-\begin{align*}
-	z = \frac{\bracs{fl}^2\eps_{\mathrm{r}}\mu_{\mathrm{r}}}{c^2},
-\end{align*}
-where $\eps_{\mathrm{r}}$ and $\mu_{\mathrm{r}}$ are, respectively, the relative (electric) permittivity and (magnetic) permeability of the medium, and $c$ is the speed of light in vacuum. \tstk{jackson cassent refs?}
-To avoid notational clutter in equations, we will write $\omega^2=z$ where convenient.
-The spectrum (that is, the set of $z=\omega^2$ in \eqref{eq:WaveEquation} that are allowed in some sense)  provides access to the frequencies of waves that can propagate in a physical material (by ``re-dimensionalising" $z$ via \eqref{eq:WaveEquationNonDim}), which determines the use of the structure itself as a waveguide.
-The focus of this chapter will be on quantitatively encapsulating the structure of the spectrum for all problems of the form \eqref{eq:WaveEquation} on our singular-structure domains, via analysis of the spaces $\ktgradSob{\ddom}{\dddmes}$ and the derivation of a quantum graph problem.
-We will also discuss how objects such as the $M$-matrix (introduced in section \ref{ssec:MMatrix}) can be used to aid the analysis of the spectrum of such problems, both numerically and analytically.
+This chapter aims to provide a concrete introduction to variational problems on singular structures, and their link to the quantum graph problems that arise in the asymptotic limit of thin structures as the thickness shrinks to zero.
+We will concern ourselves with the study of the acoustic (or wave) equation on a singular structure, and the corresponding non-classical Sobolev spaces of functions possessing gradients with respect to the measure that supports this singular structure.
+By understanding this function space we will be able to derive a quantum graph problem, or more precisely a problem of generalised resolvent type, from our original variational problem.
+From here, we will turn our attention to the use of the $M$-matrix to solve the resulting quantum graph problems and recover the spectrum of 
+
+\tstk{got to here with review, upon writing draft of chapters 1 and 2}
 
 We now precisely formulate the problem that we wish to consider.
 Let $\graph$ be the period graph of a (periodic) metric graph embedded into $\reals^2$, with unit cell $\ddom\subset\reals^2$ (see section \ref{sec:SingularStructures}).
