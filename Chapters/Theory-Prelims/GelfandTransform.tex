@@ -34,20 +34,22 @@ Typically one sees $\mathcal{A}$ written as a ``direct integral" of operators
 	\mathcal{A} &= \int_{B}^{\bigoplus}\mathcal{A}_{\qm} \ \md\qm,
 \end{align*}
 \tstk{notation found where? M.Reed and B.Simon, Methods of Modern Mathematical Physics, 1978 is apparently one place} which can be thought of as the generalisation of a direct sum over a countable index to a continuous index ($\qm$).
+The operators $\mathcal{A}_{\qm}$ are referred to as the \emph{fibres} of $\mathcal{A}$.
 Perhaps more helpful is the interpretation that the action of the original operator $\mathcal{A}$ can be thought of as acting independently on an infinite number of copies of $D_{\mathcal{A}}$ indexed by $\qm$, the action on each of these copies spaces being $\mathcal{A}_{\qm}$.
-To draw a complete analogy, consider a Hilbert space $H$ and an operator $T$ on $H$ which acts independently on two (closed) subspaces $H_1, H_2$, such that $H = H_1 \oplus H_2$.
-We could denote by $T_i$ the restriction of $T$ to $H_i$ ($i=1,2$), and then write the action of $T$ as
-\begin{align*}
-	Tu &= \begin{pmatrix} T_1 & 0 \\ 0 & T_2 \end{pmatrix}
-	\begin{pmatrix} u_1 \\ u_2	\end{pmatrix},
-\end{align*}
-for any element $u = u_1 + u_2$ for $u_i\in H_i$ (an example of this would be the decoupling of Maxwell operator $\mathcal{M}$ into the TE and TM modes, see the discussion in section \ref{sec:Intro-Maxwell} around equation \eqref{eq:Intro-AcousticApprox}).
-By studying the operators $T_1$ and $T_2$, we can deduce the behaviour of the operator $T$, and in particular deduce its spectrum from the union of the spectra of the $T_i$.
-The direct integral notation extends this to when an operator $\mathcal{A}$ cannot be broken down into a countable (or finite) direct sum, and analogous conclusions apply: the action of $\mathcal{A}$ on a function $u$ could be deduced from the ``sum" of actions of the $\mathcal{A}_{\qm}$ on $\gelfand u(\cdot,\qm)$,
+%To draw a complete analogy, consider a Hilbert space $H$ and an operator $T$ on $H$ which acts independently on two (closed) subspaces $H_1, H_2$, such that $H = H_1 \oplus H_2$.
+%We could denote by $T_i$ the restriction of $T$ to $H_i$ ($i=1,2$), and then write the action of $T$ as
+%\begin{align*}
+%	Tu &= \begin{pmatrix} T_1 & 0 \\ 0 & T_2 \end{pmatrix}
+%	\begin{pmatrix} u_1 \\ u_2	\end{pmatrix},
+%\end{align*}
+%for any element $u = u_1 + u_2$ for $u_i\in H_i$ (an example of this would be the decoupling of Maxwell operator $\mathcal{M}$ into the TE and TM modes, see the discussion in section \ref{sec:Intro-Maxwell} around equation \eqref{eq:Intro-AcousticApprox}).
+%By studying the operators $T_1$ and $T_2$, we can deduce the behaviour of the operator $T$, and in particular deduce its spectrum from the union of the spectra of the $T_i$.
+%The direct integral notation extends this to when an operator $\mathcal{A}$ cannot be broken down into a countable (or finite) direct sum, and analogous conclusions apply: 
+The action of $\mathcal{A}$ on a function $u$ can be deduced from the ``sum" of actions of the $\mathcal{A}_{\qm}$ on $\gelfand u(\cdot,\qm)$,
 \begin{align} \label{eq:GelfandDirectIntegral}
-	\mathcal{A}u = \int_{B}^{\bigoplus}\mathcal{A}_{\qm}\gelfand u\bracs{\cdot,\qm} \ \md\qm,
+	\mathcal{A}u(x) = \gelfand^{-1}\int_{B}^{\bigoplus}\mathcal{A}_{\qm}\gelfand u\bracs{x,\qm} \ \md\qm,
 \end{align}
-and the spectrum of $\mathcal{A}$ is formed from the union of the spectra of $\mathcal{A}_{\qm}$ over $\qm$, 
+and one can prove that the spectrum of $\mathcal{A}$ is formed from the union of the spectra of $\mathcal{A}_{\qm}$ over $\qm$ \tstk{ref for this? It's a standard result...}, 
 \begin{align*}
 	\sigma\bracs{\mathcal{A}} = \bigcup_{\qm\in B}\sigma\bracs{\mathcal{A}_{\qm}}.
 \end{align*}
@@ -72,6 +74,7 @@ In chapter \ref{ch:CurlCurl}, we will be considering a singular structure that h
 	\begin{pmatrix} \partial_1 + \rmi\qm_1 \\ \partial_2 + \rmi\qm_2 \\ \rmi\wavenumber \end{pmatrix},
 \end{align*}
 which is the result of a Gelfand transform in the $\bracs{x_1,x_2}$-plane and a Fourier transform in the $x_3$ (extruded) direction.
+At times, we may also use the operator $\kgrad = \bracs{\partial_1, \partial_2, \rmi\wavenumber}^\top$.
 We also denote by $\ktcurl{}$ the ``curl" operator obtained after applying the Gelfand transform, so formally
 \begin{align*}
 	\ktcurl{}\phi &= \ktgrad\wedge\phi

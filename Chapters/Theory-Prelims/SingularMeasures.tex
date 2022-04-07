@@ -4,7 +4,7 @@ The introduction of these measures also necessitates a change in the way we view
 
 Let $\ddom\subset\reals^d$, and let $\mathcal{B}_{\ddom}$ denote the Borel sigma algebra for $\ddom$ (with the topology inherited from $\reals^d$).
 A (Borel) measure $\rho$ on the measurable space $\bracs{\ddom,\mathcal{B}_{\ddom}}$ is called \emph{singular} if there exist two disjoint sets $S_1,S_2\in \mathcal{B}_{\ddom}$ such that $\rho$ is zero on all (measurable) subsets of $S_1$ and the $d$-dimensional Lebesgue measure $\lambda_d$ is zero on all subsets of $S_2$.
-The textbook example of a singular measure is the point-mass (or ``$\delta$-function") measure placed at a point $x_0\in\ddom$,
+The textbook example of a singular measure is the point-mass measure (or \emph{$\delta$-function}) placed at a point $x_0\in\ddom$,
 \begin{align*}
 	\delta_{x_0}\bracs{B} &= \begin{cases} 1 & x_0\in B, \\ 0 & x_0\not\in B, \end{cases}
 	\qquad \forall B\in\mathcal{B}_{\ddom},
@@ -28,7 +28,7 @@ Since the sum of two singular measures is another singular measure, we can then 
 	\dddmes\bracs{B} = \ddmes\bracs{B} + \nu\bracs{B},
 \end{align*}
 where we refer to $\ddmes$ as the ``\emph{singular measure} that supports $\graph$", and $\nu$ is the singular measure supporting the masses $\alpha_j$ at the vertices of $\graph$.
-For graphs embedded into two and three dimensions, figure \ref{fig:Diagram_SingularMeasure2D} illustrates the $\dddmes$ ``measure" of Borel sets.
+For graphs embedded into two and three dimensions, figure \ref{fig:Diagram_SingularMeasure2D} illustrates the $\dddmes$ notion of size.
 \begin{figure}[b!]
 	\centering
 	\begin{subfigure}[t]{0.45\textwidth}
@@ -44,4 +44,4 @@ For graphs embedded into two and three dimensions, figure \ref{fig:Diagram_Singu
 	\end{subfigure}
 \end{figure}
 In chapter \ref{ch:SingInc}, we will reintroduce the background material into which our singular structure is embedded.
-This will require us to consider the sum of singular measures and the ``background" Lebesgue measure $\lambda_d$, so for a singular measure $\rho$ we shall write \tstk{change overhead tilde notation to distinguish -  you're using this for both $\dddmes$, the sum of vertex and edge singular measures, and the composite measure in chapter 5} $\tilde{\rho} = \rho + \lambda_d$.
+This will require us to consider the sum of singular measures and the ``background" Lebesgue measure $\lambda_2$, so for a singular measure $\rho$ we shall write \tstk{change overhead tilde notation to distinguish -  you're using this for both $\dddmes$, the sum of vertex and edge singular measures, and the composite measure in chapter 5} $\tilde{\rho} = \rho + \lambda_2$.
