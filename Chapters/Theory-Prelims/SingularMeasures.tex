@@ -20,14 +20,14 @@ For each $I_{jk}\in\edgeSet$ define the (Borel) measure $\lambda_{jk}$ as the me
 Here, $r_{jk}$ is the parametrisation of the edge $I_{jk}$ as per assumption \ref{ass:MeasTheoryProblemSetup}.
 The measure $\lambda_{jk}$ will be referred to as the \emph{singular measure that supports $I_{jk}$}, or just the \emph{singular measure on $I_{jk}$}.
 Since the sum of two singular measures is another singular measure, we can then define the following singular measures;
-\begin{align*}
+\begin{align} \label{eq:Intro-MeasureDefs}
 	\ddmes\bracs{B} = \sum_{v_j\in \vertSet}\sum_{j\conLeft k} \lambda_{jk}\bracs{B},
 	\quad
-	\nu\bracs{B} = \sum_{v_j\in\vertSet}\alpha_j\delta_j\bracs{B},
+	\massMes\bracs{B} = \sum_{v_j\in\vertSet}\alpha_j\delta_j\bracs{B},
 	\quad
-	\dddmes\bracs{B} = \ddmes\bracs{B} + \nu\bracs{B},
-\end{align*}
-where we refer to $\ddmes$ as the ``\emph{singular measure} that supports $\graph$", and $\nu$ is the singular measure supporting the masses $\alpha_j$ at the vertices of $\graph$.
+	\dddmes\bracs{B} = \ddmes\bracs{B} + \massMes\bracs{B},
+\end{align}
+where we refer to $\ddmes$ as the ``\emph{singular measure} that supports $\graph$", and $\massMes$ is the singular measure supporting the masses $\alpha_j$ at the vertices of $\graph$.
 For graphs embedded into two and three dimensions, figure \ref{fig:Diagram_SingularMeasure2D} illustrates the $\dddmes$ notion of size.
 \begin{figure}[b!]
 	\centering
@@ -44,4 +44,4 @@ For graphs embedded into two and three dimensions, figure \ref{fig:Diagram_Singu
 	\end{subfigure}
 \end{figure}
 In chapter \ref{ch:SingInc}, we will reintroduce the background material into which our singular structure is embedded.
-This will require us to consider the sum of singular measures and the ``background" Lebesgue measure $\lambda_2$, so for a singular measure $\rho$ we shall write \tstk{change overhead tilde notation to distinguish -  you're using this for both $\dddmes$, the sum of vertex and edge singular measures, and the composite measure in chapter 5} $\tilde{\rho} = \rho + \lambda_2$.
+This will require us to consider the sum of singular measures and the ``background" Lebesgue measure $\lambda_2$, so for a singular measure $\rho$ we shall write $\lambda_2^{\rho} = \lambda_2 + \rho$.
