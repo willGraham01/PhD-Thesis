@@ -164,19 +164,9 @@ Each of these problems can be rewritten as a system of ODEs on the edge interval
 		\forall j, \sum_{j\con k}\pdiff{u^{(jk)}}{n}\bracs{v_j} = \alpha_j u\bracs{v_j}.
 	\end{cases}
 \end{align*}
-\tstk{commented out the generalised resolvents stuff --- this should go in the scalar chapter when we first derive our QG system with the spectral parameter on the RHS of the boundary condition.}
-%\tstk{spectral param in BCs discussion comes here --- these sections might need to be re-referenced. Also, Kuchment-Zeng and Exner-Post touch on this association somewhat}
-%One will note that only $\alpha_j$ appears in the Robin-like condition in \eqref{eq:GraphLaplacianExample}, but $\alpha_j\bracs{\omega^2-\wavenumber^2}$ is present on the right hand side of \eqref{eq:3DQGDerivCondition}.
-%\tstk{here we have to talk about Gen. Resolvents --- what to say?}
-%This means the problem \eqref{eq:3DQGFullSystem} belongs to the class of problems with generalised resolvents.
-%In section \ref{ssec:MMatrix} we will introduce the $M$-matrix in a more familiar setting (with no $\omega^2$-dependence in the vertex conditions) and remarked that the analysis of the spectrum of \eqref{eq:QGFullSystem} can be carried by replacing the matrix $B$ in section \ref{ssec:MMatrix} with $\omega^2 B$ in section \ref{ssec:MMatrixConsequences}.
-%Justification for doing so lies in observing that introducing explicit $\omega^2$-dependence will not affect the (structure of) the arguments in the supporting theory \tstk{refs to Ryzhov here?}, and consequentially is expected to give rise to the aforementioned alteration to $B$.
-%However, a formal argument to justify methodology based on the $M$-matrix and boundary triples (in the context of generalised resolvents) has not been carried out in the literature.
-%As such it remains open to investigation, but would closely follow and resemble arguments that are already available (and form the basis for the theory presented in section \ref{ssec:MMatrix}).
-%This observation (and justification) is made in other works that analyse problems with generalised resolvents via use of the theory of boundary triples and the $M$-matrix --- see for example \cite[page 1846]{cherednichenko2018effective} concerning the results of \tstk{The paper \cite[page 1846]{cherednichenko2018effective} specifically refers to those arguments found in Ryzhov, V.: Weyl-Titchmarsh function of an abstract boundary value problem, operator colligations, and linear systems with boundary control. Complex Anal. Oper. Theory 3(1), 289–322 (2009)}.
-%If one has reservations about this ``gap" in the available theory, an alternative to analysing a problem with generalised resolvents directly is explored in \cite[Section 6]{cherednichenko2017norm}.
-%One could look to transform a problem with $\omega^2$-dependent $\delta$-type vertex condition (like \eqref{eq:3DQGFullSystem}) into a problem with $\omega^2$-independent $\delta'$-type vertex conditions.
-%This comes at the cost of having to determine the appropriate (unitary) transform to apply to \eqref{eq:3DQGFullSystem}; but the theory of section \ref{ssec:MMatrix} would apply to the transformed problem, could be used to analyse the spectrum, and then the inverse transform applied.
+One should note that the spectral parameter does \emph{not} appear on the right hand side of the Kirchoff condition.
+This is because we are dealing with operators on quantum graphs here, as opposed to operators that act in an extended space but which can be interpreted through a ``non-standard" quantum graph problem (section \ref{ssec:Intro-ThinStructures}).
+We will discuss this, and the idea of Strauss extensions, further in section \ref{ssec:GRandSELinks} when we come to analyse the spectrum of our variational problems on singular structures and explore their link to quantum graphs.
 
 \subsection{The $M$-Matrix} \label{ssec:MMatrix}
 We next provide a brief overview of the $M$-matrix, a tool for characterising the spectrum of a quantum graph which we will exploit in section \tstk{other refs \ref{sec:ScalarDiscussion}}.

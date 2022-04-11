@@ -1,27 +1,15 @@
 \section{Derivation of quantum graph problem} \label{sec:ScalarDerivation}
 In this section we provide an overview of a system of the form \eqref{eq:SingularWaveEqnQGProblem} is obtained from \eqref{eq:SingularScalarWaveEqn}, which will setup our discussion revolving around the methods we employ for solving \eqref{eq:SingularWaveEqnQGProblem} in section \ref{sec:ScalarDiscussion}.
+However, before doing so we provide the reader with an intuitive understanding, stemming from the analysis of section \ref{sec:3DGradSobSpaces}, of the space $\tgradSob{\ddom}{\dddmes}$.
+Upon deriving the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem}, we will elaborate its link to our variational problem in the context of Strauss extensions, setting up our discussion in \tstk{chapter conclusion!} and work in chapters \ref{ch:CurlCurl} and \ref{ch:SingInc}.
 
-Precise definition and analysis of the Sobolev spaces $\tgradSob{\ddom}{\dddmes}$ can be found in section \ref{sec:BorelMeasSobSpaces}, and explicit analysis of these spaces in section \ref{sec:3DGradSobSpaces}, although we provide a short intuitive idea of the objects $\tgrad_{\ddmes}u$ and $\tgrad_{\dddmes}u$ here.
-The central idea behind understanding $\tgrad_{\ddmes}u$ is that the singular measure $\ddmes$ only supports the edges of $\graph$, and so cannot ``see" any changes in the function $u$ ``across" (in the direction perpendicular to) the edge $I_{jk}$.
-So at any point $x\in I_{jk}$, the tangential gradient $\tgrad_{\ddmes}u(x)$ is only able to encapsulate the rate of change of the function $u$ at $x\in I_{jk}$ in the direction along $I_{jk}$.
-As a result, it is not inaccurate to think of $\tgrad_{\ddmes}u(x) = \bracs{u^{(jk)}}'(x)e_{jk}$ (up to an appropriate shift due to the presence of the quasi-momentum $\qm$) for $x\in I_{jk}$, where $\bracs{u^{(jk)}}' = \pdiff{u^{(jk)}}{e_{jk}}$.
-This also provides us with an intuitive understanding of how $\tgrad_{\ddmes}u$ behaves on each edge of the graph $\graph$, which is crucial for deriving the system of ODEs on the edges $I_{jk}$ \eqref{eq:SingularWaveEqnQGProblem} and providing a meaning to the $\diff{}{y}$ operator that appears in those equations.
-As discussed in section \ref{ssec:FunctionSpaces}, the coupling constants attached to the vertices of the graph as well as the connectivity of the graph itself then dictate that the edge functions $u^{(jk)}$ and $\bracs{u^{(jk)}}'$ adhere to certain matching conditions at the vertices.
-In summary, the functions $u\in\gradSobQM{\ddom}{\dddmes}$ and their gradients $\tgrad_{\dddmes}u$ can be thought of as possessing the following properties (precise statements can be found in section \ref{sec:3DGradSobSpaces}):
-\begin{enumerate}[(a)]
-	\item The function $u$ is continuous at all vertices $v_j\in\vertSet$.
-	\item On each edge $I_{jk}\in\edgeSet$; $\tgrad_{\dddmes}u = \tgrad_{\lambda_{jk}}u$, and $\tgrad_{\lambda_{jk}}u = \bracs{\bracs{u^{(jk)}}' + \rmi\qm_{jk}u^{(jk)}}e_{jk}$.
-	The function $\bracs{u^{(jk)}}'$ being the derivative (in the $H^1$-sense) of the function $u^{(jk)}\circ r_{jk}$.
-	\item At each vertex $v_j\in\vertSet$, we have $\tgrad_{\dddmes}u=0$, however $\lim_{x\rightarrow v_j}\tgrad_{\lambda_{jk}}u$ need not be zero.
-\end{enumerate}
+\input{./Chapters/Scalar-System/Scalar-GradientGeometricInterpretation}
 
+\subsection{Derivation of the system \eqref{eq:SingularWaveEqnQGProblem}} \label{ssec:Scalar-QGDerivation}
 We can now provide an argument for how a system of the form \eqref{eq:SingularWaveEqnQGProblem} arises from \eqref{eq:SingularScalarWaveEqn}.
-A function $u\in\gradSobQM{\ddom}{\dddmes}$ is said to be a solution to \eqref{eq:SingularScalarWaveEqn} if
-\begin{align} \label{eq:SingularWaveEqnWeakForm}
-	\integral{\ddom}{\tgrad_{\dddmes}u\cdot\overline{\tgrad_{\dddmes}\phi}}{\dddmes} &= \omega^2\integral{\ddom}{u\overline{\phi}}{\dddmes}, \quad\forall \phi\in\psmooth{\ddom}.
-\end{align}
-We first note that whenever the equality in \eqref{eq:SingularWaveEqnWeakForm} holds for all smooth functions $\phi$, it holds in particular when $\phi$ has support that intersects the interior of a single edge $I_{jk}\in\edgeSet$ and no other parts of $\graph$.
-Combined with the fact that $\dddmes$ is a sum of the edge measures and point masses at the vertices, and that $\tgrad_{\dddmes}u=\tgrad_{\lambda_{jk}}u$ on the edge $I_{jk}$, equation \eqref{eq:SingularWaveEqnWeakForm} implies
+
+We first note that whenever the equality in \eqref{eq:SingularScalarWaveEqn-VariationalForm} holds for all smooth functions $\phi$, it holds in particular when $\phi$ has support that intersects the interior of a single edge $I_{jk}\in\edgeSet$ and no other parts of $\graph$.
+Combined with the fact that $\dddmes$ is a sum of the edge measures and point masses at the vertices, and that $\tgrad_{\dddmes}u=\tgrad_{\lambda_{jk}}u$ on the edge $I_{jk}$, equation \eqref{eq:SingularScalarWaveEqn-VariationalForm} implies
 \begin{align*}
 	0 &= \integral{\ddom}{ \bracs{\tgrad_\ddmes u \cdot \overline{\tgrad\phi} - \omega^2 u\overline{\phi}} }{\ddmes}
 	= \integral{I_{jk}}{ \bracs{\tgrad_{\lambda_{jk}}u \cdot \overline{\tgrad\phi} - \omega^2 u^{(jk)}\overline{\phi}} }{\lambda_{jk}} \\
@@ -41,7 +29,7 @@ This holds for all smooth $\varphi$ with support contained in the interior of $\
 
 Now we turn our attention to the derivation of the vertex conditions.
 Fix a vertex $v_j\in \vertSet$, and consider functions $\phi\in\psmooth{\ddom}$ whose support intersects $\graph$ in a neighbourhood of $v_j$ that only contains edges which connect to $v_j$ (which can be, for example, a ball of sufficiently small radius centred on $v_j$).
-Using the change of variables $r_{jk}$ on each edge and writing $\tilde{u}^{(jk)} = u^{(jk)} \circ r_{jk}$, $\varphi_{jk} = \phi\circ r_{jk}$ for each $k\con j$, we can work from \eqref{eq:SingularWaveEqnWeakForm} to obtain
+Using the change of variables $r_{jk}$ on each edge and writing $\tilde{u}^{(jk)} = u^{(jk)} \circ r_{jk}$, $\varphi_{jk} = \phi\circ r_{jk}$ for each $k\con j$, we can work from \eqref{eq:SingularScalarWaveEqn-VariationalForm} to obtain
 \begin{align*}
 	0 &= \sum_{k: \ k\con j} \integral{I_{jk}}{ \bracs{ \tgrad_\ddmes u \cdot \overline{\tgrad\phi} - \omega^2 u\overline{\phi} } }{\lambda_{jk}} 
 	+ \integral{\ddom}{ \bracs{ \tgrad_{\dddmes}u\cdot\overline{\tgrad_{\dddmes}\phi}-\omega^2 u\overline{\phi} } }{\nu} \\
@@ -66,12 +54,26 @@ Repeating the argument for each $v_j\in \vertSet$ then provides us with a condit
 One should note the presence of $\omega^2$ in this equation, so this is not a standard Robin condition on the derivatives of the edge-wise components of $u$, but rather indicates that our problem belongs to the class of problems with generalised resolvents, as mentioned in section \ref{ssec:DiffOpsOnGraphs}.
 The result of theorem \ref{thm:dddmesTangGradImplication} tells us that functions $u\in\gradSobQM{\ddom}{\dddmes}$ are also continuous at each vertex $v_j$, and thus the following problem (precisely \eqref{eq:SingularWaveEqnQGProblem}) has been derived:
 \begin{subequations}
-	\begin{align}
+	\begin{align*}
 		-\bracs{\diff{}{y} + \rmi\qm_{jk}}^2 u^{(jk)} &= \omega^2 u^{(jk)}, \quad &y\in\interval{I_{jk}}, \ \forall I_{jk}\in\edgeSet, \\
 		u \text{ is continuous at } & v_j, \quad &\forall v_j\in\vertSet,  \\
 		\sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}u^{(jk)}\bracs{v_j} &= \omega^2\alpha_j u\bracs{v_j}, \quad &\forall v_j\in\vertSet,
-	\end{align}
+	\end{align*}
 \end{subequations}
 where we henceforth drop the overhead tilde notation and simply write $u^{(jk)}$ for brevity (appealing to the obvious association between $u^{(jk)}$ and $\tilde{u}^{(jk)}$).
-Solving for the eigenvalues $\omega^2$ will net us the eigenvalues of our original problem \eqref{eq:SingularScalarWaveEqn}, and taking the union of the eigenvalues over $\qm$ will provide the spectrum of \eqref{eq:SingularScalarWaveEqnWholeSpace}.
 As will be made clear in the discussion that follows, the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem} is much easier to handle both analytically and numerically thanks to the utility of the $M$-matrix.
+
+\subsection{Link to Generalised Resolvents and Strauss Extensions} \label{ssec:GRandSELinks}
+\tstk{whooooooooooo fun times now}
+%\tstk{spectral param in BCs discussion comes here --- these sections might need to be re-referenced. Also, Kuchment-Zeng and Exner-Post touch on this association somewhat}
+%One will note that only $\alpha_j$ appears in the Robin-like condition in \eqref{eq:GraphLaplacianExample}, but $\alpha_j\bracs{\omega^2-\wavenumber^2}$ is present on the right hand side of \eqref{eq:3DQGDerivCondition}.
+%\tstk{here we have to talk about Gen. Resolvents --- what to say?}
+%This means the problem \eqref{eq:3DQGFullSystem} belongs to the class of problems with generalised resolvents.
+%In section \ref{ssec:MMatrix} we will introduce the $M$-matrix in a more familiar setting (with no $\omega^2$-dependence in the vertex conditions) and remarked that the analysis of the spectrum of \eqref{eq:QGFullSystem} can be carried by replacing the matrix $B$ in section \ref{ssec:MMatrix} with $\omega^2 B$ in section \ref{ssec:MMatrixConsequences}.
+%Justification for doing so lies in observing that introducing explicit $\omega^2$-dependence will not affect the (structure of) the arguments in the supporting theory \tstk{refs to Ryzhov here?}, and consequentially is expected to give rise to the aforementioned alteration to $B$.
+%However, a formal argument to justify methodology based on the $M$-matrix and boundary triples (in the context of generalised resolvents) has not been carried out in the literature.
+%As such it remains open to investigation, but would closely follow and resemble arguments that are already available (and form the basis for the theory presented in section \ref{ssec:MMatrix}).
+%This observation (and justification) is made in other works that analyse problems with generalised resolvents via use of the theory of boundary triples and the $M$-matrix --- see for example \cite[page 1846]{cherednichenko2018effective} concerning the results of \tstk{The paper \cite[page 1846]{cherednichenko2018effective} specifically refers to those arguments found in Ryzhov, V.: Weyl-Titchmarsh function of an abstract boundary value problem, operator colligations, and linear systems with boundary control. Complex Anal. Oper. Theory 3(1), 289–322 (2009)}.
+%If one has reservations about this ``gap" in the available theory, an alternative to analysing a problem with generalised resolvents directly is explored in \cite[Section 6]{cherednichenko2017norm}.
+%One could look to transform a problem with $\omega^2$-dependent $\delta$-type vertex condition (like \eqref{eq:3DQGFullSystem}) into a problem with $\omega^2$-independent $\delta'$-type vertex conditions.
+%This comes at the cost of having to determine the appropriate (unitary) transform to apply to \eqref{eq:3DQGFullSystem}; but the theory of section \ref{ssec:MMatrix} would apply to the transformed problem, could be used to analyse the spectrum, and then the inverse transform applied.

@@ -48,7 +48,7 @@ We can follow a similar construction to define the operator $-\laplacian_{\upsil
 \end{align*}
 Through the use of a Gelfand transform (and via passage through approximating sequences of smooth functions), the family of operators $-\laplacian_{\dddmes}^{\qm}$ decomposes $-\laplacian_{\upsilon}$ as
 \begin{align*}
-	-\laplacian_{\upsilon} &= \int_{[-\pi,\pi)^2}^{\bigoplus} -\laplacian_{\dddmes}^{\qm} \md\qm,
+	-\laplacian_{\upsilon} &= \int_{[-\pi,\pi)^2}^{\bigoplus} -\laplacian_{\dddmes}^{\qm} \ \md\qm,
 \end{align*}
 and so we have in particular that
 \begin{align*}
@@ -67,8 +67,8 @@ Further to this point, in section \ref{sec:ScalarDerivation} we demonstrate that
 	\end{align}
 \end{subequations}
 The $\qm_{jk}$ are rotations of the quasi-momentum $\qm$, and can be computed given the orientation of the edge $I_{jk}\in\edgeSet$.
-Note that \eqref{eq:SingularWaveEqnQGProblem} possesses a generalised resolvent --- the spectral parameter $\omega^2$ is present in the boundary conditions at each vertex \eqref{eq:SingularWaveEqnQGProblem-3}, \tstk{point to the discussion when you eventually have it!}.
-This section will also make explicit the link between our variational formulation and the Strauss extension for the problem \eqref{eq:SingularWaveEqnQGProblem} \tstk{add this!}.
+Note that \eqref{eq:SingularWaveEqnQGProblem} possesses a generalised resolvent --- the spectral parameter $\omega^2$ is present in the boundary conditions at each vertex \eqref{eq:SingularWaveEqnQGProblem-3}.
+As such, section \ref{ssec:GRandSELinks} will also make explicit the link between our variational formulation and the Strauss extension for the problem \eqref{eq:SingularWaveEqnQGProblem}.
 
 Having derived \eqref{eq:SingularWaveEqnQGProblem} and made the connection between its extension and our starting variational problems, we move on to how one can analyse the spectrum of such problems (both analytically and numerically).
 This culminates in section \ref{sec:ScalarDiscussion} with an explicit expression for the $M$-matrix of \eqref{eq:SingularWaveEqnQGProblem}, opening a discussion into the methodology and considerations for using it to analyse the spectrum of \eqref{eq:SingularWaveEqnQGProblem}, which we then employ in section \ref{sec:ScalarExamples}, before concluding.

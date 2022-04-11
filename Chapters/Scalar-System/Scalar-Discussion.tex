@@ -1,8 +1,8 @@
 \section{General formula for the $M$-matrix of a finite period graph} \label{sec:ScalarDiscussion}
 Having obtained the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem}, we turn our attention to determining the eigenvalues $z := \omega^2$.
-The advantage of \eqref{eq:SingularWaveEqnQGProblem} over working directly with \eqref{eq:SingularScalarWaveEqnWholeSpace} is that we can now use the $M$-matrix (introduced in section \ref{ssec:MMatrix}) as a tool in our analysis.
-In this section we contextualise the theory introduced in section \ref{sec:QuantumGraphs}, and in particular section \ref{ssec:MMatrix}, showing how it is employed for studying the spectrum of \eqref{eq:SingularScalarWaveEqnWholeSpace}.
-In doing so, we provide a general formula for the $M$-matrix of a finite period graph on which \eqref{eq:SingularWaveEqnQGProblem} is posed.
+The advantage of \eqref{eq:SingularWaveEqnQGProblem} over working directly with \eqref{eq:SingularScalarWaveEqn} is that we can now use the $M$-matrix (introduced in section \ref{ssec:MMatrix}) as a tool in our analysis.
+In this section we contextualise the theory introduced in section \ref{sec:QuantumGraphs}, and in particular section \ref{ssec:MMatrix}, showing how it is employed for studying the spectrum of \eqref{eq:SingularWaveEqnQGProblem} and thus $\sigma\bracs{-\laplacian_{\dddmes}^{\qm}}$.
+In doing so, we provide a general formula for the $M$-matrix in terms of the underlying (period) graph on which \eqref{eq:SingularWaveEqnQGProblem} is posed.
 We will follow up on this in section \ref{sec:Examples}, where we provide some explicit examples of quantum graph problems that can be solved by employing the $M$-matrix in the manner discussed below.
 
 \subsection{General formula for the $M$-matrix} \label{ssec:MMatrixResult}
@@ -82,12 +82,12 @@ Also recall the convention for summing over $j\con k$:
 	Since $M(\dmap u) = \nmap u$, and the $e_k$ are a basis for $\complex^{\abs{V}}$, we have also deduced the $k^{\text{th}}$ column of the $M$-matrix.
 \end{proof}
 Proposition \ref{prop:M-MatrixEntries} also explicitly demonstrates that the $M$-matrix (in the context of \eqref{eq:SingularWaveEqnQGProblem}) is parametrised by $\qm$, and so we shall denote it by $M_{\qm}$ henceforth.
-The dependence of $M_\qm$ on $\qm$ is due to our decision to specify our singular structure (comprising the domain in which \eqref{eq:SingularScalarWaveEqnWholeSpace} was posed) as an embedded, periodic metric graph and then apply the Gelfand transform (see section \ref{ssec:MMatrix}).
-In the following section, we continue our analysis of the $M$-matrix and outline how it can be used to recover the eigenvalues $z=\omega^2$ of \eqref{eq:SingularWaveEqnQGProblem}, and thus \eqref{eq:SingularScalarWaveEqnWholeSpace}.
+The dependence of $M_\qm$ on $\qm$ is due to our decision to specify our singular structure as an embedded, periodic metric graph and then apply the Gelfand transform (see section \ref{ssec:MMatrix}).
+In the following section, we continue our analysis of the $M$-matrix and outline how it can be used to recover the eigenvalues $z=\omega^2$ of \eqref{eq:SingularWaveEqnQGProblem}.
 
 \subsection{Consequences of Proposition \ref{prop:M-MatrixEntries}} \label{ssec:MMatrixConsequences}
 Whilst proposition \ref{prop:M-MatrixEntries} provides an explicit form for the entries of the $M$-matrix,  it is not the most convenient when looking for a method for determining the spectrum of \eqref{eq:SingularWaveEqnQGProblem}.
-Proposition \ref{prop:M-MatrixEntries} shows that $M_\qm$ is meromorphic, and thus has the following decomposition:
+Proposition \ref{prop:M-MatrixEntries} does however show that $M_\qm$ is meromorphic, and thus has the following decomposition:
 \begin{cory} \label{cory:M-MatrixEntriesNoPoles}
 	Let $G^{(1)}_\qm\bracs{\omega}$ have entries defined by
 	\begin{align*}
@@ -135,7 +135,7 @@ The product notation should be understood analogously to the summation notation 
 The zeros of $H^{(2)}$ exactly coincide with the poles of $M_\qm$, both $H^{(1)}_\qm$ and $H^{(2)}$ are analytic, and the matrix $H^{(1)}_\qm$ even has its entry at position $jk$ bounded (uniformly in $\omega$) by the number of (direct) connections between $v_j$ and $v_k$.
 
 Recall that (section \ref{ssec:MMatrix}) we need to determine those $z$ for which the matrix $M_\qm(z)-B(z)$ has at least one zero eigenvalue, where we have $B(z) = -z\alpha$.
-Note the dependence of $B$ on $z$ --- this was raised in section \ref{ssec:DiffOpsOnGraphs} \tstk{you mean it was put off here - this discussion should go after we derive the scalar system}.
+Note the dependence of $B$ on $z$ --- this was raised in section \ref{ssec:DiffOpsOnGraphs} \tstk{you mean it was put off here - this discussion should go after we derive the scalar system, and should include how the $M$-matrix theory doesn't really change if we allow $B$ to be $z$-varying}.
 Now let $\beta_j\bracs{z}, j\in\clbracs{1,...,\abs{\vertSet}}$ denote the eigenvalue branches of the matrix $M_\qm(z)-B(z)$.
 Also set $\mathfrak{M}_\qm(z) = H^{(1)}_\qm(z) - H^{(2)}(z)B(z)$, and let $\widetilde{\beta}_j\bracs{z}, j\in\clbracs{1,...,\abs{\vertSet}}$ denote the eigenvalue branches of $\mathfrak{M}_\qm$.
 The matrix $\mathfrak{M}_\qm$ is analytic, and so has at least one zero eigenvalue at those $z$ for which there exists a $w\in\complex^{\abs{\vertSet}}\setminus\clbracs{0}$ such that
@@ -159,7 +159,7 @@ Checking the limit in \eqref{eq:EigenvalueBranchLimit} is not necessary for all 
 the limit in \eqref{eq:EigenvalueBranchLimit} is clearly zero, and so $z_0$ belongs to the spectrum of \eqref{eq:SingularWaveEqnQGProblem}.
 As we will discuss in section \ref{ssec:ApproachConsiderations}, checking the limit \eqref{eq:EigenvalueBranchLimit} may not be necessary at all, given known results about the spectra of periodic quantum graph problems. \tstk{closure result - it suffices to examine spectrum on a dense subset of the Brilliouin zone then take the closure}
 Considerations concerning which of the two equations (\eqref{eq:QGGenEvalSolveNoPoles} or \eqref{eq:QGDetSolveCondition}) should be used for determining the spectrum $\sigma_\qm$ are also discussed in section \ref{ssec:ApproachConsiderations}.
-In any event, \eqref{eq:SingularScalarWaveEqnWholeSpace} has now been reduced to a more accessible (family of) matrix-eigenvalue problems for $\mathfrak{M}_\qm$.
+In any event, \eqref{eq:SingularScalarWaveEqn} has now been reduced to a more accessible (family of) matrix-eigenvalue problems for $\mathfrak{M}_\qm$.
 
 \subsection{Artificial Vertices and Splitting Edges} \label{ssec:ArtificialVertices}
 As noted in section section \ref{ssec:MMatrix}, it is required that the underlying graph $\graph$ contains no looping edges and has all edge-lengths pairwise irrationally-related.
@@ -177,7 +177,7 @@ This process can be iterated, splitting edges iteratively to remove rational-rel
 Doing so means that any graph representing a singular-structure can now be treated in the manner described in section \ref{ssec:MMatrixConsequences}.
 
 \subsection{Considerations for the Approach to Solving \eqref{eq:QGGenEvalSolveNoPoles} or \eqref{eq:QGDetSolveCondition}} \label{ssec:ApproachConsiderations}
-In this section we briefly discuss some considerations for recovering the spectrum of \eqref{eq:SingularScalarWaveEqnWholeSpace} (which we denote by $\sigma$), and the merits of determining the spectrum of \eqref{eq:SingularWaveEqnQGProblem} (denoted $\sigma_\qm$) via \eqref{eq:QGGenEvalSolveNoPoles} or \eqref{eq:QGDetSolveCondition}.
+In this section we briefly discuss some considerations for recovering the spectrum of $-\laplacian_{\upsilon}$ (which we denote by $\sigma$), and the merits of determining the spectrum of \eqref{eq:SingularWaveEqnQGProblem} (denoted $\sigma_\qm$) via \eqref{eq:QGGenEvalSolveNoPoles} or \eqref{eq:QGDetSolveCondition}.
 Recall that our use of the Gelfand transform informs us that $\sigma = \bigcup_{\qm}\sigma_{\qm}$.
 We also take as a baseline that one has to hand an appropriate numerical scheme for handling the generalised eigenvalue problem \eqref{eq:QGGenEvalSolveNoPoles} (a good introduction to which can be found in \cite{guttel2017nonlinear}), and so do not delve into the details of how such an algorithm would operate.
 It is however worth mentioning that $\mathfrak{M}_\qm$ is Hermitian, from which most numerical schemes benefit.
