@@ -42,13 +42,13 @@ Using corollary \ref{cory:M-MatrixEntriesNoPoles}, and with $s\in S_\graph$ with
 For $s\in S_\graph$, define
 \begin{align*}
 	C\bracs{s} &= \prod_{\substack{j=1,...,N, \\ j\neq s_j}} \mathfrak{M}_{j s_j} \prod_{\substack{j=1,...,N, \\ j = s_j}} \mathfrak{M}_{jj} \\
-	&= \prod_{\substack{j=1,...,N, \\ j\neq s_j}} \bracs{ \sum_{j\conLeft k}e_{jk}^+ s_{jk}^{-1} + \sum_{j\conRight k}e_{kj}^- s_{kj}^{-1} } \prod_{\substack{j=1,...,N, \\ j = s_j}} \bracs{ -\sum_{j\con l}c_{jl}s_{jl}^{-1} + \omega\alpha_j },
+	&= \prod_{\substack{j=1,...,N, \\ j\neq s_j}} \bracs{ \sum_{j\conLeft k}e_{jk}^+ s_{jk}^{-1} + \sum_{j\conRight k}e_{kj}^- s_{kj}^{-1} } \prod_{\substack{j=1,...,N, \\ j = s_j}} \bracs{ -\sum_{j\con l}c_{jl}s_{jl}^{-1} + \omega\alpha_j }, \labelthis\label{eq:PropProof-ProductLabel}
 \end{align*}
 so that 
 \begin{align*}
 	\det\mathfrak{M} &= \sum_{s\in S_\graph} \mathrm{sgn}(s) \bracs{ \omega H^{(2)} }^N  C(s)
 \end{align*}
-We refer to the product over $j\neq s_j$ as the ``connection product" and the product over $j=s_j$ as the ``diagonal product".
+We refer to the product over $j\neq s_j$ in \eqref{eq:PropProof-ProductLabel} as the ``connection product" and the product over $j=s_j$ as the ``diagonal product".
 
 The following result can be shown to hold, concerning the number of occurrences of the terms $s_{jk}$ in $C(s)$.
 \begin{lemma} \label{lem:DetFormProofLemmaLess3}
