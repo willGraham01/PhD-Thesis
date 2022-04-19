@@ -57,9 +57,15 @@ As mentioned in section \ref{sec:Intro-Maxwell}, the space $D_{\mathcal{A}}$ con
 This allows us to order the eigenvalues $\lambda_i\bracs{\qm}$ of $\mathcal{A}_{\qm}$ in ascending order, and when viewed as functions of $\qm$, these $\lambda_i$ are called \emph{dispersion branches}, or individual branches of the \emph{dispersion relations}.
 They are also continuous in $\qm$, and thus allow the spectrum of the original operator $\mathcal{A}$ to be written as
 \begin{align*}
-	\sigma\bracs{\mathcal{A}} &= \bigcup_{i\in\naturals}\sqbracs{ \min_{\qm}\lambda_j, \max_{\qm}\lambda_j },
+	\sigma\bracs{\mathcal{A}} &= \bigcup_{i\in\naturals}\sqbracs{ \min_{\qm}\lambda_i, \max_{\qm}\lambda_i },
 \end{align*}
-where the interval $\sqbracs{ \min_{\qm}\lambda_j, \max_{\qm}\lambda_j }$ is labelled as the $j^{\text{th}}$ spectral band of $\mathcal{A}$.
+where the interval $\sqbracs{ \min_{\qm}\lambda_i, \max_{\qm}\lambda_i }$ is labelled as the $i^{\text{th}}$ spectral band of $\mathcal{A}$.
+With the dispersion branches being continuous functions of $\qm$, we also have the important result that if $B^*$ is a dense subset of $B$,
+\begin{align} \label{eq:TP-DenseQMSubsetSuffices}
+	\sigma\bracs{\mathcal{A}} &= \bigcup_{i\in\naturals}\overline{\lambda_i\bracs{B^*}}
+	= \overline{\bigcup_{\qm\in B^*}\sigma\bracs{\mathcal{A}_{\qm}}}.
+\end{align}
+This is to say, not all values of the quasi-momentum have to be considered when computing the spectrum of the original operator $\mathcal{A}$ \tstk{kuchment review paper, page 223}, which is something that we shall exploit in our discussion in section \ref{ssec:ApproachConsiderations}.
 
 The Gelfand transform will be an incredibly useful tool for us in our analysis of variational problems on periodic, singular structures.
 As such we introduce some shorthand for the ``$\qm$-shifted" gradient operator that the transform introduces, in $\reals^2$ we denote

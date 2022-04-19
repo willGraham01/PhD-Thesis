@@ -128,6 +128,7 @@ The connectivity of $\graph$ is introduced through proper definition of the (dom
 Differential operators on metric graphs are defined by specifying their domain and action on each edge of the graph.
 A well-posed problem on a graph requires specifying boundary conditions at the vertices (also referred to as \emph{vertex conditions}), which are identified with the end-points of the corresponding edges $I_{jk}$ as discussed in section \ref{ssec:QG-FunctionSpaces}.
 A \emph{quantum graph} is then simply a metric graph equipped with such a differential operator.
+We have already introduced the notion of a band gap spectrum for a periodic differential operatorin sections \ref{sec:Intro-Maxwell} and \ref{sec:TP-GelfandTransform} --- it is known that periodic quantum graph problems possess similar band gap structures \cite[Chapter 4.3]{berkolaiko2013introduction}.
 
 There are a variety of choices one can make for the vertex conditions, and we will be interested in imposing continuity of the solution at each vertex and a Robin-like condition on the derivatives of the solution, also known as a ``$\delta-$type" condition \cite{berkolaiko2013introduction, albeverio2012solvable}.
 By way of example, let us demonstrate how the Laplacian $-\laplacian$ is defined on an embedded graph $\graph$.
@@ -206,9 +207,9 @@ A consequence of this decision will be that upon specifying our operator $\mathc
 For example, there may be dependencies on the angle between the edges and the co-ordinate axes (which is not unexpected given how the constants $\qm_{jk}$ in \eqref{eq:3DQGFullSystem} are derived, see section \ref{sec:3DSystemDerivation} or appendix \ref{app:3dMuAnalysis} for details), and if $\mathcal{A}_{\qm}$ contains such dependencies, so too will the resulting family of $M$-matrices.
 That is, the $M$-matrix for each member of the family will depend on the spectral parameter $z$, the quasi-momentum $\qm$, and a number of geometric quantities arising from the embedding --- meaning that the spectrum of each $\mathcal{A}_{\qm}$ will inherit these dependencies from the embedding.
 Of course, the union of $\sigma\bracs{\mathcal{A}_{\qm}}$ over the quasi-momentum $\qm$ will yield the spectrum of the original operator on $\graph$.
-By choosing a different embedding, one could obtain a different set of fibres $\widetilde{\mathcal{A}}_{\qm}$ (and $M$-matrices), where in general $\sigma\bracs{\mathcal{A}_{\qm}} \neq \widetilde{\mathcal{A}}_{\qm}$, but the unions over the quasi-momentum still coinciding (with $\sigma{\mathcal{A}}$),
+By choosing a different embedding, one could obtain a different set of fibres $\widetilde{\mathcal{A}}_{\qm}$ (and $M$-matrices), where in general $\sigma\bracs{\mathcal{A}_{\qm}} \neq \widetilde{\mathcal{A}}_{\qm}$, but the unions over the quasi-momentum still coinciding (with $\sigma\bracs{\mathcal{A}}$),
 \begin{align*}
-	\bigcup_{\qm\in B} \sigma\bracs{\mathcal{A}_{\qm}} &= \bigcup_{\qm\in B} \widetilde{\mathcal{A}}_{\qm} = \sigma{\mathcal{A}}.
+	\bigcup_{\qm\in B} \sigma\bracs{\mathcal{A}_{\qm}} &= \bigcup_{\qm\in B} \sigma\bracs{\widetilde{\mathcal{A}}_{\qm}} = \sigma\bracs{\mathcal{A}}.
 \end{align*}
 Again, we highlight that one such way to circumnavigate this issue would be to adopt the definition of periodicity for a quantum (or metric) graph $\tilde{\graph}$ without prescribing an embedding, as is done in \cite[Chapter~4]{berkolaiko2013introduction}.
 Since the graph $\tilde{\graph}$ prescribes a notion of length and derivative, its $M$-matrix can then also be defined and computed, and analysed to obtain the spectrum --- potentially in a manner involving an abstract version of the Gelfand transform.
