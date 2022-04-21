@@ -1,7 +1,7 @@
 \section{Derivation of quantum graph problem} \label{sec:ScalarDerivation}
 In this section we provide an overview of a system of the form \eqref{eq:SingularWaveEqnQGProblem} is obtained from \eqref{eq:SingularScalarWaveEqn}, which will setup our discussion revolving around the methods we employ for solving \eqref{eq:SingularWaveEqnQGProblem} in section \ref{sec:ScalarDiscussion}.
 However, before doing so we provide the reader with an intuitive understanding, stemming from the analysis of section \ref{sec:3DGradSobSpaces}, of the space $\tgradSob{\ddom}{\dddmes}$.
-Upon deriving the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem}, we will elaborate its link to our variational problem in the context of Strauss extensions, setting up our discussion in \tstk{chapter conclusion!} and work in chapters \ref{ch:CurlCurl} and \ref{ch:SingInc}.
+Upon deriving the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem}, we will elaborate its link to our variational problem in the context of Strauss extensions, setting up our discussion in section \ref{ssec:GRandSELinks} and work in chapters \ref{ch:CurlCurl} and \ref{ch:SingInc}.
 
 \input{./Chapters/Scalar-System/Scalar-GradientGeometricInterpretation}
 
@@ -62,9 +62,10 @@ The result of theorem \ref{thm:dddmesTangGradImplication} tells us that function
 \end{subequations}
 where we henceforth drop the overhead tilde notation and simply write $u^{(jk)}$ for brevity (appealing to the obvious association between $u^{(jk)}$ and $\tilde{u}^{(jk)}$).
 As will be made clear in the discussion that follows, the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem} is much easier to handle both analytically and numerically thanks to the utility of the $M$-matrix.
+\tstk{note: limits in alpha going to 0, infinity, or finite encompass each of the EP/KZ cases!}
 
 \subsection{Link to Generalised Resolvents and Strauss Extensions} \label{ssec:GRandSELinks}
-\tstk{whooooooooooo fun times now - in all seriousness, this might be better placed in the singular inclusions chapter.}
+\tstk{This might be better placed in the singular inclusions chapter, although the narrative of the work probably necessitates that it be discussed now}
 %\tstk{spectral param in BCs discussion comes here --- these sections might need to be re-referenced. Also, Kuchment-Zeng and Exner-Post touch on this association somewhat}
 %One will note that only $\alpha_j$ appears in the Robin-like condition in \eqref{eq:GraphLaplacianExample}, but $\alpha_j\bracs{\omega^2-\wavenumber^2}$ is present on the right hand side of \eqref{eq:3DQGDerivCondition}.
 %\tstk{here we have to talk about Gen. Resolvents --- what to say?}
