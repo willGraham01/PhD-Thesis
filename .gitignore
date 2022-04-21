@@ -26,6 +26,7 @@
 *__pycache__/
 *.npz
 *.xcf
+*.ipynb_checkpoints/
 
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
