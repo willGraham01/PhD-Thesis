@@ -55,14 +55,32 @@ One should note the presence of $\omega^2$ in this equation, so this is not a st
 The result of theorem \ref{thm:dddmesTangGradImplication} tells us that functions $u\in\gradSobQM{\ddom}{\dddmes}$ are also continuous at each vertex $v_j$, and thus the following problem (precisely \eqref{eq:SingularWaveEqnQGProblem}) has been derived:
 \begin{subequations}
 	\begin{align*}
-		-\bracs{\diff{}{y} + \rmi\qm_{jk}}^2 u^{(jk)} &= \omega^2 u^{(jk)}, \quad &y\in\interval{I_{jk}}, \ \forall I_{jk}\in\edgeSet, \\
-		u \text{ is continuous at } & v_j, \quad &\forall v_j\in\vertSet,  \\
-		\sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}u^{(jk)}\bracs{v_j} &= \omega^2\alpha_j u\bracs{v_j}, \quad &\forall v_j\in\vertSet,
+		-\bracs{\diff{}{y} + \rmi\qm_{jk}}^2 u^{(jk)} &= \omega^2 u^{(jk)}, \quad &y\in\interval{I_{jk}}, \ \forall I_{jk}\in\edgeSet, \tag{\eqref{eq:SingularWaveEqnQGProblem-1} restated} \\
+		u \text{ is continuous at } & v_j, \quad &\forall v_j\in\vertSet,  \tag{\eqref{eq:SingularWaveEqnQGProblem-2} restated} \\
+		\sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}u^{(jk)}\bracs{v_j} &= \omega^2\alpha_j u\bracs{v_j}, \quad &\forall v_j\in\vertSet, \tag{\eqref{eq:SingularWaveEqnQGProblem-3} restated}
 	\end{align*}
 \end{subequations}
 where we henceforth drop the overhead tilde notation and simply write $u^{(jk)}$ for brevity (appealing to the obvious association between $u^{(jk)}$ and $\tilde{u}^{(jk)}$).
 As will be made clear in the discussion that follows, the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem} is much easier to handle both analytically and numerically thanks to the utility of the $M$-matrix.
-\tstk{note: limits in alpha going to 0, infinity, or finite encompass each of the EP/KZ cases!}
+
+Now that we have obtained the system \eqref{eq:SingularWaveEqnQGProblem}, we can affirm our interpretation of the coupling constants $\alpha_j$ as the (limit of the) ratio of vertex volume $V_{\mathrm{vertex}}$ to edge volume $V_{\mathrm{edge}}$ that was described in section \ref{ssec:Intro-ThinStructures}.
+As can clearly be seen from \eqref{eq:SingularWaveEqnQGProblem-3}, when $\alpha_j$ is non-zero and finite, we obtain a non-classical Kirchoff conditions between the incoming (normal) derivatives into the vertex $v_j$.
+This is precisely the boundary condition we would obtain in the limiting problem for the corresponding thickened graph, provided the ratio $\frac{V_{\mathrm{vertex}}}{V_{\mathrm{edge}}}\rightarrow\alpha_j$ as the thickness of the graph tended to zero.
+Moreover, notice that if $\alpha_j=0$ in \eqref{eq:SingularWaveEqnQGProblem-3}, we obtain an exact Kirchoff condition at the vertex $v_j$, along with continuity of the incoming edge functions --- precisely the case when $V_{\mathrm{vertex}}\ll V_{\mathrm{edge}}$.
+Finally, if one divides through by $\alpha_j$ in \eqref{eq:SingularWaveEqnQGProblem-3} and takes a formal limit as $\alpha_j\rightarrow\infty$, the resulting system imposes homogeneous Dirichlet boundary conditions on the solution $u$ at $v_j$ --- corresponding to the conditions obtained in the limiting case $V_{\mathrm{vertex}}\gg V_{\mathrm{edge}}$.
+Armed with this interpretation, our consideration of singular measures also allows us to predict the limiting problems for ``non-uniform" thickened graphs.
+By this we mean a thickened graph $\mathcal{G}_{\delta}$ of $\graph$, where $V_{\mathrm{edge}}\bracs{\delta}$ is the same for every (thickened) edge, yet the volume of the thickened vertices $V_{v_j}\bracs{\delta}, v_j\in\vertSet$ changes between vertices.
+Letting $\alpha_j = \lim_{\delta\rightarrow0}\frac{V_{v_j}}{V_{\mathrm{edge}}}$ (where we formally allow $\alpha_j=\infty$) for each $v_j$, our consideration of singular measures and the variational problem \eqref{eq:SingularScalarWaveEqn} predicts that the resulting system will be realisable as the following quantum graph problem:
+\begin{subequations}
+	\begin{align*}
+		-\bracs{\diff{}{y} + \rmi\qm_{jk}}^2 u^{(jk)} &= \omega^2 u^{(jk)}, \quad &y\in\interval{I_{jk}}, \ \forall I_{jk}\in\edgeSet, \\
+		u \text{ is continuous at } & v_j, \quad &\forall v_j\in\vertSet, \\
+		\sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}u^{(jk)}\bracs{v_j} &= \omega^2\alpha_j u\bracs{v_j}, \quad &\forall v_j\in\vertSet, \ \alpha_j\in\bracs{0,\infty}, \\
+		\sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}u^{(jk)}\bracs{v_j} &= 0, \quad &\forall v_j\in\vertSet, \ \alpha_j = 0, \\
+		u\bracs{v_j} &= 0, \quad &\forall v_j\in\vertSet, \ \alpha_j = \infty.
+	\end{align*}
+\end{subequations}
+We also remark that, for a graph with $\alpha_j<\infty$ for every $v_j$, our approach via the $M$-matrix (section \ref{sec:ScalarDiscussion}) for determining the spectrum of the above problem remains valid.
 
 \subsection{Link to Generalised Resolvents and Strauss Extensions} \label{ssec:GRandSELinks}
 \tstk{This might be better placed in the singular inclusions chapter, although the narrative of the work probably necessitates that it be discussed now}
