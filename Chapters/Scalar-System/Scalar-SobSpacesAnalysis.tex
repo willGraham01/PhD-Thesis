@@ -322,15 +322,22 @@ The reason for observing that the collection $B_{\massMes}$ is a basis of $\pltw
 
 Given that the measure $\dddmes = \ddmes + \massMes$, propositions \ref{prop:3DGradZeroChar} and \ref{prop:NuGradZeroChar} allow us to understand $\gradZero{\ddom}{\dddmes}$.
 Intuitively, $\gradZero{\ddom}{\dddmes}$ is made up of linear combinations of gradients of zero with respect to $\ddmes$ and $\massMes$, although we will qualify this statement since the functions (or rather, equivalence classes of functions) that live in $\gradZero{\ddom}{\ddmes}$ and $\gradZero{\ddom}{\massMes}$ are defined on different parts of $\graph$.
-\tstk{$g_{\mu}$ and similar for $\massMes$ are still in the wrong spaces though... think about the phrasing of this statement of this theorem a bit more}
 \begin{theorem}[``Characterisation" of $\gradZero{\ddom}{\dddmes}$] \label{thm:3DdddmesCharGradZero}
-	Let $\tilde{g}\in\pltwo{\ddom}{\dddmes}^3$ and define
+	Let $\tilde{g}\in\pltwo{\ddom}{\dddmes}^3$ where
 	\begin{align*}
-		g_\mu(x) = \begin{cases} \tilde{g}(x) & x\neq v_j, \ \forall v_j\in\vertSet, \\ 0 & x=v_j, \ v_j\in\vertSet, \end{cases}
-		\qquad
-		g_\massMes(x) = \begin{cases} 0 & x\neq v_j, \ \forall v_j\in\vertSet, \\ \tilde{g}\bracs{v_j} & x=v_j, \ v_j\in\vertSet, \end{cases}
+		\tilde{g} = 
+		\begin{cases} 
+			g_{\ddmes}(x) & x\neq v_j, \ \forall v_j\in\vertSet, \\
+			g_{\massMes}(x) & x=v_j, \ v_j\in\vertSet.
+		\end{cases}
 	\end{align*}
-	so $\tilde{g} = g_\mu + g_\massMes$ (in $\pltwo{\ddom}{\dddmes}^3$).
+%	and define
+%	\begin{align*}
+%		g_\ddmes(x) = \begin{cases} \tilde{g}(x) & x\neq v_j, \ \forall v_j\in\vertSet, \\ 0 & x=v_j, \ v_j\in\vertSet, \end{cases}
+%		\qquad
+%		g_\massMes(x) = \begin{cases} 0 & x\neq v_j, \ \forall v_j\in\vertSet, \\ \tilde{g}\bracs{v_j} & x=v_j, \ v_j\in\vertSet, \end{cases}
+%	\end{align*}
+%	so $\tilde{g} = g_\ddmes + g_\massMes$ (in $\pltwo{\ddom}{\dddmes}^3$).
 	Then
 	\begin{align*}
 		\tilde{g}\in\gradZero{\ddom}{\dddmes} \quad\Leftrightarrow\quad
@@ -342,19 +349,19 @@ Intuitively, $\gradZero{\ddom}{\dddmes}$ is made up of linear combinations of gr
 	\begin{align*}
 		\norm{\cdot}_{\ltwo{\ddom}{\dddmes}^3}^2 &= \norm{\cdot}_{\ltwo{\ddom}{\ddmes}^3}^2 + \norm{\cdot}_{\ltwo{\ddom}{\massMes}^3}^2,
 	\end{align*}
-	so any approximating sequence for $\tilde{g}$ also converges to $g_\mu$ in $\ltwo{\ddom}{\ddmes}^3$ and $g_\massMes$ in $\ltwo{\ddom}{\massMes}^3$.
+	so any approximating sequence for $\tilde{g}$ also converges to $g_\ddmes$ in $\ltwo{\ddom}{\ddmes}^3$ and $g_\massMes$ in $\ltwo{\ddom}{\massMes}^3$.
 	
-	$\bracs{\Leftarrow}$ For the left-directed implication, it will be sufficient for us to show the result holds when $g_\mu=0$ and then for when $g_\massMes=0$, since we can use linearity of $\gradZero{\ddom}{\dddmes}$ to then complete the proof.
+	$\bracs{\Leftarrow}$ For the left-directed implication, it will be sufficient for us to show the result holds when $g_\ddmes=0$ and then for when $g_\massMes=0$, since we can use linearity of $\gradZero{\ddom}{\dddmes}$ to complete the proof.
 	With this in mind, notice that the Extension lemma \ref{lem:3DExtensionLemmaGrads} and proposition \ref{prop:3DBSubsetGradZero} deal with the case $g_\massMes=0$, demonstrating that $\tilde{g}\in\gradZero{\ddom}{\dddmes}$.
-	For the case when $g_\mu=0$, we can again take without loss of generality $g_\massMes$ to be non-zero at exactly one vertex $v_j\in\vertSet$ (as again, we can then use linearity of $\gradZero{\ddom}{\dddmes}$).
-	Let this be the case, so $g_\mu=0$ and $g_\massMes=0$ except at the vertex $v=\bracs{v_1,v_2}^\top\in\vertSet$, where $g_\massMes(v) =: g = \bracs{g_1,g_2,0}^\top$.
+	For the case when $g_\ddmes=0$, we can again take without loss of generality $g_\massMes$ to be non-zero at exactly one vertex $v_j\in\vertSet$ (as again, we can then use linearity of $\gradZero{\ddom}{\dddmes}$).
+	Let this be the case, so $g_\ddmes=0$ and $g_\massMes=0$ except at the vertex $v=\bracs{v_1,v_2}^\top\in\vertSet$, where $g_\massMes(v) =: g = \bracs{g_1,g_2,0}^\top$.
 	Consider smooth functions $\phi_n$ for each $n\in\naturals$ where
 	\begin{align*}
 		\phi_n(x) &= \bracs{x_1-v_1}g_1 + \bracs{x_2-v_2}g_2, &\text{when } \abs{x-v}\leq\recip{n}, \\
 		\phi_n(x) &= 0, &\text{when } \abs{x-v}\geq\frac{2}{n}.
 	\end{align*}
 	Note that $\phi_n(v)=0$ and $\grad\phi_n(v)=g$ for every $n\in\naturals$.
-	Since $\abs{\phi_n(x)}\leq\recip{n}\abs{g_\massMes(v)}$ when $\abs{x-v}=\recip{n}$, we can also chose $\phi_n$ so that there exists a constant $c$ independent of $n$ such that $\abs{\grad\phi_n(x)}\leq c\abs{g_\massMes(v)}$ whenever $\recip{n}\leq\abs{x-v}\leq\frac{2}{n}$.
+	Since $\abs{\phi_n(x)}\leq\recip{n}\abs{g_\massMes(v)}$ when $\abs{x-v}\leq\recip{n}$, we can also chose $\phi_n$ so that there exists a constant $c$ independent of $n$ such that $\abs{\grad\phi_n(x)}\leq c\abs{g_\massMes(v)}$ whenever $\recip{n}\leq\abs{x-v}\leq\frac{2}{n}$.
 	Then
 	\begin{align*}
 		\integral{\ddom}{ \abs{\phi_n}^2 }{\dddmes}
