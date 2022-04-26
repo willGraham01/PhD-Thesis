@@ -54,7 +54,7 @@ Our next objective is to prove the following result:
 That is to say, the tangential gradient $\ktgrad_{\dddmes}u$ inherits the behaviour of the tangential gradients of $u$ on the edges and at the vertices.
 Due to the lengthy nature of some of the arguments involved, we will present the proof of theorem \ref{thm:CharOfSobSpaces} in a series of separate results.
 The main complexity coming in the proof of theorem \ref{thm:CharOfSobSpaces}(i), for reasons we will elaborate on shortly.
-We also highlight that a result analogous to theorem \ref{thm:CharOfSobSpaces} is claimed without proof in \tstk{Zhikov2004 paper}, with the reader being redirected to another result in the same work for an idea of the argument required --- however there are problems with this analogous argument, which we will discuss at the time.
+We also highlight that a result analogous to theorem \ref{thm:CharOfSobSpaces} is claimed without proof in \cite{zhikov2002homogenization}, with the reader being redirected to another result in the same work for an idea of the argument required --- however there are problems with this analogous argument, which we will discuss at the time.
 First we shall prove the easiest of the implications, the right-directed implication in theorem \ref{thm:CharOfSobSpaces}(ii).
 \begin{theorem} \label{thm:dddmesTangGradImplication}
 	Let $\bracs{u,\ktgrad_{\dddmes}u}\in\ktgradSob{\ddom}{\dddmes}$.
@@ -87,18 +87,18 @@ First we shall prove the easiest of the implications, the right-directed implica
 \end{proof}
 
 \tstk{look over this and review the discussion}
-Our focus now will be on the proof of theorem \ref{thm:CharOfSobSpaces}(i), and it is at this point we should address the result claimed in \tstk{Zhikov 2004 ref}.
-This work provides a statement of the result in theorem \ref{thm:CharOfSobSpaces}(i), in the absence of $\qm$ and $\wavenumber$, however neglects to provide an explicit proof, instead referring the reader to an analogous result in \tstk{Zhikov 2004, lemma 6.1}.
-The argument in this lemma depends on the result \tstk{Zhikov 2004, prop 5.5} which is presented without proof, and when rephrased into our context reads as follows:
-\begin{prop}[\tstk{Zhikov, 2004}] \label{prop:Zhikov5-5}
+Our focus now will be on the proof of theorem \ref{thm:CharOfSobSpaces}(i), and it is at this point we should address the result claimed in \cite{zhikov2002homogenization}.
+This work provides a statement of the result in theorem \ref{thm:CharOfSobSpaces}(i), in the absence of $\qm$ and $\wavenumber$, however neglects to provide an explicit proof, instead referring the reader to an analogous result in \cite[lemma 6.1]{zhikov2002homogenization} which depends on the result \cite[proposition 5.5]{zhikov2002homogenization} which is presented without proof.
+When rephrased into our context, this proposition reads as follows:
+\begin{prop}[Analogous to Zhikov, 2002] \label{prop:Zhikov5-5}
 	Suppose that $u_n\in\gradSob{\ddom}{\ddmes}$ is a sequence such that
 	\begin{enumerate}[(i)]
 		\item $u_n$ converges weakly in $\ltwo{\ddom}{\ddmes}$ to $u$.
-		\item The tangential gradients $\grad_{\ddmes}u$ are bounded in $\ltwo{\ddom}{\ddmes}^2$.
+		\item The tangential gradients $\grad_{\ddmes}u_n$ are bounded in $\ltwo{\ddom}{\ddmes}^2$.
 	\end{enumerate}
 	Then $u\in\gradSob{\ddom}{\ddmes}$.
 \end{prop}
-Proposition \ref{prop:Zhikov5-5} is familiar when one replaces $\ddmes$ with the usual Lebesgue measure $\lambda_2$: the result in this case being a result of the compactness of the embedding of $H^1$ into $L^2$, plus an appeal to the definition of the weak derivative and then the use of the Meyers-Serrin theorem \tstk{should I get a reference for this?} to conclude that there is a sequence of smooth functions converging strongly to $u$ and its (tangential) gradient.
+Proposition \ref{prop:Zhikov5-5} is familiar when one replaces $\ddmes$ with the usual Lebesgue measure $\lambda_2$: the result in this case being a consequence of the compactness of the embedding of $H^1$ into $L^2$, plus an appeal to the definition of the weak derivative and then the use of the Meyers-Serrin theorem to conclude that there is a sequence of smooth functions converging strongly to $u$ and its (tangential) gradient.
 However when the Lebesgue measure is replaced with a general measure $\ddmes$, the hypotheses of proposition \ref{prop:Zhikov5-5} are too weak for the conclusion, due to the lack of an analogue for the Meyers-Serrin theorem and definition of a ``weak" $\ddmes$-derivative.
 Even if one establishes an appropriate ``weak" definition for the $\ddmes$-derivative, using the notion of integration against test functions and the ``integration by parts" formula holding, we still do not have coincidence of such ``weak" derivatives with the definition of $\grad_{\ddmes}u$ as defined in \tstk{theory chapter}.
 
