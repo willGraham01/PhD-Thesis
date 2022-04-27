@@ -86,21 +86,29 @@ First we shall prove the easiest of the implications, the right-directed implica
 	Thus, $\ktgrad_{\dddmes}u$ coincides with $\ktgrad_{\ddmes}u$ on the edges, and $\ktgrad_{\massMes}u$ at the vertices, and we are done.
 \end{proof}
 
-\tstk{look over this and review the discussion}
 Our focus now will be on the proof of theorem \ref{thm:CharOfSobSpaces}(i), and it is at this point we should address the result claimed in \cite{zhikov2002homogenization}.
-This work provides a statement of the result in theorem \ref{thm:CharOfSobSpaces}(i), in the absence of $\qm$ and $\wavenumber$, however neglects to provide an explicit proof, instead referring the reader to an analogous result in \cite[lemma 6.1]{zhikov2002homogenization} which depends on the result \cite[proposition 5.5]{zhikov2002homogenization} which is presented without proof.
+The primary concern of this study is the homogenisation problem for the equations of elasticity on singular structures.
+As such, although the statement of the result in theorem \ref{thm:CharOfSobSpaces}(i) (in the absence of $\qm$ and $\wavenumber$), the study does not provide an explicit proof, instead referring the reader to an analogous result \cite[lemma 6.1]{zhikov2002homogenization} in the aforementioned context of elasticity.
+This result (\cite[lemma 6.1]{zhikov2002homogenization}) further depends on the result \cite[proposition 5.5]{zhikov2002homogenization}, which is presented without proof.
 When rephrased into our context, this proposition reads as follows:
 \begin{prop}[Analogous to Zhikov, 2002] \label{prop:Zhikov5-5}
 	Suppose that $u_n\in\gradSob{\ddom}{\ddmes}$ is a sequence such that
 	\begin{enumerate}[(i)]
-		\item $u_n$ converges weakly in $\ltwo{\ddom}{\ddmes}$ to $u$.
-		\item The tangential gradients $\grad_{\ddmes}u_n$ are bounded in $\ltwo{\ddom}{\ddmes}^2$.
+		\item $u_n$ converges weakly in $\pltwo{\ddom}{\ddmes}$ to $u$.
+		\item The tangential gradients $\grad_{\ddmes}u_n$ are bounded in $\pltwo{\ddom}{\ddmes}^2$.
 	\end{enumerate}
 	Then $u\in\gradSob{\ddom}{\ddmes}$.
 \end{prop}
-Proposition \ref{prop:Zhikov5-5} is familiar when one replaces $\ddmes$ with the usual Lebesgue measure $\lambda_2$: the result in this case being a consequence of the compactness of the embedding of $H^1$ into $L^2$, plus an appeal to the definition of the weak derivative and then the use of the Meyers-Serrin theorem to conclude that there is a sequence of smooth functions converging strongly to $u$ and its (tangential) gradient.
-However when the Lebesgue measure is replaced with a general measure $\ddmes$, the hypotheses of proposition \ref{prop:Zhikov5-5} are too weak for the conclusion, due to the lack of an analogue for the Meyers-Serrin theorem and definition of a ``weak" $\ddmes$-derivative.
-Even if one establishes an appropriate ``weak" definition for the $\ddmes$-derivative, using the notion of integration against test functions and the ``integration by parts" formula holding, we still do not have coincidence of such ``weak" derivatives with the definition of $\grad_{\ddmes}u$ as defined in \tstk{theory chapter}.
+Proposition \ref{prop:Zhikov5-5} is familiar when one replaces $\ddmes$ with the usual Lebesgue measure $\lambda_2$: the result in this case being a consequence of the compactness of the embedding of $H^1$ into $L^2$, plus an appeal to the definition of the weak derivative to deduce that the function $u$ also possesses a weak derivative in $L^2$.
+When $\ddmes$ is the Lebesgue measure, we can then conclude that $u$ and its gradient are therefore also approximated by smooth functions in the Sobolev norm, using the Meyers-Serrin ``$H=W$`` theorem.
+Note however, that for a general measure $\ddmes$ we do \emph{not} define the tangential gradient in the analogous ``weak" (or $W^{m,p}$-sense), we \emph{only} understand $\grad_{\ddmes}u$ through its approximation by smooth functions.
+Consequentially, the hypotheses of proposition \ref{prop:Zhikov5-5} are too weak for the conclusion, due to the aforementioned issues --- one can certainly establish that $u_n$ and $\grad_{\ddmes}u_n$ converge \emph{weakly} along a subsequence, however without Meyers-Serrin this does not establish the existence of smooth approximating functions for the weak limits.
+A thorough investigation into the matter would need to establish an appropriate ``weak" definition for the $\ddmes$-derivative, determine uniqueness results for the weak derivatives akin to our knowledge of gradients of zero, and from there derive an analogy of the Meyers-Serrin theorem, if possible.
+Again we remark that establishing such a weak definition is non trivial, as the motivation for such definitions in the classical (Lebesgue) setting is through imposing that the ``integration by parts" formula holds when testing against smooth functions, and integration by parts does not hold for a general measure $\ddmes$. \tstk{link to the partial IBP theorem if we include it?}
+In any event, proposition \ref{prop:Zhikov5-5} is not to be believed without concrete justification, although the result \cite[lemma 6.1]{zhikov2002homogenization} can likely be salvaged using the style of argument that we employ.
+Our argument centres around establishing that there is a sequence of smooth functions $\varphi_n$ converging \emph{strongly} to $u$ in $\ltwo{\ddom}{\ddmes}$, with $\ktgrad\varphi_n$ bounded in $\ltwo{\ddom}{\ddmes}^3$ \emph{but also convergent} in $L^1\bracs{\ddom,\md\ddmes}^3$.
+This allows us to extract a subsequence converging pointwise almost everywhere, pass to this subsequence and confirm membership of $u\in\ktgradSob{\ddom}{\ddmes}$.
+Indeed, the argument employed by \cite[lemma 6.1]{zhikov2002homogenization} already goes some way to establishing such an appropriate sequence --- although one needs to smooth functions to replace $u_n$, and to carefully construct an approximating sequence that does indeed converge in $L^1$.
 
 We begin with the proof of the right-directed implication of theorem \ref{thm:CharOfSobSpaces}(i).
 Our approach is as follows; first we show that (i) and (ii) hold by appealing to an approximating sequence and using proposition \ref{prop:3DGradZeroChar}.
