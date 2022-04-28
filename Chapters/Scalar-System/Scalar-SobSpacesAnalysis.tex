@@ -14,9 +14,9 @@ In practice of course, the space $\tgradSob{\ddom}{\dddmes}$ was studied first, 
 As promised, we begin with an examination of gradients of zero.
 \tstk{need $L^2$ periodic and smooth, periodic functions here!}
 
-\subsection{Gradients of Zero} \label{ssec:muGradZero}
+\subsection{Gradients of Zero} \label{ssec:GradZero}
 In this section we will characterise gradients of zero with respect to the measures $\ddmes, \massMes$, and $\dddmes$, in that order.
-Throughout, we denote by $\ograd$ the $\ktgrad$ operator with $\kt=\bracs{0,0}$.
+Throughout, we denote by $\ograd$ the $\ktgrad$ operator with $\kt=\bracs{0,0}$. \tstk{SO JUST THE GRADIENT OPERATOR THEN WILL? WHY NOT JUST DROP THE SUPERSCRIPT!?!?!!}
 Given proposition \ref{prop:ZeroInvariantUnderQM-Wavenumber}, without loss of generality we can always take any approximating sequence $\phi_n$ for a gradient of zero $g$ to be such that $\ograd\phi_n\rightarrow g$, as opposed to $\ktgrad\phi_n\rightarrow g$.
 \begin{prop}[Gradients of Zero on a Segment Parallel to the $x_2$-axis] \label{prop:3DGradZeroParallel}
 	Suppose that the edge $I_{jk}$ is parallel to the $x_2$-axis.
@@ -99,7 +99,7 @@ Then define
 	\eta_j^n(x) = \eta_j\bracs{nx},
 \end{align}
 which are both smooth functions by composition.
-The functions $\eta_j^n$ will enable us to extend functions defined on one edge $I_{jk}$ to the whole of $\graph$ without worrying about proximity to the vertex $v_j$.
+The functions $\eta_j^n$ will enable us to extend functions defined on one edge $I_{jk}$ to the whole of $\graph$ without worrying about proximity to the vertex $v_j$ --- although we will normally choose $n\in\naturals$, note that we can in fact take $n$ as any positive real number if the need arises.
 Notice that $\eta_j^n\rightarrow 1 \toInfty{n}$ in $\ltwo{\ddom}{\ddmes}$ since
 \begin{align*}
 	\integral{\ddom}{ \abs{\eta_j^n - 1}^2 }{\ddmes} &\leq

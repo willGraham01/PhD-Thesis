@@ -288,28 +288,28 @@ There is also the compounding issue that without a proper distance to the vertex
 	whenever $x\in J(v_j)$.
 	
 	For each $n\in\naturals$, consider the following partition of unity.
-	We let $\eta_j^n$ be as in \eqref{eq:SmoothEtaDef}, and for each $I_{jk}\in J(v_j)$ let $\zeta_{jk}^n\in\csmooth{\ddom}$ be such that
+	We let $\eta_j^n$ be as in \eqref{eq:SmoothEtaDef}, define $\tau_j^n = 1-\eta_j^n$ and for each $I_{jk}\in J(v_j)$ let $\zeta_{jk}^n\in\csmooth{\ddom}$ be such that
 	\begin{align*}
-		\zeta_{jk}^n + \eta_j^n = 1 \text{ on } I_{jk}, 
+		\zeta_{jk}^n + \tau_j^n = 1 \text{ on } I_{jk}, 
 		\qquad \zeta_{jk}^n = 0 \text{ when } x\not\in I_{jk}.
 	\end{align*}
-	Note that since there exists some constant such that $\abs{\grad\eta_j^n}\leq cn$, we also have that $\abs{\grad\zeta_{jk}^n}\leq cn$ on $I_{jk}$ too.
+	Note that since there exists some constant such that $\abs{\grad\eta_j^n}\leq cn$, we also have that $\abs{\grad\zeta_{jk}^n}\leq cn$ and $\abs{\grad\tau_j^n}\leq cn$ on $I_{jk}$ too.
 	
 	We are now ready to begin the proof.
 	Define 
 	\begin{align*}	
-		\varphi_n = u(v_j)\eta_j^n + \sum_{J(v_j)}\phi^{jk}_n\zeta_{jk}^n\in\csmooth{\ddom}\cap\psmooth{\ddom},
+		\varphi_n = u(v_j)\tau_j^n + \sum_{J(v_j)}\phi^{jk}_n\zeta_{jk}^n\in\csmooth{\ddom}\cap\psmooth{\ddom},
 	\end{align*}
 	so we have that
 	\begin{align*}
 		\ktgrad\varphi_n 
-		&= u(v_j)\ograd\eta_j^n + \rmi u(v_j)\bracs{\qm_1,\qm_2,\wavenumber}^\top\eta_j^n + \sum_{I_{jk}\in J(v_j)}\zeta_{jk}^n\ktgrad\phi_n^{jk} + \phi_n^{jk}\ograd\zeta_{jk}^n.
+		&= u(v_j)\ograd\tau_j^n + \rmi u(v_j)\bracs{\qm_1,\qm_2,\wavenumber}^\top\tau_j^n + \sum_{I_{jk}\in J(v_j)}\zeta_{jk}^n\ktgrad\phi_n^{jk} + \phi_n^{jk}\ograd\zeta_{jk}^n.
 	\end{align*}
 	We can observe that $\varphi_n\lconv{\ltwo{\ddom}{\ddmes}}u$ from the fact that
 	\begin{align*}
 		\integral{\ddom}{ \abs{\varphi - u}^2 }{\ddmes}
-		&= \sum_{I_{jk}\in J(v_j)}\integral{I_{jk}}{ \abs{u(v_j)\eta_j^n + \phi_n^{jk}\zeta_{jk}^n - u}^2 }{\lambda_{jk}} \\
-		&= \sum_{I_{jk}\in J(v_j)}\integral{I_{jk}}{ \abs{\bracs{u(v_j)-u}\eta_j^n + \bracs{\phi_n^{jk}-u}\zeta_{jk}^n}^2 }{\lambda_{jk}} \\
+		&= \sum_{I_{jk}\in J(v_j)}\integral{I_{jk}}{ \abs{u(v_j)\tau_j^n + \phi_n^{jk}\zeta_{jk}^n - u}^2 }{\lambda_{jk}} \\
+		&= \sum_{I_{jk}\in J(v_j)}\integral{I_{jk}}{ \abs{\bracs{u(v_j)-u}\tau_j^n + \bracs{\phi_n^{jk}-u}\zeta_{jk}^n}^2 }{\lambda_{jk}} \\
 		&\leq 2\sum_{I_{jk}\in J(v_j)} \integral{I_{jk}\cap B_{2/n}(v_j)}{ \abs{u(v_j)-u}^2 }{\lambda_{jk}} + \norm{\phi_n^{jk}-u}_{\ltwo{\ddom}{\lambda_{jk}}}^2 \\
 		&\leq 2\sum_{I_{jk}\in J(v_j)} \frac{4\hat{c}^2}{n^2} + \recip{n^4}.
 	\end{align*}
@@ -318,23 +318,23 @@ There is also the compounding issue that without a proper distance to the vertex
 	First we establish that $\norm{\ktgrad\varphi_n-\ktgrad_{\ddmes}u}_{\ltwo{\ddom}{\ddmes}^3}$ is uniformly bounded in $n$, by first noting that on $I_{jk}$,
 	\begin{align*}
 		\abs{\ktgrad\varphi_n - \ktgrad_{\ddmes}u}^2
-		&= \abs{u(v_j)\ograd\eta_j^n + \rmi u(v_j)\begin{pmatrix} \qm_1 \\ \qm_2 \\ \wavenumber \end{pmatrix} \eta_j^n + \zeta_{jk}^n\ktgrad\phi_n^{jk} + \phi_n^{jk}\ograd\zeta_{jk}^n}^2 \\
-		&\leq 4\abs{\bracs{\rmi u(v_j)\begin{pmatrix} \qm_1 \\ \qm_2 \\ \wavenumber \end{pmatrix}-\ktgrad_{\lambda_{jk}}u}\eta_j^n}^2 + 4\abs{\zeta_{jk}^n\bracs{\ktgrad\phi_n^{jk}-\ktgrad_{\lambda_{jk}}u}}^2 \\
-		&\qquad + 2\abs{u(v_j)\ograd\eta_j^n + \phi_n^{jk}\ograd\zeta_{jk}^n}^2.
+		&= \abs{u(v_j)\ograd\tau_j^n + \rmi u(v_j)\begin{pmatrix} \qm_1 \\ \qm_2 \\ \wavenumber \end{pmatrix} \tau_j^n + \zeta_{jk}^n\ktgrad\phi_n^{jk} + \phi_n^{jk}\ograd\zeta_{jk}^n}^2 \\
+		&\leq 4\abs{\bracs{\rmi u(v_j)\begin{pmatrix} \qm_1 \\ \qm_2 \\ \wavenumber \end{pmatrix}-\ktgrad_{\lambda_{jk}}u}\tau_j^n}^2 + 4\abs{\zeta_{jk}^n\bracs{\ktgrad\phi_n^{jk}-\ktgrad_{\lambda_{jk}}u}}^2 \\
+		&\qquad + 2\abs{u(v_j)\ograd\tau_j^n + \phi_n^{jk}\ograd\zeta_{jk}^n}^2.
 	\end{align*}
 	Note that the function $v = \rmi u(v_j)\bracs{\qm_1,\qm_2,\wavenumber}^\top - \ktgrad_{\lambda_{jk}}u\in\ltwo{\ddom}{\ddmes}^3$, and so we have that
 	\begin{align*}
 		\integral{I_{jk}}{ \abs{\ktgrad\varphi_n - \ktgrad_{\ddmes}u}^2 }{\lambda_{jk}}
 		&\leq \frac{4}{n}\norm{v}_{\ltwo{\ddom}{\lambda_{jk}}^3}^2 + 4\norm{\ktgrad\varphi_n 
 		- \ktgrad_{\lambda_{jk}}u}_{\ltwo{\ddom}{\lambda_{jk}}^3}^2 \\
-		&\qquad + 2\integral{I_{jk}}{ \abs{u(v_j)\ograd\eta_j^n + \phi_n^{jk}\ograd\zeta_{jk}^n}^2 }{\lambda_{jk}}.
+		&\qquad + 2\integral{I_{jk}}{ \abs{u(v_j)\ograd\tau_j^n + \phi_n^{jk}\ograd\zeta_{jk}^n}^2 }{\lambda_{jk}}.
 	\end{align*}
 	The first two terms are clearly bounded uniformly in $n$.
-	For the remaining term, we notice that $\ograd\zeta_{jk}^n+\ograd\eta_j^n=0$ on $I_{jk}$, so 
+	For the remaining term, we notice that $\ograd\zeta_{jk}^n+\ograd\tau_j^n=0$ on $I_{jk}$, so 
 	\begin{align*}
-		\integral{I_{jk}}{ \abs{u(v_j)\ograd\eta_j^n + \phi_n^{jk}\ograd\zeta_{jk}^n}^2 }{\lambda_{jk}}
-		&= \integral{I_{jk}}{ \abs{ \bracs{u(v_j)-u} + \bracs{u - \phi_n^{jk}} }^2\abs{ \ograd\eta_j^n }^2 }{\lambda_{jk}} \\
-		&= \integral{I_{jk}\cap B_{2/n}(v_j)}{ \abs{ \bracs{u(v_j)-u} + \bracs{u - \phi_n^{jk}} }^2\abs{ \ograd\eta_j^n }^2 }{\lambda_{jk}} \\
+		\integral{I_{jk}}{ \abs{u(v_j)\ograd\tau_j^n + \phi_n^{jk}\ograd\zeta_{jk}^n}^2 }{\lambda_{jk}}
+		&= \integral{I_{jk}}{ \abs{ \bracs{u(v_j)-u} + \bracs{u - \phi_n^{jk}} }^2\abs{ \ograd\tau_j^n }^2 }{\lambda_{jk}} \\
+		&= \integral{I_{jk}\cap B_{2/n}(v_j)}{ \abs{ \bracs{u(v_j)-u} + \bracs{u - \phi_n^{jk}} }^2\abs{ \ograd\tau_j^n }^2 }{\lambda_{jk}} \\
 		&\leq 2c^2 n^2\integral{I_{jk}\cap B_{2/n}(v_j)}{ \abs{u(v_j)-u}^2 }{\lambda_{jk}} \\
 		&\qquad + 2c^2n^2\norm{u-\phi_n^{jk}}_{\ltwo{\ddom}{\lambda_{jk}}}^2 \\
 		&\leq 2c^2 n^2 \hat{c}^2 \frac{2}{n}\integral{I_{jk}\cap B_{2/n}(v_j)}{}{\lambda_{jk}} + 2c^2 n^{-2} \\
@@ -384,16 +384,16 @@ We are now ready to prove the left-directed implication of theorem \ref{thm:Char
 \end{theorem}
 \begin{proof}
 	Fix $r>0$ such that $r<\recip{3}\min\clbracs{l_{jk} \setVert I_{jk}\in\edgeSet}$.
-	Consider a smooth partition of unity that includes the functions $\eta_j^r$ for each $v_j\in\vertSet$ and $\zeta_{jk}^r$ for each $I_{jk}\in\edgeSet$, where
+	Consider a smooth partition of unity that includes the functions $\tau_j^r := 1-\eta_j^r$ for each $v_j\in\vertSet$ and $\zeta_{jk}^r$ for each $I_{jk}\in\edgeSet$, where
 	\begin{align} \label{eq:LeftDirect-SobChar-PartOfUnity}
-		\zeta_{jk}^r + \eta_j^r + \eta_k^r = 1, \text{on } I_{jk}, 
+		\zeta_{jk}^r + \tau_j^r + \tau_k^r = 1, \text{on } I_{jk}, 
 		\qquad
 		\zeta_{jk}^r = 0, \text{whenever } x\in\graph\setminus I_{jk}.
 	\end{align}
-	The functions $u\eta_j^r$ satisfy the hypothesis of lemma \ref{lem:ExtensionLemmaVertexFunctions} for every $v_j\in\vertSet$, whilst $u_{jk}\zeta_{jk}^r$ satisfy those of lemma \ref{lem:ExtensionLemmaEdgeFunctions}, so are all functions in $\ktgradSob{\ddom}{\ddmes}$ and $\ktgradSob{\ddom}{\dddmes}$.
+	The functions $u\tau_j^r$ satisfy the hypothesis of lemma \ref{lem:ExtensionLemmaVertexFunctions} for every $v_j\in\vertSet$, whilst $u_{jk}\zeta_{jk}^r$ satisfy those of lemma \ref{lem:ExtensionLemmaEdgeFunctions}, so are all functions in $\ktgradSob{\ddom}{\ddmes}$ and $\ktgradSob{\ddom}{\dddmes}$.
 	Given that
 	\begin{align*}
-		u = \bracs{ \sum_{v_j\in\vertSet} \eta_j^r + \sum_{I_{jk}\in\edgeSet} \zeta_{jk}^r }u,
+		u = \bracs{ \sum_{v_j\in\vertSet} \tau_j^r + \sum_{I_{jk}\in\edgeSet} \zeta_{jk}^r }u,
 	\end{align*}
 	linearity of $\ktgradSob{\ddom}{\ddmes}$ and $\ktgradSob{\ddom}{\dddmes}$, along with \eqref{eq:LeftDirect-SobChar-PartOfUnity}, completes the proof.
 \end{proof}
