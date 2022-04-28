@@ -1,0 +1,78 @@
+\documentclass[crop, tikz]{standalone}
+
+\usepackage[utf8]{inputenc}
+% 'crop' is the default for v1.0, before it was 'preview'
+%\usetikzlibrary{...}% tikz package already loaded by 'tikz' option
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{calc}
+
+%hexagon drawing variables
+\def\ly{0.866025} %sin(pi/3) = sqrt(3)/2
+\def\lx{0.5} %cos(pi/3) = 0.5
+\def\hexSize{5} %size of the hexagon that'll be the extent of the fibre cross section
+\def\coreSize{0.2} %size of hollow cores
+\def\coreSep{0.5} %separation between core CENTRES HORIZONTALLY
+\def\coreSepHeight{0.4464} %separation between core CENTRES VERTICALLY
+
+\newcommand{\hexagon}[4]{
+\begin{scope}[shift={#2}]
+	\draw[#3, fill=#4] (-#1*\lx, #1*\ly) -- (#1*\lx, #1*\ly) -- (#1,0) -- (#1*\lx, -#1*\ly) -- (-#1*\lx, -#1*\ly) -- (-#1,0) -- cycle;
+\end{scope}
+} %\hexagon{centre-to-corner-length}{shift (x,y)}{line spec}{fill colour} [none is allowed for fillcolour]
+
+\newcommand\latitude[4]{
+  \draw[#4] (#3:#1) arc (0:-180:{#1*cos(#3)} and {#2*cos(#3)});
+  \draw[dashed, #4] (-#3:-#1) arc (-180:0:{#1*cos(#3)} and {-#2*cos(#3)});
+}
+%draws the line of latitude on the sphere of radius #1, with projected radius #2, at lattitude #3
+%draw options can be passed in #4
+
+\begin{document}
+\def\angle{55}
+\def\r{2}
+\def\latr{0.2}
+\def\marking{\arrow{>>}}
+
+\begin{tikzpicture}[]
+
+% In-plane rotation
+\begin{scope}[shift={(0,0)}]
+	% draw sphere itself
+  	\shade[ball color = black!1!white, draw=black] (0,0,0) circle (2);
+
+	% draw path of point p
+	\begin{scope}[decoration={markings, mark=at position 0.5 with {\marking}}]
+		\latitude{\r}{\latr}{0}{red, very thick, postaction={decorate}}
+	\end{scope}
+	\node[anchor=east, align=center, red] at (-\r,0,0) {$\gamma_p$};
+	% draw point p
+	\filldraw[fill=black, draw=black] (-0.2,-0.2) circle (2pt) node[anchor=north] {$p$};
+
+	% draw curl axis
+	\draw[line width=2, black, ->] (0,0,0) -- (0,\r+1.5,0) node[anchor=south] {$\mathrm{curl}_{\lambda_{jk}}^{(\theta,\kappa)}u \ \| \ \hat{n}_{jk}$};	
+\end{scope}
+
+% Out of plane rotation
+\begin{scope}[shift={(7.5,0)}, rotate=-45]
+	% draw sphere itself
+  	\shade[ball color = black!1!white, draw=black] (0,0,0) circle (2);
+
+	% draw path of the point p through p^*
+	\begin{scope}[decoration={markings, mark=at position 0.5 with {\marking}}]
+		\latitude{\r}{\latr}{0}{red, very thick, postaction={decorate}}
+	\end{scope}
+	\node[anchor=east, align=center, red] at (-\r,0,0) {$\gamma_p$};
+	% draw point p
+	\filldraw[fill=black, draw=black] (-0.2,-0.2) circle (2pt) node[anchor=north east] {$p$};
+	% also mark the point p^*
+	\filldraw[fill=black, draw=black] (0.2,0.2) circle (2pt) node[anchor=south west] {$p^*$};
+
+	% draw curl axis
+	\draw[line width=2, black, ->] (0,0,0) -- (0,\r+1.5,0) node[anchor=south] {$c\in\mathcal{C}_{\Omega, \mathrm{d}\lambda_{jk}}\left(0\right), \ c\perp\hat{n}_{jk}$};	
+\end{scope}
+
+\end{tikzpicture}
+\end{document}
