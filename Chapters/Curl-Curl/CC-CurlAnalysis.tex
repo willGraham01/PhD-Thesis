@@ -1,0 +1,284 @@
+\section{Sobolev Spaces of Functions with Curls} \label{sec:CC-CurlAnalysis}
+In similar vein to section \ref{sec:3DGradSobSpaces}, our focus for this section will be the analysis of curls of zero and tangential curls with respect to the measures $\ddmes$, $\massMes$ and $\dddmes$.
+We will again utilise the thematic approach of the aforementioned section; first looking to understand curls of zero and tangential curls on (planes induced by an) edge $I_{jk}$, then show that we can ``add" such edge functions together to form functions on the whole graph $\graph$.
+
+\subsection{Curls of Zero} \label{ssec:CurlsOfZero}
+Our analysis begins, analogously to how it did in section \ref{ssec:GradZero}, with an examination of $\curlZero{\ddom}{\lambda_{jk}}$.
+\begin{prop} \label{prop:CurlZero-Parallel}
+	Let $I_{jk}$ be an edge in $\ddom$ with $e_{jk} = \widehat{x}_2$.
+	Then
+	\begin{align*}
+		\curlZero{\ddom}{\lambda_{jk}} &= \clbracs{ \bracs{0,c_2,c_3}^\top \setVert c_2,c_3\in\pltwo{\ddom}{\lambda_{jk}} }.
+	\end{align*}
+\end{prop}
+The proof of this result is one particular case of the more general proof that we present for the following corollary, when we no longer assume that the edge $I_{jk}$ is parallel to the $x_2$-axis.
+However we note that for any $c\in\pltwo{\ddom}{\lambda_{jk}}^3$, the function $\bracs{0,c_2,c_3}^{\top}$ is simply the function $c$ with its $\widehat{x}_1$ component removed, and in the setup of proposition \ref{prop:CurlZero-Parallel} $n_{jk} = \widehat{x}_1$.
+\begin{cory}[Curls of Zero on an Edge] \label{cory:CurlZero-Rotated}
+	Let $I_{jk}$ be an edge of $\graph$.
+	Then we have that
+	\begin{align*}
+		\curlZero{\ddom}{\lambda_{jk}} &= \clbracs{ c_{jk}\widehat{e}_{jk} + c_3\widehat{x}_3 \setVert c_{jk},c_3\in\pltwo{\ddom}{\lambda_{jk}} }.
+	\end{align*}
+\end{cory}
+\begin{proof}
+	First, suppose that $c\widehat{n}_{jk}\in\curlZero{\ddom}{\lambda_{jk}}$ and take an approximating sequence $\Phi^n$ for it.
+	This means that we have the following convergences in $\ltwo{\ddom}{\lambda_{jk}}$:
+	\begin{align*}
+		\Phi^n_1 \rightarrow 0, \quad
+		\Phi^n_2 &\rightarrow 0, \quad
+		\Phi^n_3 \rightarrow 0, \\
+		\partial_2\Phi^n_3 - \rmi\wavenumber\Phi^n_2 \rightarrow c n_1^{(jk)} = c e_2^{(jk)}, \quad
+		\partial_1\Phi^n_3 - \rmi\wavenumber\Phi^n_1 &\rightarrow -c n_2^{(jk)} = c e_1^{(jk)}, \quad
+		\partial_1\Phi^n_2 - \partial_2\Phi^n_1 \rightarrow 0.
+	\end{align*}
+	Therefore, we have that
+	\begin{align*}
+		\grad^{(0)}\Phi^n_3 \lconv{\ltwo{\ddom}{\lambda_{jk}}^2} c \widehat{e}_{jk},
+	\end{align*}
+	and $\Phi^n_3\rightarrow 0$ in $\ltwo{\ddom}{\lambda_{jk}}$.
+	As such, $c\widehat{e}_{jk}\in\gradZero{\ddom}{\lambda_{jk}}$, and then proposition \ref{prop:3DGradZeroRotated} implies that $c=0$.
+	
+	Now, let $c\in\psmooth{\ddom}$.
+	Take $\Phi, \Psi\in\csmooth{\ddom}$ which, within some open neighbourhood of $I_{jk}$, have the form
+	\begin{align*}
+		\Phi = \bracs{v_j - x}\cdot n_{jk} c\widehat{x}_3, &\quad
+		\Psi = \bracs{v_j - x}\cdot n_{jk} c\widehat{e}_{jk}.
+	\end{align*}
+	This ensures that both $\Phi$ and $\Psi$ are zero on $I_{jk}$, as for $x\in I_{jk}$ we have that $v_j-x$ is some scalar multiple of $e_{jk}$.
+	Furthermore, we also have that
+	\begin{align*}
+		\curl{}\Phi &= \begin{pmatrix} \bracs{v_j-x}\cdot n_{jk} \partial_2 c - c n_2^{(jk)} \\ -\bracs{v_j-x}\cdot n_{jk} \partial_1 c + c n_1^{(jk)} \\ 0 \end{pmatrix}
+		= \begin{pmatrix} \bracs{v_j-x}\cdot n_{jk} \partial_2 c + c e_1^{(jk)} \\ -\bracs{v_j-x}\cdot n_{jk} \partial_1 c + c e_2^{(jk)} \\ 0 \end{pmatrix}, \\
+		\curl{}\Psi &= \begin{pmatrix} 0 \\ 0 \\ \bracs{\partial_1 c + \partial_2 c}\bracs{x-v_j}\cdot n_{jk} + c\norm{n_{jk}}_2 \end{pmatrix}
+		= \begin{pmatrix} 0 \\ 0 \\ \bracs{\partial_1 c + \partial_2 c}\bracs{x-v_j}\cdot n_{jk} + c \end{pmatrix},
+	\end{align*}
+	so again for $x\in I_{jk}$, we have that
+	\begin{align*}
+		\curl{}\phi = c\widehat{e}_{jk}, \qquad \curl{}\psi = c\widehat{x}_3,
+	\end{align*}
+	whenever $x\in I_{jk}$, and thus $c\widehat{e}_{jk}, c\widehat{x}_3\in\curlZero{\ddom}{\lambda_{jk}}$.
+	Density of $\psmooth{\ddom}$ in $\pltwo{\ddom}{\lambda_{jk}}$ then completes the proof.
+\end{proof}
+
+Corollary \ref{cory:CurlZero-Rotated} provides the backbone for our geometric interpretation of curls of zero and tangential curls, which was given in section \ref{ssec:CC-Geometric}.
+The curls of zero always lie in the plane induced by $I_{jk}$, as vectors within the plane only serve to induce rotations perpendicular to said plane.
+In three dimensions (that is, with the usual Lebesgue measure) we would be able to observe such rotations, however with our limited view (through $\lambda_{jk}$), we cannot.
+As one might expect, the behaviour of curls of zero on $\graph$ can be characterised by the behaviour of in the individual edges, as was the case for gradients of zero and tangential gradients.
+\begin{theorem}[Characterisation of $\curlZero{\ddom}{\ddmes}$] \label{thm:CurlZeroChar}
+	We have that
+	\begin{align*}
+		\curlZero{\ddom}{\ddmes} = \clbracs{ c\in\pltwo{\ddom}{\ddmes}^3 \setVert c\in\curlZero{\ddom}{\lambda_{jk}}, \ \forall I_{jk}\in\edgeSet }.
+	\end{align*}
+\end{theorem}
+For ease, let us denote $C = \clbracs{ c\in\pltwo{\ddom}{\ddmes}^3 \setVert c\in\curlZero{\ddom}{\lambda_{jk}}, \ \forall I_{jk}\in\edgeSet }$, and we note that thanks to corollary \ref{cory:CurlZero-Rotated} we have that
+\begin{align*}
+	C &= \clbracs{ c\in\pltwo{\ddom}{\ddmes} \setVert c\cdot\widehat{n}_{jk}\vert_{I_{jk}}=0, \ \forall I_{jk}\in\edgeSet }.
+\end{align*}
+
+The method of proof proceeds in much the same way as that of proposition \ref{prop:3DGradZeroChar}, the inclusion $\curlZero{\ddom}{\ddmes}\subset C$ is immediate, the reverse direction requires us to deal with the issue of reconciling the different edge-wise curls of zero as we approach the vertices.
+Our first target is the aforementioned easier inclusion:
+\begin{lemma} \label{lem:CurlZeroInC}
+	\begin{align*}
+		\curlZero{\ddom}{\ddmes} \subset C.
+	\end{align*}
+\end{lemma}
+\begin{proof}
+	Let $c\in\curlZero{\ddom}{\ddmes}$, and take an approximating sequence $\Phi^n$.
+	Clearly we have that
+	\begin{align*}
+		\norm{ \Phi^n }_{\ltwo{\ddom}{\lambda_{jk}}^3} &\leq \norm{ \Phi^n }_{\ltwo{\ddom}{\ddmes}^3} \rightarrow 0, \\
+		\norm{ \grad^{(0)}\wedge\Phi^n - c }_{\ltwo{\ddom}{\lambda_{jk}}^3} & \leq \norm{ \grad^{(0)}\wedge\Phi^n - c }_{\ltwo{\ddom}{\ddmes}^3} \rightarrow 0,
+	\end{align*}
+	and so $c\in C$.
+\end{proof}
+
+Next, we require an extension lemma for curls of zero (compare this result with the role of lemma \ref{lem:3DExtensionLemmaGrads} for gradients of zero), and from this we will use closure of $\curlZero{\ddom}{\ddmes}$ to show the inclusion $\curlZero{\ddom}{\ddmes}\supset C$.
+\begin{lemma}[Extension lemma for $\curlZero{\ddom}{\lambda_{jk}}$] \label{lem:CurlZeroExtensionLemma}
+	Let $n\in\naturals$ and $I_{jk}^n$ be as in \eqref{eq:ShortenedEdgeDef}.
+	Suppose that $c\in\curlZero{\ddom}{\lambda_{jk}}$ with $c=0$ on $I_{jk}\setminus I_{jk}^n$.
+	Then
+	\begin{align*}
+		c\in\curlZero{\ddom}{\ddmes}.
+	\end{align*}
+	Furthermore, define $\tilde{c}$ via
+	\begin{align*}
+		\tilde{c} &= \begin{cases} c & x\not\in\vertSet, \\ 0 & x\in\vertSet. \end{cases}
+	\end{align*}
+	Then we also have that $\tilde{c}\in\curlZero{\ddom}{\dddmes}$.
+\end{lemma}
+\begin{proof}
+	Let $\Phi^l$ be an approximating sequence for $c$ as in \eqref{eq:CurlZeroSequenceDef}, and $\chi_{jk}^n$ be the smooth function defined in \eqref{eq:SmoothChiDef}.
+	Recall that we can choose $\chi_{jk}^n$ such that $\sup\abs{\grad\chi_{jk}^n}\leq kn$ for some constant $k$.
+	Consider the sequence $\Psi^l := \chi_{jk}^n \Phi^l$, by construction we have that
+	\begin{align*}
+		\integral{\ddom}{ \abs{\Psi^l}^2 }{\ddmes} \leq \integral{I_{jk}}{ \abs{\Phi^l}^2 }{\lambda_{jk}} \rightarrow 0 \toInfty{l}.
+	\end{align*}
+	Since $\chi_{jk}^n$ and $\Phi^l$ are smooth, we can use the identity
+	\begin{align*}
+		\curl{}\Psi^l &= \grad\chi_{jk}^n\wedge\Phi^l + \chi_{jk}^n\curl{}\Phi^l,
+	\end{align*}
+	to deduce that
+	\begin{align*}
+		\integral{\ddom}{ \abs{ \curl{}\Psi^l - c }^2 }{\ddmes}
+		&\leq 2\integral{I_{jk}}{ \abs{ \chi_{jk}^n\curl{}\Phi^l - c }^2 }{\lambda_{jk}}
+		+ 2\sup\abs{\grad\chi_{jk}^n}^2 \integral{I_{jk}}{ \abs{ \Phi^l }^2 }{\lambda_{jk}} \\
+		&\leq2\integral{I_{jk}}{ \abs{ \curl{}\Phi^l - c }^2 }{\lambda_{jk}}
+		+ 2(kn)^2 \integral{I_{jk}}{ \abs{ \Phi^l }^2 }{\lambda_{jk}} \\
+		&\rightarrow 0 \toInfty{l}.
+	\end{align*}
+	The sequence $\Psi^l$ now serves as the required approximating sequence, giving us that $c\in\curlZero{\ddom}{\ddmes}$.
+	Furthermore, we also notice that $\Psi^l\bracs{v_j}=0$ and $\curl{}\Psi^l\bracs{v_j}=0$ for every $v_j\in\vertSet$, so we additionally have that
+	\begin{align*}
+		\Psi^l \lconv{\ltwo{\ddom}{\dddmes}^3} 0, 
+		\qquad
+		\curl{}\Psi^l \lconv{\ltwo{\ddom}{\dddmes}^3} \tilde{c},
+	\end{align*}
+	which demonstrates that $\tilde{c}\in\curlZero{\ddom}{\dddmes}$.
+\end{proof}
+
+\begin{lemma} \label{lem:CInCurlZero}
+	\begin{align*}
+		C \subset \curlZero{\ddom}{\ddmes}.
+	\end{align*}
+	Furthermore, the function
+	\begin{align*}
+		\tilde{c} &= \begin{cases} c & x\not\in\vertSet, \\ 0 & x\in\vertSet, \end{cases}
+	\end{align*}
+	is an element of $\curlZero{\ddom}{\dddmes}$.
+\end{lemma}
+\begin{proof}
+	Let $\eta_j^n$ be as in \eqref{eq:SmoothEtaDef}, take $c\in C$, and define two families of functions $c_n$, $\tilde{c}_n$ by
+	\begin{align*}
+		c_n = \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \eta_j^n \eta_k^n c_{jk},
+		\qquad
+		\tilde{c}_n = \begin{cases} c_n & x\not\in\vertSet, \\ 0 & x\in\vertSet. \end{cases}
+	\end{align*}
+	For each $n\in\naturals$ and $j\conLeft k$, the function $\eta_j^n \eta_k^n c_{jk}$ satisfies the hypothesis of the extension lemma \ref{lem:CurlZeroExtensionLemma}, and so is an element of $\curlZero{\ddom}{\ddmes}$, and its extension by zero the the vertices of $\graph$ is an element of $\curlZero{\ddom}{\dddmes}$.
+	As both $\curlZero{\ddom}{\ddmes}$ and $\curlZero{\ddom}{\dddmes}$ are linear subspaces, $c_n\in\curlZero{\ddom}{\ddmes}$ and $\tilde{c}_n\in\curlZero{\ddom}{\dddmes}$ for every $n\in\naturals$.
+	Since $\eta_j^n\rightarrow 1$ in $\ltwo{\ddom}{\ddmes}$, we conclude that $c_n\rightarrow c$ in $\ltwo{\ddom}{\ddmes}^3$, and since $\curlZero{\ddom}{\ddmes}$ is closed, we have that $c\in\curlZero{\ddom}{\ddmes}$.
+	Similarly we can conclude that $\tilde{c}$ is the limit of $\tilde{c}_n$, and thus is an element of $\curlZero{\ddom}{\dddmes}$.
+\end{proof}
+Lemmas \ref{lem:CurlZeroInC}, \ref{lem:CurlZeroExtensionLemma}, and \ref{lem:CInCurlZero} then form the proof of theorem \ref{thm:CurlZeroChar}.
+
+Our next brief stop will be an examination of the set $\curlZero{\ddom}{\massMes}$, before we then look to fully characterise the set $\curlZero{\ddom}{\dddmes}$.
+Much of the same intuition that we had for gradients also holds for curls in the context of the measure $\massMes$ --- given that $\massMes$ only respects a finite number of points in $\ddom$, there is no way to measure rotations at these points, and so all curls will be curls of zero.
+\begin{prop} \label{prop:VertexCurlZero}
+	\begin{align*}
+		\curlZero{\ddom}{\massMes} &= \pltwo{\ddom}{\massMes}^3.
+	\end{align*}
+\end{prop}
+\begin{proof}
+	For each $j\in\vertSet$ and $k\in\clbracs{1,2,3}$, let $c^k_1\in\pltwo{\ddom}{\massMes}^3$ be the function
+	\begin{align*}
+		c^j_k\bracs{x} &= \begin{cases} e_k & x=v_j, \\ 0 & x\neq v_j, \end{cases}
+	\end{align*}
+	where $e_k$ is the $k$\textsuperscript{th} canonical unit vector in $\complex^3$.
+	Note that the collection 
+	\begin{align*}
+		\mathcal{C} = \clbracs{c^j_k \ \setVert v_j\in\vertSet, k\in\clbracs{1,2,3}}
+	\end{align*}
+	is a basis for $\pltwo{\ddom}{\massMes}^3$, so it is sufficient to show that $\mathcal{C}\subset\curlZero{\ddom}{\massMes}$, since $\curlZero{\ddom}{\massMes}$ is a closed linear subspace of $\ltwo{\ddom}{\massMes}^3$.
+	To this end, let $d=\min_\edgeSet\abs{I_{jk}}$ and $\psi:\reals\rightarrow\reals$ be a smooth function with 
+	\begin{align*}
+		\psi(0) = 0, \quad \psi'(0) = 1, \quad \supp\bracs{\psi} \subset \bracs{-d,d}.
+	\end{align*}
+	Then for each $v_j\in\vertSet$, the function $\Phi_j\in\csmooth{\ddom}^3$ via 
+	\begin{itemize}
+		\item $\Phi_j(x) = \bracs{0, 0, \psi\bracs{x_2 - v_j^{(2)}}}^\top$ is such that $\Phi_j = 0, \ \grad^{(0)}\wedge\Phi_j = c^j_1$ in $\ltwo{\ddom}{\massMes}^3$,
+		\item $\Phi_j(x) = \bracs{0, 0, \psi\bracs{v_j^{(1)} - x_1}}^\top$ is such that $\Phi_j = 0, \ \grad^{(0)}\wedge\Phi_j = c^j_2$ in $\ltwo{\ddom}{\massMes}^3$,
+		\item $\Phi_j(x) = \bracs{0, \psi\bracs{x_1 - v_j^{(1)}}, 0}^\top$ is such that $\Phi_j = 0, \ \grad^{(0)}\wedge\Phi_j = c^j_3$ in $\ltwo{\ddom}{\massMes}^3$,
+	\end{itemize}
+	and thus $\mathcal{C}\subset\curlZero{\ddom}{\massMes}$, and the result follows.
+\end{proof}
+
+\begin{cory} \label{cory:VertexCurlSob}
+	\begin{align*}
+		\ktcurlSob{\ddom}{\massMes} &= \clbracs{ \bracs{u,0} \setVert u\in\pltwo{\ddom}{\massMes}^3 }.
+	\end{align*}
+\end{cory}
+\begin{proof}
+	($\subset$) If $u\in\ktcurlSob{\ddom}{\massMes}$ with $\ktcurl{\massMes}u=\bracs{v_1,v_2,v_3}^\top$ then the requirement that $\ktcurl{\massMes}u \perp \curlZero{\ddom}{\massMes}$ and proposition \ref{prop:VertexCurlZero} imply that $v_1=v_2=v_3=0$.
+	
+	($\supset$) Conversely if $u\in\ltwo{\ddom}{\massMes}^3$, for each $v_j\in\vertSet$ let $\psi_j$ denote the smooth ``bump" function centred on $v_j$ with
+	\begin{align*}
+		\psi_j\bracs{v_j} = 1, \quad
+		\psi_j'\bracs{v_j} = 0, \quad
+		\supp\bracs{\psi_j} \subset B_d\bracs{v_j},
+	\end{align*}
+	where $d=\min_{\edgeSet}\abs{I_{jk}}$.
+	Setting $\Phi(x) = \sum_{v_j\in\vertSet}u\bracs{v_j}\psi_j\bracs{x}$, we have that $\Phi=u$ in $\ltwo{\ddom}{\massMes}^3$ so $\bracs{u,\ktcurl{}\Phi}\in W^{\kt}_{\mathrm{curl}}$.
+	Therefore, there exists some $c\in\curlZero{\ddom}{\massMes}^{\perp}$ such that $\bracs{u,c}\in\ktcurlSob{\ddom}{\massMes}$, however from the ``$\subset$" inclusion we can then conclude that $c = 0$.
+\end{proof}
+
+We can now combine our understanding of $\curlZero{\ddom}{\ddmes}$ and $\curlZero{\ddom}{\massMes}$ to show that linear combinations of these functions make up the set $\curlZero{\ddom}{\dddmes}$.
+\begin{prop} \label{prop:ThickVertexCurlZeroCharacterisation}
+	Let $\tilde{c}\in\ltwo{\ddom}{\dddmes}^3$ where
+	\begin{align*}
+		\tilde{c} &= \begin{cases} c_{\ddmes} & x\not\in\vertSet, \\ c_{\massMes} & x\in\vertSet, \end{cases}
+	\end{align*}
+	for $c_{\ddmes}\in\pltwo{\ddom}{\ddmes}^3$ and $c_{\massMes}\in\pltwo{\ddom}{\massMes}^3$.
+	Then we have that
+	\begin{align*}
+		c\in\curlZero{\ddom}{\dddmes} \quad\Leftrightarrow\quad 
+		& c_{\ddmes}\in\curlZero{\ddom}{\ddmes} \text{ and } c_{\massMes}\in\curlZero{\ddom}{\massMes}.
+	\end{align*}
+\end{prop}
+\begin{proof}
+	($\Rightarrow$) For the right-directed implication it is sufficient to notice that 
+	\begin{align*}
+		\norm{\cdot}_{\ltwo{\ddom}{\dddmes}}^2 &= \norm{\cdot}_{\ltwo{\ddom}{\ddmes}}^2 + \norm{\cdot}_{\ltwo{\ddom}{\massMes}}^2,
+	\end{align*}
+	so any approximating sequence for $c$ that converges in $\ltwo{\ddom}{\dddmes}^3$ also converges in $\ltwo{\ddom}{\ddmes}^3$ to $c_{\ddmes}$ and in $\ltwo{\ddom}{\massMes}^3$ to $c_{\massMes}$.
+	
+	($\Leftarrow$) For the left-directed implication, it is sufficient for us to demonstrate the implication holds for the case when $c_{\massMes}=0$, and the case that $c_{\ddmes}=0$ with $c_{\massMes}\neq0$ at precisely one vertex $v$.
+	Having shown the implication in these cases, linearity of $\curlZero{\ddom}{\dddmes}$ will then complete the proof.
+	
+	The case when $c_{\massMes}=0$ is handled by the extension lemma \ref{lem:CurlZeroExtensionLemma} and lemma \ref{lem:CInCurlZero}.
+	
+	Next, consider the case when $c_{\ddmes}=0$, and when $c_{\massMes}=0$ at all vertices except $v\in\vertSet$, with $v=\bracs{v_1, v_2}\in\ddom$ and with $c_{\massMes}(v) = \bracs{c_1, c_2, c_3}^\top$.
+	For each $n\in\naturals$ take a smooth function $\phi_n:\reals\rightarrow\sqbracs{-1,1}$ with the properties
+	\begin{align*}
+		\phi_n(0) = 0,
+		&\quad	\phi'_n(0) = 1, \\
+		\phi_n(t) = 0, &\quad t\not\in B_{\frac{2}{n}}(0), \\
+		\abs{\phi_n(t)} \leq \recip{n} &\quad t\in B_{\frac{2}{n}}(0).
+	\end{align*}
+	Since $\abs{\phi_n(t)} \leq \recip{n}$ when $\abs{t}\leq\recip{n}$, $\phi_n$ can be chosen so that exists a constant $K$ independent of $n$ such that $\abs{\grad\phi_n} \leq K$ when $\recip{n} \leq \abs{x-v} \leq \frac{2}{n}$.
+	Define the functions $\Phi^n\in\csmooth{\ddom}$ (and compute their curls) as follows;
+	\begin{align*}
+		\Phi^n(x) = 
+		\begin{pmatrix} 
+			0 \\ 
+			c_3\phi_n\bracs{x_1 - v_1} \\ 
+			c_1\phi_n\bracs{x_2-v_2} + c_2\phi_n\bracs{v_1-x_1} 
+		\end{pmatrix},
+		&\qquad
+		\curl{}\Phi_n(x) =
+		\begin{pmatrix}
+			c_1\phi'_n\bracs{x_2-v_2} \\
+			c_2\phi'_n\bracs{v_1-x_1} \\
+			c_3\phi'_n\bracs{x_1-v_1}
+		\end{pmatrix}.
+	\end{align*}
+	Then we have the following:
+	\begin{align*}
+		\integral{\ddom}{ \abs{ \Phi^n }^2 }{\dddmes}
+		&\leq \bracs{c_3^2 + \bracs{c_1 + c_2}^2} \bracs{ \integral{B_{\frac{2}{n}}(v)}{ \recip{n^2} }{\ddmes}
+		+ \alpha_v\abs{\phi_n(0)}^2 } \\
+		&= \frac{2\mathrm{deg}(v)}{n^3}\bracs{\abs{c_3}^2 + \abs{c_1 + c_2}^2} \rightarrow 0 \toInfty{n}, \\
+		\integral{\ddom}{ \abs{ \curl{}\Phi^n - c }^2 }{\dddmes}
+		&= \integral{\ddom}{ \abs{ \curl{}\Phi^n}^2 }{\ddmes}
+		+ \integral{\ddom}{ \abs{ \curl{}\Phi^n - c_{\massMes} }^2 }{\massMes} \\
+		&= \abs{c_1}^2\integral{\ddom}{ \abs{\phi'_n\bracs{x_2-v_2}}^2 }{\ddmes}
+		+ \abs{c_2}^2\integral{\ddom}{ \abs{\phi'_n\bracs{v_1-x_1}}^2 }{\ddmes} \\
+		&\quad + \abs{c_3}^2\integral{\ddom}{ \abs{\phi'_n\bracs{x_1-v_1}}^2 }{\ddmes}
+		+ \alpha_v\abs{c(v)}^2\abs{\phi'_n(0)-1}^2 \\
+		&\leq \abs{c(v)}^2 \bracs{ K^2\integral{B_{\frac{2}{n}}(v)}{ }{\ddmes}
+		+ \alpha_v\abs{\phi'_n(0)-1}^2 } \\
+		&= \frac{2\mathrm{deg}(v)}{n}\abs{c(v)}^2 K^2 \rightarrow 0 \toInfty{n},
+	\end{align*}
+	where $\mathrm{\deg}(v)$ is the degree of the vertex $v$.
+	We thus conclude that $c\in\curlZero{\ddom}{\dddmes}$, and given the linearity of $\curlZero{\ddom}{\dddmes}$, the proof is complete.
+\end{proof}
+
+\subsection{Tangential Curls} \label{ssec:TangCurls}
