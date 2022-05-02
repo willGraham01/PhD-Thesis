@@ -188,9 +188,10 @@ Much of the same intuition that we had for gradients also holds for curls in the
 		\item $\Phi_j(x) = \bracs{0, 0, \psi\bracs{v_j^{(1)} - x_1}}^\top$ is such that $\Phi_j = 0, \ \grad^{(0)}\wedge\Phi_j = c^j_2$ in $\ltwo{\ddom}{\massMes}^3$,
 		\item $\Phi_j(x) = \bracs{0, \psi\bracs{x_1 - v_j^{(1)}}, 0}^\top$ is such that $\Phi_j = 0, \ \grad^{(0)}\wedge\Phi_j = c^j_3$ in $\ltwo{\ddom}{\massMes}^3$,
 	\end{itemize}
-	and thus $\mathcal{C}\subset\curlZero{\ddom}{\massMes}$, and the result follows.
+	and thus, after multiplying by a smooth cut-off function equal to unity on some open neighbourhood of $v_j$, we see that $\mathcal{C}\subset\curlZero{\ddom}{\massMes}$ and the result follows.
 \end{proof}
 
+Although we usually conduct a study of tangential curls after completing our study of the curls of zero (akin to our methodology for studying gradients of zero and tangential gradients), there is little point in delaying the obvious characterisation for $\ktcurl{\ddom}{\massMes}$.
 \begin{cory} \label{cory:VertexCurlSob}
 	\begin{align*}
 		\ktcurlSob{\ddom}{\massMes} &= \clbracs{ \bracs{u,0} \setVert u\in\pltwo{\ddom}{\massMes}^3 }.
@@ -282,3 +283,129 @@ We can now combine our understanding of $\curlZero{\ddom}{\ddmes}$ and $\curlZer
 \end{proof}
 
 \subsection{Tangential Curls} \label{ssec:TangCurls}
+With theorem \ref{thm:CurlZeroChar} in hand, we are ready to explore the form of tangential curls with respect to the measures $\ddmes$ and $\dddmes$.
+Note that we have already identified the curls of zero with respect to $\massMes$, through corollary \ref{cory:VertexCurlSob}.
+We begin, as has become standard, with an edge parallel to one of the coordinate axes.
+\begin{prop} \label{prop:TangCurlEdgeParallel}
+	Let $I_{jk}$ be parallel to the $x_2$ axis, and write $\gradSob{\sqbracs{0,l_{jk}}}{y}$ for the classical Sobolev space of functions on $\sqbracs{0,l_{jk}}$ with respect to the Lebesgue measure.
+	Suppose that $u\in\ktgradSob{\ddom}{\lambda_{jk}}$ and set $\tilde{u}=u\circ r_{jk}$ on $I_{jk}$.
+	Then $\tilde{u}_3\in\gradSob{\sqbracs{0,l_{jk}}}{y}$ and 
+	\begin{align*}
+		\ktcurl{\lambda_{jk}}u &= \bracs{ u_3' + \rmi\qm_2 u_3 - \rmi\wavenumber u_2 }\widehat{x}_1,
+	\end{align*}
+	where $u_3'=\tilde{u}_3'\circ r_{jk}^{-1}$.
+\end{prop}
+
+The proof follows from the general argument presented in corollary \ref{cory:TangCurlEdgeRotated}, however proposition \ref{prop:TangCurlEdgeParallel} is useful for validating our expectations that the tangential curl is directed ``out of" the plane induced by $I_{jk}$, and only concerns ``rates of change" that the measure $\lambda_{jk}$ can see.
+Indeed we can observe that we essentially have the operation $\partial_2+\rmi\qm_2$ acting on $u_3$; and $\rmi\wavenumber$ acting on $u_2$, which is essentially a rate of change along $x_3$ due to our previous taking of a  Fourier transform in $\widehat{x}_3$.
+\begin{cory} \label{cory:TangCurlEdgeRotated}
+	Let $I_{jk}\in\edgeSet$, and let $u\in\ktcurlSob{\ddom}{\lambda_{jk}}$.
+	Define
+	\begin{align*}
+		U(x) = R_{jk}\begin{pmatrix} u_1(x) \\ u_2(x) \end{pmatrix},
+		\qquad
+		\tilde{u}_3 &= u_3\circ r_{jk}, 
+		\qquad
+		\qm_{jk} = \qm\cdot e_{jk} = \bracs{R_{jk}\qm}_2.
+	\end{align*}
+	Then $\tilde{u}_3\in\gradSob{\sqbracs{0,l_{jk}}}{y}$ and
+	\begin{align*}
+		\ktcurl{\lambda_{jk}}u &= \bracs{ u_3' + \rmi\qm_{jk}u_3 - \rmi\wavenumber U_2 }\widehat{n}_{jk},
+	\end{align*}
+	where $u_3' := \tilde{u}_3'\circ r_{jk}^{-1}$.
+\end{cory}
+\begin{proof}
+	Let us write $c = \ktcurl{\lambda_{jk}}u$.
+	The requirement that $c\perp\curlZero{\ddom}{\lambda_{jk}}$, combined with theorem \ref{thm:CurlZeroChar}, implies that
+	\begin{align*}
+		c\cdot\widehat{e}_{jk} = 0 = c\cdot\widehat{x}_3,
+	\end{align*}
+	so we can write $c = c_{jk}\widehat{n}_{jk}$, for some $c_{jk}\in\pltwo{\ddom}{\lambda_{jk}}$ to be determined.
+	To this end, let us now take an approximating sequence $\Phi^n$ for $u$, which provides us with the following convergences in $\ltwo{\ddom}{\lambda_{jk}}$:
+	\begin{align*}
+		\Phi^n_1 \rightarrow u_1, \quad 
+		\Phi^n_2 &\rightarrow u_2, \quad
+		\Phi^n_3 \rightarrow u_3, \\
+		\bracs{\partial_2+\rmi\qm_2}\Phi^n_3 - \rmi\wavenumber\Phi^n_2 &\rightarrow c_{jk}n_1^{(jk)} = c_{jk}e_2^{(jk)}, \\
+		\bracs{\partial_1+\rmi\qm_1}\Phi^n_3 - \rmi\wavenumber\Phi^n_1 &\rightarrow -c_{jk}n_2^{(jk)} = c_{jk}e_1^{(jk)}, \\
+		\bracs{\partial_1 + \rmi\qm_1}\Phi^n_2 - \bracs{\partial_2+\rmi\qm_2}\Phi^n_1 &\rightarrow 0.
+	\end{align*}
+	In particular we notice that
+	\begin{align*}
+		\grad\Phi^n_3\cdot e_{jk} \rightarrow c_{jk} + \rmi\wavenumber U\cdot e_{jk} - \rmi u_3\qm\cdot e_{jk},
+	\end{align*}
+	and thus the sequence $\varphi_n := \Phi^n_3\circ r_{jk}$ is such that
+	\begin{align*}
+		\varphi_n\rightarrow\tilde{u}_3, \quad
+		\varphi_n'\rightarrow c_{jk}\circ r_{jk} + \rmi\wavenumber\bracs{U\circ r_{jk}}\cdot e_{jk} - \rmi\tilde{u}_3\qm\cdot e_{jk}, \quad
+		\text{in } \ltwo{\sqbracs{0,l_{jk}}}{y}.
+	\end{align*}
+	As such, we have that $\tilde{u}_3\in\gradSob{\sqbracs{0,l_{jk}}}{y}$, and upon rearrangement and undoing the change of variables $r_{jk}$, we obtain
+	\begin{align*}
+		c_{jk}(x) &= u_3'(x) + \rmi\qm_{jk}u_3(x) - \rmi\wavenumber U(x)\cdot e_{jk}
+		= u_3'(x) + \rmi\qm_{jk}u_3(x) - \rmi\wavenumber U_2(x),
+	\end{align*}
+	providing the result.
+\end{proof}
+
+Our goal now is to characterise tangential curls belonging to functions in the spaces $\ktcurlSob{\ddom}{\ddmes}$ and $\ktcurlSob{\ddom}{\dddmes}$ using our edge-wise understanding from corollary \ref{cory:TangCurlEdgeRotated} and vertex-characterisation from corollary \ref{cory:VertexCurlSob}.
+A simple comparison of norms shows us that the edge-wise behaviour must be inherited:
+\begin{prop} \label{prop:TC-dddmesImpliesOthers}
+	Suppose that $\bracs{u,\ktcurl{\dddmes}u}\in\ktcurlSob{\ddom}{\dddmes}$.
+	Then we have that $\bracs{u,\ktcurl{\dddmes}u}\in\ktcurlSob{\ddom}{\ddmes}$ and $\bracs{u,\ktcurl{\dddmes}u}\in\ktcurlSob{\ddom}{\massMes}$ too.
+\end{prop}
+\begin{proof}
+	Simply take an approximating sequence $\Phi^n$ for $u$, and notice that
+	\begin{align*}
+		\norm{\cdot}_{\ltwo{\ddom}{\dddmes}^3} &= \norm{\cdot}_{\ltwo{\ddom}{\ddmes}^3} + \norm{\cdot}_{\ltwo{\ddom}{\massMes}^3}.
+	\end{align*}
+	This implies that $\Phi^n$ and $\ktcurl{}\Phi^n$ also converge in these norms to (functions almost everywhere equal to) $u$ and $\ktcurl{\dddmes}u$ respectively.
+	We are also assured that $\ktcurl{\dddmes}u$ is orthogonal to $\curlZero{\ddom}{\ddmes}$ and $\curlZero{\ddom}{\massMes}$ by theorem \ref{thm:CurlZeroChar}, which completes the proof.
+\end{proof}
+
+The proof of corollary \ref{cory:TangCurlEdgeRotated} hints at a connection between the third component $u_3$ of a function $u\in\ktcurlSob{\ddom}{\ddmes}$ and the space $\ktgradSob{\ddom}{\ddmes}$.
+Further to this, we know from theorem \tstk{gradient characterisation} that functions in this space are precisely those that can be constructed from edge functions, provided these edge functions are continuous at the vertices.
+\begin{prop} \label{prop:TC-3rdComponentIFF}
+	Suppose that $u_3\in\pltwo{\ddom}{\ddmes}$ and $\tilde{u}_3\in\pltwo{\ddom}{\dddmes}$.
+	Then we have that
+	\begin{enumerate}[(i)]
+		\item $u:= \bracs{0,0,u_3}^\top\in\ktcurlSob{\ddom}{\ddmes}
+		\quad\Leftrightarrow\quad
+		u_3\in\ktgradSob{\ddom}{\ddmes}$
+		\item $\tilde{u} := \bracs{0,0,\tilde{u}_3}^\top\in\ktcurlSob{\ddom}{\dddmes}
+		\quad\Leftrightarrow\quad
+		\tilde{u}_3\in\ktcurlSob{\ddom}{\dddmes}$.
+	\end{enumerate}
+\end{prop}
+\begin{proof}
+	$(\Leftarrow)$ For the left-directed implication, let $\phi_n$ be an approximating sequence for $u_3$ and write $g = \ktgrad_{\ddmes}u$.
+	Define the sequence $\Phi^n = \bracs{0,0,\phi_n}^\top\in\psmooth{\ddom}^3$, and notice that
+	\begin{align*}
+		\Phi^n\lconv{\ltwo{\ddom}{\ddmes}^3}u, \qquad
+		\ktcurl{}\Phi^n = 
+		\begin{pmatrix} 
+			\bracs{\partial_2+\rmi\qm_2}\phi_n \\ -\bracs{\partial_1 + \rmi\qm_1}\phi_n \\ 0 
+		\end{pmatrix}
+		\lconv{\ltwo{\ddom}{\ddmes}^3}
+		\begin{pmatrix}
+			g_2 \\ -g_1 \\ 0
+		\end{pmatrix}
+		=: c.
+	\end{align*}
+	Note that, since $g\perp\gradZero{\ddom}{\ddmes}$, we have $g\perp\widehat{e}_{jk}$ on every edge $I_{jk}$, implying that $c\perp\widehat{n}_{jk}$ on each $I_{jk}$ and thus $c\perp\curlZero{\ddom}{\ddmes}$ by theorem \ref{thm:CurlZeroChar}.
+	Therefore, $\Phi^n$ serves as an approximating sequence for $\bracs{u,c}\in\ktcurlSob{\ddom}{\ddmes}$.
+	The proof of the left-directed implication for $(ii)$ is functionally identical.
+	
+	$(\Rightarrow)$ For the right-directed implication, let $\Phi^n$ be an approximating sequence for $u$ and write $c=\ktcurl{}u$.
+	Define the sequence $\phi_n = \Phi^n_3$; similarly to the above, it can be shown that
+	\begin{align*}
+		\phi_n \lconv{\ltwo{\ddom}{\ddmes}} u_3, \qquad
+		\ktgrad\phi_n \lconv{\ltwo{\ddom}{\ddmes}^3} \begin{pmatrix} -c_2 \\ c_1 \\ \rmi\wavenumber u_3 \end{pmatrix}
+		=: g.
+	\end{align*}
+	Again by recognising $c\perp\curlZero{\ddom}{\ddmes}$ implies that $g\perp\gradZero{\ddom}{\ddmes}$, we can conclude that $\phi_n$ serves as an approximating sequence for $\bracs{u,g}\in\ktgradSob{\ddom}{\ddmes}$.
+	The proof for the right-directed implication of $(ii)$ is, again, functionally identical.
+\end{proof}
+
+Proposition \ref{prop:TC-3rdComponentIFF} then allows us to invoke theorem \tstk{gradient characterisation theorem} to conclude that the component $u_3$ is continuous at the vertices of $\graph$, and can be formed edge-wise.
+This just leaves questions concerning the remaining two components $u_1$ and $u_2$ \tstk{investigate?}
