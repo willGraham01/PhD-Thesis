@@ -1,0 +1,110 @@
+\section{The Divergence-Free Condition} \label{sec:DivFreeCondition}
+\tstk{introductory paragraph}
+
+As was mentioned in \tstk{the introduction}, the definition of the Maxwell operator requires us to pay respect to the divergence-free nature of the electric and magnetic fields.
+The fields that solve the curl of the curl equation are also required to be divergence free, and indeed one usually finds the curl of the curl equation posed on a space consisting of divergence-free fields.
+Given the motivation for our consideration of the curl of the curl equation on a singular structure, it is natural for us to consider what the analogue of a divergence free field would be.
+We find ourselves presented with several possibilities for the definition of a divergence free field, however none of these \tstk{complete train of thought - also, check whether we put a definition of divergence free in the introduction, because we might want to ret-con that}.
+
+\subsection{Orthogonality to Gradients} \label{ssec:DivFree-OrthToAllGradients}
+A characterising feature of divergence-free fields is that they are orthogonal to all potential vector fields; that is any vector field equal to the gradient of a scalar function.
+Through this analogue, we can provide the following definition for our analogue of divergence-free fields:
+\begin{definition}[Divergence Free (all Gradients)] \label{def:DivFree-AllGradients}
+	A field $u\in\pltwo{\ddom}{\dddmes}^3$ is divergence free (with respect to $\dddmes$) if (and only if)
+	\begin{align*}
+		\ip{u}{g}_{\ltwo{\ddom}{\dddmes}^3} = \integral{\ddom}{ u\cdot\overline{g} }{\dddmes} = 0,
+	\end{align*}
+	for every $g\in W_{\mathrm{grad}}^{\kt}\bracs{\ddom,\md\dddmes}$.
+\end{definition}
+That is, a field is divergence free only if it is orthogonal in $L^2$ to any gradient field, including the gradients of zero.
+
+This allows for the rather quick characterisation of divergence-free vector fields.
+\begin{prop}
+	Let $u\in\pltwo{\ddom}{\dddmes}^3$ and define (for each edge $I_{jk}$)
+	\begin{align*}
+		U^{(jk)} = R_{jk}\begin{pmatrix} u_1^{(jk)} \\ u_2^{(jk)} \end{pmatrix}, 
+		\qquad \qm_{jk} = \qm\cdot e_{jk}, 
+		\qquad \widetilde{U}^{(jk)} = U^{(jk)}\circ r_{jk}.
+	\end{align*}		
+	Then $u$ is divergence-free (in the sense of definition \ref{def:DivFree-AllGradients}) if and only if
+	\begin{align*}
+		\mathrm{(i)} \ & U_1^{(jk)} = 0, \quad \forall I_{jk}\in\edgeSet \\
+		\mathrm{(ii)} \ & \widetilde{U}_2^{(jk)}\in\gradSob{\sqbracs{0,l_{jk}}}{y}, \quad \forall I_{jk}\in\edgeSet, \\
+		\mathrm{(iii)} \ & \bracs{U_2^{(jk)}}' + \rmi\qm_{jk}U_2^{(jk)} + \rmi\wavenumber u_3^{(jk)} = 0 \text{ on } I_{jk}, \quad \forall I_{jk}\in\edgeSet, \\
+		\mathrm{(iv)} \ & u_1\bracs{v_j} = u_2\bracs{v_j} = 0, \quad \forall v_j\in\vertSet, \\
+		\mathrm{(v)} \ & \sum_{j\conRight k}U_2^{(jk)}\bracs{v_j} - \sum_{j\conLeft k}U_2^{(jk)}\bracs{v_j} = \rmi\wavenumber\alpha_j u_3\bracs{v_j}, \quad \forall v_j\in\vertSet,
+	\end{align*}
+	where $\bracs{U_2^{(jk)}}' = \bracs{\widetilde{U}_2^{(jk)}}'\circ r_{jk}^{-1}$.
+\end{prop}
+\begin{proof}
+	First assume that the field $u$ is divergence-free (in the sense of definition \ref{def:DivFree-AllGradients}).
+	\begin{enumerate}[(i)]
+		\item We first utilise theorem \ref{thm:3DdddmesCharGradZero} to deduce that $\ip{u}{g}_{\ltwo{\ddom}{\lambda_{jk}}}=0$ for every $g\in\gradZero{\ddom}{\lambda_{jk}}$.
+		Then since we know that $\gradZero{\ddom}{\lambda_{jk}}$ consists of all functions of the form $g_{jk}\hat{n}_{jk}$ (proposition \ref{prop:3DGradZeroChar}), we must conclude that
+		\begin{align*}
+			0 &= \integral{\ddom}{ \overline{g}_{jk}\begin{pmatrix} u_1^{(jk)} \\ u_2^{(jk)} \end{pmatrix}\cdot n_{jk} }{\lambda_{jk}}, \qquad \forall g_{jk}\in\pltwo{\ddom}{\lambda_{jk}},
+		\end{align*}
+		so $U_1^{(jk)}=0$ on $I_{jk}$.
+		\item Let $\phi\in\csmooth{\sqbracs{0,l_{jk}}}$.
+		Utilising suitable cut-off functions, we can then construct a function $\varphi\in\csmooth{\ddom}\cap\psmooth{\ddom}$ such that $\varphi(x)=\phi\bracs{r_{jk}^{-1}(x)}$ when $x\in I_{jk}$, and with $\varphi=0$ on all other parts of $\graph$.
+		Since such $\varphi$ are smooth, they are elements of $\ktgradSob{\ddom}{\lambda_{jk}}$ and by lemma \ref{lem:ExtensionLemmaEdgeFunctions} also elements of $\ktgradSob{\ddom}{\dddmes}$.
+		As such, we have that
+		\begin{align*}
+			0 &= \integral{\ddom}{ u\cdot\overline{\ktgrad_{\dddmes}\varphi} }{\dddmes}
+			= \integral{I_{jk}}{ u\cdot\bracs{ \bracs{\overline{\varphi}' - \rmi\qm_{jk}\overline{\varphi}}\widehat{e}_{jk} - \rmi\wavenumber\overline{\varphi}\widehat{x}_3} }{\lambda_{jk}} \\
+			&= \integral{I_{jk}}{ \bracs{\overline{\varphi}' - \rmi\qm_{jk}\overline{\varphi}}U_2^{(jk)} - \rmi\wavenumber\overline{\varphi}u_3^{(jk)} }{\lambda_{jk}} \\
+			&= \int_0^{l_{jk}} \bracs{\overline{\phi}' - \rmi\qm_{jk}\overline{\phi}}\widetilde{U}_2^{(jk)} - \rmi\wavenumber\overline{\phi}\widetilde{u}_3^{(jk)} \ \md y, \\
+			\implies
+			\int_0^{l_{jk}} \overline{\phi}'\widetilde{U}_2^{(jk)} \ \md y
+			&= \int_0^{l_{jk}} \overline{\phi}\bracs{ \rmi\qm_{jk}\widetilde{U}_2^{(jk)} + \rmi\wavenumber\widetilde{u}_3^{(jk)} } \ \md y.
+		\end{align*}
+		This holds for every $\phi\in\csmooth{\sqbracs{0,l_{jk}}}$, and so we can conclude that $\widetilde{U}_2^{(jk)}\in\gradSob{\sqbracs{0,l_{jk}}}{y}$.
+		\item Following immediately on from the above, we have that
+		\begin{align*}
+			\bracs{U_2^{(jk)}}' = - \bracs{ \rmi\qm_{jk}U_2^{(jk)} + \rmi\wavenumber u_3^{(jk)} },
+		\end{align*}
+		which upon rearrangement gives the result.
+		\item We again notice through theorem \ref{thm:3DdddmesCharGradZero} we have that $\ip{u}{g}_{\ltwo{\ddom}{\massMes}}=0$ for every $g\in\gradZero{\ddom}{\massMes}$.
+		Fix $v_j\in\vertSet$, and take $g=\bracs{g_1,g_2,0}^\top$ at $v_j$ and zero elsewhere.
+		Given the characterisation in proposition \ref{prop:NuGradZeroChar}, we can conclude that
+		\begin{align*}
+			0 &= \integral{\ddom}{ u_\cdot\overline{g} }{\massMes}
+			= \alpha_j\bracs{\overline{g_1}u_1 + \overline{g_2}u_2},
+		\end{align*}
+		for all $g_1,g_2\in\complex$.
+		Therefore, we must have that $u_1\bracs{v_j}=u_2\bracs{v_j}=0$.
+		\item Finally, take $\varphi\in\csmooth{\ddom}$ with support
+		\begin{align*}
+			\supp\bracs{\varphi} \subset \mathcal{J}\bracs{v_j}\setminus\clbracs{v_k\in\vertSet \setVert v_k\neq v_j}.
+		\end{align*}
+		Since this $\varphi$ is smooth, it is an element of $\ktgradSob{\ddom}{\dddmes}$ by definition, and we have that
+		\begin{align*}
+		0 &= \integral{\ddom}{ u\cdot\overline{\ktgrad_{\dddmes}\varphi} }{\dddmes} \\
+		&= \sum_{j\con k}\integral{I_{jk}}{ U_2^{(jk)}\bracs{\overline{\varphi}' - \rmi\qm_{jk}\overline{\varphi}} - \rmi\wavenumber u_3^{(jk)}\overline{\varphi} }{\lambda_{jk}} 
+		+ \integral{\ddom}{ u\cdot\overline{\ktgrad_{\dddmes}\varphi} }{\massMes} \\
+		&= \sum_{j\con k}\int_0^{l_{jk}} \widetilde{U}_2^{(jk)}\bracs{\overline{\widetilde{\varphi}}' - \rmi\qm_{jk}\overline{\widetilde{\varphi}}} - \rmi\wavenumber u_3^{(jk)}\overline{\widetilde{\varphi}} \ \md y
+		-\rmi\wavenumber\alpha_j u_3\bracs{v_j}\overline{\varphi}\bracs{v_j}.
+		\end{align*}
+		Rearranging and using (ii) and (iii), we find that
+		\begin{align*}
+			\rmi\wavenumber\alpha_j u_3\bracs{v_j}\overline{\varphi}\bracs{v_j}
+			&= - \sum_{j\con k}\int_0^{l_{jk}} \overline{\widetilde{\varphi}}\bracs{ \widetilde{U}_2^{(jk)} + \rmi\qm_{jk}\widetilde{U}_2^{(jk)} + \rmi\wavenumber\widetilde{u}_3^{(jk)} } \ \md y \\
+			&\quad + \overline{\varphi}\bracs{v_j}\bracs{ \sum_{j\conRight k} U_2^{(jk)}\bracs{v_j} - \sum_{j\conLeft k} U_2^{(jk)}\bracs{v_j} } \\
+			&= \overline{\varphi}\bracs{v_j}\bracs{ \sum_{j\conRight k} U_2^{(kj)}\bracs{v_j} - \sum_{j\conLeft k} U_2^{(jk)}\bracs{v_j} }.
+		\end{align*}
+		This holds for every such smooth $\varphi$, and so we must have that
+		\begin{align*}
+			\rmi\wavenumber\alpha_j u_3\bracs{v_j} &= \sum_{j\conRight k} U_2^{(kj)}\bracs{v_j} - \sum_{j\conLeft k} U_2^{(jk)}\bracs{v_j}.
+		\end{align*}
+	\end{enumerate}
+	
+	Now let us suppose that (i)-(v) hold.
+	Conditions (i) and (iv) ensure that $u$ is orthogonal to $\gradZero{\ddom}{\dddmes}$ via theorem \ref{thm:3DdddmesCharGradZero}.
+	Now let $v\in\ktgradSob{\ddom}{\dddmes}$, and consider an approximating sequence $\phi_n$ for $v$.
+	Clearly,
+	\begin{align*}
+		\ip{u}{\ktgrad_{\dddmes}v}_{\ltwo{\ddom}{\dddmes}^3}
+		&= \lim_{n\rightarrow\infty}\ip{u}{\ktgrad\phi_n}_{\ltwo{\ddom}{\dddmes}^3},
+	\end{align*}
+	from which we can use (ii), (iii), and (v) to deduce that $\ip{u}{\ktgrad\phi_n}_{\ltwo{\ddom}{\dddmes}^3}=0$ for every $n\in\naturals$, providing orthogonality to tangential gradients.
+\end{proof}
