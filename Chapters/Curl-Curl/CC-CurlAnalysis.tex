@@ -314,6 +314,7 @@ Indeed we can observe that we essentially have the operation $\partial_2+\rmi\qm
 	\end{align*}
 	where $u_3' := \tilde{u}_3'\circ r_{jk}^{-1}$.
 \end{cory}
+It is worth remarking that $U_2 = \bracs{u_1,u_2}^{\top}e_{jk}$ on $I_{jk}$, so that we can see that $U_2$ retains precisely the component of $U$ in the direction along $I_{jk}$.
 \begin{proof}
 	Let us write $c = \ktcurl{\lambda_{jk}}u$.
 	The requirement that $c\perp\curlZero{\ddom}{\lambda_{jk}}$, combined with theorem \ref{thm:CurlZeroChar}, implies that
@@ -366,18 +367,26 @@ A simple comparison of norms shows us that the edge-wise behaviour must be inher
 The proof of corollary \ref{cory:TangCurlEdgeRotated} hints at a connection between the third component $u_3$ of a function $u\in\ktcurlSob{\ddom}{\ddmes}$ and the space $\ktgradSob{\ddom}{\ddmes}$.
 Further to this, we know from theorem \tstk{gradient characterisation} that functions in this space are precisely those that can be constructed from edge functions, provided these edge functions are continuous at the vertices.
 \begin{prop} \label{prop:TC-3rdComponentIFF}
-	Suppose that $u_3\in\pltwo{\ddom}{\ddmes}$ and $\tilde{u}_3\in\pltwo{\ddom}{\dddmes}$.
-	Then we have that
-	\begin{enumerate}[(i)]
-		\item $u:= \bracs{0,0,u_3}^\top\in\ktcurlSob{\ddom}{\ddmes}
-		\quad\Leftrightarrow\quad
-		u_3\in\ktgradSob{\ddom}{\ddmes}$
-		\item $\tilde{u} := \bracs{0,0,\tilde{u}_3}^\top\in\ktcurlSob{\ddom}{\dddmes}
-		\quad\Leftrightarrow\quad
-		\tilde{u}_3\in\ktcurlSob{\ddom}{\dddmes}$.
-	\end{enumerate}
+	Let $u_3^{(jk)}\in\pltwo{\ddom}{\lambda_{jk}}$, $u_3\in\pltwo{\ddom}{\ddmes}$, and $\tilde{u}_3\in\pltwo{\ddom}{\dddmes}$.
+	Then the following equivalences hold.
+	\begin{align*}
+		\mathrm{(i)} \ &
+		u^{(jk)}:= \bracs{0,0,u_3^{(jk)}}^\top\in\ktcurlSob{\ddom}{\lambda_{jk}}
+		\quad &\Leftrightarrow &\quad
+		u_3^{(jk)}\in\ktgradSob{\ddom}{\lambda_{jk}}, \\
+		\mathrm{(ii)} \ &
+		u:= \bracs{0,0,u_3}^\top\in\ktcurlSob{\ddom}{\ddmes}
+		\quad &\Leftrightarrow &\quad
+		u_3\in\ktgradSob{\ddom}{\ddmes}, \\
+		\mathrm{(iii)} \ &
+		\tilde{u} := \bracs{0,0,\tilde{u}_3}^\top\in\ktcurlSob{\ddom}{\dddmes}
+		\quad &\Leftrightarrow &\quad
+		\tilde{u}_3\in\ktcurlSob{\ddom}{\dddmes}.
+	\end{align*}
 \end{prop}
 \begin{proof}
+	We will explicitly prove the statement (ii), since the other statements (i) and (iii) follow essentially the same argument --- taking an approximating sequence, observing the convergences in $L^2$ that we obtain, and appealing the the characterisation of gradients or curls of zero depending on which implication is being shown.
+	
 	$(\Leftarrow)$ For the left-directed implication, let $\phi_n$ be an approximating sequence for $u_3$ and write $g = \ktgrad_{\ddmes}u$.
 	Define the sequence $\Phi^n = \bracs{0,0,\phi_n}^\top\in\psmooth{\ddom}^3$, and notice that
 	\begin{align*}
@@ -394,7 +403,6 @@ Further to this, we know from theorem \tstk{gradient characterisation} that func
 	\end{align*}
 	Note that, since $g\perp\gradZero{\ddom}{\ddmes}$, we have $g\perp\widehat{e}_{jk}$ on every edge $I_{jk}$, implying that $c\perp\widehat{n}_{jk}$ on each $I_{jk}$ and thus $c\perp\curlZero{\ddom}{\ddmes}$ by theorem \ref{thm:CurlZeroChar}.
 	Therefore, $\Phi^n$ serves as an approximating sequence for $\bracs{u,c}\in\ktcurlSob{\ddom}{\ddmes}$.
-	The proof of the left-directed implication for $(ii)$ is functionally identical.
 	
 	$(\Rightarrow)$ For the right-directed implication, let $\Phi^n$ be an approximating sequence for $u$ and write $c=\ktcurl{}u$.
 	Define the sequence $\phi_n = \Phi^n_3$; similarly to the above, it can be shown that
@@ -404,8 +412,65 @@ Further to this, we know from theorem \tstk{gradient characterisation} that func
 		=: g.
 	\end{align*}
 	Again by recognising $c\perp\curlZero{\ddom}{\ddmes}$ implies that $g\perp\gradZero{\ddom}{\ddmes}$, we can conclude that $\phi_n$ serves as an approximating sequence for $\bracs{u,g}\in\ktgradSob{\ddom}{\ddmes}$.
-	The proof for the right-directed implication of $(ii)$ is, again, functionally identical.
 \end{proof}
 
-Proposition \ref{prop:TC-3rdComponentIFF} then allows us to invoke theorem \tstk{gradient characterisation theorem} to conclude that the component $u_3$ is continuous at the vertices of $\graph$, and can be formed edge-wise.
-This just leaves questions concerning the remaining two components $u_1$ and $u_2$ \tstk{investigate?}
+Proposition \ref{prop:TC-3rdComponentIFF} also allows us to invoke theorem \tstk{gradient characterisation theorem} to conclude that the component $u_3$ is continuous at the vertices of $\graph$.
+This just leaves questions concerning the remaining two components $u_1$ and $u_2$; we have already seen from proposition \ref{prop:TC-dddmesImpliesOthers} that a function on the whole graph breaks down edge-wise.
+However we are lacking continuity (and even weak differentiability) of $u_1$ and $u_2$ at the vertices, so cannot sum edge-functions to obtain a function on the whole graph in a manner akin to \tstk{gradient case}.
+The best we can do (utilising only knowledge of curls) comes when we have a vector field whose first and second components have support contained in the interior of an edge, analogous to \tstk{tang grad extension lemma}.
+\begin{prop}
+	Suppose that $=\bracs{u_1,u_2,0}^\top\in\ktcurlSob{\ddom}{\lambda_{jk}}$ with $u=0$ outside $I_{jk}^\eps$ for some $\eps>0$.
+	Then $u\in\ktcurlSob{\ddom}{\ddmes}$ and $u\in\ktcurlSob{\ddom}{\dddmes}$ with
+	\begin{align*}
+		\ktcurl{\ddmes}u =
+		\begin{cases} 
+			\ktcurl{\lambda_{jk}}u & x\in I_{jk}, \\
+			0 & x\not\in I_{jk}, 
+		\end{cases}
+		\qquad
+		\ktcurl{\dddmes}u = 
+		\begin{cases} 
+			\ktcurl{\lambda_{jk}}u & x\in I_{jk}, \\
+			0 & x\not\in I_{jk}, \\
+			0 & x\in\vertSet.
+		\end{cases}
+	\end{align*}
+\end{prop}
+\begin{proof}
+	Take an approximating sequence $\Phi^n$ for $u$, and consider the smooth cut-off function $\chi_{jk}^{\eps}$ in \eqref{eq:SmoothChiDef}.
+	Construct the sequence $\Psi^n = \chi_{jk}^{\eps}\Phi^n$, and note that for each $n\in\naturals$, 
+	\begin{align*}
+		\Psi^n\bracs{v_j}=0, \qquad
+		\ktcurl{}\Psi_n = \chi_{jk}^{\eps}\ktcurl{}\Phi^n + \grad\chi_{jk}^{\eps}\wedge\Phi^n, \qquad
+		\ktcurl{}\Psi_n\bracs{v_j} = 0.
+	\end{align*}
+	We then observe that
+	\begin{align*}
+		\integral{\ddom}{ \abs{\Psi^n-u}^2 }{\ddmes}
+		&= \integral{\ddom}{ \abs{\chi_{jk}^\eps\Phi^n-u}^2 }{\lambda_{jk}} \\
+		&\leq \integral{\ddom}{ \abs{\Phi^n-u}^2 }{\lambda_{jk}} \rightarrow 0 \toInfty{n}.
+	\end{align*}
+	Furthermore, since $\grad\chi_{jk}^\eps$ is only non-zero outside the support of $u$, we have that
+	\begin{align*}
+		\recip{2}\integral{\ddom}{ & \abs{\ktcurl{}\Psi^n - \ktcurl{\ddmes}u}^2 }{\ddmes} \\
+		&\leq \integral{\ddom}{ \abs{\chi_{jk}^{\eps}\ktcurl{}\Phi^n - \ktcurl{\ddmes}u}^2 }{\ddmes}
+		+ \integral{\ddom}{ \abs{\grad\chi_{jk}^{\eps}\wedge\Phi^n}^2 }{\lambda_{jk}} \\
+		&\leq \integral{\ddom}{ \abs{\ktcurl{}\Phi^n - \ktcurl{\ddmes}u}^2 }{\lambda_{jk}} %\\
+%		&\qquad 
+		+ \integral{\ddom}{ \abs{\grad\chi_{jk}^\eps}^2\abs{\Phi^n - u}^2 }{\lambda_{jk}} \\
+		&\leq \norm{\ktcurl{}\Phi^n - \ktcurl{\ddmes}u}_{\ltwo{\ddom}{\lambda_{jk}}^3} \\
+		&\qquad + \sup\abs{\grad\chi_{jk}^\eps}^2\norm{\Phi^n - u}_{\ltwo{\ddom}{\lambda_{jk}}^3} \\
+		&\rightarrow0 \toInfty{n}.
+	\end{align*}
+	This gives us the required convergences for $u\in\ktcurlSob{\ddom}{\ddmes}$, we also observe that $u\in\ktcurlSob{\ddom}{\dddmes}$ through use of the same approximating sequence as
+	\begin{align*}
+		\norm{\Psi^n-u}_{\ltwo{\ddom}{\massMes}^3} = 0 = \norm{\ktcurl{}\Psi^n}_{\ltwo{\ddom}{\massMes}^3}
+	\end{align*}
+	for every $n\in\naturals$.
+\end{proof}
+
+\tstk{but does my $L^1$-to-subsequence trick save us here though? Don't think so, as we still need to link up these functions somehow. Only divergence-free will give us that...}
+The issue preventing us from establishing the converse implication to that in proposition \ref{prop:TC-dddmesImpliesOthers} is the aforementioned lack of control over the components $u_1$ and $u_2$ near the vertices of a graph when we attempt to ``lift" edge-functions.
+In the case of tangential gradients, the we had to depend on continuity of the incoming edge functions at the vertex to circumnavigate this issue, and we also depend on this fact when handling the component $u_3$ of vector fields with tangential curls.
+This continuity does not hold for the incoming components $u_1$ and $u_2$ since knowing the field $u$ possesses a tangential curl does not establish whether these components have gradients of their own.
+However, we can glean more information about what is happening near the vertices if we consider divergence-free vector fields
