@@ -469,8 +469,7 @@ The best we can do (utilising only knowledge of curls) comes when we have a vect
 	for every $n\in\naturals$.
 \end{proof}
 
-\tstk{but does my $L^1$-to-subsequence trick save us here though? Don't think so, as we still need to link up these functions somehow. Only divergence-free will give us that...}
 The issue preventing us from establishing the converse implication to that in proposition \ref{prop:TC-dddmesImpliesOthers} is the aforementioned lack of control over the components $u_1$ and $u_2$ near the vertices of a graph when we attempt to ``lift" edge-functions.
 In the case of tangential gradients, the we had to depend on continuity of the incoming edge functions at the vertex to circumnavigate this issue, and we also depend on this fact when handling the component $u_3$ of vector fields with tangential curls.
-This continuity does not hold for the incoming components $u_1$ and $u_2$ since knowing the field $u$ possesses a tangential curl does not establish whether these components have gradients of their own.
-However, we can glean more information about what is happening near the vertices if we consider divergence-free vector fields
+This continuity does not hold for the incoming components $u_1$ and $u_2$ since knowing the field $u$ possesses a tangential curl does not establish whether these components have gradients of their own, or even directional derivatives along the edges (which would also suffice).
+However, we can glean more information about what is happening near the vertices if we consider divergence-free vector fields.

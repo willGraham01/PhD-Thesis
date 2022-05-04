@@ -75,11 +75,12 @@ That is to say, curls of zero induce rotations ``out of the plane" $P_{jk}$, whi
 
 \tstk{now it's time for the summary of key tangential curl results.}
 Similarly to chapter \ref{ch:ScalarSystem}, having an edge-wise behaviour for the tangential curl and curls of zero (that is, with respect to $\lambda_{jk}$) will allow us to construct those with respect to $\ddmes$ and $\dddmes$.
-These arguments are the focus of \tstk{appendix section}, however we again provide the reader with a summary of the key properties of the tangential curl so that the manipulations in section \tstk{derivation section} can be followed, and to provide some familiarity with the objects that are discussed in \tstk{discussion session where everything is broken}.
+These arguments are the focus of section \ref{sec:CC-CurlAnalysis}, however we again provide the reader with a summary of the key properties of the tangential curl so that the manipulations in section \tstk{derivation section} can be followed, and to provide some familiarity with the objects that are discussed in \tstk{discussion session where everything is broken}.
 To this end, a function $u\in\ktcurlSob{\ddom}{\dddmes}$ has the following properties:
 \begin{enumerate}[(i)]
 	\item On a given edge $I_{jk}$, we have that $\ktcurl{\dddmes}u = \ktcurl{\lambda_{jk}}u$.
-	\item Along the edge $I_{jk}$, only the ``in-plane" components of $u$ are relevant, to this end we set $U^{(jk)} = R_{jk}\begin{pmatrix} u^{(jk)}_1 \\ u^{(jk)}_2 \end{pmatrix}$.
+	\item Along the edge $I_{jk}$, only the ``in-plane" components of $u$ are relevant.
+	To this end we set $U^{(jk)} = R_{jk}\begin{pmatrix} u^{(jk)}_1 \\ u^{(jk)}_2 \end{pmatrix}$.
 	Then we have that $\ktcurl{\lambda_{jk}}u = \bracs{u_3' + \rmi\qm_{jk}u_3 - \rmi\wavenumber U^{(jk)}_2}\widehat{n}_{jk}$, where $\qm_{jk}$ are the same constants from section \ref{sec:ScalarDerivation}, and $u_3'$ is the derivative in the $H^1$ sense of $u^{(jk)}_3\circ r_{jk}$.
 	The term $\rmi\wavenumber U^{(jk)}_2$ resembles the information about any rotation induced by changes in $u$ along the $x_3$-axis that the measure $\lambda_{jk}\times\lambda_1$ can see.
 	\item We have that $u_3\in\ktgradSob{\ddom}{\dddmes}$, so in particular it is continuous at each vertex $v_j$.
