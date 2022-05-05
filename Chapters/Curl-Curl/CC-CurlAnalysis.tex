@@ -414,10 +414,10 @@ Further to this, we know from theorem \tstk{gradient characterisation} that func
 	Again by recognising $c\perp\curlZero{\ddom}{\ddmes}$ implies that $g\perp\gradZero{\ddom}{\ddmes}$, we can conclude that $\phi_n$ serves as an approximating sequence for $\bracs{u,g}\in\ktgradSob{\ddom}{\ddmes}$.
 \end{proof}
 
-Proposition \ref{prop:TC-3rdComponentIFF} also allows us to invoke theorem \tstk{gradient characterisation theorem} to conclude that the component $u_3$ is continuous at the vertices of $\graph$.
+Proposition \ref{prop:TC-3rdComponentIFF} also allows us to invoke theorem \ref{thm:CharOfSobSpaces} to conclude that the component $u_3$ is continuous at the vertices of $\graph$.
 This just leaves questions concerning the remaining two components $u_1$ and $u_2$; we have already seen from proposition \ref{prop:TC-dddmesImpliesOthers} that a function on the whole graph breaks down edge-wise.
-However we are lacking continuity (and even weak differentiability) of $u_1$ and $u_2$ at the vertices, so cannot sum edge-functions to obtain a function on the whole graph in a manner akin to \tstk{gradient case}.
-The best we can do (utilising only knowledge of curls) comes when we have a vector field whose first and second components have support contained in the interior of an edge, analogous to \tstk{tang grad extension lemma}.
+However we are lacking continuity of $u_1$ and $u_2$ at the vertices, (and even weak differentiability along the edges), so cannot sum edge-functions to obtain a function on the whole graph as we could with scalar functions possessing gradients.
+The best we can do (utilising only knowledge of curls) comes when we have a vector field whose first and second components have support contained in the interior of an edge, analogous to lemma \ref{lem:ExtensionLemmaEdgeFunctions}.
 \begin{prop}
 	Suppose that $=\bracs{u_1,u_2,0}^\top\in\ktcurlSob{\ddom}{\lambda_{jk}}$ with $u=0$ outside $I_{jk}^\eps$ for some $\eps>0$.
 	Then $u\in\ktcurlSob{\ddom}{\ddmes}$ and $u\in\ktcurlSob{\ddom}{\dddmes}$ with

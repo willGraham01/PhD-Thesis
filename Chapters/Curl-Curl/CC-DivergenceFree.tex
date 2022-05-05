@@ -3,7 +3,7 @@ As was mentioned in \tstk{the introduction}, the definition of the Maxwell opera
 The fields that solve the curl of the curl equation are also required to be divergence free, and indeed one usually finds the curl of the curl equation posed on a space consisting of divergence-free fields.
 Given the motivation for our consideration of the curl of the curl equation on a singular structure, it is natural for us to consider what the analogue of a divergence free field would be.
 We find ourselves presented with several reasonable definitions for the notion of a divergence free vector field with respect to our singular measures, which we will discuss in turn below.
-However, we will see that the differences between definitions \ref{def:DivFree-AllGradients} and \ref{def:DivFree-TangGradients} is essentially nullified by the result of \tstk{derivation section}, whilst the ``strong" definition \tstk{definition ref} fails to get off the ground.
+However, we will see that the differences between definitions \ref{def:DivFree-AllGradients} and \ref{def:DivFree-TangGradients} is essentially nullified by the result of \tstk{derivation section}, whilst the a ``strong" definition through approximating sequences fails to provide an adequate description (see lemma \ref{lem:DivZero-Everything}).
 
 A characterising feature of (classical) divergence-free fields is that they are orthogonal to all potential vector fields (that is, any vector field equal to the gradient of a scalar function).
 Utilising this analogue with the classical divergence, we can adopt the following definition for our analogue of divergence-free fields:
@@ -125,7 +125,7 @@ The condition (iv) fills the same role at the vertices --- recall that $\massMes
 The condition (v) is then the result of the interaction of the incoming fields at the vertices\footnote{The condition (v) even bears resemblance to a $\delta'$-type vertex condition in a quantum graph problem --- the ``derivative" $\rmi\wavenumber u_3$ at $v_j$ must equal a multiple of the incoming edge functions.}.
 To be divergence free at the vertex $v_j$; the sum of the ``flux" seen by the measure $\ddmes$, represented by the trace values of the $U_2^{(jk)}$ (the sign depending on whether the corresponding edge is directed into or out of the vertex $v_j$), and the ``flux" observed by $\massMes\times\lambda_1$ along the line induced by $v_j$, must balance.
 
-This interpretation does raise the question as to whether we can define \emph{the divergence} of a vector field with respect to our singular measures, akin to how we defined gradients and curls in section \tstk{prelims section} --- we come to this later.
+This interpretation does raise the question as to whether we can define \emph{the divergence} of a vector field with respect to our singular measures, akin to how we defined gradients and curls in section \ref{sec:BorelMeasSobSpaces} --- we come to this later.
 At present, we instead ask the question about whether being divergence-free should necessitate that a field be orthogonal to gradients of zero.
 Classically of course, there are no ``gradients of zero" and so there is no distinction between tangential gradients and gradients of zero.
 Consequentially, divergence free functions being orthogonal to gradients is functionally the same as them being orthogonal to all tangential gradients.
@@ -158,7 +158,7 @@ Indeed, this characterisation retains precisely the conditions (ii), (iii), and 
 We purposefully retain the same labels as proposition \ref{prop:DivFree-AllGradsConditions}.
 Similarly to how tangential gradients and curls only encode information about changes of functions or fields in the plane, a field being tangentially divergence free only imposes balance between the changes (in their respective directions) of the in-plane components of a vector field $u$.
 
-This brings us closer to the idea of defining a ``tangential divergence" in a similar manner to that of gradients and curls in section \tstk{ref!}.
+This brings us closer to the idea of defining a ``tangential divergence" in a similar manner to that of gradients and curls in section \ref{sec:BorelMeasSobSpaces}.
 If we bring each of the terms in (v) over to the left-hand side, we now have a function $F\in\pltwo{\ddom}{\dddmes}$ with
 \begin{align} \label{eq:ktDivergence-Guess}
 	F(x) &= 
@@ -220,7 +220,7 @@ with the closure taken in $\ltwo{\ddom}{\rho}^3\times\ltwo{\ddom}{\rho}$, and de
 \begin{align*}
 	\mathcal{D}_{\ddom,\md\rho}\bracs{0} &= \clbracs{d \setVert \bracs{0,d}\in W_{\rho,\mathrm{div}}^{\kt}}.
 \end{align*}
-Similar arguments to those in section \tstk{ref} would inform us that $\mathcal{D}_{\ddom,\md\rho}\bracs{0}$ does not depend on the value of $\kt$, and is a closed, linear subspace of $\pltwo{\ddom}{\rho}$.
+Similar arguments to those in section \ref{sec:BorelMeasSobSpaces} establish that $\mathcal{D}_{\ddom,\md\rho}\bracs{0}$ does not depend on the value of $\kt$, and is a closed, linear subspace of $\pltwo{\ddom}{\rho}$.
 Hence we can decompose $\pltwo{\ddom}{\rho}$ as the direct sum of $\mathcal{D}_{\ddom,\md\rho}\bracs{0}$ and its orthogonal complement.
 In turn, we would find that a function has at most one ``tangential divergence", and thus could define the Sobolev space of functions possessing divergences as
 \begin{align*}
@@ -229,7 +229,7 @@ In turn, we would find that a function has at most one ``tangential divergence",
 \end{align*}
 So far there have been no problems.
 However once we consider the divergences of zero on a single edge of our singular structure, we will quickly see an issue:
-\begin{lemma}
+\begin{lemma} \label{lem:DivZero-Everything}
 	For any edge $I_{jk}$, we have that $\mathcal{D}_{\ddom,\md\lambda_{jk}}\bracs{0}=\pltwo{\ddom}{\lambda_{jk}}$.
 \end{lemma}
 \begin{proof}
@@ -237,8 +237,8 @@ However once we consider the divergences of zero on a single edge of our singula
 	Then the smooth function $\varphi\widehat{n}_{jk}\in\csmooth{\ddom}^3$ is such that $\varphi=0$ and $\grad\cdot\varphi\widehat{n}_{jk}=\phi$ on $I_{jk}$, so $\phi\in\mathcal{D}_{\ddom,\md\lambda_{jk}}\bracs{0}$.
 	A density argument then completes the proof.
 \end{proof}
-Further to this, it is not difficult to prove an analogy of the extension lemmas \tstk{gradient and curl of zero extension lemmas} for these divergences of zero.
-Neither is it difficult to show that $\mathcal{D}_{\ddom,\md\massMes}\bracs{0}=\pltwo{\ddom}{\massMes}$, and consequentially that an analogue of \tstk{curl and gradient of zero char theorems} holds, so every tangential divergence is zero!
+Further to this, it is not difficult to prove an analogy of the extension results (proposition \ref{prop:3DGradZeroChar} and theorem \ref{thm:CurlZeroChar}) for these divergences of zero.
+Neither is it difficult to show that $\mathcal{D}_{\ddom,\md\massMes}\bracs{0}=\pltwo{\ddom}{\massMes}$, and consequentially that an analogue of theorem \ref{thm:3DdddmesCharGradZero} and proposition \ref{prop:ThickVertexCurlZeroCharacterisation} holds, so every tangential divergence is zero!
 We should not be surprised at this result --- the divergence is a scalar representing the net flow of a vector field out of a given point $x$.
 However our singular measure cannot see any such flux across the edges $I_{jk}$ (or out of the planes $P_{jk}$), thus any divergence induced by such a flux must be a divergence of zero.
 However it is then impossible to know ``how much" of the scalar divergence would be due to these unobservable fluxes across $I_{jk}$, and how much was from the observable portions of the vector field along $I_{jk}$.
