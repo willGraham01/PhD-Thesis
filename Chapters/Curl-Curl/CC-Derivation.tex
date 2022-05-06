@@ -1,205 +1,144 @@
 \section{Derivation of quantum graph problem} \label{sec:3DSystemDerivation}
-
-\tstk{UNCHANGED FROM PREVIOUS NOTES!!!!}
-
-In this section we provide an overview of how the system \eqref{eq:3DQGFullSystem} is obtained from \eqref{eq:PeriodCellCurlCurlStrongForm}, which will setup our discussion concerning the tools for determining the spectrum of \eqref{eq:3DQGFullSystem} in section \ref{sec:3DDiscussion}.
-To reiterate what was said at the end of section \ref{sec:QuantumGraphs}, convention \ref{ass:MeasTheoryProblemSetup} is adopted throughout this section and the rest of this work. 
-
-Precise definition and analysis of the ``Sobolev spaces" defined here can be found in the appendices \ref{app:MeasureTheory}-\ref{app:SumMeasureAnalysis}, but we provide a short intuitive idea of the object $\ktgrad_{\dddmes}$ and its implications for the concepts of gradient, divergence, and curl here.
-The central idea surrounding these concepts involves determining the information (about a function) that is ``lost" due to the measure $\dddmes$ only supporting the edges and vertices of an embedded graph $\graph$, which is a set without any interior from the perspective of the region $\ddom$ into which it is embedded.
-Another key result to note is that, since $\dddmes$ is the sum of a singular measure supporting the edges of $\graph$ ($\ddmes$) and point-masses at the vertices ($\nu$), functions in $\ktgradSob{\ddom}{\dddmes}$ possess both the properties of functions in $\ktgradSob{\ddom}{\ddmes}$ and $\ktgradSob{\ddom}{\nu}$ (analogous statements hold for the curl spaces too).
-
-With this in mind, to understand $\ktgrad_{\dddmes}u$ we consider the behaviour of $\ktgrad_{\ddmes}u$ (the part of the gradient on the edges) and $\ktgrad_{\nu}u$ (the part on the vertices).
-On the edges, the measure $\ddmes$ cannot see any changes in a function $u$ that occur ``across" (specifically, in the direction perpendicular to) the edges of $\graph$.
-So at any point $x\in I_{jk}$, the gradient $\ktgrad_{\ddmes}u$ encapsulates the rate of change of the function $u$ \emph{only in the direction along the edge} $I_{jk}$, and it not inaccurate to think of $\ktgrad_{\ddmes}u(y) = \bracs{u^{(jk)}}'(y)e_{jk}$ for $y\in I_{jk}$, where $\bracs{u^{(jk)}}' = \pdiff{u^{(jk)}}{e_{jk}}$.
-The curl $\ktcurl{\ddmes}u$ of a vector field $u$ tells a similar story; an in-depth interpretation is provided in appendix \ref{apps:CurlsOfZero}, but the consequence is that the curl is directed normal to the edges of $\graph$ so as to induce a rotation ``within" the edge $I_{jk}$ (appendix \ref{apps:CurlsOfZero} has precise details).
-Finally, for a vector field $u$ to be divergence free on the edges of $\graph$, it must be orthogonal to all gradients.
-This results the requirement that, on any given edge $I_{jk}$ the components of $u$ ``directed down the edge" must satisfy a particular ODE, and contributions of these components from connected edges must sum to zero at common vertices (see theorem \ref{thm:DivFreeEdgesCharacterisation}).
-For the behaviour of functions at the vertices of $\graph$ we can apply similar intuition, but the ``view" of the measure $\nu$ is even more restricted than that of $\ddmes$, only being able to see isolated points in $\ddom$ corresponding to the placement of vertices.
-It transpires that because of this, $\nu$ cannot see any changes ``across" the vertices, which results in all gradients $\ktgrad_{\nu}u=0$ and all curls being essentially zero too.
-The requirement that a vector field $u$ be divergence-free even transpires to be necessary and sufficient to having $u=0$ at all the vertices.
-
-Before we begin the derivation, let us establish some notation.
-Let $u=\bracs{u_1,u_2,u_3}^\top\in\ktcurlSob{\ddom}{\dddmes}$ be divergence-free, and let $\Phi=\bracs{\phi_1,\phi_2,\phi_3}^\top\in\smooth{\ddom}^3$.
+We now derive the system \eqref{eq:3DQGFullSystem} from \eqref{eq:PeriodCellCurlCurlStrongForm}.
+Let $u=\bracs{u_1,u_2,u_3}^\top\in\ktcurlSob{\ddom}{\dddmes}$ and let $\Phi=\bracs{\phi_1,\phi_2,\phi_3}^\top\in\psmooth{\ddom}^3$.
 Also define for each $I_{jk}\in\edgeSet$,
 \begin{align*}
 	U^{(jk)} := R_{jk} \begin{pmatrix} u_1^{(jk)} \\ u_2^{(jk)} \end{pmatrix},
 	\qquad
 	\Psi^{(jk)} := R_{jk} \begin{pmatrix} \phi_1^{(jk)} \\ \phi_2^{(jk)} \end{pmatrix}.
 \end{align*}
-Use an overhead tilde to denote composition with $r_{jk}$, and for a function $v$ with $\widetilde{v}^{(jk)}\in\ktgradSob{\interval{I_{jk}}}{y}$ write $\bracs{v^{(jk)}}' := \bracs{\widetilde{v}^{(jk)}}' \circ r_{jk}^{-1}$.
-Finally, for a given quasi-momentum $\qm$, set $\qm_{jk} = \bracs{ R_{jk}\qm }_2 = \qm\cdot e_{jk}$, and let
-\begin{align*}
-	\ktcurlSobDivFree{\ddom}{\dddmes} &=
-	\clbracs{ u\in\ktcurlSob{\ddom}{\dddmes} \setVert u \text{ is } \kt\text{-divergence-free with respect to } \dddmes}.
-\end{align*}
-A summary of all the important results which will be used in the derivation that follows is provided below, for $u\in\ktcurlSobDivFree{\ddom}{\dddmes}$:
-\begin{enumerate}[(a)]
-	\item (Theorem \ref{thm:TangCurlGraph}): For every edge $I_{jk}$, $\ktcurl{\dddmes}u$ points normal to the edge $I_{jk}$, and has the form
-	\begin{align*}
-		\ktcurl{\dddmes}u(x) = \bracs{ \bracs{u_3^{(jk)}}'(x) + \rmi\qm_{jk} u_3^{(jk)}(x) - \rmi\wavenumber U_2^{(jk)}(x) } \hat{n}_{jk}, \quad x\in I_{jk}.
-	\end{align*}
-	\item (Proposition \ref{prop:CurlImpliesThirdCompGradient}): $u_3\in\ktgradSob{\ddom}{\ddmes}$ is continuous at every $v_j\in\vertSet$.
-	\item (Corollary \ref{cory:VertexCurlSob}): At every vertex $v_j\in\vertSet$, $\ktcurl{\dddmes}u = 0$.
-	Note that this \emph{does not} necessitate that
-	\begin{align*}
-		\lim_{\substack{x\rightarrow v_j \\ x\in I_{jk}, \\ j\con k}}\ktcurl{\dddmes}u(x) = 0,
-	\end{align*}
-	since this is a behaviour induced by the measure $\nu$ as a part of $\dddmes$, and is disconnected from the behaviour of the curl on the edges.
-	\item (Proposition \ref{prop:ThickVertexDivFree}): On every edge $I_{jk}$ we have $U_1^{(jk)}=0$ and
-	\begin{align*}
-		\bracs{U_2^{(jk)}}' + \rmi\qm_{jk} U_2^{(jk)} + \rmi\wavenumber u_3^{(jk)} = 0.
-	\end{align*}
-	\item (Proposition \ref{prop:ThickVertexDivFree}): At every vertex $v_j$, we have that $u_1(v_j) = u_2(v_j) = 0$ and
-	\begin{align*}
-		\sum_{j\conRight k} U_2^{(jk)}\bracs{v_j} - \sum_{j\conLeft k} U_2^{(jk)}\bracs{v_j} = \rmi\wavenumber\alpha_j u_3\bracs{v_j}.
-	\end{align*}
-\end{enumerate}
-\tstk{subject to divergence-free and divergence definition reviews, we might want to rewrite the above summary}
-
-We now derive the system \eqref{eq:3DQGFullSystem} from \eqref{eq:PeriodCellCurlCurlStrongForm}.
+We use an overhead tilde to denote composition with $r_{jk}$, and for a function $v$ with $\widetilde{v}^{(jk)}\in\ktgradSob{\sqbracs{0,l_{jk}}}{y}$ write $\bracs{v^{(jk)}}' := \bracs{\widetilde{v}^{(jk)}}' \circ r_{jk}^{-1}$.
+Finally, for a given quasi-momentum $\qm$, set $\qm_{jk} = \bracs{ R_{jk}\qm }_2 = \qm\cdot e_{jk}$.
+%, and let
+%\begin{align*}
+%	\ktcurlSobDivFree{\ddom}{\dddmes} &=
+%	\clbracs{ u\in\ktcurlSob{\ddom}{\dddmes} \setVert u \text{ is } \kt\text{-divergence-free with respect to } \dddmes}.
+%\end{align*}
 A function $u\in\ktcurlSob{\ddom}{\dddmes}$ is a solution to \eqref{eq:PeriodCellCurlCurlStrongForm} if
 \begin{align} \label{eq:PeriodCellCurlCurlWeakForm}
-	\integral{\ddom}{ \ktcurl{\dddmes}u\cdot\overline{\ktcurl{\dddmes}\Phi} }{\dddmes} &= \omega^2 \integral{\ddom}{ u\cdot\overline{\Phi} }{\dddmes},
-	\quad\forall \Phi\in\smooth{\ddom}^3.
+	\integral{\ddom}{ \ktcurl{\dddmes}u\cdot\overline{\ktcurl{\dddmes}\Phi} }{\dddmes} 
+	&= \omega^2 \integral{\ddom}{ u\cdot\overline{\Phi} }{\dddmes},
+	\quad\forall \Phi\in\psmooth{\ddom}^3.
 \end{align}
-Notice that we immediately have $u\in\ktcurlSobDivFree{\ddom}{\dddmes}$ from \eqref{eq:PeriodCellCurlCurlWeakForm}, since we can choose $\Phi = \ktgrad\phi$ for any smooth $\phi$ (and apply proposition \ref{prop:CurlOfGradIsZero} and corollary \ref{cory:DivFreeSufficient}).
-The equality in \eqref{eq:PeriodCellCurlCurlWeakForm} holds (in particular) whenever we take $\Phi$ to be a smooth function whose support only intersects (the interior of) an edge $I_{jk}$, and no other parts of the graph $\graph$.
-In this case, \eqref{eq:PeriodCellCurlCurlWeakForm} reduces to
+We immediately have that $u$ is $\kt$-divergence free (in the sense of definition \ref{def:DivFree-TangGradients}), since for any $v\in\ktgradSob{\ddom}{\dddmes}$ we can take an approximating sequence $\Phi^n$ for $v$ and obtain
 \begin{align*}
-	\integral{I_{jk}}{ \ktcurl{\ddmes}u\cdot\overline{\ktcurl{\ddmes}\Phi} }{\lambda_{jk}} &= \omega^2 \integral{I_{jk}}{ u\cdot\overline{\Phi} }{\lambda_{jk}},
+	\omega^2\integral{\ddom}{ u\cdot\overline{\ktgrad_{\dddmes}v} }{\dddmes}
+	&= \omega^2 \lim_{n\rightarrow\infty} \integral{\ddom}{ u\cdot\overline{\ktgrad\Phi^n} }{\dddmes} \\
+	&= \lim_{n\rightarrow\infty} \integral{\ddom}{ \ktcurl{\dddmes}u\cdot\overline{\ktcurl{\dddmes}\ktgrad\Phi^n} }{\dddmes}
+	= 0,
 \end{align*}
-since the contribution at the vertices is zero due to the choice of $\Phi$.
-By (a) we have that
+through using lemma \ref{lem:CurlOfGradSmoothFunctions}.
+Note that we can similarly show that $u$ is orthogonal to all gradients of zero via the same trick, however we will see that the additional information (the conditions (i) and (iv) in proposition \ref{prop:DivFree-AllGradsConditions}) is obtained more directly in what follows.
+
+Now let us fix an edge $I_{jk}$ and take $\Phi$ such that $\supp\Phi\cap\graph\subset I_{jk}^{\circ}$.
+The equation \eqref{eq:PeriodCellCurlCurlWeakForm} reduces to
 \begin{align*}
-	\integral{I_{jk}}{ \bracs{ \bracs{u_3^{(jk)}}' + \rmi\qm_{jk} u_3^{(jk)} - \rmi\wavenumber U_2^{(jk)} }\overline{\bracs{ \bracs{\phi_3^{(jk)}}' + \rmi\qm_{jk} \phi_3^{(jk)} - \rmi\wavenumber \Psi_2^{(jk)} }} }{\lambda_{jk}}
-	&= \omega^2 \integral{I_{jk}}{ u\cdot\overline{\Phi} }{\lambda_{jk}},
+	\omega^2 \integral{I_{jk}}{ u\cdot\overline{\Phi} }{\lambda_{jk}}
+	&= \integral{I_{jk}}{ \ktcurl{\ddmes}u\cdot\overline{\ktcurl{\ddmes}\Phi} }{\lambda_{jk}} \\
+	&= \integral{I_{jk}}{ \bracs{ \bracs{u_3^{(jk)}}' + \rmi\qm_{jk} u_3^{(jk)} - \rmi\wavenumber U_2^{(jk)} }\overline{\bracs{ \bracs{\phi_3^{(jk)}}' + \rmi\qm_{jk} \phi_3^{(jk)} - \rmi\wavenumber \Psi_2^{(jk)} }} }{\lambda_{jk}}.
 \end{align*}
-and then using the change of variables $r_{jk}$ this implies
-\begin{align*} 
-	\int_0^{\abs{I_{jk}}} \bracs{ \bracs{\widetilde{u}_3^{(jk)}}' + \rmi\qm_{jk} \widetilde{u}_3^{(jk)} - \rmi\wavenumber \widetilde{U}_2^{(jk)} } 
-	& \bracs{ \bracs{\overline{\widetilde{\phi}}_3^{(jk)}}' - \rmi\qm_{jk} \overline{\widetilde{\phi}}_3^{(jk)} + \rmi\wavenumber \overline{\widetilde{\Psi}}_2^{(jk)} } \ \md y 
-	\\
-	&= \omega^2 \int_0^{\abs{I_{jk}}} \widetilde{U}_1^{(jk)}\overline{\widetilde{\Psi}}_1^{(jk)} + \widetilde{U}_2^{(jk)}\overline{\widetilde{\Psi}}_2^{(jk)} + \widetilde{u}_3^{(jk)}\overline{\widetilde{\phi}}_3^{(jk)} \ \md y,
+Using the change of variables $r_{jk}$ we obtain
+\begin{align*}
+	\int_0^{l_{jk}} & \bracs{ \bracs{\widetilde{u}_3^{(jk)}}' + \rmi\qm_{jk} \widetilde{u}_3^{(jk)} - \rmi\wavenumber \widetilde{U}_2^{(jk)} } \bracs{ \bracs{\overline{\widetilde{\phi}}_3^{(jk)}}' - \rmi\qm_{jk} \overline{\widetilde{\phi}}_3^{(jk)} + \rmi\wavenumber \overline{\widetilde{\Psi}}_2^{(jk)} } \ \md y \\
+	&= \omega^2 \int_0^{l_{jk}} \widetilde{U}_1^{(jk)}\overline{\widetilde{\Psi}}_1^{(jk)} + \widetilde{U}_2^{(jk)}\overline{\widetilde{\Psi}}_2^{(jk)} + \widetilde{u}_3^{(jk)}\overline{\widetilde{\phi}}_3^{(jk)} \ \md y.
 \end{align*}
-which holds for all $\widetilde{\Psi}_2^{(jk)}, \widetilde{\phi}_3^{(jk)}\in\smooth{\interval{I_{jk}}}$ with compact support in $\bracs{0,\abs{I_{jk}}}$.
-Therefore, for all $\psi\in\smooth{\interval{I_{jk}}}$ with compact support in $\bracs{0,\abs{I_{jk}}}$ we have that,
+Now suppose we have $\varphi_1,\varphi_2\in\csmooth{\sqbracs{0,l_{jk}}}$.
+Since the system
+\begin{align*}
+	\begin{pmatrix} \phi_1 \\ \phi_2 \end{pmatrix} &= R_{jk}^\top \begin{pmatrix} \varphi_1 \\ \varphi_2 \end{pmatrix}
+\end{align*}
+has a unique solution, we can construct a $\Phi\in\csmooth{\ddom}$ with $\supp\Phi\cap\graph\subset I_{jk}^{\circ}$, $\widetilde{\Psi}_1^{(jk)}=\varphi_1$, and $\widetilde{\Psi}_2^{(jk)}=\varphi_2$.
+We thus observe that
+\begin{align*}
+	\int_0^{l_{jk}} & \bracs{ \bracs{\widetilde{u}_3^{(jk)}}' + \rmi\qm_{jk} \widetilde{u}_3^{(jk)} - \rmi\wavenumber \widetilde{U}_2^{(jk)} } \bracs{ \overline{\varphi_3}' - \rmi\qm_{jk} \overline{\varphi_3} + \rmi\wavenumber \overline{\varphi_2} } \ \md y \\
+	&= \omega^2 \int_0^{l_{jk}} \widetilde{U}_1^{(jk)}\overline{\varphi_1} + \widetilde{U}_2^{(jk)}\overline{\varphi_2} + \widetilde{u}_3^{(jk)}\overline{\varphi_3} \ \md y
+\end{align*}
+holds for any $\varphi_1,\varphi_2,\varphi_3\in\csmooth{\sqbracs{0,l_{jk}}}$.
+Therefore it must hold that for any $\varphi\in\csmooth{\sqbracs{0,l_{jk}}}$,
 \begin{subequations}
 	\begin{align*}
-		0 &= \int_0^{\abs{I_{jk}}} \overline{\psi} \widetilde{U}_1^{(jk)} \ \md y, \labelthis\label{eq:CurlCurlWeakFormPhi1} \\
-		0 &= \int_0^{\abs{I_{jk}}} \overline{\psi} \bracs{ \rmi\wavenumber\bracs{\widetilde{u}_3^{(jk)}}' + \bracs{\wavenumber^2 - \omega^2}\widetilde{U}_2^{(jk)} - \wavenumber\qm_{jk}\widetilde{u}_3^{(jk)}  } \ \md y, \labelthis\label{eq:CurlCurlWeakFormPhi2} \\
-		0 &= \int_0^{\abs{I_{jk}}} \overline{\psi}' \bracs{ \bracs{\widetilde{u}_3^{(jk)}}'
+		0 &= \int_0^{l_{jk}} \overline{\varphi} \widetilde{U}_1^{(jk)} \ \md y, \labelthis\label{eq:CurlCurlWeakFormPhi1} \\
+		0 &= \int_0^{l_{jk}} \overline{\varphi} \bracs{ \rmi\wavenumber\bracs{\widetilde{u}_3^{(jk)}}' + \bracs{\wavenumber^2 - \omega^2}\widetilde{U}_2^{(jk)} - \wavenumber\qm_{jk}\widetilde{u}_3^{(jk)}  } \ \md y, \labelthis\label{eq:CurlCurlWeakFormPhi2} \\
+		0 &= \int_0^{l_{jk}} \overline{\varphi}' \bracs{ \bracs{\widetilde{u}_3^{(jk)}}'
 		- \rmi\wavenumber\widetilde{U}_2^{(jk)} + \rmi\qm_{jk}\widetilde{u}_3^{(jk)} } \\
-		&\qquad -\rmi\qm_{jk}\overline{\psi}\bracs{ \bracs{\widetilde{u}_3^{(jk)}}' - \rmi\wavenumber\bracs{\widetilde{U}_2^{(jk)}}' + \rmi\qm_{jk}\widetilde{u}_3^{(jk)} }
-		- \omega^2 \widetilde{u}_3^{(jk)}\overline{\psi} \ \md y. \labelthis\label{eq:CurlCurlWeakFormPhi3}
+		&\qquad -\rmi\qm_{jk}\overline{\varphi}\bracs{ \bracs{\widetilde{u}_3^{(jk)}}' - \rmi\wavenumber\bracs{\widetilde{U}_2^{(jk)}}' + \rmi\qm_{jk}\widetilde{u}_3^{(jk)} }
+		- \omega^2 \widetilde{u}_3^{(jk)}\overline{\varphi} \ \md y. \labelthis\label{eq:CurlCurlWeakFormPhi3}
 	\end{align*}
 \end{subequations}
-Equation \eqref{eq:CurlCurlWeakFormPhi1} immediately implies that $\widetilde{U}_1^{(jk)}=0$ on $I_{jk}$.
-Given (b) and (d), \eqref{eq:CurlCurlWeakFormPhi3} can be manipulated to demonstrate that
+The equation \eqref{eq:CurlCurlWeakFormPhi1} implies that $U_1^{(jk)}=0$ (almost everywhere) on $I_{jk}$, whilst \eqref{eq:CurlCurlWeakFormPhi2} implies that
 \begin{align*}
-	-\int_0^{\abs{I_{jk}}} \overline{\psi}' \widetilde{u}'_{3,jk} \ \md y
-	&= \int_0^{\abs{I_{jk}}} \overline{\psi} \bracs{ \rmi\wavenumber\widetilde{U}'_{2,jk} - \wavenumber\qm_{jk}\widetilde{U}_{2,jk} - 2\rmi\qm_{jk}\widetilde{u}'_{3,jk} + \qm_{jk}^2\widetilde{u}_{3,jk} - \omega^2\widetilde{u}_{3,jk} } \ \md y.
+	\rmi\wavenumber\bracs{\diff{}{y} + \rmi\qm_{jk}}\widetilde{u}_3^{(jk)} + \wavenumber^2\widetilde{U}_2^{(jk)} &= \omega^2\widetilde{U}_2^{(jk)},
 \end{align*}
-This holds for all such $\psi$, so $\bracs{\widetilde{u}_3^{(jk)}}'\in\gradSob{\interval{I_{jk}}}{y}$  --- that is, $\widetilde{u}$ is twice (weakly) differentiable.
-As such, \eqref{eq:CurlCurlWeakFormPhi3} implies
+on $I_{jk}$.
+Given that $u$ is divergence-free, we know that $\widetilde{U}_2^{(jk)}$ is weakly differentiable in the $\gradSob{\sqbracs{0,l_{jk}}}{y}$-sense and can manipulate \eqref{eq:CurlCurlWeakFormPhi3} to obtain
 \begin{align*}
-	0 &= \int_0^{\abs{I_{jk}}} \overline{\psi} \bracs{ \rmi\wavenumber\bracs{\widetilde{U}_2^{(jk)}}' - \wavenumber\qm_{jk}\widetilde{U}_2^{(jk)} - \bracs{\widetilde{u}_3^{(jk)}}'' - 2\rmi\qm_{jk}\bracs{\widetilde{u}_3^{(jk)}}' + \qm_{jk}^2\widetilde{u}_3^{(jk)} - \omega^2\widetilde{u}_3^{(jk)} } \ \md y,
+	\int_0^{l_{jk}} \overline{\varphi}' \widetilde{u}'_{3,jk} \ \md y
+	&= -\int_0^{l_{jk}} \overline{\psi} \bracs{ \rmi\wavenumber\widetilde{U}'_{2,jk} - \wavenumber\qm_{jk}\widetilde{U}_{2,jk} - 2\rmi\qm_{jk}\widetilde{u}'_{3,jk} + \qm_{jk}^2\widetilde{u}_{3,jk} - \omega^2\widetilde{u}_{3,jk} } \ \md y.,
 \end{align*}
-and since \eqref{eq:CurlCurlWeakFormPhi2} and the equation above hold for all smooth $\psi$ with compact support, (after some rearranging) we have
-\begin{subequations} \label{eq:QGPhiStandalone}
-	\begin{align}
-		\rmi\wavenumber \bracs{ \diff{}{y} + \rmi\qm_{jk} }\widetilde{u}_3^{(jk)} + \wavenumber^2\widetilde{U}_2^{(jk)} &= \omega^2\widetilde{U}_2^{(jk)}, \label{eq:QGPhi2Standalone} \\
-		-\bracs{ \diff{}{y} + \rmi\qm_{jk} }^2\widetilde{u}_3^{(jk)} + \rmi\wavenumber\bracs{ \diff{}{y} + \rmi\qm_{jk} }\widetilde{U}_2^{(jk)} &= \omega^2 \widetilde{u}_3^{(jk)}, \label{eq:QGPhi3Standalone}
-	\end{align}
-\end{subequations}
-on each $I_{jk}$.
+for all $\varphi\in\csmooth{\sqbracs{0,l_{jk}}}$.
+Thus we can conclude that $\widetilde{u}_3\in\gradgradSob{\sqbracs{0,l_{jk}}}{y}$, from which we deduce that
+\begin{align*}
+	-\bracs{ \diff{}{y} + \rmi\qm_{jk} }^2\widetilde{u}_3^{(jk)} + \rmi\wavenumber\bracs{ \diff{}{y} + \rmi\qm_{jk} }\widetilde{U}_2^{(jk)} &= \omega^2 \widetilde{u}_3^{(jk)}
+\end{align*}
+on $I_{jk}$.
+This provides us with a system of coupled ODEs on each of the edges $I_{jk}$ (and the information that the component $\widetilde{U}_1^{(jk)}=0$ on each edge).
 
-Now we return to \eqref{eq:PeriodCellCurlCurlWeakForm}, and fix a vertex $v_j\in\vertSet$.
-Consider smooth $\Phi$ with whose support contains the vertex $v_j$ in its interior, and no other vertices of $\graph$.
-In which case, we have that
+Now we look at how these edge ODEs are coupled at the vertices.
+Fix a vertex $v_j$ and consider a $\Phi\in\csmooth{\ddom}$ whose support contains $v_j$ in its interior, and no other vertices of $\graph$.
+Testing against such $\Phi$ in \eqref{eq:PeriodCellCurlCurlWeakForm} implies that
 \begin{align*}
-	\integral{\ddom}{ \ktcurl{\dddmes}u\cdot\overline{\ktcurl{\dddmes}\Phi} - \omega^2 u\cdot\overline{\Phi} }{\nu}
-	&= - \omega^2 \alpha_j u\bracs{v_j}\cdot\overline{\Phi}\bracs{v_j},
+	\alpha_j\omega^2 u(v_j)\cdot\overline{\Phi}(v_j)
+	&= \integral{\ddom}{ \ktcurl{\ddmes}u\cdot\overline{\ktcurl{\ddmes}\Phi} - \omega^2 u\cdot\overline{\Phi} }{\ddmes} \\
+	&= \sum_{j\con k}\integral{I_{jk}}{ \bracs{ \bracs{u_3^{(jk)}}' + \rmi\qm_{jk}u_3^{(jk)} - \rmi\wavenumber U_2^{(jk)}} \bracs{ \bracs{\overline{\phi}_3^{(jk)}}' - \rmi\qm_{jk}\overline{\phi}_3^{(jk)} + \rmi\wavenumber \overline{\Psi}_2^{(jk)}} \\
+	&\qquad - \omega^2 U_1^{(jk)}\overline{\Psi}_1 - \omega^2 U_2^{(jk)}\overline{\Psi}_2 - \omega^2 u_3^{(jk)}\overline{\phi}_3 }{\lambda_{jk}} \\
+	&= \sum_{j\con k}\int_0^{l_{jk}} \bracs{ \bracs{\widetilde{u}_3^{(jk)}}' + \rmi\qm_{jk}\widetilde{u}_3^{(jk)} - \rmi\wavenumber \widetilde{U}_2^{(jk)}} \bracs{ \bracs{\overline{\widetilde{\phi}}_3^{(jk)}}' - \rmi\qm_{jk}\overline{\widetilde{\phi}}_3^{(jk)} + \rmi\wavenumber \overline{\widetilde{\Psi}}_2^{(jk)}} \\
+	&\qquad - \bracs{\bracs{\widetilde{u}_3^{(jk)}}' + \rmi\qm_{jk}\widetilde{u}_3^{(jk)} - \rmi\wavenumber \widetilde{U}_2^{(jk)}}\rmi\wavenumber\overline{\widetilde{\Psi}_2^{(jk)}} - \omega^2 \widetilde{u}_3^{(jk)}\overline{\widetilde{\phi}}_3 \ \md y \\
+	&= -\sum_{j\con k}\int_0^{l_{jk}} \overline{\widetilde{\phi}}_3
+	\sqbracs{ \bracs{\widetilde{u}_3^{(jk)}}'' + 2\rmi\qm_{jk}\bracs{\widetilde{u}_3^{(jk)}}' + \bracs{\rmi\qm_{jk}}^2\widetilde{u}_3^{(jk)} + \omega^2\widetilde{u}_3^{(jk)} } \\
+	&\qquad - \overline{\widetilde{\phi}}_3\sqbracs{\rmi\wavenumber\bracs{ \bracs{\widetilde{U}_2^{(jk)}}' + \rmi\qm_{jk}\widetilde{U}_2^{(jk)} } } \ \md y \\
+	&\qquad + \overline{\phi}_3(v_j)\sqbracs{ \sum_{j\con k}\bracs{\pdiff{}{n}+\rmi\qm_{jk}}u_3^{(jk)}(v_j) + \sum_{j\conRight k}U_2^{(kj)}(v_j) - \sum_{j\conLeft k}U_2^{(jk)}(v_j) } \\
+	&= \overline{\phi}_3(v_j)\sqbracs{ \sum_{j\con k}\bracs{\pdiff{}{n}+\rmi\qm_{jk}}u_3^{(jk)}(v_j) + \sum_{j\conRight k}U_2^{(kj)}(v_j) - \sum_{j\conLeft k}U_2^{(jk)}(v_j) },
 \end{align*}
-since tangential curls are zero at the vertices, and
+where $U_2^{(jk)}(v_j)$ is the trace of $U_2^{(jk)}$ to the vertex $v_j$.
+Identifying that this holds for all $\phi_1(v_j), \phi_2(v_j), \phi_3(v_j)\in\complex$, we must conclude that
 \begin{align*}
-	& \integral{\ddom}{ \ktcurl{\dddmes}u\cdot\overline{\ktcurl{\dddmes}\Phi} - \omega^2 u\cdot\overline{\Phi} }{\ddmes} \\
-	&= \sum_{j\con k}\integral{I_{jk}}{ \bracs{ \bracs{u_3^{(jk)}}' + \rmi\qm_{jk} u_3^{(jk)} - \rmi\wavenumber U_2^{(jk)} }\overline{\bracs{ \bracs{\phi_3^{(jk)}}' + \rmi\qm_{jk} \phi_3^{(jk)} - \rmi\wavenumber \Psi_2^{(jk)} }} - \omega^2 u\cdot\overline{\Phi} }{\lambda_{jk}} \\
-	&= \sum_{j\con k}\integral{I_{jk}}{ \bracs{ \bracs{u_3^{(jk)}}' + \rmi\qm_{jk} u_3^{(jk)} - \rmi\wavenumber U_2^{(jk)} }\overline{\bracs{ \bracs{\phi_3^{(jk)}}' + \rmi\qm_{jk} \phi_3^{(jk)} }} - \omega^2 u_3^{(jk)}\overline{\phi}_3^{(jk)} }{\lambda_{jk}},
+	u_1(v_j) &= 0, \\
+	u_2(v_j) &= 0, \\
+	\alpha_j\omega^2u_3(v_j) &= \sum_{j\con k}\bracs{\pdiff{}{n}+\rmi\qm_{jk}}u_3^{(jk)}(v_j) + \sum_{j\conRight k}U_2^{(kj)}(v_j) - \sum_{j\conLeft k}U_2^{(jk)}(v_j).
 \end{align*}
-since we know $U_1^{(jk)}=0$ on every edge, and \eqref{eq:CurlCurlWeakFormPhi2}.
-
-Since \eqref{eq:PeriodCellCurlCurlWeakForm} holds for each of these $\Phi$ too, we have that
-\begin{align*}
-	\alpha_j \omega^2 u_3\bracs{v_j} \overline{\phi}_3\bracs{v_j} 
-	&= \sum_{j\con k} \integral{I_{jk}}{ \bracs{ \bracs{u_3^{(jk)}}' + \rmi\qm_{jk} u_3^{(jk)} - \rmi\wavenumber U_2^{(jk)} } \overline{ \bracs{ \bracs{\phi_3^{(jk)}}' + \rmi\qm_{jk} \phi_3^{(jk)} - \rmi\wavenumber \Psi_2^{(jk)}} }}{\lambda_{jk}} \\
-	&\qquad - \omega^2 \sum_{j\con k}\integral{I_{jk}}{ u\cdot\overline{\Phi} }{\lambda_{jk}}.
-\end{align*}
-Then changing variables via $r_{jk}$ and using \eqref{eq:QGPhi2Standalone} on each connecting edge, we find that (with $\widetilde{\phi}_3^{(jk)} = \psi^{(jk)}$),
-\begin{align*}
-	\alpha_j \omega^2 u_3\bracs{v_j} \phi_3\bracs{v_j}
-	 &= \sum_{j\con k} \int_0^{\abs{I_{jk}}} 	\overline{\psi^{(jk)}}' \bracs{ \bracs{\widetilde{u}_3^{(jk)}}' - \rmi\wavenumber\widetilde{U}_2^{(jk)} + \rmi\qm_{jk}\widetilde{u}_3^{(jk)} } \\
-		&\qquad -\rmi\qm_{jk}\overline{\psi^{(jk)}}\bracs{ \bracs{\widetilde{u}_3^{(jk)}}' - \rmi\wavenumber\widetilde{U}_2^{(jk)} + \rmi\qm_{jk}\widetilde{u}_3^{(jk)} }
-		- \omega^2 \widetilde{u}_3^{(jk)}\overline{\psi^{(jk)}} \ \md y \\
-	&= \sum_{j\con k}\sqbracs{ \overline{\psi^{(jk)}}\bracs{ \bracs{\widetilde{u}_3^{(jk)}}' - \rmi\wavenumber\widetilde{U}_2^{(jk)} + \rmi\qm_{jk}\widetilde{u}_3^{(jk)} } }_{v_j} \\
-	&\quad + \sum_{j\con k}\int_0^{\abs{I_{jk}}} \overline{\psi^{(jk)}} \bracs{ -\bracs{\widetilde{u}_3^{(jk)}}'' + \rmi\wavenumber\bracs{\widetilde{U}_2^{(jk)}}' - \rmi\qm_{jk}\bracs{\widetilde{u}_3^{(jk)}}' } \ \md y \\
-	&\quad + \sum_{j\con k}\int_0^{\abs{I_{jk}}} \overline{\psi^{(jk)}} \bracs{ - \rmi\qm_{jk}\bracs{\widetilde{u}_3^{(jk)}}' - \wavenumber\qm_{jk}\widetilde{U}_2^{(jk)} + \qm_{jk}^2\widetilde{u}_3^{(jk)} - \omega^2\widetilde{u}_3^{(jk)} } \ \md y \\
-	&= \sum_{j\con k}\sqbracs{ \overline{\psi^{(jk)}}\bracs{ \bracs{\widetilde{u}_3^{(jk)}}' - \rmi\wavenumber\widetilde{U}_2^{(jk)} + \rmi\qm_{jk}\widetilde{u}_3^{(jk)} } }_{v_j},
-\end{align*}
-using \eqref{eq:QGPhi3Standalone} for the final step.
-Therefore, \eqref{eq:PeriodCellCurlCurlWeakForm} implies that
-\begin{align*}
-	& \alpha_j \omega^2 \bracs{ u_1\bracs{v_j} \overline{\phi}_1\bracs{v_j} + u_2\bracs{v_j} \overline{\phi}_2\bracs{v_j} + u_3\bracs{v_j} \overline{\phi}_3\bracs{v_j} } \\
-	&= \sum_{j\con k}\sqbracs{ \overline{\psi^{(jk)}}\bracs{ \bracs{\widetilde{u}_3^{(jk)}}' - \rmi\wavenumber\widetilde{U}_2^{(jk)} + \rmi\qm_{jk}\widetilde{u}_3^{(jk)} } }_{v_j} \\
-	&= \overline{\phi}_3\bracs{v_j}\sum_{j\con k}\sqbracs{ \bracs{\widetilde{u}_3^{(jk)}}' - \rmi\wavenumber\widetilde{U}_2^{(jk)} + \rmi\qm_{jk}\widetilde{u}_3^{(jk)} }_{v_j},
-\end{align*}
-after recalling the map $r_{jk}$, and that $\phi_3$ is continuous at the vertex $v_j$.
-Repeating this process for each vertex $v_j$ implies the following conditions at each $v_j\in\vertSet$: 
-\begin{align*}
-	u_1\bracs{v_j}\overline{\phi}_1\bracs{v_j} &= 0, \\
-	u_2\bracs{v_j}\overline{\phi}_2\bracs{v_j} &= 0, \\
-	\alpha_j \omega^2 u_3\bracs{v_j} \overline{\phi}_3\bracs{v_j} 
-	&= \overline{\phi}_3\bracs{v_j} \bracs{ \sum_{j\con k} \bracs{ \pdiff{}{n} + \rmi\qm_{jk} }\widetilde{u}_3^{(jk)}\bracs{v_j} - \rmi\wavenumber\bracs{ \sum_{j\conRight k} \widetilde{U}_2^{(jk)} - \sum_{j\conLeft k} \widetilde{U}_2^{(jk)} } }.
-\end{align*}
-Given what we have deduced holds for every such smooth $\phi$, and combined with \eqref{eq:QGPhiStandalone}, we arrive at the following system of equations;
+We are thus presented with the following set of equations on each edge $I_{jk}$;
 \begin{subequations} \label{eq:QGRawSystem}
+	\begin{align*}
+		\widetilde{U}_1^{(jk)} &= 0 \\
+		\rmi\wavenumber \bracs{ \diff{}{y} + \rmi\qm_{jk} }\widetilde{u}_3^{(jk)} + \wavenumber^2\widetilde{U}_2^{(jk)} &= \omega^2\widetilde{U}_2^{(jk)}, \labelthis\label{eq:QGPhi2} \\
+		-\bracs{ \diff{}{y} + \rmi\qm_{jk} }^2\widetilde{u}_3^{(jk)} + \rmi\wavenumber\bracs{ \diff{}{y} + \rmi\qm_{jk} }\widetilde{U}_2^{(jk)} &= \omega^2 \widetilde{u}_3^{(jk)}, \labelthis\label{eq:QGPhi3} 
+	\end{align*}
+	complemented by the vertex conditions
+	\begin{align*}
+		\widetilde{u}_3 \text{ is continuous at } v_j &\quad\forall v_j\in\vertSet, \labelthis\label{eq:QGContinuity} \\
+		u_1(v_j) &= 0, \\
+		u_2(v_j) &= 0, \\
+		\alpha_j \omega^2 u_3\bracs{v_j}
+		&= \sum_{j\con k} \bracs{ \pdiff{}{n} + \rmi\qm_{jk} }u_3^{(jk)}\bracs{v_j} - \rmi\wavenumber\bracs{ \sum_{j\conRight k} U_2^{(jk)} - \sum_{j\conLeft k} U_2^{(jk)} }. \labelthis\label{eq:QGVertexCondition}
+	\end{align*}
+\end{subequations}
+
+Determining the solution to \eqref{eq:QGRawSystem} requires us to find the function $u_3$ and the edge-functions $U_2^{(jk)}$.
+However we can eliminate the $U_2^{(jk)}$ from the system \eqref{eq:QGRawSystem} via substitution of \eqref{eq:QGPhi2} into \eqref{eq:QGPhi3}, and use of corollary \ref{cory:DivFree-TangGradsConditions}(v), to obtain
+\begin{subequations} \label{eq:CurlCurl-ScalarQGProblem}
 	\begin{align}
-		\rmi\wavenumber \bracs{ \diff{}{y} + \rmi\qm_{jk} }\widetilde{u}_3^{(jk)} + \wavenumber^2\widetilde{U}_2^{(jk)} &= \omega^2\widetilde{U}_2^{(jk)}, \label{eq:QGPhi2} \\
-		-\bracs{ \diff{}{y} + \rmi\qm_{jk} }^2\widetilde{u}_3^{(jk)} + \rmi\wavenumber\bracs{ \diff{}{y} + \rmi\qm_{jk} }\widetilde{U}_2^{(jk)} &= \omega^2 \widetilde{u}_3^{(jk)}, \label{eq:QGPhi3} \\
-		\widetilde{u}_3 \text{ is continuous at } v_j &\quad\forall v_j\in\vertSet, \label{eq:QGContinuity} \\
-		\sum_{j\con k} \bracs{ \pdiff{}{n} + \rmi\qm_{jk} }\widetilde{u}_3^{(jk)}\bracs{v_j} - \rmi\wavenumber\bracs{ \sum_{j\conRight k} \widetilde{U}_2^{(jk)} - \sum_{j\conLeft k} \widetilde{U}_2^{(jk)} } 
-		&= \alpha_j \omega^2 u_3\bracs{v_j}. \label{eq:QGVertexCondition}
+		-\bracs{ \diff{}{y} + \rmi\qm_{jk} }^2 u_3^{(jk)} &= \bracs{\omega^2-\wavenumber^2}u,
+		\qquad &\text{on each } I_{jk}, \\
+		u_3 \text{ is continuous at } & v_j \qquad &\forall v_j\in\vertSet, \\
+		\sum_{j\con k}\bracs{\pdiff{}{n}+\rmi\qm_{jk}}u_3^{(jk)}(v_j) &= \alpha_j\bracs{\omega^2-\wavenumber^2}u_3(v_j), \qquad &\forall v_j\in\vertSet.
 	\end{align}
 \end{subequations}
-Note that we have neglected to explicitly include $\widetilde{U}_1^{(jk)}=0$ on each edge, and $u_1(v_j)=u_2(v_j)=0$ for every $v_j\in\vertSet$ in \eqref{eq:QGRawSystem}.
-These conditions are implicitly still part of the system, but given that they are trivial and do not affect the components $\widetilde{u}_3^{(jk)}, \widetilde{U}_2^{(jk)}$, we don't bother to write them down.
-
-The equations \eqref{eq:QGPhi2}-\eqref{eq:QGPhi3} can be written as a first-order system (on each edge)
-\begin{align*}
-	\diff{}{y} \begin{pmatrix} \widetilde{U}_2^{(jk)} \\ \widetilde{u}_3^{(jk)} \end{pmatrix}
-	&= 
-	\begin{pmatrix} 
-		-\rmi\qm_{jk} & -\rmi\wavenumber \\	
-		\frac{\omega^2-\wavenumber^2}{\rmi\wavenumber} & -\rmi\qm_{jk}
-	\end{pmatrix}
-	\begin{pmatrix} \widetilde{U}_2^{(jk)} \\ \widetilde{u}_3^{(jk)} \end{pmatrix},
-\end{align*}
-the differential equation in the second row being that which appears in (d), which is a consequence of $u$ being $\kt$-divergence-free with respect to $\dddmes$.
-As such, the form of $\widetilde{U}_2^{(jk)}$ and $\widetilde{u}_3^{(jk)}$ is determined up to 2 constants per edge, giving us a total of $2\abs{\edgeSet}$ constants to be determined by the vertex conditions.
-The condition \eqref{eq:QGContinuity} provides us with $\sum_{v\in\vertSet}\clbracs{\mathrm{deg}(v)-1}$ algebraic equations in these constants, whilst \eqref{eq:QGVertexCondition} provides us with an additional $\abs{\vertSet}$.
-Since $2\abs{\edgeSet} = \sum_{v\in\vertSet}\mathrm{deg}(v)$, this means that \eqref{eq:QGRawSystem} has a unique solution for each $\omega, \wavenumber$ pair.
-However we can eliminate $\widetilde{U}_2$ from \eqref{eq:QGRawSystem}, to obtain a system in terms of $\widetilde{u}_3$ only:
-\begin{align*}
-	- \bracs{ \diff{}{y} + \rmi\qm_{jk} }^2 u_3^{(jk)} - \bracs{\omega^2-\wavenumber^2}u_3^{(jk)} = 0, &\quad y\in\interval{I_{jk}}, \quad\forall I_{jk}\in\edgeSet, \\
-	u_3 \text{ is continuous at each } & v_j\in\vertSet, \\
-	\sum_{j\con k}\bracs{ \pdiff{}{n} + \rmi\qm_{jk} }u_3^{(jk)} = \bracs{\omega^2-\wavenumber^2}\alpha_j u_3\bracs{v_j}, &\quad\forall v_j\in\vertSet,
-\end{align*}
-that is the system \eqref{eq:3DQGFullSystem}.
-To do so, we have differentiated \eqref{eq:QGPhi2} and substituted into \eqref{eq:QGPhi3} to obtain a second-order ODE in $\widetilde{u}_3$ on each edge.
-Then, given that $u$ is divergence free, we have used the condition (e) to eliminate $\widetilde{U}_2^{(jk)}$ from the vertex conditions.
-Of course, upon solving \eqref{eq:3DQGFullSystem} for $\widetilde{u}_3$, we can recover $\widetilde{U}_2^{(jk)}$ from \eqref{eq:QGPhi2} if we so wish.
+That is, \tstk{curl of curl equation} simply reduces to the scalar system obtained in section \ref{sec:ScalarDerivation}, except with $\omega^2-\wavenumber^2$ playing the role of the spectral parameter.
+We will elaborate further on the implications of this result in section \tstk{discussion}.
 
 \tstk{remarks: the fact that you have obtained a (scalar) equation for the "polarised" Maxwell by a series of nontrivial manipulations on the curl demonstrates that your approach is sound overall and gives further credibility to the work on the first part of the thesis. This "polarised Maxwell" chapter will not have much new stuff on the numerics side though, as we have got back to the scalar case, which will have been looked at numerically in the preceding chapter.}
+
+\tstk{UNCHANGED FROM PREVIOUS NOTES!!!! Also needs an introductory sentence, and will probably go in the discussion section of this chapter.}
 
 \subsection{Remarks on the Calder\'on Operator} \label{ssec:CalderonOp}
 In this section we look to draw parallels between the classical curl-of-the-curl problem (described by \eqref{eq:CurlCurlEqn} on a suitable domain with boundary conditions) for a polarised electromagnetic field, and the system \eqref{eq:QGRawSystem}.
