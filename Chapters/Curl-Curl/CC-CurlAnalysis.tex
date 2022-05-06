@@ -381,7 +381,7 @@ Further to this, we know from theorem \tstk{gradient characterisation} that func
 		\mathrm{(iii)} \ &
 		\tilde{u} := \bracs{0,0,\tilde{u}_3}^\top\in\ktcurlSob{\ddom}{\dddmes}
 		\quad &\Leftrightarrow &\quad
-		\tilde{u}_3\in\ktcurlSob{\ddom}{\dddmes}.
+		\tilde{u}_3\in\ktgradSob{\ddom}{\dddmes}.
 	\end{align*}
 \end{prop}
 \begin{proof}
@@ -472,4 +472,4 @@ The best we can do (utilising only knowledge of curls) comes when we have a vect
 The issue preventing us from establishing the converse implication to that in proposition \ref{prop:TC-dddmesImpliesOthers} is the aforementioned lack of control over the components $u_1$ and $u_2$ near the vertices of a graph when we attempt to ``lift" edge-functions.
 In the case of tangential gradients, the we had to depend on continuity of the incoming edge functions at the vertex to circumnavigate this issue, and we also depend on this fact when handling the component $u_3$ of vector fields with tangential curls.
 This continuity does not hold for the incoming components $u_1$ and $u_2$ since knowing the field $u$ possesses a tangential curl does not establish whether these components have gradients of their own, or even directional derivatives along the edges (which would also suffice).
-However, we can glean more information about what is happening near the vertices if we consider divergence-free vector fields.
+Consideration of what it means for a field to be divergence-free with respect to $\dddmes$ (section \ref{sec:DivFreeCondition}) goes some of the way towards to remedying this.
