@@ -5,7 +5,7 @@
 
 
 \subsection{Remarks on the Calder\'on Operator} \label{ssec:CalderonOp}
-\tstk{comment at end - Whilst it is not known whether the problem \eqref{eq:PeriodCellCurlCurlStrongForm} is the ``limit" of a thin-structure problem with thick vertices, in the sense of \tstk{scalar SS problem to scalar TS problem, via KZ and EP}, the motivation for our consideration of such variational problems stems from the coincidence? Might go in a future directions/ open questions subsection instead}
+\tstk{comment at end - Whilst it is not known whether the problem \eqref{eq:SingularCurlEquation} is the ``limit" of a thin-structure problem with thick vertices, in the sense of \tstk{scalar SS problem to scalar TS problem, via KZ and EP}, the motivation for our consideration of such variational problems stems from the coincidence? Might go in a future directions/ open questions subsection instead}
 
 In this section we look to draw further parallels between the curl-of-the-curl problem on a classical domain and the system \eqref{eq:QGRawSystem}.
 One of our key motivating factors and themes throughout this work has been retaining an intuitive link between the spaces and objects necessary for studying variational problems on singular structures and their classical counterparts.
@@ -32,18 +32,12 @@ We can quickly validate Green's identity:
 	&= \integral{\partial D}{ \nmap u \cdot \overline{\dmap v} - \dmap u \cdot \overline{\nmap v} }{S},
 \end{align*}
 so $\bracs{\ltwo{\partial D}{S}^3, \dmap, \nmap}$ is a boundary triple for the operator $\mathcal{A}$, and we can talk about its associated Dirichlet-to-Neumann map (or $M$-operator).
-This is the Calder\'{o}n operator $\mathcal{C}$, that acts on solutions $u$ to \eqref{eq:Maxwell3D}, sending
+This is the Calder\'{o}n operator $\mathcal{C}$, acting as
 \begin{align*}
 	u\vert_{\partial D} \rightarrow \hat{n}\wedge\bracs{\curl{}u}\vert_{\partial D}.
 \end{align*}
 
 Now let us turn to the quantum graph problem \eqref{eq:QGRawSystem}.
-%If we expect \eqref{eq:SingStrucCurlCurl} to be some ``limit" of a thin-structure problem with thick vertices, then we expect that the vertex condition \eqref{eq:QGVertexCondition} will be of the form
-%\begin{align} \label{eq:DispersiveBC}
-%	\dgmap u &= -\omega^2 \tilde{\alpha} \ngmap u,
-%\end{align}
-%which is the form of the vertex conditions in \tstk{scalar problem}.
-%In the context of \eqref{eq:QGRawSystem}, we should expect $\tilde{\alpha}$ be akin to the diagonal matrix of coupling constants (rather than precisely the matrix $\alpha$), whilst $\dgmap, \ngmap$ will be the Dirichlet and Neumann maps for the quantum graph problem \eqref{eq:QGRawSystem}.
 Given the definition of $\dmap$ in \eqref{eq:ClassicalEM-DNMaps}, we should expect that
 \begin{align} \label{eq:DGMapDef}
 	\dgmap u &= 
@@ -149,4 +143,4 @@ implying
 \end{align*}
 and so the Green's identity holds. \tstk{do we even define a boundary triple in the QG chapter? If so, saying "green's identity" doesn't make much sense!}
 Therefore, $\bracs{\complex^{3N}, \dgmap, \ngmap}$ is a boundary triple for the operator $\ag$.
-Given \eqref{eq:ClassicalEM-DNMaps} served as the motivations for the definitions \eqref{eq:DGMapDef} and \eqref{eq:NGMapDef}, the $M$-operator associated with \eqref{eq:QGRawSystem} really is a ``graph version" of the Calder\'on operator for the problem \eqref{eq:SingStrucCurlCurl}.
+Given \eqref{eq:ClassicalEM-DNMaps} served as the motivations for the definitions \eqref{eq:DGMapDef} and \eqref{eq:NGMapDef}, the $M$-operator associated with \eqref{eq:QGRawSystem} really is a ``graph version" of the Calder\'on operator for the problem \eqref{eq:SingularCurlEquation}.

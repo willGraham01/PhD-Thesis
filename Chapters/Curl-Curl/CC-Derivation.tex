@@ -22,7 +22,7 @@ through using lemma \ref{lem:CurlOfGradSmoothFunctions}.
 Note that we cannot employ the same technique show that $u$ is orthogonal to all gradients of zero,, however we will see that the additional information (the conditions (i) and (iv) in proposition \ref{prop:DivFree-AllGradsConditions}) are obtained from the argument that follows.
 
 Now let us fix an edge $I_{jk}$ and take $\Phi$ such that $\supp\Phi\cap\graph\subset I_{jk}^{\circ}$.
-The equation \eqref{eq:PeriodCellCurlCurlWeakForm} reduces to
+The equation \eqref{eq:SingularCurlEquation-VariationalForm} reduces to
 \begin{align*}
 	\omega^2 \integral{I_{jk}}{ u\cdot\overline{\Phi} }{\lambda_{jk}}
 	&= \integral{I_{jk}}{ \ktcurl{\ddmes}u\cdot\overline{\ktcurl{\ddmes}\Phi} }{\lambda_{jk}} \\
@@ -76,7 +76,7 @@ This provides us with a system of coupled ODEs on each of the edges $I_{jk}$ (an
 
 Now we look at how these edge ODEs are coupled at the vertices.
 Fix a vertex $v_j$ and consider a $\Phi\in\csmooth{\ddom}$ whose support contains $v_j$ in its interior, and no other vertices of $\graph$.
-Testing against such $\Phi$ in \eqref{eq:PeriodCellCurlCurlWeakForm} implies that
+Testing against such $\Phi$ in \eqref{eq:SingularCurlEquation-VariationalForm} implies that
 \begin{align*}
 	\alpha_j\omega^2 u(v_j)\cdot\overline{\Phi}(v_j)
 	&= \integral{\ddom}{ \ktcurl{\ddmes}u\cdot\overline{\ktcurl{\ddmes}\Phi} - \omega^2 u\cdot\overline{\Phi} }{\ddmes} \\
