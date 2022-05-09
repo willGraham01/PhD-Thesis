@@ -1,0 +1,57 @@
+\section{Chapter Introduction} \label{sec:Curl-Intro}
+The focus of this chapter is extending the work of chapter \ref{ch:ScalarSystem} in understanding variational problems on singular structures, the spaces and objects involved, and their explicit solution to the ``curl of the curl" equation.
+Using the ideas and concepts developed in chapter \ref{ch:ScalarSystem}, we can begin to define analogues of the curl and divergence of vector fields with respect to our singular measures.
+This takes us outside the realms in which we can rely on intuition to guide us --- the curl and divergence do not have (obvious) one-dimensional analogues in the same way that the gradient possesses (with the derivative).
+However it in turn allows us to consider variational problems motivated by the Maxwell system that go beyond the acoustic approximation, examine candidates for ``limiting" problems for the Maxwell system on thin structures, and provide insights into the effects that might be lost when considering the acoustic approximation over the vectorial equations.
+Unlike with the acoustic approximation, an analysis of the curl of the curl equation (and broader Maxwell system) on a thin structure as the thickness tends to zero is presently an open problem in the literature.
+Furthermore, the closest analogue available in the context of the acoustic approximation --- the studies \cite{kuchment2001convergence, kuchment2003asymptotics, exner2005convergence} --- rely on knowing \emph{a priori} the resulting limiting problem one should obtain.
+Here we appeal to the success of our variational approach and singular structures in the previous chapter; the system \eqref{eq:SingularWaveEqnQGProblem} matches that of the limiting problems one obtains for the acoustic equation on a thin structure, and the variational problem studied is the direct analogue its thin-structure counterpart.
+By starting from a variational problem on a singular structure that reflects the curl of the curl equation, we aim to provide a candidate for the thin structure limit of said equation, and to examine some of the behaviours one can expect from the spectrum and/or solutions.
+
+We now formulate the problem that we wish to consider in this section, and recall the notation and setup of section \ref{sec:TP-DomainSetup}.
+Let $\ktcurlSob{\ddom}{\dddmes}$ be the non-classical space of functions with curls as introduced in section \ref{sec:BorelMeasSobSpaces}, and let $\graph=\bracs{\vertSet,\edgeSet}$ be the period graph of a (periodic) metric graph $\hat{\graph}$ embedded into $\reals^2$, with unit cell $\ddom$.
+We now extrude $\hat{\graph}$ into three dimensions, forming the singular structure $\hat{\graph}\times[0,\infty)\subset\reals^3$ which consists of a union of planes parallel to the $x_3$ axis.
+This provides us with a ``fibre-like" geometry --- $\hat{\graph}$ forming the periodic, two dimensional cross section of a photonic crystal (or ``coreless" photonic crystal fibre) looking to guide light along the $x_3$-axis, along which the material properties are invariant.
+The invariance along the fibre axis, and periodic structure in the $\bracs{x_1,x_2}$-plane means it is natural for us to take a Fourier transform in $x_3$ and Gelfand transform in the plane, taking us to the problem
+\begin{align} \label{eq:SingularCurlEquation}
+	\ktcurl{\dddmes}\bracs{ \ktcurl{\dddmes}u } &= \omega^2 u,
+	\qquad \text{in } \ddom,
+\end{align}
+for $u\in\ktcurlSob{\ddom}{\dddmes}$, with $\wavenumber$ the Fourier variable (and $\qm$ the quasi-momentum).
+Details about the function space $\ktcurlSob{\ddom}{\dddmes}$ are left to the analysis of section \ref{sec:CC-CurlAnalysis}.
+Although we have returned to studying a singular structure $\graph$ on the torus, it is important for our understanding that we do not forget that each edge $I_{jk}$ induces a plane $P_{jk}$ parallel to $\widehat{x}_3$, and multiplication by $\rmi\wavenumber$ in Fourier space represents differentiation with respect to $x_3$ --- the description of tangential curls in section \ref{sec:CC-Geometric} relies on this.
+It is also important that we do not forget that the ``classical" curl of the curl equation has to be complimented with a divergence-free condition --- finding the analogue to this condition is the topic of discussion in section \ref{sec:DivFreeConditions}.
+
+Of course, we should formally define what we mean when we write \eqref{eq:SingularCurlEquation}.
+First define the bilinear form
+\begin{align*}
+	\dom \bracs{c_{\qm}} &= \ktcurlSob{\ddom}{\dddmes} \times \ktcurlSob{\ddom}{\dddmes}, \\
+	c_{\qm}\bracs{u,v} &= \integral{\ddom}{ \ktcurl{\dddmes}u\cdot\overline{\ktcurl{\dddmes}v} }{\dddmes},
+\end{align*}
+and then the operator $\ktcurl{\dddmes}\bracs{ \ktcurl{\dddmes} \cdot }$  via
+\begin{align*}
+	\dom\bracs{ \ktcurl{\dddmes}\bracs{ \ktcurl{\dddmes} \cdot } }
+	&= \clbracs{ u\in\ktcurlSob{\ddom}{\dddmes} \setVert \exists f\in\pltwo{\ddom}{\dddmes} \text{ s.t. } \right. \\
+	&\qquad \left. c_{\qm}\bracs{u,v}=\ip{f}{v}_{\ktcurlSob{\ddom}{\dddmes}}, \quad\forall v\in\ktcurlSob{\ddom}{\dddmes} }, \labelthis\label{eq:CurlCurlOperatorDefinition}
+\end{align*}
+with action
+\begin{align*}
+	\ktcurl{\dddmes}\bracs{ \ktcurl{\dddmes} u } &= f,
+\end{align*}
+where $f$ and $u$ are related as in \eqref{eq:CurlCurlOperatorDefinition}.
+The curl of the curl problem \eqref{eq:SingularCurlEquation} is then the eigenvalue problem for this operator; find $u\in\ktcurlSob{\ddom}{\dddmes}$ such that
+\begin{align} \label{eq:SingularCurlEquation-VariationalForm}
+	\integral{\ddom}{ \ktcurl{\dddmes}u\cdot\overline{\ktcurl{\dddmes}\phi} }{\dddmes}
+	&= \omega^2 \integral{\ddom}{ u\cdot\overline{\phi} }{\dddmes}, 
+	\qquad \forall \phi\in\psmooth{\ddom}.
+\end{align}
+As in the case of the acoustic approximation, we can define an operator $\kcurl{\upsilon}\bracs{ \kcurl{\upsilon} \cdot }$ acting on functions in $\reals^2$ on the singular structure $\hat{\graph}$, and have that
+\begin{align*}
+	\sigma\bracs{ \kcurl{\upsilon}\bracs{ \kcurl{\upsilon} \cdot } }
+	&= \bigcup_{\qm\in[-\pi,\pi)^2} \sigma\bracs{ \ktcurl{\dddmes}\bracs{ \ktcurl{\dddmes} \cdot } }.
+\end{align*}
+
+We will again look to turn the problem \eqref{eq:SingularCurlEquation} into a more tractable (and familiar) problem on the underlying graph $\graph$, which is the objective of section \ref{sec:3DSystemDerivation}.
+Once again we will be left with a (problem this is realisable as a) quantum graph problem (see \eqref{eq:QGRawSystem}), however this will reduce to a system of scalar equations, rather than remaining a system of vector-valued equations on each of the edges $I_{jk}$.
+Although this is unexpected given the vectorial starting point \eqref{eq:SingularCurlEquation}, in section \ref{sec:CC-Discussion} we will explore some of the underlying reasons for this behaviour, further parallels with the classical setting that indicate this is the expected behaviour, and some of the implications for the first-order Maxwell system if this is the case.
+We will conclude by highlighting the open problems in the literature that have been bought to our attention in light of this analysis, and which may shed further light on this behaviour.

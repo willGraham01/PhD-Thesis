@@ -1,5 +1,7 @@
 \section{Derivation of quantum graph problem} \label{sec:3DSystemDerivation}
-We now derive the system \eqref{eq:3DQGFullSystem} from \eqref{eq:PeriodCellCurlCurlStrongForm}.
+We now look to find an alternative formulation to \eqref{eq:SingularCurlEquation}, which is more amenable to analysis.
+Similarly to our working in section \ref{sec:ScalarDerivation}, the result will be a problem consisting of ODEs on the edges of $\graph$ coupled through the behaviour of incoming functions at the vertices.
+
 Let $u=\bracs{u_1,u_2,u_3}^\top\in\ktcurlSob{\ddom}{\dddmes}$ and let $\Phi=\bracs{\phi_1,\phi_2,\phi_3}^\top\in\psmooth{\ddom}^3$.
 Also define for each $I_{jk}\in\edgeSet$,
 \begin{align*}
@@ -9,22 +11,11 @@ Also define for each $I_{jk}\in\edgeSet$,
 \end{align*}
 We use an overhead tilde to denote composition with $r_{jk}$, and for a function $v$ with $\widetilde{v}^{(jk)}\in\ktgradSob{\sqbracs{0,l_{jk}}}{y}$ write $\bracs{v^{(jk)}}' := \bracs{\widetilde{v}^{(jk)}}' \circ r_{jk}^{-1}$.
 Finally, for a given quasi-momentum $\qm$, set $\qm_{jk} = \bracs{ R_{jk}\qm }_2 = \qm\cdot e_{jk}$.
-%, and let
-%\begin{align*}
-%	\ktcurlSobDivFree{\ddom}{\dddmes} &=
-%	\clbracs{ u\in\ktcurlSob{\ddom}{\dddmes} \setVert u \text{ is } \kt\text{-divergence-free with respect to } \dddmes}.
-%\end{align*}
-A function $u\in\ktcurlSob{\ddom}{\dddmes}$ is a solution to \eqref{eq:PeriodCellCurlCurlStrongForm} if
-\begin{align} \label{eq:PeriodCellCurlCurlWeakForm}
-	\integral{\ddom}{ \ktcurl{\dddmes}u\cdot\overline{\ktcurl{\dddmes}\Phi} }{\dddmes} 
-	&= \omega^2 \integral{\ddom}{ u\cdot\overline{\Phi} }{\dddmes},
-	\quad\forall \Phi\in\psmooth{\ddom}^3.
-\end{align}
-We immediately have that $u$ is $\kt$-divergence free (in the sense of definition \ref{def:DivFree-TangGradients}), since for any $v\in\ktgradSob{\ddom}{\dddmes}$ we can take an approximating sequence $\Phi^n$ for $v$ and obtain
+Immediately, we can notice that $u$ is tangentially-divergence free (definition \ref{def:DivFree-TangGradients}), since for any $v\in\ktgradSob{\ddom}{\dddmes}$ we can take an approximating sequence $\Phi^n$ for $v$ and obtain
 \begin{align*}
 	\omega^2\integral{\ddom}{ u\cdot\overline{\ktgrad_{\dddmes}v} }{\dddmes}
 	&= \omega^2 \lim_{n\rightarrow\infty} \integral{\ddom}{ u\cdot\overline{\ktgrad\Phi^n} }{\dddmes} \\
-	&= \lim_{n\rightarrow\infty} \integral{\ddom}{ \ktcurl{\dddmes}u\cdot\overline{\ktcurl{\dddmes}\ktgrad\Phi^n} }{\dddmes}
+	&= \lim_{n\rightarrow\infty} \integral{\ddom}{ \ktcurl{\dddmes}u\cdot\overline{\ktcurl{\dddmes}\bracs{\ktgrad\Phi^n}} }{\dddmes}
 	= 0,
 \end{align*}
 through using lemma \ref{lem:CurlOfGradSmoothFunctions}.
@@ -43,11 +34,11 @@ Using the change of variables $r_{jk}$ we obtain
 	&= \omega^2 \int_0^{l_{jk}} \widetilde{U}_1^{(jk)}\overline{\widetilde{\Psi}}_1^{(jk)} + \widetilde{U}_2^{(jk)}\overline{\widetilde{\Psi}}_2^{(jk)} + \widetilde{u}_3^{(jk)}\overline{\widetilde{\phi}}_3^{(jk)} \ \md y.
 \end{align*}
 Now suppose we have $\varphi_1,\varphi_2\in\csmooth{\sqbracs{0,l_{jk}}}$.
-Since the system
+Since $R_{jk}\in\mathrm{SO}(2)$, the system
 \begin{align*}
 	\begin{pmatrix} \phi_1 \\ \phi_2 \end{pmatrix} &= R_{jk}^\top \begin{pmatrix} \varphi_1 \\ \varphi_2 \end{pmatrix}
 \end{align*}
-has a unique solution, we can construct a $\Phi\in\csmooth{\ddom}$ with $\supp\Phi\cap\graph\subset I_{jk}^{\circ}$, $\widetilde{\Psi}_1^{(jk)}=\varphi_1$, and $\widetilde{\Psi}_2^{(jk)}=\varphi_2$.
+has a unique solution for $\bracs{\phi_1,\phi_2}^\top$, and we can construct a $\Phi\in\csmooth{\ddom}$ with $\supp\Phi\cap\graph\subset I_{jk}^{\circ}$, $\widetilde{\Psi}_1^{(jk)}=\varphi_1$, and $\widetilde{\Psi}_2^{(jk)}=\varphi_2$.
 We thus observe that
 \begin{align*}
 	\int_0^{l_{jk}} & \bracs{ \bracs{\widetilde{u}_3^{(jk)}}' + \rmi\qm_{jk} \widetilde{u}_3^{(jk)} - \rmi\wavenumber \widetilde{U}_2^{(jk)} } \bracs{ \overline{\varphi_3}' - \rmi\qm_{jk} \overline{\varphi_3} + \rmi\wavenumber \overline{\varphi_2} } \ \md y \\
@@ -133,7 +124,10 @@ However we can eliminate the $U_2^{(jk)}$ from the system \eqref{eq:QGRawSystem}
 		\sum_{j\con k}\bracs{\pdiff{}{n}+\rmi\qm_{jk}}u_3^{(jk)}(v_j) &= \alpha_j\bracs{\omega^2-\wavenumber^2}u_3(v_j), \qquad &\forall v_j\in\vertSet.
 	\end{align}
 \end{subequations}
-That is, \tstk{curl of curl equation} simply reduces to the scalar system obtained in section \ref{sec:ScalarDerivation}, except with $\omega^2-\wavenumber^2$ playing the role of the spectral parameter.
-We will elaborate further on the implications of this result in section \ref{sec:CC-Discussion}.
-
-\tstk{remarks: the fact that you have obtained a (scalar) equation for the "polarised" Maxwell by a series of nontrivial manipulations on the curl demonstrates that your approach is sound overall and gives further credibility to the work on the first part of the thesis. This "polarised Maxwell" chapter will not have much new stuff on the numerics side though, as we have got back to the scalar case, which will have been looked at numerically in the preceding chapter.}
+The system \eqref{eq:SingularCurlEquation} has reduced to the scalar system obtained in section \ref{sec:ScalarDerivation}, except with $\omega^2-\wavenumber^2$ playing the role of the spectral parameter.
+We have already surveyed and explored the methods one can employ for studying \eqref{eq:CurlCurl-ScalarQGProblem} in chapter \ref{ch:ScalarSystem}, so whilst we know how to solve this problem, there is nothing new to be done on the numerical side.
+In this regard, it is regrettable and surprising that our analysis of the curl-of-the-curl system has resulted in us obtaining what is essentially the acoustic approximation.
+Even when we do not consider oblique waves (for which $\kappa=0)$), we still find that we have this reduction to a scalar system, which does not occur for the classical Maxwell system or curl of the curl equation.
+Having said this, we have ultimately still managed to obtain the solvable (and realisable) system \eqref{eq:CurlCurl-ScalarQGProblem} through the analysis of sections \ref{sec:CC-CurlAnalysis} and \ref{sec:DivFreeCondition}, and non-trivial manipulations of unfamiliar objects like $\ktcurl{\dddmes}u$.
+This demonstrates that, even if we are forced to accept rather uncomfortable-sounding statements like all vector fields are divergence free (see section \ref{sec:DivFreeCondition}), our approach to the postulation and solution of variational problems on singular structures is consistent and provides a coherent framework for the handling of such problems.
+We will continue to discuss the implications of \eqref{eq:CurlCurl-ScalarQGProblem}, and reach an a posteriori understanding as to why we have obtained it, in \ref{sec:CC-Discussion}.

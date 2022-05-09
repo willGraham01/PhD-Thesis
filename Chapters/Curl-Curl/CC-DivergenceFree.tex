@@ -3,7 +3,7 @@ As was mentioned in section \ref{sec:Intro-Maxwell}, the definition of the Maxwe
 This divergence-free condition adds extra constraints to the fields, and the analysis of section \ref{sec:CC-CurlAnalysis} indicates that we require an analogue of this divergence-free condition to constrain the behaviour of vector fields with $\dddmes$-tangential curls near the vertices.
 Given the motivation for our consideration of the curl of the curl equation on a singular structure, it is natural for us to consider what the analogue of a divergence free field would be.
 Using the classical notion of a divergence-free vector field as our starting point, we find ourselves presented with several reasonable definitions for the notion of a divergence free vector field with respect to our singular measures, which we will discuss in turn below.
-However, we will see that a ``strong" definition through approximating sequences fails to provide a rather underwhelming\footnote{If not entirely unexpected.} description (see lemma \ref{lem:DivZero-Everything}), whilst the ``weaker" definitions \ref{def:DivFree-AllGradients} and \ref{def:DivFree-TangGradients} do provide some additional constraints on our vector fields, but section \ref{sec:3DSystemDerivation} will show that these constraints are also directly obtainable from \tstk{curl of curl equation}.
+However, we will see that a ``strong" definition through approximating sequences fails to provide a rather underwhelming\footnote{If not entirely unexpected.} description (see lemma \ref{lem:DivZero-Everything}), whilst the ``weaker" definitions \ref{def:DivFree-AllGradients} and \ref{def:DivFree-TangGradients} do provide some additional constraints on our vector fields, but section \ref{sec:3DSystemDerivation} will show that these constraints are also directly obtainable from \eqref{eq:SingularCurlEquation}.
 
 Given how we have chosen to define gradients and curls with respect to our singular measures, it is natural to ask whether it would be possible to define the tangential divergence through an approximation via smooth functions in a similar manner.
 A short investigation proves that this is not be the case.
@@ -49,7 +49,7 @@ Utilising this analogue with the classical divergence, we could adopt the follow
 	for every $g\in W_{\mathrm{grad}}^{\kt}\bracs{\ddom,\md\dddmes}$.
 \end{definition}
 That is, a field is divergence free only if it is orthogonal in $\ltwo{\ddom}{\dddmes}$ to any gradient field, including the gradients of zero.
-Whilst this ``weak" definition breaks the tradition of our approach via smooth approximations, it will nonetheless be valuable for us to examine the implications of definition \ref{def:DivFree-AllGradients} (and the later definition \ref{def:DivFree-TangGradients}) when we come to the analysis of \tstk{curl-curl equation}.
+Whilst this ``weak" definition breaks the tradition of our approach via smooth approximations, it will nonetheless be valuable for us to examine the implications of definition \ref{def:DivFree-AllGradients} (and the later definition \ref{def:DivFree-TangGradients}) when we come to the analysis of \eqref{eq:SingularWaveEqnQGProblem}).
 Definition \ref{def:DivFree-AllGradients} admits the following characterisation.
 \begin{prop} \label{prop:DivFree-AllGradsConditions}
 	Let $u\in\pltwo{\ddom}{\dddmes}^3$ and define (for each edge $I_{jk}$)
