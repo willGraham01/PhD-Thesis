@@ -17,14 +17,14 @@ Combined with the fact that $\dddmes$ is a sum of the edge measures and point ma
 \end{align*}
 Now using the change of variables $r_{jk}$ and denoting $\tilde{u}^{(jk)} = u^{(jk)} \circ r_{jk}$ and $\varphi = \phi\circ r_{jk}$, we arrive at
 \begin{align*}
-	0 &= \int_{0}^{\abs{I_{jk}}} \bracs{\bracs{\tilde{u}^{(jk)}}' + \rmi\qm_{jk} \tilde{u}^{(jk)}}\bracs{\overline{\varphi}' - \rmi\qm_{jk} \overline{\varphi} } - \omega^2 \tilde{u}^{(jk)}\overline{\varphi} \ \md y. \\
+	0 &= \int_{0}^{l_{jk}} \bracs{\bracs{\tilde{u}^{(jk)}}' + \rmi\qm_{jk} \tilde{u}^{(jk)}}\bracs{\overline{\varphi}' - \rmi\qm_{jk} \overline{\varphi} } - \omega^2 \tilde{u}^{(jk)}\overline{\varphi} \ \md y. \\
 	\implies
-	\int_{0}^{\abs{I_{jk}}} \bracs{\tilde{u}^{(jk)}}'\overline{\varphi}' \ \md y &=
-	\int_{0}^{\abs{I_{jk}}} \clbracs{ \omega^2\tilde{u}^{(jk)} + 2\rmi\qm_{jk}\bracs{\tilde{u}^{(jk)}}' + \bracs{\rmi\qm_{jk}}^2\tilde{u}^{(jk)} } \overline{\varphi} \ \md y.
+	\int_{0}^{l_{jk}} \bracs{\tilde{u}^{(jk)}}'\overline{\varphi}' \ \md y &=
+	\int_{0}^{l_{jk}} \clbracs{ \omega^2\tilde{u}^{(jk)} + 2\rmi\qm_{jk}\bracs{\tilde{u}^{(jk)}}' + \bracs{\rmi\qm_{jk}}^2\tilde{u}^{(jk)} } \overline{\varphi} \ \md y.
 \end{align*}
-This holds for all smooth $\varphi$ with support contained in the interior of $\interval{I_{jk}}$, and as such we can deduce that $\tilde{u}^{(jk)}$ is twice (weakly) differentiable, and obtain the (strong) equation
+This holds for all smooth $\varphi$ with support contained in the interior of $\sqbracs{0,l_{jk}}$, and as such we can deduce that $\tilde{u}^{(jk)}$ is twice (weakly) differentiable, and obtain the (strong) equation
 \begin{align*}
-	-\bracs{\diff{}{x} + \rmi\qm_{jk}}^2 \tilde{u}^{(jk)} &= \omega^2 \tilde{u}^{(jk)}, \quad x\in\interval{I_{jk}}.
+	-\bracs{\diff{}{y} + \rmi\qm_{jk}}^2 \tilde{u}^{(jk)} &= \omega^2 \tilde{u}^{(jk)}, \quad y\in\sqbracs{0,l_{jk}}.
 \end{align*}
 
 Now we turn our attention to the derivation of the vertex conditions.
@@ -33,16 +33,16 @@ Using the change of variables $r_{jk}$ on each edge and writing $\tilde{u}^{(jk)
 \begin{align*}
 	0 &= \sum_{k: \ k\con j} \integral{I_{jk}}{ \bracs{ \tgrad_\ddmes u \cdot \overline{\tgrad\phi} - \omega^2 u\overline{\phi} } }{\lambda_{jk}} 
 	+ \integral{\ddom}{ \bracs{ \tgrad_{\dddmes}u\cdot\overline{\tgrad_{\dddmes}\phi}-\omega^2 u\overline{\phi} } }{\nu} \\
-	&= \sum_{k: \ k\con j} \int_{0}^{\abs{I_{jk}}} \clbracs{ \bracs{\bracs{\tilde{u}^{(jk)}}' + \rmi\qm_{jk} \tilde{u}^{(jk)}}\bracs{\overline{\varphi}' - \rmi\qm_{jk} \overline{\varphi} } - \omega^2 \tilde{u}^{(jk)}\overline{\varphi} } \ \md y \\
+	&= \sum_{k: \ k\con j} \int_{0}^{l_{jk}} \clbracs{ \bracs{\bracs{\tilde{u}^{(jk)}}' + \rmi\qm_{jk} \tilde{u}^{(jk)}}\bracs{\overline{\varphi}' - \rmi\qm_{jk} \overline{\varphi} } - \omega^2 \tilde{u}^{(jk)}\overline{\varphi} } \ \md y \\
 	&\qquad + \alpha_j\left.\bracs{ \tgrad_{\dddmes}u\cdot\overline{\tgrad_{\dddmes}\phi}-\omega^2 u\overline{\phi} }\right\vert_{v_j} \\
-	&= \sum_{k: \ k\con j} \int_{0}^{\abs{I_{jk}}} \clbracs{ \bracs{\bracs{\tilde{u}^{(jk)}}' + \rmi\qm_{jk} \tilde{u}^{(jk)}}\bracs{\overline{\varphi}' - \rmi\qm_{jk} \overline{\varphi} } - \omega^2 \tilde{u}^{(jk)}\overline{\varphi} } \ \md y
+	&= \sum_{k: \ k\con j} \int_{0}^{l_{jk}} \clbracs{ \bracs{\bracs{\tilde{u}^{(jk)}}' + \rmi\qm_{jk} \tilde{u}^{(jk)}}\bracs{\overline{\varphi}' - \rmi\qm_{jk} \overline{\varphi} } - \omega^2 \tilde{u}^{(jk)}\overline{\varphi} } \ \md y
 	 - \alpha_j \omega^2 u\bracs{v_j}\overline{\phi}\bracs{v_j}.
 \end{align*}
 Here we have used the fact that $\tgrad_{\dddmes}u\bracs{v_j}=0$ (see section \ref{sec:3DGradSobSpaces}).
 Given that (from before) $u$ is twice differentiable on each $I_{jk}$, it follows that
 \begin{align*}
 	\alpha_j\omega^2 u\bracs{v_j}\overline{\phi}\bracs{v_j} 
-	&= - \sum_{k: \ k\con j} \int_{0}^{\abs{I_{jk}}} \bracs{ \bracs{\diff{}{x} + \rmi\qm_{jk}}^2 \tilde{u}^{(jk)} +\omega^2 \tilde{u}^{(jk)} }\overline{\varphi} \ \md x \\
+	&= - \sum_{k: \ k\con j} \int_{0}^{l_{jk}} \bracs{ \bracs{\diff{}{x} + \rmi\qm_{jk}}^2 \tilde{u}^{(jk)} +\omega^2 \tilde{u}^{(jk)} }\overline{\varphi} \ \md x \\
 	&\qquad + \sum_{k: \ k\con j}\overline{\varphi}\bracs{v_j}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}\tilde{u}^{(jk)}\bracs{v_j} \\
 	&= \overline{\varphi}\bracs{v_j}\sum_{k: \ k\con j}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}\tilde{u}^{(jk)}\bracs{v_j}. \labelthis\label{eq:DerivationVertexConditionWeak}
 \end{align*}
@@ -55,7 +55,7 @@ One should note the presence of $\omega^2$ in this equation, so this is not a st
 The result of theorem \ref{thm:dddmesTangGradImplication} tells us that functions $u\in\gradSobQM{\ddom}{\dddmes}$ are also continuous at each vertex $v_j$, and thus the following problem (precisely \eqref{eq:SingularWaveEqnQGProblem}) has been derived:
 \begin{subequations}
 	\begin{align*}
-		-\bracs{\diff{}{y} + \rmi\qm_{jk}}^2 u^{(jk)} &= \omega^2 u^{(jk)}, \quad &y\in\interval{I_{jk}}, \ \forall I_{jk}\in\edgeSet, \tag{\eqref{eq:SingularWaveEqnQGProblem-1} restated} \\
+		-\bracs{\diff{}{y} + \rmi\qm_{jk}}^2 u^{(jk)} &= \omega^2 u^{(jk)}, \quad &y\in\sqbracs{0,l_{jk}}, \ \forall I_{jk}\in\edgeSet, \tag{\eqref{eq:SingularWaveEqnQGProblem-1} restated} \\
 		u \text{ is continuous at } & v_j, \quad &\forall v_j\in\vertSet,  \tag{\eqref{eq:SingularWaveEqnQGProblem-2} restated} \\
 		\sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}u^{(jk)}\bracs{v_j} &= \omega^2\alpha_j u\bracs{v_j}, \quad &\forall v_j\in\vertSet, \tag{\eqref{eq:SingularWaveEqnQGProblem-3} restated}
 	\end{align*}
@@ -73,7 +73,7 @@ By this we mean a thickened graph $\mathcal{G}_{\delta}$ of $\graph$, where $V_{
 Letting $\alpha_j = \lim_{\delta\rightarrow0}\frac{V_{v_j}}{V_{\mathrm{edge}}}$ (where we formally allow $\alpha_j=\infty$) for each $v_j$, our consideration of singular measures and the variational problem \eqref{eq:SingularScalarWaveEqn} predicts that the resulting system will be realisable as the following quantum graph problem:
 \begin{subequations}
 	\begin{align*}
-		-\bracs{\diff{}{y} + \rmi\qm_{jk}}^2 u^{(jk)} &= \omega^2 u^{(jk)}, \quad &y\in\interval{I_{jk}}, \ \forall I_{jk}\in\edgeSet, \\
+		-\bracs{\diff{}{y} + \rmi\qm_{jk}}^2 u^{(jk)} &= \omega^2 u^{(jk)}, \quad & y\in\sqbracs{0,l_{jk}}, \ \forall I_{jk}\in\edgeSet, \\
 		u \text{ is continuous at } & v_j, \quad &\forall v_j\in\vertSet, \\
 		\sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}u^{(jk)}\bracs{v_j} &= \omega^2\alpha_j u\bracs{v_j}, \quad &\forall v_j\in\vertSet, \ \alpha_j\in\bracs{0,\infty}, \\
 		\sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}u^{(jk)}\bracs{v_j} &= 0, \quad &\forall v_j\in\vertSet, \ \alpha_j = 0, \\
