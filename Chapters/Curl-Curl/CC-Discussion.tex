@@ -160,18 +160,19 @@ Given \eqref{eq:ClassicalEM-DNMaps} served as the motivations for the definition
 \subsection{Open Questions} \label{ssec:CC-OpenQuestions}
 \tstk{comment at end - Whilst it is not known whether the problem \eqref{eq:SingularCurlEquation} is the ``limit" of a thin-structure problem with thick vertices, in the sense of \tstk{scalar SS problem to scalar TS problem, via KZ and EP}, the motivation for our consideration of such variational problems stems from the coincidence? Might go in a future directions/ open questions subsection instead}
 
-Given that our investigation into the curl of the curl equation has resulted in us obtaining the acoustic approximation, it is natural to consider stepping back to a variational problem for the general Maxwell system.
-This analysis (and definition of the corresponding operator) is currently an open problem in the context of singular structures, \tstk{although it was answered in the lebesgue case (Birman-Suslena?)}.
-This would require us to consider the system
+Given that our investigation into the curl of the curl equation has resulted in us obtaining the acoustic approximation, it is natural to consider stepping back to a variational problem for the general Maxwell system;
 \begin{subequations} \label{eq:CC-Maxwell1stOrder}
 	\begin{align}
-		\ktgrad_{\dddmes}\cdot
-		\ktcurl{*}E = \rmi\omega\mu_m H,
-		\qquad
+		\ktdiv{\dddmes}\cdot E = 0,
+		&\qquad
+		\ktcurl{*}E = \rmi\omega\mu_m H, \\
+		\ktdiv{\dddmes}\cdot H = 0,
+		&\qquad
 		\ktcurl{*}H = -\rmi\omega\epsilon_m E,
 	\end{align}
 \end{subequations}
-(for the purpose of illustration, we will assume the material parameters are constants) which we interpret as the problem of finding $E,H\in\pltwo{\ddom}{\dddmes}^3$ such that
+for the purpose of illustration, we will assume the material parameters are constants. 
+A thorough analysis would establish a formal definition for the Maxwell operator, the eigenvalue problem for which corresponds to \eqref{eq:CC-Maxwell1stOrder}, which we interpret as the problem of finding divergence-free $E,H\in\pltwo{\ddom}{\dddmes}^3$ such that
 \begin{subequations} \label{eq:CC-Maxwell1stOrderVariational}
 	\begin{align} 
 		\integral{\ddom}{ E\cdot\overline{\ktcurl{}\phi} - \rmi\omega\mu_m H\cdot\overline{\phi} }{\dddmes} &= 0, 
@@ -180,8 +181,10 @@ This would require us to consider the system
 		\qquad &\forall \psi\in\psmooth{\ddom}^3.
 	\end{align}
 \end{subequations}
-We write the ``curls" in \eqref{eq:CC-Maxwell1stOrder} with a subscript asterisk to distinguish them from the tangential curls that belong to fields in $\ktcurlSob{\ddom}{\dddmes}$.
-Similarly to the treatment of the divergence-free condition, the curl appears as a first-order operator in \eqref{eq:CC-Maxwell1stOrder}, and so we cannot lean on the approaches or analysis we have employed in defining gradients and curls for use in our ``second-order" equations.
-This being said, the definition of divergence free that is analysed in section \ref{sec:DivFreeCondition} does translate into the first order context
-Indeed, the objects $\ktcurl{*}E$ and $\ktcurl{*}H$ would only be ``defined" upon determining a solution $E,H$ to \eqref{eq:CC-Maxwell1stOrderVariational}.
-Consideration of the first order Maxwell operator on a singular structure also raises an interesting question --- is the (singular) curl of the curl equation \eqref{eq:SingularCurlEquation} still a consequence of the more general (singular) Maxwell system \eqref{eq:CC-Maxwell1stOrder}\footnote{More precisely, is it true that a solution $E,H$ to \eqref{eq:CC-Maxwell1stOrder} gives rise to a solution $\bracs{u, \ktcurl{\dddmes}u }\in\ktcurlSob{\ddom}{\dddmes}$ to \eqref{eq:SingularCurlEquation}?}?
+One has to answer a number of new questions when attempting to examine the first order Maxwell operator.
+Definition \ref{def:DivFree-AllGradients} translates directly into the first order context, but we write the ``curls" in \eqref{eq:CC-Maxwell1stOrder} with a subscript asterisk to distinguish them from the tangential curls that belong to fields in $\ktcurlSob{\ddom}{\dddmes}$.
+Unlike in \eqref{eq:SingularCurlEquation}, the curl appears as a first-order operator in \eqref{eq:CC-Maxwell1stOrder}, and so there is no guarantee that the object $\ktcurl{*}E$ coincides with $E\in\ktcurlSob{\ddom}{\dddmes}$.
+Indeed, the objects $\ktcurl{*}E$ and $\ktcurl{*}H$ in \eqref{eq:CC-Maxwell1stOrder} are only really ``defined" upon determining a solution $E,H$ to \eqref{eq:CC-Maxwell1stOrderVariational}.
+Circumnavigating these issues and performing an analysis of the resulting system is the natural next step in pursuit of understanding the Maxwell system on singular structures, and the behaviour of the modes supported by such structures.
+There is also the related question of whether the singular curl of the curl equation \eqref{eq:SingularCurlEquation} would still be a consequence of the more general (singular) Maxwell system \eqref{eq:CC-Maxwell1stOrder} that is defined.
+More precisely, is it true that a solution $E,H$ to \eqref{eq:CC-Maxwell1stOrder} gives rise to a solution $\bracs{u, \ktcurl{\dddmes}u }\in\ktcurlSob{\ddom}{\dddmes}$ to \eqref{eq:SingularCurlEquation}? \tstk{here}

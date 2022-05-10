@@ -20,7 +20,7 @@ Hence we can decompose $\pltwo{\ddom}{\rho}$ as the direct sum of $\divZero{\ddo
 In turn, we would find that a function has at most one ``tangential divergence", and thus could define the Sobolev space of functions possessing divergences as
 \begin{align*}
 	\ktdivSob{\ddom}{\rho}
-	&= \clbracs{ \bracs{u,d}\in W_{\rho,\mathrm{div}}^{\kt} \setVert d\perp\mathcal{D}_{\ddom,\md\rho}\bracs{0} }.
+	&= \clbracs{ \bracs{u,\ktdiv{\rho}u}\in W_{\rho,\mathrm{div}}^{\kt} \setVert d\perp\mathcal{D}_{\ddom,\md\rho}\bracs{0} }.
 \end{align*}
 Then any vector field whose tangential divergence is zero, we would label as a divergence free field.
 However once we consider the divergences of zero on a single edge of our singular structure, we will quickly run into an unpleasant consequence:
@@ -212,12 +212,12 @@ Indeed, we could elect to define the $\kt$-divergence with respect to $\dddmes$ 
 		&= -\integral{\ddom}{ d\overline{\phi} }{\dddmes}, \qquad\forall\phi\in\psmooth{\ddom},
 	\end{align*}
 	we say that $u$ admits (or possesses) a weak $\kt$-divergence with respect to $\dddmes$.
-	Then we call $d:=\ktgrad_{\dddmes}\cdot u$ the $\kt$-divergence with respect to $\dddmes$ of the vector field $u$.
-	If $\ktgrad_{\dddmes}\cdot u=0$, then $u$ is weakly divergence free.
+	Then we call $d:=\ktdiv{\dddmes}u$ the $\kt$-divergence with respect to $\dddmes$ of the vector field $u$.
+	If $\ktdiv{\dddmes}u=0$, then $u$ is tangentially divergence free.
 \end{definition}
 Clearly we could produce a similar definition for any Borel measure $\rho$ on $\ddom$.
 The notions of $\kt$-tangentially divergence free (definition \ref{def:DivFree-TangGradients}) and weakly $\kt$-divergence free as in definition \ref{def:dddmesDivergence} coincide.
-This means that it is possible for us to define the object $\ktgrad_{\dddmes}\cdot u$ in a manner that does not result in all vector fields being (trivially) divergence free, although this is beyond our requirements for studying the equation \eqref{eq:SingularCurlEquation}.
+This means that it is possible for us to define the object $\ktdiv{\dddmes}u$ in a manner that does not result in all vector fields being (trivially) divergence free, although this is beyond our requirements for studying the equation \eqref{eq:SingularCurlEquation}.
 We do conclude by remarking that this weak $\kt$-divergence of a field $u$ is unique --- if there are two such divergences, the difference integrated against all $\phi\in\psmooth{\ddom}$ must be zero, from which we can deduce the difference is zero almost everywhere.
 And finally, we can conclude that the weak $\kt$-divergence has the same form as the function $F$ in \eqref{eq:ktDivergence-Guess}, up to the position of the constant $\alpha_j$.
 \begin{cory}
