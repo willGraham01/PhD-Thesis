@@ -1,12 +1,24 @@
-\section{Discussion and Further Studies} \label{sec:CC-Discussion}
+\section{Discussion and Research Outlook} \label{sec:CC-Discussion}
 
 \subsection{On the Reduction to a Scalar System} \label{ssec:ReductionToScalar}
-\tstk{always get scalar because one qm propagation constant is zero...}
+The reduction of the (vectorial) \eqref{eq:SingularCurlEquation} to a scalar system that resembles the acoustic approximation comes as a surprise.
+This does not happen in the classical setting when one considers (either of) the curl of the curl equation \eqref{eq:Intro-CurlCurlEqns} on a periodic medium in the $\bracs{x_1,x_2}$-plane that is extruded into $x_3$, except in the case of oblique wave propagation --- when the propagation constant in the $x_3$ direction is zero.
+Under these conditions, the Maxwell system reduces to the acoustic approximation, which was the focus of chapter \ref{ch:ScalarSystem}.
+In our context, oblique wave propagation would correspond to the case when $\wavenumber=0$, however we observe reduction to the acoustic approximation regardless of the value of $\wavenumber$ --- warranting some thought.
 
+The answer/reason lies in the nature of our variational problem itself --- specifically the dynamics induced by the tangential curls.
+Let us imagine we now have a wave $u = u_0\e^{\rmi\vec{k}\cdot x}$ propagating in our material with wave-vector $\vec{k} = \qm_1\widehat{x}_1 + \qm_2\widehat{x}_2 + \wavenumber\widehat{x}_3$.
+For each edge $I_{jk}$ (or plane $P_{jk}$) we can write this wave-vector using the local frame of reference provided by $\widehat{e}_{jk}$ and $\widehat{n}_{jk}$, obtaining $\vec{k}_{jk} := \qm_{jk}\widehat{e}_{jk} + \qm_{jk}^\perp\widehat{n}_{jk} + \wavenumber\widehat{x}_3$, where $\qm_{jk}^\perp := \qm\cdot n_{jk}$.
+Now $\ktcurl{\dddmes}u$ on $I_{jk}$ is directed in the $\widehat{n}_{jk}$ direction, effectively only inducing dynamics or changes in $u$ in the $\widehat{e}_{jk}$ and $\widehat{x}_3$ directions.
+There is no propagation out of the plane $P_{jk}$ as a result, which corresponds to when we have the component of $\vec{k}$ in the $\widehat{n}_{jk}$ direction being zero --- $\vec{k}\cdot\widehat{n}_{jk}=0$, which happens only if $\qm_{jk}^\perp=0$.
+By analogy with the classical setting, one component of our wave-vector being zero will then result in the curl of the curl equation reducing to the acoustic approximation.
+This occurs for each plane $P_{jk}$, and thus we find that our edge ODEs always reduce to the (singular analogue of the) acoustic approximation.
+We also highlight that this is a direct consequence of the behaviour of the tangential curls on the particular geometry we have chosen to study --- there is no way to avoid such a reduction if one wishes to use the ``fibre-like" geometry considered here.
+One could consider reworking the setup for the original variational problem \eqref{eq:SingularCurlEquation} (including the function spaces), however the reduction to the acoustic approximation is tied to the nature of our singular structure being \emph{singular} --- we are always going to effectively ``loose" the ability to observe wave propagation in one direction.
+This observation also provides an idea for preventing automatic reduction to the acoustic approximation:  we need part of our domain to be non-singular, and we can do this by ``filling" the regions between the edges $I_{jk}$ with some background material.
+Such a course of action does not come without its own complications, but we begin to pursue it in chapter \ref{ch:SingInc}.
 
 \subsection{Remarks on the Calder\'on Operator} \label{ssec:CalderonOp}
-\tstk{comment at end - Whilst it is not known whether the problem \eqref{eq:SingularCurlEquation} is the ``limit" of a thin-structure problem with thick vertices, in the sense of \tstk{scalar SS problem to scalar TS problem, via KZ and EP}, the motivation for our consideration of such variational problems stems from the coincidence? Might go in a future directions/ open questions subsection instead}
-
 In this section we look to draw further parallels between the curl-of-the-curl problem on a classical domain and the system \eqref{eq:QGRawSystem}.
 One of our key motivating factors and themes throughout this work has been retaining an intuitive link between the spaces and objects necessary for studying variational problems on singular structures and their classical counterparts.
 Further to this, we will demonstrate that the Dirichlet-to-Neumann operator (the so-called $M$-operator) associated with the problem \eqref{eq:QGRawSystem} is a direct analogue of the Calder\'on operator, that is the Dirichlet-to-Neumann operator for the curl of the curl equation.
@@ -61,10 +73,10 @@ The classical action of $\nmap$ in \eqref{eq:ClassicalEM-DNMaps} then suggests t
 \begin{align} \label{eq:NGMapDef}
 	\ngmap u &= 
 	\begin{pmatrix}
-		\sum_{1\con k} \hat{\sigma}_{1k}\wedge\ktcurl{\dddmes}u\bracs{v_1} \\
-		\sum_{2\con k} \hat{\sigma}_{2k}\wedge\ktcurl{\dddmes}u\bracs{v_2} \\
+		\sum_{1\con k} \hat{\sigma}_{1k}\bracs{v_1}\wedge\ktcurl{\dddmes}u\bracs{v_1} \\
+		\sum_{2\con k} \hat{\sigma}_{2k}\bracs{v_2}\wedge\ktcurl{\dddmes}u\bracs{v_2} \\
 		\vdots \\
-		\sum_{N\con k} \hat{\sigma}_{Nk}\wedge\ktcurl{\dddmes}u\bracs{v_N}
+		\sum_{N\con k} \hat{\sigma}_{Nk}\bracs{v_N}\wedge\ktcurl{\dddmes}u\bracs{v_N}
 	\end{pmatrix}
 	\in\complex^{3N},
 \end{align}
@@ -144,3 +156,8 @@ implying
 and so the Green's identity holds. \tstk{do we even define a boundary triple in the QG chapter? If so, saying "green's identity" doesn't make much sense!}
 Therefore, $\bracs{\complex^{3N}, \dgmap, \ngmap}$ is a boundary triple for the operator $\ag$.
 Given \eqref{eq:ClassicalEM-DNMaps} served as the motivations for the definitions \eqref{eq:DGMapDef} and \eqref{eq:NGMapDef}, the $M$-operator associated with \eqref{eq:QGRawSystem} really is a ``graph version" of the Calder\'on operator for the problem \eqref{eq:SingularCurlEquation}.
+
+\subsection{Remarks on the 1st Order Maxwell System} \label{ssec:CC-1stOrderMaxwell}
+
+\subsection{Open Questions} \label{ssec:CC-OpenQuestions}
+\tstk{comment at end - Whilst it is not known whether the problem \eqref{eq:SingularCurlEquation} is the ``limit" of a thin-structure problem with thick vertices, in the sense of \tstk{scalar SS problem to scalar TS problem, via KZ and EP}, the motivation for our consideration of such variational problems stems from the coincidence? Might go in a future directions/ open questions subsection instead}
