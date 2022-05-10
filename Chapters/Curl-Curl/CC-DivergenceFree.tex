@@ -39,8 +39,9 @@ However our singular measure cannot see any such flux across the edges $I_{jk}$ 
 However it is then impossible to know ``how much" of the scalar divergence would be due to these unobservable fluxes across $I_{jk}$, and how much was from the observable portions of the vector field along $I_{jk}$.
 
 Naturally, one might find it dissatisfying that all vector fields are divergence free in lieu of the above computation, and instead look for other possible definitions or interpretations.
-A characterising feature of (classical) divergence-free fields is that they are orthogonal to all potential vector fields (that is, any vector field equal to the gradient of a scalar function).
-Utilising this analogue with the classical divergence, we could adopt the following definition for our analogue of divergence-free fields:
+However we are getting ahead of ourselves by trying to define the notion of divergence-free in this ``strong" manner.
+The expression ``$u$ is divergence-free" for an $L^2$ vector field does not necessitate the existence of \emph{another} $L^2$ function related to $u$ in the manner proposed above, but rather indicates that the vector field $u$ is orthogonal to all gradients.
+Utilising this analogue with the classical divergence, we adopt the following definition for our analogue of divergence-free fields:
 \begin{definition}[$\dddmes$-Divergence Free] \label{def:DivFree-AllGradients}
 	A field $u\in\pltwo{\ddom}{\dddmes}^3$ is divergence free (with respect to $\dddmes$) if (and only if)
 	\begin{align*}
@@ -49,8 +50,7 @@ Utilising this analogue with the classical divergence, we could adopt the follow
 	for every $g\in W_{\mathrm{grad}}^{\kt}\bracs{\ddom,\md\dddmes}$.
 \end{definition}
 That is, a field is divergence free only if it is orthogonal in $\ltwo{\ddom}{\dddmes}$ to any gradient field, including the gradients of zero.
-Whilst this ``weak" definition breaks the tradition of our approach via smooth approximations, it will nonetheless be valuable for us to examine the implications of definition \ref{def:DivFree-AllGradients} (and the later definition \ref{def:DivFree-TangGradients}) when we come to the analysis of \eqref{eq:SingularWaveEqnQGProblem}).
-Definition \ref{def:DivFree-AllGradients} admits the following characterisation.
+This ``weak" definition is the most consistent given that we do not need to consider any equations explicitly involving the divergence of a vector field, and it admits the following characterisation.
 \begin{prop} \label{prop:DivFree-AllGradsConditions}
 	Let $u\in\pltwo{\ddom}{\dddmes}^3$ and define (for each edge $I_{jk}$)
 	\begin{align*}
@@ -159,11 +159,11 @@ The condition (iv) fills the same role at the vertices --- recall that $\massMes
 The condition (v) is then the result of the interaction of the incoming fields at the vertices\footnote{The condition (v) even bears resemblance to a $\delta'$-type vertex condition in a quantum graph problem --- the ``derivative" $\rmi\wavenumber u_3$ at $v_j$ must equal a multiple of the incoming edge functions.}.
 To be divergence free at the vertex $v_j$; the sum of the ``flux" seen by the measure $\ddmes$, represented by the trace values of the $U_2^{(jk)}$ (the sign depending on whether the corresponding edge is directed into or out of the vertex $v_j$), and the ``flux" observed by $\massMes\times\lambda_1$ along the line induced by $v_j$, must balance.
 
-This interpretation does raise the question as to whether we can define some kind of \emph{weak divergence} of a vector field with respect to our singular measures.
-However we can note from proposition \ref{prop:DivFree-AllGradsConditions} that only conditions (iii) and (v) actually affect what such a ``weak divergence" would look like --- the requirement that a field be orthogonal to gradients of zero to be divergence-free directly affects the field itself.
+This interpretation does raise the question as to whether we can define some kind of \emph{weak tangential divergence} of a vector field with respect to our singular measures.
+However we can note from proposition \ref{prop:DivFree-AllGradsConditions} that only conditions (iii) and (v) actually affect what such a thing would look like --- the requirement that a field be orthogonal to gradients of zero to be divergence-free directly affects the field itself.
 Classically of course, there are no ``gradients of zero" and so there is no distinction between tangential gradients and gradients of zero.
 Consequentially, divergence free functions being orthogonal to gradients is functionally the same as them being orthogonal to all tangential gradients.
-In pursuit of a ``weak divergence", we first put forward a weaker definition of ``divergence-free", which for ease of language we will refer to as \emph{tangentially divergence-free}.
+However, we are able to put forward a weaker definition of ``divergence-free", which for ease of language we will refer to as \emph{tangentially divergence-free}.
 \begin{definition}[Tangentially $\dddmes$-Divergence Free] \label{def:DivFree-TangGradients}
 	A field $u\in\pltwo{\ddom}{\dddmes}^3$ is tangentially divergence free with respect to $\dddmes$ if (and only if)
 	\begin{align*}
@@ -192,8 +192,7 @@ Indeed, this characterisation retains precisely the conditions (ii), (iii), and 
 We purposefully retain the same labels as proposition \ref{prop:DivFree-AllGradsConditions}.
 Similarly to how tangential gradients and curls only encode information about changes of functions or fields in the plane, a field being tangentially divergence free only imposes balance between the changes (in their respective directions) of the in-plane components of a vector field $u$.
 
-This brings us closer to the idea of defining a ``weak divergence" in a similar manner to that of gradients and curls in section \ref{sec:BorelMeasSobSpaces}.
-If we bring each of the terms in (v) over to the left-hand side, we now have a function $F\in\pltwo{\ddom}{\dddmes}$ with
+This brings us closer to the idea of defining some kind of \emph{(weak) tangential divergence}; bringing each of the terms in (v) over to the left-hand side, we would have a function $F\in\pltwo{\ddom}{\dddmes}$ with
 \begin{align} \label{eq:ktDivergence-Guess}
 	F(x) &= 
 	\begin{cases} 
@@ -205,7 +204,7 @@ If we bring each of the terms in (v) over to the left-hand side, we now have a f
 \end{align}
 and that suggestively satisfies $u$ is tangentially divergence free if and only if $F=0$.
 Indeed, we could elect to define the $\kt$-divergence with respect to $\dddmes$ of a vector field $u$ in the following manner:
-\begin{definition}[$\kt$-Divergence (with respect to $\dddmes$)] \label{def:dddmesDivergence}
+\begin{definition}[(Weak) $\kt$-Divergence (with respect to $\dddmes$)] \label{def:dddmesDivergence}
 	Let $u\in\pltwo{\ddom}{\dddmes}^3$.
 	If there exists a function $d\in\pltwo{\ddom}{\dddmes}$ such that
 	\begin{align*}
@@ -218,7 +217,8 @@ Indeed, we could elect to define the $\kt$-divergence with respect to $\dddmes$ 
 \end{definition}
 Clearly we could produce a similar definition for any Borel measure $\rho$ on $\ddom$.
 The notions of $\kt$-tangentially divergence free (definition \ref{def:DivFree-TangGradients}) and weakly $\kt$-divergence free as in definition \ref{def:dddmesDivergence} coincide.
-Furthermore, the weak $\kt$-divergence of a field $u$ is unique --- if there are two such divergences, the difference integrated against all $\phi\in\psmooth{\ddom}$ must be zero, from which we can deduce the difference is zero almost everywhere.
+This means that it is possible for us to define the object $\ktgrad_{\dddmes}\cdot u$ in a manner that does not result in all vector fields being (trivially) divergence free, although this is beyond our requirements for studying the equation \eqref{eq:SingularCurlEquation}.
+We do conclude by remarking that this weak $\kt$-divergence of a field $u$ is unique --- if there are two such divergences, the difference integrated against all $\phi\in\psmooth{\ddom}$ must be zero, from which we can deduce the difference is zero almost everywhere.
 And finally, we can conclude that the weak $\kt$-divergence has the same form as the function $F$ in \eqref{eq:ktDivergence-Guess}, up to the position of the constant $\alpha_j$.
 \begin{cory}
 	Let $u\in\pltwo{\ddom}{\dddmes}^3$, and define (for each edge $I_{jk}$)
@@ -245,14 +245,17 @@ And finally, we can conclude that the weak $\kt$-divergence has the same form as
 \end{cory}
 The proof of this corollary follows the same arguments as those for the conditions (ii), (iii), and (v) in proposition \ref{prop:DivFree-AllGradsConditions}.
 
-\tstk{now do the de Rham stuff. Also, the curl-curl equation automatically gives us the other, weak definitions of divergence free to play with, so de Rham is a kind of tie-breaker in this respect.}
-\begin{theorem}[de Rham]
-	The following statements hold.
-	\begin{enumerate}[(a)]
-		\item If $u\in\ktgradSob{D}{\rho}$ then $\ktgrad_{\rho}u\in\ktcurlSob{\ddom}{\rho}$ with $\ktcurl{\rho}\bracs{\ktgrad_{\rho}u}=0$.
-		\item If $g\in\gradZero{D}{\rho}$ then $g\in\ktcurlSob{\ddom}{\rho}$ with $\ktcurl{\rho}g=0$.
-		\item Suppose that $v\in\ktcurlSob{D}{\rho}$ with $\ktcurl{\rho}v=0$.
-		Then there exist unique $u\in\ktgradSob{D}{\rho}$ and $g\in\gradZero{D}{\rho}$ such that $v = \ktgrad_{\rho}u + g$.
-		\item If $v\in\ktcurlSob{D}{\rho}$ then $\ktcurl{\rho}v\in H^1_{\qm,\wavenumber,\mathrm{div}}\bracs{\ddom,\md\rho}$
-	\end{enumerate}
-\end{theorem}
+%\tstk{now do the de Rham stuff. Also, the curl-curl equation automatically gives us the other, weak definitions of divergence free to play with, so de Rham is a kind of tie-breaker in this respect.}
+%\begin{theorem}[de Rham]
+%	The following statements hold.
+%	\begin{enumerate}[(a)]
+%		\item If $u\in\ktgradSob{D}{\rho}$ then $\ktgrad_{\rho}u\in\ktcurlSob{\ddom}{\rho}$ with $\ktcurl{\rho}\bracs{\ktgrad_{\rho}u}=0$.
+%		\item If $g\in\gradZero{D}{\rho}$ then $g\in\ktcurlSob{\ddom}{\rho}$ with $\ktcurl{\rho}g=0$.
+%		\item Suppose that $v\in\ktcurlSob{D}{\rho}$ with $\ktcurl{\rho}v=0$.
+%		Then there exist unique $u\in\ktgradSob{D}{\rho}$ and $g\in\gradZero{D}{\rho}$ such that $v = \ktgrad_{\rho}u + g$.
+%		\item If $v\in\ktcurlSob{D}{\rho}$ then $\ktcurl{\rho}v\in\ktdivSob{D}{\rho}$ with $\ktgrad_{\rho}\cdot\ktcurl{\rho}v=0$.
+%		\item If $c\in\curlZero{D}{\rho}$ then $c\in\ktdivSob{D}{\rho}$ with $\ktgrad_{\rho}\cdot c=0$.
+%		\item Suppose that $w\in\ktdivSob{D}{\rho}$ with $\ktgrad_{\rho}\cdot w=0$.
+%		Then there exist unique $v\in\ktcurlSob{D}{\rho}$ and $c\in\curlZero{D}{\rho}$ such that $w = \ktcurl{\rho}v + c$.
+%	\end{enumerate}
+%\end{theorem}
