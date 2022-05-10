@@ -13,27 +13,27 @@ If we follow our motivations for gradients and curls, for a (Borel) measure $\rh
 \end{align*}
 with the closure taken in $\ltwo{\ddom}{\rho}^3\times\ltwo{\ddom}{\rho}$, and define the space of divergences of zero (with respect to $\rho$) as
 \begin{align*}
-	\mathcal{D}_{\ddom,\md\rho}\bracs{0} &= \clbracs{d \setVert \bracs{0,d}\in W_{\rho,\mathrm{div}}^{\kt}}.
+	\divZero{\ddom}{\rho} &= \clbracs{d \setVert \bracs{0,d}\in W_{\rho,\mathrm{div}}^{\kt}}.
 \end{align*}
-Similar arguments to those in section \ref{sec:BorelMeasSobSpaces} establish that $\mathcal{D}_{\ddom,\md\rho}\bracs{0}$ does not depend on the value of $\kt$, and is a closed, linear subspace of $\pltwo{\ddom}{\rho}$.
-Hence we can decompose $\pltwo{\ddom}{\rho}$ as the direct sum of $\mathcal{D}_{\ddom,\md\rho}\bracs{0}$ and its orthogonal complement.
+Similar arguments to those in section \ref{sec:BorelMeasSobSpaces} establish that $\divZero{\ddom}{\rho}$ does not depend on the value of $\kt$, and is a closed, linear subspace of $\pltwo{\ddom}{\rho}$.
+Hence we can decompose $\pltwo{\ddom}{\rho}$ as the direct sum of $\divZero{\ddom}{\rho}$ and its orthogonal complement.
 In turn, we would find that a function has at most one ``tangential divergence", and thus could define the Sobolev space of functions possessing divergences as
 \begin{align*}
-	H^1_{\qm,\wavenumber,\mathrm{div}}\bracs{\ddom,\md\rho}
+	\ktdivSob{\ddom}{\rho}
 	&= \clbracs{ \bracs{u,d}\in W_{\rho,\mathrm{div}}^{\kt} \setVert d\perp\mathcal{D}_{\ddom,\md\rho}\bracs{0} }.
 \end{align*}
 Then any vector field whose tangential divergence is zero, we would label as a divergence free field.
 However once we consider the divergences of zero on a single edge of our singular structure, we will quickly run into an unpleasant consequence:
 \begin{lemma} \label{lem:DivZero-Everything}
-	For any edge $I_{jk}$, we have that $\mathcal{D}_{\ddom,\md\lambda_{jk}}\bracs{0}=\pltwo{\ddom}{\lambda_{jk}}$.
+	For any edge $I_{jk}$, we have that $\divZero{\ddom}{\lambda_{jk}}=\pltwo{\ddom}{\lambda_{jk}}$.
 \end{lemma}
 \begin{proof}
 	Let $\phi\in\psmooth{\ddom}$, and let $\varphi\in\csmooth{\ddom}$ be a smooth function with $\varphi(x)=\bracs{x-v_j}\cdot n_{jk}\phi(x)$ in some neighbourhood of $I_{jk}$.
-	Then the smooth function $\varphi\widehat{n}_{jk}\in\csmooth{\ddom}^3$ is such that $\varphi=0$ and $\grad\cdot\varphi\widehat{n}_{jk}=\phi$ on $I_{jk}$, so $\phi\in\mathcal{D}_{\ddom,\md\lambda_{jk}}\bracs{0}$.
+	Then the smooth function $\varphi\widehat{n}_{jk}\in\csmooth{\ddom}^3$ is such that $\varphi=0$ and $\grad\cdot\varphi\widehat{n}_{jk}=\phi$ on $I_{jk}$, so $\phi\in\divZero{\ddom}{\lambda_{jk}}$.
 	A density argument then completes the proof.
 \end{proof}
 Further to this, it is not difficult to prove an analogy of the extension results (proposition \ref{prop:3DGradZeroChar} and theorem \ref{thm:CurlZeroChar}) for these divergences of zero.
-Neither is it difficult to show that $\mathcal{D}_{\ddom,\md\massMes}\bracs{0}=\pltwo{\ddom}{\massMes}$, and consequentially that an analogue of theorem \ref{thm:3DdddmesCharGradZero} and proposition \ref{prop:ThickVertexCurlZeroCharacterisation} holds, so every tangential divergence is zero!
+Neither is it difficult to show that $\divZero{\ddom}{\massMes}=\pltwo{\ddom}{\massMes}$, and consequentially that an analogue of theorem \ref{thm:3DdddmesCharGradZero} and proposition \ref{prop:ThickVertexCurlZeroCharacterisation} holds, so every tangential divergence is zero!
 We should not be surprised at this result --- the divergence is a scalar representing the net flow of a vector field out of a given point $x$.
 However our singular measure cannot see any such flux across the edges $I_{jk}$ (or out of the planes $P_{jk}$), thus any divergence induced by such a flux must be a divergence of zero.
 However it is then impossible to know ``how much" of the scalar divergence would be due to these unobservable fluxes across $I_{jk}$, and how much was from the observable portions of the vector field along $I_{jk}$.
@@ -246,3 +246,13 @@ And finally, we can conclude that the weak $\kt$-divergence has the same form as
 The proof of this corollary follows the same arguments as those for the conditions (ii), (iii), and (v) in proposition \ref{prop:DivFree-AllGradsConditions}.
 
 \tstk{now do the de Rham stuff. Also, the curl-curl equation automatically gives us the other, weak definitions of divergence free to play with, so de Rham is a kind of tie-breaker in this respect.}
+\begin{theorem}[de Rham]
+	The following statements hold.
+	\begin{enumerate}[(a)]
+		\item If $u\in\ktgradSob{D}{\rho}$ then $\ktgrad_{\rho}u\in\ktcurlSob{\ddom}{\rho}$ with $\ktcurl{\rho}\bracs{\ktgrad_{\rho}u}=0$.
+		\item If $g\in\gradZero{D}{\rho}$ then $g\in\ktcurlSob{\ddom}{\rho}$ with $\ktcurl{\rho}g=0$.
+		\item Suppose that $v\in\ktcurlSob{D}{\rho}$ with $\ktcurl{\rho}v=0$.
+		Then there exist unique $u\in\ktgradSob{D}{\rho}$ and $g\in\gradZero{D}{\rho}$ such that $v = \ktgrad_{\rho}u + g$.
+		\item If $v\in\ktcurlSob{D}{\rho}$ then $\ktcurl{\rho}v\in H^1_{\qm,\wavenumber,\mathrm{div}}\bracs{\ddom,\md\rho}$
+	\end{enumerate}
+\end{theorem}

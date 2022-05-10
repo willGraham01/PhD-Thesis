@@ -147,26 +147,24 @@
 \newcommand{\kcurl}[1]{\mathrm{curl}_{#1}^{(\wavenumber)}}	 	% k-curl with measure subscript #1
 \newcommand{\ktcurl}[1]{\mathrm{curl}_{#1}^{\kt}}				% k,theta-curl with measure subscript #1
 
-% GRAD/CURL OF ZERO SETS: format is \command{domain}{measure}
+% GRAD/CURL/DIV OF ZERO SETS: format is \command{domain}{measure}
 \newcommand{\gradZero}[2]{\mathcal{G}_{ #1, \mathrm{d}#2}\bracs{0}}					% gradients of zero
 \newcommand{\kgradZero}[2]{\mathcal{G}_{ #1, \mathrm{d}#2}^{(\wavenumber)}\bracs{0}}	% k-gradients of zero
 \newcommand{\curlZero}[2]{\mathcal{C}_{ #1, \mathrm{d}#2}\bracs{0}}					% curls of zero
 \newcommand{\kcurlZero}[2]{\mathcal{C}_{ #1, \mathrm{d}#2}^{(\wavenumber)}\bracs{0}}	% k-curls of zero
+\newcommand{\divZero}[2]{\mathcal{D}_{#1,\mathrm{d}#2}\bracs{0}} 						% divs of zero
 
 % SOBOLEV SPACES: format is \command{domain}{measure}
 \newcommand{\gradSob}[2]{H^1_\mathrm{grad}\bracs{#1, \mathrm{d}#2}}			% gradient SS
 \newcommand{\tgradSob}[2]{H^1_{\qm, \mathrm{grad}}\bracs{#1, \mathrm{d}#2}} 	% t-gradient SS
 \newcommand{\gradSobQM}[2]{\tgradSob{#1}{#2}}									% t-gradient SS, legacy
 
-%\wavenumber,\qm-gradient Sobolev space
-\newcommand{\ktgradSob}[2]{H^1_{\wavenumber,\qm,\mathrm{grad}}\bracs{#1, \mathrm{d}#2}}	
-
+\newcommand{\ktgradSob}[2]{H^1_{\wavenumber,\qm,\mathrm{grad}}\bracs{#1, \mathrm{d}#2}}	% kt-grad SS
 \newcommand{\curlSob}[2]{H^1_\mathrm{curl}\bracs{#1, \mathrm{d}#2}}						% curl SS
 \newcommand{\tcurlSob}[2]{H^1_{\qm, \mathrm{curl}}\bracs{#1, \mathrm{d}#2}}				% t-curl SS
 \newcommand{\kcurlSob}[2]{H^1_{\wavenumber,\mathrm{curl}}\bracs{#1, \mathrm{d}#2}}		% k-curl SS
-
-%\wavenumber,\qm-curl Sobolev space
-\newcommand{\ktcurlSob}[2]{H^1_{\wavenumber,\qm,\mathrm{curl}}\bracs{#1, \mathrm{d}#2}}
+\newcommand{\ktcurlSob}[2]{H^1_{\wavenumber,\qm,\mathrm{curl}}\bracs{#1, \mathrm{d}#2}}	% kt-curl SS
+\newcommand{\ktdivSob}[2]{H^1_{\qm,\wavenumber,\mathrm{div}}\bracs{#1,\mathrm{d}#2}}		% kt-div SS
 %\wavenumber,\qm-curl, divergence-free Sobolev space
 \newcommand{\ktcurlSobDivFree}[2]{\mathcal{H}^{\kt}\bracs{#1, \mathrm{d}#2}}	
 				
