@@ -3,11 +3,11 @@
 %Import thesis style file
 \usepackage{baththesis}
 %Define thesis style macros and names
-\title{THESIS TITLE}
-\author{William Graham}
-\degree{DEGREE NAME}
-\department{Mathematical Sciences}
-\degreemonthyear{DEGREE year/month/date}
+\title{Asymptotic and Numerical Analysis of Wave Propagation in Thin-Structure Waveguides}
+\author{William Michael Graham}
+\degree{Doctor of Philosophy}
+\department{Department of Mathematical Sciences}
+\degreemonthyear{June 2022}
 
 %Image and page layout packages
 \usepackage{graphicx}
@@ -15,6 +15,8 @@
 \usepackage[bottom]{footmisc} %footnotes go below figures
 \usepackage{parskip} %adds line space between paragraphs by default
 %Declare location of image files
+\usepackage{appendix} %can declare chapter-local appendices
+
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 \graphicspath{{./Diagrams/Diagram_PDFs/} {./Diagrams/Numerical_Results/}}
 
@@ -31,7 +33,7 @@
 \includeonly{
 %./Chapters/Introduction/Intro,
 %./Chapters/Theory-Prelims/Theory-Prelims,
-./Chapters/Scalar-System/Scalar-System,
+%./Chapters/Scalar-System/Scalar-System,
 %./Chapters/Curl-Curl/Curl-Curl,
 %./Chapters/SingInclusions/SingInclusions,
 }
@@ -39,10 +41,38 @@
 \begin{document}
 
 %Title page --- provided the information sent to baththesis is correct, this should auto-generate
-%\maketitle
+\maketitle
 
-%The summary uses a redefined abstract environment
-%\abstract{look, some words!}
+%Number pages prior to the start of the thesis with roman numerals
+\pagenumbering{roman}
+
+%Licensing and authorship declaration comes next --- setting are in the baththesis style
+\License
+
+%%The summary uses a redefined abstract environment
+%\abstract
+%Summary of work conducted will go here
+
+%%Acknowledgements also reuse a hacked abstract environment
+%\acknowledgements
+%Write your acknowledgements here
+
+\chapter*{Summary}
+Write a summary of the work here
+
+\chapter*{Acknowledgements}
+Write your acknowledgements here
+
+%Create the contents
+\tableofcontents
+
+\cleardoublepage %ensure that page numbering is correct
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures %caption[list of figures text]{in body text} can be used to customise the text provided here
+
+%Switch to arabic numbering for research content
+\cleardoublepage
+\pagenumbering{arabic}
 
 %Introductory chapter begins
 \include{./Chapters/Introduction/Intro}
@@ -59,10 +89,8 @@
 %Sing Inclusions chapter begins
 \include{./Chapters/SingInclusions/SingInclusions}
 
-%Conclusions chapter begins
-%\include{./Chapters/Conclusion/Conc}
-
-\newpage %have a new page to start the bibliography
+%Create bibliography, starting on new page
+\newpage
 \bibliographystyle{acm}
 \bibliography{./BibFiles/Thesis_MasterBib.bib}
 

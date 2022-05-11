@@ -9,7 +9,8 @@
 % Updated on 19/01/05 by PJH to reflect updated university regulations.
 %
 % Updated on 01/09/07 by MAF to reflect updated university regulations.
-
+%
+% Updated on 11/05/22 by WMG to reflect updated university regulations.
 
 %% Announce ourselves
 \ProvidesPackage{baththesis}
@@ -49,10 +50,16 @@ A copy of this thesis has been supplied on condition that anyone who consults it
 
 \def\@restriction[#1]{This thesis may not be consulted, photocopied or lent to other libraries without the permission of the author for #1 years from the date of acceptance of the thesis.}
 
-\def\signature#1#2{\par\noindent#1\dotfill\null
+\def\@declarepreviouswork{The material presented here for examination for the award of a higher degree by research has not been incorporated into a submission for another degree.
+}
+
+\def\@declareauthorship{I am the author of this thesis, and the work described therein was carried out by myself personally, without exception.}
+
+\def\signature#1#2{\par\noindent#1\hspace{0.25\textwidth}\dotfill\null
 
   {\raggedleft \mbox{#2 \hspace{1in}}\par}}
 
+% Format for the title page
 \def\maketitle{
 	\begin{titlepage}
 		\setcounter{page}{0}
@@ -61,51 +68,67 @@ A copy of this thesis has been supplied on condition that anyone who consults it
 		\null\vfill
 		\begin{center}
 			\vfill
-			\large
 			\def\baselinestretch{1.2}
 			{\def\baselinestretch{1.2}\Huge\bf \@title \par}
 			
-			submitted by
+			\vfill
 			
 			{\huge \@author}
 			
-			for the degree of \@degree 
+			\vfill
 			
-			of the 
-			
+			{\large Thesis submitted for the degree of \@degree}
+				
 			{\huge University of Bath}
 			
-			\@department
+			{\Large \@department}
 			
-			\@degreemonthyear
+			\vfill
+			
+			{\Large \@degreemonthyear}
 			\vfill
 		\end{center} 
-		\begin{center}
-			\bf COPYRIGHT
-		\end{center}
-		\@standardcopyright
-		
-		\noindent\@norestriction
-		\vfill
-		\begin{center} 
-			\signature{Signature of Author}{\@author}
-			\vfill
-		\end{center}
-			% The \kern0pt pushes any depth into the height.  Thanks to Richard Stone.
-			\par\kern 0pt\null
+		% The \kern0pt pushes any depth into the height.  Thanks to Richard Stone.
+		\par\kern 0pt\null
 	\end{titlepage}
 }
 
-%% Redefine the abstract environment so it carries a page number and
-%% the right header:
-\renewcommand{\abstractname}{Summary}
-\def\abstract{
+% Licensing page format
+\def\License{
 	\newpage\null\vfil
+	% Copyright and license
 	\begin{center}
-		\Large\bf \abstractname
+		\bf COPYRIGHT
 	\end{center}
-	}
-\def\endabstract{\par\vfil\null\newpage}
+	\vspace{\baselineskip}
+	\@standardcopyright
+	
+	\noindent\@norestriction	
+	
+	%push the rest of these objects to the bottom page
+	\vspace*{\fill}	
+	
+	% declaration of previous submission and authorship
+	\begin{center}
+		\bf DECLARATION OF ANY PREVIOUS SUBMISSION OF THE WORK
+	\end{center}
+	\vspace{\baselineskip}
+	\@declarepreviouswork
+	\begin{center}
+		\signature{Candidate's signature}{\@author}
+	\end{center}
+	
+	\vspace{\baselineskip}	
+	
+	\begin{center}
+		\bf DECLARATION OF AUTHORSHIP
+	\end{center}
+	\vspace{\baselineskip}
+	\@declareauthorship
+	\begin{center}
+		\signature{Candidate's signature}{\@author}
+	\end{center}
+}
 
 % If using the report style, use - instead of . in the figure number.
 \@ifundefined{thechapter}{}{\def\thefigure{\thechapter-\arabic{figure}}}
