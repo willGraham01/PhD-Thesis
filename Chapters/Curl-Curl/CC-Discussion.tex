@@ -27,15 +27,24 @@ Pursuit of this idea naturally leads us on to the work in chapter \ref{ch:SingIn
 Before moving on however, we highlight some further considerations and open problems that have been bought to the forefront of our attention in light of the results of this section.
 
 \subsection{Open Questions} \label{ssec:CC-OpenQuestions}
-\tstk{comment at end - Whilst it is not known whether the problem \eqref{eq:SingularCurlEquation} is the ``limit" of a thin-structure problem with thick vertices, in the sense of \tstk{scalar SS problem to scalar TS problem, via KZ and EP}, the motivation for our consideration of such variational problems stems from the coincidence? Might go in a future directions/ open questions subsection instead}
+Obtaining \eqref{eq:SingularScalarWaveEqn} from \eqref{eq:SingularCurlEquation} ultimately fulfils one of the objectives established at the start of this chapter: to provide a candidate for (the spectrum of) the limit of the curl of the curl equation on a thin structure as the thickness tends to zero.
+With the success of our analogous variational approach in chapter \ref{ch:ScalarSystem} in obtaining the known limit of the acoustic equation on thin structures, we can put forward \eqref{eq:QGRawSystem} as a candidate for the limit of the aforementioned curl of the curl problems.
+We have highlighted already that determining this limit (or the limit of the spectra) is currently an open problem in the literature.
+By providing a candidate for the limit we motivate and invite analysis akin to \cite{kuchment2001convergence, kuchment2003asymptotics, exner2005convergence}; either to confirm that sending the thickness of a structure to zero results in the same effective problem as the acoustic setting, or to indicate the effects that are present in the thin structure setting that do not disappear in the singular limit but which are not captured by our variational problems.
+The former being confirmed would further cement our approach via singular measures as a tool for probing limits of thin structures, and provide a useful justification for physical modelling of such structures in an electromagnetic context.
+It could also motivate further analysis into the first order Maxwell system in such limits, of which the curl of the curl equation a consequence, similar to how the acoustic approximation is a consequence of a particular case of the curl of the curl equations. 
+Confirmation of the latter case would also provide a number of insights into why our classically-motivated variational approach fails.
+It may simply be the case that \eqref{eq:SingularCurlEquation} is not the correct analogue of \eqref{eq:Intro-CurlCurlEqns}, and with adjustments any effects that are lost can be recovered --- with the explanation as to how and why lying in the aforementioned analysis.
+Or it may be that there is an alternative approach to defining gradients and curls to the one we have adopted, which is not so restrictive and preserves any effects our current approach looses.
+In any event, this would shed further light onto the behaviour of the curl of the curl operator on increasingly fine thin structures.
 
 Given that our investigation into the curl of the curl equation has resulted in us obtaining the acoustic approximation, it is natural to consider stepping back to a variational problem for the general Maxwell system;
 \begin{subequations} \label{eq:CC-Maxwell1stOrder}
 	\begin{align}
-		\ktdiv{\dddmes}\cdot E = 0,
+		\ktdiv{\dddmes} E = 0,
 		&\qquad
 		\ktcurl{*}E = \rmi\omega\mu_m H, \\
-		\ktdiv{\dddmes}\cdot H = 0,
+		\ktdiv{\dddmes} H = 0,
 		&\qquad
 		\ktcurl{*}H = -\rmi\omega\epsilon_m E,
 	\end{align}
