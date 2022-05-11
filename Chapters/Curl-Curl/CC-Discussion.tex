@@ -1,161 +1,30 @@
 \section{Discussion and Research Outlook} \label{sec:CC-Discussion}
+In this chapter we have performed a detailed analysis of the equation \eqref{eq:SingularCurlEquation} and the associated function spaces.
+By extending the definitions and techniques from chapter \ref{ch:ScalarSystem}, we have been able to provide a definition for a curl-like object in one dimension (the tangential curl), and understand the properties of said object on our singular structure.
+Complementing this analysis is the analysis and discussion of section \ref{sec:DivFreeCondition}, on the condition of being divergence free in our singular structure context.
+It is possible to define a ``strong" notion of the divergence of a vector field in a similar manner to gradients and curls, \tstk{for which de Rham works}, but forces us to accept that the divergence of any vector field is the zero function.
+Were we considering a problem in which the divergence appeared as an interior operator, this approach would be necessary for our understanding of the variational form of said problem, as we would need to explicitly work with the object $\ktdiv{\dddmes}u$.
+However the problem \eqref{eq:SingularCurlEquation} does not require us to provide such a ``strong" definition of the divergence, and we instead interpret the divergence free condition weakly, as is done classically.
+This enables us to characterise divergence-free vector fields, and its utility extends into exploration of the first order Maxwell system, which we discuss shortly.
 
-\subsection{On the Reduction to a Scalar System} \label{ssec:ReductionToScalar}
-The reduction of the (vectorial) \eqref{eq:SingularCurlEquation} to a scalar system that resembles the acoustic approximation comes as a surprise.
-This does not happen in the classical setting when one considers (either of) the curl of the curl equation \eqref{eq:Intro-CurlCurlEqns} on a periodic medium in the $\bracs{x_1,x_2}$-plane that is extruded into $x_3$, except in the case of oblique wave propagation --- when the propagation constant in the $x_3$ direction is zero.
-Under these conditions, the Maxwell system reduces to the acoustic approximation, which was the focus of chapter \ref{ch:ScalarSystem}.
-In our context, oblique wave propagation would correspond to the case when $\wavenumber=0$, however we observe reduction to the acoustic approximation regardless of the value of $\wavenumber$ --- warranting some thought.
-
-The answer/reason lies in the nature of our variational problem itself --- specifically the dynamics induced by the tangential curls.
+Our efforts to turn \eqref{eq:SingularCurlEquation} into a more tractable problem in section \ref{sec:3DSystemDerivation} culminate in us arriving at the acoustic approximation.
+This marks a departure from the classical setting when one considers the curl of the curl equation \eqref{eq:Intro-CurlCurlEqns} on a periodic medium in the $\bracs{x_1,x_2}$-plane that is extruded into $x_3$.
+In such a setup, we only obtain the acoustic approximation from \eqref{eq:Intro-CurlCurlEqns} under the assumption of oblique wave propagation --- when the propagation constant in one of the axial directions is zero.
+This would imply that we should only obtain \eqref{eq:SingularScalarWaveEqn} from \eqref{eq:SingularCurlEquation} when we set $\wavenumber=0$, however we obtain \eqref{eq:SingularScalarWaveEqn} regardless of the value of $\wavenumber$, and even have $\wavenumber$ appearing as part of an effective spectral parameter in $\omega^2-\wavenumber^2$.
+The reason for this reduction lies in the nature of our variational problem itself --- specifically the dynamics induced by the tangential curls.
 Let us imagine we now have a wave $u = u_0\e^{\rmi\vec{k}\cdot x}$ propagating in our material with wave-vector $\vec{k} = \qm_1\widehat{x}_1 + \qm_2\widehat{x}_2 + \wavenumber\widehat{x}_3$.
 For each edge $I_{jk}$ (or plane $P_{jk}$) we can write this wave-vector using the local frame of reference provided by $\widehat{e}_{jk}$ and $\widehat{n}_{jk}$, obtaining $\vec{k}_{jk} := \qm_{jk}\widehat{e}_{jk} + \qm_{jk}^\perp\widehat{n}_{jk} + \wavenumber\widehat{x}_3$, where $\qm_{jk}^\perp := \qm\cdot n_{jk}$.
 Now $\ktcurl{\dddmes}u$ on $I_{jk}$ is directed in the $\widehat{n}_{jk}$ direction, effectively only inducing dynamics or changes in $u$ in the $\widehat{e}_{jk}$ and $\widehat{x}_3$ directions.
 There is no propagation out of the plane $P_{jk}$ as a result, which corresponds to when we have the component of $\vec{k}$ in the $\widehat{n}_{jk}$ direction being zero --- $\vec{k}\cdot\widehat{n}_{jk}=0$, which happens only if $\qm_{jk}^\perp=0$.
 By analogy with the classical setting, one component of our wave-vector being zero will then result in the curl of the curl equation reducing to the acoustic approximation.
 This occurs for each plane $P_{jk}$, and thus we find that our edge ODEs always reduce to the (singular analogue of the) acoustic approximation.
-We also highlight that this is a direct consequence of the behaviour of the tangential curls on the particular geometry we have chosen to study --- there is no way to avoid such a reduction if one wishes to use the ``fibre-like" geometry considered here.
-One could consider reworking the setup for the original variational problem \eqref{eq:SingularCurlEquation} (including the function spaces), however the reduction to the acoustic approximation is tied to the nature of our singular structure being \emph{singular} --- we are always going to effectively ``loose" the ability to observe wave propagation in one direction.
-This observation also provides an idea for preventing automatic reduction to the acoustic approximation:  we need part of our domain to be non-singular, and we can do this by ``filling" the regions between the edges $I_{jk}$ with some background material.
-Such a course of action does not come without its own complications, but we begin to pursue it in chapter \ref{ch:SingInc}.
+We also highlight that this is a direct consequence of the behaviour of the tangential curls on the singular structure geometry --- a union of planes induced by the extrusion of $\hat{\graph}$ --- which we have chosen to study.
+There is no way to avoid such a reduction since it is tied to the nature of our singular structure being \emph{singular} --- we are always going to effectively ``loose" the ability to observe wave propagation in one direction.
 
-\subsection{Remarks on the Calder\'on Operator} \label{ssec:CalderonOp}
-In this section we look to draw further parallels between the curl-of-the-curl problem on a classical domain and the system \eqref{eq:QGRawSystem}.
-One of our key motivating factors and themes throughout this work has been retaining an intuitive link between the spaces and objects necessary for studying variational problems on singular structures and their classical counterparts.
-Further to this, we will demonstrate that the Dirichlet-to-Neumann operator (the so-called $M$-operator) associated with the problem \eqref{eq:QGRawSystem} is a direct analogue of the Calder\'on operator, that is the Dirichlet-to-Neumann operator for the curl of the curl equation.
-The Dirichlet and Neumann maps for the classical curl of the curl problem motivate the definitions for their counterparts associated to the problem \eqref{eq:QGRawSystem}; and we will observe that the resulting maps form a boundary triple, providing us with an $M$-operator and thus a graph analogue of $\mathcal{C}$.
-
-\tstk{might be the first time we talk about this, might move it into the $M$-matrix section of QGs, or even into the introductory section of this chapter if it reads better. Also did we mention boundary triples before??}
-Let us quickly introduce the Calder\'{o}n operator; let $D\subset\reals^3$ be a domain, and define $\mathcal{A}$ as the curl of the curl operator
-\begin{align*}
-	\dom\bracs{\mathcal{A}} &= \clbracs{ u\in H^2_{\mathrm{curl}}(D) \setVert \hat{n}\wedge\curl{}u\vert_{\partial D} = m }, \\
-	\mathcal{A}u &= \curl{}\bracs{\curl{}u},
-\end{align*}
-and the Dirichlet and Neumann maps ($\dmap$ and $\nmap$ respectively) by
-\begin{align} \label{eq:ClassicalEM-DNMaps}
-	\dmap u = u\vert_{\partial D}, \qquad
-	\nmap u = \hat{n}\wedge\curl{u}\vert_{\partial D}.
-\end{align}
-We can quickly validate Green's identity:
-\begin{align*}
-	\integral{D}{ \mathcal{A}u \cdot \overline{v} - u \cdot \overline{\mathcal{A}v} }{x}
-	&= \integral{D}{ \curl{}\bracs{\curl{}u}\cdot\overline{v} - u\cdot\overline{\curl{}\bracs{\curl{}v}} }{x} \\
-	&= \integral{D}{ \curl{}u\cdot\overline{\curl{}v} - \curl{}u\cdot\overline{\curl{}v} }{x} \\
-	&\quad + \integral{\partial D}{ \hat{n}\wedge\curl{}u\cdot\overline{v} - u\cdot\hat{n}\wedge\overline{\curl{}v} }{S} \\
-	&= \integral{\partial D}{ \nmap u \cdot \overline{\dmap v} - \dmap u \cdot \overline{\nmap v} }{S},
-\end{align*}
-so $\bracs{\ltwo{\partial D}{S}^3, \dmap, \nmap}$ is a boundary triple for the operator $\mathcal{A}$, and we can talk about its associated Dirichlet-to-Neumann map (or $M$-operator).
-This is the Calder\'{o}n operator $\mathcal{C}$, acting as
-\begin{align*}
-	u\vert_{\partial D} \rightarrow \hat{n}\wedge\bracs{\curl{}u}\vert_{\partial D}.
-\end{align*}
-
-Now let us turn to the quantum graph problem \eqref{eq:QGRawSystem}.
-Given the definition of $\dmap$ in \eqref{eq:ClassicalEM-DNMaps}, we should expect that
-\begin{align} \label{eq:DGMapDef}
-	\dgmap u &= 
-	\begin{pmatrix}
-		u\bracs{v_1} \\ u\bracs{v_2} \\ \vdots \\ u\bracs{v_N}
-	\end{pmatrix}
-	\in\complex^{3N},
-\end{align}
-where we have stacked the 3-vectors on top of each other and set $N=\abs{\vertSet}$.
-As for $\ngmap u$, this should be the analogue of $\nmap$ in \eqref{eq:ClassicalEM-DNMaps} --- only now the boundary of our domain is the vertices of $\graph$.
-Define the functions \tstk{might be worth moving into our usual setup assumption for ease of use?}
-\begin{align*}
-	\sgn_{jk}: \clbracs{v_j, v_k} \rightarrow \clbracs{-1,0,1}, 
-	&\qquad
-	\sgn_{jk}(x) = \begin{cases} -1 & x=v_j, \\ 1 & x=v_k, \end{cases}
-	&\qquad
-	\hat{\sigma}_{jk} &= \sgn_{jk}\widehat{e}_{jk},
-\end{align*}
-so $\hat{\sigma}_{jk}$ is the ``exterior normal" to the edge $I_{jk}$.
-The classical action of $\nmap$ in \eqref{eq:ClassicalEM-DNMaps} then suggests the following candidate for $\ngmap$:
-\begin{align} \label{eq:NGMapDef}
-	\ngmap u &= 
-	\begin{pmatrix}
-		\sum_{1\con k} \hat{\sigma}_{1k}\bracs{v_1}\wedge\ktcurl{\dddmes}u\bracs{v_1} \\
-		\sum_{2\con k} \hat{\sigma}_{2k}\bracs{v_2}\wedge\ktcurl{\dddmes}u\bracs{v_2} \\
-		\vdots \\
-		\sum_{N\con k} \hat{\sigma}_{Nk}\bracs{v_N}\wedge\ktcurl{\dddmes}u\bracs{v_N}
-	\end{pmatrix}
-	\in\complex^{3N},
-\end{align}
-where we have again stacked the 3-vectors vertically.
-From our analysis of $\kt$-tangential curls (corollary \ref{cory:TangCurlEdgeRotated}), we know that
-\begin{align*}
-	\ktcurl{\dddmes}u &= \bracs{ \bracs{ u_3^{(jk)} }' + \rmi\qm_{jk}u_3^{(jk)} - \rmi\wavenumber U_2^{(jk)} }\widehat{n}_{jk},
-\end{align*}
-on each edge $I_{jk}$.
-Therefore, 
-\begin{align*}
-	\widehat{e}_{jk}\wedge\ktcurl{\dddmes}u &= \bracs{ \bracs{ u_3^{(jk)} }' + \rmi\qm_{jk}u_3^{(jk)} - \rmi\wavenumber U_2^{(jk)} }\widehat{x}_3
-\end{align*}
-on $I_{jk}$, and noticing that 
-\begin{align*}
-	\sum_{j\conRight k} U_2^{(kj)}\bracs{v_j} - \sum_{j\conLeft k} U_2^{(jk)}\bracs{v_j} &=
-	\sum_{j\con k} \sgn_{jk}(v_j) U_2^{(jk)}\bracs{v_j},
-\end{align*} 
-we have for each $v_j\in\vertSet$,
-\begin{align*}
-	\sum_{j\con k} \hat{\sigma}_{jk}\bracs{v_j} \wedge \ktcurl{\dddmes}u\bracs{v_j}
-	&= \bracs{ 
-	\rmi\wavenumber\sum_{j\con k} \sgn_{jk}(v_j) U_2^{(jk)}\bracs{v_j}
-	- \sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}u_3^{(jk)}\bracs{v_j}
-	} \widehat{x}_3.
-\end{align*}
-As such, we can now notice that the vertex conditions for the system \eqref{eq:QGRawSystem} can be written as
-\begin{align} \label{eq:VertConditionExplicit}
-	\sum_{j\con k} \hat{\sigma}_{jk}\bracs{v_j} \wedge \ktcurl{\dddmes}u\bracs{v_j}
-	&= \alpha_j\omega^2 u\bracs{v_j},
-	\qquad \forall v_j\in\vertSet.
-\end{align}
-We can identify \eqref{eq:VertConditionExplicit} as being of the form \eqref{eq:DispersiveBC} where
-\begin{align*}
-	\tilde{\alpha} = 
-	\mathrm{diag}\bracs{\alpha_1, \alpha_1, \alpha_1, \alpha_2, \alpha_2, \alpha_2, ..., \alpha_N, \alpha_N, \alpha_N} \in \complex^{3N\times 3N},
-\end{align*}
-and $\dgmap, \ngmap$ are as in \eqref{eq:DGMapDef}, \eqref{eq:NGMapDef}.
-To complete the analogy, define the operator $\ag$ via the action
-\begin{align*}
-	\ag u &= 
-	\begin{pmatrix}
-		\sqbracs{ \rmi\wavenumber\bracs{\diff{}{y} + \rmi\qm_{jk} }u_3^{(jk)} + \wavenumber^2 U_2^{(jk)} }e_{jk}
-		+ U_1^{(jk)} n_{jk} \\
-		- \bracs{\diff{}{y} + \rmi\qm_{jk} }^2 u_3^{(jk)} + \rmi\wavenumber \bracs{\diff{}{y} + \rmi\qm_{jk} }U_2^{(jk)}
-	\end{pmatrix}
-\end{align*}
-on each edge, where $\mathrm{dom}\bracs{\ag}$ consists of all functions $u$ with the following properties:
-\begin{align*}
-	u\in\mathrm{dom}\bracs{\ag} \quad\Leftrightarrow\quad &
-	\begin{cases}
-	u\in L^2\bracs{\graph}\times L^2\bracs{\graph}\times H^2\bracs{\graph}, \\
-	U_2^{(jk)}\in \gradSob{I_{jk}}{y}, & \forall I_{jk}\in\edgeSet, \\
-	u_3 \text{ is continuous at } v_j, & \forall v_j\in\vertSet, \\
-	u_1(v_j) = u_2(v_j) = 0, & \forall v_j\in\vertSet, \\
-	\text{\eqref{eq:QGVertexCondition} is satisfied at } v_j, & \forall v_j\in\vertSet.
-	\end{cases}
-\end{align*}
-The eigenvalue problem for the operator $\ag$ is then \eqref{eq:QGRawSystem} and we have that
-\begin{align*}
-	\integral{I_{jk}}{ \ag u \cdot \overline{v} }{y} - \integral{I_{jk}}{ u \cdot \overline{\ag v} }{y}
-	&= \sqbracs{ -u'_3 v_3 + u_3 v_3' - 2\rmi\qm_{jk}u_3 v_3 + \rmi\wavenumber\bracs{U_2 v_3 + u_3 V_2} }_{v_j}^{v_k} \\
-	&= -\sqbracs{ \overline{v}_3\bracs{ \bracs{\diff{}{y} + \rmi\qm_{jk} }u_3 - \rmi\wavenumber U_2 } }_{v_j}^{v_k} \\
-	&\qquad + \sqbracs{ u_3\overline{\bracs{ \bracs{\diff{}{y} + \rmi\qm_{jk} }v_3 - \rmi\wavenumber V_2 }} }_{v_j}^{v_k},
-\end{align*}
-implying
-\begin{align*}
-	&\ip{\ag u}{v}_{L^2\bracs{\graph}^3} - \ip{u}{\ag v}_{L^2\bracs{\graph}^3} \\
-	&\quad = \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \integral{I_{jk}}{ \ag u \cdot \overline{v} - u \cdot \overline{\ag v} }{y} \\
-	&\quad = \sum_{v_j\in\vertSet}\sum_{j\conLeft k} -\sqbracs{ \overline{v}_3\bracs{ \bracs{\diff{}{y} + \rmi\qm_{jk} }u_3 - \rmi\wavenumber U_2 } }_{v_j}^{v_k}
-	+ \sqbracs{ u_3\overline{\bracs{ \bracs{\diff{}{y} + \rmi\qm_{jk} }v_3 - \rmi\wavenumber V_2 }} }_{v_j}^{v_k} \\
-	&\quad = \sum_{v_j\in\vertSet} u_3\bracs{v_j}\overline{\bracs{ \sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}v_3 - \rmi\wavenumber\sum_{j\con k} \sgn_{jk}(v_j) V_2^{(jk)}\bracs{v_j} }} \\
-	&\quad + \sum_{v_j\in\vertSet} \overline{v}_3\bracs{v_j}\bracs{ \sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}u_3 - \rmi\wavenumber\sum_{j\con k} \sgn_{jk}(v_j) U_2^{(jk)}\bracs{v_j} } \\
-	&\quad = \ngmap u \cdot \overline{\dgmap v} - \dgmap u \cdot \overline{\ngmap v}
-	= \ip{\ngmap u}{\dgmap v}_{\complex^{3N}} - \ip{\dgmap u}{\ngmap v}_{\complex^{3N}},
-\end{align*}
-and so the Green's identity holds. \tstk{do we even define a boundary triple in the QG chapter? If so, saying "green's identity" doesn't make much sense!}
-Therefore, $\bracs{\complex^{3N}, \dgmap, \ngmap}$ is a boundary triple for the operator $\ag$.
-Given \eqref{eq:ClassicalEM-DNMaps} served as the motivations for the definitions \eqref{eq:DGMapDef} and \eqref{eq:NGMapDef}, the $M$-operator associated with \eqref{eq:QGRawSystem} really is a ``graph version" of the Calder\'on operator for the problem \eqref{eq:SingularCurlEquation}.
+This last observation does provide an idea that might prevent this collapse to the acoustic approximation:  we need part of our domain to be non-singular, which can be done by ``filling" the regions between the edges $I_{jk}$ with some background material.
+Doing so will move us closer towards a true ``fibre-like" geometry, where we have a background material interlaced with periodic inclusions, and then extruded into three dimensions.
+Pursuit of this idea naturally leads us on to the work in chapter \ref{ch:SingInc}.
+Before moving on however, we highlight some further considerations and open problems that have been bought to the forefront of our attention in light of the results of this section.
 
 \subsection{Open Questions} \label{ssec:CC-OpenQuestions}
 \tstk{comment at end - Whilst it is not known whether the problem \eqref{eq:SingularCurlEquation} is the ``limit" of a thin-structure problem with thick vertices, in the sense of \tstk{scalar SS problem to scalar TS problem, via KZ and EP}, the motivation for our consideration of such variational problems stems from the coincidence? Might go in a future directions/ open questions subsection instead}
