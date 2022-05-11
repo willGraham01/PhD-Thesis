@@ -136,10 +136,9 @@ We will continue to discuss the implications of \eqref{eq:CurlCurl-ScalarQGProbl
 \subsection{Remarks on the Calder\'on Operator} \label{ssec:CalderonOp}
 Whilst \eqref{eq:SingularCurlEquation} reduces to the acoustic approximation, there are further parallels that can be drawn between the (classical) curl-of-the-curl problem and the system \eqref{eq:QGRawSystem}.
 One of our key motivating factors and themes throughout this work has been retaining an intuitive link between the spaces and objects necessary for studying variational problems on singular structures and their classical counterparts.
-Further to this, the Dirichlet-to-Neumann operator (\tstk{you likely said this in the theory section?}also called the $M$-operator) associated with the problem \eqref{eq:QGRawSystem} is a direct analogue of the Calder\'{o}n operator $\mathcal{C}$, the Dirichlet-to-Neumann operator for the curl of the curl equation.
+Further to this, the Dirichlet-to-Neumann operator (or $M$-operator) associated with the problem \eqref{eq:QGRawSystem} is a direct analogue of the Calder\'{o}n operator $\mathcal{C}$, the Dirichlet-to-Neumann operator for the curl of the curl equation.
 The Dirichlet and Neumann maps for the classical curl of the curl problem motivate the definitions for their counterparts associated to the problem \eqref{eq:QGRawSystem}; and we will observe that the resulting maps form a boundary triple, providing us with an $M$-operator and thus a graph analogue of $\mathcal{C}$.
 
-\tstk{might be the first time we talk about this, might move it into the $M$-matrix section of QGs, or even into the introductory section of this chapter if it reads better. Also did we mention boundary triples before??}
 Let us quickly introduce the Calder\'{o}n operator; let $D\subset\reals^3$ be a domain, and define $\mathcal{A}$ as the curl of the curl operator
 \begin{align*}
 	\dom\bracs{\mathcal{A}} &= \clbracs{ u\in H^2_{\mathrm{curl}}(D) \setVert \hat{n}\wedge\curl{}u\vert_{\partial D} = m }, \\
@@ -175,7 +174,7 @@ Given the definition of $\dmap$ in \eqref{eq:ClassicalEM-DNMaps}, we should expe
 \end{align}
 where we have stacked the 3-vectors on top of each other and set $N=\abs{\vertSet}$.
 As for $\ngmap u$, this should be the analogue of $\nmap$ in \eqref{eq:ClassicalEM-DNMaps} --- only now the boundary of our domain is the vertices of $\graph$.
-Define the functions \tstk{might be worth moving into our usual setup assumption for ease of use?}
+Define the functions \tstk{check if these see use in chapter 5 - if so, we can label this equation}
 \begin{align*}
 	\sgn_{jk}: \clbracs{v_j, v_k} \rightarrow \clbracs{-1,0,1}, 
 	&\qquad
@@ -263,6 +262,5 @@ implying
 	&\quad = \ngmap u \cdot \overline{\dgmap v} - \dgmap u \cdot \overline{\ngmap v}
 	= \ip{\ngmap u}{\dgmap v}_{\complex^{3N}} - \ip{\dgmap u}{\ngmap v}_{\complex^{3N}},
 \end{align*}
-and so the Green's identity holds. \tstk{do we even define a boundary triple in the QG chapter? If so, saying "green's identity" doesn't make much sense!}
-Therefore, $\bracs{\complex^{3N}, \dgmap, \ngmap}$ is a boundary triple for the operator $\ag$.
+and so the Green's identity holds, and $\bracs{\complex^{3N}, \dgmap, \ngmap}$ is a boundary triple for the operator $\ag$.
 Given \eqref{eq:ClassicalEM-DNMaps} served as the motivation for the definitions \eqref{eq:DGMapDef} and \eqref{eq:NGMapDef}, the $M$-operator associated with \eqref{eq:QGRawSystem} really is a ``graph version" of the Calder\'on operator for the problem \eqref{eq:SingularCurlEquation}.

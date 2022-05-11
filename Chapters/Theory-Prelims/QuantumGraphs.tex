@@ -170,29 +170,31 @@ This is because we are dealing with operators on quantum graphs here, as opposed
 We will discuss this, and the idea of Strauss extensions, further in section \ref{ssec:GRandSELinks} when we come to analyse the spectrum of our variational problems on singular structures and explore their link to quantum graphs.
 
 \subsection{The $M$-Matrix} \label{ssec:MMatrix}
-We next provide a brief overview of the $M$-matrix, a tool for characterising the spectrum of a quantum graph which we will exploit in section \tstk{other refs \ref{sec:ScalarDiscussion}}.
-The $M$-matrix is a generalisation of the classical Weyl-Titchmarsh $m$-function, and a particular case of the abstract $M$-operator, as it appears in the theory of boundary triples.
-For the purposes of our research we will not need any of this more general information nor theory, however one can find further information on the $M$-operator in \cite{kochubei1975extensions, kochubei1980characteristic, gorbachuk1991boundary, brown2008boundary, brown2020functional, cherednichenko2020scattering, cherednichenko2018functional}, whilst information for the $m$-function can be found in \cite{titchmarsh1962eigenfunction, atkinson1964discrete}.
-Here we restrict ourselves to a short review the specific theory that will be relevant to our work.
+We next provide a brief overview of the $M$-matrix, a tool for characterising the spectrum of a quantum graph which we will exploit in sections \ref{sec:ScalarDiscussion} and \ref{sec:ScalarExamples}.
 Let $\mathcal{A}$ be a differential operator on an embedded, metric graph $\graph$ and consider the maps
 \begin{align*}
 	\dmap, \nmap: \mathrm{dom}\bracs{\mathcal{A}} \rightarrow \complex^{\abs{\vertSet}},
 \end{align*}
-sending a function $u\in\mathrm{dom}\bracs{\mathcal{A}}$ to its Dirichlet and Neumann data at each of the vertices, respectively: \tstk{boundary triple!!!!}
+sending a function $u\in\mathrm{dom}\bracs{\mathcal{A}}$ to its Dirichlet and Neumann data at each of the vertices;
 \begin{align*}
 	\bracs{\dmap u}_j &= u\bracs{v_j}, \quad &j=1,...,\abs{\vertSet}, \\
 	\bracs{\nmap u}_j &= -\sum_{j\con k}\pdiff{u^{(jk)}}{n}\bracs{v_j}, \quad &j=1,...,\abs{\vertSet}. 
 \end{align*}
+Note that the \emph{Green's identity}
+\begin{align*}
+	\ip{\mathcal{A}u}{v}_{L^2{\graph}} - \ip{u}{\mathcal{A}v}_{L^2{\graph}}
+	&= \ip{\nmap u}{\dmap v}_{\complex^{\abs{\vertSet}}} - \ip{\dmap u}{\nmap v}_{\complex^{\abs{\vertSet}}}
+\end{align*}
+holds for all $u,v\in\dom\mathcal{A}$, and so\footnote{In the general context, there is also a requirement that the map $u\mapsto\bracs{\dmap u, \nmap u}$ is surjective.} the triple $\bracs{\complex^{\abs{\vertSet}},\dmap,\nmap}$ is said to be a boundary triple for the operator $\mathcal{A}$.
 The $M$-matrix at $z\in\complex$ is then defined by
 \begin{align*}
 	M(z): \ \complex^{\abs{\vertSet}} \ni \dmap u \mapsto \nmap u \in \complex^{\abs{\vertSet}},
-	 &\quad \forall u\in\mathrm{ker}\bracs{\mathcal{A}-z}.
+	 &\quad \forall u\in\mathrm{ker}\bracs{\mathcal{A}-z},
 \end{align*}
-The analogous (and general) statements concerning the $M$-operator can be found in \cite{derkach1991generalized, derkach2014boundary}.
+that is, the Dirichlet-to-Neumann map associated to the triple $\bracs{\complex^{\abs{\vertSet}},\dmap,\nmap}$.
 One detail that should be noted here is that $\mathcal{A}$ is required to be an extension of a \emph{simple} operator --- an operator for which there is no reducing subspace of its domain in which the operator is self-adjoint (see \cite[Section 2.2]{ershova2014isospectrality} for the precise definition).
 This can be guaranteed by ensuring $\graph$ contains no looping edges, and has all edge-lengths pairwise-irrationally related \cite{ashurova2014simplicity}.
 In section \ref{ssec:ArtificialVertices} we will see that any graph (that we wish to consider) can be manipulated to adhere to these specifications, through the introduction of \emph{artificial vertices}.
-
 Our interest in the $M$-matrix as a tool for analysing the spectrum of a quantum graph problem stems from the following property; it can be shown that $z_0\in\complex$ belongs to the spectrum of $\mathcal{A}$ if and only if $\bracs{M\bracs{z} - B}^{-1}$ does \emph{not} admit analytic continuation into $z_0$ (see \cite[Theorem 2.1]{ershova2014isospectrality}), where $B=-\alpha$.
 Equivalently, zero is an eigenvalue of $M\bracs{z_0}-B$ if and only if $z_0$ is an eigenvalue of $\mathcal{A}$ (as presented in \cite[Proposition 1]{derkach1991generalized}, \cite[page 698]{cherednichenko2019time}).
 Assuming one has a method for evaluating the $M$-matrix, the eigenvalues of $\mathcal{A}$ can be found by solving for pairs $u\in\mathrm{dom}\bracs{\mathcal{A}}\setminus\clbracs{0}$, $z_0\in\complex$ such that
@@ -200,6 +202,12 @@ Assuming one has a method for evaluating the $M$-matrix, the eigenvalues of $\ma
 	\bigl( M\bracs{z_0} - B \bigr) \dmap u = 0.
 \end{align*}
 In section \ref{sec:Discussion} we will expand on how this result provides access to the spectrum of $\mathcal{A}$, and utilise these ideas in the examples of section \ref{sec:Examples}.
+
+One can extend these ideas to any\footnote{Subject to reasonable assumptions.} operator on a Hilbert space; replacing $\complex^{\abs{\vertSet}}$ with the Hilbert space that the boundary data belongs to, and adjusting the definitions of the Dirichlet and Neumann maps accordingly.
+If $\mathcal{A}$ is a differential operator on a domain in $\reals^n$, then the Dirichlet and Neumann maps are the boundary values of the function $u$ and its normal derivative on the boundary, the boundary space is the space of functions defined on the boundary of the domain, and the Green's identity is the homonymous identity from vector calculus.
+The $M$-matrix itself is a generalisation of the classical Weyl-Titchmarsh $m$-function, and a particular case of the abstract $M$-operator or Dirichlet-to-Neumann map as it appears in the theory of boundary triples.
+Here we have restricted ourselves to a short review of the specific theory that will be relevant to our work, however one can find further information on the $M$-operator in \cite{kochubei1975extensions, kochubei1980characteristic, gorbachuk1991boundary, brown2008boundary, brown2020functional, cherednichenko2020scattering, cherednichenko2018functional}, whilst information on the $m$-function can be found in \cite{titchmarsh1962eigenfunction, atkinson1964discrete}.
+The precise (and more general) statements concerning the $M$-operator corresponding to those we have presented above (in the context of quantum graphs) can be found in \cite{derkach1991generalized, derkach2014boundary}.
 
 Before continuing, we address a detail concerning how we formulate our quantum graph problems and the definition of the $M$-matrix.
 In this work we will use an embedded, periodic graph (usually in $\reals^2$) to represent our singular-structure, however will typically only specify its period cell $\ddom$ and period graph $\graph$ --- this does not cause any ambiguity, as one can reconstruct the entire graph from $\graph$ and $\ddom$ if they so wish.

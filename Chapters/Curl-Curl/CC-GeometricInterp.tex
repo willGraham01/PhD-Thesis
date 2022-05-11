@@ -17,9 +17,8 @@ We can then prove the following result:
 The assumption on the position and orientation of $I_{jk}$ is not restrictive, in the sense that the result we prove will generalise to any line segment (and thus edge) in $\reals^3$.
 This result also holds when we replace $\reals^3$ with a finite domain $U\subset\reals^3$ (with non-zero $\lambda_3$-measure) and consider $I_{jk}\subset U$, and consequentially if we consider $U$ the period cell of some 3-dimensional singular structure $\graph$ and consider curls on the torus.
 \begin{proof}
-	We construct explicit approximating sequences for any function in $\ltwo{\reals^3}{\lambda_{jk}}^3$, by first considering $\phi\in\smooth{\reals^3}$.
-	Consider the vector field $\varphi^{(2)} = -x_1\phi\widehat{x}_3\in\smooth{\reals^3}^3$ --- note that we can always multiply $\varphi^{(2)}$ by a smooth cut-off function which is equal to unity on $I_{jk}$ to obtain a compactly supported smooth function if we are so inclined.
-	Then we can observe that $\varphi^{(2)}=0$ on $I_{jk}$ (since $x_1=0$ here) and 
+	We construct explicit approximating sequences for any function in $\ltwo{\reals^3}{\lambda_{jk}}^3$, by first considering $\phi\in\csmooth{\reals^3}$, and considering the vector field $\varphi^{(2)} = -x_1\phi\widehat{x}_3\in\csmooth{\reals^3}^3$.
+	We observe that $\varphi^{(2)}=0$ on $I_{jk}$ (since $x_1=0$ here) and 
 	\begin{align*}
 		\curl{}\varphi^{(2)} = -x_1\partial_2\phi\widehat{x}_1 + \bracs{\phi + x_1\partial_1\phi}\widehat{x}_2,
 	\end{align*}
@@ -32,11 +31,11 @@ This result also holds when we replace $\reals^3$ with a finite domain $U\subset
 	\end{align*}
 	so $\phi\widehat{x}_2\in\curlZero{\reals^3}{\lambda_{jk}}$.
 	Consideration of the functions $\varphi^{(1)} = -x_3\phi\widehat{x}_2$ and $\varphi^{(3)}=x_1\phi\widehat{x}_2$ demonstrates that $\phi\widehat{x}_1$ and $\phi\widehat{x}_3$ are also elements of $\curlZero{\reals^3}{\lambda_{jk}}$.
-	By linearity, we have that $\smooth{\reals^3}^3\subset\curlZero{\reals^3}{\lambda_{jk}}$ and then by the density of smooth functions in $\ltwo{\reals^3}{\lambda_{jk}}$, we obtain
+	By linearity, we have that $\csmooth{\reals^3}^3\subset\curlZero{\reals^3}{\lambda_{jk}}$ and then by the density of smooth functions in $\ltwo{\reals^3}{\lambda_{jk}}$, we obtain
 	\begin{align*}
 		\curlZero{\reals^3}{\lambda_{jk}} = \ltwo{\reals^3}{\lambda_{jk}}^3.
 	\end{align*}
-	We can also infer that any smooth vector field $\Phi\in\smooth{\reals^3}{\lambda_{jk}}^3$ is an element of $\ktcurlSob{\reals^3}{\lambda_{jk}}$ with $\ktcurl{\lambda_{jk}}\Phi = 0$ since $\ltwo{\reals^3}{\lambda_{jk}}^{\perp} = \clbracs{0}$.
+	We can also infer that any smooth vector field $\Phi\in\csmooth{\reals^3}{\lambda_{jk}}^3$ is an element of $\ktcurlSob{\reals^3}{\lambda_{jk}}$ with $\ktcurl{\lambda_{jk}}\Phi = 0$ since $\ltwo{\reals^3}{\lambda_{jk}}^{\perp} = \clbracs{0}$.
 	Density of smooth functions in $\ltwo{\reals^3}{\lambda_{jk}}^3$ then demonstrates that any $u\in\ltwo{\reals^3}{\lambda_{jk}}^3$ is also an element of $\ktcurlSob{\reals^3}{\lambda_{jk}}$ with tangential curl equal to zero.
 \end{proof}
 That is to say, a singular structure in 3 dimensions represented by a graph does not give rise to any non-trivial notion of the curl of a vector field.
