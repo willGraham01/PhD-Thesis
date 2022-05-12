@@ -1,0 +1,76 @@
+\section{On Determination of $L_{m,n}$} \label{sec:SIApp-NonLocalSolve}
+\tstk{contextualise this now that you've put it in it's own appendix}
+The operator $\dtn_{\omega}^i$ is self-adjoint and has compact resolvent (as its inverse is the Neumann to Dirichlet map), and thus possesses a sequence of eigenvalues $\lambda^i_n$ and eigenfunctions $\varphi_n^i$, where we list the $\lambda^i_n$ in ascending order (in $n$, for each $i$).
+These eigenfunctions also form a basis of the space $\ltwo{\partial\ddom_i}{S}$, and can be extended by zero to functions $\hat{\varphi}_n^i$ in $L^2\bracs{\graph}$.
+This means that we can represent each $\psi_m\vert_{\partial\ddom_i}$ as a sum of the $\varphi_n^i$ as
+\begin{align*}
+	\psi_m = \sum_{n=1}^{\infty} c_{m,n}^i \varphi_n^i, \quad c_{m,n}^i = \ip{\psi_m}{\varphi_n^i}_{\ltwo{\partial\ddom_i}{S}},
+\end{align*}
+and each of the $\hat{\varphi}_n^i$ as
+\begin{align*}
+	\hat{\varphi}_n^i = \sum_{n=1}^{\infty} \hat{c}_{n,m}^i \psi_m, \quad \hat{c}_{n,m}^i = \ip{\varphi_n^i}{\psi_m}_{L^2\bracs{\graph}}.
+\end{align*}
+Furthermore, extending $\varphi_n^i$ by zero implies that
+\begin{align*}
+	\hat{c}_{n,m}^i = \ip{\varphi_n^i}{\psi_m}_{L^2\bracs{\graph}} = \ip{\varphi_n^i}{\psi_m}_{\ltwo{\partial\ddom_i}{S}} = \overline{\ip{\psi_m}{\varphi_n^i}}_{\ltwo{\partial\ddom_i}{S}} = \overline{c}_{m,n}^i,
+\end{align*}
+which cuts down on the number of computations we need to perform.
+Choose a ``truncation index" $N_i$ for each $\ddom_i$, and define the matrices $B, C, L$ via
+\begin{align*}
+	B_{n,m} &= \ip{\tgrad\psi_m}{\tgrad\psi_n}_{L^2\bracs{\graph}}, \\
+	C_{n,m} &= \ip{\psi_m}{\psi_n}_{L^2\bracs{\graph}}, \\
+	L_{n,m} &= \sum_{v_j\in\vertSet}\sum_{j\conLeft k}
+	\sqbracs{ \sum_{p=1}^{N_+}c_{m,p}^+\lambda^+_p \sum_{q=1}^M \hat{c}_{p,q}^+ \ip{\psi_q}{\psi_n}_{L^2\bracs{I_{jk}}} + \sum_{p=1}^{N_-}c_{m,p}^-\lambda^-_p \sum_{q=1}^M \hat{c}_{p,q}^- \ip{\psi_q}{\psi_n}_{L^2\bracs{I_{jk}}} },
+\end{align*}
+where we use our usual $\pm$ notation for the regions $\ddom^{\pm}$ adjacent to an edge $I_{jk}$.
+\tstk{include this derivation in an appendix? It's long but straightforward}
+\tstk{the sum is not as daunting as it seems if we are clever with our choice of $\psi_m$ --- notably, if we take local basis functions (hats or tents) then the majority of the coefficients are zero, and }
+Setting $U = \bracs{u_1, ..., u_M}^\top$, our approximate solution $u_V$ can then be found by determining the solution to
+\begin{align*}
+	B U &= \bracs{\omega^2 C - L} U.
+\end{align*}
+Note that $B$ is the term in the above equation which does not depend on $\omega^2$ --- $L$ depends on $\omega^2$ through the eigenfunctions associated to the DtN map of the ``Helmholtz" operator $\laplacian_{\qm}+\omega^2$.
+This provides us with a system of $M$ algebraic equations in $M$ unknowns which we can solve for $U$, or if $\omega^2$ is unknown, we can solve as a generalised eigenvalue problem.
+However, at each step of the generalised eigenvalue problem, we will need to compute $L_{n,m}$ again, since $\omega$ will be iteratively updated, which in turn will require us to compute new eigenfunctions.
+\tstk{Note that, if we are interested in the resolvent equation (replace $\omega^2 u$ with $f$ in the original formulation) then we just replace $\omega^2 C$ with the column vector $F=\bracs{f_1,...,f_M}^\top$ where $f = \sum_{m=1}^M f_m\psi_m$.}
+Additionally, this method also requires us to know the $\lambda_n^i, \varphi_n^i$ a priori, or to have available a method for obtaining them, which we discuss in \tstk{section}.
+
+\subsubsection{Computing the DtN eigenvalues and eigenfunctions} \label{sssec:ComputingDtNEfuncs}
+We can compute the DtN operator's eigenvalues (and eigenfunctions) via the ``max-min" principle;
+\begin{align*}
+	\lambda^i_n &= \max_{S_{n-1}}\min_{\varphi\in S_{n-1}}\clbracs{ \frac{\ip{\varphi}{\dtn_{\omega}^i\varphi}_{\ltwo{\partial\ddom_i}{S}}}{\norm{\varphi}_{\ltwo{\partial\ddom_i}{S}}} \setVert \varphi\perp S_{n-1}},
+\end{align*}
+where $S_{n-1}$ is a subspace of $\ltwo{\partial\ddom_i}{S}$ with dimension $n-1$.
+The eigenfunction $\varphi_n^i$ associated with $\lambda^i_n$ is the $\varphi$ for which the ``max-min" is attained.
+Given the domain of $\dtn_{\omega}^i$, observe that
+\begin{align*}
+	\ip{\varphi}{\dtn_{\omega}^i\varphi}_{\ltwo{\partial\ddom_i}{S}}
+	&= \integral{\ddom_i}{ \tgrad \varphi\cdot\overline{\tgrad \varphi} + \varphi\overline{\laplacian_{\qm} \varphi} }{x} \\
+	&= \integral{\ddom_i}{ \tgrad \varphi\cdot\overline{\tgrad \varphi} - \omega^2 \varphi\overline{\varphi} }{x}
+	= \norm{\tgrad \varphi}_{\ltwo{\ddom_i}{x}} - \omega^2 \norm{\varphi}_{\ltwo{\ddom_i}{x}},
+\end{align*}
+and therefore
+\begin{align*}
+	\lambda^i_n 
+	&= \max_{S'_{n-1}}\min_{\varphi\in S'_{n-1}}\clbracs{ \frac{\norm{\tgrad \varphi}_{\ltwo{\ddom_i}{x}} - \omega^2 \norm{\varphi}_{\ltwo{\ddom_i}{x}}}{\norm{\varphi}_{\ltwo{\partial\ddom_i}{S}}} \setVert \varphi\perp S'_{n-1} }, \\
+	&= \max_{S'_{n-1}}\min_{\varphi\in S'_{n-1}}\clbracs{ \norm{\tgrad \varphi}_{\ltwo{\ddom_i}{x}} - \omega^2 \norm{\varphi}_{\ltwo{\ddom_i}{x}} \setVert \norm{\varphi}_{\ltwo{\partial\ddom_i}{S}}=1, \ \varphi\perp S'_{n-1} },
+\end{align*}
+\tstk{does this exist as our objective function doesn't have to behave nicely right? This is also tied to us having to avoid any eigenvalues of the dirichlet laplacian}
+where $S'_{n-1}$ is a subspace of $\gradgradSob{\ddom_i}{\lambda_2}$ with dimension $n-1$.
+We then have the following procedure available to extract the $\lambda_n^i, \varphi_n^i$:
+\begin{enumerate}
+	\item Solve
+	\begin{align*}
+		\lambda_1^i &= \min_{\substack{\varphi\in\gradgradSob{\ddom_i}{\lambda_2} \\ \norm{\varphi}_{\ltwo{\partial\ddom_i}{S}}=1}} \clbracs{ \norm{\tgrad \varphi}_{\ltwo{\ddom_i}{x}} - \omega^2 \norm{\varphi}_{\ltwo{\ddom_i}{x}} },
+	\end{align*}
+	to obtain $\lambda_1^i$.
+	The argmin of the above expression is the eigenfunction $\varphi_1^i$.
+	\item For $n>1$, the eigenfunctions $\varphi_k^i$ are known for $1\leq k\leq n-1$.
+	Furthermore, we also know that $\varphi_n^i$ is orthogonal to each of the $\varphi_k^i$, and so we know that the subspace in which the maximum will be attained is $S'_{n-1} = \mathrm{span}\clbracs{\varphi_k^i \setVert 1\leq k\leq n-1}$.
+	Thus, we solve
+	\begin{align*}
+		\lambda_n^i &= \min_{\substack{\varphi\in\gradgradSob{\ddom_i}{\lambda_2} \\ \norm{\varphi}_{\ltwo{\partial\ddom_i}{S}}=1}} \clbracs{ \norm{\tgrad \varphi}_{\ltwo{\ddom_i}{x}} - \omega^2 \norm{\varphi}_{\ltwo{\ddom_i}{x}} \setVert \varphi\perp\varphi_k^i, \text{ for each } 1\leq k\leq n-1 },
+	\end{align*}
+	with the argmin being the eigenfunction $\varphi_n^i$.
+\end{enumerate}
+We can numerically solve these minimisation problems via the method of Lagrange multipliers for example, but this would require us to settle for approximate $\varphi_n^i$ and eigenvalues.

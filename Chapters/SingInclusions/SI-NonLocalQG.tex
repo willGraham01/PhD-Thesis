@@ -1,5 +1,5 @@
 \section{Reformulation of \eqref{eq:SI-WaveEqn} as a Non-Local Quantum Graph Problem} \label{sec:SI-NonLocalQG}
-Both of the methods employed in sections \ref{ssec:SI-VP} and \ref{ssec:FDMSingInc} force us to handle the interaction between the bulk regions and skeleton in some way; either through the global approximation we use (if working from \eqref{eq:SI-}) or through how we tie the various approximations in the bulk regions and skeleton together (if using the finite difference based approach).
+Both of the methods employed in sections \ref{sec:SI-VarProbMethod} and \ref{ssec:SI-FDMMethod} force us to handle the interaction between the bulk regions and skeleton in some way; either through the global approximation we use (if working from \eqref{eq:SI-VarProb}) or through how we tie the various approximations in the bulk regions and skeleton together (in the approach of section \ref{ssec:SI-FDMMethod}).
 The question we ask here is whether we can take this one step further; can we entirely remove the equations in the bulk regions from our formulation, replacing them with a suitable term (or terms) in the equations along the skeleton?
 Our objective is to arrive at a quantum graph problem, which are relatively well understood when compared to the measure-theoretic formulation \eqref{eq:SI-WaveEqn} that we begun with.
 We also expect to see some kind of reward in dimension or complexity reduction, as a quantum graph is ultimately a set of one-dimensional intervals.
@@ -9,12 +9,11 @@ In order to investigate how to reduce \eqref{eq:SI-WaveEqn} to a quantum graph p
 We already know that the eigenfunction itself is continuous across the skeleton, so the function values on the boundary of each bulk region coincide with the function values on the skeleton.
 Furthermore, we also observe that the normal derivative of the eigenfunction from the adjacent regions affects the behaviour along the skeleton.
 So, the question is whether we can express the (traces of the) normal derivatives from the adjacent regions in terms of the values of our function on the skeleton, given that we know \eqref{eq:SI-BulkEqn} is satisfied in each bulk region?
-Essentially, we are asking whether we can determine the Neumann data of a function that satisfies \eqref{eq:SI-BulkEqn}, given its Dirichlet values on the boundary.
-This draws our attention to the Dirichlet-to-Neumann map for the Helmholtz equation on $\ddom_i$, which we define as follows.
+This draws our attention to the Dirichlet-to-Neumann map for the Helmholtz equation on $\ddom_i$: we are asking whether we can determine the Neumann data of a function that satisfies \eqref{eq:SI-BulkEqn}, given its Dirichlet values on the boundary.
 
 For each bulk region $\ddom_i$ and $\omega^2>0$ that is \emph{not} an eigenvalue of the Dirichlet laplacian on $\ddom_i$\footnote{That is, an eigenvalue of Laplace's equation on $\ddom_i$ satisfying homogeneous boundary conditions on $\partial\ddom_i$.}, define the set $D_i$ by
 \begin{align*}
-	D^i_\omega = \{ \bracs{g,h}\in\gradSob{\partial\ddom_i}{S}\times\ltwo{\partial\ddom_i}{S} \ \vert \
+	D^i_\omega = \{ \bracs{g,h}\in\ltwo{\partial\ddom_i}{S}\times\ltwo{\partial\ddom_i}{S} \ \vert \
 	& \exists v\in\gradgradSob{\ddom_i}{\lambda_2} \text{ s.t. } \\
 	&\quad \bracs{\laplacian_\qm + \omega^2}v = 0, \\
 	&\quad v\vert_{\partial\ddom_i}=g, \ \left.\bracs{\tgrad v\cdot n}\right\vert_{\partial\ddom_i} = h \}.
@@ -27,7 +26,7 @@ The Dirichlet to Neumann map $\dtn^i_\omega$ for the operator $\laplacian_{\qm}+
 \end{align*}
 where $g,h$ are related as in \eqref{eq:SI-DtNMapRegion}.
 Notice that it is imperative that $\omega^2$ is not an eigenvalue of the Dirichlet laplacian on $\ddom_i$, as otherwise $\dtn_{\omega}^i$ is ill-defined (the zero function can be mapped to infinitely many other functions).
-Now suppose we have a solution $u, \omega^2$ to \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition}, with $\omega^2$ not being an eigenvalue of the Dirichlet laplacian on any of the bulk regions.
+Now suppose we have a solution $u, \omega^2$ to \eqref{eq:SI-StrongForm}, with $\omega^2$ not being an eigenvalue of the Dirichlet laplacian on any of the bulk regions.
 Then for every bulk region $\ddom_i$, $u\in\gradSob{\partial\ddom_i}{S}$ and there exists a $v$ as in \eqref{eq:SI-DtNMapRegion} (that $v$ \emph{being} $u$).
 Given continuity of $u$ across the skeleton, we thus have that
 \begin{align*}
@@ -55,17 +54,18 @@ Conversely, consider an eigenpair $\omega^2>0, u\in H^2\bracs{\graph}$ of the pr
 		&\qquad\text{at every } v_j\in\vertSet. \label{eq:SI-NonLocalQGVertexCont}
 	\end{align}
 \end{subequations}
-It can be demonstrated that this eigenpair of \eqref{eq:SI-NonLocalQG} also defines a solution $\omega^2, \tilde{u}$ to \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition}; take $\tilde{u}=u$ on $\graph$, and in the bulk regions assign $\tilde{u}$ the values of the function $v$ in \eqref{eq:SI-DtNMapRegion} for $g=u$ (which exists since we assume $u$ solves \eqref{eq:SI-NonLocalQG} in the first place).
-Therefore, up to possibly the eigenvalues of the Dirichlet laplacian in the bulk regions, \eqref{eq:SI-NonLocalQG} shares the same eigenvalues as \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition}.
+It can be demonstrated that this eigenpair of \eqref{eq:SI-NonLocalQG} also defines a solution $\omega^2, \tilde{u}$ to \eqref{eq:SI-StrongForm}; take $\tilde{u}=u$ on $\graph$, and in the bulk regions assign $\tilde{u}$ the values of the function $v$ in \eqref{eq:SI-DtNMapRegion} for $g=u$ (which exists since we assume $u$ solves \eqref{eq:SI-NonLocalQG} in the first place).
+Therefore, up to possibly the eigenvalues of the Dirichlet laplacian in the bulk regions, \eqref{eq:SI-NonLocalQG} shares the same eigenvalues as \eqref{eq:SI-StrongForm}.
 
 The problem \eqref{eq:SI-NonLocalQG} is inherently non-local --- notice that (for each edge $I_{jk}$) the terms $\dtn^{\pm}_\omega u$ require information about the function $u$ on edges that form the boundary of one of the adjacent region $\ddom_{jk}^{\pm}$, which are not necessarily (directly) connected to $I_{jk}$ itself.
 The Dirichlet-to-Neumann map is the tool that allows us to encode this non-local effect that arises due to the dynamics that are occurring in the (now removed) bulk regions, and its appearance in \eqref{eq:SI-NonLocalQGEdgeEquation} can be thought of as the price we have to pay in order to move to the purely quantum graph problem \eqref{eq:SI-NonLocalQG}.
-This renders our previous approaches via the $M$-matrix (\tstk{chapter ref}) unusable, and also has serious implications when we attempt to solve \eqref{eq:SI-NonLocalQG} numerically, which is the subject of section \ref{ssec:SI-GraphMethod}.
+Our previous approaches via the $M$-matrix (section \ref{sec:ScalarDiscussion}) largely depended upon determining an explicit form for the entries of the $M$-matrix, something which is currently unfeasible here as there is no closed form for the Dirichlet-to-Neumann map.
+This lack of a closed form also has serious implications when we attempt to solve \eqref{eq:SI-NonLocalQG} numerically, which is the subject of section \ref{ssec:SI-GraphMethod}.
 
 When $\omega^2$ lies on the spectrum of the Dirichlet laplacian on one of the bulk regions $\ddom_i$, we cannot use $\dtn^i_{\omega}$ to reduce \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} to a quantum graph problem.
-Intuitively, having $\omega^2$ on the Dirichlet spectrum means there are multiple possible behaviours for $u$ in $\ddom_i$ which cannot be distinguished from one another by examining the Dirichlet boundary values of $u$ and the equation it satisfies in the bulk.
-Thus, we also cannot deduce what the Neumann data for $u$ on $\partial\ddom_i$ should be without looking at what $u$ is explicitly doing in the bulk region $\ddom_i$, and hence can never "remove" $\ddom_i$ from our formulation.
-Mathematically this is because the eigenfunctions of the Dirichlet laplacian on $\ddom_i$ would satisfy \eqref{eq:SI-BulkEqn} in $\ddom_i$, and all would have zero trace onto $\partial\ddom_i$ but different Neumann data.
+Intuitively, with $\omega^2$ on the Dirichlet spectrum there are multiple possible behaviours for $u$ in $\ddom_i$ which cannot be distinguished from one another by examining the Dirichlet boundary values of $u$ and the equation it satisfies in the bulk.
+Thus, we also cannot deduce what the Neumann data for $u$ on $\partial\ddom_i$ should be without looking at what $u$ is explicitly doing in the bulk region $\ddom_i$, and hence can never ``remove" $\ddom_i$ from our formulation.
+Phrased more precisely, the eigenfunctions of the Dirichlet laplacian on $\ddom_i$ would satisfy \eqref{eq:SI-BulkEqn} in $\ddom_i$, and all would have zero trace onto $\partial\ddom_i$ but different Neumann data.
 As a result, $\dtn^i_\omega 0$ would be many-valued and (by linearity) $\dtn^i_\omega g = \dtn^i_\omega\bracs{g+0}$ is also undefined for any $g\in\gradSob{\partial\ddom}{S}$.
 
 Of course, it is worth briefly exploring what we can do if we happen to land on a value $\omega_i^2$ which \emph{is} an eigenvalue of the Dirichlet laplacian in one of the bulk regions $\ddom_i$.
@@ -95,23 +95,19 @@ where
 		\bracs{\grad\phi\cdot n_{jk}}^+ -\bracs{\grad\phi\cdot n_{jk}}^-, & \ddom_i = \ddom_{jk}^+ \text{ and } \ddom_i = \ddom_{jk}^-,
 	\end{cases}
 \end{align*}
-then $u, \omega_i^2$ will be a solution to \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition}.
+then $u, \omega_i^2$ will be a solution to \eqref{eq:SI-StrongForm}.
 The $\mathrm{T}\phi$ term encodes this aforementioned freedom that comes from our ability to add eigenfunctions of the Dirichlet laplacian to $u$ in $\ddom_i$, and the knock-on affect on the equations on the skeletons.
 We also clearly see why the Dirichlet-to-Neumann map cannot be used in these cases, as both $\tgrad\bracs{u+\phi}\cdot n$ and $\tgrad u\cdot n$ are possible Neumann data for the Dirichlet data $u\vert_{\partial\ddom_i}$.
 
 \subsection{``Spectral Method" on the Inclusions} \label{ssec:SI-GraphMethod}
-\tstk{content of this section summarises \texttt{02-11-21\_NumericalSchemeOnGraphProposal.pdf}. Also, write an appropriate linking introduction here!}
-
 In this section we discuss some of the considerations and ideas for a numerical method for solving \eqref{eq:SI-NonLocalQG}.
-Compared to sections \ref{ssec:SI-VP} and \ref{ssec:FDMSingInc}, the problem \eqref{eq:SI-NonLocalQG} is posed on the one-dimensional domain $\graph$, rather than our original two-dimensional domain $\ddom$.
-The price we have paid for this reduction in dimension is that our edge ODEs are inherently non-local, coupling together edges that may not share a common vertex --- this was not the case in the previous chapters \tstk{chap refs} where the solution on each edge only interacted with the other edge solutions at the vertices.
+Compared to sections \ref{sec:SI-VarProbMethod} and \ref{ssec:SI-FDMMethod}, the problem \eqref{eq:SI-NonLocalQG} is posed on the one-dimensional domain $\graph$, rather than our original two-dimensional domain $\ddom$, but we have to overcome non-locality in the ODEs themselves.
 This non-locality rules out a finite difference approach along the edges of $\graph$, as we have no way of expressing the action of the Dirichlet-to-Neumann map \emph{soley} in terms of nearby function values.
-It also rules out our previous approach involving the $M$-matrix (section \tstk{ref}), since we can no longer make use of the same idea as before and reconstruct the entries of the $M$-matrix just from the knowledge of the function values at the vertices (see the proof of \tstk{theorem on $M$-matrix entries here}).
+It also rules out our previous approach involving the $M$-matrix since we can no longer make use of the same idea as before and reconstruct the entries of the $M$-matrix just from the knowledge of the function values at the vertices\footnote{There is also the more pressing theoretical question as to whether \eqref{eq:SI-NonLocalQG} admits a boundary triple.}.
 Indeed, the handling of the Dirichlet-to-Neumann map term is the main problem with any numerical approach to solving \eqref{eq:SI-NonLocalQG}.
 
-With the system we want to solve being non-local, it does not make sense for us to consider numerical methods that rely on local approximations, such as finite difference methods.
-Instead we must use the ideas from spectral- and finite element methods; decide on a finite-dimensional subspace $V$ in which to approximate the solution to $u$, determine a suitable basis for this space, the expand our approximate solution in terms of this basis and choose the coefficients of the basis expansion to satisfy the problem \eqref{eq:SI-NonLocalQG} in $V$.
-Finite element methods choose to do this with local basis functions, typically via the use of ``tent" or ``hat" functions placed over nodes on a mesh, which are non-zero over most of the domain except for within the vicinity of a particular node.
+We have to accept this non-locality, and so it does not make sense for us to consider numerical methods that rely on local approximations.
+Instead we must use the ideas from spectral methods; decide on a finite-dimensional subspace $V$ in which to approximate the solution to $u$, determine a suitable basis for this space, the expand our approximate solution in terms of this basis and choose the coefficients of the basis expansion to satisfy the problem \eqref{eq:SI-NonLocalQG} in $V$.
 A spectral method on the other hand looks to use basis functions that are non-zero over the whole domain.
 For the time being, we will simply let $V\subset\htwo{\graph}$ be a finite-dimensional subspace with dimension $M$ and basis functions $\clbracs{\psi_m}_{m=1}^{M}$.
 Write the approximate solution $u_V\in V$ to \eqref{eq:SI-NonLocalQG} as
@@ -128,7 +124,7 @@ We then write the problem \eqref{eq:SI-NonLocalQG} in the (``weak") form
 	}
 	&= \omega^2 \sum_{v_j\in\vertSet}\sum_{j\conLeft k}\integral{I_{jk}}{u\overline{\phi}}{\lambda_{jk}},
 \end{align*}
-which holds for each $\phi\in\smooth{\ddom}$.
+which holds for each $\phi$ in a suitable space of test functions.
 From here, we replace $u$ with $u_V$, substitute the basis expansion, and choose $\phi=\psi_n$ for each $n\in\clbracs{1,...,M}$ to obtain
 \begin{align*}
 	0 &= 
@@ -159,89 +155,6 @@ However this forces us back to numerically solving each of the problems
 \end{align*}
 for every $m=1,...,M$ and bulk region $\ddom_i$, and then reading off the Neumann data of the computed solution.
 Furthermore, we will have to perform these computations every time we want to evaluate $M(\omega^2)$ whilst solving the generalised eigenvalue problem.
-Alternatives looking to avoid solving PDEs in the bulk regions might be to examine the properties of $\dtn^i_\omega$ as an operator on $\gradSob{\partial\ddom_i}{S}$.
-Indeed, if ...
-
 Ultimately, short of obtaining an analytic expression (or an expression that can be easily approximated numerically) for the action of $\dtn^i_{\omega}$ in terms of $\omega$, there is no simple way to deal with
- on the bulk regions, albeit without the coupling across the skeleton that we had before in section \tstk{FDM and VP}.
-
-Other alternatives include expressing $L_{n,m}$ in terms of the eigenvalues and eigenfunctions of the $\dtn^i_\omega$ \tstk{this is what I ramble on about below}, or attempting to ``linearise" the Dirichlet-to-Neumann map \tstk{figotin paper that Kirill showed me with DtN map expressed in terms of spectral parameter and harmonic lift operators}
-However this goes against the ethos of us working to bring \eqref{eq:SI-WaveEqn} onto the skeleton in the first place --- we have removed our bulk regions only to reintroduce them later, albeit they are no longer coupled together.
-
-
-
-\tstk{this can likely move to an appendix, or just not appear. It doesn't really work and I don't have much code to numerically explore it. Could try writing some over a weekend I guess!}
-The operator $\dtn_{\omega}^i$ is self-adjoint and has compact resolvent (as its inverse is the Neumann to Dirichlet map), and thus possesses a sequence of eigenvalues $\lambda^i_n$ and eigenfunctions $\varphi_n^i$, where we list the $\lambda^i_n$ in ascending order (in $n$, for each $i$).
-These eigenfunctions also form a basis of the space $\ltwo{\partial\ddom_i}{S}$, and can be extended by zero to functions $\hat{\varphi}_n^i$ in $L^2\bracs{\graph}$.
-This means that we can represent each $\psi_m\vert_{\partial\ddom_i}$ as a sum of the $\varphi_n^i$ as
-\begin{align*}
-	\psi_m = \sum_{n=1}^{\infty} c_{m,n}^i \varphi_n^i, \quad c_{m,n}^i = \ip{\psi_m}{\varphi_n^i}_{\ltwo{\partial\ddom_i}{S}},
-\end{align*}
-and each of the $\hat{\varphi}_n^i$ as
-\begin{align*}
-	\hat{\varphi}_n^i = \sum_{n=1}^{\infty} \hat{c}_{n,m}^i \psi_m, \quad \hat{c}_{n,m}^i = \ip{\varphi_n^i}{\psi_m}_{L^2\bracs{\graph}}.
-\end{align*}
-Furthermore, extending $\varphi_n^i$ by zero implies that
-\begin{align*}
-	\hat{c}_{n,m}^i = \ip{\varphi_n^i}{\psi_m}_{L^2\bracs{\graph}} = \ip{\varphi_n^i}{\psi_m}_{\ltwo{\partial\ddom_i}{S}} = \overline{\ip{\psi_m}{\varphi_n^i}}_{\ltwo{\partial\ddom_i}{S}} = \overline{c}_{m,n}^i,
-\end{align*}
-which cuts down on the number of computations we need to perform.
-Choose a ``truncation index" $N_i$ for each $\ddom_i$, and define the matrices $B, C, L$ via
-\begin{align*}
-	B_{n,m} &= \ip{\tgrad\psi_m}{\tgrad\psi_n}_{L^2\bracs{\graph}}, \\
-	C_{n,m} &= \ip{\psi_m}{\psi_n}_{L^2\bracs{\graph}}, \\
-	L_{n,m} &= \sum_{v_j\in\vertSet}\sum_{j\conLeft k}
-	\sqbracs{ \sum_{p=1}^{N_+}c_{m,p}^+\lambda^+_p \sum_{q=1}^M \hat{c}_{p,q}^+ \ip{\psi_q}{\psi_n}_{L^2\bracs{I_{jk}}} + \sum_{p=1}^{N_-}c_{m,p}^-\lambda^-_p \sum_{q=1}^M \hat{c}_{p,q}^- \ip{\psi_q}{\psi_n}_{L^2\bracs{I_{jk}}} },
-\end{align*}
-where we use our usual $\pm$ notation for the regions $\ddom^{\pm}$ adjacent to an edge $I_{jk}$.
-\tstk{include this derivation in an appendix? It's long but straightforward}
-\tstk{the sum is not as daunting as it seems if we are clever with our choice of $\psi_m$ --- notably, if we take local basis functions (hats or tents) then the majority of the coefficients are zero, and }
-Setting $U = \bracs{u_1, ..., u_M}^\top$, our approximate solution $u_V$ can then be found by determining the solution to
-\begin{align*}
-	B U &= \bracs{\omega^2 C - L} U.
-\end{align*}
-Note that $B$ is the term in the above equation which does not depend on $\omega^2$ --- $L$ depends on $\omega^2$ through the eigenfunctions associated to the DtN map of the ``Helmholtz" operator $\laplacian_{\qm}+\omega^2$.
-This provides us with a system of $M$ algebraic equations in $M$ unknowns which we can solve for $U$, or if $\omega^2$ is unknown, we can solve as a generalised eigenvalue problem.
-However, at each step of the generalised eigenvalue problem, we will need to compute $L_{n,m}$ again, since $\omega$ will be iteratively updated, which in turn will require us to compute new eigenfunctions.
-\tstk{Note that, if we are interested in the resolvent equation (replace $\omega^2 u$ with $f$ in the original formulation) then we just replace $\omega^2 C$ with the column vector $F=\bracs{f_1,...,f_M}^\top$ where $f = \sum_{m=1}^M f_m\psi_m$.}
-Additionally, this method also requires us to know the $\lambda_n^i, \varphi_n^i$ a priori, or to have available a method for obtaining them, which we discuss in \tstk{section}.
-
-\subsubsection{Computing the DtN eigenvalues and eigenfunctions} \label{sssec:ComputingDtNEfuncs}
-We can compute the DtN operator's eigenvalues (and eigenfunctions) via the ``max-min" principle;
-\begin{align*}
-	\lambda^i_n &= \max_{S_{n-1}}\min_{\varphi\in S_{n-1}}\clbracs{ \frac{\ip{\varphi}{\dtn_{\omega}^i\varphi}_{\ltwo{\partial\ddom_i}{S}}}{\norm{\varphi}_{\ltwo{\partial\ddom_i}{S}}} \setVert \varphi\perp S_{n-1}},
-\end{align*}
-where $S_{n-1}$ is a subspace of $\ltwo{\partial\ddom_i}{S}$ with dimension $n-1$.
-The eigenfunction $\varphi_n^i$ associated with $\lambda^i_n$ is the $\varphi$ for which the ``max-min" is attained.
-Given the domain of $\dtn_{\omega}^i$, observe that
-\begin{align*}
-	\ip{\varphi}{\dtn_{\omega}^i\varphi}_{\ltwo{\partial\ddom_i}{S}}
-	&= \integral{\ddom_i}{ \tgrad \varphi\cdot\overline{\tgrad \varphi} + \varphi\overline{\laplacian_{\qm} \varphi} }{x} \\
-	&= \integral{\ddom_i}{ \tgrad \varphi\cdot\overline{\tgrad \varphi} - \omega^2 \varphi\overline{\varphi} }{x}
-	= \norm{\tgrad \varphi}_{\ltwo{\ddom_i}{x}} - \omega^2 \norm{\varphi}_{\ltwo{\ddom_i}{x}},
-\end{align*}
-and therefore
-\begin{align*}
-	\lambda^i_n 
-	&= \max_{S'_{n-1}}\min_{\varphi\in S'_{n-1}}\clbracs{ \frac{\norm{\tgrad \varphi}_{\ltwo{\ddom_i}{x}} - \omega^2 \norm{\varphi}_{\ltwo{\ddom_i}{x}}}{\norm{\varphi}_{\ltwo{\partial\ddom_i}{S}}} \setVert \varphi\perp S'_{n-1} }, \\
-	&= \max_{S'_{n-1}}\min_{\varphi\in S'_{n-1}}\clbracs{ \norm{\tgrad \varphi}_{\ltwo{\ddom_i}{x}} - \omega^2 \norm{\varphi}_{\ltwo{\ddom_i}{x}} \setVert \norm{\varphi}_{\ltwo{\partial\ddom_i}{S}}=1, \ \varphi\perp S'_{n-1} },
-\end{align*}
-\tstk{does this exist as our objective function doesn't have to behave nicely right? This is also tied to us having to avoid any eigenvalues of the dirichlet laplacian}
-where $S'_{n-1}$ is a subspace of $\gradgradSob{\ddom_i}{\lambda_2}$ with dimension $n-1$.
-We then have the following procedure available to extract the $\lambda_n^i, \varphi_n^i$:
-\begin{enumerate}
-	\item Solve
-	\begin{align*}
-		\lambda_1^i &= \min_{\substack{\varphi\in\gradgradSob{\ddom_i}{\lambda_2} \\ \norm{\varphi}_{\ltwo{\partial\ddom_i}{S}}=1}} \clbracs{ \norm{\tgrad \varphi}_{\ltwo{\ddom_i}{x}} - \omega^2 \norm{\varphi}_{\ltwo{\ddom_i}{x}} },
-	\end{align*}
-	to obtain $\lambda_1^i$.
-	The argmin of the above expression is the eigenfunction $\varphi_1^i$.
-	\item For $n>1$, the eigenfunctions $\varphi_k^i$ are known for $1\leq k\leq n-1$.
-	Furthermore, we also know that $\varphi_n^i$ is orthogonal to each of the $\varphi_k^i$, and so we know that the subspace in which the maximum will be attained is $S'_{n-1} = \mathrm{span}\clbracs{\varphi_k^i \setVert 1\leq k\leq n-1}$.
-	Thus, we solve
-	\begin{align*}
-		\lambda_n^i &= \min_{\substack{\varphi\in\gradgradSob{\ddom_i}{\lambda_2} \\ \norm{\varphi}_{\ltwo{\partial\ddom_i}{S}}=1}} \clbracs{ \norm{\tgrad \varphi}_{\ltwo{\ddom_i}{x}} - \omega^2 \norm{\varphi}_{\ltwo{\ddom_i}{x}} \setVert \varphi\perp\varphi_k^i, \text{ for each } 1\leq k\leq n-1 },
-	\end{align*}
-	with the argmin being the eigenfunction $\varphi_n^i$.
-\end{enumerate}
-We can numerically solve these minimisation problems via the method of Lagrange multipliers for example, but this would require us to settle for approximate $\varphi_n^i$ and eigenvalues.
+the inherent influence of \eqref{eq:SI-BulkEqn} on \eqref{eq:SI-NonLocalQGEdgeEquation}.
+Possible ideas for alternatives include expressing $L_{n,m}$ in terms of the eigenvalues and eigenfunctions of the $\dtn^i_\omega$ (which are briefly explored in section \ref{sec:SIApp-NonLocalSolve}), or attempting to ``linearise" the Dirichlet-to-Neumann map.
