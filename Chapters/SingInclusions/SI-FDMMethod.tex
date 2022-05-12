@@ -1,126 +1,5 @@
-\tstk{OLD FILE - CONTENTS SINCE REORGANISED INTO OTHER FILES}
-
-\section{Numerical Approach to the Variational Problem and Strong Formulation} \label{sec:SI-VPandFDM}
-\tstk{fix this section's name once you decide what makes the cut. Also make a proper introduction here, or at least a lead-in.}
-
-In this section we turn to numerical schemes for handling the variational problem \eqref{eq:SI-VarProb} and the strong formulation \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition}.
-For each formulation, we will outline the numerical scheme we have chosen to pursue and, importantly, the methods in which we can handle the non-standard integrals and gradients with respect to $\compMes$ numerically.
-
-We will use the "cross-in-the-plane" geometry from the example in section \tstk{ref!!} (now equipped with $\compMes$) to illustrate the results of these methods.
-For convenience, we have translated the period cell by $-\bracs{\recip{2},\recip{2}}$, which allows us to avoid carrying additional constant terms around in what follows.
-Recall that this geometry consists of a skeleton $\graph$ within $\ddom=\left[0,1\right)^2$, with a single vertex $v_0=\bracs{0,0}^\top$, and two ``looping" edges $I_h = \sqbracs{0,1}\times\clbracs{0}$, $I_v=\clbracs{0}\times\sqbracs{0,1}$.
-The quasi-momentum parameters $\qm_{jk}$ are easily computable as $\qm_h = \qm_1$ and $\qm_v = \qm_2$, and we only have a single bulk region, $\ddom_i = \ddom^{\circ}=\bracs{0,1}^2$.
-There are a number of properties that we expect of our eigenvalues due to the symmetric nature of our geometry, notably the following:
-\begin{prop}[Cross in the plane symmetries] \label{prop:CrossInPlaneSymmetries}
-	If $\omega^2, u\bracs{x_1,x_2}$ is a solution to \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} at $\qm = \bracs{\qm_1,\qm_2}\in\left[-\pi,\pi\right)^2$, then:
-	\begin{itemize}
-		\item $\omega^2, u\bracs{1-x_1,x_2}$ is a solution to \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} at $\qm = \bracs{-\qm_1, \qm_2}$.
-		\item $\omega^2, u\bracs{x_1,1-x_2}$ is a solution to \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} at $\qm = \bracs{\qm_1, -\qm_2}$.
-		\item $\omega^2, u\bracs{x_2,x_1}$ is a solution to \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} at $\qm = \bracs{\qm_2, \qm_1}$.
-	\end{itemize}
-\end{prop}
-\tstk{proof?}
-
-Additionally for the cross-in-the-plane geometry, we can obtain analytic expressions for a subset of the eigenfunctions and eigenvalues --- namely those inherited from the Dirichlet laplacian on $\bracs{0,1}^2$.
-Observe that for $n,m\in\naturals$ the function
-\begin{align*}
-	u_{n,m}(x) &= \e^{-\rmi\qm\cdot x}\sin\bracs{n\pi x_1}\sin\bracs{m\pi x_2},
-\end{align*}
-is an eigenfunction of the Dirichlet laplacian $-\laplacian_{\qm}$,
-\begin{align*}
-	-\laplacian_{\qm}u &= \omega_{n,m}^2 u, &\qquad \text{on } \bracs{0,1}^2, \\
-	u\bracs{0,x_2} = u\bracs{1,x_2} &= u\bracs{x_1,0} = u\bracs{x_1,1} = 0,
-\end{align*}
-where $\omega_{n,m}^2 = \bracs{n^2+m^2}\pi^2$.
-It is clear that $u_{n,m}$ also solves \eqref{eq:SI-BulkEqn} with $\omega^2 = \omega_{n,m}^2$ and has $u=0$ on the skeleton, and furthermore is such that $u_{n,m}\in\tgradSob{\ddom}{\compMes}$.
-In the event that both
-\begin{itemize}
-	\item ($n$ is even and $\qm_1=0$) or ($n$ is odd and $\qm_1=-\pi$),
-	\item ($m$ is even and $\qm_2=0$) or ($m$ is odd and $\qm_2=-\pi$),
-\end{itemize}
-hold, then $u_{n,m}$ is also an eigenfunction of \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} with the same eigenvalue (the quasi-momentum values are required to ensure that the normal derivative traces cancel out in \eqref{eq:SI-InclusionEqn}).
-Of course, one can also substitute $\omega^2_{n,m}, u_{n,m}$ and into \eqref{eq:SI-WaveEqn} to arrive at the same conclusion.
-Knowing that \eqref{eq:SI-WaveEqn} shares eigenvalues with the Dirichlet laplacian will have consequences for us in section \ref{sec:NonLocalQG}, when we attempt to reduce \eqref{eq:SI-WaveEqn} to a quantum graph problem.
-For now however, $u_{n,m}$ and $\omega_{n,m}^2$ provide some suitable test cases for our numerical schemes.
-
-\subsection{Variational Problem} \label{ssec:SI-VP}
-We begin by examining the variational problem \eqref{eq:SI-VarProb},
-\begin{align*} 
-	\omega_n^2 &:= \min_{u}\clbracs{ \integral{\ddom}{ \abs{\tgrad_{\compMes}u}^2 }{\compMes} \setVert \norm{u}_{\ltwo{\ddom}{\compMes}}=1, \ u\perp u_l \ \forall 1\leq l\leq n-1 }. \tag{\eqref{eq:SI-VarProb} restated}
-\end{align*}
-\tstk{this is a fail safe, belongs when we talk about the numerical methods themselves.}
-The equations \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} and variational problem \eqref{eq:SI-VarProb} of course provide us with the same eigenvalues and eigenfunctions, as can be deduced from applying the Lagrange multiplier theorem to \eqref{eq:SI-VarProb}. \tstk{do this maybe? See notes from 23-11-21.}
-Our interest is in determining the eigenvalues $\omega_n^2$, however we also need to determine the eigenfunctions $u_n$ since we need $u_n$ to be orthogonal to each of $u_l, 1\leq l\leq n-1$.
-Given that we can obtain the eigenvalue $\omega_n^2$ from the eigenfunction $u_n$ by evaluating the integral in \eqref{eq:SI-VarProb}, we will focus our discussion on the approximation (and computation) of the eigenfunctions.
-We also drop the explicit subscript $n$, and just consider the problem of determining the function $u\in\tgradSob{\ddom}{\compMes}$ which solves the optimisation problem
-\begin{subequations} \label{eq:SI-MinProblem}
-	\begin{align}
-		\text{Minimise} \quad & \quad \integral{\ddom}{ \abs{\tgrad_{\compMes}u}^2 }{\compMes} \\
-		\text{Subject to} \quad & \quad \integral{\ddom}{ \abs{u}^2 }{\compMes} = 1, \\
-		& \quad \integral{\ddom}{ u\cdot\overline{u}_l }{\compMes} = 0, \ 1\leq l\leq n-1,
-	\end{align}
-\end{subequations}
-where $n\in\naturals$, $u_l, 1\leq l\leq n-1$ are given (pairwise) orthogonal functions.
-The traditional idea when attempting to approximate a minimising function is to represent the minimising function $u$ in a basis $\clbracs{\varphi_m}_{m\in\naturals_0}\subset\tgradSob{\ddom}{\compMes}$, truncate the basis expansion at some index $M$,
-\begin{align} \label{eq:SI-VPTruncatedBasis}
-	u &\approx \sum_{m=0}^M u_m \varphi_m,
-\end{align}
-and solve the minimisation problem (that arises from substituting \eqref{eq:SI-VPTruncatedBasis} into \eqref{eq:SI-MinProblem}) in the coefficients of the basis expansion that remain --- the choice of $M$ determines the accuracy in the approximate eigenfunction (and hence eigenvalue).
-This minimisation problem will be discrete (solving for the $M+1$ independent variables $u_m$), and can be handled using optimisation methods.
-
-None of the steps above are prohibited for the problem \eqref{eq:SI-MinProblem} and so we can proceed with the aforementioned ideas, illustrating the implementation for the cross-in-the-plane geometry.
-Our first task is to decide on the basis functions $\varphi_m$ that we want to use to approximate $u$.
-From the standpoint of accuracy (and typically speed) of the numerical solution there are several properties that it is desirable for this basis to have; orthonormality between the $\varphi_m$, similar shape to that expected of $u$, and of course periodicity.
-This is where problems concerning the unfamiliar nature of our space $\tgradSob{\ddom}{\compMes}$ begin to arise, as the choice of basis is considerably more complex --- as choosing the behaviour of $\varphi_m$ in the bulk regions then restricts what $\varphi_m$ can do on the skeleton, and vice-versa. 
-The geometry of the skeleton can also compound this issue, particularly if there are a large number of bulk regions $\ddom_i$, if they have irregular shapes, or if their shapes are significantly different (in terms of size or shape) from each other.
-As a general approach, one can choose a basis in similar fashion to how this is done for finite element schemes; mesh $\ddom$ into a union of simplexes (usually triangles) by placing nodes $\tau_i$, ensuring that none of the simplexes straddle any parts of the skeleton (that is, the interior of a simplex never has non-empty intersection with part of the skeleton).
-Then, use ``tent" or ``hat" functions centred on each node $\tau_i$ for the truncated basis functions $\varphi_m$.
-This allows sufficient flexibility in the behaviour of $u$ on the edges and in the bulk regions, at the expense of requiring a new mesh for every new graph geometry.
-
-Fortunately, the geometry of our cross-in-the-plane example is rather simple, since the two edges $I_h, I_v$ are aligned with the coordinate axes.
-This makes computing integrals on the skeleton much simpler, and traces from the bulk region can be computed with relative ease, so we can avoid taking the approach of meshing $\ddom$ as described above.
-Instead, we can opt to choose a basis in a way more akin to spectral methods --- by choosing ``global" basis functions rather than the ``local" tent-basis functions that meshing $\ddom$ would utilise.
-Combined with the fact that we only have one bulk region that spans the entire period cell, the natural candidate for our basis functions would be the 2D Fourier basis $\e^{2\pi\rmi(\alpha x + \beta y)}$.
-These functions are orthogonal in $\ltwo{\ddom}{\compMes}$, have period cell $\ddom$, and on each of the edges of $\graph$ reduce to a 1D-Fourier series.
-However, these functions also possess a continuous (in the sense of matching traces) normal derivative across the skeleton, which functions in $\tgradSob{\ddom}{\compMes}$ are not required to have, and so we cannot use the Fourier basis.
-Instead, we will look to use 2D polynomials to approximate our function $u$, by taking $M\in\naturals$ and setting
-\begin{align} \label{eq:2DPolyBasisDef}
-	\varphi_m(x,y) &= x^{i_m} y^{j_m}, \quad m = j_m + Mi_m, \ i,j\in\clbracs{0,...,M-1}.
-\end{align}
-These functions are not periodic by definition, so we are required to add the additional constraints
-\begin{align*}
-	u\bracs{0,y} = u\bracs{1,y}, \ \forall y\in\sqbracs{0,1}, 
-	\qquad 
-	u\bracs{x,0} = u\bracs{x,1}, \ \forall x\in\sqbracs{0,1},
-\end{align*}
-to our minimisation problem to account for this.
-With this choice of basis, and writing $U = \bracs{u_0,...,u_{M^2-1}}^\top$, we are tasked with solving the following problem.
-\begin{problem}[Discrete Variational Problem] \label{prob:DiscVarProb}
-	Let $M,N\in\naturals$ and $\varphi_m$ be as in \eqref{eq:2DPolyBasisDef}.
-	Given coefficients $U_l=\bracs{u^l_0,...,u^l_{M^2-1}}^\top$ for $1\leq l\neq N-1$, find values $U=\bracs{u_0,...,u_{M^2-1}}^\top$ that:
-	\begin{subequations} \label{eq:SI-ExampleMinProb}
-		\begin{align}
-			\text{Minimise} \quad & \quad J\sqbracs{U} := \sum_{m=0}^{M^2-1}\sum_{n=0}^{M^2-1}u_m\overline{u}_n\ip{\tgrad_{\compMes}\varphi_m}{\tgrad_{\compMes}\varphi_n}_{\ltwo{\ddom}{\compMes}^2} 
-			\label{eq:SI-EMPObjectiveFn} \\
-			\text{Subject to} \quad & \quad \sum_{m=0}^{M^2-1}\sum_{n=0}^{M^2-1}u_m\overline{u}_n\ip{\varphi_m}{\varphi_n}_{\ltwo{\ddom}{\compMes}} = 1, 
-			\label{eq:SI-EMPNormConstraint} \\
-			& \quad \sum_{i_m=1}^{M-1}u_{j_m+Mi_m} = 0, \ \forall j_m\in\clbracs{0,...,M-1}, 
-			\label{eq:SI-EMPxPeriodicity} \\
-			& \quad \sum_{j_m=1}^{M-1}u_{j_m+Mi_m} = 0, \ \forall i_m\in\clbracs{0,...,M-1},
-			\label{eq:SI-EMPyPeriodicity} \\
-			& \quad \sum_{m=0}^{M^2-1}\sum_{n=0}^{M^2-1}u_m\overline{u}^l_n\ip{\varphi_m}{\varphi_n}_{\ltwo{\ddom}{\compMes}} = 0, \ \forall 1\leq l\leq N-1.
-			\label{eq:SI-EMPOrthogonality}
-		\end{align}
-	\end{subequations}
-\end{problem}
-The minimiser $U$ of problem \ref{prob:DiscVarProb} then provides our approximation of $u$, and we have that $\omega^2 \approx J[U]$.
-Equation \eqref{eq:SI-EMPNormConstraint} is the norm constraint on the eigenfunction $u$, \eqref{eq:SI-EMPxPeriodicity} (respectively \eqref{eq:SI-EMPyPeriodicity}) are the constraints that ensure periodicity of the eigenfunction in the $x$ (respectively $y$) directions, and \eqref{eq:SI-EMPOrthogonality} forces $u$ to be orthogonal to the previously computed eigenfunctions $u^l$.
-Due to the finite dimension of our problem (through the truncation at order $M$ for the functions $\varphi_m$), we are only ever able to compute approximations to the lowest $M^2 - \bracs{2M + 1} + 1$ eigenvalues due to the number of constraints in the problem \ref{prob:DiscVarProb}.
-
-\tstk{time to display some nice figures, maybe some comparisons between the two methods etc? Could also do a run of this with $\alpha_3\neq0$ just to see what on earth happens!}
-
-\subsection{Finite Difference Scheme} \label{ssec:FDMSingInc}
-As an alternative to working directly from the variational problem \ref{prob:DiscVarProb}, we can instead choose to work from our ``strong formulation" \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition}.
+\subsection{Solution of \eqref{eq:SI-StrongForm} via Finite-Differences} \label{ssec:SI-FDMMethod}
+Now that we have the problem \eqref{eq:SI-StrongForm} to work with, we can attempt to solve \eqref{eq:SI-WaveEqn} through a formulation that involves familiar gradients and derivatives, rather than the more abstract tangential gradients.
 Before we do so, it is convenient to notice that we can move the ``trace" terms in \eqref{eq:SI-InclusionEqn} to the left-hand-side to obtain the slightly nicer (in terms of the numerics that follow) looking system
 \begin{subequations} \label{eq:SI-FDMEquationsToDisc}
 	\begin{align}
@@ -145,8 +24,8 @@ Since $u$ is twice differentiable along the skeleton, the placement of these nod
 The traces of the normal derivates (in \eqref{eq:SI-FDMSkeleton}) can also be approximated via one-sided differences using suitable nodes from each of the adjacent bulk regions.
 Finally, an approximation for \eqref{eq:SI-FDMVertex} can be derived for nodes that lie at vertices $v_j\in\vertSet$, using the nodes that lie on edges that connect to $v_j$.
 We will come to discuss some of the difficulties with the general application of this procedure after our illustrative example.
-For now, assuming we have approximations for the gradient- and derivative-like objects, we can then approximate the action of the left-hand-side of \eqref{eq:SI-FDMEquationsToDisc} via the action of a matrix $\mathcal{F}$ on the vector $U = \bracs{u_j}^\top$, where $u_j:=u\bracs{\tau_j}$.
-As a result, we can then approximate the system \eqref{eq:SI-FDMEquationsToDisc} by the matrix-eigenvalue problem involving $\mathcal{F}$.
+For now, let us assume we have approximations for the action of the gradient and derivative, so that the action of the left-hand-side of \eqref{eq:SI-FDMEquationsToDisc} is approximated through the action of a matrix $\mathcal{F}$ on the vector $U = \bracs{u_j}^\top$, where $u_j:=u\bracs{\tau_j}$.
+We then approximate the system \eqref{eq:SI-FDMEquationsToDisc} by the matrix-eigenvalue problem involving $\mathcal{F}$.
 
 Let us begin by illustrating this approach using the cross in the plane geometry.
 We first discretise $\ddom$ into a uniform mesh consisting of $N\times N$ nodes $\tau_{p,q} = \bracs{(p-1)h,(q-1)h}$ for $p,q\in\clbracs{1,...,N}$, with a mesh width of $h = \recip{N-1}$, and write $u_{p,q} = u\bracs{\tau_{p,q}}$.
@@ -169,23 +48,22 @@ For nodes $\tau_{p,q}\in I_{jk}$ (for either $I_{jk}=I_h$ or $I_v$), our finite 
 This is because $u$ is twice differentiable \emph{along the skeleton}, so we must approximate $\bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)}$ through finite differences along the edge $I_{jk}$, which will involve the values of $u$ at the nodes ``adjacent" to $\tau_{p,q}$ in the $e_{jk}$ and $-e_{jk}$ directions.
 For the normal-derivative trace terms, we use one-sided finite differences to approximate these values at $\tau_{p,q}$, which involves the values of $u$ at the nodes ``adjacent" to $\tau_{p,q}$ in the $n_{jk}$ and $-n_{jk}$ directions.
 For general skeleton geometries these requirements will contribute to the complications with meshing the domain, but since the edges are aligned with the coordinate axes in the cross-in-the-plane geometry, the vectors $e_{jk}$ and $n_{jk}$ are also aligned with the coordinate axes and the discretisation proceeds easily.
-\tstk{check geometry is correct: FDM was originally done with vertex in centre, not in corner}
 Those $\tau_{p,q}$ that lie on the horizontal edge $I_h$ have $q=0$ and $p\neq0$, so our finite difference approximation is
 \begin{align*}
-	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u_{p,0} - \bracs{\bracs{\grad u_{p,0}\cdot n_{jk}}^+ - \bracs{\grad u_{p,0}\cdot n_{jk}}^-}
-	& \approx \bracs{\qm_1^2 + 2h^{-1} + 2h^{-2}}u_{p,0} \\
-	& \quad - h^{-1}\bracs{h^{-1} + \rmi\qm_1}u_{p+1,0} \\
-	& \quad - h^{-1}\bracs{h^{-1} - \rmi\qm_1}u_{p-1,0} \\
+	- & \bracs{\diff{}{y} + \rmi\qm_{jk}}^2 u_{p,0} - \bracs{\bracs{\grad u_{p,0}\cdot n_{jk}}^+ - \bracs{\grad u_{p,0}\cdot n_{jk}}^-} \\
+	& \quad\approx \bracs{\qm_1^2 + 2h^{-1} + 2h^{-2}}u_{p,0}
+	- h^{-1}\bracs{h^{-1} + \rmi\qm_1}u_{p+1,0}
+	- h^{-1}\bracs{h^{-1} - \rmi\qm_1}u_{p-1,0} \\
 	& \quad - h^{-1}u_{p,1} - h^{-1}u_{p,-1}. \labelthis\label{eq:SI-FDMHorzEdgeDiscretise}
 \end{align*}
 Here we have used centred differences along the edge $I_h$, identifying that the nodes $\tau_{p-1,0}, \tau_{p+1,0}$ are the adjacent nodes in the $x_1 (= e_h)$ direction.
 The traces cause the introduction of the terms $u_{p,-1}$ and $u_{p,1}$, since $-x_2 = n_h$.
 Analogously, nodes $\tau_{p,q}$ on the vertical edge $I_v$ have $p=0$ and $q\neq0$, and the finite difference approximation is
 \begin{align*}
-	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2_{0,q} - \bracs{\bracs{\grad u_{0,q}\cdot n_{jk}}^+ - \bracs{\grad u_{0,q}\cdot n_{jk}}^-}
-	& \approx \bracs{\qm_2^2 + 2h^{-1} + 2h^{-2}}u_{0,q} \\
-	& \quad - h^{-1}\bracs{h^{-1} + \rmi\qm_2}u_{0,q+1} \\
-	& \quad - h^{-1}\bracs{h^{-1} - \rmi\qm_2}u_{0,q-1} \\
+	- & \bracs{\diff{}{y} + \rmi\qm_{jk}}^2 u_{0,q} - \bracs{\bracs{\grad u_{0,q}\cdot n_{jk}}^+ - \bracs{\grad u_{0,q}\cdot n_{jk}}^-} \\
+	& \quad\approx \bracs{\qm_2^2 + 2h^{-1} + 2h^{-2}}u_{0,q}
+	- h^{-1}\bracs{h^{-1} + \rmi\qm_2}u_{0,q+1}
+	- h^{-1}\bracs{h^{-1} - \rmi\qm_2}u_{0,q-1} \\
 	& \quad - h^{-1}u_{1,q} - h^{-1}u_{-1,q}. \labelthis\label{eq:SI-FDMVertEdgeDiscretise}
 \end{align*}
 
@@ -199,27 +77,27 @@ Here we again approximate each (signed) normal derivative by a one-sided finite 
 We now insert these finite difference approximations \eqref{eq:SI-FDMBulkDiscretise}-\eqref{eq:SI-FDMVertCond} into \eqref{eq:SI-FDMEquationsToDisc}, which provides the following system in the $\bracs{N-1}^2$ nodal values $u_{p,q}$;
 \begin{subequations} \label{eq:SI-FDMDiscreteEqns}
 	\begin{align*}
-		\bracs{\abs{\qm}^2 + 4h^{-2}}u_{p,q} \\
+		\bracs{\abs{\qm}^2 + 4h^{-2}} & u_{p,q}
 		-h^{-1}\bracs{h^{-1} + \rmi\qm_1}u_{p+1,q}
-		-h^{-1}\bracs{h^{-1} - \rmi\qm_1}u_{p-1,q} & & \\
-		\quad -h^{-1}\bracs{h^{-1} + \rmi\qm_2}u_{p,q+1}
+		-h^{-1}\bracs{h^{-1} - \rmi\qm_1}u_{p-1,q} \\
+		& -h^{-1}\bracs{h^{-1} + \rmi\qm_2}u_{p,q+1}
 		-h^{-1}\bracs{h^{-1} - \rmi\qm_2}u_{p,q-1}
-		& = \omega^2 u_{p,q}, &\quad p,q\neq0, \labelthis\label{eq:SI-FDMBulkDiscEqns} \\
-		\bracs{\qm_1^2 + 2h^{-1} + 2h^{-2}}u_{p,0} \\
-		- h^{-1}\bracs{h^{-1} + \rmi\qm_1}u_{p+1,0}
-		- h^{-1}\bracs{h^{-1} - \rmi\qm_1}u_{p-1,0} & & \\
-		\quad - h^{-1}u_{p,1} - h^{-1}u_{p,-1}
-		&= \omega^2 u_{p,0}, &\quad p\neq0, q=0, \labelthis\label{eq:SI-FDMHEdge} \\
-		\bracs{\qm_2^2 + 2h^{-1} + 2h^{-2}}u_{0,q} \\
-		- h^{-1}\bracs{h^{-1} + \rmi\qm_2}u_{0,q+1}
-		- h^{-1}\bracs{h^{-1} - \rmi\qm_2}u_{0,q-1} & & \\
-		- h^{-1}u_{1,q} - h^{-1}u_{-1,q}
-		&= \omega^2 u_{0,q}, &\quad p=0, q\neq0, \labelthis\label{eq:SI-FDMVEdge} \\
-		h^{-1} \bracs{ 4u_{0,0} - u_{1,0} - u_{-1,0} - u_{0,1} - u_{0,-1} }
-		&= 0, & p=q=0, \labelthis\label{eq:SI-FDMDiscVertex}
+		= \omega^2 u_{p,q}, & p,q\neq0, \labelthis\label{eq:SI-FDMBulkDiscEqns} \\
+		\bracs{\qm_1^2 + 2h^{-1} + 2h^{-2}} & u_{p,0}
+		-h^{-1}\bracs{h^{-1} + \rmi\qm_1}u_{p+1,0}
+		-h^{-1}\bracs{h^{-1} - \rmi\qm_1}u_{p-1,0} \\
+		& -h^{-1}u_{p,1} - h^{-1}u_{p,-1}
+		= \omega^2 u_{p,0}, & p\neq0, q=0, \labelthis\label{eq:SI-FDMHEdge} \\
+		\bracs{\qm_2^2 + 2h^{-1} + 2h^{-2}} & u_{0,q}
+		-h^{-1}\bracs{h^{-1} + \rmi\qm_2}u_{0,q+1}
+		-h^{-1}\bracs{h^{-1} - \rmi\qm_2}u_{0,q-1} \\
+		& -h^{-1}u_{1,q} - h^{-1}u_{-1,q}
+		= \omega^2 u_{0,q}, & p=0, q\neq0, \labelthis\label{eq:SI-FDMVEdge} \\
+		h^{-1} & \bracs{ 4u_{0,0} - u_{1,0} - u_{-1,0} - u_{0,1} - u_{0,-1} }
+		= 0, & p=q=0, \labelthis\label{eq:SI-FDMDiscVertex}
 	\end{align*}
 \end{subequations}
-where $p,q\in\clbracs{0,...,N-1}$.
+where $p,q\in\clbracs{0,...,N-1}$ unless otherwise stated.
 This system can then be written in matrix form as 
 \begin{align} \label{eq:SI-FDMMatrixEqn}
 	\mathcal{F}U &= \omega^2 B U,
@@ -241,7 +119,7 @@ However by examining the eigenvalues in this band as functions of $\qm$, as in f
 	\includegraphics[width=\textwidth]{FDM_2022-01-28-09-33_AllBands.pdf}
 	\caption{\label{fig:FDM_2022-01-28-09-33_AllBands} The eigenvalues $\omega$ in each spectral band, plotted as functions of the quasi-momentum $\qm$. Observe the symmetries that are expected from proposition \ref{prop:CrossInPlaneSymmetries}.}
 \end{figure}
-Furthermore, we also notice that the eigenvalues within each band obey the symmetries in $\qm$ as expected from \ref{prop:CrossInPlaneSymmetries}.
+Furthermore, we also notice that the eigenvalues within each band obey the symmetries in $\qm$ as expected from proposition \ref{prop:CrossInPlaneSymmetries}.
 
 Finally, we can also test the rate of convergence of the numerical scheme to the eigenvalues $\omega_{n,m}^2 = \bracs{n^2+m^2}\pi^2$.
 In these cases, we expect that the error in the approximate eigenvalue is of the order of $N^{-2}$, since our scheme makes use of centred differences in the bulk region, and on the skeleton the eigenfunction should be identically zero.
@@ -275,12 +153,12 @@ This is what we observe numerically, and is illustrated in figure \ref{fig:Compo
 	\end{subfigure}
 	\caption{\label{fig:CompositeCross-FDM-DEV} Convergence rate for the FDM method to the analytic eigenvalues shared with the Dirichlet laplacian. Observe that the estimated gradient, hence convergence rate with $N$, is approximately $-2$ as expected.}
 \end{figure}
-\tstk{The eigenfunction plots are also quite nice, but we don't have anything to compare them to (true values, etc).
+Regrettably, we do not have to hand any analytic solutions to \eqref{eq:SI-WaveEqn} beyond those shared with the Dirichlet laplacian and so we cannot test the rate of convergence for solutions which are non-constant along the skeleton.
+\tstk{The eigenfunction plots are also quite nice, but we don't have anything to compare them to (true values, etc) - but are there any that are non-constant along the edges!?!?!?!?.
 Comparison with the ``spectral" method is also a must, certainly for the results we have obtained --- maybe give the difference in spectral values found for a fixed theta, and varying the mesh width and $M$ (in VP)?}
 
-\tstk{now reflections on how this method might get much more complicated}
 Our example using the cross-in-the-plane geometry illustrates the principle behind this approach; use finite differences to approximate $u$ in each $\ddom_i$ and along each $I_{jk}$, and tie approximations from adjacent bulk regions together through the nodal values along the common edge of the skeleton.
-Compared to the variational approach in section \ref{ssec:SI-VP}, this approach avoids working with $\compMes$ directly and instead allows us to work solely in terms of classical derivatives, approximating them through Taylor's theorem.
+Compared to the variational approach in section \ref{sec:SI-VarProbMethod}, this approach avoids working with $\compMes$ directly and instead allows us to work solely in terms of classical derivatives, approximating them through Taylor's theorem.
 However by choosing to approximate our function within each region and then ``stitch" these approximations together, we must choose our mesh in such a way as to abide by this decision, which can lead to some further considerations.
 Let us begin by considering the requirements of the placement of nodes within the bulk regions --- each node must have neighbours in each of the coordinate directions that lie within the (closure of) the bulk region.
 Now, consider a bulk region like that in figure \ref{fig:Diagram_FDMMeshIssue}, where a part of the skeleton is not aligned to the coordinate axes.
@@ -311,13 +189,13 @@ One could argue that a suitable value for $u$ ``below" the highlighted node coul
 However there is no assurance that this interpolation will produce an accurate value for $u$, particularly if we are in the situation in figure \ref{fig:Diagram_FDMMeshIssue-a} where there are only two nodes along the diagonal edge, and the lower-left vertex doesn't even have a node placed at it.
 To address this meshing complication, one can introduce additional nodes along the skeleton (and at the vertices) where necessary, as in figure \ref{fig:Diagram_FDMMeshIssue-b} (highlighted in blue).
 This results in every node in the bulk regions having suitable neighbours in the coordinate directions, and has the additional bonus of improving the approximation of the derivative of $u$ along the skeleton.
-Our expense is that we have given up a uniform distance between all nodes, which will require us to take slightly more care when deriving difference equations at each node and assembling the matrix $\mathcal{F}$.
+Our expense is that we have given up a uniform distance between all nodes, which will require us to take slightly care when deriving difference equations at each node and assembling the matrix $\mathcal{F}$, and the rate of convergence will likely scale with some power of the \emph{greatest} such inter-nodal distance.
+
 We also may end up compounding another issue when we come to approximate the normal derivative traces in \eqref{eq:SI-FDMSkeleton}, which we highlight in figure \ref{fig:Diagram_FDMMeshIssue-c} --- if an edge is not aligned with the coordinate axes, where are the nearest nodes in the directions $\pm n_{jk}$ from the edge?
 There is the possibility that such a node is far from the edge, again resulting in a poor approximation to the trace of the normal derivative, or that such a node may not even exist (see the leftmost highlighted node in figure \ref{fig:Diagram_FDMMeshIssue-c}).
 We again have the option of interpolating a value for $u$ in the bulk regions, schematically illustrated at the right highlighted node in figure \ref{fig:Diagram_FDMMeshIssue-c} --- the values at the orange points can be interpolated from nodes in the bulk region, provided we have already made sensible mesh choices within the adjacent bulk regions\footnote{Note that we cannot simply decide to make the mesh in the bulk region finer, so that a node is placed in the position we want to interpolate. In general, doing so will end up in us requiring more nodes on the skeleton through the issue in figure \ref{fig:Diagram_FDMMeshIssue-a}, sending us in circles!}.
 These issues arise due to how the skeleton (or more precisely, each edge of the skeleton) is effectively using a different coordinate system (for its derivatives) to the bulk regions, which is why this issue disappears when the edges of the skeleton are aligned to the coordinate axes --- the ``neighbouring" nodes we need on the skeleton are in the directions $e_{jk}, n_{jk}$ rather than the coordinate directions $x_1, x_2$.
 Whilst the complications this brings can be combatted in the manners discussed above, it does highlight the need for care when setting up and implementing this approach for general skeleton geometries.
-Contrastingly, the variational approach in \ref{ssec:SI-VP} does not run into these issues since (in that approach) we have made the choice to work with $\compMes$ directly and approximate the related gradients globally (over the whole domain) rather than utilising their properties on sub-regions.
-\tstk{convergence experiments to the analytic solutions that we know about --- Dirichlet laplacian solutions...}
+Contrastingly, the approach via \eqref{eq:SI-VarProb} does not run into these issues since (in that approach) we have made the choice to work with $\compMes$ directly and approximate the related gradients globally (over the whole domain) rather than utilising their properties on sub-regions.
 
-\tstk{could have a final paragraph or two commenting on a finite element based approach, which is a middle ground between the two approaches discussed here. It uses the variational form, but the basis functions that we'll be using would be local...}
+\tstk{could have a final paragraph or two commenting on a finite element based approach, which is a middle ground between the two approaches discussed here. It uses the variational form, but the basis functions that we'll be using would be local... Move to discussion at end}

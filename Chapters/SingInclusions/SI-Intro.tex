@@ -1,47 +1,44 @@
 \section{Chapter Introduction} \label{sec:SingIncChapterIntro}
-
-The focus of the previous chapters \tstk{refs} rested solely on the singular structure itself and how to understand the notion of a derivative (or curl) on such a structure.
-Once established, it was shown that a quantum graph problem can be obtained from a more abstract variational formulation, and the spectrum of such a problem analysed via tools like the $M$-matrix.
-This choice to ignore or neglect the ``bulk" of our domain ($\ddom\setminus\graph$) reflects a physical situation where we expect there to be no field (or propagation) in this region.
-In the context of electromagnetism for example, this would represent some (singular) dielectric material surrounded by conductors --- there would be no field in the conducting regions, and only ``along" the dielectric materials.
+The focus of the chapters \ref{ch:ScalarSystem} and \ref{ch:CurlCurl} was on the analysis of variational problems on the singular structure itself, how to understand the notion of a derivative (or curl) on such a structure, and the solution and analysis of said problems.
+In each of these problems, ``bulk" of our domain ($\ddom\setminus\graph$) is ignored by the singular measures we consider --- an observation that we exploit in the analysis of the various Sobolev spaces.
+These setups are more akin to setups from \tstk{quantum wires, etc stuff}, rather than the setting of photonic crystals.
+One can argue that by choosing to ignore this bulk region, the variational problems reflect a physical situation where we expect there to be no electromagnetic field (or wave propagation) in this region.
+In the context of electromagnetism, this would represent some (singular) dielectric material surrounded by conductors --- there would be no field in the conducting regions, and only ``along" the dielectric materials.
 Of course, photonic crystals (and the fibres they are manufactured into) do not consist of a (thin, periodic) dielectric encased in a conducting material; rather they are composed of a (thin, periodic) dielectric material surrounded by \emph{another} dielectric material.
-This is where the motivation for our final problem stems from --- we will examine a problem on a (two dimensional) domain with \emph{singular} inclusions.
+This is where the motivation for our final problem stems from --- we will examine a problem on a two dimensional composite domain with one of the components being singular.
 We would like to view such a problem as (some appropriate) limit of a problem on a domain with thin-structure inclusions, as the thickness of such inclusions tends to zero.
-There have been studies related to this topic, \tstk{Kirill-Evans, Zhikov-Past. on how what we're doing here is similar to this stuff, but is not it exactly. Highlight that this means we are shooting in the dark a bit, as we have nothing to go off of!}
+There have been studies related to this topic, \tstk{check thesis introduction. Kirill-Evans, Zhikov-Past. on how what we're doing here is similar to this stuff, but is not it exactly. Highlight that this means we are shooting in the dark a bit, as we have nothing to go off of! Kuch-Fig also have a paper on this.}
 
-\subsection{Notation and Conventions} \label{ssec:SINotation}
 Let us formalise the notation and terminology we will us to describe the domain we will be working with in this section.
-As usual, we take $\ddom$ and $\graph$ to be a singular structure domain, with $\graph$ being the period graph of some embedded, metric graph and $\ddom$ the unit cell, which is identified with the torus \tstk{as in section where this was all established}.
-The domain $\ddom$ will henceforth be referred to as the ``composite domain".
+As usual, we take $\graph$ to be the period graph of an embedded, metric graph $\hat{\graph}$ in $\reals^2$ with unit cell $\ddom$.
 The graph $\graph$ naturally breaks $\ddom$ into a collection of disjoint union of (open) polygonal regions (or subdomains); we label these $\ddom_i$ for $i\in\Lambda$ for some appropriate (finite) index set $\Lambda$, and we then have that $\ddom = \graph\cup\bigcup_{i\in\Lambda}\ddom_i$.
-We will refer to the graph $\graph$ and its constituent edges $I_{jk}\in\edgeSet$ as the ``(singular) skeleton", and refer to the $\ddom_i$ as the ``bulk (regions)" or ``(dielectric) composite regions"\footnote{We neglect to use the term ``inclusion" for either of $\ddom_i$ or $\graph$ since there is an argument to be made both ways about which material is being ``included" in the other.}.
-Additionally, we denote by $\lambda_2$ the two-dimensional Lebesgue measure on $\ddom$ and write
+We will refer to the graph $\graph$ and its constituent edges $I_{jk}\in\edgeSet$ as the \emph{(singular) skeleton}, and refer to the $\ddom_i$ as the \emph{bulk (regions)} or \emph{dielectric regions}\footnote{We neglect to use the term ``inclusion" for either of $\ddom_i$ or $\graph$ since there is an argument to be made both ways about which material is being ``included" in the other.}.
+Additionally, recall that we denote by $\lambda_2$ the two-dimensional Lebesgue measure on $\ddom$ and write
 \begin{align*}
 	\compMes := \lambda_2 + \ddmes,
 \end{align*}
-where we shall refer to $\compMes$ as the ``composite" measure on $\ddom$ with respect to the graph $\graph$.
-\tstk{haven't done $\nu$ additions yet, mention this because using the tilde notation is somewhat unfortunate. Also, this was defined in the theory-prelims chapter}
-Also, define $\lcompMes = \lambda_2 + \lambda_{jk}$ for each edge $I_{jk}$.
+where we shall refer to $\compMes$ as the \emph{composite measure} on $\ddom$ with respect to the graph $\graph$.
+Whenever we refer to $\ddom$ as a \emph{composite domain}, we refer to $\ddom$ equipped with the measure $\compMes$.
+Additionally, define $\lcompMes = \lambda_2 + \lambda_{jk}$ for each edge $I_{jk}$.
 
-Note that our singular inclusions are distinct from boundaries or material interfaces; at an interface one simply has matching conditions between the solutions (to a suitable differential problem) approaching from one side of the interface and from the other.
+We shall observe that our singular skeleton provides effects that are distinct from those induced simply having interface conditions at the common boundaries of the $\ddom_i$.
+At such an interface one simply has matching conditions between the solutions (to a suitable differential problem) approaching from one side of the interface and from the other.
 The interface itself has no size or bulk, and there are no dynamics happening along these interfaces beyond the matching conditions imposed --- the behaviour of the solution is determined in the bulk, and then matched to the expected (or physically relevant) interface conditions.
-On the other hand, our skeleton is bestowed a notion of length by $\ddmes$, and thus has the potential to (and does) give rise to dynamics along the edges of $\graph$, which will be coupled to the dynamics in the composite regions $\ddom_i$.
-That is to say, the behaviour of a solution is no longer determined by the behaviour in the bulk regions, then matched to the other regions via the inclusions which separate them.
-In fact, we will see that it is even possible to reformulate a problem on the composite domain into a problem posed solely on the graph $\graph$, where the interplay between the solution in the bulk and on the edges is encoded in the non-locality of the resulting problem.
+Contrastingly, our skeleton is bestowed a notion of length by $\ddmes$, and thus has the potential to (and does) give rise to dynamics along the edges of $\graph$, which will be coupled to the dynamics in the composite regions $\ddom_i$.
+The behaviour of a solution is thus no longer determined by the behaviour in the bulk regions, then matched to the other regions via the interfaces which separate them.
+In fact, we will see that it is even possible to reformulate a problem on the composite domain into a problem posed solely on the skeleton $\graph$, where the interplay between the solution in the bulk and on the edges is encoded in the non-locality of the resulting problem.
 
-\subsection{Chapter Overview} \label{ssec:SIOverview}
-The focus of this chapter will be on the ``Helmholtz-equation" (thought of as a Fourier transformed ``wave-equation"),
+The focus of this chapter will be on the acoustic approximation\footnote{Again for the sake of avoiding monotonous, we will also use ``wave equation" to refer to \eqref{eq:SI-WaveEqn}.}
 \begin{align} \label{eq:SI-WaveEqn}
 	-\bracs{\tgrad_{\compMes}}^2 u = \omega^2 u \qquad\text{in } \ddom,
 \end{align}
-now posed on our composite domain and respecting our singular skeleton.
-Our goal of studying the spectrum of \eqref{eq:SI-WaveEqn} will direct our analysis in this chapter as follows; foremost, in section \ref{ssec:SI-WaveEqnSetup} we establish formal definitions of the appropriate function space for $u$ and the operator for which \eqref{eq:SI-WaveEqn} is the eigenvalue problem of, motivated by our approaches in chapters \tstk{scalar and curl}.
-This ensures that there \emph{are} eigenfunctions and eigenvalues of \eqref{eq:SI-WaveEqn} to talk about, and we then move onto considerations for determining these.
-In doing so, we discover that \eqref{eq:SI-WaveEqn} possesses several equivalent formulations, each of which will be the basis of a numerical scheme with benefits and hindrances relative to the other formulations.
-The first such formulation we consider (section \ref{ssec:SI-VP}) comes directly from the variational problem for the operator that defines \eqref{eq:SI-WaveEqn}, and the second (section \ref{ssec:FDMSingInc}) comes from the corresponding ``strong form" that we can derive using analysis of the function space that $u$ lives in.
+now posed on our composite domain and respecting our singular skeleton\footnote{See section \ref{sec:SI-ProblemFormulation} for a precise definition of what is meant by this equation, although the meaning assigned is analogous to our previous approaches in chapters \ref{ch:ScalarSystem} and \ref{ch:CurlCurl}.}.
+Our goal of studying the spectrum of \eqref{eq:SI-WaveEqn} will direct our work in this chapter; our objective is, again, to determine an equivalent formulation for \eqref{eq:SI-WaveEqn} which we can then analyse and potentially tackle numerically.
+In fact, we will discover that \eqref{eq:SI-WaveEqn} possesses several equivalent formulations, each of which can be the basis of a numerical scheme with benefits and hindrances relative to the other formulations.
+The first such formulation we consider (section \ref{sec:SI-VarProbMethod}) comes directly from the variational problem for the operator that defines \eqref{eq:SI-WaveEqn}, and the second (section \ref{ssec:FDMMethod}) comes from the corresponding ``strong form" that we can derive using analysis of the function space that $u$ lives in.
 These formulations still require us to work with the unfamiliar gradients ($\tgrad_{\compMes}u$) or handle interplay between the solution in the bulk and on the skeleton, which brings us to the third formulation in section \ref{sec:SI-NonLocalQG} where we reformulate \eqref{eq:SI-WaveEqn} into a problem on the skeleton only.
-
-Our investigation into each of these formulations will highlights several ``trade-offs" that are made as we move between the various formulations or numerical approaches to solving \eqref{eq:SI-WaveEqn}.
-For example, moving towards a problem on the skeleton only allows us to avoid handling tangential gradients with respect to $\compMes$ (and other non-classical objects) and theoretically reduces the dimensionality of any numerical scheme we want to employ because the skeleton is 1D.
-On the other hand, moving onto the skeleton also results in the introduction of non-local effects into the equations on each $I_{jk}$, to compensate for the effect of the bulk regions, which complicates the solutions process.
-We will also establish a link between the first and second formulations by means of \tstk{motivated by the use of a Strauss dilations, extended spaces}, and speculate on the affect of introducing non-zero coupling constants at the vertices.
+Our investigation into each of these formulations will highlight several ``trade-offs" that are made as we move between the various formulations or numerical approaches to solving \eqref{eq:SI-WaveEqn}.
+We will conclude with a discussion of further extensions to this work --- notably the reintroduction of non-zero coupling constants at the vertices, and analysis of more general problems from electromagnetism than the acoustic approximation.
+%For example, moving towards a problem on the skeleton only allows us to avoid handling tangential gradients with respect to $\compMes$ (and other non-classical objects) and theoretically reduces the dimensionality of any numerical scheme we want to employ because the skeleton is 1D.
+%On the other hand, moving onto the skeleton also results in the introduction of non-local effects into the equations on each $I_{jk}$, to compensate for the effect of the bulk regions, which complicates the solutions process.
+%We will also establish a link between the first and second formulations by means of \tstk{motivated by the use of a Strauss dilations, extended spaces}, and speculate on the affect of introducing non-zero coupling constants at the vertices.

@@ -1,11 +1,7 @@
-\section{The Narrative (placeholder section)}
-\tstk{In section (narrative section or whatever it becomes) we will formalise the problem \eqref{eq:SI-WaveEqn} and define the operator for which it is the eigenvalue problem of.
-We will then write down the variational problem for this operator with a view to determining its eigenvalues, and the equivalent ``strong form" problem that it gives rise to.}
-
-\subsection{The Wave Equation in our Composite Medium} \label{ssec:SI-WaveEqnSetup}
+\section{Problem Formulation} \label{sec:SI-ProblemFormulation}
 Let us begin defining the objects in \eqref{eq:SI-WaveEqn} accurately.
-This requires us to first analyse the set $\tgradSob{\ddom}{\compMes}$, much in the same vein as did with $\ktgradSob{\ddom}{\dddmes}$ and $\ktcurlSob{\ddom}{\dddmes}$ before (\tstk{section ref}), and is the focus of section \ref{sec:CompSobSpaces}.
-A summary of the key results for a function $u\in\tgradSob{\ddom}{\compMes}$ is provided here for reference:
+This requires us to first analyse the gradients of functions that live in the space $\tgradSob{\ddom}{\compMes}$ in the same vein as did with $\ktgradSob{\ddom}{\dddmes}$ and $\ktcurlSob{\ddom}{\dddmes}$ before, and is the focus of section \ref{sec:CompSobSpaces}.
+As we might expect from the previous chapters, we find that:
 \begin{itemize}
 	\item The tangential gradient $\tgrad_{\compMes}u$ of $u$ is such that
 	\begin{align*}
@@ -17,7 +13,8 @@ A summary of the key results for a function $u\in\tgradSob{\ddom}{\compMes}$ is 
 	This is as close to a condition of ``continuity across the inclusions" as we can get.
 	Additionally, the $u^{(jk)}$ are continuous at the vertices of $\graph$, as was the case for functions in $\ktgradSob{\ddom}{\dddmes}$.
 \end{itemize}
-We then consider (for a fixed $\qm$) the bilinear form $b_{\qm}$ defined on pairs $(u,v)\in\tgradSob{\ddom}{\compMes}\times\tgradSob{\ddom}{\compMes}$ where\footnote{Of course, we can be less stringent with this definition and define $b$ on smooth functions, which are (by construction) dense in $\tgradSob{\ddom}{\compMes}$.}
+
+Now consider (for a fixed $\qm$) the bilinear form $b_{\qm}$ defined on pairs $(u,v)\in\tgradSob{\ddom}{\compMes}\times\tgradSob{\ddom}{\compMes}$ where
 \begin{align*}
 	b_{\qm}(u,v) &= \integral{\ddom}{ \tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}v} }{\compMes}
 	= \ip{\tgrad_{\compMes}u}{\tgrad_{\compMes}v}_{\ltwo{\ddom}{\compMes}^2}.
@@ -26,7 +23,7 @@ Clearly $b_{\qm}$ is symmetric and satisfies $b_{\qm}(u,u)\geq 0$ with equality 
 \begin{align*}
 	\mathcal{A}_{\qm} := -\bracs{\tgrad_{\compMes}}^2,
 \end{align*}
-\tstk{provided we equip $\tgradSob{\ddom}{\compMes}$ with a suitable inner product, which'll just be the analogue of the usual Sobolev inner product} by
+by
 \begin{align*} 
 	\dom\bracs{ \mathcal{A}_{\qm} } &= \clbracs{ u\in\tgradSob{\ddom}{\compMes} \setVert \exists f\in\ltwo{\ddom}{\compMes} \text{ s.t. } \right.
 	\\
@@ -41,220 +38,50 @@ where $u$ and $f$ are related as in \eqref{eq:CompLaplaceOpDom}.
 Equation \eqref{eq:SI-WaveEqn} is then the eigenvalue equation for the operator $\mathcal{A}_{\qm}$, interpreted as the problem of finding $\omega^2>0$ and non-zero $u\in\tgradSob{\ddom}{\compMes}$ such that
 \begin{align} \label{eq:SI-WeakWaveEqn}
 	\integral{\ddom}{ \tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}\phi} }{\compMes}
-	&= \omega^2 \integral{\ddom}{ u\overline{\phi} }{\compMes}, \quad\forall\phi\in\smooth{\ddom}.
+	&= \omega^2 \integral{\ddom}{ u\overline{\phi} }{\compMes}, \quad\forall\phi\in\psmooth{\ddom}.
 \end{align}
-\tstk{this is the discussion about how we have a catch-22 between the variational formulation of our operator (proving it exists, is well defined, has discrete spectrum, etc, and generally being useful in an abstract setting) vs the unfamiliarity of the objects involved making it difficult to comprehend and solve explicitly (which requires us to find an alternative, non-standard form only involving objects we are familiar with).}
 With $\ddom$ being bounded and $\mathcal{A}_{\qm}$ self-adjoint, the spectrum of $\mathcal{A}_{\qm}$ consists of a discrete set of values $\omega^2\in\reals$ (as we expect from the Gelfand transform and introduction of the quasi-momentum) and taking the union of the spectra of the $\mathcal{A}_{\qm}$ over $\qm$ will provide us with the spectrum of a periodic operator on $\reals^2$ with period cell $\ddom$.
-We can even utilise the min-max principle to write down a variational formulation whose solution determines the eigenvalues (and eigenfunctions) of $\mathcal{A}_{\qm}$, which will form the basis of our numerical approach to solving this problem.
+More importantly, we can utilise the min-max principle to write down a variational formulation whose solution determines the eigenvalues (and eigenfunctions) of $\mathcal{A}_{\qm}$, which will form the basis of our numerical approach to solving this problem.
 Yet despite these useful analytic properties, \eqref{eq:CompLaplaceOpDom} and \eqref{eq:SI-WeakWaveEqn} do not lend themselves particularly well to explicit analytic solution, nor provide any insight into how to handle objects like $\tgrad_{\compMes}u$ numerically.
-This places us in something of a catch-22; the variational formulation \eqref{eq:SI-WeakWaveEqn} is the ``standard" form of the eigenvalue problem for our operator $\mathcal{A}_{\qm}$ - and ensures that it exists, is well-defined, provides us with qualitative information about its spectrum, \tstk{and fits into the framework of existing theory concerning operators on Hilbert spaces - ask Kirill about how to word this point}.
-However, the objects involved (like $\tgrad_{\compMes}u$) and the integrals in \eqref{eq:SI-WeakWaveEqn} with respect to $\compMes$ are unfamiliar both from an analytic and numerical standpoint --- we know some of their properties when restricted to different regions of $\ddom$, but not how to work directly with them to obtain a ``solution" (or approximation thereof) to \eqref{eq:SI-WeakWaveEqn}.
-This motivates us to find an alternative formulation to \eqref{eq:SI-WeakWaveEqn}, leading to the following  formulation in section \ref{ssec:SI-Derivation} which brings us to a problem involving objects we are familiar with from \tstk{scalar and curl, and classical Sob}, at the expense of sacrificing the variaitonal form and our ability to use the min-max principle.
-Indeed, we shall see that the system we end up at will have the spectral parameter $\omega^2$ appearing in multiple places in the problem, taking us towards the realm of problems with generalised resolvents.
+This places us in something of a catch-22; the variational formulation \eqref{eq:SI-WeakWaveEqn} is the standard form\footnote{Within the framework of existing theory concerning operators on Hilbert spaces.} of the eigenvalue problem for our operator $\mathcal{A}_{\qm}$ --- ensuring that it exists, is well-defined, and providing qualitative information about the spectrum.
+However the tangential gradients and the integrals in \eqref{eq:SI-WeakWaveEqn} with respect to $\compMes$ are unfamiliar both from an analytic and numerical standpoint --- we know some of their properties when restricted to different regions of $\ddom$, but not how to work with them directly to obtain a solution (or approximation thereof) to \eqref{eq:SI-WeakWaveEqn}.
+This motivates us to find an alternative formulation to \eqref{eq:SI-WeakWaveEqn}, leading to the formulation obtained in section \ref{sec:SI-StrongDerivation}.
 We will take this idea further in section \ref{sec:SI-NonLocalQG} when we attempt to reformulate our problem on the skeleton, and discard the bulk regions.
 
-\subsection{Variational Problem and Strong Form of \eqref{eq:SI-WaveEqn}} \label{ssec:SI-Derivation}
-Now that \eqref{eq:SI-WaveEqn} is well-defined through \eqref{eq:SI-WeakWaveEqn} and the operator $\mathcal{A}_{\qm}$, we can begin to consider our approach to solving it.
-As mentioned in section \ref{ssec:SI-WaveEqnSetup}, the fact that $\mathcal{A}_{\qm}$ is self-adjoint for each $\qm$ combined with the min-max principle implies that the eigenvalues $\omega_{n}^2$ (and eigenfunctions $u_n$) of $\mathcal{A}_{\qm}$ are the minimum values (respectively minimisers) of the following variational problem:
-\begin{align} \label{eq:SI-VarProb}
-	\omega_n^2 &:= \min_{u}\clbracs{ \integral{\ddom}{ \abs{\tgrad_{\compMes}u}^2 }{\compMes} \setVert \norm{u}_{\ltwo{\ddom}{\compMes}}=1, \ u\perp u_l \ \forall 1\leq l\leq n-1 }.,
-\end{align} 
-where the eigenvalues are numbered in ascending order, and the orthogonality condition is meant with respect to the inner product in $\ltwo{\ddom}{\compMes}$.
-We will discuss a numerical approach to solving \eqref{eq:SI-VarProb} in section \ref{ssec:SI-VP}, but for now we look for an alternative formulation to work with.
+\tstk{cross in plane setup for future sections can go here, possibly in subsection}
+We will use the "cross-in-the-plane" geometry from the example in section \ref{ssec:ExampleCrossInPlane} (now equipped with $\compMes$) to ground our discussion of each of our numerical approaches, and illustrate their implementation.
+For convenience, we have translated the period cell by $-\bracs{\recip{2},\recip{2}}$, which allows us to avoid carrying additional constant terms around in what follows.
+Recall that this geometry consists of a skeleton $\graph$ within $\ddom=\left[0,1\right)^2$, with a single vertex $v_0=\bracs{0,0}^\top$, and two ``looping" edges $I_h = \sqbracs{0,1}\times\clbracs{0}$, $I_v=\clbracs{0}\times\sqbracs{0,1}$.
+The quasi-momentum parameters $\qm_{jk}$ are easily computable as $\qm_h = \qm_1$ and $\qm_v = \qm_2$, and we only have a single bulk region, $\ddom_1 = \ddom^{\circ}=\bracs{0,1}^2$.
+There are a number of properties that we expect of our eigenvalues due to the symmetric nature of our geometry, notably the following:
+\begin{prop}[Cross in the plane symmetries] \label{prop:CrossInPlaneSymmetries}
+	If $\omega^2, u\bracs{x_1,x_2}$ is a solution to \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} at $\qm = \bracs{\qm_1,\qm_2}\in\left[-\pi,\pi\right)^2$, then:
+	\begin{itemize}
+		\item $\omega^2, u\bracs{1-x_1,x_2}$ is a solution to \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} at $\qm = \bracs{-\qm_1, \qm_2}$.
+		\item $\omega^2, u\bracs{x_1,1-x_2}$ is a solution to \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} at $\qm = \bracs{\qm_1, -\qm_2}$.
+		\item $\omega^2, u\bracs{x_2,x_1}$ is a solution to \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} at $\qm = \bracs{\qm_2, \qm_1}$.
+	\end{itemize}
+\end{prop}
+\tstk{proof?}
 
-First, we should consider what our intuition is telling us about the behaviour we expect from any solutions $u$ to \eqref{eq:SI-WeakWaveEqn}.
-A good starting point is to consider how we expect our solutions to behave if we could (n\"{i}avely) interpret \eqref{eq:SI-WeakWaveEqn} in a strong sense.
-Away from the skeleton, \eqref{eq:SI-WeakWaveEqn} looks like the usual Helmholtz problem on a bounded domain, and so we expect our solution to possess sufficient regularity to be differentiated twice in the bulk.
-We also know that solutions to the ``wave equation" on the inclusions possess two derivatives along the edges of $\graph$ (\tstk{chapter ref!}), and are tied together through the vertex conditions.
-Finally, we must consider what should happen in the vicinity of the skeleton --- here we have (what we expect to be) a twice differentiable function in a bulk region $\ddom_i$ approaching its boundary, and so there should be ($L^2$) traces of $u$ and its normal derivative onto this boundary.
-However, this boundary coincides with (a subregion of) the skeleton, so the function $u$ should ``feel" the affect of these traces as it moves along the skeleton.
-A partial converse is also expected; $u$ is twice differentiable along the skeleton, and given that $u$ \emph{also} has a trace onto the skeleton, we expect that these traces should be consistent with the function values from the bulk.
-In summary, we expect that \eqref{eq:SI-WeakWaveEqn} can be reformulated into a system (which we colloquially label a ``strong form") that consists of the following components:
-\begin{enumerate}[(a)]
-	\item A (Helmholtz-like) PDE in each of the bulk regions, the solution to which has boundary traces matching the solution to a quantum graph problem on the inclusions.
-	\item A 2nd-order quantum graph problem on the singular inclusions, with the edge ODEs involving or being influenced by the traces from the bulk regions.
-	\item Conditions at the vertices of the graph to tie the quantum graph problem, and hence the PDE problems, together.
-\end{enumerate}
-
-At a glance, solutions $u$ to \eqref{eq:SI-WeakWaveEqn} appear to be less regular than what we expect from our intuitive arguments above, and \eqref{eq:SI-WeakWaveEqn} itself is not in the form (a)-(c).
-However, much like in sections \ref{sec:ScalarDerivation} and \tstk{sec:VectorDerivation} we can work from \eqref{eq:SI-WeakWaveEqn} and the definition of $\tgradSob{\ddom}{\compMes}$ to obtain a system as described by (a)-(c)\footnote{As we will later remark in section \ref{ssec:SI-VP}, this system can also be derived from an application of the Lagrange multiplier theorem to the variational problem \eqref{eq:SI-MinProblem}.}.
-Our starting point is the problem \eqref{eq:SI-WeakWaveEqn}, repeated here for ease of reading: find $\omega^2>0$ and non-zero $u\in\tgradSob{\ddom}{\compMes}$ such that
+Additionally for the cross-in-the-plane geometry, we can obtain analytic expressions for a subset of the eigenfunctions and eigenvalues --- namely those inherited from the Dirichlet laplacian on $\bracs{0,1}^2$.
+Observe that for $n,m\in\naturals$ the function
 \begin{align*}
-	\integral{\ddom}{ \tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}\phi} }{\compMes}
-	&= \omega^2 \integral{\ddom}{ u\overline{\phi} }{\compMes}, \quad\forall\phi\in\smooth{\ddom}. \tag{\eqref{eq:SI-WeakWaveEqn} restated}
+	u_{n,m}(x) &= \e^{-\rmi\qm\cdot x}\sin\bracs{n\pi x_1}\sin\bracs{m\pi x_2},
 \end{align*}
-We will need to make use of several standard integral identities, which we summarise below.
-Let $D$ be an open Lipschitz domain, let $u\vert_{\partial D}$ denote the trace (of a suitably regular) function $u$ on $D$ into $\ltwo{\partial D}{S}$, and $n^D$ denote the exterior normal on the boundary of $D$.
+is an eigenfunction of the Dirichlet laplacian $-\laplacian_{\qm}$,
+\begin{align*}
+	-\laplacian_{\qm}u &= \omega_{n,m}^2 u, &\qquad \text{on } \bracs{0,1}^2, \\
+	u\bracs{0,x_2} = u\bracs{1,x_2} &= u\bracs{x_1,0} = u\bracs{x_1,1} = 0,
+\end{align*}
+where $\omega_{n,m}^2 = \bracs{n^2+m^2}\pi^2$.
+It is clear that $u_{n,m}$ also solves \eqref{eq:SI-BulkEqn} with $\omega^2 = \omega_{n,m}^2$ and has $u=0$ on the skeleton, and furthermore is such that $u_{n,m}\in\tgradSob{\ddom}{\compMes}$.
+In the event that both
 \begin{itemize}
-	\item For $u,v\in\gradSob{D}{\lambda_2}$ and $j\in\clbracs{1,2}$,
-	\begin{align*}
-		\integral{D}{ v\partial_j u + u\partial_j v }{\lambda_2}
-		&= \integral{\partial D}{ u v n^D_j }{S}.
-	\end{align*}
-	\item For $u\in H^2\bracs{D,\lambda_2}, v\in\gradSob{D}{\lambda_2}$,
-	\begin{align*}
-		\integral{D}{ \grad u\cdot \grad v }{\lambda_2} 
-		&=  - \integral{D}{ v\laplacian u }{\lambda_2} + \integral{\partial D}{ v\vert_{\partial D}\pdiff{u}{n^D}\vert_{\partial D} }{S}.
-	\end{align*}
+	\item ($n$ is even and $\qm_1=0$) or ($n$ is odd and $\qm_1=-\pi$),
+	\item ($m$ is even and $\qm_2=0$) or ($m$ is odd and $\qm_2=-\pi$),
 \end{itemize}
-From the above, we can deduce that whenever $u\in H^2\bracs{D,\lambda_2}$ and $v\in\gradSob{D}{\lambda_2}$, we have that
-\begin{align*}
-	\integral{D}{ \tgrad u\cdot\overline{\tgrad v} }{\lambda_2}
-	&= - \integral{D}{ \overline{v}\tgrad\cdot\tgrad u }{\lambda_2} + \integral{\partial D}{ \overline{v}\vert_{\partial D}\bracs{\tgrad u\cdot n^D}\vert_{\partial D} }{S}.
-\end{align*}
-We now begin the reformulation, throughout let us assume $\omega^2>0$ and $u\in\tgradSob{\ddom}{\compMes}$ solve \eqref{eq:SI-WeakWaveEqn}.
-
-Suppose that the test function $\phi$ in \eqref{eq:SI-WeakWaveEqn} has support contained within one of the bulk regions $\ddom_i$.
-This implies that \eqref{eq:SI-WeakWaveEqn} becomes
-\begin{align*}
-	\omega^2\integral{\ddom_i}{u\overline{\phi}}{\lambda_2} 
-	&= \integral{\ddom_i}{ \grad u\cdot\overline{\grad\phi} - \rmi\qm\overline{\phi}\cdot\tgrad u + \rmi\qm  u\cdot\overline{\grad\phi} - \rmi^2\qm\cdot\qm u\overline{\phi} }{\lambda_2} \\
-	&= \integral{\ddom_i}{ \grad u\cdot\overline{\grad\phi} - 2\rmi\qm\overline{\phi}\cdot\tgrad u - \rmi^2\qm\cdot\qm u\overline{\phi} }{\lambda_2}, \\ 
-	&= \integral{\ddom_i}{ \bracs{\omega^2 u + 2\rmi\qm\cdot\tgrad u + \rmi^2\qm\cdot\qm u} \overline{\phi} }{\lambda_2}, 
-\end{align*}
-which holds for all smooth $\phi$ with compact support in $\ddom_i$.
-Given that we also know that $u$ is $\ltwo{\partial\ddom_i}{S}$ (and is even $H^1$ in this space), this implies that $u\in \gradgradSob{\ddom_i}{\lambda_2}$ with
-\begin{align*}
-	\laplacian u &= -\bracs{ \omega^2 u + 2\rmi\qm\cdot\tgrad u + \rmi^2\qm\cdot\qm u } &\qquad\text{in } \ddom_i, \\
-	\implies
-	\tgrad\cdot\tgrad u =: \laplacian_\qm u &= -\omega^2 u &\qquad\text{in } \ddom_i. \labelthis\label{eq:SI-BulkEqn}
-\end{align*}
-The additional regularity of the solution $u$ in the bulk regions provides equation \eqref{eq:SI-BulkEqn}, which matches our expectations in (a) of $u$ satisfying a Helmholtz-like equation in the bulk regions.
-
-Next, we turn to addressing what happens when we lie in the vicinity of an edge $I_{jk}\in\edgeSet$.
-For this, we need to introduce a local labelling system for the bulk regions that are adjacent to $I_{jk}$, as follows.
-Let $\ddom_{jk}^+$ be the bulk region whose boundary has non-empty intersection with $I_{jk}$ and whose exterior unit normal on $\partial\ddom_{jk}^+\cap I_{jk}$ is equal to $-n_{jk}$.
-Similarly let $\ddom_{jk}^-$ be the bulk region whose boundary has non-empty intersection with $I_{jk}$ and whose exterior unit normal on $\partial\ddom_{jk}^-\cap I_{jk}$ is equal to $n_{jk}$.
-Note the sign convention; this is chosen because the region $\ddom_{jk}^+$ is ``to the right" of $I_{jk}$ as viewed from the local coordinate system $y_{jk}=\bracs{n_{jk}, e_{jk}}$, and $\ddom_{jk}^-$ is ``on the left" --- see figure \ref{fig:Diagram_SI-AdjacentBulkRegions}.
-\begin{figure}[h]
-	\centering
-	\includegraphics[scale=1.0]{Diagram_SI-AdjacentBulkRegions.pdf}
-	\caption{\label{fig:Diagram_SI-AdjacentBulkRegions} Labelling convention for regions adjacent to an edge $I_{jk}$.}
-\end{figure}
-Now consider \eqref{eq:SI-WeakWaveEqn} when $\phi$ is taken to have compact support that intersects (the interior of) an edge $I_{jk}$, the adjacent bulk regions $\ddom_{jk}^+$ and $\ddom_{jk}^-$, and no other parts of $\ddom$.
-Equation \eqref{eq:SI-WeakWaveEqn} then implies that
-\begin{align*}
-	\integral{\ddom}{ \omega^2 u\overline{\phi} - \tgrad_{\lambda_{jk}}u\cdot\overline{\tgrad_{\lambda_{jk}}\phi} }{\lambda_{jk}}
-	&= \integral{\ddom}{ \tgrad u\cdot\overline{\tgrad\phi} - \omega^2 u\overline{\phi} }{\lambda_2} \\
-	&= \integral{\ddom_{jk}^+}{ \tgrad u\cdot\overline{\tgrad\phi} - \omega^2 u\overline{\phi} }{\lambda_2}
-	+ \integral{\ddom_{jk}^-}{ \tgrad u\cdot\overline{\tgrad\phi} - \omega^2 u\overline{\phi} }{\lambda_2}.
-\end{align*}
-Next, we know that $u\in \gradgradSob{\ddom_{jk}^{\pm}}{\lambda_2}$ for both $\ddom_{jk}^+$ and $\ddom_{jk}^-$, and so $u$ and its normal derivative possess an $L^2$-trace onto $I_{jk}$.
-Using the notation $\tgrad u\cdot n_{jk} = \pdiff{u}{n_{jk}} + \rmi\qm u\cdot n_{jk}$; and denoting the trace of $u$ viewed as an element of $\gradgradSob{\ddom_{jk}^{\pm}}{\lambda_2}$ onto the boundary by $u^{\pm}$, we have that
-\begin{align*}
-	\integral{\ddom}{ \omega^2 u\overline{\phi} - \tgrad_{\lambda_{jk}}u\cdot\overline{\tgrad_{\lambda_{jk}}\phi} }{\lambda_{jk}}
-	&= \integral{\ddom_{jk}^+}{ -\overline{\phi}\bracs{ \tgrad\cdot\tgrad u + \omega^2 u } }{\lambda_2} \\
-	&\qquad + \integral{\ddom_{jk}^-}{ -\overline{\phi}\bracs{ \tgrad\cdot\tgrad u + \omega^2 u } }{\lambda_2} \\
-	&\qquad + \integral{\partial\ddom_{jk}^+}{ -\overline{\phi}\bracs{\tgrad u\cdot n_{jk}}^{+} }{S} \\
-	&\qquad + \integral{\partial\ddom_{jk}^-}{ \overline{\phi}\bracs{\tgrad u\cdot n_{jk}}^{-} }{S},
-\end{align*}
-since the exterior normal to $\ddom_{jk}^{\pm}$ is $\mp n_{jk}$.
-Given \eqref{eq:SI-BulkEqn} and the support of $\phi$, this further implies that
-\begin{align*}
-	\integral{\ddom}{ \omega^2 u\overline{\phi} - \tgrad_{\lambda_{jk}}u\cdot\overline{\tgrad_{\lambda_{jk}}\phi} }{\lambda_{jk}}
-	&= \integral{I_{jk}}{ \overline{\phi}\sqbracs{\bracs{\tgrad u\cdot n_{jk}}^- - \bracs{\tgrad u\cdot n_{jk}}^+} }{S} \\
-	&= \int_0^{\abs{I_{jk}}} \overline{\phi}\sqbracs{\bracs{\tgrad u\cdot n_{jk}}^- - \bracs{\tgrad u\cdot n_{jk}}^+} \ \md y.
-\end{align*}
-Changing variables via $r_{jk}$ in the integral on the left hand side, substituting the known form for the tangential gradients, and rearranging then provides us with
-\begin{align*}
-	\int_0^{\abs{I_{jk}}} \bracs{u^{(jk)}}'\overline{\phi}' \ \md y
-	&= \int_0^{\abs{I_{jk}}} \overline{\phi}\sqbracs{ \bracs{\tgrad u\cdot n_{jk}}^- - \bracs{\tgrad u\cdot n_{jk}}^+ \right. \\
-	&\qquad \left. - \omega^2 u^{(jk)} - 2\rmi\qm_{jk}\bracs{u^{(jk)}}' - \bracs{\rmi\qm_{jk}}^2 u^{(jk)} } \ \md y,
-\end{align*}
-which holds for all smooth $\phi$ with support contained in the interior of $I_{jk}$.
-Thus, we can deduce that $u^{(jk)}\in\gradgradSob{\interval{I_{jk}}}{y}$, and that
-\begin{align*}
-	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)} 
-	&= \omega^2 u^{(jk)} + \bracs{\tgrad u\cdot n_{jk}}^+ - \bracs{\tgrad u\cdot n_{jk}}^-,
-	&\qquad\text{in } \bracs{0,I_{jk}}.
-\end{align*}
-If we additionally recall that the trace of $u$ from the bulk regions $\ddom_{jk}^{\pm}$ is equal to $u^{(jk)}$, we can eliminate part of the trace-terms to obtain
-\begin{align} \label{eq:SI-InclusionEqn}
-	- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)} 
-	&= \omega^2 u^{(jk)} + \bracs{\grad u\cdot n_{jk}}^+ - \bracs{\grad u\cdot n_{jk}}^-,
-	&\qquad\text{in } I_{jk}.
-\end{align}
-This provides us with part (b) from our intuitive argument --- on the edges of the graph we have the second-order differential equation from chapter \ref{ch:ScalarSystem}, but with the addition of a term capturing the differences in the trace of the normal derivative of $u$ from either side of the inclusion.
-It is worth remarking how, if our inclusions were merely interfaces, we would simply obtain an algebraic equation in the difference of the normal derivative traces on the $I_{jk}$.
-Giving the edges a notion of length, even though it is 1-dimensional length within a 2-dimensional domain, has resulted in this difference (or ``jump" in the normal derivatives) directly influencing the behaviour of $u$ on the inclusions.
-Conversely, the requirement that the traces of $u$ from $\ddom_{jk}^{\pm}$ be equal to $u^{(jk)}$ also means that the behaviour of $u$ on the inclusions will affect the solution in the bulk regions.
-This means we have something resembling a ``feedback loop"; the solution in the bulk exerts influence on the edges through the traces of the normal derivatives, and the solution on the inclusions exerts influence on the bulk via the requirement that the traces coincide with the values on the inclusion.
-
-Finally, we consider the solution $u$ to \eqref{eq:SI-WeakWaveEqn} in the vicinity of a vertex, or more precisely when $\phi$ has support containing a vertex $v_j$ (and without loss of generality, no other vertices).
-The process is straightforward; we aim to proceed as before and use \eqref{eq:SI-BulkEqn} and \eqref{eq:SI-InclusionEqn} to cancel terms on the inclusions and in the bulk regions, leaving us with a ``vertex condition", however we require one final set of temporary notation to transcribe the argument.
-Fix $v_j\in\vertSet$ and let $J(v_j) = \clbracs{I_{jk} \setVert j\con k}$, which is a finite set since $\graph$ is finite.
-For each $I_{jk}\in J(v_j)$
-\footnote{The direction of the edges $I_{jk}$ is not important here, so we use  $I_{jk}\in J(v_j)$ to refer to a general element of $J(v_j)$, despite the fact that both $I_{kj}$ and $I_{jk}$ may be elements of $J(v_j)$. 
-Once we shortly assign an ordering, this point will become moot.} 
-let $\beta_{jk}$ be the anticlockwise angle between the angle between the segment $I_{jk}$ and the $v_j+\hat{x}_1$ direction.
-The $\clbracs{\beta_{jk}}$ can then be ordered by size, and correspondingly we can also order the $I_{jk}\in J(v_j)$, writing
-\begin{align*}
-	\beta_{jk_1} < \beta_{jk_2} < ... < \beta_{jk_{\deg(v_j)}}, 
-	\qquad I_{jk_1} < I_{jk_2} < ... < I_{jk_{\deg(v_j)}}.
-\end{align*}
-Also adopt a cyclic convention, where $k_0 = k_{\deg(v_j)}$ and $k_{\deg(v_j)+1} = k_1$.
-Now, for each $l\in\clbracs{1,...,\deg(v_j)}$ let $\ddom_{jk_l}$ be the bulk region that lies between (in the sense of the angles $\beta_{jk_{l-1}}$ and $\beta_{jk_l}$) $I_{jk_{l-1}}$ and $I_{jk_l}$.
-This notation can be visualised in figure \ref{fig:Diagram_SI-JunctionLabelling}.
-\begin{figure}[h]
-	\centering
-	\includegraphics[scale=1.5]{Diagram_SI-JunctionLabelling.pdf}
-	\caption{\label{fig:Diagram_SI-JunctionLabelling} The labelling conventions for the bulk regions and edges surrounding a vertex.}
-\end{figure}
-
-Fix $v_j\in\vertSet$ and let $\phi\in\smooth{\ddom}$ be such that $\supp(\phi)\subset\bigcup_{l}\ddom_{jk_l}$, and have $v_j\in\supp(\phi)$.
-With such a $\phi$, the following equalities hold;
-\begin{align*}
-	\integral{\ddom}{ \tgrad u\cdot\overline{\tgrad\phi} - \omega^2u\overline{\phi} }{\lambda_2}
-	&= \sum_{l} \integral{\ddom_l}{ \tgrad u\cdot\overline{\tgrad\phi} - \omega^2u\overline{\phi} }{\lambda_2} \\
-	&= \sum_{l} \integral{\ddom_l}{ -\overline{\phi}\bracs{ \tgrad\cdot\tgrad u + \omega^2 u } }{\lambda_2}
-	+ \integral{\partial\ddom_l}{ \overline{\phi}\tgrad u\cdot n_{jk_l} }{S} \\
-	&= \sum_l \integral{I_{jk_l}}{ \overline{\phi}\tgrad u\cdot n_{jk_l} }{S} + \integral{I_{jk_{l-1}}}{ \phi\tgrad u\cdot n_{jk_{l-1}} }{S} \\
-	&= \sum_l \integral{I_{jk_l}}{ \overline{\phi}\bracs{ \bracs{\tgrad u\cdot n_{jk_l}}^- - \bracs{\tgrad u\cdot n_{jk_l}}^+ } }{S}, \\
-	\integral{\ddom}{ \tgrad_{\compMes} u\cdot\overline{\tgrad_{\compMes}\phi} - \omega^2u\overline{\phi} }{\ddmes}
-	&= \sum_l \integral{I_{jk_l}}{ -\overline{\phi}\bracs{\bracs{\diff{}{y}+\rmi\qm_{jk_l}}^2 u^{(jk_l)} + \omega^2 u^{(jk_l)}} }{\lambda_{jk_l}} \\
-	&\qquad + \sum_l \sqbracs{ \bracs{\pdiff{}{n}+\rmi\qm_{jk_l}} u^{(jk_l)}(v_j)\overline{\phi}(v_j) }.
-\end{align*}
-Thus, equation \eqref{eq:SI-WeakWaveEqn} becomes
-\begin{align*}
-	0
-	&= \sum_l \clbracs{ \integral{I_{jk_l}}{ \overline{\phi}\bracs{ \bracs{\tgrad u\cdot n_{jk_l}}^- - \bracs{\tgrad u\cdot n_{jk_l}}^+ } }{S} \right. \\
-	&\qquad \left.	+ \integral{I_{jk_l}}{ -\overline{\phi}\bracs{\bracs{\diff{}{y}+\rmi\qm_{jk_l}}^2 u^{(jk_l)} + \omega^2 u^{(jk_l)}} }{\lambda_{jk_l}} \right. \\
-	&\qquad \left.	+ \sqbracs{ \bracs{\pdiff{}{n}+\rmi\qm_{jk_l}} u^{(jk_l)}(v_j)\overline{\phi}(v_j) } } \\
-	&= \sum_l \sqbracs{ \bracs{\pdiff{}{n}+\rmi\qm_{jk_l}} u^{(jk_l)}(v_j)\overline{\phi}(v_j) }
-	&\quad\text{using \eqref{eq:SI-InclusionEqn}}, \\
-	\implies 0
-	&= \sum_l \bracs{\pdiff{}{n}+\rmi\qm_{jk_l}} u^{(jk_l)}(v_j), \labelthis\label{eq:SI-VertexCondition}
-\end{align*}
-since $\phi(v_j)$ is arbitrary.
-We find that, in addition to continuity of $u$ at each of the vertices, $u$ also adheres to a Kirchoff-like condition at each of the vertices. \tstk{like in Scalar chapter, if had point masses added, probably would be equal to $\alpha_j\omega^2 u$ here. Add a pointer to our Strauss section and extended spaces, where we present with the $\alpha_j$ there.}
-\tstk{restate system here so that it looks nicer??}
-
-The equations \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition},
-\begin{subequations}
-	\begin{align*}
-		-\laplacian_\qm u 
-		&= \omega^2 u 
-		&\text{in } \ddom_i, \tag{\eqref{eq:SI-BulkEqn} restated} \\
-		- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)}  
-		&= \omega^2 u^{(jk)} + \bracs{\bracs{\grad u\cdot n_{jk}}^+ - \bracs{\grad u\cdot n_{jk}}^-}
-		&\text{in } I_{jk}, \tag{\eqref{eq:SI-InclusionEqn} restated} \\
-		\sum_k \bracs{\pdiff{}{n}+\rmi\qm_{jk}} u^{(jk)}(v_j) 
-		&= 0 
-		&\text{at } v_j\in\vertSet, \tag{\eqref{eq:SI-VertexCondition} restated}
-	\end{align*}
-\end{subequations}
-combined with the knowledge that $u^{(jk)}$ matches the traces of $u$ from the adjacent bulk regions, provides us with a reformulated system reflecting our intuition from (a)-(c).
-
-We nominally call the system \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} ``strong" since it no longer involves integration against test functions.
-Indeed, the system is composed of two differential equations (the PDE \eqref{eq:SI-BulkEqn} on the bulk, and the ODE \eqref{eq:SI-InclusionEqn} on the skeleton) coupled through the vertex condition \eqref{eq:SI-VertexCondition} and the requirement that the traces from adjacent regions match the function values on the skeleton, all of which stemmed from the original variational (or ``weak") formulation \eqref{eq:SI-WeakWaveEqn}.
-However this system is still somewhat cumbersome to handle because we have a PDE coupled to an ODE on the inclusions, which gives rise to two ``scales" on which a solution $u$ behaves, and we need resolution in both of them.
-However the objects that we are required to work with are more familiar to us, being a combination of classical gradients and those studied in \tstk{$\ddmes$ sob space analysis chapter}. 
-We also expect it will be easier for us to work with this system both analytically and numerically, largely due to the interaction between the bulk regions and skeleton being made explicit.
-
-There are also parallels to be drawn between the system \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} and \tstk{scalar/curl chapter system} --- in particular, we remark at how the ODEs on the skeleton \eqref{eq:SI-InclusionEqn} depend in a non-standard way on the spectral parameter $\omega^2$.
-Most notably, the system \tstk{scalar/curl chapter system} has $\omega^2$ appearing in the vertex conditions, or to rephrase this, in what would normally simply be the \emph{boundary conditions} for the ODEs on the edges $I_{jk}$.
-This appearance of $\omega^2$ in the vertex conditions was the direct affect of the measure $\nu$ providing the vertices with some ``size".
-Here, rather than a graph with ``bulky vertices", we instead have a set of regions $\ddom_i$ with ``bulky boundaries" (the singular inclusions).
-And again, we observe that bestowing a notion of length to our singular inclusions (through $\ddmes$) has caused $\omega^2$ to appear in what would normally be our boundary conditions for the regions $\ddom_i$.
-In \tstk{conclusion ref} we will explore how reintroducing the point masses at the vertices will cause the coupling constants and spectral parameter $\omega^2$ to also be present in \eqref{eq:SI-VertexCondition}.
-\tstk{so we're now back in the realm of generalised resolvents? We should now expect the possibility of spectral gaps being opened up. Also, we'll return to this when we talk about Strauss extensions and hypothesise about adding the vertex measure $\nu$ back in.}
+hold, then $u_{n,m}$ is also an eigenfunction of \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} with the same eigenvalue (the quasi-momentum values are required to ensure that the normal derivative traces cancel out in \eqref{eq:SI-InclusionEqn}).
+Of course, one can also substitute $\omega^2_{n,m}, u_{n,m}$ and into \eqref{eq:SI-WaveEqn} to arrive at the same conclusion.
+Knowing that \eqref{eq:SI-WaveEqn} shares eigenvalues with the Dirichlet laplacian will have consequences for us in section \ref{sec:NonLocalQG}, when we attempt to reduce \eqref{eq:SI-WaveEqn} to a quantum graph problem.
+For now however, $u_{n,m}$ and $\omega_{n,m}^2$ provide some suitable test cases for our numerical schemes.

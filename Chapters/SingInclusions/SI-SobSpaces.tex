@@ -24,8 +24,8 @@ Furthermore, for $\alpha\in\reals$ let $\mathbf{I}^{\alpha} = \cup_{\abs{\alpha'
 		\end{align*}
 		Then $\xi_n\in\smooth{\ddom}$ for any $n\in\naturals$, and we have that
 		\begin{align*}
-			\xi_n \lconv{\ltwo{\ddom}{\compMes_{jk}}} 0, \qquad
-			\grad\xi_n \lconv{\ltwo{\ddom}{\compMes_{jk}}^2} n_{jk}\charFunc{jk},
+			\xi_n \lconv{\ltwo{\ddom}{\lcompMes}} 0, \qquad
+			\grad\xi_n \lconv{\ltwo{\ddom}{\lcompMes}^2} n_{jk}\charFunc{jk},
 		\end{align*}
 		$\toInfty{n}$.
 		\item Write $\hat{\lambda} = \lambda_2 + \dddmes$.
@@ -45,12 +45,12 @@ Furthermore, for $\alpha\in\reals$ let $\mathbf{I}^{\alpha} = \cup_{\abs{\alpha'
 		Additionally, $\grad\xi_n(x) = n_{jk}\xi'\bracs{n\bracs{x-v_j}\cdot n_{jk}}$ so we also have that $\grad\xi_n(x) = n_{jk}$ whenever $x\in I_{jk}$.
 		Now,
 		\begin{align*}
-			\integral{\ddom}{ \abs{\xi_n(x)}^2 }{\compMes_{jk}}
+			\integral{\ddom}{ \abs{\xi_n(x)}^2 }{\lcompMes}
 			&= \integral{\ddom}{ \recip{n^2}\abs{\xi\bracs{n\bracs{x-v_j}\cdot n_{jk}}}^2 }{\lambda_2}
 			+ \integral{\ddom}{ \abs{\xi_n(0)}^2 }{\lambda_{jk}} \\
 			&\leq \recip{n^2}\integral{\mathbf{I}^{1/n}}{ }{\lambda_2} = \frac{2\ddom_{e_{jk}}}{n^3} \rightarrow 0,
 		\end{align*}
-		so we have that the $\xi_n$ converge to 0 in $\ltwo{\ddom}{\compMes_{jk}}$.
+		so we have that the $\xi_n$ converge to 0 in $\ltwo{\ddom}{\lcompMes}$.
 		Since $n_{jk}\charFunc{jk}=0$ $\lambda_2$-almost-everywhere, we also have the estimate
 		\begin{align*}
 			\integral{\ddom}{ \abs{ \grad\xi_n(x) - n_{jk}\charFunc{jk} }^2 }{\lambda_2}
@@ -67,7 +67,7 @@ Furthermore, for $\alpha\in\reals$ let $\mathbf{I}^{\alpha} = \cup_{\abs{\alpha'
 		\end{align*}
 		and so
 		\begin{align*}
-			\integral{\ddom}{ \abs{ \grad\xi_n(x) - n_{jk}\charFunc{jk} }^2 }{\compMes_{jk}}
+			\integral{\ddom}{ \abs{ \grad\xi_n(x) - n_{jk}\charFunc{jk} }^2 }{\lcompMes}
 			&\leq \frac{2c^2\ddom_{e_{jk}}}{n} \rightarrow 0 \toInfty{n},
 		\end{align*}
 		and we are done.
@@ -107,7 +107,7 @@ Furthermore, for $\alpha\in\reals$ let $\mathbf{I}^{\alpha} = \cup_{\abs{\alpha'
 	Suppose that $\phi\in\smooth{\ddom}$, and let $I_{jk}\in\edgeSet$.
 	Then the function
 	\begin{align*}
-		\tilde{g} &= \begin{cases} 0 & x\in\ddom\setminus I_{jk} \\ \phi n_{jk} & x\in I_{jk} \in\gradZero{\ddom}{\compMes_{jk}}. \end{cases}
+		\tilde{g} &= \begin{cases} 0 & x\in\ddom\setminus I_{jk} \\ \phi n_{jk} & x\in I_{jk} \in\gradZero{\ddom}{\lcompMes}. \end{cases}
 	\end{align*}
 \end{lemma}
 \begin{proof}
@@ -117,7 +117,7 @@ Furthermore, for $\alpha\in\reals$ let $\mathbf{I}^{\alpha} = \cup_{\abs{\alpha'
 		\grad\phi_n(x) &= \xi_n(x)\grad\phi(x) + \phi(x)\xi'\bracs{n\bracs{x-v_j}\cdot n_{jk}}n_{jk},
 	\end{align*}
 	so $\phi_n(x) = 0$ and $\grad\phi_n(x) = \phi(x)n_{jk}$ when $x\in I_{jk}$, due to the properties of $\xi_n$.
-	\tstk{this is where we'd need that $\phi$ and it's gradient are bounded in $\ltwo{\ddom}{\compMes_{jk}}$, which for the gradient isn't assured because of the aforementioned boundary issues. The statement of this lemma can be amended to provide a similar result regardless.}
+	\tstk{this is where we'd need that $\phi$ and it's gradient are bounded in $\ltwo{\ddom}{\lcompMes}$, which for the gradient isn't assured because of the aforementioned boundary issues. The statement of this lemma can be amended to provide a similar result regardless.}
 	Then, \tstk{since bounds on $\phi$ and its gradient hold,} we have that $\phi_n\rightarrow0$ and $\grad\phi_n\rightarrow\tilde{g}$ by lemma \ref{lem:SI-SmoothFunctionsResults}(i).
 \end{proof}
 
@@ -127,7 +127,7 @@ First we show that we can extend an edge gradient of zero to a composite gradien
 	Then the function
 	\begin{align*}
 		\tilde{g} = \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ g & x\in I_{jk}, \end{cases}
-		\in\gradZero{\ddom}{\compMes_{jk}}.
+		\in\gradZero{\ddom}{\lcompMes}.
 	\end{align*}
 \end{lemma}
 \begin{proof}
@@ -142,46 +142,46 @@ First we show that we can extend an edge gradient of zero to a composite gradien
 	Each of the functions $\grad\phi_n\cdot n_{jk}$ are smooth, and thus by lemma \ref{lem:SI-SmoothGradZero} we have that the functions
 	\begin{align*}
 		\tilde{g}_n &= \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ \bracs{ \grad\phi_n\cdot n_{jk} }n_{jk} & x\in I_{jk}, \end{cases}
-		\in\gradZero{\ddom}{\compMes_{jk}}.
+		\in\gradZero{\ddom}{\lcompMes}.
 	\end{align*}
 	Furthermore, we can observe that
 	\begin{align*}
-		\integral{\ddom}{\abs{ \tilde{g}_n - \tilde{g} }^2}{\compMes_{jk}}
+		\integral{\ddom}{\abs{ \tilde{g}_n - \tilde{g} }^2}{\lcompMes}
 		&= \integral{\ddom}{\abs{ \tilde{g}_n - \tilde{g} }^2}{\lambda_{jk}}
 		= \integral{I_{jk}}{\abs{ \bracs{ \grad\phi_n\cdot n_{jk} }n_{jk} - g }^2}{\lambda_{jk}} \\
 		&\rightarrow 0 \toInfty{n},
 	\end{align*}
-	and so $\tilde{g}_n\lconv{\ltwo{\ddom}{\compMes_{jk}}^2}\tilde{g}$.
-	Since $\gradZero{\ddom}{\compMes_{jk}}$ is closed, and $\tilde{g}_n\in\gradZero{\ddom}{\compMes_{jk}}$ for every $n\in\naturals$, we thus conclude that the limit $\tilde{g}\in\gradZero{\ddom}{\compMes_{jk}}$, and we are done.
+	and so $\tilde{g}_n\lconv{\ltwo{\ddom}{\lcompMes}^2}\tilde{g}$.
+	Since $\gradZero{\ddom}{\lcompMes}$ is closed, and $\tilde{g}_n\in\gradZero{\ddom}{\lcompMes}$ for every $n\in\naturals$, we thus conclude that the limit $\tilde{g}\in\gradZero{\ddom}{\lcompMes}$, and we are done.
 \end{proof}
 
-Lemma \ref{lem:SI-GradZeroEdgeToComposite} essentially proves that we can ``lift" a gradient of zero on an edge up to a gradient of zero with respect to the composite measure $\compMes_{jk}$.
-Given that all gradients of zero with respect to $\lambda_2$ are zero, this effectively gives us our characterisation of $\gradZero{\ddom}{\compMes_{jk}}$.
+Lemma \ref{lem:SI-GradZeroEdgeToComposite} essentially proves that we can ``lift" a gradient of zero on an edge up to a gradient of zero with respect to the composite measure $\lcompMes$.
+Given that all gradients of zero with respect to $\lambda_2$ are zero, this effectively gives us our characterisation of $\gradZero{\ddom}{\lcompMes}$.
 \begin{cory} \label{cory:SI-GradZeroEdgeChar}
 	\begin{enumerate}[(i)]
-		\item Let $I_{jk}\in\edgeSet$, suppose that $g\in\ltwo{\ddom}{\lambda_{jk}}$ and $\tilde{g}\in\ltwo{\ddom}{\compMes_{jk}}$ where
+		\item Let $I_{jk}\in\edgeSet$, suppose that $g\in\ltwo{\ddom}{\lambda_{jk}}$ and $\tilde{g}\in\ltwo{\ddom}{\lcompMes}$ where
 		\begin{align*}
 			\tilde{g} = \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ g & x\in I_{jk}. \end{cases}
 		\end{align*}
 		Then it holds that
 		\begin{align*}
-			\tilde{g}\in\gradZero{\ddom}{\compMes_{jk}} \quad\Leftrightarrow\quad 
+			\tilde{g}\in\gradZero{\ddom}{\lcompMes} \quad\Leftrightarrow\quad 
 			& g\in\gradZero{\ddom}{\lambda_{jk}}.
 		\end{align*}
 		\item It holds that
 		\begin{align*}
-			\gradZero{\ddom}{\compMes_{jk}} 
-			&= \clbracs{ \tilde{g}\in\ltwo{\ddom}{\compMes_{jk}} \setVert \exists g\in\gradZero{\ddom}{\lambda_{jk}} \text{ s.t. } \tilde{g} = \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ g & x\in I_{jk}. \end{cases}}
+			\gradZero{\ddom}{\lcompMes} 
+			&= \clbracs{ \tilde{g}\in\ltwo{\ddom}{\lcompMes} \setVert \exists g\in\gradZero{\ddom}{\lambda_{jk}} \text{ s.t. } \tilde{g} = \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ g & x\in I_{jk}. \end{cases}}
 		\end{align*}
 	\end{enumerate}
 \end{cory}
 \begin{proof}
 	\begin{enumerate}[(i)]
-		\item ($\Rightarrow$) The right-directed implication holds since any approximating sequence for $\tilde{g}$ in $\ltwo{\ddom}{\compMes_{jk}}$ also serves as an appropriate approximating sequence for $g$ in $\ltwo{\ddom}{\lambda_{jk}}$. \newline
+		\item ($\Rightarrow$) The right-directed implication holds since any approximating sequence for $\tilde{g}$ in $\ltwo{\ddom}{\lcompMes}$ also serves as an appropriate approximating sequence for $g$ in $\ltwo{\ddom}{\lambda_{jk}}$. \newline
 		($\Leftarrow$) The left-directed implication is simply the result of lemma \ref{lem:SI-GradZeroEdgeToComposite}.
 		\item The ``$\supset$" inclusion holds by part (i) above.
-		For the ``$\subset$" inclusion, take $\tilde{g}\in\gradZero{\ddom}{\compMes_{jk}}$.
-		Then $\tilde{g}\in\gradZero{\ddom}{\lambda_2}$ and $\tilde{g}\in\gradZero{\ddom}{\lambda_{jk}}$ since any approximating sequence for $\tilde{g}$ in $\ltwo{\ddom}{\compMes_{jk}}$ also serves as the approximating sequence in the other two spaces.
+		For the ``$\subset$" inclusion, take $\tilde{g}\in\gradZero{\ddom}{\lcompMes}$.
+		Then $\tilde{g}\in\gradZero{\ddom}{\lambda_2}$ and $\tilde{g}\in\gradZero{\ddom}{\lambda_{jk}}$ since any approximating sequence for $\tilde{g}$ in $\ltwo{\ddom}{\lcompMes}$ also serves as the approximating sequence in the other two spaces.
 		However, $\tilde{g}\in\gradZero{\ddom}{\lambda_2}$ implies that $\tilde{g}=0$ $\lambda_2$-almost-everywhere,	and thus $\tilde{g}$ has the form
 		\begin{align*}
 			\tilde{g} = \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ g & x\in I_{jk}, \end{cases}
@@ -191,11 +191,11 @@ Given that all gradients of zero with respect to $\lambda_2$ are zero, this effe
 	\end{enumerate}
 \end{proof}
 
-Now we need an extension lemma so that we can move from $\compMes_{jk}$ to $\compMes$...
+Now we need an extension lemma so that we can move from $\lcompMes$ to $\compMes$...
 \begin{prop}[Extension for the Composite Measure] \label{prop:SI-GradZeroExtension}
 	Fix $I_{jk}\in\edgeSet$.
 	\begin{enumerate}[(i)]
-		\item Suppose that $g\in\gradZero{\ddom}{\compMes_{jk}}$ with
+		\item Suppose that $g\in\gradZero{\ddom}{\lcompMes}$ with
 		\begin{align*}
 			g = \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ g_{jk} & x\in I_{jk}, \end{cases}
 		\end{align*}
@@ -205,7 +205,7 @@ Now we need an extension lemma so that we can move from $\compMes_{jk}$ to $\com
 			\tilde{g}(x) &:= \begin{cases} 0 & x\in\ddom\setminus\graph, \\ 0 & x\in\graph\setminus I_{jk}, \\ g_{jk}(x) & x\in I_{jk} \end{cases}
 			\in\gradZero{\ddom}{\compMes}.
 		\end{align*}
-		\item Now only assume that $g\in\gradZero{\ddom}{\compMes_{jk}}$ with
+		\item Now only assume that $g\in\gradZero{\ddom}{\lcompMes}$ with
 		\begin{align*}
 			g = \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ g_{jk} & x\in I_{jk}. \end{cases}
 		\end{align*}
@@ -216,7 +216,7 @@ Now we need an extension lemma so that we can move from $\compMes_{jk}$ to $\com
 		\end{align*}
 		\item We have that
 		\begin{align*}
-			\gradZero{\ddom}{\compMes} &= \clbracs{ \tilde{g}\in\ltwo{\ddom}{\compMes} \setVert \tilde{g}^{(jk)}\in\gradZero{\ddom}{\compMes_{jk}} \ \forall I_{jk}\in\edgeSet }.
+			\gradZero{\ddom}{\compMes} &= \clbracs{ \tilde{g}\in\ltwo{\ddom}{\compMes} \setVert \tilde{g}^{(jk)}\in\gradZero{\ddom}{\lcompMes} \ \forall I_{jk}\in\edgeSet }.
 		\end{align*}
 	\end{enumerate}
 \end{prop}
@@ -250,8 +250,8 @@ Now we need an extension lemma so that we can move from $\compMes_{jk}$ to $\com
 			+ \integral{I_{jk}}{\abs{ \grad\phi_l - g }^2}{\lambda_{jk}} \\
 			&\quad + \sup_{\ddom}\abs{\grad\chi_{jk}^n}^2 
 			\bracs{ \integral{\ddom}{\abs{ \phi_l }^2}{\lambda_2} 	+ \integral{I_{jk}}{\abs{ \phi_l }^2}{\lambda_{jk}} } \\
-			&= \integral{\ddom}{\abs{ \grad\phi_l - g }^2}{\compMes_{jk}}
-			+ \norm{\phi_l}_{\ltwo{\ddom}{\compMes_{jk}}} \sup_{\ddom}\abs{\grad\chi_{jk}^n}^2 \\
+			&= \integral{\ddom}{\abs{ \grad\phi_l - g }^2}{\lcompMes}
+			+ \norm{\phi_l}_{\ltwo{\ddom}{\lcompMes}} \sup_{\ddom}\abs{\grad\chi_{jk}^n}^2 \\
 			&\rightarrow 0 \toInfty{l},
 		\end{align*}
 		and we conclude that $\tilde{g}\in\gradZero{\ddom}{\compMes}$.
@@ -260,7 +260,7 @@ Now we need an extension lemma so that we can move from $\compMes_{jk}$ to $\com
 		\begin{align*}
 			g_n := \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ \eta_n^j\eta_n^k g_{jk} & x\in I_{jk} \end{cases}
 		\end{align*}
-		are elements of $\gradZero{\ddom}{\compMes_{jk}}$ too.
+		are elements of $\gradZero{\ddom}{\lcompMes}$ too.
 		By part (i), we then have that
 		\begin{align*}
 			\tilde{g}_n := 	\begin{cases} 0 & x\in\ddom\setminus\graph, \\ 0 & x\in\graph\setminus I_{jk}, \\ \eta_n^j\eta_n^k g_{jk} & x\in I_{jk}, \end{cases}
@@ -268,8 +268,8 @@ Now we need an extension lemma so that we can move from $\compMes_{jk}$ to $\com
 		is an element of $\gradZero{\ddom}{\compMes}$, $\forall n\in\naturals$.
 		As such, by closure of $\gradZero{\ddom}{\compMes}$, it suffices to show that the sequence $\tilde{g}_n$ converges in $\ltwo{\ddom}{\compMes}$ to $\tilde{g}$.
 		Given the result of lemma \ref{lem:SI-SmoothFunctionsResults}(ii), we indeed have that $\tilde{g}_n\rightarrow\tilde{g}$ and thus $\tilde{g}\in\gradZero{\ddom}{\compMes}$.
-		\item The ``$\subset$" inclusion is simply a result of any approximating sequence for $\tilde{g}$ also serving as an approximating sequence in $\ltwo{\ddom}{\compMes_{jk}}$ for each edge $I_{jk}$. \newline
-		The ``$\supset$" inclusion follows from part (ii) and linearity of the space $\gradZero{\ddom}{\compMes}$; each $\tilde{g}^{(jk)}\in\gradZero{\ddom}{\compMes_{jk}}$ can be extended by zero (using part (ii)) to a function in $\gradZero{\ddom}{\compMes}$.
+		\item The ``$\subset$" inclusion is simply a result of any approximating sequence for $\tilde{g}$ also serving as an approximating sequence in $\ltwo{\ddom}{\lcompMes}$ for each edge $I_{jk}$. \newline
+		The ``$\supset$" inclusion follows from part (ii) and linearity of the space $\gradZero{\ddom}{\compMes}$; each $\tilde{g}^{(jk)}\in\gradZero{\ddom}{\lcompMes}$ can be extended by zero (using part (ii)) to a function in $\gradZero{\ddom}{\compMes}$.
 		Summing up these extended functions then yields the function $\tilde{g}$ again, which is an element of $\gradZero{\ddom}{\compMes}$ by linearity of the subspace.
 	\end{enumerate}
 \end{proof}

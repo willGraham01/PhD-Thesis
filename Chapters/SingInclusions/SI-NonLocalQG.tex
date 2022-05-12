@@ -1,9 +1,5 @@
 \section{Reformulation of \eqref{eq:SI-WaveEqn} as a Non-Local Quantum Graph Problem} \label{sec:SI-NonLocalQG}
-
-\tstk{intro stuff}
-
-The discussions in sections \ref{ssec:SI-VP} and \ref{ssec:FDMSingInc} provide us with two methods by which we can approximate the spectrum of \eqref{eq:SI-WaveEqn}.
-In both of these methods we are forced to handle the interaction between the bulk regions and skeleton in some way; either through the global approximation we use (if using the variational problem) or through how we tie the various approximations in the bulk regions and skeleton together (if using the finite difference based approach).
+Both of the methods employed in sections \ref{ssec:SI-VP} and \ref{ssec:FDMSingInc} force us to handle the interaction between the bulk regions and skeleton in some way; either through the global approximation we use (if working from \eqref{eq:SI-}) or through how we tie the various approximations in the bulk regions and skeleton together (if using the finite difference based approach).
 The question we ask here is whether we can take this one step further; can we entirely remove the equations in the bulk regions from our formulation, replacing them with a suitable term (or terms) in the equations along the skeleton?
 Our objective is to arrive at a quantum graph problem, which are relatively well understood when compared to the measure-theoretic formulation \eqref{eq:SI-WaveEqn} that we begun with.
 We also expect to see some kind of reward in dimension or complexity reduction, as a quantum graph is ultimately a set of one-dimensional intervals.
