@@ -21,6 +21,31 @@ rc('text', usetex=True)
 
 from datetime import datetime
 
+def CombineResults(f1,f2,outStr=[]):
+    '''
+    Given two outputs for the same n,m, combine the output files and produce another, new file.
+    Files will have the data concatenated, rather than sorted, so be careful.
+    '''
+    
+    d1 = np.load(f1);   d2 = np.load(f2)
+    
+    if d1['n']!=d2['n'] or d1['m']!=d2['m']:
+        raise ValueError('Input files correspond to runs of differing n,m values.')
+    else:
+        # combine data into new output file.
+        
+        sqErrors = np.concatenate((d1['sqErrors'], d2['sqErrors']))
+        NVals = np.concatenate((d1['NVals'], d2['NVals']))
+        
+        if outStr:
+            # if provided a filename, save to this filename
+            np.savez(outStr, NVals=NVals, sqErrors=sqErrors, n=d1['n'], m=d1['m'])
+        else:
+            # use default filename
+            oStr = 'FDM_n%d_m%d_saveData.npz' % (d1['n'], d1['m'])
+            np.savez(oStr, NVals=NVals, sqErrors=sqErrors, n=d1['n'], m=d1['m'])
+    return
+
 if __name__=="__main__":
 
     parser = argparse.ArgumentParser(description='FDM convergence rate plots: Reads in multiple datasets of the error in the eigenvalue against log(N), plotting them all on the same axis. Outputs should be in the format saved by FDM_DirichletEval_ConvInvestigation.py')
