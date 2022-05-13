@@ -105,7 +105,7 @@ This system can then be written in matrix form as
 where $B=\mathrm{diag}\bracs{1,...,1,0,1,...,1}$ is a (positive semi-definite) diagonal matrix with the zero in the row corresponding to the equation \eqref{eq:SI-FDMDiscVertex}.
 The equation \eqref{eq:SI-FDMMatrixEqn} can then be solved using a generalised eigenvalue solver to obtain the approximate eigenvalues $\omega^2$ and eigenvectors $U$.
 
-The approximate eigenvalues computed by the finite difference scheme are displayed in figure \ref{fig:CompositeCross-FDM-SpectralBands}, using $N=251$ grid-points in each of the coordinate directions.
+The approximate eigenvalues computed by the finite difference scheme using $N=251$ grid-points in each of the coordinate directions are displayed in figure \ref{fig:CompositeCross-FDM-SpectralBands}.
 \begin{figure}[b!]
 	\centering
 	\includegraphics[scale=0.5]{CompositeCross-FDM-SpectralBands.pdf}
@@ -119,11 +119,12 @@ However by examining the eigenvalues in this band as functions of $\qm$, as in f
 	\includegraphics[width=\textwidth]{FDM_2022-01-28-09-33_AllBands.pdf}
 	\caption{\label{fig:FDM_2022-01-28-09-33_AllBands} The eigenvalues $\omega$ in each spectral band, plotted as functions of the quasi-momentum $\qm$. Observe the symmetries that are expected from proposition \ref{prop:CrossInPlaneSymmetries}.}
 \end{figure}
-Furthermore, we also notice that the eigenvalues within each band obey the symmetries in $\qm$ as expected from proposition \ref{prop:CrossInPlaneSymmetries}.
+Similarly to our approach via \eqref{eq:SI-VarProb}, the eigenvalues within each band obey the symmetries expected from proposition \ref{prop:CrossInPlaneSymmetries}.
 
-Finally, we can also test the rate of convergence of the numerical scheme to the eigenvalues $\omega_{n,m}^2 = \bracs{n^2+m^2}\pi^2$.
+A distinct advantage of using this method over that for solving problem \ref{prob:DiscVarProb} is that, once the finite difference matrix $\mathcal{F}$ is assembled, we can use matrix-eigenvalue solvers to examine the eigenvalues near to any positive number that we choose, without needing to compute \emph{all} the previous eigenvalues (and eigenfunctions) up to this value.
+This allows us to easily test the rate of convergence of the numerical scheme to the eigenvalues $\omega_{n,m}^2 = \bracs{n^2+m^2}\pi^2$.
 In these cases, we expect that the error in the approximate eigenvalue is of the order of $N^{-2}$, since our scheme makes use of centred differences in the bulk region, and on the skeleton the eigenfunction should be identically zero.
-This is what we observe numerically, and is illustrated in figure \ref{fig:CompositeCross-FDM-DEV} for $n,m\in\clbracs{1,2,3}$. \tstk{you're missing $2,2$!}
+This is what we observe numerically, and is illustrated in figure \ref{fig:CompositeCross-FDM-DEV} for $n\leq m\in\clbracs{1,2,3}$ (the cases $n>m$ are similar due to the aforementioned symmetry).
 \begin{figure}[h]
 	\centering
 	\begin{subfigure}[t]{0.45\textwidth}

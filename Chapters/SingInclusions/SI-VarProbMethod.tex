@@ -75,6 +75,21 @@ With our choice of polynomial basis, and writing $U = \bracs{u_0,...,u_{M^2-1}}^
 \end{problem}
 The minimiser $U$ of problem \ref{prob:DiscVarProb} then provides our approximation of $u$, and we have that $\omega^2 \approx J[U]$.
 Equation \eqref{eq:SI-EMPNormConstraint} is the norm constraint on the eigenfunction $u$, \eqref{eq:SI-EMPxPeriodicity} (respectively \eqref{eq:SI-EMPyPeriodicity}) are the constraints that ensure periodicity of the eigenfunction in the $x$ (respectively $y$) directions, and \eqref{eq:SI-EMPOrthogonality} forces $u$ to be orthogonal to the previously computed eigenfunctions $u^l$.
-Due to the finite dimension of our problem (through the truncation at order $M$ for the functions $\varphi_m$), we are only ever able to compute approximations to the lowest $M^2 - \bracs{2M + 1} + 1$ eigenvalues due to the number of constraints in the problem \ref{prob:DiscVarProb}.
 
-\tstk{time to display some nice figures, maybe some comparisons between the two methods etc? Could also do a run of this with $\alpha_3\neq0$ just to see what on earth happens!}
+One can view the approximate spectral bands as computed from the problem \ref{prob:DiscVarProb} with $M=12$ in figure \ref{fig:CompositeCross-VP-SpectralBands}.
+\begin{figure}[b!]
+	\centering
+	\includegraphics[scale=0.5]{CompositeCross-VP-SpectralBands.pdf}
+	\caption[optional text]{\label{fig:CompositeCross-VP-SpectralBands} The eigenvalues belonging to the first 5 bands, approximated via the problem \ref{prob:DiscVarProb}.}
+\end{figure}
+We remark that there are no gaps between the spectral bands, although be examining the dispersion relations in figure \ref{fig:VP_AllBands}, we do notice that the eigenvalues within each band obey the symmetries in $\qm$ as expected from proposition \ref{prop:CrossInPlaneSymmetries}.
+\begin{figure}[t!]
+	\centering
+	\includegraphics[width=\textwidth]{VP_2022-05-13-14-26_AllBands.pdf}
+	\caption[optional text]{\label{fig:VP_AllBands} The dispersion relations for the first 5 spectral bands, approximated via the problem \ref{prob:DiscVarProb}.}
+\end{figure}
+
+A glaring drawback to this method is its sequential nature --- if we want to compute the eigenvalues (or eigenfunctions) of the $n^{\text{th}}$ spectral band, then we need to compute those for each band below too.
+Compounding this is that the finite dimension of our problem (through the truncation at order $M$) means that we are only ever able to compute approximations to the lowest $M^2 - \bracs{2M + 1} + 1$ eigenvalues due to the number of constraints in the problem \ref{prob:DiscVarProb}.
+This in particular makes it difficult to examine any part of the spectrum that is far away from zero --- if one does not know a priori which band the eigenvalues of a certain order fall into, one simply has to continue computing successive eigenvalues until they reach the region of the spectrum they want to explore.
+Simply extrapolating from the eigenvalues computed thus far, the ``lowest" eigenvalue of the form $\omega^2_{n,m}=\bracs{n^2+m^2}\pi^2$ would occur in the fourteenth band\footnote{And jumping the gun to the results of section \ref{ssec:SI-FDMMethod}, 14 bands looks like an underestimate.} --- a not insignificant amount of effort to put into computing eigenvalues that are not of interest.
