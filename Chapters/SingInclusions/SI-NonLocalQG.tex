@@ -134,9 +134,9 @@ From here, we replace $u$ with $u_V$, substitute the basis expansion, and choose
 	B_{n,m} &= \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \omega^2\ip{\psi_m}{\psi_n}_{L^2\bracs{I_{jk}}}.
 \end{align*}
 Letting $M\bracs{\omega^2}$ be the matrix-valued function with entries
-\begin{align*}
+\begin{align} \label{eq:SI-NonLocalQGNumericalDisc}
 	\bracs{M\bracs{\omega^2}}_{n,m} &= A_{n,m} + L_{n,m}\bracs{\omega} - \omega^2 B_{n,m},
-\end{align*}
+\end{align}
 our coefficients $u_m$ and approximate eigenvalues $\omega^2$ are then determined by the solution to the generalised eigenvalue problem
 \begin{align*}
 	M\bracs{\omega^2}U &= 0,
@@ -157,4 +157,5 @@ for every $m=1,...,M$ and bulk region $\ddom_i$, and then reading off the Neuman
 Furthermore, we will have to perform these computations every time we want to evaluate $M(\omega^2)$ whilst solving the generalised eigenvalue problem.
 Ultimately, short of obtaining an analytic expression (or an expression that can be easily approximated numerically) for the action of $\dtn^i_{\omega}$ in terms of $\omega$, there is no simple way to deal with
 the inherent influence of \eqref{eq:SI-BulkEqn} on \eqref{eq:SI-NonLocalQGEdgeEquation}.
-Possible ideas for alternatives include expressing $L_{n,m}$ in terms of the eigenvalues and eigenfunctions of the $\dtn^i_\omega$ (which are briefly explored in section \ref{sec:SIApp-NonLocalSolve}), or attempting to ``linearise" the Dirichlet-to-Neumann map.
+Possible ideas for alternatives include expressing $L_{n,m}$ in terms of the eigenvalues and eigenfunctions of the $\dtn^i_\omega$, or exploring whether the Dirichlet-to-Neumann map admits an ``expansion" --- these are briefly elaborated on in section \ref{sec:SIApp-NonLocalSolve}.
+Ultimately however, a deeper understanding of the properties of $\dtn_\omega^i$ are required to make any further progress without falling back to solving a two-dimensional problem in the bulk regions.
