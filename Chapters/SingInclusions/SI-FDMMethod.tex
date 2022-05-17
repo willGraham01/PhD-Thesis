@@ -10,7 +10,7 @@ Before we do so, it is convenient to notice that we can move the ``trace" terms 
 		&= \omega^2 u^{(jk)},
 		&\text{in } I_{jk}, \label{eq:SI-FDMSkeleton} \\
 		\sum_l \bracs{\pdiff{}{n}+\rmi\qm_{jk_l}} u^{(jk_l)}(v_j) 
-		&= 0 
+		&= \alpha_j\omega^2 u(v_j)
 		&\text{at } v_j\in\vertSet. \label{eq:SI-FDMVertex}
 	\end{align}
 \end{subequations}
@@ -94,7 +94,7 @@ We now insert these finite difference approximations \eqref{eq:SI-FDMBulkDiscret
 		& -h^{-1}u_{1,q} - h^{-1}u_{-1,q}
 		= \omega^2 u_{0,q}, & p=0, q\neq0, \labelthis\label{eq:SI-FDMVEdge} \\
 		h^{-1} & \bracs{ 4u_{0,0} - u_{1,0} - u_{-1,0} - u_{0,1} - u_{0,-1} }
-		= 0, & p=q=0, \labelthis\label{eq:SI-FDMDiscVertex}
+		= \alpha\omega^2 u_{0,0}, & p=q=0, \labelthis\label{eq:SI-FDMDiscVertex}
 	\end{align*}
 \end{subequations}
 where $p,q\in\clbracs{0,...,N-1}$ unless otherwise stated.
@@ -102,13 +102,21 @@ This system can then be written in matrix form as
 \begin{align} \label{eq:SI-FDMMatrixEqn}
 	\mathcal{F}U &= \omega^2 B U,
 \end{align}
-where $B=\mathrm{diag}\bracs{1,...,1,0,1,...,1}$ is a (positive semi-definite) diagonal matrix with the zero in the row corresponding to the equation \eqref{eq:SI-FDMDiscVertex}.
+where $B=\mathrm{diag}\bracs{1,...,1,\alpha,1,...,1}$ is a (positive semi-definite) diagonal matrix with the zero in the row corresponding to the equation \eqref{eq:SI-FDMDiscVertex}.
 The equation \eqref{eq:SI-FDMMatrixEqn} can then be solved using a generalised eigenvalue solver to obtain the approximate eigenvalues $\omega^2$ and eigenvectors $U$.
 
 The approximate eigenvalues computed by the finite difference scheme using $N=251$ grid-points in each of the coordinate directions are displayed in figure \ref{fig:CompositeCross-FDM-SpectralBands}.
 \begin{figure}[b!]
 	\centering
-	\includegraphics[scale=0.5]{CompositeCross-FDM-SpectralBands.pdf}
+	\begin{subfigure}[t]{0.45\textwidth}
+		\centering
+		\includegraphics[scale=0.45]{CompositeCross-FDM-SpectralBands.pdf}
+	\end{subfigure}
+	~
+	\begin{subfigure}[t]{0.45\textwidth}
+		\centering
+		\includegraphics[scale=0.45]{CompositeCross-FDM-SpectralBands-alpha1.pdf}
+	\end{subfigure}
 	\caption{\label{fig:CompositeCross-FDM-SpectralBands} The approximate eigenvalues computed by the finite-difference scheme, sorted into spectral bands for the cross-in-the-plane geometry. Eigenvalues corresponding to the extremities of the quasi-momentum are plotted in red.}
 \end{figure}
 Those points plotted in red correspond to eigenvalues that were computed at quasi-momentum values of $\bracs{0,0}^\top$, $\bracs{-\pi,0}^\top$, $\bracs{0,-\pi}^\top$, $\bracs{-\pi,-\pi}^\top$, from which we can observe that these points typically form the endpoints of each of the spectral bands.

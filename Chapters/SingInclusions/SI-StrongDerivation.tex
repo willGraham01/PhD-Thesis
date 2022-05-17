@@ -18,11 +18,11 @@ In summary, we expect that \eqref{eq:SI-WeakWaveEqn} can be reformulated into a 
 \end{enumerate}
 
 At a glance, solutions $u$ to \eqref{eq:SI-WeakWaveEqn} appear to be less regular than what we expect from our intuitive arguments above, and \eqref{eq:SI-WeakWaveEqn} itself is of course not in the form (a)-(c).
-However, much like in sections \ref{sec:ScalarDerivation} and \ref{sec:3DSystemDerivation} we can work from \eqref{eq:SI-WeakWaveEqn} and the definition of $\tgradSob{\ddom}{\compMes}$ to obtain a system as described by (a)-(c).
-Our starting point is the problem \eqref{eq:SI-WeakWaveEqn}, repeated here for ease of reading: find $\omega^2>0$ and non-zero $u\in\tgradSob{\ddom}{\compMes}$ such that
+However, much like in sections \ref{sec:ScalarDerivation} and \ref{sec:3DSystemDerivation} we can work from \eqref{eq:SI-WeakWaveEqn} and the definition of $\tgradSob{\ddom}{\ccompMes}$ to obtain a system as described by (a)-(c).
+Our starting point is the problem \eqref{eq:SI-WeakWaveEqn}, repeated here for ease of reading: find $\omega^2>0$ and non-zero $u\in\tgradSob{\ddom}{\ccompMes}$ such that
 \begin{align*}
-	\integral{\ddom}{ \tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}\phi} }{\compMes}
-	&= \omega^2 \integral{\ddom}{ u\overline{\phi} }{\compMes}, \quad\forall\phi\in\psmooth{\ddom}. \tag{\eqref{eq:SI-WeakWaveEqn} restated}
+	\integral{\ddom}{ \tgrad_{\ccompMes}u\cdot\overline{\tgrad_{\ccompMes}\phi} }{\ccompMes}
+	&= \omega^2 \integral{\ddom}{ u\overline{\phi} }{\ccompMes}, \quad\forall\phi\in\psmooth{\ddom}. \tag{\eqref{eq:SI-WeakWaveEqn} restated}
 \end{align*}
 We will need to make use of several standard integral identities, which we summarise below.
 Let $D$ be an open Lipschitz domain, let $u\vert_{\partial D}$ denote the trace (of a suitably regular) function $u$ on $D$ into $\ltwo{\partial D}{S}$, and $n^D$ denote the exterior normal on the boundary of $D$.
@@ -43,8 +43,8 @@ From the above, we can deduce that whenever $u\in H^2\bracs{D,\lambda_2}$ and $v
 	\integral{D}{ \tgrad u\cdot\overline{\tgrad v} }{\lambda_2}
 	&= - \integral{D}{ \overline{v}\tgrad\cdot\tgrad u }{\lambda_2} + \integral{\partial D}{ \overline{v}\vert_{\partial D}\bracs{\tgrad u\cdot n^D}\vert_{\partial D} }{S}.
 \end{align*}
-We now begin the reformulation, throughout let us assume $\omega^2>0$ and $u\in\tgradSob{\ddom}{\compMes}$ solve \eqref{eq:SI-WeakWaveEqn}.
 
+We now begin the reformulation, throughout let us assume $\omega^2>0$ and $u\in\tgradSob{\ddom}{\ccompMes}$ solve \eqref{eq:SI-WeakWaveEqn}.
 Suppose that the test function $\phi$ in \eqref{eq:SI-WeakWaveEqn} has support contained within one of the bulk regions $\ddom_i$.
 This implies that \eqref{eq:SI-WeakWaveEqn} becomes
 \begin{align*}
@@ -151,25 +151,24 @@ With such a $\phi$, the following equalities hold;
 	+ \integral{\partial\ddom_l}{ \overline{\phi}\tgrad u\cdot n_{jk_l} }{S} \\
 	&= \sum_l \integral{I_{jk_l}}{ \overline{\phi}\tgrad u\cdot n_{jk_l} }{S} + \integral{I_{jk_{l-1}}}{ \phi\tgrad u\cdot n_{jk_{l-1}} }{S} \\
 	&= \sum_l \integral{I_{jk_l}}{ \overline{\phi}\bracs{ \bracs{\tgrad u\cdot n_{jk_l}}^- - \bracs{\tgrad u\cdot n_{jk_l}}^+ } }{S}, \\
-	\integral{\ddom}{ \tgrad_{\compMes} u\cdot\overline{\tgrad_{\compMes}\phi} - \omega^2u\overline{\phi} }{\ddmes}
+	\integral{\ddom}{ \tgrad_{\ccompMes} u\cdot\overline{\tgrad_{\ccompMes}\phi} - \omega^2u\overline{\phi} }{\ddmes}
 	&= \sum_l \integral{I_{jk_l}}{ -\overline{\phi}\bracs{\bracs{\diff{}{y}+\rmi\qm_{jk_l}}^2 u^{(jk_l)} + \omega^2 u^{(jk_l)}} }{\lambda_{jk_l}} \\
 	&\qquad + \sum_l \sqbracs{ \bracs{\pdiff{}{n}+\rmi\qm_{jk_l}} u^{(jk_l)}(v_j)\overline{\phi}(v_j) }.
 \end{align*}
 Thus, equation \eqref{eq:SI-WeakWaveEqn} becomes
 \begin{align*}
-	0
+	\alpha_j\omega^2 u(v_j)\overline{\phi}(v_j)
 	&= \sum_l \clbracs{ \integral{I_{jk_l}}{ \overline{\phi}\bracs{ \bracs{\tgrad u\cdot n_{jk_l}}^- - \bracs{\tgrad u\cdot n_{jk_l}}^+ } }{S} \right. \\
 	&\qquad \left.	+ \integral{I_{jk_l}}{ -\overline{\phi}\bracs{\bracs{\diff{}{y}+\rmi\qm_{jk_l}}^2 u^{(jk_l)} + \omega^2 u^{(jk_l)}} }{\lambda_{jk_l}} \right. \\
 	&\qquad \left.	+ \sqbracs{ \bracs{\pdiff{}{n}+\rmi\qm_{jk_l}} u^{(jk_l)}(v_j)\overline{\phi}(v_j) } } \\
 	&= \sum_l \sqbracs{ \bracs{\pdiff{}{n}+\rmi\qm_{jk_l}} u^{(jk_l)}(v_j)\overline{\phi}(v_j) }
 	&\quad\text{using \eqref{eq:SI-InclusionEqn}}, \\
-	\implies 0
+	\implies \alpha_j\omega^2 u(v_j)\overline{\phi}(v_j)
 	&= \sum_l \bracs{\pdiff{}{n}+\rmi\qm_{jk_l}} u^{(jk_l)}(v_j), \labelthis\label{eq:SI-VertexCondition}
 \end{align*}
 \end{subequations} % last equation that we needed in the strong form has been provided, close off the subequations environment
 since $\phi(v_j)$ is arbitrary.
-In addition to continuity of $u$ at each of the vertices, we have found that $u$ also adheres to a Kirchoff-like condition at each of the vertices.
-This is also highly suggestive as to what the effect of reintroducing the point-mass measure $\massMes$ will be, which we elaborate on later.
+In addition to continuity of $u$ at each of the vertices, we have found that $u$ also adheres to a non-classical Kirchoff-like condition at each of the vertices.
 
 The system \eqref{eq:SI-StrongForm}\footnote{We call \eqref{eq:SI-StrongForm} ``strong" since it is no longer understood in a variational sense, and its relation to \eqref{eq:SI-WaveEqn} is akin to the relationship between the strong and weak forms of PDEs.}, 
 \begin{subequations}
@@ -181,7 +180,7 @@ The system \eqref{eq:SI-StrongForm}\footnote{We call \eqref{eq:SI-StrongForm} ``
 		&= \omega^2 u^{(jk)} + \bracs{\bracs{\grad u\cdot n_{jk}}^+ - \bracs{\grad u\cdot n_{jk}}^-}
 		&\text{in } I_{jk}, \tag{\eqref{eq:SI-InclusionEqn} restated} \\
 		\sum_{j\con k} \bracs{\pdiff{}{n}+\rmi\qm_{jk}} u^{(jk)}(v_j) 
-		&= 0 
+		&= \alpha_j\omega^2 u(v_j)
 		&\text{at } v_j\in\vertSet, \tag{\eqref{eq:SI-VertexCondition} restated}
 	\end{align*}
 \end{subequations}
@@ -193,10 +192,41 @@ There are however two ``scales" on which a solution $u$ behaves, being 2D in the
 
 There are a couple of comments that we should make about the system \eqref{eq:SI-StrongForm}.
 On the matter of consistency between solutions to the problem \eqref{eq:SI-VarProb} and \eqref{eq:SI-StrongForm}, note that \eqref{eq:SI-StrongForm} is the result of applying the theorem of Lagrange multipliers to \eqref{eq:SI-VarProb}.
-Another comment should be made on how the ODEs on the skeleton \eqref{eq:SI-InclusionEqn} depend on the spectral parameter $\omega^2$.
+Another comment should be made on how the ODEs on the skeleton \eqref{eq:SI-InclusionEqn} depend on the spectral parameter $\omega^2$. \tstk{Venstcel conditions, see Kirill and Evans: that the skeleton no longer acts as a simple boundary between the bulk regions $\ddom_i$.}
 The system \eqref{eq:SingularWaveEqnQGProblem} had $\omega^2$ appearing in the vertex conditions, that is what would normally be the \emph{boundary conditions} for the ODEs on $I_{jk}$.
 The appearance of $\omega^2$ in these conditions was a direct consequence of the presence of the measure $\massMes$ providing the vertices with some ``size".
 Rather than a graph with ``bulky vertices", we now have a set of regions $\ddom_i$ with ``bulky boundaries" (the skeleton).
 And again, we observe that bestowing a notion of length to our singular inclusions (through $\ddmes$) has caused $\omega^2$ to appear in what would normally be our boundary conditions for the regions $\ddom_i$.
-We can also conjecture what the affect of reintroducing the vertex size (via $\massMes$) will do to the system \eqref{eq:SI-StrongForm} --- which we elaborate on in section \tstk{section ref}.
-On a related note, we can see immediately that the skeleton no longer acts as a simple boundary between the bulk regions $\ddom_i$.
+
+We also make some remarks here to reconnect \eqref{eq:SI-StrongForm} with the physical (or ``dimensionfull") material it is supposed to represent.
+The system \eqref{eq:SI-StrongForm} represents the acoustic approximation on a composite material whose \emph{material} properties in the bulk regions and on the skeleton are identical, but whose geometric properties are in contrast.
+Indeed, one may find it odd to notice that the (dimensionless) parameters $\alpha_j$ only appear in one of the three equations, \eqref{eq:SI-VertexCondition}.
+It is precisely this equation which links the behaviour of the solutions at the vertices to that on the edges. 
+The two geometric properties of the physical material are the ``thickness" of the edges and that of the vertices, and these are the two properties the $\alpha_j$ represent a relationship between.
+This is directly analogous to the situation one ends in when studying composite materials with contrasting material properties; the dimensionless parameters representing the contrast appear in (what is normally a boundary condition) relating the values of the solution across the interface between the inclusion and background material.
+No such parameter appears in \eqref{eq:SI-StrongForm} because the physical material we are representing does not have any material contrast , only geometric contrast.
+With this understanding it is not difficult to see how the introduction of such a contrast would affect \eqref{eq:SI-StrongForm}.
+Let us now suppose there is some contrast in the material properties of the bulk regions and skeleton, represented through the (dimensionless) function
+\begin{align*}
+	\epsilon_m =
+	\begin{cases} \epsilon & x\in\ddom_i, \\ 1 & x\in\graph, \end{cases}
+\end{align*}
+where $\epsilon$ is the dimensionless parameter representing the contrast between the material properties on the skeleton and the bulk.
+One would then obtain a system of the form 
+\begin{subequations}
+	\begin{align*}
+		-\epsilon^{-1}\laplacian_\qm u 
+		&= \omega^2 u 
+		&\text{in } \ddom_i, \\
+		- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)}  
+		&= \omega^2 u^{(jk)} + \epsilon^{-1}\bracs{\bracs{\grad u\cdot n_{jk}}^+ - \bracs{\grad u\cdot n_{jk}}^-}
+		&\text{in } I_{jk}, \\
+		\sum_{j\con k} \bracs{\pdiff{}{n}+\rmi\qm_{jk}} u^{(jk)}(v_j) 
+		&= \alpha_j\omega^2 u(v_j)
+		&\text{at } v_j\in\vertSet,
+	\end{align*}
+\end{subequations}
+through studying the problem \eqref{eq:SI-WaveEqn} in the space $\tgradSob{\ddom}{\bracs{\epsilon^{-1}\lambda_2}^{\dddmes}}$, where $\bracs{\epsilon^{-1}\lambda_2}^{\dddmes} = \epsilon^{-1}\lambda_2 + \dddmes$.
+The effects of material contrast can thus be introduced in an identical fashion to the effects of geometric contrast --- through ``adding" mass to one part of the medium and not to the others.
+For geometric effects, mass $\alpha_j$ is ``added" to the vertices $v_j$.
+For material contrast, mass $\epsilon^{-1}$ is ``taken away"\footnote{We could also introduce this affect by ``adding" mass to the skeleton, by considering $\epsilon\dddmes$ in place of $\dddmes$.} from the bulk regions $\ddom_i$. 

@@ -194,118 +194,123 @@ Now that we can ``lift" (via lemma \ref{lem:SI-GradZeroEdgeToComposite}) gradien
 	\end{enumerate}
 \end{proof}
 
-Now we look to demonstrate that the set $\gradZero{\ddom}{\compMes}$ is constructed from sums of edge functions belonging to $\gradZero{\ddom}{\lcompMes}$.
-\begin{prop}[Relation between $\gradZero{\ddom}{\lcompMes}$ and $\gradZero{\ddom}{\compMes}$.] \label{prop:SI-GradZeroExtensionAndChar}
-	Fix $I_{jk}\in\edgeSet$.
+Now we look to demonstrate that the set $\gradZero{\ddom}{\compMes}$ is constructed from sums of edge functions belonging to $\gradZero{\ddom}{\lcompMes}$, and that the edge functions of elements of $\gradZero{\ddom}{\ccompMes}$ are also elements of $\gradZero{\ddom}{\lcompMes}$.
+\begin{prop} \label{prop:SI-GradZeroExtensionAndChar}
+	
 	\begin{enumerate}[(i)]
-		\item Suppose that $g\in\gradZero{\ddom}{\lcompMes}$ with
+		\item Fix $I_{jk}\in\edgeSet$.
+		Suppose that $g_{jk}\in\gradZero{\ddom}{\lcompMes}$ with
 		\begin{align*}
-			g = \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ g_{jk} & x\in I_{jk}, \end{cases}
+			g_{jk} = \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ g^{(jk)} & x\in I_{jk}, \end{cases}
 		\end{align*}
 		and $\supp(g_{jk})\subset I_{jk}^n$ (where $I_{jk}^n$ is as in \eqref{eq:ShortenedEdgeDef}).
-		Then the function
+		Define the functions
+		\begin{align} \label{eq:SI-GradZeroChar-ExtendedFunctions}
+			g(x) := \begin{cases} 0 & x\in\ddom\setminus\graph, \\ 0 & x\in\graph\setminus I_{jk}, \\ g_{jk}(x) & x\in I_{jk}, \end{cases}
+			&\qquad
+			\widetilde{g}(x) := \begin{cases} 0 & x\in\ddom\setminus\graph, \\ 0 & x\in\graph\setminus I_{jk}, \\ g_{jk}(x) & x\in I_{jk}, \\ 0 & x\in\vertSet. \end{cases}			
+		\end{align}
+		Then $g\in\gradZero{\ddom}{\compMes}$ and $\widetilde{g}\in\gradZero{\ddom}{\ccompMes}$.
+		\item Now only assume that $g_{jk}\in\gradZero{\ddom}{\lcompMes}$ with
 		\begin{align*}
-			\tilde{g}(x) &:= \begin{cases} 0 & x\in\ddom\setminus\graph, \\ 0 & x\in\graph\setminus I_{jk}, \\ g_{jk}(x) & x\in I_{jk}, \end{cases}
+			g = \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ g^{(jk)} & x\in I_{jk}. \end{cases}
 		\end{align*}
-		is an element of $\gradZero{\ddom}{\compMes}$.
-		\item Now only assume that $g\in\gradZero{\ddom}{\lcompMes}$ with
-		\begin{align*}
-			g = \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ g_{jk} & x\in I_{jk}. \end{cases}
-		\end{align*}
-		Then the function
-		\begin{align*}
-			\tilde{g}(x) &:= \begin{cases} 0 & x\in\ddom\setminus\graph, \\ 0 & x\in\graph\setminus I_{jk}, \\ g_{jk}(x) & x\in I_{jk}, \end{cases}
-		\end{align*}
-		is an element of $\gradZero{\ddom}{\compMes}$.
-		\item We have that
-		\begin{align*}
-			\gradZero{\ddom}{\compMes} &= \clbracs{ \tilde{g}\in\ltwo{\ddom}{\compMes} \setVert \tilde{g}^{(jk)}\in\gradZero{\ddom}{\lcompMes} \ \forall I_{jk}\in\edgeSet }.
-		\end{align*}
-		\item Let $\tilde{g}\in\ltwo{\ddom}{\compMes}^2$, where
+		Then the functions $g$ and $\widetilde{g}$ defined in \eqref{eq:SI-GradZeroChar-ExtendedFunctions} are elements of $\gradZero{\ddom}{\compMes}$ and $\gradZero{\ddom}{\ccompMes}$ respectively.
+		\item Let $g\in\ltwo{\ddom}{\compMes}^2$ and $\widetilde{g}\in\ltwo{\ddom}{\ccompMes}$, where
 	\begin{align*}
-		\tilde{g} &= \begin{cases} g_{\lambda_2} & x\in\ddom\setminus\graph, \\ g_{\ddmes} & x\in\graph. \end{cases}
+		g = \begin{cases} g_{\lambda_2} & x\in\ddom\setminus\graph, \\ g_{\ddmes} & x\in\graph, \end{cases}
+		\qquad
+		\widetilde{g} = \begin{cases} g_{\lambda_2} & x\in\ddom\setminus\graph, \\ g_{\ddmes} & x\in\graph\setminus\vertSet, \\ g_{\massMes} & x\in\vertSet. \end{cases}
 	\end{align*}
-	Then
+	Then both of the following hold:
 	\begin{align*}
-		\tilde{g}\in\gradZero{\ddom}{\compMes}
+		g\in\gradZero{\ddom}{\compMes}
 		\quad\Leftrightarrow\quad &
-		g_{\lambda_2} = 0 \text{ and } g_{\ddmes}\in\gradZero{\ddom}{\ddmes}.
+		g_{\lambda_2} = 0 \text{ and } g_{\ddmes}\in\gradZero{\ddom}{\ddmes}, \\
+		\widetilde{g}\in\gradZero{\ddom}{\ccompMes}
+		\quad\Leftrightarrow\quad &
+		g_{\lambda_2} = 0 \text{ and } g_{\ddmes}\in\gradZero{\ddom}{\ddmes} \text{ and } g_{\massMes}\in\gradZero{\ddom}{\massMes}.
 	\end{align*}
 	\end{enumerate}
 \end{prop}
 \begin{proof}
 	\begin{enumerate}[(i)]
-		\item Take an approximating sequence $\phi_l$ for $g$, and set $\psi_l = \chi_{jk}^n\phi_l\in\psmooth{\ddom}$ for each $l\in\naturals$, where $\chi_{jk}^n$ is as in \eqref{eq:SmoothChiDef}.
+		\item Take an approximating sequence $\phi_l$ for $g_{jk}$, and set $\psi_l = \chi_{jk}^n\phi_l\in\psmooth{\ddom}$ for each $l\in\naturals$, where $\chi_{jk}^n$ is as in \eqref{eq:SmoothChiDef}.
 		We then have that $\grad\psi_l = \chi_{jk}^n\grad\phi_l + \phi_l\grad\chi_{jk}^n$, and immediately see that $\psi_l\lconv{\ltwo{\ddom}{\compMes}}0$ since
 		\begin{align*}
 			\integral{\ddom}{\abs{ \psi_l }^2}{\compMes}
-			&\leq \integral{\ddom}{\abs{ \phi_l }^2}{\compMes}.
+			&\leq \integral{\ddom}{\abs{ \phi_l }^2}{\lcompMes}.
 		\end{align*}
 		Additionally, we have the estimates
 		\begin{align*}
-			\recip{2}\integral{\ddom}{\abs{ \grad\psi_l - \tilde{g} }^2}{\ddmes}
-			&= \recip{2}\integral{I_{jk}}{\abs{ \chi_{jk}^n\grad\phi_l - g  + \phi_l\grad\chi_{jk}^n }^2}{\lambda_{jk}} \\
-			&\leq \integral{I_{jk}}{\abs{ \chi_{jk}^n\grad\phi_l - g }^2}{\lambda_{jk}}
+			\recip{2}\integral{\ddom}{\abs{ \grad\psi_l - g }^2}{\ddmes}
+			&= \recip{2}\integral{I_{jk}}{\abs{ \chi_{jk}^n\grad\phi_l - g^{(jk)}  + \phi_l\grad\chi_{jk}^n }^2}{\lambda_{jk}} \\
+			&\leq \integral{I_{jk}}{\abs{ \chi_{jk}^n\grad\phi_l - g^{(jk)} }^2}{\lambda_{jk}}
 			+ \integral{I_{jk}}{\abs{ \phi_l\grad\chi_{jk}^n }^2}{\lambda_{jk}} \\
-			&\leq \integral{I_{jk}}{\abs{ \grad\phi_l - g }^2}{\lambda_{jk}}
+			&\leq \integral{I_{jk}}{\abs{ \grad\phi_l - g^{(jk)} }^2}{\lambda_{jk}}
 			+ \sup_{\ddom}\abs{\grad\chi_{jk}^n}^2 \integral{I_{jk}}{\abs{ \phi_l }^2}{\lambda_{jk}}, \\
-			\recip{2}\integral{\ddom}{\abs{ \grad\psi_l - \tilde{g} }^2}{\lambda_2}
-			&\leq \integral{\ddom}{\abs{ \chi_{jk}^n\grad\phi_l - \tilde{g} }^2}{\lambda_2}
+			\recip{2}\integral{\ddom}{\abs{ \grad\psi_l - g }^2}{\lambda_2}
+			&\leq \integral{\ddom}{\abs{ \chi_{jk}^n\grad\phi_l - g }^2}{\lambda_2}
 			+ \sup_{\ddom}\abs{\grad\chi_{jk}^n}^2 \integral{\ddom}{\abs{ \phi_l }^2}{\lambda_2} \\
 			&\leq \integral{\ddom}{\abs{ \grad\phi_l }^2}{\lambda_2}
 			+ \sup_{\ddom}\abs{\grad\chi_{jk}^n}^2 \integral{\ddom}{\abs{ \phi_l }^2}{\lambda_2}.
 		\end{align*}
-		Therefore,
+		Therefore (since $g=0$ $\lambda_2$-almost-everywhere),
 		\begin{align*}
-			\recip{2}\integral{\ddom}{\abs{ \grad\psi_l - \tilde{g} }^2}{\compMes}
+			\recip{2}\integral{\ddom}{\abs{ \grad\psi_l - g }^2}{\compMes}
 			&\leq \integral{\ddom}{\abs{ \grad\phi_l }^2}{\lambda_2}
-			+ \integral{I_{jk}}{\abs{ \grad\phi_l - g }^2}{\lambda_{jk}} \\
+			+ \integral{I_{jk}}{\abs{ \grad\phi_l - g^{(jk)} }^2}{\lambda_{jk}} \\
 			&\quad + \sup_{\ddom}\abs{\grad\chi_{jk}^n}^2 
 			\bracs{ \integral{\ddom}{\abs{ \phi_l }^2}{\lambda_2} 	+ \integral{I_{jk}}{\abs{ \phi_l }^2}{\lambda_{jk}} } \\
 			&= \integral{\ddom}{\abs{ \grad\phi_l - g }^2}{\lcompMes}
-			+ \norm{\phi_l}_{\ltwo{\ddom}{\lcompMes}} \sup_{\ddom}\abs{\grad\chi_{jk}^n}^2 \\
+			+ \norm{\phi_l}_{\ltwo{\ddom}{\lcompMes}}^2 \sup_{\ddom}\abs{\grad\chi_{jk}^n}^2 \\
 			&\rightarrow 0 \toInfty{l},
 		\end{align*}
-		and we conclude that $\tilde{g}\in\gradZero{\ddom}{\compMes}$.
-		\item The function $g_{jk}\in\gradZero{\ddom}{\lambda_{jk}}$ by corollary \ref{cory:SI-GradZeroEdgeChar}, and thus for any $n\in\naturals$ the function $\eta_n^j\eta_n^k g_{jk}\in\gradZero{\ddom}{\lambda_{jk}}$.
+		and we conclude that $g\in\gradZero{\ddom}{\compMes}$.
+		Noticing that $\psi_l=0$ and $\grad\psi_l=0$ at every vertex $v_j$ and for every $l\in\naturals$ then implies that $\widetilde{g}\in\gradZero{\ddom}{\ccompMes}$ too.
+		\item The function $g_{jk}\in\gradZero{\ddom}{\lambda_{jk}}$ by corollary \ref{cory:SI-GradZeroEdgeChar}, and thus for any $n\in\naturals$ the function $\eta_n^j\eta_n^k g_{jk}$ is an element of $\gradZero{\ddom}{\lambda_{jk}}$.
 		By lemma \ref{lem:SI-GradZeroEdgeToComposite}, the functions
 		\begin{align*}
-			g_n := \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ \eta_n^j\eta_n^k g_{jk} & x\in I_{jk} \end{cases}
+			g_{jk,n} := \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ \eta_n^j\eta_n^k g^{(jk)} & x\in I_{jk} \end{cases}
 		\end{align*}
 		are elements of $\gradZero{\ddom}{\lcompMes}$ too.
 		By part (i), we then have that
 		\begin{align*}
-			\tilde{g}_n := 	\begin{cases} 0 & x\in\ddom\setminus\graph, \\ 0 & x\in\graph\setminus I_{jk}, \\ \eta_n^j\eta_n^k g_{jk} & x\in I_{jk}, \end{cases}
+			g_n := 	\begin{cases} 0 & x\in\ddom\setminus\graph, \\ 0 & x\in\graph\setminus I_{jk}, \\ \eta_n^j\eta_n^k g_{jk} & x\in I_{jk}, \end{cases}
+			\qquad
+			\widetilde{g}_n := 	\begin{cases} 0 & x\in\ddom\setminus\graph, \\ 0 & x\in\graph\setminus I_{jk}, \\ \eta_n^j\eta_n^k g_{jk} & x\in I_{jk}, \\ 0 & x\in\vertSet, \end{cases}
 		\end{align*}
-		is an element of $\gradZero{\ddom}{\compMes}$, $\forall n\in\naturals$.
-		As such, by closure of $\gradZero{\ddom}{\compMes}$, it suffices to show that the sequence $\tilde{g}_n$ converges in $\ltwo{\ddom}{\compMes}$ to $\tilde{g}$.
-		Given the result of lemma \ref{lem:SI-SmoothFunctionsResults}(ii), we indeed have that $\tilde{g}_n\rightarrow\tilde{g}$ and thus $\tilde{g}\in\gradZero{\ddom}{\compMes}$.
-		\item The ``$\subset$" inclusion is simply a result of any approximating sequence for $\tilde{g}$ also serving as an approximating sequence in $\ltwo{\ddom}{\lcompMes}$ for each edge $I_{jk}$. \newline
-		The ``$\supset$" inclusion follows from part (ii) and linearity of the space $\gradZero{\ddom}{\compMes}$; each $\tilde{g}^{(jk)}\in\gradZero{\ddom}{\lcompMes}$ can be extended by zero (using part (ii)) to a function in $\gradZero{\ddom}{\compMes}$.
-		Summing up these extended functions then yields the function $\tilde{g}$ again, which is an element of $\gradZero{\ddom}{\compMes}$ by linearity of the subspace.
-		\item ($\Leftarrow$) The left-directed implication follows from proposition \ref{prop:3DGradZeroChar}, corollary \ref{cory:SI-GradZeroEdgeChar}(ii), and part (iii). \newline
+		are elements of $\gradZero{\ddom}{\compMes}$ and $\gradZero{\ddom}{\ccompMes}$ respectively, $\forall n\in\naturals$.
+		Given the result of lemma \ref{lem:SI-SmoothFunctionsResults}(ii), we have that $\widetilde{g}_n\rightarrow\widetilde{g}$ and $g_n\rightarrow g$, so by closure of the spaces of gradients of zero, we have the result.
+%		\item The ``$\subset$" inclusion is simply a result of any approximating sequence for $\tilde{g}$ also serving as an approximating sequence in $\ltwo{\ddom}{\lcompMes}$ for each edge $I_{jk}$. \newline
+%		The ``$\supset$" inclusion follows from part (ii) and linearity of the space $\gradZero{\ddom}{\compMes}$; each $\tilde{g}^{(jk)}\in\gradZero{\ddom}{\lcompMes}$ can be extended by zero (using part (ii)) to a function in $\gradZero{\ddom}{\compMes}$.
+%		Summing up these extended functions then yields the function $\tilde{g}$ again, which is an element of $\gradZero{\ddom}{\compMes}$ by linearity of the subspace.
+		\item ($\Leftarrow$) The left-directed implication follows from proposition \ref{prop:3DGradZeroChar}, corollary \ref{cory:SI-GradZeroEdgeChar}(ii), and part (ii). \newline
 	($\Rightarrow$) The right-directed implication is simply a result of any approximating sequence for $\tilde{g}$ also serving as an approximating sequence for $g_{\lambda_2}$ and $g_{\ddmes}$.
 	This also implies that $g_{\lambda_2} = 0$ (being a gradient of zero with respect to the Lebesgue measure), which completes the proof.
 	\end{enumerate}
 \end{proof}
 
 Having understood the set of gradients of zero, we are now able to deduce some important properties of the functions that live in $\tgradSob{\ddom}{\compMes}$.
-The most direct result that follows from proposition \ref{prop:SI-GradZeroExtensionAndChar}(iv) is that the tangential gradient $\tgrad_{\compMes}$ is the usual weak derivative (with respect to the Lebesgue measure) in the bulk regions, and equal to the tangential derivative with respect to $\ddmes$ on $\graph$.
+The most direct result that follows from proposition \ref{prop:SI-GradZeroExtensionAndChar}(iii) is that the tangential gradient $\tgrad_{\compMes}$ is the usual weak derivative (with respect to the Lebesgue measure) in the bulk regions, and equal to the tangential derivative with respect to $\ddmes$ on $\graph$.
 \begin{cory}
-	Suppose that $u\in\tgradSob{\ddom}{\compMes}$
+	Suppose that $u\in\tgradSob{\ddom}{\compMes}$ and $\widetilde{u}\in\tgradSob{\ddom}{\ccompMes}$.
 	Then 
 	\begin{align*}
-		\tgrad_{\compMes}u = \begin{cases} \grad u + \rmi\qm u & x\in\ddom\setminus\graph, \\ \tgrad_{\ddmes}u & x\in\graph, \end{cases}
+		\tgrad_{\compMes}u = \begin{cases} \grad u + \rmi\qm u & x\in\ddom\setminus\graph, \\ \tgrad_{\lambda_{jk}}u^{(jk)} & x\in I_{jk}, \ \forall I_{jk}\in\edgeSet, \end{cases}
+		\qquad
+		\tgrad_{\ccompMes}\widetilde{u} = \begin{cases} \grad\widetilde{u} + \rmi\qm\widetilde{u} & x\in\ddom\setminus\graph, \\ \tgrad_{\lambda_{jk}}\widetilde{u} ^{(jk)} & x\in I_{jk}, \ \forall I_{jk}\in\edgeSet \\ 0 & x\in\vertSet, \end{cases}
 	\end{align*}
-	where $\grad u$ denotes the weak derivative of $u\in\gradSob{\ddom}{\lambda_2}$.
+	where $\grad u$ (respectively $\grad\widetilde{u}$) denotes the weak derivative of $u\in\gradSob{\ddom}{\lambda_2}$ (respectively $\widetilde{u}\in\gradSob{\ddom}{\lambda_2}$).
 \end{cory}
 \begin{proof}
-	The requirement that $\tgrad_{\compMes}u$ be orthogonal to $\gradZero{\ddom}{\compMes}$ and theorem \ref{thm:SI-GradZeroChar} implies that $\tgrad_{\compMes}u = \tgrad_{\ddmes}u$ on $\graph$.
+	The requirement that $\tgrad_{\compMes}u$ be orthogonal to $\gradZero{\ddom}{\compMes}$ and proposition \ref{prop:SI-GradZeroExtensionAndChar}(iii) implies that $\tgrad_{\compMes}u = \tgrad_{\lambda_{jk}}u^{(jk)}$ on $\graph$.
 	For the bulk regions, we again notice that any approximating sequence $\phi_n$ for $u\in\tgradSob{\ddom}{\compMes}$ also serves as an approximating sequence in for $u\in\tgradSob{\ddom}{\lambda_2}$, and $\tgrad_{\lambda_2}u = \grad u + \rmi\qm u$.
 	This implies that $\tgrad_{\compMes}u = \grad u + \rmi\qm u$ ($\lambda_2$-almost-everywhere) in $\ddom\setminus\graph$, completing the proof.
+	Similar deductions can be made concerning $\widetilde{u}$.
 \end{proof}
 
-Functions in $\tgrad{\ddom}{\compMes}$ also exhibit additional regularity when approaching the edges of $\graph$ from the bulk regions $\ddom_i$, analogously to how functions in $\ktgradSob{\ddom}{\ddmes}$ exhibit continuity on approach the the vertices.
+Functions in $\tgradSob{\ddom}{\compMes}$ also exhibit additional regularity when approaching the edges of $\graph$ from the bulk regions $\ddom_i$, analogously to how functions in $\ktgradSob{\ddom}{\ddmes}$ exhibit continuity on approach the the vertices.
 This is not immediately obvious from the definition (by approximation of smooth functions) of $\tgradSob{\ddom}{\compMes}$; however now that we understand that our tangential gradients are essentially the familiar (weak) gradients with respect to $\lambda_2$ in the bulk and are equal to tangential gradients with respect to $\ddmes$ on $\graph$, we can establish this connection between the bulk and inclusions.
 \begin{theorem} \label{thm:SI-SobFuncEdgeContinuity}
 	Let $u\in\tgradSob{\ddom}{\compMes}$, and fix a bulk region $\ddom_i$.

@@ -15,10 +15,10 @@ The graph $\graph$ naturally breaks $\ddom$ into a collection of disjoint union 
 We will refer to the graph $\graph$ and its constituent edges $I_{jk}\in\edgeSet$ as the \emph{(singular) skeleton}, and refer to the $\ddom_i$ as the \emph{bulk (regions)} or \emph{dielectric regions}\footnote{We neglect to use the term ``inclusion" for either of $\ddom_i$ or $\graph$ since there is an argument to be made both ways about which material is being ``included" in the other.}.
 Additionally, recall that we denote by $\lambda_2$ the two-dimensional Lebesgue measure on $\ddom$ and write
 \begin{align*}
-	\compMes := \lambda_2 + \ddmes,
+	\ccompMes := \lambda_2 + \ddmes + \massMes,
 \end{align*}
-where we shall refer to $\compMes$ as the \emph{composite measure} on $\ddom$ with respect to the graph $\graph$.
-Whenever we refer to $\ddom$ as a \emph{composite domain}, we refer to $\ddom$ equipped with the measure $\compMes$.
+where we shall refer to $\ccompMes$ as the \emph{composite measure} on $\ddom$ with respect to the graph $\graph$.
+Whenever we refer to $\ddom$ as a \emph{composite domain}, we refer to $\ddom$ equipped with the measure $\ccompMes$.
 Additionally, define $\lcompMes = \lambda_2 + \lambda_{jk}$ for each edge $I_{jk}$.
 
 We shall observe that our singular skeleton provides effects that are distinct from those induced simply having interface conditions at the common boundaries of the $\ddom_i$.
@@ -30,13 +30,13 @@ In fact, we will see that it is even possible to reformulate a problem on the co
 
 The focus of this chapter will be on the acoustic approximation\footnote{Again for the sake of avoiding monotonous, we will also use ``wave equation" to refer to \eqref{eq:SI-WaveEqn}.}
 \begin{align} \label{eq:SI-WaveEqn}
-	-\bracs{\tgrad_{\compMes}}^2 u = \omega^2 u \qquad\text{in } \ddom,
+	-\bracs{\tgrad_{\ccompMes}}^2 u = \omega^2 u \qquad\text{in } \ddom,
 \end{align}
 now posed on our composite domain and respecting our singular skeleton\footnote{See section \ref{sec:SI-ProblemFormulation} for a precise definition of what is meant by this equation, although the meaning assigned is analogous to our previous approaches in chapters \ref{ch:ScalarSystem} and \ref{ch:CurlCurl}.}.
 Our goal of studying the spectrum of \eqref{eq:SI-WaveEqn} will direct our work in this chapter; our objective is, again, to determine an equivalent formulation for \eqref{eq:SI-WaveEqn} which we can then analyse and potentially tackle numerically.
 In fact, we will discover that \eqref{eq:SI-WaveEqn} possesses several equivalent formulations, each of which can be the basis of a numerical scheme with benefits and hindrances relative to the other formulations.
 The first such formulation we consider (section \ref{sec:SI-VarProbMethod}) comes directly from the variational problem for the operator that defines \eqref{eq:SI-WaveEqn}, and the second (section \ref{ssec:SI-FDMMethod}) comes from the corresponding ``strong form" that we can derive using analysis of the function space that $u$ lives in.
-These formulations still require us to work with the unfamiliar gradients ($\tgrad_{\compMes}u$) or handle interplay between the solution in the bulk and on the skeleton, which brings us to the third formulation in section \ref{sec:SI-NonLocalQG} where we reformulate \eqref{eq:SI-WaveEqn} into a problem on the skeleton only.
+These formulations still require us to work with the unfamiliar gradients ($\tgrad_{\ccompMes}u$) or handle interplay between the solution in the bulk and on the skeleton, which brings us to the third formulation in section \ref{sec:SI-NonLocalQG} where we reformulate \eqref{eq:SI-WaveEqn} into a problem on the skeleton only.
 Our investigation into each of these formulations will highlight several ``trade-offs" that are made as we move between the various formulations or numerical approaches to solving \eqref{eq:SI-WaveEqn}.
 We will conclude with a discussion of further extensions to this work --- notably the reintroduction of non-zero coupling constants at the vertices, and analysis of more general problems from electromagnetism than the acoustic approximation.
 %For example, moving towards a problem on the skeleton only allows us to avoid handling tangential gradients with respect to $\compMes$ (and other non-classical objects) and theoretically reduces the dimensionality of any numerical scheme we want to employ because the skeleton is 1D.
