@@ -28,6 +28,10 @@
 *.xcf
 *.ipynb_checkpoints/
 
+## Results directories to always be ignored
+*FDM_Results/
+*VP_Results/
+
 ## Bibliography auxiliary files (bibtex/biblatex/biber):
 *.bbl
 *.bcf

@@ -216,20 +216,15 @@ Now we look to demonstrate that the set $\gradZero{\ddom}{\compMes}$ is construc
 			g = \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ g^{(jk)} & x\in I_{jk}. \end{cases}
 		\end{align*}
 		Then the functions $g$ and $\widetilde{g}$ defined in \eqref{eq:SI-GradZeroChar-ExtendedFunctions} are elements of $\gradZero{\ddom}{\compMes}$ and $\gradZero{\ddom}{\ccompMes}$ respectively.
-		\item Let $g\in\ltwo{\ddom}{\compMes}^2$ and $\widetilde{g}\in\ltwo{\ddom}{\ccompMes}$, where
+		\item Let $g\in\ltwo{\ddom}{\compMes}^2$ where
 	\begin{align*}
 		g = \begin{cases} g_{\lambda_2} & x\in\ddom\setminus\graph, \\ g_{\ddmes} & x\in\graph, \end{cases}
-		\qquad
-		\widetilde{g} = \begin{cases} g_{\lambda_2} & x\in\ddom\setminus\graph, \\ g_{\ddmes} & x\in\graph\setminus\vertSet, \\ g_{\massMes} & x\in\vertSet. \end{cases}
 	\end{align*}
-	Then both of the following hold:
+	Then 
 	\begin{align*}
 		g\in\gradZero{\ddom}{\compMes}
 		\quad\Leftrightarrow\quad &
-		g_{\lambda_2} = 0 \text{ and } g_{\ddmes}\in\gradZero{\ddom}{\ddmes}, \\
-		\widetilde{g}\in\gradZero{\ddom}{\ccompMes}
-		\quad\Leftrightarrow\quad &
-		g_{\lambda_2} = 0 \text{ and } g_{\ddmes}\in\gradZero{\ddom}{\ddmes} \text{ and } g_{\massMes}\in\gradZero{\ddom}{\massMes}.
+		g_{\lambda_2} = 0 \text{ and } g_{\ddmes}\in\gradZero{\ddom}{\ddmes}.
 	\end{align*}
 	\end{enumerate}
 \end{prop}
@@ -289,6 +284,103 @@ Now we look to demonstrate that the set $\gradZero{\ddom}{\compMes}$ is construc
 	($\Rightarrow$) The right-directed implication is simply a result of any approximating sequence for $\tilde{g}$ also serving as an approximating sequence for $g_{\lambda_2}$ and $g_{\ddmes}$.
 	This also implies that $g_{\lambda_2} = 0$ (being a gradient of zero with respect to the Lebesgue measure), which completes the proof.
 	\end{enumerate}
+\end{proof}
+
+We cannot conclude proposition \ref{prop:SI-GradZeroExtensionAndChar}(iii) with a characterisation of $\gradZero{\ddom}{\ccompMes}$, since we have not yet established what the contribution of the measure $\massMes$ is to $\gradZero{\ddom}{\ccompMes}$.
+However proposition \ref{prop:NuGradZeroChar} makes this contribution relatively obvious --- gradients of zero with respect to $\massMes$ can take any value at the vertices.
+\begin{prop} \label{prop:SI-MassMesGradZeroExtension}
+	For any $c\in\complex^2$ and vertex $v_j\in\vertSet$, we have that the function
+	\begin{align} \label{eq:MassMesExtension-VertexFunction}
+		c\charFunc{v_j} = \begin{cases} c & x=v_j, \\ 0 & \text{otherwise}, \end{cases}
+	\end{align}
+	is an element of $\gradZero{\ddom}{\ccompMes}$.
+\end{prop}
+\begin{proof}
+	Fix $v_j\in\vertSet$, and let $E = \clbracs{e_{jk} \setVert I_{jk}\in J(v_j) }$.
+	Let $w\in\reals^2$ be a unit vector that is \emph{not} perpendicular to any of the vectors in $E$, and let $w^{\perp}\in\reals^2$ be a unit vector such that $w\cdot w^{\perp}=0$. 
+	%Existence of such vectors: https://math.stackexchange.com/questions/3413569/find-a-vector-not-perpendicular-to-a-given-set-of-vectors
+	Let $\varphi:\reals\rightarrow\sqbracs{0,1}$ be a smooth function with support contained in $\sqbracs{-1,1}$ and with $\varphi(0)=1$, $\varphi'(0)=0$.
+	Take $\gamma>0$, and consider the function
+	\begin{align*}
+		\xi_n^j(x) = \recip{n}\xi\bracs{n\bracs{x-v_j}\cdot w}\varphi\bracs{\gamma\bracs{x-v_j}\cdot w^{\perp}},
+	\end{align*}
+	the support of which is the set
+	\begin{align*}
+		S := \supp\bracs{\xi_n^j} =
+		\clbracs{ x=v_j+aw+bw^{\perp} \setVert -\recip{n}\leq a\leq\recip{n}, \ -\gamma^{-1}\leq b\leq\gamma^{-1} }.
+	\end{align*}
+	Without loss of generality we can choose $\gamma, N$ such that for every $n\geq N$ we have that $S\subset\mathcal{J}(v_j)\setminus\vertSet$, and additionally that $\xi_n^j\in\csmooth{\ddom}$ so after extending by periodicity, $\xi_n^j\in\psmooth{\ddom}$.
+	From this construction, we note that $\abs{\xi_n^j(x)}\leq\recip{n}$ for every $x\in\ddom$, and in particular $\xi_n^j(v_j)=0$.
+	Additionally,
+	\begin{align*}
+		\grad\xi_n^j(x) &= \xi'\bracs{n\bracs{x-v_j}\cdot w}\varphi\bracs{\gamma\bracs{x-v_j}\cdot w^{\perp}}w + \recip{n\gamma}\xi\bracs{n\bracs{x-v_j}\cdot w}\varphi'\bracs{\gamma\bracs{x-v_j}\cdot w^{\perp}}w^{\perp},
+	\end{align*}
+	so
+	\begin{align*}
+		\abs{\grad\xi_n^j}^2 \leq \sup\abs{\xi'}^2 + \gamma^2\sup\abs{\varphi'}^2 =: C < \infty,
+	\end{align*}
+	and $\grad\xi_n^j(v_j)=w$.
+	We now have that
+	\begin{align*}
+		\integral{\ddom}{\abs{\xi_n^j}^2}{\ccompMes}
+		&= \integral{S}{\abs{\xi_n^j}^2}{\ccompMes}
+		\leq \recip{n^2}\integral{S}{}{\compMes} + \alpha_j\xi_n^j(v_j) \\
+		&= \recip{n^2}\integral{S}{}{\compMes} \rightarrow 0 \toInfty{n}.
+	\end{align*}
+	so $\xi_n^j\rightarrow0$ in $\ltwo{\ddom}{\ccompMes}$.
+	For convergence of the gradients, we note that
+	\begin{align*}
+		\integral{\ddom}{\abs{\grad\xi_n^j}^2}{\lambda_2}
+		&\leq C\integral{S}{}{\lambda_2} = \frac{4C}{\gamma}\recip{n},
+	\end{align*}
+	since $\lambda_2(S)\leq 4\bracs{n\gamma}^{-1}$.
+	Additionally, we clearly have that
+	\begin{align*}
+		\integral{\ddom}{\abs{\grad\xi_n^j - w}^2}{\massMes} &= 0.
+	\end{align*}
+	Now consider any $I_{jk}\in J(v_j)$; since $e_{jk}\cdot w\neq 0$ there exists some angle $\beta_{jk}\neq\frac{\pi}{2},\frac{3\pi}{2}$ such that $\cos\beta_{jk}=e_{jk}\cdot w\neq 0$, and we have that
+	\begin{align*}
+		\lambda_{jk}\bracs{I_{jk}\cap S} &= \recip{n\abs{\cos\beta_{jk}}}.
+	\end{align*}
+	Therefore,
+	\begin{align*}
+		\integral{\ddom}{\abs{\grad\xi_n^j}^2}{\ddmes}
+		&= \sum_{I_{jk}\in J(v_j)} \integral{I_{jk}}{\abs{\grad\xi_n^j}^2}{\lambda_{jk}} \\
+		&\leq \sum_{I_{jk}\in J(v_j)} C\integral{I_{jk}\cap S}{}{\lambda_{jk}}
+		= \frac{C}{n} \sum_{I_{jk}\in J(v_j)} \recip{\abs{\cos\beta_{jk}}},
+	\end{align*}
+	and so we have that
+	\begin{align*}
+		\integral{\ddom}{\abs{\grad\xi_n^j - w\charFunc{v_j}}^2}{\ccompMes}
+		&\leq \frac{C}{n}\bracs{ 4\gamma^{-1} + \sum_{I_{jk}\in J(v_j)} \recip{\abs{\cos\beta_{jk}}} }
+		\rightarrow0 \toInfty{n},
+	\end{align*}
+	where $w\charFunc{v_j}$ is as in \eqref{eq:MassMesExtension-VertexFunction} with $c=w$.
+	This implies that we have the function $w\charFunc{v_j}\in\gradZero{\ddom}{\ccompMes}$.
+	
+	Now consider the set $E' = E \cup \clbracs{w^{\perp}, -w^{\perp}}$.
+	There again exists some unit vector $\hat{w}\in\reals^2$ such that $\hat{w}$ is not perpendicular to any element of $E'$, and following the construction above we can conclude that $\hat{w}\charFunc{v_j}\in\gradZero{\ddom}{\ccompMes}$ too.
+	Furthermore, we are guaranteed that $w$ and $\hat{w}$ are linearly independent in $\reals^2$, and in particular there exist constants $c_1,\hat{c}_1,c_2,\hat{c}_2\in\reals$ such that $\widehat{x}_1 = c_1 w + \hat{c}_1\hat{w}$ and $\widehat{x}_2 = c_2 + \hat{c}_2\hat{w}_2$.
+	This informs us that $\widehat{x}_1\charFunc{v_j}, \widehat{x}_2\charFunc{v_j}\in\gradZero{\ddom}{\ccompMes}$ by linearity, and consequentially so is $c\charFunc{v_j}$.
+\end{proof}
+
+Armed with proposition \ref{prop:SI-MassMesGradZeroExtension}, we can now characterise $\gradZero{\ddom}{\ccompMes}$.
+\begin{theorem}
+	Let $g\in\ltwo{\ddom}{\ccompMes}$, where
+	\begin{align*}
+		g = \begin{cases} g_{\lambda_2} & x\in\ddom\setminus\graph, \\ g_{\ddmes} & x\in\graph\setminus\vertSet, \\ g_{\massMes} & x\in\vertSet. \end{cases}
+	\end{align*}
+	Then we have that
+	\begin{align*}
+		g\in\gradZero{\ddom}{\ccompMes}
+		\quad\Leftrightarrow\quad &
+		g_{\lambda_2} = 0 \text{ and } g_{\ddmes}\in\gradZero{\ddom}{\ddmes} \text{ and } g_{\massMes}\in\gradZero{\ddom}{\massMes}.
+	\end{align*}
+\end{theorem}
+\begin{proof}
+	($\Rightarrow$) The right directed implication is a consequence of approximating sequences in $\gradZero{\ddom}{\ccompMes}$ also serving as suitable approximating sequences in the other spaces.
+	
+	($\Leftarrow$) The left directed implication follows from propositions \ref{prop:NuGradZeroChar}, \ref{prop:SI-GradZeroExtensionAndChar}(iii), and \ref{prop:SI-MassMesGradZeroExtension}, along with linearity of $\gradZero{\ddom}{\ccompMes}$.
 \end{proof}
 
 Having understood the set of gradients of zero, we are now able to deduce some important properties of the functions that live in $\tgradSob{\ddom}{\compMes}$.

@@ -4,7 +4,7 @@
 
 source activate PythonBasics
 
-cd /home/will/Documents/PhD/PhD-Thesis/Code/Composite_Cross/
+cd /home/will/Documents/PhD/PhD-Thesis/Code/CompositeCross/
 
 # parameters to keep constant throughout
 nPts=51
@@ -20,7 +20,7 @@ tEnd=$(($nPts-1))
 masterName="./FDM_Results/nPts${nPts}-N${N}-t1loops${tStart}-${tEnd}.csv"
 masterFName="./FDM_Results/nPts${nPts}-N${N}-t1loops${tStart}-${tEnd}-funcs.csv"
 # in case you want to set the value of alpha3?
-a=1.0
+a=10.0
 #a=0.0
 
 # Compute the eigenvalues and eigenfunctions, and save to files

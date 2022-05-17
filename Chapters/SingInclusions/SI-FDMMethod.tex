@@ -110,24 +110,28 @@ The approximate eigenvalues computed by the finite difference scheme using $N=25
 	\centering
 	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
-		\includegraphics[scale=0.45]{CompositeCross-FDM-SpectralBands.pdf}
+		\includegraphics[scale=0.45]{CompositeCross-FDM-SpectralBands-alpha0.pdf}
+		\caption[]{\label{fig:CompositeCross-FDM-SpectralBands-alpha0} Spectral bands when $\alpha=0$.}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
 		\includegraphics[scale=0.45]{CompositeCross-FDM-SpectralBands-alpha1.pdf}
+		\caption[]{\label{fig:CompositeCross-FDM-SpectralBands-alpha1} Spectral bands when $\alpha=1$.}
 	\end{subfigure}
 	\caption{\label{fig:CompositeCross-FDM-SpectralBands} The approximate eigenvalues computed by the finite-difference scheme, sorted into spectral bands for the cross-in-the-plane geometry. Eigenvalues corresponding to the extremities of the quasi-momentum are plotted in red.}
 \end{figure}
 Those points plotted in red correspond to eigenvalues that were computed at quasi-momentum values of $\bracs{0,0}^\top$, $\bracs{-\pi,0}^\top$, $\bracs{0,-\pi}^\top$, $\bracs{-\pi,-\pi}^\top$, from which we can observe that these points typically form the endpoints of each of the spectral bands.
 Much like the quantum graph case, we do not expect this to occur for general geometries --- there even appears to be a notable example of this in band 6, for which the eigenvalues at the extremities of the band are not obtained at any of these quasi-momentum values.
-However by examining the eigenvalues in this band as functions of $\qm$, as in figure \ref{fig:FDM_2022-01-28-09-33_AllBands}, it can be noticed that these extreme eigenvalues occur at quasi-momentum values where one of the components is either 0 (for the minimum values) or $-\pi$ (for the maximum values).
+However by examining the eigenvalues in this band as functions of $\qm$, as in figure \ref{fig:FDM_2022-01-28-09-33_AllBands}, it can be noticed that these extreme eigenvalues occur at quasi-momentum values where one of the components is either 0 (for the minimum values) or $-\pi$ (for the maximum values). \tstk{maybe move this to its own appendix as it's quite clunky, and then we can also throw in the alpha=1 ones too}
 \begin{figure}[b!]
 	\centering
 	\includegraphics[width=\textwidth]{FDM_2022-01-28-09-33_AllBands.pdf}
 	\caption{\label{fig:FDM_2022-01-28-09-33_AllBands} The eigenvalues $\omega$ in each spectral band, plotted as functions of the quasi-momentum $\qm$. Observe the symmetries that are expected from proposition \ref{prop:CrossInPlaneSymmetries}.}
 \end{figure}
 Similarly to our approach via \eqref{eq:SI-VarProb}, the eigenvalues within each band obey the symmetries expected from proposition \ref{prop:CrossInPlaneSymmetries}.
+We also note that the presence of non-zero $\alpha$, that is \emph{geometric contrast} in our material, has been sufficient to open spectral gaps.
+We additionally note that the Dirichlet eigenvalues $\omega_{n,m}^2=\bracs{n^2+m^2}\pi^2$ remain, as expected, part of the spectrum \tstk{in fact, are bands shrinking TO these values as alpha increases? Try a run with big alpha to check!}.
 
 A distinct advantage of using this method over that for solving problem \ref{prob:DiscVarProb} is that, once the finite difference matrix $\mathcal{F}$ is assembled, we can use matrix-eigenvalue solvers to examine the eigenvalues near to any positive number that we choose, without needing to compute \emph{all} the previous eigenvalues (and eigenfunctions) up to this value.
 This allows us to easily test the rate of convergence of the numerical scheme to the eigenvalues $\omega_{n,m}^2 = \bracs{n^2+m^2}\pi^2$.
@@ -167,7 +171,7 @@ This is what we observe numerically, and is illustrated in figure \ref{fig:Compo
 Regrettably, we do not have to hand any analytic solutions to \eqref{eq:SI-WaveEqn} beyond those shared with the Dirichlet laplacian and so we cannot test the rate of convergence for solutions which are non-constant along the skeleton. \tstk{but we could include some pictures of them anyway, right?}
 
 Our example using the cross-in-the-plane geometry illustrates the principle behind this approach; use finite differences to approximate $u$ in each $\ddom_i$ and along each $I_{jk}$, and tie approximations from adjacent bulk regions together through the nodal values along the common edge of the skeleton.
-Compared to the variational approach in section \ref{sec:SI-VarProbMethod}, this approach avoids working with $\compMes$ directly and instead allows us to work solely in terms of classical derivatives, approximating them through Taylor's theorem.
+Compared to the variational approach in section \ref{sec:SI-VarProbMethod}, this approach avoids working with $\ccompMes$ directly and instead allows us to work solely in terms of classical derivatives, approximating them through Taylor's theorem.
 However by choosing to approximate our function within each region and then ``stitch" these approximations together, we must choose our mesh in such a way as to abide by this decision, which can lead to some further considerations.
 Let us begin by considering the requirements of the placement of nodes within the bulk regions --- each node must have neighbours in each of the coordinate directions that lie within the (closure of) the bulk region.
 Now, consider a bulk region like that in figure \ref{fig:Diagram_FDMMeshIssue}, where a part of the skeleton is not aligned to the coordinate axes.
@@ -205,6 +209,6 @@ There is the possibility that such a node is far from the edge, again resulting 
 We again have the option of interpolating a value for $u$ in the bulk regions, schematically illustrated at the right highlighted node in figure \ref{fig:Diagram_FDMMeshIssue-c} --- the values at the orange points can be interpolated from nodes in the bulk region, provided we have already made sensible mesh choices within the adjacent bulk regions\footnote{Note that we cannot simply decide to make the mesh in the bulk region finer, so that a node is placed in the position we want to interpolate. In general, doing so will end up in us requiring more nodes on the skeleton through the issue in figure \ref{fig:Diagram_FDMMeshIssue-a}, sending us in circles!}.
 These issues arise due to how the skeleton (or more precisely, each edge of the skeleton) is effectively using a different coordinate system (for its derivatives) to the bulk regions, which is why this issue disappears when the edges of the skeleton are aligned to the coordinate axes --- the ``neighbouring" nodes we need on the skeleton are in the directions $e_{jk}, n_{jk}$ rather than the coordinate directions $x_1, x_2$.
 Whilst the complications this brings can be combatted in the manners discussed above, it does highlight the need for care when setting up and implementing this approach for general skeleton geometries.
-Contrastingly, the approach via \eqref{eq:SI-VarProb} does not run into these issues since (in that approach) we have made the choice to work with $\compMes$ directly and approximate the related gradients globally (over the whole domain) rather than utilising their properties on sub-regions.
+Contrastingly, the approach via \eqref{eq:SI-VarProb} does not run into these issues since (in that approach) we have made the choice to work with $\ccompMes$ directly and approximate the related gradients globally (over the whole domain) rather than utilising their properties on sub-regions.
 
 \tstk{could have a final paragraph or two commenting on a finite element based approach, which is a middle ground between the two approaches discussed here. It uses the variational form, but the basis functions that we'll be using would be local... Move to discussion at end}
