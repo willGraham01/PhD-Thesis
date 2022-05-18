@@ -119,7 +119,7 @@ The approximate eigenvalues computed by the finite difference scheme using $N=25
 		\includegraphics[scale=0.45]{CompositeCross-FDM-SpectralBands-alpha1.pdf}
 		\caption[]{\label{fig:CompositeCross-FDM-SpectralBands-alpha1} Spectral bands when $\alpha=1$.}
 	\end{subfigure}
-	\caption{\label{fig:CompositeCross-FDM-SpectralBands} The approximate eigenvalues computed by the finite-difference scheme, sorted into spectral bands for the cross-in-the-plane geometry. Eigenvalues corresponding to the extremities of the quasi-momentum are plotted in red.}
+	\caption[Spectral bands of \eqref{eq:SI-WaveEqn}, computed via solution of the problem \eqref{eq:SI-StrongForm}.]{\label{fig:CompositeCross-FDM-SpectralBands} The approximate eigenvalues computed by the finite-difference scheme, sorted into spectral bands for the cross-in-the-plane geometry. Eigenvalues corresponding to the extremities of the quasi-momentum are plotted in red.}
 \end{figure}
 Those points plotted in red correspond to eigenvalues that were computed at quasi-momentum values of $\bracs{0,0}^\top$, $\bracs{-\pi,0}^\top$, $\bracs{0,-\pi}^\top$, $\bracs{-\pi,-\pi}^\top$, from which we can observe that these points typically form the endpoints of each of the spectral bands.
 Much like the quantum graph case, we do not expect this to occur for general geometries --- there even appears to be a notable example of this in band 6, for which the eigenvalues at the extremities of the band are not obtained at any of these quasi-momentum values.
@@ -127,7 +127,7 @@ However by examining the eigenvalues in this band as functions of $\qm$, as in f
 \begin{figure}[b!]
 	\centering
 	\includegraphics[width=\textwidth]{FDM_2022-01-28-09-33_AllBands.pdf}
-	\caption{\label{fig:FDM_2022-01-28-09-33_AllBands} The eigenvalues $\omega$ in each spectral band, plotted as functions of the quasi-momentum $\qm$. Observe the symmetries that are expected from proposition \ref{prop:CrossInPlaneSymmetries}.}
+	\caption[Dispersion relations for the first 10 spectral bands of \eqref{eq:SI-WaveEqn}, computed via solution of \eqref{eq:SI-StrongForm} with $\alpha=0$.]{\label{fig:FDM_2022-01-28-09-33_AllBands} The eigenvalues $\omega$ in each spectral band, plotted as functions of the quasi-momentum $\qm$. Observe the symmetries that are expected from proposition \ref{prop:CrossInPlaneSymmetries}.}
 \end{figure}
 Similarly to our approach via \eqref{eq:SI-VarProb}, the eigenvalues within each band obey the symmetries expected from proposition \ref{prop:CrossInPlaneSymmetries}.
 We also note that the presence of non-zero $\alpha$, that is \emph{geometric contrast} in our material, has been sufficient to open spectral gaps.
@@ -142,7 +142,7 @@ This is what we observe numerically, and is illustrated in figure \ref{fig:Compo
 	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
 		\includegraphics[scale=0.45]{CompositeCross-FDM-DEV-LogError.pdf}
-		\caption{\label{fig:CompositeCross-FDM-DEV-LogError} Logarithm of the error in the eigenvalue against $\log(N)$, for a selection of $n,m$ values.}
+		\caption[]{\label{fig:CompositeCross-FDM-DEV-LogError} Logarithm of the error in the eigenvalue against $\log(N)$, for a selection of $n,m$ values.}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\textwidth}
@@ -164,9 +164,9 @@ This is what we observe numerically, and is illustrated in figure \ref{fig:Compo
 			$\bracs{3, 3}$ & $6.14879571$ & $-2.03187802$ \\
 			\hline
 		\end{tabular}
-		\caption{\label{fig:CompositeCross-FDM-DEV-LoBF} Line of best fit (via least squares regression) for each pair $\bracs{n,m}$.}
+		\caption[]{\label{fig:CompositeCross-FDM-DEV-LoBF} Line of best fit (via least squares regression) for each pair $\bracs{n,m}$.}
 	\end{subfigure}
-	\caption{\label{fig:CompositeCross-FDM-DEV} Convergence rate for the FDM method to the analytic eigenvalues shared with the Dirichlet laplacian. Observe that the estimated gradient, hence convergence rate with $N$, is approximately $-2$ as expected.}
+	\caption[Error in the eigenvalue approximation as a function of mesh size, for the cross-in-the-plane geometry.]{\label{fig:CompositeCross-FDM-DEV} Convergence rate for the FDM method to the analytic eigenvalues shared with the Dirichlet laplacian. Observe that the estimated gradient, hence convergence rate with $N$, is approximately $-2$ as expected.}
 \end{figure}
 Regrettably, we do not have to hand any analytic solutions to \eqref{eq:SI-WaveEqn} beyond those shared with the Dirichlet laplacian and so we cannot test the rate of convergence for solutions which are non-constant along the skeleton. \tstk{but we could include some pictures of them anyway, right?}
 
@@ -180,21 +180,21 @@ Now, consider a bulk region like that in figure \ref{fig:Diagram_FDMMeshIssue}, 
 	\begin{subfigure}[t]{0.3\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{Diagram_FDMMeshIssue-a.pdf}
-		\caption{\label{fig:Diagram_FDMMeshIssue-a} A uniform mesh does not ensure that nodes in the bulk regions have neighbouring nodes which will provide us with a $C^2$-approximation, nor that every vertex has a node placed at it.}
+		\caption[]{\label{fig:Diagram_FDMMeshIssue-a} A uniform mesh does not ensure that nodes in the bulk regions have neighbouring nodes which will provide us with a $C^2$-approximation, nor that every vertex has a node placed at it.}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.3\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{Diagram_FDMMeshIssue-b.pdf}
-		\caption{\label{fig:Diagram_FDMMeshIssue-b} Placing additional nodes along the skeleton edges, ensuring nodes in the bulk region have neighbours that lie within that same bulk region or on its boundary.}
+		\caption[]{\label{fig:Diagram_FDMMeshIssue-b} Placing additional nodes along the skeleton edges, ensuring nodes in the bulk region have neighbours that lie within that same bulk region or on its boundary.}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.3\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{Diagram_FDMMeshIssue-c.pdf}
-		\caption{\label{fig:Diagram_FDMMeshIssue-c} The nearest nodes in the directions $\pm n_{jk}$ from the skeleton may be far from the edge or not exist at all (left highlighted node). Interpolation (right highlighted node) offers a solution, provided the bulk region is meshed well.}
+		\caption[]{\label{fig:Diagram_FDMMeshIssue-c} The nearest nodes in the directions $\pm n_{jk}$ from the skeleton may be far from the edge or not exist at all (left highlighted node). Interpolation (right highlighted node) offers a solution, provided the bulk region is meshed well.}
 	\end{subfigure}
-	\caption{\label{fig:Diagram_FDMMeshIssue} An illustration of the complications encountered and considerations to be made when setting up a finite difference based approach for a general skeleton.}
+	\caption[Considerations for the placement of mesh nodes when handling arbitrary skeleton geometries.]{\label{fig:Diagram_FDMMeshIssue} An illustration of the complications encountered and considerations to be made when setting up a finite difference based approach for a general skeleton.}
 \end{figure}
 As we can quickly realise, uniform mesh will not be sufficient in this case, nor in general when the skeleton has edges that are not aligned to the coordinate axes. 
 In figure \ref{fig:Diagram_FDMMeshIssue-a}, the highlighted node in the bulk region has no neighbour ``below" that lies within the same bulk region or its boundary, so a centred difference approximation to $\laplacian_{\qm}u$ at this node cannot be used.

@@ -73,7 +73,7 @@ Note the sign convention; this is chosen because the region $\ddom_{jk}^+$ is ``
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=1.0]{Diagram_SI-AdjacentBulkRegions.pdf}
-	\caption{\label{fig:Diagram_SI-AdjacentBulkRegions} Labelling convention for regions adjacent to an edge $I_{jk}$.}
+	\caption[Labelling convention for bulk regions adjacent to a skeleton edge.]{\label{fig:Diagram_SI-AdjacentBulkRegions} Labelling convention for regions adjacent to an edge $I_{jk}$.}
 \end{figure}
 Now consider \eqref{eq:SI-WeakWaveEqn} when $\phi$ is taken to have compact support that intersects (the interior of) an edge $I_{jk}$, the adjacent bulk regions $\ddom_{jk}^+$ and $\ddom_{jk}^-$, and no other parts of $\ddom$.
 Equation \eqref{eq:SI-WeakWaveEqn} then implies that
@@ -139,7 +139,7 @@ This notation can be visualised in figure \ref{fig:Diagram_SI-JunctionLabelling}
 \begin{figure}[h]
 	\centering
 	\includegraphics[scale=1.5]{Diagram_SI-JunctionLabelling.pdf}
-	\caption{\label{fig:Diagram_SI-JunctionLabelling} The labelling conventions for the bulk regions and edges surrounding a vertex.}
+	\caption[Labelling convention for bulk regions surrounding a vertex.]{\label{fig:Diagram_SI-JunctionLabelling} The labelling conventions for the bulk regions and edges surrounding a vertex.}
 \end{figure}
 
 Fix $v_j\in\vertSet$ and let $\phi\in\psmooth{\ddom}$ be such that $\supp(\phi)\subset\bigcup_{l}\ddom_{jk_l}$, and have $v_j\in\supp(\phi)$.
@@ -226,10 +226,10 @@ For material contrast, mass $\epsilon^{-1}$ is ``taken away"\footnote{We could a
 
 Our final comments on the system \eqref{eq:SI-StrongForm} pertain to the form of the ODEs on the skeleton \eqref{eq:SI-InclusionEqn}.
 Notice that there is a coupling between the flux across the skeleton and the ``diffusion" (the second-derivative operator) along the skeleton.
-Analogous boundary conditions (and equations in the bulk) are observed in the study \tstk{Kirill-Evans} for a similar material setup, but considering the effective problem for the equations of (linearised) elasticity as the period cell size shrinks to zero.
+Analogous boundary conditions (and equations in the bulk) are observed in the study \cite{cherednichenko2019homogenisation} for a similar material setup, but considering the effective problem for the equations of (linearised) elasticity as the period cell size shrinks to zero.
 The effective problem obtained in this study also consisted of equations on the bulk regions, with a coupling between diffusion along and flux across the interfaces between the two components.
 It is noted in this study that such conditions, which coupling diffusion along a boundary to diffusion along said boundary, belong to the class of \tstk{Ventcel' conditions, reference}.
-The material considered in \tstk{Kirill-evans} did not possess geometric contrast (between the vertex and edge volume) however, so there is no analogous equation to \eqref{eq:SI-VertexCondition} appears in the effective problem.
+The material considered in \cite{cherednichenko2019homogenisation} did not possess geometric contrast (between the vertex and edge volume) however, so there is no analogous equation to \eqref{eq:SI-VertexCondition} appears in the effective problem.
 However us having obtained analogous conditions in the ``electromagnetic" setting provides further evidence that our motivation for studying \eqref{eq:SI-SingularWaveEqn} was well-founded; obtaining the system \eqref{eq:SI-StrongForm} and the analogous results in the elasticity context suggest that it is the limiting problem for the acoustic equation on a material with thin-structure inclusions that possess some geometric contrast\footnote{And given the discussion of the previous paragraph, can be easily generalised to a periodic, composite material exhibiting both material and geometric contrast.}.
 
 %Another comment should be made on how the ODEs on the skeleton \eqref{eq:SI-InclusionEqn} depend on the spectral parameter $\omega^2$. \tstk{Venstcel conditions, see Kirill and Evans: that the skeleton no longer acts as a simple boundary between the bulk regions $\ddom_i$.}

@@ -5,7 +5,7 @@ In the interests of providing the reader an intuitive idea of what the tangentia
 We will also address a remark made in section \ref{sec:TP-DomainSetup}, concerning why we do not consider a singular structure modelled by a (periodic) graph embedded into $\reals^3$, and instead consider a domain formed from the extrusion into 3 dimensions of a periodic graph embedded in $\reals^2$.
 
 Let us begin by demonstrating why curls of zero on a singular structure embedded into $\reals^3$ do not give rise to any interesting variational problems.
-Consider a segment $I_{jk}\subset\reals^3$, with $I_{jk} = \clbracs{0}\times\sqbracs{0,l_{jk}}\times\clbracs{0}$, which we can view as one edge of a graph embedded into $\reals^3$.
+Consider a segment $I_{jk}\subset\reals^3$, with $I_{jk} = \clbracs{0}\times\sqbracs{0,l_{jk}}\times\clbracs{0}$, which we can view as one edge of a graph embedded into $\reals^3$ --- the illustration in figure \ref{fig:Diagram_SingularMeasure3D} is representative of the situation.
 We can then prove the following result:
 \begin{prop} \label{prop:3DGraph-CurlsAreZero}
 	Every vector field is a curl of zero, that is
@@ -64,7 +64,7 @@ Under the axis of rotation provided by $\ktcurl{\lambda_{jk}}u$, the curve $\gam
 \begin{figure}[b!]
 	\centering
 	\includegraphics[scale=1.0]{./Diagram_CurlGeometric.pdf}
-	\caption{\label{fig:Diagram_CurlGeometric} An illustration of the notation of tangential curl and curls of zero on $P_{jk}$. Tangential curls cause points on an (infinitesimally small) sphere to rotate within the plane $P_{jk}$, whilst curls of zero induce rotations that move points on the sphere out of the plane.}
+	\caption[Geometric interpretation of tangential curls with respect to $\dddmes$.]{\label{fig:Diagram_CurlGeometric} An illustration of the notation of tangential curl and curls of zero on $P_{jk}$. Tangential curls cause points on an (infinitesimally small) sphere to rotate within the plane $P_{jk}$, whilst curls of zero induce rotations that move points on the sphere out of the plane.}
 \end{figure}
 However under the axis of rotation provided by a curl of zero, the curve $\gamma_p$ is not contained in the plane $P_{jk}$ --- in fact, it's intersection with the plane will be at most a finite number of points.
 If instead $P_{jk}\cap\gamma_p\supset\clbracs{p,p^*}$ for $p^*\neq p$, the measure $\lambda_{jk}\times\lambda_1$ still has no way of knowing \emph{how} $p$ travelled to $p^*$, since the path $\gamma_p$ is not visible (and, from the 3-dimensional perspective, there are infinitely many curls of varying magnitudes that could rotate $p$ to $p^*$ and back).
