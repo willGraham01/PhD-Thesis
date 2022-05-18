@@ -1,91 +1,121 @@
 \section{Conclusions and Further Exploration} \label{sec:SI-Conc}
+We conclude our investigation into the various formulations of \eqref{eq:SI-WaveEqn}, our attempts to access the spectrum, and the insights we have obtained with a summary and survey of open questions motivated by this work.
+Recall that the motivation for studying \eqref{eq:SI-WaveEqn} was \tstk{many-fold};
+\begin{itemize}
+	\item Study the ``intuitive" limit of thin-structure problems, with a view to motivating rigorous analysis and further generalisations to problems in electromagnetism
+	\item Perform preliminary investigations into the effects introduced by the presence of geometric contrast
+	\item Investigate numerical approaches to the solution of such problems
+\end{itemize} 
 
-\subsection{Non-Zero Coupling Constants, and the Relation Between \eqref{eq:SI-WeakWaveEqn} and \eqref{eq:SI-NonLocalQG}} \label{ssec:SI-Strauss}
+Each of the sections \tstk{VP, FDM, NonLocal} has provided us with an alternative formulation of \eqref{eq:SI-WaveEqn}.
+We demonstrated in section \ref{sec:SI-VarProbMethod} that we can attempt to solve \eqref{eq:SI-WeakWaveEqn} directly through use of the min-max principle, appealing only to the understanding of $\tgradSob{\ddom}{\ccompMes}$ that we gained from section \ref{sec:CompSobSpaces}.
+Whilst approximation of the eigenvalues, eigenfunctions, and dispersion relations was possible using this method, the formulation itself does not provide us with any explicit insights into the interactions between the skeleton and the bulk, nor the effect of the coupling constants $\alpha_j$.
+We also highlighted that the lack of a priori knowledge concerning the explicit functions that live in $\tgradSob{\ddom}{\ccompMes}$, and the subset of these that are solutions to \eqref{eq:SI-WaveEqn}, forces us to use inefficient choices for our basis functions.
+Indeed, having to hand an explicit orthonormal basis for $\tgradSob{\ddom}{\ccompMes}$, or some a priori information about the form of the eigenfunctions would go a number of ways towards fixing this issue.
+We also highlight that if one is intent on solving \eqref{eq:SI-WaveEqn} directly from the variational problem, one might wish to consider setting up a finite element based approach.
+There would still be a number of issues surrounding explicitly determining a suitable basis to use in computations, however \eqref{eq:SI-WeakWaveEqn} is already in the form $b(u\phi)=\ip{u}{\phi}$.
+So up to checking that the bilinear forms \tstk{HERE, FDM stuff}
 
-\tstk{copy-paste from ExtendedSpaceAlready.tex}
-Let $\ddom=\left[0,1\right)^2$ be our usual domain filled with a singular structure $\graph$, separated by $\graph$ into the pairwise-disjoint connected components $\ddom_i, i\in\Lambda$ for some finite index set $\Lambda$.
-Set $N = \abs{\vertSet}$ to be the number of vertices, and $L=\abs{\Lambda}$ be the number of bulk regions.
-Also denote by $\compMes = \lambda_2 + \ddmes$, and for coupling constants $\alpha_j>0$ at the vertices $v_j$ let $\nu = \sum_{v_j\in\vertSet}\alpha_j\delta_{v_j}$ be a weighted sum of point-mass measures centred at the vertices.
-On an edge $I_{jk}$, we denote by $\ddom_+$ the bulk region in the direction $n_{jk}$ from $I_{jk}$, and $\ddom_-$ the bulk region in the direction $-n_{jk}$ from $I_{jk}$.
-Denote by $n^{\pm}$ the unit exterior normal to $\ddom_{\pm}$ (noting that $n^{\pm}=\mp n_{jk}$), and write $\pdiff{u^{\pm}}{n^{\pm}}$ to be the normal derivative on $\partial\ddom_{\pm}$ of the function $u$ restricted to $\ddom_{\pm}$.
+The difficulties we came across when working in $\tgradSob{\ddom}{\ccompMes}$ lead us to the decision to derive a formulation of \eqref{eq:SI-WaveEqn} that does not involve the rather unfamiliar tangential gradients with respect to $\ccompMes$.
+This lead us to the ``strong" formulation \eqref{eq:SI-StrongForm}, which clarifies the interactions between the bulk regions, skeleton, and vertices.
+We observe that the inclusion of a background material causes a coupling between the solution in the bulk regions and on the skeleton through the \tstk{Ventcel'?} condition \eqref{eq:SI-InclusionEqn}, and bears additional similarities to effective problems derived in the context of elasticity (without geometric contrast between the edges and vertices).
+Furthermore, the geometric contrast provided by the coupling constants $\alpha_j$ is again present in a non-classical Kirchoff condition at the vertices.
+Whilst the physical material that we have been considering does not possess any material contrast between the bulk and skeleton, we highlight that we may ``add mass" to the measure $\lambda_2$ to capture the effects of such contrast in our strong formulation too.
+The observations justify our approach via singular measures and physically motivated variational problems as a useful tool for providing an insight into the effective problems one can expect to obtain from the study of composite materials with geometric and/or material contrast.
+However, the question is still open in the literature as to whether the (operator whose spectral problem is the) strong formulation \eqref{eq:SI-StrongForm} is the limit (either in the spectral or norm-resolvent sense) of a sequence of operators on a composite, periodic medium with both geometric and material contrast.
+On the numerical side, we can exploit the additional information gained from \eqref{eq:SI-StrongForm} to approximate the action of the operator (that defines the left hand side of \eqref{eq:SI-FDMEquationsToDisc}) on $u$ in each of the bulk regions and on each edge of the skeleton, then couple the various ``regional" approximations via the flux across the edges and the non-classical Kirchoff condition at the vertices.
+Such a scheme allows us to avoid the problems surrounding the space $\tgradSob{\ddom}{\ccompMes}$ that we ran into previously, albeit not without introducing a number of other considerations in setting up such a scheme.
+Our example concerning the cross-in-the-plane geometry also demonstrates that the introduction of geometric contrast (that is, ensuring that $\alpha_j\neq0$) is sufficient to cause band-gaps to emerge in the spectrum of $\bracs{\tgrad_{\ccompMes}}^2$. \tstk{alpha going to infinity causes Dirichlet decoupling maybe? do some more runs...}
+There also appears to be good agreement with the approximations obtained from solution to \eqref{eq:SI-VarProb}, and convergence to the eigenfunctions and eigenvalues shared with the Dirichlet Laplacian.
 
-The ``strong formulation" of our composite medium problem is
-\begin{subequations} \label{eq:StrongForm}
-	\begin{align}
-		-\laplacian_{\qm}u &= \omega^2 u, &\qquad\text{in } \ddom_i, \ \forall i\in\Lambda, \\
-		-\bracs{\diff{}{y}+\rmi\qm_{jk}}^2 u_{jk} - \bracs{\pdiff{u^+}{n^+} + \pdiff{u^-}{n^-}} &= \omega^2 u_{jk},  &\qquad\text{on every } I_{jk}\in\edgeSet, \\
-		\sum_{j\con k}\bracs{\pdiff{}{n}+\rmi\qm_{jk}}u_{jk}(v_j) &= 0, &\qquad\text{at every } v_j\in\vertSet,
-	\end{align}
-\end{subequations}
-where the function $u$ is $\gradgradSob{\ddom_i}{\lambda_2}$ for every $i$, $H^2(I_{jk})$ for every $I_{jk}$, is continuous (in the sense of traces) across $I_{jk}$, and is continuous at the vertices $v_j$.
-Recall that this problem was derived from the variational problem of finding $u\in\tgradSob{\ddom}{\compMes}$ such that
-\begin{align} \label{eq:WeakForm}
-	\integral{\ddom}{ \tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}} }{\compMes} &=
-	\omega^2\integral{\ddom}{ u\overline{\phi} }{\compMes}, \quad\forall\phi\in\smooth{\ddom}.
-\end{align}
 
-We are interested in constructing an extended space $\mathcal{H}$ in which the problem \eqref{eq:StrongForm} reads as a standard eigenvalue problem $\mathcal{A} u = \omega^2 u$ for some operator $\mathcal{A}$ on $\mathcal{H}$.
-With this in mind, consider the space
-\begin{align*}
-	\mathcal{H} &= \bracs{\bigoplus_{i\in\Lambda}\gradgradSob{\ddom_i}{\lambda_2}} \oplus H^2\bracs{\graph} \oplus \ltwo{\ddom}{\nu},
-\end{align*}
-viewed as a subspace of
-\begin{align*}
-	\mathcal{L} := \bracs{\bigoplus_{i\in\Lambda}\ltwo{\ddom_i}{\lambda_2}} \oplus L^2\bracs{\graph} \oplus \ltwo{\ddom}{\nu},
-\end{align*}
-where we denote an element $u$ of $\mathcal{L}$ by the $\bracs{L+\abs{\edgeSet}+N}$-``vector"
-\begin{align*}
-	u &= \bracs{\clbracs{u_{\ddom_i}}_{i\in\Lambda}, \clbracs{u_{jk}}_{I_{jk}\in\edgeSet}, \clbracs{u(v_j)}_{v_j\in\vertSet}}^\top.
-\end{align*}
-Note that $\ltwo{\ddom}{\nu}\cong\complex^N$.
-Define the operator $\mathcal{A}$ by
-\begin{align*}
-	\dom\bracs{\mathcal{A}} &= \mathcal{H}, \\
-	\mathcal{A} u &= 
-	\begin{pmatrix}	
-	\clbracs{-\laplacian_{\qm}u_{\ddom_i}}_{i\in\Lambda} \\
-	\clbracs{-\bracs{\diff{}{y}+\rmi\qm_{jk}}^2 u_{jk} - \bracs{\tgrad u_{\ddom_+}\cdot n^+ + \tgrad u_{\ddom_-}\cdot n^-} }_{I_{jk}\in\edgeSet} \\
-	\clbracs{\sum_{j\con k}\bracs{\pdiff{}{n}+\rmi\qm_{jk}}u_{jk}(v_j)}_{v_j\in\vertSet}
-	\end{pmatrix}
-	\in\mathcal{L},
-\end{align*}
-and (setting aside questions about the nature of the spectrum, etc) consider the eigenvalue problem
-\begin{align*}
-	\mathcal{A} u = \omega^2 u,
-\end{align*}
-which without much effort can be shown to be equivalent to
-\begin{subequations} \label{eq:aopEvalProb}
-	\begin{align}
-		-\laplacian_{\qm}u &= \omega^2 u, &\qquad\text{in } \ddom_i, \ \forall i\in\Lambda, \\
-		-\bracs{\diff{}{y}+\rmi\qm_{jk}}^2 u_{jk} - \bracs{\tgrad u_{\ddom_+}\cdot n^+ + \tgrad u_{\ddom_-}\cdot n^-} &= \omega^2 u_{jk},  &\qquad\text{on every } I_{jk}\in\edgeSet, \\
-		\sum_{j\con k}\bracs{\pdiff{}{n}+\rmi\qm_{jk}}u_{jk}(v_j) &= \omega^2\alpha_j u(v_j), &\qquad\text{at every } v_j\in\vertSet.		
-	\end{align}
-\end{subequations}
-Here, we denote by $\tgrad u_{\ddom_+}\cdot n^+$ the trace of the $\qm$-shifted gradient $\tgrad$ of the function $u_{\ddom_{\pm}}\cdot n^{\pm}$ onto $I_{jk}$.
-
-Note that \eqref{eq:aopEvalProb} is not equivalent to \eqref{eq:StrongForm}, as functions in $\mathcal{H}$ are not required to adhere to continuity across the skeleton (hence the $\tgrad$ terms rather than just normal derivatives) nor continuity at the vertices (the notation $u(v_j)$ is just some value in $\complex$ that $u\in\mathcal{H}$ takes at each $v_j$).
-We can then ask if there is a form from which $\mathcal{A}$ can be defined, with this in mind, notice that
-\begin{align*}
-	\ip{\mathcal{A} u}{\phi}_{\mathcal{L}} &= \sum_{i\in\Lambda}\integral{\ddom_i}{ \tgrad u_{\ddom_i}\cdot\overline{\tgrad\phi} }{\lambda_2}
-	+ \sum_{v_j\in\vertSet}\sum_{j\conLeft k}\integral{\ddom}{ \bracs{\diff{}{y}+\rmi\qm_{jk}}u\overline{\bracs{\diff{}{y}+\rmi\qm_{jk}}\phi} }{\lambda_{jk}} \\
-	&= \sum_{i\in\Lambda}\ip{ \tgrad u }{ \tgrad\phi }_{\ltwo{\ddom_i}{\lambda_i}}
-	+ \sum_{v_j\in\vertSet}\sum_{j\conLeft k}\ip{ \bracs{\diff{}{y}+\rmi\qm_{jk}}u }{ \bracs{\diff{}{y}+\rmi\qm_{jk}}\phi }_{\ltwo{I_{jk}}{\lambda_{jk}}},
-\end{align*}
-so if we define (for $u\in\mathcal{H}$)
-\begin{align*}
-	\tgrad_{\mathcal{H}} u &:= \bracs{\clbracs{\tgrad u_{\ddom_i}}_{i\in\Lambda}, \clbracs{\bracs{\diff{}{y}+\rmi\qm_{jk}}u_{jk}}_{I_{jk}\in\edgeSet}, \clbracs{0}_{v_j\in\vertSet}}^\top,
-\end{align*}
-we have that
-\begin{align*}
-	\ip{\mathcal{A} u}{\phi}_{\mathcal{L}} &= \ip{\tgrad_{\mathcal{H}} u}{\tgrad_{\mathcal{H}}\phi}_{\mathcal{L}}.
-\end{align*}
-Thus, we can define $\mathcal{A}$ from the bilinear form $b(u,v) = \ip{\tgrad_{\mathcal{H}} u}{\tgrad_{\mathcal{H}}\phi}_{\mathcal{L}}$ for $u,v\in\mathcal{H}$, and write the eigenvalue problem for $\mathcal{A}$ as
-\begin{align} \label{eq:aopWeakEvalProb}
-	\ip{\tgrad_{\mathcal{H}} u}{\tgrad_{\mathcal{H}}\phi}_{\mathcal{L}} &= \omega^2\ip{u}{\phi}_{\mathcal{L}}.
-\end{align}
-
-The similarities between \eqref{eq:StrongForm} and \eqref{eq:aopEvalProb} are apparent --- if we take $\alpha_j=0$ for every $j$, then \eqref{eq:WeakForm} and \eqref{eq:aopWeakEvalProb} are the same problem, and our ``definition" of $\tgrad_{\mathcal{H}} u$ for $u\in\mathcal{H}$ coincides with $\tgrad_{\compMes}u$ for $u\in\tgradSob{\ddom}{\compMes}$.
-We even have that the set of $u\in\tgradSob{\ddom}{\compMes}$ that solve \eqref{eq:WeakForm} is a subset of $\mathcal{H}$.
-
-Furthermore, if we then ``switch on" the $\alpha_j>0$, then $\tgrad_{\mathcal{H}} u$ still coincides with what we expect the tangential gradient in $\tgradSob{\ddom}{(\compMes+\nu)}$ to be.
-The equations \eqref{eq:WeakForm} (replacing $\compMes$ with $\compMes+\nu$) and \eqref{eq:aopWeakEvalProb} are identical, and the problem \eqref{eq:aopEvalProb} (restricted to $\tgradSob{\ddom}{(\compMes+\nu)}$) reduces to what my current ``guess" at the analogue of \eqref{eq:StrongForm} with the point masses included would be.
+%
+%\subsection{Non-Zero Coupling Constants, and the Relation Between \eqref{eq:SI-WeakWaveEqn} and \eqref{eq:SI-NonLocalQG}} \label{ssec:SI-Strauss}
+%
+%\tstk{copy-paste from ExtendedSpaceAlready.tex}
+%Let $\ddom=\left[0,1\right)^2$ be our usual domain filled with a singular structure $\graph$, separated by $\graph$ into the pairwise-disjoint connected components $\ddom_i, i\in\Lambda$ for some finite index set $\Lambda$.
+%Set $N = \abs{\vertSet}$ to be the number of vertices, and $L=\abs{\Lambda}$ be the number of bulk regions.
+%Also denote by $\compMes = \lambda_2 + \ddmes$, and for coupling constants $\alpha_j>0$ at the vertices $v_j$ let $\nu = \sum_{v_j\in\vertSet}\alpha_j\delta_{v_j}$ be a weighted sum of point-mass measures centred at the vertices.
+%On an edge $I_{jk}$, we denote by $\ddom_+$ the bulk region in the direction $n_{jk}$ from $I_{jk}$, and $\ddom_-$ the bulk region in the direction $-n_{jk}$ from $I_{jk}$.
+%Denote by $n^{\pm}$ the unit exterior normal to $\ddom_{\pm}$ (noting that $n^{\pm}=\mp n_{jk}$), and write $\pdiff{u^{\pm}}{n^{\pm}}$ to be the normal derivative on $\partial\ddom_{\pm}$ of the function $u$ restricted to $\ddom_{\pm}$.
+%
+%The ``strong formulation" of our composite medium problem is
+%\begin{subequations} \label{eq:StrongForm}
+%	\begin{align}
+%		-\laplacian_{\qm}u &= \omega^2 u, &\qquad\text{in } \ddom_i, \ \forall i\in\Lambda, \\
+%		-\bracs{\diff{}{y}+\rmi\qm_{jk}}^2 u_{jk} - \bracs{\pdiff{u^+}{n^+} + \pdiff{u^-}{n^-}} &= \omega^2 u_{jk},  &\qquad\text{on every } I_{jk}\in\edgeSet, \\
+%		\sum_{j\con k}\bracs{\pdiff{}{n}+\rmi\qm_{jk}}u_{jk}(v_j) &= 0, &\qquad\text{at every } v_j\in\vertSet,
+%	\end{align}
+%\end{subequations}
+%where the function $u$ is $\gradgradSob{\ddom_i}{\lambda_2}$ for every $i$, $H^2(I_{jk})$ for every $I_{jk}$, is continuous (in the sense of traces) across $I_{jk}$, and is continuous at the vertices $v_j$.
+%Recall that this problem was derived from the variational problem of finding $u\in\tgradSob{\ddom}{\compMes}$ such that
+%\begin{align} \label{eq:WeakForm}
+%	\integral{\ddom}{ \tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}} }{\compMes} &=
+%	\omega^2\integral{\ddom}{ u\overline{\phi} }{\compMes}, \quad\forall\phi\in\smooth{\ddom}.
+%\end{align}
+%
+%We are interested in constructing an extended space $\mathcal{H}$ in which the problem \eqref{eq:StrongForm} reads as a standard eigenvalue problem $\mathcal{A} u = \omega^2 u$ for some operator $\mathcal{A}$ on $\mathcal{H}$.
+%With this in mind, consider the space
+%\begin{align*}
+%	\mathcal{H} &= \bracs{\bigoplus_{i\in\Lambda}\gradgradSob{\ddom_i}{\lambda_2}} \oplus H^2\bracs{\graph} \oplus \ltwo{\ddom}{\nu},
+%\end{align*}
+%viewed as a subspace of
+%\begin{align*}
+%	\mathcal{L} := \bracs{\bigoplus_{i\in\Lambda}\ltwo{\ddom_i}{\lambda_2}} \oplus L^2\bracs{\graph} \oplus \ltwo{\ddom}{\nu},
+%\end{align*}
+%where we denote an element $u$ of $\mathcal{L}$ by the $\bracs{L+\abs{\edgeSet}+N}$-``vector"
+%\begin{align*}
+%	u &= \bracs{\clbracs{u_{\ddom_i}}_{i\in\Lambda}, \clbracs{u_{jk}}_{I_{jk}\in\edgeSet}, \clbracs{u(v_j)}_{v_j\in\vertSet}}^\top.
+%\end{align*}
+%Note that $\ltwo{\ddom}{\nu}\cong\complex^N$.
+%Define the operator $\mathcal{A}$ by
+%\begin{align*}
+%	\dom\bracs{\mathcal{A}} &= \mathcal{H}, \\
+%	\mathcal{A} u &= 
+%	\begin{pmatrix}	
+%	\clbracs{-\laplacian_{\qm}u_{\ddom_i}}_{i\in\Lambda} \\
+%	\clbracs{-\bracs{\diff{}{y}+\rmi\qm_{jk}}^2 u_{jk} - \bracs{\tgrad u_{\ddom_+}\cdot n^+ + \tgrad u_{\ddom_-}\cdot n^-} }_{I_{jk}\in\edgeSet} \\
+%	\clbracs{\sum_{j\con k}\bracs{\pdiff{}{n}+\rmi\qm_{jk}}u_{jk}(v_j)}_{v_j\in\vertSet}
+%	\end{pmatrix}
+%	\in\mathcal{L},
+%\end{align*}
+%and (setting aside questions about the nature of the spectrum, etc) consider the eigenvalue problem
+%\begin{align*}
+%	\mathcal{A} u = \omega^2 u,
+%\end{align*}
+%which without much effort can be shown to be equivalent to
+%\begin{subequations} \label{eq:aopEvalProb}
+%	\begin{align}
+%		-\laplacian_{\qm}u &= \omega^2 u, &\qquad\text{in } \ddom_i, \ \forall i\in\Lambda, \\
+%		-\bracs{\diff{}{y}+\rmi\qm_{jk}}^2 u_{jk} - \bracs{\tgrad u_{\ddom_+}\cdot n^+ + \tgrad u_{\ddom_-}\cdot n^-} &= \omega^2 u_{jk},  &\qquad\text{on every } I_{jk}\in\edgeSet, \\
+%		\sum_{j\con k}\bracs{\pdiff{}{n}+\rmi\qm_{jk}}u_{jk}(v_j) &= \omega^2\alpha_j u(v_j), &\qquad\text{at every } v_j\in\vertSet.		
+%	\end{align}
+%\end{subequations}
+%Here, we denote by $\tgrad u_{\ddom_+}\cdot n^+$ the trace of the $\qm$-shifted gradient $\tgrad$ of the function $u_{\ddom_{\pm}}\cdot n^{\pm}$ onto $I_{jk}$.
+%
+%Note that \eqref{eq:aopEvalProb} is not equivalent to \eqref{eq:StrongForm}, as functions in $\mathcal{H}$ are not required to adhere to continuity across the skeleton (hence the $\tgrad$ terms rather than just normal derivatives) nor continuity at the vertices (the notation $u(v_j)$ is just some value in $\complex$ that $u\in\mathcal{H}$ takes at each $v_j$).
+%We can then ask if there is a form from which $\mathcal{A}$ can be defined, with this in mind, notice that
+%\begin{align*}
+%	\ip{\mathcal{A} u}{\phi}_{\mathcal{L}} &= \sum_{i\in\Lambda}\integral{\ddom_i}{ \tgrad u_{\ddom_i}\cdot\overline{\tgrad\phi} }{\lambda_2}
+%	+ \sum_{v_j\in\vertSet}\sum_{j\conLeft k}\integral{\ddom}{ \bracs{\diff{}{y}+\rmi\qm_{jk}}u\overline{\bracs{\diff{}{y}+\rmi\qm_{jk}}\phi} }{\lambda_{jk}} \\
+%	&= \sum_{i\in\Lambda}\ip{ \tgrad u }{ \tgrad\phi }_{\ltwo{\ddom_i}{\lambda_i}}
+%	+ \sum_{v_j\in\vertSet}\sum_{j\conLeft k}\ip{ \bracs{\diff{}{y}+\rmi\qm_{jk}}u }{ \bracs{\diff{}{y}+\rmi\qm_{jk}}\phi }_{\ltwo{I_{jk}}{\lambda_{jk}}},
+%\end{align*}
+%so if we define (for $u\in\mathcal{H}$)
+%\begin{align*}
+%	\tgrad_{\mathcal{H}} u &:= \bracs{\clbracs{\tgrad u_{\ddom_i}}_{i\in\Lambda}, \clbracs{\bracs{\diff{}{y}+\rmi\qm_{jk}}u_{jk}}_{I_{jk}\in\edgeSet}, \clbracs{0}_{v_j\in\vertSet}}^\top,
+%\end{align*}
+%we have that
+%\begin{align*}
+%	\ip{\mathcal{A} u}{\phi}_{\mathcal{L}} &= \ip{\tgrad_{\mathcal{H}} u}{\tgrad_{\mathcal{H}}\phi}_{\mathcal{L}}.
+%\end{align*}
+%Thus, we can define $\mathcal{A}$ from the bilinear form $b(u,v) = \ip{\tgrad_{\mathcal{H}} u}{\tgrad_{\mathcal{H}}\phi}_{\mathcal{L}}$ for $u,v\in\mathcal{H}$, and write the eigenvalue problem for $\mathcal{A}$ as
+%\begin{align} \label{eq:aopWeakEvalProb}
+%	\ip{\tgrad_{\mathcal{H}} u}{\tgrad_{\mathcal{H}}\phi}_{\mathcal{L}} &= \omega^2\ip{u}{\phi}_{\mathcal{L}}.
+%\end{align}
+%
+%The similarities between \eqref{eq:StrongForm} and \eqref{eq:aopEvalProb} are apparent --- if we take $\alpha_j=0$ for every $j$, then \eqref{eq:WeakForm} and \eqref{eq:aopWeakEvalProb} are the same problem, and our ``definition" of $\tgrad_{\mathcal{H}} u$ for $u\in\mathcal{H}$ coincides with $\tgrad_{\compMes}u$ for $u\in\tgradSob{\ddom}{\compMes}$.
+%We even have that the set of $u\in\tgradSob{\ddom}{\compMes}$ that solve \eqref{eq:WeakForm} is a subset of $\mathcal{H}$.
+%
+%Furthermore, if we then ``switch on" the $\alpha_j>0$, then $\tgrad_{\mathcal{H}} u$ still coincides with what we expect the tangential gradient in $\tgradSob{\ddom}{(\compMes+\nu)}$ to be.
+%The equations \eqref{eq:WeakForm} (replacing $\compMes$ with $\compMes+\nu$) and \eqref{eq:aopWeakEvalProb} are identical, and the problem \eqref{eq:aopEvalProb} (restricted to $\tgradSob{\ddom}{(\compMes+\nu)}$) reduces to what my current ``guess" at the analogue of \eqref{eq:StrongForm} with the point masses included would be.

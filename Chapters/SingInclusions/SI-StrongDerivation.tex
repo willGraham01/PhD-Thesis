@@ -189,16 +189,9 @@ Indeed, the system is composed of two differential equations (the PDE \eqref{eq:
 The objects that we are required to work with are more familiar to us, being a combination of classical gradients and those studied in section \ref{sec:3DGradSobSpaces}. 
 We also expect it will be easier for us to work with this system both analytically and numerically, due to the interaction between the bulk regions and skeleton being made explicit.
 There are however two ``scales" on which a solution $u$ behaves, being 2D in the bulk and 1D on the skeleton, and we need resolution in both of them.
+On the matter of consistency between solutions to the problem \eqref{eq:SI-VarProb} and \eqref{eq:SI-StrongForm}, note that \eqref{eq:SI-StrongForm} is also the result of applying the theorem of Lagrange multipliers to \eqref{eq:SI-VarProb}.
 
-There are a couple of comments that we should make about the system \eqref{eq:SI-StrongForm}.
-On the matter of consistency between solutions to the problem \eqref{eq:SI-VarProb} and \eqref{eq:SI-StrongForm}, note that \eqref{eq:SI-StrongForm} is the result of applying the theorem of Lagrange multipliers to \eqref{eq:SI-VarProb}.
-Another comment should be made on how the ODEs on the skeleton \eqref{eq:SI-InclusionEqn} depend on the spectral parameter $\omega^2$. \tstk{Venstcel conditions, see Kirill and Evans: that the skeleton no longer acts as a simple boundary between the bulk regions $\ddom_i$.}
-The system \eqref{eq:SingularWaveEqnQGProblem} had $\omega^2$ appearing in the vertex conditions, that is what would normally be the \emph{boundary conditions} for the ODEs on $I_{jk}$.
-The appearance of $\omega^2$ in these conditions was a direct consequence of the presence of the measure $\massMes$ providing the vertices with some ``size".
-Rather than a graph with ``bulky vertices", we now have a set of regions $\ddom_i$ with ``bulky boundaries" (the skeleton).
-And again, we observe that bestowing a notion of length to our singular inclusions (through $\ddmes$) has caused $\omega^2$ to appear in what would normally be our boundary conditions for the regions $\ddom_i$.
-
-We also make some remarks here to reconnect \eqref{eq:SI-StrongForm} with the physical (or ``dimensionfull") material it is supposed to represent.
+It is worth making some remarks here to reconnect \eqref{eq:SI-StrongForm} with the physical (or ``dimensionfull") material it is supposed to represent.
 The system \eqref{eq:SI-StrongForm} represents the acoustic approximation on a composite material whose \emph{material} properties in the bulk regions and on the skeleton are identical, but whose geometric properties are in contrast.
 Indeed, one may find it odd to notice that the (dimensionless) parameters $\alpha_j$ only appear in one of the three equations, \eqref{eq:SI-VertexCondition}.
 It is precisely this equation which links the behaviour of the solutions at the vertices to that on the edges. 
@@ -230,3 +223,17 @@ through studying the problem \eqref{eq:SI-WaveEqn} in the space $\tgradSob{\ddom
 The effects of material contrast can thus be introduced in an identical fashion to the effects of geometric contrast --- through ``adding" mass to one part of the medium and not to the others.
 For geometric effects, mass $\alpha_j$ is ``added" to the vertices $v_j$.
 For material contrast, mass $\epsilon^{-1}$ is ``taken away"\footnote{We could also introduce this affect by ``adding" mass to the skeleton, by considering $\epsilon\dddmes$ in place of $\dddmes$.} from the bulk regions $\ddom_i$. 
+
+Our final comments on the system \eqref{eq:SI-StrongForm} pertain to the form of the ODEs on the skeleton \eqref{eq:SI-InclusionEqn}.
+Notice that there is a coupling between the flux across the skeleton and the ``diffusion" (the second-derivative operator) along the skeleton.
+Analogous boundary conditions (and equations in the bulk) are observed in the study \tstk{Kirill-Evans} for a similar material setup, but considering the effective problem for the equations of (linearised) elasticity as the period cell size shrinks to zero.
+The effective problem obtained in this study also consisted of equations on the bulk regions, with a coupling between diffusion along and flux across the interfaces between the two components.
+It is noted in this study that such conditions, which coupling diffusion along a boundary to diffusion along said boundary, belong to the class of \tstk{Ventcel' conditions, reference}.
+The material considered in \tstk{Kirill-evans} did not possess geometric contrast (between the vertex and edge volume) however, so there is no analogous equation to \eqref{eq:SI-VertexCondition} appears in the effective problem.
+However us having obtained analogous conditions in the ``electromagnetic" setting provides further evidence that our motivation for studying \eqref{eq:SI-SingularWaveEqn} was well-founded; obtaining the system \eqref{eq:SI-StrongForm} and the analogous results in the elasticity context suggest that it is the limiting problem for the acoustic equation on a material with thin-structure inclusions that possess some geometric contrast\footnote{And given the discussion of the previous paragraph, can be easily generalised to a periodic, composite material exhibiting both material and geometric contrast.}.
+
+%Another comment should be made on how the ODEs on the skeleton \eqref{eq:SI-InclusionEqn} depend on the spectral parameter $\omega^2$. \tstk{Venstcel conditions, see Kirill and Evans: that the skeleton no longer acts as a simple boundary between the bulk regions $\ddom_i$.}
+%The system \eqref{eq:SingularWaveEqnQGProblem} had $\omega^2$ appearing in the vertex conditions, that is what would normally be the \emph{boundary conditions} for the ODEs on $I_{jk}$.
+%The appearance of $\omega^2$ in these conditions was a direct consequence of the presence of the measure $\massMes$ providing the vertices with some ``size".
+%Rather than a graph with ``bulky vertices", we now have a set of regions $\ddom_i$ with ``bulky boundaries" (the skeleton).
+%And again, we observe that bestowing a notion of length to our singular inclusions (through $\ddmes$) has caused $\omega^2$ to appear in what would normally be our boundary conditions for the regions $\ddom_i$.
