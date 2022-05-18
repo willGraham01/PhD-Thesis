@@ -7,7 +7,7 @@ Recall that the motivation for studying \eqref{eq:SI-WaveEqn} was \tstk{many-fol
 	\item Investigate numerical approaches to the solution of such problems
 \end{itemize} 
 
-Each of the sections \tstk{VP, FDM, NonLocal} has provided us with an alternative formulation of \eqref{eq:SI-WaveEqn}.
+Each of the sections \ref{sec:SI-VarProbMethod}, \ref{sec:SI-StrongDerivation}, and \ref{sec:SI-NonLocalQG} has provided us with an alternative formulation of \eqref{eq:SI-WaveEqn}.
 We demonstrated in section \ref{sec:SI-VarProbMethod} that we can attempt to solve \eqref{eq:SI-WeakWaveEqn} directly through use of the min-max principle, appealing only to the understanding of $\tgradSob{\ddom}{\ccompMes}$ that we gained from section \ref{sec:CompSobSpaces}.
 Whilst approximation of the eigenvalues, eigenfunctions, and dispersion relations was possible using this method, the formulation itself does not provide us with any explicit insights into the interactions between the skeleton and the bulk, nor the effect of the coupling constants $\alpha_j$.
 We also highlighted that the lack of a priori knowledge concerning the explicit functions that live in $\tgradSob{\ddom}{\ccompMes}$, and the subset of these that are solutions to \eqref{eq:SI-WaveEqn}, forces us to use inefficient choices for our basis functions.
@@ -35,6 +35,18 @@ For the eigenvalues that remain, we can realise \eqref{eq:SI-WaveEqn} as a quant
 However this comes at the expense of introducing a non-local term involving Dirichlet-to-Neumann maps into the resulting system of edge ODEs.
 Unfortunately, solution to such a problem numerically requires us to have the ability to evaluate (at least approximately) these Dirichlet-to-Neumann maps, the only reliable way being to return to solving PDEs in the bulk regions.
 With a deeper understanding of the action of these Dirichlet-to-Neumann maps, a numerical approach to this non-local quantum graph problem might become tractable.
+However at present, price we pay for removing the PDEs in the bulk regions from our formulation is not worth the complexity introduced by the non-local effects in the resulting ODEs on the skeleton.
+
+In summary, the strong formulation \eqref{eq:SI-StrongFrom} provides a clear picture of how the bulk regions, skeleton, and geometric contrast each interact with one another.
+We also observe that by adding mass to the relevant measures in our formulation, effects from other forms of contrasts in the material being modelled also appear in the resulting system modelled by \eqref{eq:SI-WaveEqn}.
+As such, our ``intuition-motivated" variational problems have provided us with a useful tool for predicting the effective problems for composite materials under contrast.
+In pursuit of methods to numerically obtain the eigenvalues $\omega^2$, one can work with either \eqref{eq:SI-VarProb}, or through finite difference approximations in each of the bulk regions coupled along the skeleton.
+Each method has a number of considerations to take into account, discussed in the respective sections.
+And whilst it is possible to reduce \eqref{eq:SI-WaveEqn} to a problem on the skeleton, it is not possible to do so to recover all values of $\omega^2$ (those that correspond to Dirichlet eigenvalues) nor numerically solve the resulting system without a deeper understanding of the Dirichlet-to-Neumann map.
+
+\subsection{Extensions: Limits of Materials Under Contrast}
+
+\subsection{Extensions: Curl-of-the-curl and the Maxwell System}
 
 %
 %\subsection{Non-Zero Coupling Constants, and the Relation Between \eqref{eq:SI-WeakWaveEqn} and \eqref{eq:SI-NonLocalQG}} \label{ssec:SI-Strauss}
