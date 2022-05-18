@@ -34,7 +34,7 @@ Of course, there are a number of questions concerning whether truncating each of
 Aside from the aforementioned questions, there is still the fundamental issue in the above method that the $c_{n,m}^i$ are still dependent on $\omega$ in a non-trivial manner, so it will still be required to recompute these constants if iteratively solving for $\omega$.
 In an attempt to bypass this issue, an alternative to look into would be to determine whether it is possible to ``expand" the action of $\dtn_{\omega}^i$ in terms of (functions of) $\omega$ and other, easier to evaluate operators:
 \begin{align*}
-	\dtn_{\omega}^i u &= \sum_n f_i(\omega)\dtn_n^i u.
+	\dtn_{\omega}^i u &= \sum_n f_n(\omega)\dtn_n^i u.
 \end{align*}
-One would then look to truncate such an ``expansion", quantify the error that this truncation would induce, and use the truncated expression to evaluate $L_{m,n}$.
+One would need to understand the order at which the $f_n$ decay and look to truncate such an ``expansion", so that the error that this truncation would induce could be quantified, and use the truncated expression to evaluate $L_{m,n}$.
 Fundamental issues here revolve around understanding (explicitly) how the value of $\omega$ affects the action of $\dtn_\omega^i$ --- it may be the case that there is no simple way to quantify this in the manner described.

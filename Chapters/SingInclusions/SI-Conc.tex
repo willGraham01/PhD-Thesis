@@ -12,9 +12,8 @@ We demonstrated in section \ref{sec:SI-VarProbMethod} that we can attempt to sol
 Whilst approximation of the eigenvalues, eigenfunctions, and dispersion relations was possible using this method, the formulation itself does not provide us with any explicit insights into the interactions between the skeleton and the bulk, nor the effect of the coupling constants $\alpha_j$.
 We also highlighted that the lack of a priori knowledge concerning the explicit functions that live in $\tgradSob{\ddom}{\ccompMes}$, and the subset of these that are solutions to \eqref{eq:SI-WaveEqn}, forces us to use inefficient choices for our basis functions.
 Indeed, having to hand an explicit orthonormal basis for $\tgradSob{\ddom}{\ccompMes}$, or some a priori information about the form of the eigenfunctions would go a number of ways towards fixing this issue.
-We also highlight that if one is intent on solving \eqref{eq:SI-WaveEqn} directly from the variational problem, one might wish to consider setting up a finite element based approach.
-There would still be a number of issues surrounding explicitly determining a suitable basis to use in computations, however \eqref{eq:SI-WeakWaveEqn} is already in the form $b(u\phi)=\ip{u}{\phi}$.
-So up to checking that the bilinear forms \tstk{HERE, FDM stuff}
+We also highlight that if one is intent on solving \eqref{eq:SI-WaveEqn} directly from the variational problem, one might wish to consider a finite element based approach.
+There would still be a number of issues surrounding explicitly determining a suitable basis to use in computations, however \eqref{eq:SI-WeakWaveEqn} is already in the form $b_{\qm}(u,\phi)=\ip{u}{\phi}$, so already invites solution via finite elements after checking the bilinear form $b_{\qm}$ is suitably well-behaved\footnote{That is, $b_{\qm}$ is bounded and elliptic on $\tgradSob{\ddom}{\ccompMes}$ so that one has convergence of such a scheme guaranteed.}.
 
 The difficulties we came across when working in $\tgradSob{\ddom}{\ccompMes}$ lead us to the decision to derive a formulation of \eqref{eq:SI-WaveEqn} that does not involve the rather unfamiliar tangential gradients with respect to $\ccompMes$.
 This lead us to the ``strong" formulation \eqref{eq:SI-StrongForm}, which clarifies the interactions between the bulk regions, skeleton, and vertices.
@@ -25,9 +24,17 @@ The observations justify our approach via singular measures and physically motiv
 However, the question is still open in the literature as to whether the (operator whose spectral problem is the) strong formulation \eqref{eq:SI-StrongForm} is the limit (either in the spectral or norm-resolvent sense) of a sequence of operators on a composite, periodic medium with both geometric and material contrast.
 On the numerical side, we can exploit the additional information gained from \eqref{eq:SI-StrongForm} to approximate the action of the operator (that defines the left hand side of \eqref{eq:SI-FDMEquationsToDisc}) on $u$ in each of the bulk regions and on each edge of the skeleton, then couple the various ``regional" approximations via the flux across the edges and the non-classical Kirchoff condition at the vertices.
 Such a scheme allows us to avoid the problems surrounding the space $\tgradSob{\ddom}{\ccompMes}$ that we ran into previously, albeit not without introducing a number of other considerations in setting up such a scheme.
-Our example concerning the cross-in-the-plane geometry also demonstrates that the introduction of geometric contrast (that is, ensuring that $\alpha_j\neq0$) is sufficient to cause band-gaps to emerge in the spectrum of $\bracs{\tgrad_{\ccompMes}}^2$. \tstk{alpha going to infinity causes Dirichlet decoupling maybe? do some more runs...}
+Our example concerning the cross-in-the-plane geometry also demonstrates that the introduction of geometric contrast (that is, ensuring that $\alpha_j\neq0$) is sufficient to cause band-gaps to emerge in the spectrum of $-\bracs{\tgrad_{\ccompMes}}^2$. \tstk{alpha going to infinity causes Dirichlet decoupling maybe? do some more runs...}
 There also appears to be good agreement with the approximations obtained from solution to \eqref{eq:SI-VarProb}, and convergence to the eigenfunctions and eigenvalues shared with the Dirichlet Laplacian.
 
+The final step in our investigation looks into whether there is anything to be gained by attempting by attempting to ``remove" the bulk regions from our formulation entirely.
+In light of chapter \ref{ch:ScalarSystem}, we already have a solid understanding quantum graph problems and how to analyse them, and additionally expect that solving a system of ODEs on the edges will be less complex than a system of PDEs coupled to ODEs (that themselves obey a non standard condition at the vertices).
+It is possible for us to make such a reduction, provided that we stay away from those $\omega^2$ that are eigenvalues of the Dirichlet Laplacian on one of the bulk regions $\ddom_i$.
+This is not ideal as the cross in the plane geometry demonstrates that such eigenvalues can form part of the spectrum of $-\bracs{\tgrad_{\ccompMes}}^2$.
+For the eigenvalues that remain, we can realise \eqref{eq:SI-WaveEqn} as a quantum graph problem.
+However this comes at the expense of introducing a non-local term involving Dirichlet-to-Neumann maps into the resulting system of edge ODEs.
+Unfortunately, solution to such a problem numerically requires us to have the ability to evaluate (at least approximately) these Dirichlet-to-Neumann maps, the only reliable way being to return to solving PDEs in the bulk regions.
+With a deeper understanding of the action of these Dirichlet-to-Neumann maps, a numerical approach to this non-local quantum graph problem might become tractable.
 
 %
 %\subsection{Non-Zero Coupling Constants, and the Relation Between \eqref{eq:SI-WeakWaveEqn} and \eqref{eq:SI-NonLocalQG}} \label{ssec:SI-Strauss}

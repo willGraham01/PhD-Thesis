@@ -48,7 +48,7 @@ Conversely, consider an eigenpair $\omega^2>0, u\in H^2\bracs{\graph}$ of the pr
 		- \bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)} 
 		&= \omega^2 u^{(jk)} - \bracs{ \dtn^+_\omega u^{(jk)} + \dtn^-_\omega u^{(jk)}},
 		&\qquad\text{on } I_{jk}, \label{eq:SI-NonLocalQGEdgeEquation}  \\
-		\sum_{j\con k} \bracs{\pdiff{}{n}+\rmi\qm_{jk}} u^{(jk)}(v_j) &= 0,
+		\sum_{j\con k} \bracs{\pdiff{}{n}+\rmi\qm_{jk}} u^{(jk)}(v_j) &= \alpha_j\omega^2 u(v_j),
 		&\qquad\text{at every } v_j\in\vertSet, \label{eq:SI-NonLocalQGVertexDeriv} \\
 		u \text{ is continuous,} & 
 		&\qquad\text{at every } v_j\in\vertSet. \label{eq:SI-NonLocalQGVertexCont}
@@ -81,7 +81,7 @@ Therefore, if there exists a $\phi\in S_i$ such that $u$ satisfies
 		&= \omega_i^2 u^{(jk)} + \bracs{\bracs{\grad u\cdot n_{jk}}^+ - \bracs{\grad u\cdot n_{jk}}^-} + \mathrm{T}\phi,
 		&\text{on } I_{jk}, \\
 		\sum_{k} \bracs{\pdiff{}{n}+\rmi\qm_{jk}} u^{(jk)}(v_j) 
-		&= 0 
+		&= \alpha_j\omega^2 u(v_j)
 		&\text{at each } v_j\in\vertSet,
 	\end{align*}
 \end{subequations}
@@ -106,16 +106,15 @@ This non-locality rules out a finite difference approach along the edges of $\gr
 It also rules out our previous approach involving the $M$-matrix since we can no longer make use of the same idea as before and reconstruct the entries of the $M$-matrix just from the knowledge of the function values at the vertices\footnote{There is also the more pressing theoretical question as to whether \eqref{eq:SI-NonLocalQG} admits a boundary triple.}.
 Indeed, the handling of the Dirichlet-to-Neumann map term is the main problem with any numerical approach to solving \eqref{eq:SI-NonLocalQG}.
 
-We have to accept this non-locality, and so it does not make sense for us to consider numerical methods that rely on local approximations.
-Instead we must use the ideas from spectral methods; decide on a finite-dimensional subspace $V$ in which to approximate the solution to $u$, determine a suitable basis for this space, the expand our approximate solution in terms of this basis and choose the coefficients of the basis expansion to satisfy the problem \eqref{eq:SI-NonLocalQG} in $V$.
-A spectral method on the other hand looks to use basis functions that are non-zero over the whole domain.
+If we are to accept this non-locality we must use the ideas from spectral methods; decide on a finite-dimensional subspace $V$ in which to approximate the solution to $u$, determine a suitable basis for this space, the expand our approximate solution in terms of this basis and choose the coefficients of the basis expansion to satisfy the problem \eqref{eq:SI-NonLocalQG} in $V$.
 For the time being, we will simply let $V\subset\htwo{\graph}$ be a finite-dimensional subspace with dimension $M$ and basis functions $\clbracs{\psi_m}_{m=1}^{M}$.
+For the purposes of our discussion we will also take $\alpha_j=0$ at each of the vertices, since the major problems with a numerical approach to \eqref{eq:SI-NonLocalQG} are present whether or not the coupling constants are non-zero.
 Write the approximate solution $u_V\in V$ to \eqref{eq:SI-NonLocalQG} as
 \begin{align*}
 	u_V &= \sum_{m=1}^M u_m\psi_m, \qquad u_m\in\complex,
 \end{align*}
 for basis coefficients $u_m$ to be determined.
-We then write the problem \eqref{eq:SI-NonLocalQG} in the (``weak") form
+We then multiply write \eqref{eq:SI-NonLocalQG} in the (``weak") form
 \begin{align*}
 	\sum_{v_j\in\vertSet}\sum_{j\conLeft k} 
 	\clbracs{ 
@@ -131,7 +130,7 @@ From here, we replace $u$ with $u_V$, substitute the basis expansion, and choose
 	\sum_{m=1}^{M} u_m \bracs{ A_{n,m} + L_{n,m} - \omega^2 B_{n,m} }, \\
 	A_{n,m} &= \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \ip{\tgrad_{\lambda_{jk}}\psi_m}{\tgrad_{\lambda_{jk}}\psi_n}_{L^2\bracs{I_{jk}}}, \\
 	L_{n,m}\bracs{\omega} &= \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \ip{\dtn^+_{\omega}\psi_m + \dtn^-_{\omega}\psi_m}{\psi_n}_{L^2\bracs{I_{jk}}}, \\
-	B_{n,m} &= \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \omega^2\ip{\psi_m}{\psi_n}_{L^2\bracs{I_{jk}}}.
+	B_{n,m} &= \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \ip{\psi_m}{\psi_n}_{L^2\bracs{I_{jk}}}.
 \end{align*}
 Letting $M\bracs{\omega^2}$ be the matrix-valued function with entries
 \begin{align} \label{eq:SI-NonLocalQGNumericalDisc}
