@@ -123,7 +123,7 @@ The approximate eigenvalues computed by the finite difference scheme using $N=25
 \end{figure}
 Those points plotted in red correspond to eigenvalues that were computed at quasi-momentum values of $\bracs{0,0}^\top$, $\bracs{-\pi,0}^\top$, $\bracs{0,-\pi}^\top$, $\bracs{-\pi,-\pi}^\top$, from which we can observe that these points typically form the endpoints of each of the spectral bands.
 Much like the quantum graph case, we do not expect this to occur for general geometries --- there even appears to be a notable example of this in band 6, for which the eigenvalues at the extremities of the band are not obtained at any of these quasi-momentum values.
-However by examining the eigenvalues in this band as functions of $\qm$, as in figure \ref{fig:FDM_2022-01-28-09-33_AllBands}, it can be noticed that these extreme eigenvalues occur at quasi-momentum values where one of the components is either 0 (for the minimum values) or $-\pi$ (for the maximum values). \tstk{maybe move this to its own appendix as it's quite clunky, and then we can also throw in the alpha=1 ones too}
+However by examining the eigenvalues in this band as functions of $\qm$, as in figure \ref{fig:FDM_2022-01-28-09-33_AllBands}, it can be noticed that these extreme eigenvalues occur at quasi-momentum values where one of the components is either 0 (for the minimum values) or $-\pi$ (for the maximum values).
 \begin{figure}[b!]
 	\centering
 	\includegraphics[width=\textwidth]{FDM_2022-01-28-09-33_AllBands.pdf}
@@ -131,13 +131,13 @@ However by examining the eigenvalues in this band as functions of $\qm$, as in f
 \end{figure}
 Similarly to our approach via \eqref{eq:SI-VarProb}, the eigenvalues within each band obey the symmetries expected from proposition \ref{prop:CrossInPlaneSymmetries}.
 We also note that the presence of non-zero $\alpha$, that is \emph{geometric contrast} in our material, has been sufficient to open spectral gaps.
-We additionally note that the Dirichlet eigenvalues $\omega_{n,m}^2=\bracs{n^2+m^2}\pi^2$ remain, as expected, part of the spectrum \tstk{in fact, are bands shrinking TO these values as alpha increases? Try a run with big alpha to check!}.
+We additionally note that the Dirichlet eigenvalues $\omega_{n,m}^2=\bracs{n^2+m^2}\pi^2$ remain a part of the spectrum, as expected (since the corresponding eigenfunctions have $u_{n,m}(v_j)=0$).
 
 A distinct advantage of using this method over that for solving problem \ref{prob:DiscVarProb} is that, once the finite difference matrix $\mathcal{F}$ is assembled, we can use matrix-eigenvalue solvers to examine the eigenvalues near to any positive number that we choose, without needing to compute \emph{all} the previous eigenvalues (and eigenfunctions) up to this value.
 This allows us to easily test the rate of convergence of the numerical scheme to the eigenvalues $\omega_{n,m}^2 = \bracs{n^2+m^2}\pi^2$.
 In these cases, we expect that the error in the approximate eigenvalue is of the order of $N^{-2}$, since our scheme makes use of centred differences in the bulk region, and on the skeleton the eigenfunction should be identically zero.
 This is what we observe numerically, and is illustrated in figure \ref{fig:CompositeCross-FDM-DEV} for $n\leq m\in\clbracs{1,2,3}$ (the cases $n>m$ are similar due to the aforementioned symmetry).
-\begin{figure}[h]
+\begin{figure}[b!]
 	\centering
 	\begin{subfigure}[t]{0.45\textwidth}
 		\centering

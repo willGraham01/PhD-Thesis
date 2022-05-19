@@ -10,7 +10,7 @@ We also know that solutions to the acoustic approximation on the inclusions poss
 Finally, we must consider what should happen in the vicinity of the skeleton --- here we have (what we expect to be) a twice differentiable function in a bulk region $\ddom_i$ approaching its boundary, and so there should be ($L^2$) traces of $u$ and its normal derivative onto this boundary.
 However, this boundary coincides with (a subregion of) the skeleton, so the function $u$ should ``feel" the affect of these traces as it moves along the skeleton.
 A partial converse is also expected; $u$ is twice differentiable along the skeleton, and given that $u$ \emph{also} has a trace onto the skeleton, we expect that these traces should be consistent with the function values from the bulk.
-In summary, we expect that \eqref{eq:SI-WeakWaveEqn} can be reformulated into a system (which we colloquially label a ``strong form") that consists of the following components:
+as such, we expect that \eqref{eq:SI-WeakWaveEqn} can be reformulated into a system that consists of the following components:
 \begin{enumerate}[(a)]
 	\item A (Helmholtz-like) PDE in each of the bulk regions, the solution to which has boundary traces matching the solution to a quantum graph problem on the inclusions.
 	\item A 2nd-order quantum graph problem on the singular inclusions, with the edge ODEs involving or being influenced by the traces from the bulk regions.
@@ -70,7 +70,7 @@ For this, we need to introduce a local labelling system for the bulk regions tha
 Let $\ddom_{jk}^+$ be the bulk region whose boundary has non-empty intersection with $I_{jk}$ and whose exterior unit normal on $\partial\ddom_{jk}^+\cap I_{jk}$ is equal to $-n_{jk}$.
 Similarly let $\ddom_{jk}^-$ be the bulk region whose boundary has non-empty intersection with $I_{jk}$ and whose exterior unit normal on $\partial\ddom_{jk}^-\cap I_{jk}$ is equal to $n_{jk}$.
 Note the sign convention; this is chosen because the region $\ddom_{jk}^+$ is ``to the right" of $I_{jk}$ as viewed from the local coordinate system $y_{jk}=\bracs{n_{jk}, e_{jk}}$, and $\ddom_{jk}^-$ is ``on the left" --- see figure \ref{fig:Diagram_SI-AdjacentBulkRegions}.
-\begin{figure}[h]
+\begin{figure}[b!]
 	\centering
 	\includegraphics[scale=1.0]{Diagram_SI-AdjacentBulkRegions.pdf}
 	\caption[Labelling convention for bulk regions adjacent to a skeleton edge.]{\label{fig:Diagram_SI-AdjacentBulkRegions} Labelling convention for regions adjacent to an edge $I_{jk}$.}
@@ -135,8 +135,8 @@ The $\clbracs{\beta_{jk}}$ can then be ordered by size, and correspondingly we c
 \end{align*}
 Also adopt a cyclic convention, where $k_0 = k_{\deg(v_j)}$ and $k_{\deg(v_j)+1} = k_1$.
 Now, for each $l\in\clbracs{1,...,\deg(v_j)}$ let $\ddom_{jk_l}$ be the bulk region that lies between (in the sense of the angles $\beta_{jk_{l-1}}$ and $\beta_{jk_l}$) $I_{jk_{l-1}}$ and $I_{jk_l}$.
-This notation can be visualised in figure \ref{fig:Diagram_SI-JunctionLabelling}.
-\begin{figure}[h]
+This labelling can be visualised in figure \ref{fig:Diagram_SI-JunctionLabelling}.
+\begin{figure}[b!]
 	\centering
 	\includegraphics[scale=1.5]{Diagram_SI-JunctionLabelling.pdf}
 	\caption[Labelling convention for bulk regions surrounding a vertex.]{\label{fig:Diagram_SI-JunctionLabelling} The labelling conventions for the bulk regions and edges surrounding a vertex.}

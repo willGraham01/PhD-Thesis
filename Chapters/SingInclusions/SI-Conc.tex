@@ -1,11 +1,5 @@
 \section{Conclusions and Further Exploration} \label{sec:SI-Conc}
 We conclude our investigation into the various formulations of \eqref{eq:SI-WaveEqn}, our attempts to access the spectrum, and the insights we have obtained with a summary and survey of open questions motivated by this work.
-Recall that the motivation for studying \eqref{eq:SI-WaveEqn} was \tstk{many-fold};
-\begin{itemize}
-	\item Study the ``intuitive" limit of thin-structure problems, with a view to motivating rigorous analysis and further generalisations to problems in electromagnetism
-	\item Perform preliminary investigations into the effects introduced by the presence of geometric contrast
-	\item Investigate numerical approaches to the solution of such problems
-\end{itemize} 
 
 Each of the sections \ref{sec:SI-VarProbMethod}, \ref{sec:SI-StrongDerivation}, and \ref{sec:SI-NonLocalQG} has provided us with an alternative formulation of \eqref{eq:SI-WaveEqn}.
 We demonstrated in section \ref{sec:SI-VarProbMethod} that we can attempt to solve \eqref{eq:SI-WeakWaveEqn} directly through use of the min-max principle, appealing only to the understanding of $\tgradSob{\ddom}{\ccompMes}$ that we gained from section \ref{sec:CompSobSpaces}.
@@ -24,7 +18,7 @@ The observations justify our approach via singular measures and physically motiv
 However, the question is still open in the literature as to whether the (operator whose spectral problem is the) strong formulation \eqref{eq:SI-StrongForm} is the limit (either in the spectral or norm-resolvent sense) of a sequence of operators on a composite, periodic medium with both geometric and material contrast.
 On the numerical side, we can exploit the additional information gained from \eqref{eq:SI-StrongForm} to approximate the action of the operator (that defines the left hand side of \eqref{eq:SI-FDMEquationsToDisc}) on $u$ in each of the bulk regions and on each edge of the skeleton, then couple the various ``regional" approximations via the flux across the edges and the non-classical Kirchoff condition at the vertices.
 Such a scheme allows us to avoid the problems surrounding the space $\tgradSob{\ddom}{\ccompMes}$ that we ran into previously, albeit not without introducing a number of other considerations in setting up such a scheme.
-Our example concerning the cross-in-the-plane geometry also demonstrates that the introduction of geometric contrast (that is, ensuring that $\alpha_j\neq0$) is sufficient to cause band-gaps to emerge in the spectrum of $-\bracs{\tgrad_{\ccompMes}}^2$. \tstk{alpha going to infinity causes Dirichlet decoupling maybe? do some more runs...}
+Our example concerning the cross-in-the-plane geometry also demonstrates that the introduction of geometric contrast (that is, ensuring that $\alpha_j\neq0$) is sufficient to cause band-gaps to emerge in the spectrum of $-\bracs{\tgrad_{\ccompMes}}^2$.
 There also appears to be good agreement with the approximations obtained from solution to \eqref{eq:SI-VarProb}, and convergence to the eigenfunctions and eigenvalues shared with the Dirichlet Laplacian.
 
 The final step in our investigation looks into whether there is anything to be gained by attempting by attempting to ``remove" the bulk regions from our formulation entirely.
@@ -37,104 +31,26 @@ Unfortunately, solution to such a problem numerically requires us to have the ab
 With a deeper understanding of the action of these Dirichlet-to-Neumann maps, a numerical approach to this non-local quantum graph problem might become tractable.
 However at present, price we pay for removing the PDEs in the bulk regions from our formulation is not worth the complexity introduced by the non-local effects in the resulting ODEs on the skeleton.
 
-In summary, the strong formulation \eqref{eq:SI-StrongFrom} provides a clear picture of how the bulk regions, skeleton, and geometric contrast each interact with one another.
+In summary, the strong formulation \eqref{eq:SI-StrongFrom} provides the clearest picture of how the bulk regions, skeleton, and geometric contrast each interact with one another.
 We also observe that by adding mass to the relevant measures in our formulation, effects from other forms of contrasts in the material being modelled also appear in the resulting system modelled by \eqref{eq:SI-WaveEqn}.
 As such, our ``intuition-motivated" variational problems have provided us with a useful tool for predicting the effective problems for composite materials under contrast.
 In pursuit of methods to numerically obtain the eigenvalues $\omega^2$, one can work with either \eqref{eq:SI-VarProb}, or through finite difference approximations in each of the bulk regions coupled along the skeleton.
 Each method has a number of considerations to take into account, discussed in the respective sections.
 And whilst it is possible to reduce \eqref{eq:SI-WaveEqn} to a problem on the skeleton, it is not possible to do so to recover all values of $\omega^2$ (those that correspond to Dirichlet eigenvalues) nor numerically solve the resulting system without a deeper understanding of the Dirichlet-to-Neumann map.
 
-\subsection{Extensions: Limits of Materials Under Contrast}
+\subsection{Extensions and Related Open Questions}
+Whilst we have been successful in obtaining realisable problems from our original variational problem, and in exploring some solution techniques that can be applied to them, it is important for us not to forget what motivated us to study such systems originally.
+Similarly to our work in chapter \ref{ch:CurlCurl}, we have been able to provide a candidate for the limiting problem of the acoustic equation on a (periodic) composite material, with one of the composite materials shrinking to a singular structure.
+This candidate also explicitly indicates where any parameters quantifying geometric or material contrast enter into the resulting system, allowing prediction of system behaviours when these parameters fall into certain ranges or adhere to certain (possibly critical) scalings.
+A natural next step in the study of such variational problems would be consideration of the curl-of-the-curl equation on a composite domain, akin to how we used the ideas surrounding tangential gradients in chapter \ref{ch:ScalarSystem} to motivate definitions for the tangential curl in chapter \ref{ch:CurlCurl}.
+Indeed, the results obtained from and argumentative techniques applied to the study of $\tgradSob{\ddom}{\ccompMes}$ and $\ktcurlSob{\ddom}{\dddmes}$ will be of great use should one choose to pursue such a study.
+However, one will recall that the analysis of chapter \ref{ch:CurlCurl} on a singular structure demonstrated that the curl of the curl equation reduced to the acoustic approximation, raising the question as to whether we should expect to find anything different on a composite domain.
+In response to this, we highlight that the automatic reduction to the acoustic approximation was due to the two dimensional nature of the domain we were considering --- the presence of the bulk regions (and correspondingly the measure $\lambda_2$) in a composite domain no longer places us in such a situation.
+Further to this, we can argue heuristically (as we did at the beginning of section \ref{sec:SI-StrongDerivation}) and predict that the ``strong formulation" of the variational problem we pose --- provided it exists --- will consist of the classical curl-of-the-curl equation in the bulk regions.
+It is  much harder to predict what behaviours will emerge from interactions between the bulk and skeleton regions, and in particular what (if anything) the analogue of \eqref{eq:SI-InclusionEqn} will be.
 
-\subsection{Extensions: Curl-of-the-curl and the Maxwell System}
-
-%
-%\subsection{Non-Zero Coupling Constants, and the Relation Between \eqref{eq:SI-WeakWaveEqn} and \eqref{eq:SI-NonLocalQG}} \label{ssec:SI-Strauss}
-%
-%\tstk{copy-paste from ExtendedSpaceAlready.tex}
-%Let $\ddom=\left[0,1\right)^2$ be our usual domain filled with a singular structure $\graph$, separated by $\graph$ into the pairwise-disjoint connected components $\ddom_i, i\in\Lambda$ for some finite index set $\Lambda$.
-%Set $N = \abs{\vertSet}$ to be the number of vertices, and $L=\abs{\Lambda}$ be the number of bulk regions.
-%Also denote by $\compMes = \lambda_2 + \ddmes$, and for coupling constants $\alpha_j>0$ at the vertices $v_j$ let $\nu = \sum_{v_j\in\vertSet}\alpha_j\delta_{v_j}$ be a weighted sum of point-mass measures centred at the vertices.
-%On an edge $I_{jk}$, we denote by $\ddom_+$ the bulk region in the direction $n_{jk}$ from $I_{jk}$, and $\ddom_-$ the bulk region in the direction $-n_{jk}$ from $I_{jk}$.
-%Denote by $n^{\pm}$ the unit exterior normal to $\ddom_{\pm}$ (noting that $n^{\pm}=\mp n_{jk}$), and write $\pdiff{u^{\pm}}{n^{\pm}}$ to be the normal derivative on $\partial\ddom_{\pm}$ of the function $u$ restricted to $\ddom_{\pm}$.
-%
-%The ``strong formulation" of our composite medium problem is
-%\begin{subequations} \label{eq:StrongForm}
-%	\begin{align}
-%		-\laplacian_{\qm}u &= \omega^2 u, &\qquad\text{in } \ddom_i, \ \forall i\in\Lambda, \\
-%		-\bracs{\diff{}{y}+\rmi\qm_{jk}}^2 u_{jk} - \bracs{\pdiff{u^+}{n^+} + \pdiff{u^-}{n^-}} &= \omega^2 u_{jk},  &\qquad\text{on every } I_{jk}\in\edgeSet, \\
-%		\sum_{j\con k}\bracs{\pdiff{}{n}+\rmi\qm_{jk}}u_{jk}(v_j) &= 0, &\qquad\text{at every } v_j\in\vertSet,
-%	\end{align}
-%\end{subequations}
-%where the function $u$ is $\gradgradSob{\ddom_i}{\lambda_2}$ for every $i$, $H^2(I_{jk})$ for every $I_{jk}$, is continuous (in the sense of traces) across $I_{jk}$, and is continuous at the vertices $v_j$.
-%Recall that this problem was derived from the variational problem of finding $u\in\tgradSob{\ddom}{\compMes}$ such that
-%\begin{align} \label{eq:WeakForm}
-%	\integral{\ddom}{ \tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}} }{\compMes} &=
-%	\omega^2\integral{\ddom}{ u\overline{\phi} }{\compMes}, \quad\forall\phi\in\smooth{\ddom}.
-%\end{align}
-%
-%We are interested in constructing an extended space $\mathcal{H}$ in which the problem \eqref{eq:StrongForm} reads as a standard eigenvalue problem $\mathcal{A} u = \omega^2 u$ for some operator $\mathcal{A}$ on $\mathcal{H}$.
-%With this in mind, consider the space
-%\begin{align*}
-%	\mathcal{H} &= \bracs{\bigoplus_{i\in\Lambda}\gradgradSob{\ddom_i}{\lambda_2}} \oplus H^2\bracs{\graph} \oplus \ltwo{\ddom}{\nu},
-%\end{align*}
-%viewed as a subspace of
-%\begin{align*}
-%	\mathcal{L} := \bracs{\bigoplus_{i\in\Lambda}\ltwo{\ddom_i}{\lambda_2}} \oplus L^2\bracs{\graph} \oplus \ltwo{\ddom}{\nu},
-%\end{align*}
-%where we denote an element $u$ of $\mathcal{L}$ by the $\bracs{L+\abs{\edgeSet}+N}$-``vector"
-%\begin{align*}
-%	u &= \bracs{\clbracs{u_{\ddom_i}}_{i\in\Lambda}, \clbracs{u_{jk}}_{I_{jk}\in\edgeSet}, \clbracs{u(v_j)}_{v_j\in\vertSet}}^\top.
-%\end{align*}
-%Note that $\ltwo{\ddom}{\nu}\cong\complex^N$.
-%Define the operator $\mathcal{A}$ by
-%\begin{align*}
-%	\dom\bracs{\mathcal{A}} &= \mathcal{H}, \\
-%	\mathcal{A} u &= 
-%	\begin{pmatrix}	
-%	\clbracs{-\laplacian_{\qm}u_{\ddom_i}}_{i\in\Lambda} \\
-%	\clbracs{-\bracs{\diff{}{y}+\rmi\qm_{jk}}^2 u_{jk} - \bracs{\tgrad u_{\ddom_+}\cdot n^+ + \tgrad u_{\ddom_-}\cdot n^-} }_{I_{jk}\in\edgeSet} \\
-%	\clbracs{\sum_{j\con k}\bracs{\pdiff{}{n}+\rmi\qm_{jk}}u_{jk}(v_j)}_{v_j\in\vertSet}
-%	\end{pmatrix}
-%	\in\mathcal{L},
-%\end{align*}
-%and (setting aside questions about the nature of the spectrum, etc) consider the eigenvalue problem
-%\begin{align*}
-%	\mathcal{A} u = \omega^2 u,
-%\end{align*}
-%which without much effort can be shown to be equivalent to
-%\begin{subequations} \label{eq:aopEvalProb}
-%	\begin{align}
-%		-\laplacian_{\qm}u &= \omega^2 u, &\qquad\text{in } \ddom_i, \ \forall i\in\Lambda, \\
-%		-\bracs{\diff{}{y}+\rmi\qm_{jk}}^2 u_{jk} - \bracs{\tgrad u_{\ddom_+}\cdot n^+ + \tgrad u_{\ddom_-}\cdot n^-} &= \omega^2 u_{jk},  &\qquad\text{on every } I_{jk}\in\edgeSet, \\
-%		\sum_{j\con k}\bracs{\pdiff{}{n}+\rmi\qm_{jk}}u_{jk}(v_j) &= \omega^2\alpha_j u(v_j), &\qquad\text{at every } v_j\in\vertSet.		
-%	\end{align}
-%\end{subequations}
-%Here, we denote by $\tgrad u_{\ddom_+}\cdot n^+$ the trace of the $\qm$-shifted gradient $\tgrad$ of the function $u_{\ddom_{\pm}}\cdot n^{\pm}$ onto $I_{jk}$.
-%
-%Note that \eqref{eq:aopEvalProb} is not equivalent to \eqref{eq:StrongForm}, as functions in $\mathcal{H}$ are not required to adhere to continuity across the skeleton (hence the $\tgrad$ terms rather than just normal derivatives) nor continuity at the vertices (the notation $u(v_j)$ is just some value in $\complex$ that $u\in\mathcal{H}$ takes at each $v_j$).
-%We can then ask if there is a form from which $\mathcal{A}$ can be defined, with this in mind, notice that
-%\begin{align*}
-%	\ip{\mathcal{A} u}{\phi}_{\mathcal{L}} &= \sum_{i\in\Lambda}\integral{\ddom_i}{ \tgrad u_{\ddom_i}\cdot\overline{\tgrad\phi} }{\lambda_2}
-%	+ \sum_{v_j\in\vertSet}\sum_{j\conLeft k}\integral{\ddom}{ \bracs{\diff{}{y}+\rmi\qm_{jk}}u\overline{\bracs{\diff{}{y}+\rmi\qm_{jk}}\phi} }{\lambda_{jk}} \\
-%	&= \sum_{i\in\Lambda}\ip{ \tgrad u }{ \tgrad\phi }_{\ltwo{\ddom_i}{\lambda_i}}
-%	+ \sum_{v_j\in\vertSet}\sum_{j\conLeft k}\ip{ \bracs{\diff{}{y}+\rmi\qm_{jk}}u }{ \bracs{\diff{}{y}+\rmi\qm_{jk}}\phi }_{\ltwo{I_{jk}}{\lambda_{jk}}},
-%\end{align*}
-%so if we define (for $u\in\mathcal{H}$)
-%\begin{align*}
-%	\tgrad_{\mathcal{H}} u &:= \bracs{\clbracs{\tgrad u_{\ddom_i}}_{i\in\Lambda}, \clbracs{\bracs{\diff{}{y}+\rmi\qm_{jk}}u_{jk}}_{I_{jk}\in\edgeSet}, \clbracs{0}_{v_j\in\vertSet}}^\top,
-%\end{align*}
-%we have that
-%\begin{align*}
-%	\ip{\mathcal{A} u}{\phi}_{\mathcal{L}} &= \ip{\tgrad_{\mathcal{H}} u}{\tgrad_{\mathcal{H}}\phi}_{\mathcal{L}}.
-%\end{align*}
-%Thus, we can define $\mathcal{A}$ from the bilinear form $b(u,v) = \ip{\tgrad_{\mathcal{H}} u}{\tgrad_{\mathcal{H}}\phi}_{\mathcal{L}}$ for $u,v\in\mathcal{H}$, and write the eigenvalue problem for $\mathcal{A}$ as
-%\begin{align} \label{eq:aopWeakEvalProb}
-%	\ip{\tgrad_{\mathcal{H}} u}{\tgrad_{\mathcal{H}}\phi}_{\mathcal{L}} &= \omega^2\ip{u}{\phi}_{\mathcal{L}}.
-%\end{align}
-%
-%The similarities between \eqref{eq:StrongForm} and \eqref{eq:aopEvalProb} are apparent --- if we take $\alpha_j=0$ for every $j$, then \eqref{eq:WeakForm} and \eqref{eq:aopWeakEvalProb} are the same problem, and our ``definition" of $\tgrad_{\mathcal{H}} u$ for $u\in\mathcal{H}$ coincides with $\tgrad_{\compMes}u$ for $u\in\tgradSob{\ddom}{\compMes}$.
-%We even have that the set of $u\in\tgradSob{\ddom}{\compMes}$ that solve \eqref{eq:WeakForm} is a subset of $\mathcal{H}$.
-%
-%Furthermore, if we then ``switch on" the $\alpha_j>0$, then $\tgrad_{\mathcal{H}} u$ still coincides with what we expect the tangential gradient in $\tgradSob{\ddom}{(\compMes+\nu)}$ to be.
-%The equations \eqref{eq:WeakForm} (replacing $\compMes$ with $\compMes+\nu$) and \eqref{eq:aopWeakEvalProb} are identical, and the problem \eqref{eq:aopEvalProb} (restricted to $\tgradSob{\ddom}{(\compMes+\nu)}$) reduces to what my current ``guess" at the analogue of \eqref{eq:StrongForm} with the point masses included would be.
+Unlike the current state of the literature surrounding convergence of problems on thin-structures (section \ref{sec:Intro-ThinStructures}), where the question of spectral \tstk{and norm-resolvent??} convergence to quantum graph problems\footnote{Which by the work of chapter \ref{ch:ScalarSystem}, are equivalent to our physically-motivated variational problems on singular structures.} has been well studied, these questions are largely unexplored for periodic composite domains in an electromagnetic setting.
+The question of spectral convergence for the acoustic approximation has been explored in \tstk{K-F, graph convergence paper. Also Kuchment's review paper maybe, since that has relevant studies up to 2001?} for the acoustic equation, but this setup lacked any geometric contrast between the vertex and edge regions.
+Results on the convergence of the resolvents of such problems are also presently unaddressed and open to investigation.
+In light of our approach to the study of variational problems on singular structures, we have provided a tool for predicting the ``limit" operators one might consider\footnote{Including how one can define such operators and the appropriate function spaces.}, and indicated how it can extended to systems more general that the acoustic approximation.
+Whilst the establishment of the appropriate convergence results have not been the concern of this work; with the conclusion of our study of variational problems on singular structures, the absence of these convergence results in the literature comes to the forefront of our attention.
