@@ -140,7 +140,7 @@ This allows construction of the \emph{non-classical} Sobolev space of gradients 
 		&= \integral{\ddom}{u\overline{v}}{\rho}
 		+ \integral{\ddom}{\ktgrad_{\rho}u \cdot \overline{\ktgrad_{\rho}v}}{\rho}, \\
 		\norm_{\ktgradSob{\ddom}{\rho}}^2 &= \ip{u}{u}_{\ktgradSob{\ddom}{\rho}}
-		= \norm{u}_{\ltwo{\ddom}{\rho}}^2 + \norm{\ktgrad_{\rho}u}_{\ltwo{\ddom}{\rho}^3},
+		= \norm{u}_{\ltwo{\ddom}{\rho}}^2 + \norm{\ktgrad_{\rho}u}_{\ltwo{\ddom}{\rho}^3}^2,
 	\end{align*}		
 	to make it a Hilbert space.}
 \end{definition}
@@ -251,7 +251,7 @@ In particular, proposition \ref{prop:CurlIgnoresGradients} informs us that the $
 %Corollary \ref{cory:DivFreeSufficient} does mean that definition \ref{def:ktDivFree} could be weakened, however we chose to present the definition of divergence free in this manner to maintain parallels to the usual intuition of a divergence free field being orthogonal to \emph{all} gradients.
 
 \subsection{Other Sobolev Spaces, and the image under the Gelfand Transform} \label{ssec:SobSpacesAndGelfand}
-One can define analogous ``non-classical" Sobolev spaces on $\reals^d$ (or subsets thereof) through an analogous procedure to the above; let $\upsilon$ be a Borel measure on $\reals^d$ and define \tstk{check: you need compactly supported smooth functions here right? Otherwise they're not going to be sufficiently fast decaying!}
+One can define analogous ``non-classical" Sobolev spaces on $\reals^d$ (or subsets thereof) through an analogous procedure to the above; let $\upsilon$ be a Borel measure on $\reals^d$ and define
 \begin{align*}
 	W_{\upsilon,\mathrm{grad}} := \overline{ \clbracs{ \bracs{\phi, \grad\phi} \setVert \phi\in\csmooth{\reals^d} } },
 \end{align*}
