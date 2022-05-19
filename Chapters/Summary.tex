@@ -1,0 +1,22 @@
+\chapter*{Summary}
+The study of periodic composite materials is highly relevant in the design of photonic crystal fibres.
+Under specific relations between the material properties, one can demonstrate the emergence of spectral band gaps (as well as other metamaterial behaviour) which give rise to frequencies that do not support any modes of light in the crystal.
+These frequency gaps --- band gaps --- can then be exploited in the design of waveguides.
+Similar contrast effects have also been shown to be the result of geometric contrast on so-called thin-structure domains.
+
+Singular structures, and composite domains with one of the composite materials being singular, represent an intuitive visual limit of the domains described above.
+However it is another matter to determine whether a given system of equations on a composite domain converges (in some sense) to a system of equations on such a singular structure.
+The present methods of establishing such convergence results rely on having an \emph{a priori} guess of the expected limiting equations and structure to hand.
+Whilst there has been some success in establishing convergence results of this kind for various materials exhibiting contrasts, there has been little progress in the context of electromagnetism.
+
+The work conducted in this thesis aims to answer and explore a number of questions raised by the above.
+We examine variational problems posed on singular structures, the form of which are motivated by the equations of electromagnetism.
+Such problems constitute very intuitive analogues of their thin-structure or composite-domain counterparts, however require us to establish lower-dimensional analogues of the gradient, curl, and divergence operators --- the study of which comprises much of our analysis.
+However through this analysis we are able to realise such variational problems as more familiar and tractable problems, which we can then look to solve either analytically or numerically.
+These variational problems also provide candidates for the effective problems of their thin-structure counterparts, potentially aiding in establishing the aforementioned convergence results.  
+
+We first focus on the study of the acoustic approximation on a singular structure represented by an embedded graph; demonstrating that it can be realised as a quantum graph problem, which coincides with the known limit of analogous equations on shrinking thin structures.
+The geometric contrast between the edges and vertices of our singular structure is encoded into the singular measures we use to setup our variational problem, and emerges explicitly in the resulting quantum graph problem.
+Furthermore, we also demonstrate that the resulting problem can be readily analysed and solved through use of the $M$-matrix, and provide an explicit form for it for any underlying graph.
+This analysis then serves as motivation for us to study both the curl-of-the-curl equation on a singular structure, and the acoustic approximation on a composite domain containing singular inclusions.
+In both cases we will to setup a variational problem on a singular structure representing a physical material under contrast, reduce it to a more tractable problem (ideally on the underlying graph), and suggest and implement numerical methods for solving it.
