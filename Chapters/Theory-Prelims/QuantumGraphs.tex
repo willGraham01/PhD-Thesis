@@ -77,9 +77,9 @@ Restricting ourselves to the case of straight edges between vertices may seem ov
 Function spaces on metric graphs are formed from taking the direct sum of function spaces on each of the edges; consider for example the following function spaces: \tstk{slight inconvenience here... you haven't defined notation for $L^2$ and $H^1$ spaces yet...!}
 \begin{subequations} \label{eq:GraphFuncSpaces}
 	\begin{align}
-		L^2\bracs{\graph} := \bigoplus_{I_{jk}\in \edgeSet} \ltwo{I_{jk}}{y},
-		&\quad H^1\bracs{\graph} := \bigoplus_{I_{jk}\in \edgeSet} \gradSob{I_{jk}}{y}, \\
-		H^2\bracs{\graph} := \bigoplus_{I_{jk}\in \edgeSet} H^2_\mathrm{grad}\bracs{I_{jk}, \md y}. &
+		L^2\bracs{\graph} := \bigoplus_{I_{jk}\in \edgeSet} \ltwo{\sqbracs{0,l_{jk}}}{y},
+		&\quad H^1\bracs{\graph} := \bigoplus_{I_{jk}\in \edgeSet} \gradSob{\sqbracs{0,l_{jk}}}{y}, \\
+		H^2\bracs{\graph} := \bigoplus_{I_{jk}\in \edgeSet} H^2_\mathrm{grad}\bracs{\sqbracs{0,l_{jk}}, \md y}. &
 	\end{align}
 \end{subequations}
 As we can see, a function $u$ on a quantum graph is characterised by its functional form along each of the edges, leading us to denote $u^{(jk)} = u\vert_{I_{jk}}$ for the restriction of a function $u$ defined on $\graph$ to the edge $I_{jk}$ (extended by zero to the other edges of the graph when evaluated at points outside $I_{jk}$) --- we will call the $u^{(jk)}$ the \emph{edge functions} or \emph{edge forms} of $u$.

@@ -7,6 +7,12 @@ Section \ref{sec:QuantumGraphs} contains the notation we will use, and theory th
 This covers how we will choose to represent our ``singular structures" (section \ref{ssec:EmbeddedGraphs}), how one defines differential operators on (metric) graphs (sections \ref{ssec:QG-FunctionSpaces}-\ref{ssec:DiffOpsOnGraphs}), and a valuable tool for the analysis of the spectrum of such operators --- the $M$-matrix (section \ref{ssec:MMatrix}).
 The introduction of embedded graphs will then allow us to define the singular measures of interest to us in section \ref{sec:SingularMeasures}, before moving on to the definition of the ``non-classical" Sobolev spaces (section \ref{sec:BorelMeasSobSpaces}) that will be the backbone of the variational problems we consider in later chapters.
 
+Before we begin, we set out some notation for frequently occurring function spaces.
+Let $\ddom\subset\reals^n$, and denote by $\smooth{\ddom}$ the set of infinitely differentiable (\emph{smooth}) functions on $\ddom$, $\csmooth{\ddom}$ the set of smooth functions with compact support in the interior of $\ddom$, and $\psmooth{\ddom}$ the set of infinitely differentiable functions on $\reals^2$ that are $\ddom$-periodic.
+For a measure $\rho$ be a Borel measure on $\ddom$, and denote by $\ltwo{\ddom}{\rho}$ the space of $\rho$-square-integrable functions on $\ddom$.
+If the measure is omitted, it is taken to be the $n$-dimensional Lebesgue measure on $\ddom$.
+An exception to this will be cases where we are considering an interval $I\subset\reals$ equipped with the Lebesgue measure; here we will write $\ltwo{I}{y}$ for the space of square integrable functions on this interval, and similarly write $\gradSob{I}{y}$ for the (Sobolev) space of $u\in\ltwo{I}{y}$ that possess a weak derivative $u'\in\ltwo{I}{y}$.
+
 \input{./Chapters/Theory-Prelims/GelfandTransform}
 
 \input{./Chapters/Theory-Prelims/QuantumGraphs}
