@@ -10,7 +10,7 @@ Let $\graph=\bracs{\vertSet,\edgeSet}$ be a \emph{directed} graph with vertices 
 The edges are ordered pairs $I_{jk}=\bracs{v_j, v_k}\in \edgeSet=\vertSet\times\vertSet$, where $I_{jk}$ is directed from vertex $v_j$ (``on the left") to vertex $v_k$ (``on the right").
 Strictly, we should use the notation $I_{jk}^l$ for the edges, where the superscript $l$ parametrises the edges sharing the endpoints $v_j$ and $v_k$, however in what follows we drop the superscript $l$ to simplify the notation.
 We then assign each edge $I_{jk}$ a length $l_{jk}>0$, and use the same notation $I_{jk}$ for the interval $\sqbracs{0,l_{jk}}$.
-Also assign each vertex $v_j$ a coupling constant $\alpha_j\in\complex$ and\footnote{We will shortly restrict ourselves to the physically meaningful $\alpha\in\reals_{+}$, see \tstk{where our modelling assumptions are laid out}.} denote by $\alpha$ the diagonal matrix with $\alpha_1,...,\alpha_{\abs{\vertSet}}$ on the diagonal.
+Also assign each vertex $v_j$ a coupling constant $\alpha_j\in\complex$ and\footnote{We will shortly restrict ourselves to the physically meaningful $\alpha\geq0$, see section \ref{sec:TP-DomainSetup}.} denote by $\alpha$ the diagonal matrix with $\alpha_1,...,\alpha_{\abs{\vertSet}}$ on the diagonal.
 A graph $\graph$ with the metric structure just described is called a \emph{metric graph}.
 These graphs convey a sense of size or bulk to the structures they describe; the edges between vertices now represent physical connections as opposed to combinatorial links as in graph theory, and as such the focus is now on the dynamics along each edge, rather than a process at each vertex.
 Once one has a metric graph, a \emph{quantum graph} can be formed by equipping it with a suitable differential operator as discussed in section \ref{ssec:QG-FunctionSpaces}, however we will postpone this until after we have introduced embeddings and periodicity of metric graphs.
@@ -26,8 +26,8 @@ The choice of $\reals^2$ is simply to cover the situations that we will later wa
 
 Our choice to embed (metric) graphs into $\reals^2$ is both a convenient way to represent the singular structures we want to examine (see section \ref{sec:TP-DomainSetup}), and allows us to define what it means for a graph to be ``periodic" rather intuitively.
 For a unit vector $x\in\reals^2$, an embedded graph is said to be \emph{$T$-periodic} in the direction $x$ if it is invariant under the translation $Tx$ applied to its vertices and edges --- in what follows, we always refer to the minimal such $T>0$ (the \emph{period}) for a given $x\in\reals^2$.
-If $\graph$ is periodic in the (orthogonal) axial directions $e_1, e_2$ (with periods $T_1, T_2$ respectively) then we can define the \emph{period cell} or \emph{unit cell} $Q$ of $\graph$ in the obvious manner; take the intersection of the graph $\graph$ with the region $Q = [0,T_1)\times [0,T_2)$ and match the left boundary to the right, and the top boundary to the bottom.
-That is, view the part $\graph_{Q}$ of the graph $\graph$ contained in the region $Q$ as a set on a torus, see figure \ref{fig:PeriodCellIllustration}.
+If $\graph$ is periodic in the (orthogonal) axial directions $e_1, e_2$ (with periods $T_1, T_2$ respectively) then we can define the \emph{period cell} or \emph{unit cell} $\ddom$ of $\graph$ in the obvious manner; take the intersection of the graph $\graph$ with the region $\ddom = [0,T_1)\times [0,T_2)$ and match the left boundary to the right, and the top boundary to the bottom.
+That is, view the part $\graph_{\ddom}$ of the graph $\graph$ contained in the region $\ddom$ as a set on a torus, see figure \ref{fig:PeriodCellIllustration}.
 \begin{figure}[t!]
 	\centering
 	\begin{subfigure}[t]{0.45\textwidth}
@@ -49,8 +49,8 @@ That is, view the part $\graph_{Q}$ of the graph $\graph$ contained in the regio
 	\end{subfigure}
 	\caption[The period cell of a periodic graph embedded in $\reals^2$; viewed as a subregion of $\reals^2$, and on the torus.]{\label{fig:PeriodCellIllustration} Illustrating a periodic cell of a periodic embedded graph.}
 \end{figure} 
-Note that so long as the graph $\graph$ is periodic in two linearly independent directions, a linear transform can be applied to transform the period cell of $\graph$ into a rectangle whose sides are parallel to the co-ordinate axes, which in turn can be stretched in the axial directions to form a square cell, so without loss of generality we will always consider $Q=[0,1)^2$.
-We will refer to $\graph_{Q} = \graph \cap Q$ as the \emph{period graph}, or \emph{unit graph} of $\graph$.
+Note that so long as the graph $\graph$ is periodic in two linearly independent directions, a linear transform can be applied to transform the period cell of $\graph$ into a rectangle whose sides are parallel to the co-ordinate axes, which in turn can be stretched in the axial directions to form a square cell, so without loss of generality we will always consider a period cell $\ddom=[0,1)^2$.
+We will refer to $\graph_{\ddom} = \graph \cap \ddom$ as the \emph{period graph}, or \emph{unit graph} of $\graph$.
 It is worth remarking here that it is possible to define periodicity of a metric graph without prescribing an embedding, one can see \cite[Chapter~4]{berkolaiko2013introduction} for such a definition.
 However given that the starting point for the problems we will consider will be a singular structure, that is a metric graph that has already been prescribed an embedding, this more general definition is unnecessary.
 
@@ -69,12 +69,11 @@ Before doing so however, we outline some further standing assumptions and notati
 	Note that, under this setup, we have that $e_1^{(jk)} = - n_2^{(jk)}$ and $e_2^{(jk)} = n_1^{(jk)}$.
 	Finally, write $\widehat{n}_{jk} = \bracs{ n_{jk}, 0 }^\top\in\reals^3$ and $\widehat{e}_{jk} = \bracs{ e_{jk}, 0 }^\top\in\reals^3$, and $\widehat{x}_3 = \bracs{0,0,1}^\top$.
 \end{assumption}
-Note that we will tend to use $\ddom$ as the standard notation for the period cell, and $\graph$ for the period graph from this point forwards. \tstk{then why not just change all the $Q$s to $\ddom$s in the introduction too, Will?}
 Whenever we prescribe a singular structure, we always adhere to the notion and setup in assumption \ref{ass:MeasTheoryProblemSetup} unless explicitly stated otherwise.
 Restricting ourselves to the case of straight edges between vertices may seem overly zealous, however we will comment on the (rather straightforward) generalisation to non-straight edges in chapter \ref{ch:ScalarSystem}.
 
 \subsection{Function spaces} \label{ssec:QG-FunctionSpaces}
-Function spaces on metric graphs are formed from taking the direct sum of function spaces on each of the edges; consider for example the following function spaces: \tstk{slight inconvenience here... you haven't defined notation for $L^2$ and $H^1$ spaces yet...!}
+Function spaces on metric graphs are formed from taking the direct sum of function spaces on each of the edges; consider for example the following function spaces:
 \begin{subequations} \label{eq:GraphFuncSpaces}
 	\begin{align}
 		L^2\bracs{\graph} := \bigoplus_{I_{jk}\in \edgeSet} \ltwo{\sqbracs{0,l_{jk}}}{y},
@@ -82,7 +81,7 @@ Function spaces on metric graphs are formed from taking the direct sum of functi
 		H^2\bracs{\graph} := \bigoplus_{I_{jk}\in \edgeSet} H^2_\mathrm{grad}\bracs{\sqbracs{0,l_{jk}}, \md y}. &
 	\end{align}
 \end{subequations}
-As we can see, a function $u$ on a quantum graph is characterised by its functional form along each of the edges, leading us to denote $u^{(jk)} = u\vert_{I_{jk}}$ for the restriction of a function $u$ defined on $\graph$ to the edge $I_{jk}$ (extended by zero to the other edges of the graph when evaluated at points outside $I_{jk}$) --- we will call the $u^{(jk)}$ the \emph{edge functions} or \emph{edge forms} of $u$.
+A function $u$ on a quantum graph is characterised by its functional form along each of the edges, leading us to denote $u^{(jk)} = u\vert_{I_{jk}}$ for the restriction of a function $u$ defined on $\graph$ to the edge $I_{jk}$ (extended by zero to the other edges of the graph when evaluated at points outside $I_{jk}$) --- we will call the $u^{(jk)}$ the \emph{edge functions} or \emph{edge forms} of $u$.
 If $u$ is a vector field, then the subscript $u_{i}$ will be used to denote the $i$\textsuperscript{th} component of $u$.
 The shorthand $u^{(jk)}\bracs{v_j}$ and $u^{(jk)}\bracs{v_k}$ will be used for the values $u^{(jk)}\bracs{0}$ and $u^{(jk)}\bracs{l_{jk}}$, respectively.
 If additionally $u$ is continuous at a vertex $v_j$ (see section \ref{ssec:DiffOpsOnGraphs}), we will use the notation $u\bracs{v_j}$ for this value.
@@ -196,14 +195,14 @@ One detail that should be noted here is that $\mathcal{A}$ is required to be an 
 This can be guaranteed by ensuring $\graph$ contains no looping edges, and has all edge-lengths pairwise-irrationally related \cite{ashurova2014simplicity}.
 In section \ref{ssec:ArtificialVertices} we will see that any graph (that we wish to consider) can be manipulated to adhere to these specifications, through the introduction of \emph{artificial vertices}.
 Our interest in the $M$-matrix as a tool for analysing the spectrum of a quantum graph problem stems from the following property; it can be shown that $z_0\in\complex$ belongs to the spectrum of $\mathcal{A}$ if and only if $\bracs{M\bracs{z} - B}^{-1}$ does \emph{not} admit analytic continuation into $z_0$ (see \cite[Theorem 2.1]{ershova2014isospectrality}), where $B=-\alpha$.
-Equivalently, zero is an eigenvalue of $M\bracs{z_0}-B$ if and only if $z_0$ is an eigenvalue of $\mathcal{A}$ (as presented in \cite[Proposition 1]{derkach1991generalized}, \cite[page 698]{cherednichenko2019time}).
+Equivalently, zero is an eigenvalue of $M\bracs{z_0}-B$ if and only if $z_0$ is an eigenvalue of $\mathcal{A}$ (as presented in \cite[page 698]{cherednichenko2019time}, see \cite[Proposition 1]{derkach1991generalized} for this result stated in a more general context).
 Assuming one has a method for evaluating the $M$-matrix, the eigenvalues of $\mathcal{A}$ can be found by solving for pairs $u\in\mathrm{dom}\bracs{\mathcal{A}}\setminus\clbracs{0}$, $z_0\in\complex$ such that
 \begin{align*}
 	\bigl( M\bracs{z_0} - B \bigr) \dmap u = 0.
 \end{align*}
-In section \ref{sec:Discussion} we will expand on how this result provides access to the spectrum of $\mathcal{A}$, and utilise these ideas in the examples of section \ref{sec:Examples}.
+In section \ref{sec:ScalarDiscussion} we will expand on how this result provides access to the spectrum of $\mathcal{A}$, and utilise these ideas in the examples of section \ref{sec:ScalarExamples}.
 
-One can extend these ideas to any\footnote{Subject to reasonable assumptions.} operator on a Hilbert space; replacing $\complex^{\abs{\vertSet}}$ with the Hilbert space that the boundary data belongs to, and adjusting the definitions of the Dirichlet and Neumann maps accordingly.
+One can extend these ideas to a more general class of operators on Hilbert spaces; replacing $\complex^{\abs{\vertSet}}$ with the Hilbert space that the boundary data belongs to, and adjusting the definitions of the Dirichlet and Neumann maps accordingly.
 If $\mathcal{A}$ is a differential operator on a domain in $\reals^n$, then the Dirichlet and Neumann maps are the boundary values of the function $u$ and its normal derivative on the boundary, the boundary space is the space of functions defined on the boundary of the domain, and the Green's identity is the homonymous identity from vector calculus.
 The $M$-matrix itself is a generalisation of the classical Weyl-Titchmarsh $m$-function, and a particular case of the abstract $M$-operator or Dirichlet-to-Neumann map as it appears in the theory of boundary triples.
 Here we have restricted ourselves to a short review of the specific theory that will be relevant to our work, however one can find further information on the $M$-operator in \cite{kochubei1975extensions, kochubei1980characteristic, gorbachuk1991boundary, brown2008boundary, brown2020functional, cherednichenko2020scattering, cherednichenko2018functional}, whilst information on the $m$-function can be found in \cite{titchmarsh1962eigenfunction, atkinson1964discrete}.
@@ -212,7 +211,7 @@ The precise (and more general) statements concerning the $M$-operator correspond
 Before continuing, we address a detail concerning how we formulate our quantum graph problems and the definition of the $M$-matrix.
 In this work we will use an embedded, periodic graph (usually in $\reals^2$) to represent our singular-structure, however will typically only specify its period cell $\ddom$ and period graph $\graph$ --- this does not cause any ambiguity, as one can reconstruct the entire graph from $\graph$ and $\ddom$ if they so wish.
 A consequence of this decision will be that upon specifying our operator $\mathcal{A}$ in $\reals^2$ and taking a Gelfand transform, the fibres $\mathcal{A}_{\qm}$ will contain dependencies on the choice of geometry assigned by the embedding, as well as on the quasi-momentum $\qm$.
-For example, there may be dependencies on the angle between the edges and the co-ordinate axes (which is not unexpected given how the constants $\qm_{jk}$ in \eqref{eq:3DQGFullSystem} are derived, see section \ref{sec:3DSystemDerivation} or appendix \ref{app:3dMuAnalysis} for details), and if $\mathcal{A}_{\qm}$ contains such dependencies, so too will the resulting family of $M$-matrices.
+For example, there may be dependencies on the angle between the edges and the co-ordinate axes\footnote{Which is not unexpected given how the constants $\qm_{jk}$ in section \ref{sec:ScalarDerivation} arise.}, and if $\mathcal{A}_{\qm}$ contains such dependencies, so too will the resulting family of $M$-matrices.
 That is, the $M$-matrix for each member of the family will depend on the spectral parameter $z$, the quasi-momentum $\qm$, and a number of geometric quantities arising from the embedding --- meaning that the spectrum of each $\mathcal{A}_{\qm}$ will inherit these dependencies from the embedding.
 Of course, the union of $\sigma\bracs{\mathcal{A}_{\qm}}$ over the quasi-momentum $\qm$ will yield the spectrum of the original operator on $\graph$.
 By choosing a different embedding, one could obtain a different set of fibres $\widetilde{\mathcal{A}}_{\qm}$ (and $M$-matrices), where in general $\sigma\bracs{\mathcal{A}_{\qm}} \neq \widetilde{\mathcal{A}}_{\qm}$, but the unions over the quasi-momentum still coinciding (with $\sigma\bracs{\mathcal{A}}$),
