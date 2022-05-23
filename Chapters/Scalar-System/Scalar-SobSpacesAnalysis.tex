@@ -16,8 +16,7 @@ As promised, we begin with an examination of gradients of zero.
 
 \subsection{Gradients of Zero} \label{ssec:GradZero}
 In this section we will characterise gradients of zero with respect to the measures $\ddmes, \massMes$, and $\dddmes$, in that order.
-Throughout, we denote by $\ograd$ the $\ktgrad$ operator with $\kt=\bracs{0,0}$. \tstk{SO JUST THE GRADIENT OPERATOR THEN WILL? WHY NOT JUST DROP THE SUPERSCRIPT!?!?!!}
-Given proposition \ref{prop:ZeroInvariantUnderQM-Wavenumber}, without loss of generality we can always take any approximating sequence $\phi_n$ for a gradient of zero $g$ to be such that $\ograd\phi_n\rightarrow g$, as opposed to $\ktgrad\phi_n\rightarrow g$.
+Given proposition \ref{prop:ZeroInvariantUnderQM-Wavenumber}, without loss of generality we can always take any approximating sequence $\phi_n$ for a gradient of zero $g$ to be such that $\grad\phi_n\rightarrow g$, as opposed to $\ktgrad\phi_n\rightarrow g$.
 \begin{prop}[Gradients of Zero on a Segment Parallel to the $x_2$-axis] \label{prop:3DGradZeroParallel}
 	Suppose that the edge $I_{jk}$ is parallel to the $x_2$-axis.
 	Then 
@@ -49,19 +48,19 @@ As such, we will demonstrate the equality on the first line in the proof.
 	Given proposition \ref{prop:ZeroInvariantUnderQM-Wavenumber}, this implies that
 	\begin{align*}
 		\phi_n\lconv{\ltwo{\ddom}{\lambda_{jk}}}0, \quad
-		\ograd\phi_n \lconv{\ltwo{\ddom}{\lambda_{jk}}^3} g_{jk}\hat{e}_{jk}.
+		\grad\phi_n \lconv{\ltwo{\ddom}{\lambda_{jk}}^3} g_{jk}\hat{e}_{jk}.
 	\end{align*}
-	Therefore, $\ograd\phi_n\cdot\hat{e}_{jk}\rightarrow g_{jk}$, and thus
+	Therefore, $\grad\phi_n\cdot\hat{e}_{jk}\rightarrow g_{jk}$, and thus
 	\begin{align*}
 		\int_0^{\abs{I_{jk}}} \abs{\diff{\phi_n}{y}\bracs{r_{jk}(y)} - g_{jk}\bracs{r_{jk}(y)} }^2 \ \md y
-		&= \integral{I_{jk}}{ \abs{\ograd\phi_n\cdot\hat{e}_{jk} - g_{jk}}^2 }{\lambda_{jk}} \toInfty{n}, \\
+		&= \integral{I_{jk}}{ \abs{\grad\phi_n\cdot\hat{e}_{jk} - g_{jk}}^2 }{\lambda_{jk}} \toInfty{n}, \\
 		\implies \diff{\phi_n}{y}\bracs{r_{jk}(y)} &\lconv{\ltwo{\interval{I_{jk}}}{y}} g_{jk}\bracs{r_{jk}(y)}.
 	\end{align*}
 	We also observe that $\phi_n\bracs{r_{jk}(y)}\rightarrow 0$ in $\ltwo{\interval{I_{jk}}}{y}$, and thus $g_{jk}\bracs{r_{jk}(y)}$ is the derivative (in the classical $\gradSob{\interval{I_{jk}}}{y}$-sense) of the zero function, and thus $g_{jk}=0$.
 	
 	Finally, suppose that $g\in\psmooth{\ddom}$ and consider a compactly supported smooth function $\phi$ which, within some neighbourhood of the edge $I_{jk}$, has the form $\phi(x) = \bracs{\bracs{x-v_j}\cdot n_{jk}}g(x)$.
-	Then we have that $\ograd\phi_n = \bracs{\bracs{x-v_j}\cdot n_{jk}}\ograd g + g\hat{n}_{jk}$, and notice that $\bracs{x-v_j}\cdot n_{jk}	=0$ when $x\in I_{jk}$.
-	It is now clear that $\phi=0$ and $\ograd\phi = g\hat{n}_{jk}$ on $I_{jk}$, so $g\hat{n}_{jk}\in\gradZero{\ddom}{\lambda_{jk}}$.
+	Then we have that $\grad\phi_n = \bracs{\bracs{x-v_j}\cdot n_{jk}}\grad g + g\hat{n}_{jk}$, and notice that $\bracs{x-v_j}\cdot n_{jk}	=0$ when $x\in I_{jk}$.
+	It is now clear that $\phi=0$ and $\grad\phi = g\hat{n}_{jk}$ on $I_{jk}$, so $g\hat{n}_{jk}\in\gradZero{\ddom}{\lambda_{jk}}$.
 	By density of $\psmooth{\ddom}$ in $\pltwo{\ddom}{\lambda_{jk}}$, we can conclude that $g\hat{n}_{jk}\in\gradZero{\ddom}{\lambda_{jk}}$ for every $g\in\pltwo{\ddom}{\lambda_{jk}}$.
 \end{proof}
 Taking $R_{jk}$ as the identity matrix recovers proposition \ref{prop:3DGradZeroParallel}.
@@ -129,7 +128,7 @@ Let $\chi_{jk}^\eps\in\csmooth{\ddom}$ be such that
 	\chi_{jk}^\eps(x) = 0 \text{ when } \mathrm{dist}\bracs{x, I_{jk}^\eps}\geq \frac{2}{3\eps}.
 \end{align}
 As $\graph$ is finite, we can assume without loss of generality that the only edge of $\graph$ that $\supp\bracs{\chi_{jk}^\eps}$ intersect is $I_{jk}$ (otherwise, we just rescale the argument).
-We can also assemble $\chi_{jk}^\eps$ such that $\abs{ \ograd\chi_{jk}^{\eps} } \leq c\eps$ for some $c\geq 0$ independent of $\eps$.
+We can also assemble $\chi_{jk}^\eps$ such that $\abs{ \grad\chi_{jk}^{\eps} } \leq c\eps$ for some $c\geq 0$ independent of $\eps$.
 We can check the convergence of $\chi_{jk}^\eps \toInfty{\eps}$ in $\ltwo{\ddom}{\ddmes}$ to the characteristic function of the edge $I_{jk}$, denoted by $\charFunc{jk}$;
 \begin{align*}
 	\integral{\ddom}{ \abs{\chi_{jk}^\eps - \charFunc{jk}}^2 }{\ddmes}
@@ -156,7 +155,7 @@ We can now prove proposition \ref{prop:3DGradZeroChar} --- the inclusion $\gradZ
 	Then clearly
 	\begin{align*}
 		\norm{\phi_n}_{\ltwo{\ddom}{\lambda_{jk}}} &\leq \norm{\phi_n}_{\ltwo{\ddom}{\ddmes}} \rightarrow 0, \\
-		\norm{\ograd\phi_n - g^{(jk)}}_{\ltwo{\ddom}{\lambda_{jk}}} &\leq \norm{\ograd\phi_n - g}_{\ltwo{\ddom}{\ddmes}} \rightarrow 0,
+		\norm{\grad\phi_n - g^{(jk)}}_{\ltwo{\ddom}{\lambda_{jk}}} &\leq \norm{\grad\phi_n - g}_{\ltwo{\ddom}{\ddmes}} \rightarrow 0,
 	\end{align*}
 	thus $g\in\ltwo{\ddom}{\lambda_{jk}}$ for every $I_{jk}$, so $g\in B$.
 \end{proof}
@@ -182,30 +181,30 @@ Turning our attention to the reverse inclusion, we first demonstrate that so lon
 	\end{align*}
 	Furthermore,
 	\begin{align*}
-		\norm{\ograd\psi_l - g}_{\ltwo{\ddom}{\ddmes}^2}^2
-		&= \norm{\chi_{jk}^n\ograd\phi_l + \phi_l\ograd\chi_{jk}^n - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^2}^2 \\
-		&\leq 2\norm{\phi_l\ograd\chi_{jk}^n}_{\ltwo{\ddom}{\lambda_{jk}}^2}^2 + 2\norm{\chi_{jk}^n\ograd\phi_l - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^2}^2 \\
-		&\leq 2\sup_{I_{jk}}\abs{\ograd\chi_{jk}^n}^2 \norm{\phi_l}_{\ltwo{\ddom}{\lambda_{jk}}^2}^2
-		+ 2\norm{\ograd\phi_l - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^2}^2 \\
+		\norm{\grad\psi_l - g}_{\ltwo{\ddom}{\ddmes}^2}^2
+		&= \norm{\chi_{jk}^n\grad\phi_l + \phi_l\grad\chi_{jk}^n - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^2}^2 \\
+		&\leq 2\norm{\phi_l\grad\chi_{jk}^n}_{\ltwo{\ddom}{\lambda_{jk}}^2}^2 + 2\norm{\chi_{jk}^n\grad\phi_l - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^2}^2 \\
+		&\leq 2\sup_{I_{jk}}\abs{\grad\chi_{jk}^n}^2 \norm{\phi_l}_{\ltwo{\ddom}{\lambda_{jk}}^2}^2
+		+ 2\norm{\grad\phi_l - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^2}^2 \\
 		&\rightarrow 0 \toInfty{l}.
 	\end{align*}
 	Therefore, $\psi_l$ is an approximating sequence for $g$, and thus $g\in\gradZero{\ddom}{\ddmes}$, as required.
 	
-	Next, notice that $\psi_l\bracs{v_j} = \psi_l\bracs{v_k} = 0$, and $\ograd\psi_l\bracs{v_j} = \ograd\psi_l\bracs{v_k} = 0$ for every $l\in\naturals$.
+	Next, notice that $\psi_l\bracs{v_j} = \psi_l\bracs{v_k} = 0$, and $\grad\psi_l\bracs{v_j} = \grad\psi_l\bracs{v_k} = 0$ for every $l\in\naturals$.
 	Therefore,
 	\begin{align*}
-		\norm{\psi_l}_{\ltwo{\ddom}{\massMes}} = 0 = \norm{\ograd\psi_l}_{\ltwo{\ddom}{\massMes}^2},
+		\norm{\psi_l}_{\ltwo{\ddom}{\massMes}} = 0 = \norm{\grad\psi_l}_{\ltwo{\ddom}{\massMes}^2},
 	\end{align*}
 	for every $l\in\naturals$, and so
 	\begin{align*}
 		\norm{\psi_l}_{\ltwo{\ddom}{\dddmes}} &= \norm{\psi_l}_{\ltwo{\ddom}{\ddmes}} \rightarrow 0, \\
-		\norm{\ograd\psi_l - \tilde{g}}_{\ltwo{\ddom}{\dddmes}^2} &= \norm{\ograd\psi_l - g}_{\ltwo{\ddom}{\ddmes}^2}^2 \rightarrow 0,
+		\norm{\grad\psi_l - \tilde{g}}_{\ltwo{\ddom}{\dddmes}^2} &= \norm{\grad\psi_l - g}_{\ltwo{\ddom}{\ddmes}^2}^2 \rightarrow 0,
 	\end{align*}
 	and thus $\tilde{g}\in\gradZero{\ddom}{\dddmes}$.
 \end{proof}
 The hypothesis that $\supp\bracs{g_{jk}}\subset I_{jk}^n$ is essential for the inequality 
 \begin{align*}
-	\norm{\ograd\phi_l - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^2} \leq \norm{\ograd\phi_l - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^2}
+	\norm{\grad\phi_l - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^2} \leq \norm{\grad\phi_l - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^2}
 \end{align*} 
 to hold, and so that we can use the function $\chi_{jk}^n$ to ensure that our approximating sequence $\psi_l$ is ``restricted" to the edge $I_{jk}$ only, on which we know that $\phi_l$ has the properties we need.
 
@@ -310,11 +309,11 @@ The reason for observing that the collection $B_{\massMes}$ is a basis of $\pltw
 	and therefore $g_3 = 0$ since $\rmi\wavenumber\phi_n$ converges to $g_3$ and the zero function.
 	
 	Now take $c=\bracs{1,0,0}^\top$ and $v_j\in\vertSet$, and let $\phi(x) = \varphi_c\bracs{x-v_j}$ for $\varphi_c$ as in \eqref{eq:NuSmoothVertexFunctionDef}.
-	The function $\phi$ is smooth, has support contained in $B_d\bracs{v_j}$, and is such that $\ograd\phi(x) = \ograd\varphi_c\bracs{x-v_j}$.
+	The function $\phi$ is smooth, has support contained in $B_d\bracs{v_j}$, and is such that $\grad\phi(x) = \grad\varphi_c\bracs{x-v_j}$.
 	Clearly
 	\begin{align*}
 		\integral{\ddom}{\abs{\phi}^2}{\massMes} = 0, \quad
-		\integral{\ddom}{\abs{\ograd\phi - g_1^j}^2}{\massMes} = 0,
+		\integral{\ddom}{\abs{\grad\phi - g_1^j}^2}{\massMes} = 0,
 	\end{align*}
 	hence $g_1^j\in\gradZero{\ddom}{\massMes}$.
 	By a similar construction, we can show that $g_2^j\in\gradZero{\ddom}{\massMes}$ too, and since $\gradZero{\ddom}{\massMes}$ is a closed linear subspace of $\ltwo{\ddom}{\massMes}^3$, we have the desired result.
@@ -368,8 +367,8 @@ Intuitively, $\gradZero{\ddom}{\dddmes}$ is made up of linear combinations of gr
 		&= \integral{B_{2/n}(v)}{ \abs{\phi_n}^2 }{\ddmes} + \alpha_v\abs{\phi_n(v)}^2
 		\leq \integral{B_{2/n}(v)}{ \recip{n^2}\abs{g}^2 }{\ddmes} \\
 		&= \frac{2\abs{g}^2 \mathrm{deg}(v)}{n^3} \rightarrow 0, \\
-		\integral{\ddom}{ \abs{\ograd\phi_n - \tilde{g}}^2 }{\dddmes}
-		&= \integral{B_{2/n}(v)}{ \abs{\ograd\phi_n}^2 }{\ddmes} + \alpha_v\abs{\ograd\phi_n(v) - g}^2
+		\integral{\ddom}{ \abs{\grad\phi_n - \tilde{g}}^2 }{\dddmes}
+		&= \integral{B_{2/n}(v)}{ \abs{\grad\phi_n}^2 }{\ddmes} + \alpha_v\abs{\grad\phi_n(v) - g}^2
 		\leq c\abs{g}^2\integral{B_{2/n}(v)}{}{\ddmes} \\
 		&= \frac{2c\abs{g}^2\mathrm{deg}(v)}{n} \rightarrow 0,
 	\end{align*}
@@ -459,6 +458,43 @@ We shall address this matter when we come to look at tangential gradients with r
 
 % Since there are a lot of long arguments in the section on characterising tangential gradient Sobolev spaces, I've put these into a new file.
 \input{./Chapters/Scalar-System/Scalar-SobSpacesAnalysisCharacterisation}
+
+%\tstk{do we want the IBP result to appear here? It doesn't actually work --- can't cancel the vertex contributions in lieu of our functions being non-constant across different vertices...}
+%With theorem \ref{thm:CharOfSobSpaces}, we have enough understanding of the space $\ktgradSob{\ddom}{\dddmes}$ to proceed with the argument of section \ref{sec:ScalarDerivation}.
+%On a number of equations, we have highlighted our choice to understand tangential gradients through approximation by smooth functions, rather than in a ``weak" or distributional sense through analogy with the integration by parts technique.
+%When working with the Lebesgue measure, these two methods of defining gradients (and the classical Sobolev spaces) coincide thanks to the Meyers-Serin theorem.
+%We have remarked on a number of occasions that this equivalence will not hold for general Borel measures $\rho$, in particular the singular measures we have considered here.
+%However, the association of $I_{jk}$ with the intervals $\sqbracs{0,l_{jk}}$ and our ``removal" of the tangential gradients \emph{does} provide a partial analogy involving the tangential gradients.
+%\begin{prop}
+%	Let $u,v\in\ktgradSob{\ddom}{\dddmes}$, and $i\in\clbracs{1,2,3}$.
+%	Then we have that
+%	\begin{align*}
+%		\integral{\ddom}{ u\overline{\ktgrad_{\dddmes}v}\cdot\widehat{x}_i }{\dddmes}
+%		&= - \integral{\ddom}{ \overline{v}\ktgrad_{\dddmes}u\cdot\widehat{x}_i }{\dddmes}.
+%	\end{align*}
+%\end{prop}
+%\begin{proof}
+%	If $i=3$, then we have trivially that
+%	\begin{align*}
+%		\integral{\ddom}{ u\overline{\ktgrad_{\dddmes}v}\cdot\widehat{x}_3 }{\dddmes}
+%		&= \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \integral{I_{jk}}{ -\rmi\wavenumber u^{(jk)}\overline{v}^{(jk)} }{\lambda_{jk}} -\rmi\wavenumber\sum_{v_j\in\vertSet}\alpha_j u(v_j)\overline{v}(v_j) \\
+%		&= - \integral{\ddom}{ \overline{v}\ktgrad_{\dddmes}u\cdot\widehat{x}_i }{\dddmes}.
+%	\end{align*}
+%	
+%	Now suppose that $i\in\clbracs{1,2}$.
+%	Note that theorem \ref{thm:CharOfSobSpaces} informs us that $u^{(jk)}, v^{(jk)}$ are continuous (hence uniformly continuous) on $\sqbracs{0,l_{jk}}$, and are also elements of $\gradSob{\sqbracs{0,l_{jk}}}{y}$.
+%	Therefore, we have that
+%	\begin{align*}
+%		\integral{\ddom}{ u\overline{\ktgrad_{\dddmes}v}\cdot\widehat{x}_i }{\dddmes}
+%		&= \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \integral{I_{jk}}{ u^{(jk)}\overline{\ktgrad_{\lambda_{jk}}v}\cdot\widehat{x}_i }{\lambda_{jk}} \\
+%		&= \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \integral{I_{jk}}{ u^{(jk)}\bracs{ \bracs{\overline{v}^{(jk)}}' -\rmi\qm_{jk}\overline{v}^{(jk)} }\widehat{e}_{jk}\cdot\widehat{x}_i }{\lambda_{jk}} \\
+%		&= \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \int_0^{l_{jk}} u^{(jk)}\bracs{ \bracs{\overline{v}^{(jk)}}' -\rmi\qm_{jk}\overline{v}^{(jk)} }\widehat{e}_{jk}\cdot\widehat{x}_i \ \md y \\
+%		&= \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \int_0^{l_{jk}} \overline{v}^{(jk)}\bracs{ \bracs{\overline{v}^{(jk)}}' -\rmi\qm_{jk}\overline{v}^{(jk)} }\widehat{e}_{jk}\cdot\widehat{x}_i \ \md y
+%		+  \sum_{v_j\in\vertSet}\sum_{j\conLeft k}\sqbracs{u^{(jk)}v^{(jk)}}_0^{l_{jk}} \\
+%		&= \integral{\ddom}{ \overline{v}^{(jk)}\ktgrad_{\dddmes}u }{\dddmes}
+%		+ \sum_{v_j\in\vertSet}\sum_{I_{jk}\in J(v_j)} u(v_j)\overline{v}(v_j)
+%	\end{align*}
+%\end{proof}
 
 This concludes our investigation into the gradient Sobolev spaces, specifically the behaviour of functions that possess tangential gradients.
 In section \ref{ssec:3DGradGeometric} we provide a geometric interpretation of the tangential gradient that highlights the connection between the singular measures, the geometry of the singular structure, and the notion of ``gradient" that the measures provide.
