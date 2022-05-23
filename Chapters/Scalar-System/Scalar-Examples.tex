@@ -357,30 +357,31 @@ We can compute the eigenvector(s) $w\in\complex^{\abs{\vertSet}}$ of $\mathfrak{
 Then $w = \dmap u$ is the Dirichlet data of the eigenfunction $u$ that corresponds to the eigenvalue $\omega_0^2$, and given \eqref{eq:EdgeEqnGeneralSolution} the edge functions $u^{(jk)}$ can be obtained.
 Some examples of the result of this process are plotted in figure \ref{fig:CrossInPlane-EdgePlot}, one should note that the expected continuity at the central vertex holds, whilst their incoming derivatives adhere to the (non-standard) Kirchoff condition. \tstk{check imaginary part - red to orange doesn't look continuous??? Also it'll be more illustrative to compare EFs of THE SAME eigenvalue that persists between alpha values}
 \begin{figure}[t!]
+	\centering
 	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
-		\includegraphics[scale=0.6]{CrossInPlane_EdgePlot-R-a1.pdf}
-		\caption[]{\label{fig:CrossInPlane_EdgePlot-R-a1} The real part of the eigenfunction when $\omega_0=0.63936, \alpha=1$.}
+		\includegraphics[width=\textwidth]{CrossInPlane_EdgePlot-R-a1.pdf}
+		\caption[]{\label{fig:CrossInPlane_EdgePlot-R-a1} The real part of the eigenfunction corresponding to $\omega_0=0.63936, \alpha=1$.}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
-		\includegraphics[scale=0.6]{CrossInPlane_EdgePlot-I-a1.pdf}
-		\caption[]{\label{fig:CrossInPlane_EdgePlot-I-a1} The imaginary part of the eigenfunction when $\omega_0=0.63936, \alpha=1$.}
+		\includegraphics[width=\textwidth]{CrossInPlane_EdgePlot-I-a1.pdf}
+		\caption[]{\label{fig:CrossInPlane_EdgePlot-I-a1} The imaginary part of the eigenfunction corresponding to $\omega_0=0.63936, \alpha=1$.}
 	\end{subfigure}
 	\vskip\baselineskip
 	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
-		\includegraphics[scale=0.6]{CrossInPlane_EdgePlot-R-a4.pdf}
-		\caption[]{\label{fig:CrossInPlane_EdgePlot-R-a4} The real part of the eigenfunction when $\omega_0=0.44812, \alpha=4$.}
+		\includegraphics[width=\textwidth]{CrossInPlane_EdgePlot-R-a4.pdf}
+		\caption[]{\label{fig:CrossInPlane_EdgePlot-R-a4} The real part of the eigenfunction corresponding to $\omega_0=0.44812, \alpha=4$.}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
-		\includegraphics[scale=0.6]{CrossInPlane_EdgePlot-I-a4.pdf}
-		\caption[]{\label{fig:CrossInPlane_EdgePlot-I-a4} The imaginary part of the eigenfunction when $\omega_0=0.44812, \alpha=4$.}
+		\includegraphics[width=\textwidth]{CrossInPlane_EdgePlot-I-a4.pdf}
+		\caption[]{\label{fig:CrossInPlane_EdgePlot-I-a4} The imaginary part of the eigenfunction corresponding to $\omega_0=0.44812, \alpha=4$.}
 	\end{subfigure}	
-	\caption[Eigenfunctions of \eqref{eq:SingularScalarWaveEqn} on the cross-in-the-plane geometry.]{\label{fig:CrossInPlane-EdgePlot} Plots of the eigenfunction corresponding to the eigenvalue $\omega_0=0.63936$  when $\alpha=1$, and $\omega_0=0.44812$ when $\alpha=4$. Both eigenvalues are attained when $\qm=\bracs{\frac{\pi}{4},\frac{\pi}{4}}^\top$, and the edge functions are plotted above the graph $\graph$ in the $\bracs{x_1,x_2}$-plane.}
+	\caption[Eigenfunctions of \eqref{eq:SingularScalarWaveEqn} on the cross-in-the-plane geometry.]{\label{fig:CrossInPlane-EdgePlot} Plots of the eigenfunctions corresponding to the eigenvalue $\omega_0=0.63936$  when $\alpha=1$, and $\omega_0=0.44812$ when $\alpha=4$. Both eigenvalues are attained when $\qm=\bracs{\frac{\pi}{4},\frac{\pi}{4}}^\top$, and the edge functions are plotted above the graph $\graph$ in the $\bracs{x_1,x_2}$-plane. We observe the expected continuity at the vertices, adherence to the Kirchoff condition at $v_3$, and matching derivatives at the artificial vertices used to split the edges.}
 \end{figure}
 
 To round off the analysis, quantities such as the integrated density of states (IDoS) and density of states (DoS) can also be estimated from \eqref{eq:ExampleThickVertexSolution}, as shown in figure \ref{fig:CrossInPlane_ScalarDoS} along with a display of the band-gap structure of the spectrum.
