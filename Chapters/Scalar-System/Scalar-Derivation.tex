@@ -1,7 +1,7 @@
 \section{Derivation of quantum graph problem} \label{sec:ScalarDerivation}
 In this section we provide an overview of a system of the form \eqref{eq:SingularWaveEqnQGProblem} is obtained from \eqref{eq:SingularScalarWaveEqn}, which will setup our discussion revolving around the methods we employ for solving \eqref{eq:SingularWaveEqnQGProblem} in section \ref{sec:ScalarDiscussion}.
 However, before doing so we provide the reader with an intuitive understanding, stemming from the analysis of section \ref{sec:3DGradSobSpaces}, of the space $\tgradSob{\ddom}{\dddmes}$.
-Upon deriving the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem}, we will elaborate its link to our variational problem in the context of Strauss extensions, setting up our discussion in section \ref{ssec:GRandSELinks} and work in chapters \ref{ch:CurlCurl} and \ref{ch:SingInc}.
+Upon deriving the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem}, we will elaborate on its link to our variational problem in the context of Strauss extensions in section \ref{ssec:ExtendedSpaces}.
 
 \input{./Chapters/Scalar-System/Scalar-GradientGeometricInterpretation}
 
@@ -82,17 +82,34 @@ Letting $\alpha_j = \lim_{\delta\rightarrow0}\frac{V_{v_j}}{V_{\mathrm{edge}}}$ 
 \end{subequations}
 We also remark that, for a graph with $\alpha_j<\infty$ for every $v_j$, our approach via the $M$-matrix (section \ref{sec:ScalarDiscussion}) for determining the spectrum of the above problem remains valid.
 
-\subsection{Link to Generalised Resolvents and Strauss Extensions} \label{ssec:GRandSELinks}
-\tstk{This might be better placed in the singular inclusions chapter, although the narrative of the work probably necessitates that it be discussed now. Also it might not be worth a whole section by itself, as it's just us pointing out that our space $\ktgrad{\ddom}{\dddmes}$ is exactly right for us to get a self adjoint operator which corresponds to the ``out of space extension" for the QG problem we defined. We might also mention this in the paragraph above in fact! }
-%\tstk{spectral param in BCs discussion comes here --- these sections might need to be re-referenced. Also, Kuchment-Zeng and Exner-Post touch on this association somewhat}
-%One will note that only $\alpha_j$ appears in the Robin-like condition in \eqref{eq:GraphLaplacianExample}, but $\alpha_j\bracs{\omega^2-\wavenumber^2}$ is present on the right hand side of \eqref{eq:3DQGDerivCondition}.
-%\tstk{here we have to talk about Gen. Resolvents --- what to say?}
-%This means the problem \eqref{eq:3DQGFullSystem} belongs to the class of problems with generalised resolvents.
-%In section \ref{ssec:MMatrix} we will introduce the $M$-matrix in a more familiar setting (with no $\omega^2$-dependence in the vertex conditions) and remarked that the analysis of the spectrum of \eqref{eq:QGFullSystem} can be carried by replacing the matrix $B$ in section \ref{ssec:MMatrix} with $\omega^2 B$ in section \ref{ssec:MMatrixConsequences}.
-%Justification for doing so lies in observing that introducing explicit $\omega^2$-dependence will not affect the (structure of) the arguments in the supporting theory \tstk{refs to Ryzhov here?}, and consequentially is expected to give rise to the aforementioned alteration to $B$.
-%However, a formal argument to justify methodology based on the $M$-matrix and boundary triples (in the context of generalised resolvents) has not been carried out in the literature.
-%As such it remains open to investigation, but would closely follow and resemble arguments that are already available (and form the basis for the theory presented in section \ref{ssec:MMatrix}).
-%This observation (and justification) is made in other works that analyse problems with generalised resolvents via use of the theory of boundary triples and the $M$-matrix --- see for example \cite[page 1846]{cherednichenko2018effective} concerning the results of \tstk{The paper \cite[page 1846]{cherednichenko2018effective} specifically refers to those arguments found in Ryzhov, V.: Weyl-Titchmarsh function of an abstract boundary value problem, operator colligations, and linear systems with boundary control. Complex Anal. Oper. Theory 3(1), 289–322 (2009)}.
-%If one has reservations about this ``gap" in the available theory, an alternative to analysing a problem with generalised resolvents directly is explored in \cite[Section 6]{cherednichenko2017norm}.
-%One could look to transform a problem with $\omega^2$-dependent $\delta$-type vertex condition (like \eqref{eq:3DQGFullSystem}) into a problem with $\omega^2$-independent $\delta'$-type vertex conditions.
-%This comes at the cost of having to determine the appropriate (unitary) transform to apply to \eqref{eq:3DQGFullSystem}; but the theory of section \ref{ssec:MMatrix} would apply to the transformed problem, could be used to analyse the spectrum, and then the inverse transform applied.
+\subsection{$\tgradSob{\ddom}{\dddmes}$ and Extended Spaces} \label{ssec:ExtendedSpaces}
+As we have already discussed, the problem \eqref{eq:SingularWaveEqnQGProblem} is not a quantum graph problem \emph{per se}, in the sense that it does not correspond to the eigenvalue problem of an operator on a metric graph, but rather an operator that acts in an \emph{extended space}.
+More precisely, consider the operator $\mathcal{A}_{\mathrm{ext}}$ with domain
+\begin{align*}
+	\dom\mathcal{A}_{\mathrm{ext}} 
+	&= \clbracs{ (u, \beta) \setVert u\in H^2\bracs{\graph}, \ u \text{ is continuous at each } v_j\in\vertSet, \ \beta_j=\alpha_j u(v_j) } \\
+	& \subset L^2\bracs{\graph}\oplus\complex^{\abs{\vertSet}}.
+\end{align*}
+The element $\bracs{u,\beta}$ is a $\abs{\edgeSet}+\abs{\vertSet}$ ``vector" (more precisely, tuple) consisting of the edge functions $u^{(jk)}$, followed by the (scaled) vertex values $\beta_j$, which we shall write as
+\begin{align*}
+	\begin{pmatrix} u \\ \beta \end{pmatrix}
+	&= \begin{pmatrix} \clbracs{u^{(jk)}}_{I_{jk}\in\edgeSet} \\ \clbracs{\beta_j}_{v_j\in\vertSet} \end{pmatrix}.
+\end{align*}
+With the action of $\mathcal{A}_{\mathrm{ext}}$ defined as
+\begin{align*}
+	\mathcal{A}_{\mathrm{ext}} \begin{pmatrix} u \\ \beta \end{pmatrix}
+	&= 
+	\begin{pmatrix}
+		\clbracs{-\bracs{\diff{}{y}+\rmi\qm_{jk}}^2 u^{(jk)}}_{I_{jk}\in\edgeSet} \\ 
+		\clbracs{\sum_{j\con k}\bracs{ \pdiff{}{n} + \rmi\qm_{jk} }u^{(jk)}(v_j)}_{v_j\in\vertSet}
+	\end{pmatrix},
+\end{align*}
+we recognise \eqref{eq:SingularWaveEqnQGProblem} as the spectral problem for $\mathcal{A}_{\mathrm{ext}}$.
+The space $L^2\bracs{\graph}\oplus\complex^{\abs{\vertSet}}$ is the extended space, and $\mathcal{A}_{\mathrm{ext}}$ the Strauss extension for the problem \eqref{eq:SingularWaveEqnQGProblem}.
+
+Now let us consider our space $\tgradSob{\ddom}{\dddmes}$ in light of theorem \ref{thm:CharOfSobSpaces}.
+It is clear that $\tgradSob{\ddom}{\dddmes}\cong\dom\mathcal{A}_{\mathrm{ext}}$; these spaces are not identical since $\tgradSob{\ddom}{\dddmes}$ is a set of pairs, and the $\alpha_j$ enter through the measure $\dddmes$ rather than being a part of the entries $\beta_j$ directly.
+Furthermore that $-\laplacian_{\qm}^{\dddmes}$ and $\mathcal{A}_{\mathrm{ext}}$ share the same spectrum (in light of defining the same spectral problem), and setting aside questions of solubility for the time being, a solution to the problem $\mathcal{A}_{\mathrm{ext}}u=f$ (for $f\in L^2\bracs{\graph}\oplus\complex^{\abs{\vertSet}}$) also gives rise to a solution to $-\laplacian_{\qm}^{\dddmes}u=f$ and vice-versa.
+Ultimately our approach via singular measures has resulted in the construction of the extended spaces one expects to obtain in the zero-thickness limit of thin-structure problems.
+In the context of the acoustic approximation, we already knew what kind of problem we should end up with (section \ref{ssec:Intro-ThinStructures}) and thus the corresponding extended space.
+However this also presents an opportunity for our work going forward; the non-classical Sobolev spaces and variational problems concerning them provide us with a method of defining (up to isomorphism) the spaces and problems that may correspond to the --- presently unknown --- ``limits" of other thin-structure problems.

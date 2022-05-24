@@ -5,17 +5,25 @@ In this section we contextualise the theory introduced in section \ref{ssec:MMat
 In doing so, we provide a general formula for the $M$-matrix in terms of the underlying (period) graph on which \eqref{eq:SingularWaveEqnQGProblem} is posed.
 We will follow up on this in section \ref{sec:ScalarExamples}, where we provide some explicit examples of quantum graph problems that can be solved by employing the $M$-matrix in the manner discussed below.
 
-\tstk{spectral param in BCs discussion comes here --- might need to be re-referenced. Also, Kuchment-Zeng and Exner-Post touch on this association somewhat}
 One will note that only $\alpha_j$ appears in the Robin-like condition in \eqref{eq:GraphLaplacianExample}, but $\alpha_j\omega^2$ is present on the right hand side of \eqref{eq:SingularWaveEqnQGProblem}.
 As was raised in section \ref{ssec:Intro-ThinStructures}, the problem \eqref{eq:SingularWaveEqnQGProblem} belongs to the class of problems with generalised resolvents.
 In section \ref{ssec:MMatrix} we introduced the $M$-matrix in a more familiar setting, with no $\omega^2$-dependence in the vertex conditions.
 However the analysis of the spectrum of $-\laplacian_{\dddmes}^{\qm}$ can be carried by replacing the matrix $B$ (in section \ref{ssec:MMatrix}) with $\omega^2 B$, as will be done in section \ref{ssec:MMatrixConsequences}.
-Justification lies in the observation that introducing explicit $\omega^2$-dependence should not affect the (structure of) the arguments in the supporting theory, and consequentially the conclusions that can be drawn are robust with respect to the aforementioned alteration to $B$ --- see \cite[page 1846]{cherednichenko2018effective} (concerning the results of \tstk{Ryzhov, V.: Weyl-Titchmarsh function of an abstract boundary value problem, operator colligations, and linear systems with boundary control. Complex Anal. Oper. Theory 3(1), 289–322 (2009)}) and references therein.
-We do remark here though that a formal argument to justify methodology based on the $M$-matrix and boundary triples (in the context of generalised resolvents) has not been carried out in the literature.
-As such it remains open to investigation, but would closely follow and resemble arguments that are already available (and form the basis for the theory presented in section \ref{ssec:MMatrix}).
+Justification lies in the observation that introducing explicit $\omega^2$-dependence should not affect the (structure of) the arguments in the supporting theory (see \cite[page 1846]{cherednichenko2018effective}, concerning the results of \cite{ryzhov2009weyl} \tstk{check with Kirill - are there other works that are more directly applicable that could be adapted?}), and consequentially we should be able to draw the same conclusions with this ``alteration" to $B$.
+We do remark here though that a formal argument to justify methodology based on the $M$-matrix and boundary triples (in the context of generalised resolvents) has not been carried out in the literature --- it remains open to investigation, but would closely follow and resemble arguments that are already available.
 If one has reservations about this ``gap" in the available theory, an alternative to analysing a problem with generalised resolvents directly is explored in \cite[Section 6]{cherednichenko2017norm}.
 One could look to transform a problem with $\omega^2$-dependent $\delta$-type vertex condition (like \eqref{eq:SingularWaveEqnQGProblem}) into a problem with $\omega^2$-independent $\delta'$-type vertex conditions.
 This comes at the cost of having to determine the appropriate (unitary) transform to apply to \eqref{eq:SingularWaveEqnQGProblem}, but the theory of section \ref{ssec:MMatrix} would apply to the transformed problem, could be used to analyse the spectrum, and then the inverse transform applied.
+
+Let $\mathcal{A}$ be the operator (on the metric graph $\graph$) that defines the problem \eqref{eq:SingularWaveEqnQGProblem}, and define the Dirichlet map $\dmap$ as in \eqref{eq:GraphDNMapDef}.
+The Neumann map $\nmap$ is defined sightly differently to how it appears in \eqref{eq:GraphDNMapDef} (by virtue of our need to take a Gelfand transform), however ultimately conveys the same meaning:
+\begin{align} \label{eq:GraphNMapQM}
+	\nmap:\dom\mathcal{A} \rightarrow \complex^{\abs{\vertSet}}, \qquad
+	\bracs{\nmap u}_j = -\sum_{j\con k} \bracs{\pdiff{}{n} + \rmi\qm_{jk} }u(v_j).
+\end{align}
+The action of $\mathcal{A}$ on each edge of $\graph$ is provided by the left-hand side of \eqref{eq:SingularWaveEqnQGProblem-1}, so the Green's identity \eqref{eq:GraphGreensIdentity} holds, and the map $u\mapsto\bracs{\dmap u, \nmap u}$ is clearly surjective onto $\complex^{\abs{\vertSet}}\times\complex^{\abs{\vertSet}}$.
+As such, we can define the $M$-matrix for the problem \eqref{eq:SingularWaveEqnQGProblem} in the manner described in section \ref{ssec:MMatrix}, and in particular know that $\omega^2$ is an eigenvalue of $-\laplacian_{\qm}^{\dddmes}$ whenever $M\bracs{\omega^2}$ possesses a zero eigenvalue.
+In the abstract, this is not particularly helpful for explicitly determining the eigenvalues --- however the nature of the problem \eqref{eq:SingularWaveEqnQGProblem} allows us to compute the entries of $M\bracs{\omega^2}$ explicitly.
 
 \subsection{General formula for the $M$-matrix} \label{ssec:MMatrixResult}
 One of the foremost advantages of the $M$-matrix is that we can explicitly (and analytically) compute its entries for any (finite period) metric graph $\graph$ on which the system \eqref{eq:SingularWaveEqnQGProblem} is posed.
@@ -243,7 +251,6 @@ More precisely, it determines $\sigma$ up to the roots of the prefactor $\bracs{
 		Since $\omega_0\not\in H_0$, $\widetilde{\beta}_j^{\qm}\bracs{\omega_0^2}=0$ too, so $\det\mathfrak{M}_{\qm}\bracs{\omega_0^2}=0$, and thus by proposition \ref{prop:MMatrixDetForm} so is $F\bracs{\qm,\omega_0}$.
 		\item By (i), $F_0\setminus H_0 \subset \sigma$.
 		Therefore, $\overline{F_0\setminus H_0}\subset\overline{\sigma}=\sigma$, since the spectrum $\sigma$ is closed.
-		\tstk{can also prove this by taking $\omega_0$ and appealing to a approx. sequence $\omega_n,\qm_n$ and noting that the product of the eigenvalue branches, hence determinant, is zero for each pair, so $\omega_n\in\sigma$ and thus the limit is too.}
 	\end{enumerate}
 \end{proof}
 Corollary \ref{cory:M-MatrixEntriesNoPoles} demonstrates that the majority of the spectrum can thus be found through examination of the function $F$.

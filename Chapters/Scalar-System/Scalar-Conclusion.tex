@@ -17,7 +17,7 @@ We built on our discussion with the examples of section \ref{sec:ScalarExamples}
 
 Before we move on to considering systems of vector equations (chapter \ref{ch:CurlCurl} and composite domains (chapter \ref{ch:SingInc}), we highlight the possibility of extending the analysis carried out thus far to embedded graphs whose edges are not assumed to be straight line segments.
 
-\subsection{Extensions: Curved Edges} \label{ssec:CurvedEdges}
+\subsection{Extensions: Curved Edges and Potential Fields} \label{ssec:CurvedEdges}
 Our analysis has been, and in the following chapters will continue to be, carried out within the context of the standing assumptions \ref{ass:MeasTheoryProblemSetup} --- this includes the assumption that the edges of our singular structure are straight lines.
 Of course, the cross sections of physical photonic crystals are not limited to unions of straight struts, nor are the applications of quantum graphs to \tstk{introduction context, quantum wires, chemical reactions, etc}.
 With our analysis of $\gradZero{\ddom}{\dddmes}$ and $\ktgradSob{\ddom}{\dddmes}$ complete, we can predict through analogy the changes that would arise if this restriction was dropped, to help motivate any future work in this direction.
@@ -37,13 +37,28 @@ We make these predictions not only because of the geometric interpretations we n
 Of course, there are likely to be some technicalities to overcome, for example the smoothness of the curves $I_{jk}$ might affect how one goes about constructing smooth approximating sequences.
 
 Further to these expectations, one would expect to obtain a system of the form
-\begin{subequations}
-	\begin{align*}
-		-\bracs{\diff{}{y} + \rmi\qm_{jk}(y)}^2 u^{(jk)} &= \omega^2 u^{(jk)}, \quad &y\in\interval{l_{jk}}, \ \forall I_{jk}\in\edgeSet, \\
+\begin{subequations} \label{eq:SS-QGProblemCurvedEdges}
+	\begin{align}
+		-\bracs{\diff{}{y} + \rmi\qm_{jk}(y)}^2 u^{(jk)} &= \omega^2 u^{(jk)}, \quad &y\in\interval{l_{jk}}, \ \forall I_{jk}\in\edgeSet, \label{eq:SS-QGProblemCurvedEdges-1} \\
 		u \text{ is continuous at } & v_j, \quad &\forall v_j\in\vertSet,  \\
 		\sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}(v_j)}u^{(jk)}\bracs{v_j} &= \omega^2\alpha_j u\bracs{v_j}, \quad &\forall v_j\in\vertSet,
-	\end{align*}
+	\end{align}
 \end{subequations}
 in place of the system \eqref{eq:SingularWaveEqnQGProblem}).
-This new system is still a quantum graph problem, or more precisely \emph{interpretable} as a quantum graph problem, however we now have co-ordinate varying coefficients (through the $\qm_{jk}(y)$) in our edge ODEs.
-Operators of this kind have been studied before in the context of differential operators on non-singular structures in $\reals^2$, see for example \cite{shterenberg2007homogenization}. \tstk{more examples? Also check BK - does their book cover coordinate varying coefficients in the edge ODEs? If no examples in graph context, this is something very new that someone could do!}
+This new system is still realisable as a quantum graph problem, however we now have co-ordinate varying coefficients (through the $\qm_{jk}(y)$) in our edge ODEs.
+The Green's identity still holds for the operator that defines the problem \eqref{eq:SS-QGProblemCurvedEdges}, with the Dirichlet map as defined in \eqref{eq:GraphDNMapDef} and Neumann map defined as
+\begin{align*}
+	\bracs{\nmap u}_j &= \sum_{j\con k} \bracs{ \pdiff{}{n} + \rmi\qm_{jk}(v_j) }u(v_j) .
+\end{align*}
+One can thus construct the $M$-matrix for this problem and attempt to use it to analyse the spectrum, however an explicit construction is now greatly complicated by the $y$-dependence of the $\qm_{jk}$.
+The proof of proposition \ref{prop:M-MatrixEntries} relies on being able to compute the general solution to \eqref{eq:SS-QGProblemCurvedEdges-1}, which is non-trivial for general functions $\qm_{jk}(y)$.
+Further investigation into possible alternatives, or the viability of solving via the $M$-matrix, would be warranted.
+
+Following on from the above discussion, the system \eqref{eq:SS-QGProblemCurvedEdges} resembles that of the magnetic Schr\"{o}dinger operator on a graph --- see \cite[section 7.5.1]{berkolaiko2013introduction} --- although the coefficients $\qm_{jk}$ are not physical potentials but rather artefacts of our Gelfand transform.
+This observation brings a further generalisation to \eqref{eq:SingularScalarWaveEqn} to light, that is within immediate reach --- the introduction of (to use the terminology from the Schr\"{o}dinger context) a magnetic field $\vec{A}$ and\footnote{We can draw the immediate conclusion that $\vec{A}$ must be parallel to each edge on $I_{jk}$ by testing against gradients of zero.} potential $V$, and consideration of a variational problem such as
+\begin{align*}
+	\integral{\ddom}{ \bracs{\tgrad_{\dddmes}u + \vec{A}u}\cdot \overline{\bracs{ \tgrad_{\dddmes}\phi + \vec{A}\phi}} + Vu\overline{\phi} }{\dddmes} 
+	&= \omega^2\integral{\ddom}{u\overline{\phi}}{\dddmes},
+	\qquad \forall\phi\in\psmooth{\ddom}.
+\end{align*}
+The analysis of section \ref{sec:3DGradSobSpaces} continues to provide us with a method of interpreting such a variational problem, however its realisation as a quantum graph problem will likely bear all of the challenges the previous discussion raised, if not more.

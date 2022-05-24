@@ -150,20 +150,22 @@ or alternatively can consider the spectral problem of finding eigenpairs $\bracs
 	-\laplacian u &= z u.
 \end{align*}
 Each of these problems can be rewritten as a system of ODEs on the edge intervals coupled through the vertex conditions:
-\begin{align*}
-	\laplacian u = f \quad\Leftrightarrow\quad &
-	\begin{cases}
-		-\bracs{u^{(jk)}}'' = f^{(jk)} \ \forall j\conLeft k, \\
-		\forall j, \ u \text{ is continuous at } v_j, \\
-		\forall j, \sum_{j\con k}\pdiff{u^{(jk)}}{n}\bracs{v_j} = \alpha_j u\bracs{v_j}.
-	\end{cases} \\
-	\laplacian u = z u \quad\Leftrightarrow\quad &
-	\begin{cases}
-		-\bracs{u^{(jk)}}'' = z u^{(jk)} \ \forall j\conLeft k, \\
-		\forall j, \ u \text{ is continuous at } v_j, \\
-		\forall j, \sum_{j\con k}\pdiff{u^{(jk)}}{n}\bracs{v_j} = \alpha_j u\bracs{v_j}.
-	\end{cases}
-\end{align*}
+\begin{subequations} \label{eq:GraphLaplacianIFFs}
+	\begin{align}
+		\laplacian u = f \quad\Leftrightarrow\quad &
+		\begin{cases}
+			-\bracs{u^{(jk)}}'' = f^{(jk)} \ \forall j\conLeft k, \\
+			\forall j, \ u \text{ is continuous at } v_j, \\
+			\forall j, \sum_{j\con k}\pdiff{u^{(jk)}}{n}\bracs{v_j} = \alpha_j u\bracs{v_j}.
+		\end{cases} \\
+		\laplacian u = z u \quad\Leftrightarrow\quad &
+		\begin{cases}
+			-\bracs{u^{(jk)}}'' = z u^{(jk)} \ \forall j\conLeft k, \\
+			\forall j, \ u \text{ is continuous at } v_j, \\
+			\forall j, \sum_{j\con k}\pdiff{u^{(jk)}}{n}\bracs{v_j} = \alpha_j u\bracs{v_j}.
+		\end{cases}
+	\end{align}
+\end{subequations}
 One should note that the spectral parameter does \emph{not} appear on the right hand side of the Kirchoff condition.
 This is because we are dealing with operators on quantum graphs here, as opposed to operators that act in an extended space but which can be interpreted through a ``non-standard" quantum graph problem (section \ref{ssec:Intro-ThinStructures}).
 We will discuss this, and the idea of Strauss extensions, further in section \ref{ssec:GRandSELinks} when we come to analyse the spectrum of our variational problems on singular structures and explore their link to quantum graphs.
@@ -174,17 +176,17 @@ Let $\mathcal{A}$ be a differential operator on an embedded, metric graph $\grap
 \begin{align*}
 	\dmap, \nmap: \mathrm{dom}\bracs{\mathcal{A}} \rightarrow \complex^{\abs{\vertSet}},
 \end{align*}
-sending a function $u\in\mathrm{dom}\bracs{\mathcal{A}}$ to its Dirichlet and Neumann data at each of the vertices;
-\begin{align*}
+sending a function $u\in\mathrm{dom}\bracs{\mathcal{A}}$ to its Dirichlet and Neumann data at each of the vertices; in the case of the graph Laplacian above, we have
+\begin{align} \label{eq:GraphDNMapDef}
 	\bracs{\dmap u}_j &= u\bracs{v_j}, \quad &j=1,...,\abs{\vertSet}, \\
 	\bracs{\nmap u}_j &= -\sum_{j\con k}\pdiff{u^{(jk)}}{n}\bracs{v_j}, \quad &j=1,...,\abs{\vertSet}. 
-\end{align*}
-Note that the \emph{Green's identity}
-\begin{align*}
-	\ip{\mathcal{A}u}{v}_{L^2{\graph}} - \ip{u}{\mathcal{A}v}_{L^2{\graph}}
+\end{align}
+Provided that the \emph{Green's identity}
+\begin{align} \label{eq:GraphGreensIdentity}
+	\ip{\mathcal{A}u}{v}_{L^2\bracs{\graph}} - \ip{u}{\mathcal{A}v}_{L^2\bracs{\graph}}
 	&= \ip{\nmap u}{\dmap v}_{\complex^{\abs{\vertSet}}} - \ip{\dmap u}{\nmap v}_{\complex^{\abs{\vertSet}}}
-\end{align*}
-holds for all $u,v\in\dom\mathcal{A}$, and so\footnote{In the general context, there is also a requirement that the map $u\mapsto\bracs{\dmap u, \nmap u}$ is surjective.} the triple $\bracs{\complex^{\abs{\vertSet}},\dmap,\nmap}$ is said to be a boundary triple for the operator $\mathcal{A}$.
+\end{align}
+holds for all $u,v\in\dom\mathcal{A}$, and the map $u\mapsto\bracs{\dmap u, \nmap u}$ is surjective, the triple $\bracs{\complex^{\abs{\vertSet}},\dmap,\nmap}$ is said to be a boundary triple for the operator $\mathcal{A}$.
 The $M$-matrix at $z\in\complex$ is then defined by
 \begin{align*}
 	M(z): \ \complex^{\abs{\vertSet}} \ni \dmap u \mapsto \nmap u \in \complex^{\abs{\vertSet}},
@@ -194,7 +196,14 @@ that is, the Dirichlet-to-Neumann map associated to the triple $\bracs{\complex^
 One detail that should be noted here is that $\mathcal{A}$ is required to be an extension of a \emph{simple} operator --- an operator for which there is no reducing subspace of its domain in which the operator is self-adjoint (see \cite[Section 2.2]{ershova2014isospectrality} for the precise definition).
 This can be guaranteed by ensuring $\graph$ contains no looping edges, and has all edge-lengths pairwise-irrationally related \cite{ashurova2014simplicity}.
 In section \ref{ssec:ArtificialVertices} we will see that any graph (that we wish to consider) can be manipulated to adhere to these specifications, through the introduction of \emph{artificial vertices}.
-Our interest in the $M$-matrix as a tool for analysing the spectrum of a quantum graph problem stems from the following property; it can be shown that $z_0\in\complex$ belongs to the spectrum of $\mathcal{A}$ if and only if $\bracs{M\bracs{z} - B}^{-1}$ does \emph{not} admit analytic continuation into $z_0$ (see \cite[Theorem 2.1]{ershova2014isospectrality}), where $B=-\alpha$.
+
+Our interest in the $M$-matrix will be as a tool for analysing the spectrum of a quantum graph problem, centred around one particular property of the $M$-matrix.
+Notice that the non-standard Kirchoff condition at each vertex in \eqref{eq:GraphLaplacianIFFs} can be written in the form
+\begin{align} \label{eq:BoundaryConditionAsDNMaps}
+	\nmap u &= -\alpha\dmap u.
+\end{align}
+Suppose more generally now that the operator $\mathcal{A}$ on $\graph$ is such that $u\in\dom\mathcal{A}$ if and only if \eqref{eq:BoundaryConditionAsDNMaps} holds (again, one can think of $\mathcal{A}=-\laplacian$ as in \eqref{eq:GraphLaplacianExample}).
+It can be shown that $z_0\in\complex$ belongs to the spectrum of $\mathcal{A}$ if and only if $\bracs{M\bracs{z} - B}^{-1}$ does \emph{not} admit analytic continuation into $z_0$ (see \cite[Theorem 2.1]{ershova2014isospectrality}), where $B=-\alpha$.
 Equivalently, zero is an eigenvalue of $M\bracs{z_0}-B$ if and only if $z_0$ is an eigenvalue of $\mathcal{A}$ (as presented in \cite[page 698]{cherednichenko2019time}, see \cite[Proposition 1]{derkach1991generalized} for this result stated in a more general context).
 Assuming one has a method for evaluating the $M$-matrix, the eigenvalues of $\mathcal{A}$ can be found by solving for pairs $u\in\mathrm{dom}\bracs{\mathcal{A}}\setminus\clbracs{0}$, $z_0\in\complex$ such that
 \begin{align*}

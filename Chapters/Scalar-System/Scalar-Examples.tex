@@ -252,7 +252,7 @@ The limit \eqref{eq:EigenvalueBranchLimit} exists for both branches, however onl
 The eigenvalue branches in the vicinity of root $\omega_0=\pi\sqrt{2}$ are plotted in figure \ref{fig:1DDecoratedGraphEvalBranches-Thetas}, to illustrate this point.
 \begin{figure}[b!]
 	\centering
-	\includegraphics[scale=0.7]{1DDecoratedGraphEvalBranches-Thetas.pdf}
+	\includegraphics[width=\textwidth]{1DDecoratedGraphEvalBranches-Thetas.pdf}
 	\caption[Eigenvalue branches of the $M$-matrix near a pole of the determinant, for the geometry of section \ref{ssec:EmbeddingDependentExample}.]{\label{fig:1DDecoratedGraphEvalBranches-Thetas} eigenvalue branches of the matrix $\mathfrak{M}_{\qm}$ near $\omega_0 = \pi\sqrt{2}$, which is a root of $H^{(2)}$. The value $\qm_0\approx-0.691\pi$ solves $\Xi\bracs{\omega_0}=\cos\qm_0+\recip{2}$, and the limit \eqref{eq:EigenvalueBranchLimit} is zero. At other values of $\qm$ however, the limit \eqref{eq:EigenvalueBranchLimit} is non-zero.}
 \end{figure}
 In summary, $\sigma$ consists of those $\omega^2$ such that
@@ -291,20 +291,21 @@ with
 and coupling constant $\alpha_3$ at $v_3$ (and zero coupling constants at the dummy vertices $v_1$ and $v_2$).
 Also define
 \begin{align*}
-	 s_a\bracs{\omega} = \sin\bracs{a\omega}, \quad 
-	 c_a\bracs{\omega} = \cos\bracs{a\omega}, \quad 
-	 s_b\bracs{\omega} = \sin\bracs{b\omega}, \quad 
-	 c_b\bracs{\omega} = \cos\bracs{b\omega},
+	s_a\bracs{\omega} = \sin\bracs{a\omega}, \quad 
+	c_a\bracs{\omega} = \cos\bracs{a\omega}, \quad 
+	\tilde{s}_a\bracs{\omega} = \sin\bracs{\omega\bracs{1-a}}, \quad 
+	\tilde{c}_a\bracs{\omega} = \cos\bracs{\omega\bracs{1-a}},
 \end{align*}
 \begin{align*}
-	 \tilde{s}_a\bracs{\omega} = \sin\bracs{\omega\bracs{1-a}}, \quad 
-	 \tilde{c}_a\bracs{\omega} = \cos\bracs{\omega\bracs{1-a}}, \quad 
-	 \tilde{s}_b\bracs{\omega} = \sin\bracs{\omega\bracs{1-b}}, \quad 
-	 \tilde{c}_b\bracs{\omega} = \cos\bracs{\omega\bracs{1-b}}.
+	s_b\bracs{\omega} = \sin\bracs{b\omega}, \quad 
+	c_b\bracs{\omega} = \cos\bracs{b\omega}, \quad
+	\tilde{s}_b\bracs{\omega} = \sin\bracs{\omega\bracs{1-b}}, \quad 
+	\tilde{c}_b\bracs{\omega} = \cos\bracs{\omega\bracs{1-b}}.
 \end{align*}
 Using corollary \ref{cory:M-MatrixEntriesNoPoles} we set $H^{(2)}\bracs{\omega^2} = s_a\bracs{\omega} s_b\bracs{\omega} \tilde{s}_a\bracs{\omega} \tilde{s}_b\bracs{\omega}$, and obtain
 \begin{align*}
-	\mathfrak{M}_{\qm}\bracs{\omega^2} &=
+	\mathfrak{M}_{\qm} & \bracs{\omega^2} = \\
+	&
 	\begin{pmatrix}[2.5]
 		-\omega s_a \tilde{s}_a \bracs{ s_b \tilde{c}_b + c_b \tilde{s}_b } &
 		0 &
@@ -400,7 +401,6 @@ To round off the analysis, quantities such as the integrated density of states (
 	\caption[The spectrum and density of states for the problem \eqref{eq:ScalarWaveEqn} on the cross-in-the-plane geometry.]{\label{fig:CrossInPlane_ScalarDoS} The (relative) IDoS, DoS, and spectrum for the graph topology in section \ref{ssec:ExampleCrossInPlane}.
 	The relative IDoS at the value $x$ is defined as the IDoS at the value $x$ minus $\left\lfloor\frac{x}{\pi}\right\rfloor\bracs{2\pi}^2$.}
 \end{figure}
-\tstk{should we define these and briefly explain how the approximation was obtained?}
 For any $\alpha_3>0$, it can also be shown that the spectral bands $I_n$ satisfy $I_n\subset\sqbracs{(n-1)\pi, n\pi}$, each with left-endpoint $(n-1)\pi$ and a right-endpoint strictly less than $n\pi$.
 It is worth remarking that this behaviour is reversed for $\alpha_3<0$, the bands having right-endpoint $n\pi$ and left-endpoint strictly greater than $(n-1)\pi$.
 For $\alpha\leq-2$ there is even a gap between an isolated eigenvalue at $0$ and the beginning of the band $I_1$ --- however as mentioned in section \ref{sec:ScalarEqnChapterIntro}, $\alpha<0$ does not correspond to any physical material.

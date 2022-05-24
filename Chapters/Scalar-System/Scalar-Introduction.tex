@@ -1,9 +1,9 @@
 \section{Chapter Introduction} \label{sec:ScalarEqnChapterIntro}
 This chapter aims to provide a concrete introduction to variational problems on singular structures, and their link to the quantum graph problems that arise in the asymptotic limit of thin structures as the thickness shrinks to zero.
 We will concern ourselves with the study of the acoustic equation on a singular structure, and the corresponding non-classical Sobolev spaces of functions possessing gradients with respect to the measure $\dddmes$.
-By understanding this function space we will be able to derive a quantum graph problem, or more precisely a problem of generalised resolvent type, from our original variational problem.
+By understanding this function space we will be able to derive a quantum graph problem, or more precisely an operator that acts on an extended space whose spectral problem is realisable as a quantum graph problem, from our original variational problem.
 This will solidify the link between our variational problems and the limits of thin structure problems as discussed in section \ref{ssec:Intro-ThinStructures}, with our non-classical Sobolev spaces forming the natural ``extended" spaces, and providing us with a springboard for our work in the later chapters \ref{ch:CurlCurl} and \ref{ch:SingInc}.
-To conclude this section, we will turn our attention to the use of the $M$-matrix to analyse the spectrum of the resulting quantum graph problems, providing an explicit formula for its entries.
+We will then turn our attention to the use of the $M$-matrix to analyse the spectrum of the resulting quantum graph problems, providing an explicit formula for its entries.
 We shall conclude with an examination of some specific singular structure geometries, complimenting some of the discussion points in sections \ref{ssec:MMatrix} and \ref{sec:ScalarDiscussion}.
 
 Let us now formulate the problem that we wish to consider.
@@ -14,15 +14,25 @@ In this chapter, we will concern ourselves with the analysis of the \emph{acoust
 \end{align}
 where $u\in\tgradSob{\ddom}{\dddmes}$.
 A detailed study of the functions that lie in the space $\tgradSob{\ddom}{\dddmes}$ is left to section \ref{sec:3DGradSobSpaces}, however we provide a geometric interpretation of the gradients of zero and tangential gradients $\tgrad_{\dddmes}u$ in section \ref{ssec:3DGradGeometric}.
-Perhaps a more pressing issue is that we must provide a suitable definition of the operator $-\laplacian_{\dddmes}^{\qm}$ on the left hand side of \eqref{eq:SingularScalarWaveEqn}.
-With the knowledge (from section \ref{sec:BorelMeasSobSpaces}) that $\tgradSob{\ddom}{\dddmes}$ is a Hilbert space, we consider the bilinear form $b_{\qm}$ defined by
+Perhaps a more pressing issue is that we must provide a suitable definition for the problem \eqref{eq:SingularScalarWaveEqn}; to this end we interpret \eqref{eq:SingularScalarWaveEqn} as the problem of finding $u\in\tgradSob{\ddom}{\dddmes}\setminus\clbracs{0}$, $\omega>0$, such that
+\begin{align} \label{eq:SingularScalarWaveEqn-VariationalForm}
+	\integral{\ddom}{ \tgrad_{\dddmes}u\cdot\overline{\tgrad_{\dddmes}\phi} }{\dddmes}
+	&= \omega^2 \integral{\ddom}{ u\overline{\phi} }{\dddmes},
+	\qquad\forall\phi\in\psmooth{\ddom}.
+\end{align}
+Our concern is predominantly the ``spectral" problem \eqref{eq:SingularScalarWaveEqn} defined through \eqref{eq:SingularScalarWaveEqn-VariationalForm}, however with the knowledge (from section \ref{sec:BorelMeasSobSpaces}) that $\tgradSob{\ddom}{\dddmes}$ is a Hilbert space, we can consider defining the ``operator" $-\laplacian_{\qm}^{\dddmes}$.
+Consider the bilinear form $b_{\qm}$ defined by
 \begin{align*}
 	\dom\bracs{b_{\qm}} &= \tgradSob{\ddom}{\dddmes}\times\tgradSob{\ddom}{\dddmes}, \\
-	b_{\qm}\bracs{u,v} &= \integral{\ddom}{ \tgrad_{\dddmes}u\cdot\overline{\tgrad_{\dddmes}v} }{\dddmes}.
+	b_{\qm}\bracs{u,v} &= \integral{\ddom}{ \tgrad_{\dddmes}u\cdot\overline{\tgrad_{\dddmes}v} }{\dddmes},
 \end{align*}
-Clearly $b_{\qm}\bracs{u,u}\geq 0$ with equality only when $u$ is the zero function (whose tangential gradient is also the zero function). 
-\tstk{Defining $\ip{u}{v}_{b_{\qm}} = b_{\qm}\bracs{u,v}+\ip{u}{v}_{\tgrad{\ddom}{\dddmes}}$, we can see that the norms $\norm{\cdot}_{b_{\qm}}$ and $\norm{\cdot}_{\tgradSob{\ddom}{\dddmes}}$ are equivalent (we have that $\recip{2}\norm{\cdot}_{b_{\qm}} \leq \norm{\cdot}_{\tgradSob{\ddom}{\dddmes}} \leq \norm{\cdot}_{b_{\qm}}$, and thus by Kato's representation theorem we have that... }
-Therefore, there exists a self-adjoint operator $-\laplacian_{\dddmes}^{\qm}$ defined by
+clearly $b_{\qm}\bracs{u,u}\geq 0$ with equality only when $u$ is the zero function (whose tangential gradient is also the zero function). 
+Defining $\ip{u}{v}_{b_{\qm}} = b_{\qm}\bracs{u,v}+\ip{u}{v}_{\tgradSob{\ddom}{\dddmes}}$, we can see that the norms $\norm{\cdot}_{b_{\qm}}$ and $\norm{\cdot}_{\tgradSob{\ddom}{\dddmes}}$ are equivalent --- we have that 
+\begin{align*}
+	\recip{2}\norm{ u }_{b_{\qm}} \leq \norm{ u }_{\tgradSob{\ddom}{\dddmes}} \leq \norm{ u }_{b_{\qm}},
+	\qquad\forall u\in\tgradSob{\ddom}{\dddmes}.
+\end{align*}
+So (by Kato's representation theorem) there exists a self-adjoint operator $-\laplacian_{\dddmes}^{\qm}$ defined by
 \begin{align*}
 	\dom\bracs{ -\laplacian_{\dddmes}^{\qm} } 
 	&= \clbracs{ u\in\tgradSob{\ddom}{\dddmes} \setVert \exists f\in\ltwo{\ddom}{\dddmes} \text{ s.t. } \right.
@@ -31,14 +41,8 @@ Therefore, there exists a self-adjoint operator $-\laplacian_{\dddmes}^{\qm}$ de
 	\left. b_{\qm}\bracs{u,v} = \ip{f}{v}_{\tgradSob{\ddom}{\dddmes}}, \quad \forall v\in\tgradSob{\ddom}{\dddmes} },
 %	\left. \integral{\ddom}{ \tgrad_{\dddmes}u\cdot\overline{\tgrad_{\dddmes}v} }{\dddmes} = \integral{\ddom}{ f\overline{v}}{\dddmes}, \quad \forall v\in\tgradSob{\ddom}{\dddmes} },
 \end{align*}
-with action $-\laplacian_{\dddmes}^{\qm} u = f$, with $u$ and $f$ related as in \eqref{eq:AcousticOperatorDefinition}.
-The acoustic equation \eqref{eq:SingularScalarWaveEqn} is then the eigenvalue problem for this operator, that is the problem of finding $\omega^2>0$ and $u\in\tgradSob{\ddom}{\dddmes}$ such that
-\begin{align} \label{eq:SingularScalarWaveEqn-VariationalForm}
-	\integral{\ddom}{ \tgrad_{\dddmes}u\cdot\overline{\tgrad_{\dddmes}\phi} }{\dddmes}
-	&= \omega^2 \integral{\ddom}{ u\overline{\phi} }{\dddmes},
-	\qquad\forall\phi\in\psmooth{\ddom}.
-\end{align}
-Whenever we refer to the problem \eqref{eq:SingularScalarWaveEqn}, we understand this problem in the sense of \eqref{eq:SingularScalarWaveEqn-VariationalForm}.
+with action $-\laplacian_{\dddmes}^{\qm} u = f$, with $u$ and $f$ related as in \eqref{eq:AcousticOperatorDefinition}, and the acoustic equation \eqref{eq:SingularScalarWaveEqn} is then the eigenvalue problem for this operator.
+Although we will not be concerned with the resolvent problem for the operator $-\laplacian_{\qm}^{\dddmes}$ thus defined, our ability to define such an operator in lieu of our understanding of the space $\tgradSob{\ddom}{\dddmes}$ will be relevant when we come to the discussion in section \ref{ssec:ExtendedSpaces}.
 
 Recall the periodic graph $\hat{\graph}$ and measure $\upsilon$ from section \ref{sec:TP-DomainSetup}.
 We can follow a similar construction to define the operator $-\laplacian_{\upsilon}$ on $\gradSob{\reals^2}{\upsilon}$, using the form
@@ -46,15 +50,11 @@ We can follow a similar construction to define the operator $-\laplacian_{\upsil
 	\integral{\reals^2}{ \grad_{\upsilon}u\cdot\overline{\grad_{\upsilon}v} }{\upsilon},
 	\qquad u,v\in\gradSob{\reals^2}{\upsilon}.
 \end{align*}
-Through the use of a Gelfand transform (and via passage through approximating sequences of smooth functions), the family of operators $-\laplacian_{\dddmes}^{\qm}$ decomposes $-\laplacian_{\upsilon}$ as
-\begin{align*}
-	-\laplacian_{\upsilon} &= \int_{[-\pi,\pi)^2}^{\bigoplus} -\laplacian_{\dddmes}^{\qm} \ \md\qm,
-\end{align*}
-and so we have in particular that
+Through the use of a Gelfand transform (and via passage through approximating sequences of smooth functions), the family $-\laplacian_{\dddmes}^{\qm}$ are the fibres of $-\laplacian_{\upsilon}$, and so we have in particular that
 \begin{align*}
 	\sigma\bracs{ -\laplacian_{\upsilon} } &= \bigcup_{\qm\in[-\pi,\pi)^2} \sigma\bracs{ -\laplacian_{\dddmes}^{\qm} }.
 \end{align*}
-That is to say, we are studying the spectrum of the periodic operator $-\laplacian_{\upsilon}$ --- the analogue of the acoustic equation for our singular structure domain --- through the family of operators $-\laplacian_{\dddmes}^{\qm}$ defined on periodic functions with domain $\ddom$.
+That is to say, we are studying the spectrum of the periodic operator $-\laplacian_{\upsilon}$ on $\reals^d$ --- the analogue of the acoustic equation for our singular structure domain --- through the family of operators $-\laplacian_{\dddmes}^{\qm}$ defined on periodic functions with domain $\ddom$.
 Each member of this family is defined on a space of functions with a compact domain, so provided they are (uniformly) elliptic they will each posses discrete eigenvalues, and we can obtain dispersion branches as detailed in section \ref{sec:TP-GelfandTransform}.
 It will be clear from both our examples and the derived quantum graph problem that this is the case for the operators $-\laplacian_{\dddmes}^{\qm}$.
 
@@ -67,8 +67,8 @@ Further to this point, in section \ref{sec:ScalarDerivation} we demonstrate that
 	\end{align}
 \end{subequations}
 The $\qm_{jk}$ are rotations of the quasi-momentum $\qm$, and can be computed given the orientation of the edge $I_{jk}\in\edgeSet$.
-Note that \eqref{eq:SingularWaveEqnQGProblem} possesses a generalised resolvent --- the spectral parameter $\omega^2$ is present in the boundary conditions at each vertex \eqref{eq:SingularWaveEqnQGProblem-3}.
-As such, section \ref{ssec:GRandSELinks} will also make explicit the link between our variational formulation and the Strauss extension for the problem \eqref{eq:SingularWaveEqnQGProblem}.
+Note that \eqref{eq:SingularWaveEqnQGProblem} is a realisation of an operator that is acting in an extended space --- the spectral parameter $\omega^2$ is present in the boundary conditions at each vertex \eqref{eq:SingularWaveEqnQGProblem-3}.
+As such, section \ref{ssec:ExtendedSpaces} will also make explicit the link between our variational formulation and the Strauss extension for the problem \eqref{eq:SingularWaveEqnQGProblem}.
 
 Having derived \eqref{eq:SingularWaveEqnQGProblem} and made the connection between its extension and our starting variational problems, we move on to how one can analyse the spectrum of such problems (both analytically and numerically).
 This culminates in section \ref{sec:ScalarDiscussion} with an explicit expression for the $M$-matrix of \eqref{eq:SingularWaveEqnQGProblem}, opening a discussion into the methodology and considerations for using it to analyse the spectrum of \eqref{eq:SingularWaveEqnQGProblem}, which we then employ in section \ref{sec:ScalarExamples}, before concluding.
