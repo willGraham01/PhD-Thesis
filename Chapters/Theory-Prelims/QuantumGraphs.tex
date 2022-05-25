@@ -129,7 +129,7 @@ A well-posed problem on a graph requires specifying boundary conditions at the v
 A \emph{quantum graph} is then simply a metric graph equipped with such a differential operator.
 We have already introduced the notion of a band gap spectrum for a periodic differential operatorin sections \ref{sec:Intro-Maxwell} and \ref{sec:TP-GelfandTransform} --- it is known that periodic quantum graph problems possess similar band gap structures \cite[Chapter 4.3]{berkolaiko2013introduction}.
 
-There are a variety of choices one can make for the vertex conditions, and we will be interested in imposing continuity of the solution at each vertex and a Robin-like condition on the derivatives of the solution, also known as a ``$\delta-$type" condition \cite{berkolaiko2013introduction, albeverio2012solvable}.
+There are a variety of choices one can make for the vertex conditions, and we will be interested in imposing continuity of the solution at each vertex and a Robin-like condition on the derivatives of the solution, also known as a ``$\delta-$type" condition \cite{berkolaiko2013introduction, ershova2014isospectrality, ershova2016isospectrality}.
 By way of example, let us demonstrate how the Laplacian $-\laplacian$ is defined on an embedded graph $\graph$.
 The domain of $-\laplacian$ is defined as
 \begin{align} \label{eq:GraphLaplacianExample}
@@ -168,7 +168,7 @@ Each of these problems can be rewritten as a system of ODEs on the edge interval
 \end{subequations}
 One should note that the spectral parameter does \emph{not} appear on the right hand side of the Kirchoff condition.
 This is because we are dealing with operators on quantum graphs here, as opposed to operators that act in an extended space but which can be interpreted through a ``non-standard" quantum graph problem (section \ref{ssec:Intro-ThinStructures}).
-We will discuss this, and the idea of Strauss extensions, further in section \ref{ssec:GRandSELinks} when we come to analyse the spectrum of our variational problems on singular structures and explore their link to quantum graphs.
+We will discuss this, and the idea of Strauss extensions, further in section \ref{ssec:ExtendedSpaces} when we come to analyse the spectrum of our variational problems on singular structures and explore their link to quantum graphs.
 
 \subsection{The $M$-Matrix} \label{ssec:MMatrix}
 We next provide a brief overview of the $M$-matrix, a tool for characterising the spectrum of a quantum graph which we will exploit in sections \ref{sec:ScalarDiscussion} and \ref{sec:ScalarExamples}.
@@ -186,15 +186,15 @@ Provided that the \emph{Green's identity}
 	\ip{\mathcal{A}u}{v}_{L^2\bracs{\graph}} - \ip{u}{\mathcal{A}v}_{L^2\bracs{\graph}}
 	&= \ip{\nmap u}{\dmap v}_{\complex^{\abs{\vertSet}}} - \ip{\dmap u}{\nmap v}_{\complex^{\abs{\vertSet}}}
 \end{align}
-holds for all $u,v\in\dom\mathcal{A}$, and the map $u\mapsto\bracs{\dmap u, \nmap u}$ is surjective, the triple $\bracs{\complex^{\abs{\vertSet}},\dmap,\nmap}$ is said to be a boundary triple for the operator $\mathcal{A}$.
+holds for all $u,v\in\dom\mathcal{A}$, and the map $u\mapsto\bracs{\dmap u, \nmap u}$ is surjective, the triple $\bracs{\complex^{\abs{\vertSet}},\dmap,\nmap}$ is said to be a \emph{boundary triple} for the operator $\mathcal{A}$.
 The $M$-matrix at $z\in\complex$ is then defined by
 \begin{align*}
 	M(z): \ \complex^{\abs{\vertSet}} \ni \dmap u \mapsto \nmap u \in \complex^{\abs{\vertSet}},
 	 &\quad \forall u\in\mathrm{ker}\bracs{\mathcal{A}-z},
 \end{align*}
-that is, the Dirichlet-to-Neumann map associated to the triple $\bracs{\complex^{\abs{\vertSet}},\dmap,\nmap}$.
+that is, the Dirichlet-to-Neumann map associated to the triple $\bracs{\complex^{\abs{\vertSet}},\dmap,\nmap}$ \cite{ershova2014isospectrality, ershova2016isospectrality}.
 One detail that should be noted here is that $\mathcal{A}$ is required to be an extension of a \emph{simple} operator --- an operator for which there is no reducing subspace of its domain in which the operator is self-adjoint (see \cite[Section 2.2]{ershova2014isospectrality} for the precise definition).
-This can be guaranteed by ensuring $\graph$ contains no looping edges, and has all edge-lengths pairwise-irrationally related \cite{ashurova2014simplicity}.
+In the context of quantum graph problems, this can be guaranteed by ensuring $\graph$ contains no looping edges, and has all edge-lengths pairwise-irrationally related \cite{ashurova2014simplicity}.
 In section \ref{ssec:ArtificialVertices} we will see that any graph (that we wish to consider) can be manipulated to adhere to these specifications, through the introduction of \emph{artificial vertices}.
 
 Our interest in the $M$-matrix will be as a tool for analysing the spectrum of a quantum graph problem, centred around one particular property of the $M$-matrix.
@@ -211,11 +211,12 @@ Assuming one has a method for evaluating the $M$-matrix, the eigenvalues of $\ma
 \end{align*}
 In section \ref{sec:ScalarDiscussion} we will expand on how this result provides access to the spectrum of $\mathcal{A}$, and utilise these ideas in the examples of section \ref{sec:ScalarExamples}.
 
-One can extend these ideas to a more general class of operators on Hilbert spaces; replacing $\complex^{\abs{\vertSet}}$ with the Hilbert space that the boundary data belongs to, and adjusting the definitions of the Dirichlet and Neumann maps accordingly.
-If $\mathcal{A}$ is a differential operator on a domain in $\reals^n$, then the Dirichlet and Neumann maps are the boundary values of the function $u$ and its normal derivative on the boundary, the boundary space is the space of functions defined on the boundary of the domain, and the Green's identity is the homonymous identity from vector calculus.
-The $M$-matrix itself is a generalisation of the classical Weyl-Titchmarsh $m$-function, and a particular case of the abstract $M$-operator or Dirichlet-to-Neumann map as it appears in the theory of boundary triples.
-Here we have restricted ourselves to a short review of the specific theory that will be relevant to our work, however one can find further information on the $M$-operator in \cite{kochubei1975extensions, kochubei1980characteristic, gorbachuk1991boundary, brown2008boundary, brown2020functional, cherednichenko2020scattering, cherednichenko2018functional}, whilst information on the $m$-function can be found in \cite{titchmarsh1962eigenfunction, atkinson1964discrete}.
-The precise (and more general) statements concerning the $M$-operator corresponding to those we have presented above (in the context of quantum graphs) can be found in \cite{derkach1991generalized, derkach2014boundary}.
+The notion of a boundary triple is a generalisation of the familiar relationship between the solution to a differential equation and its boundary values.
+If $\mathcal{A}$ is a differential operator acting on functions on a domain $D\subset\reals^n$, then $\dmap u= u\vert_{\partial D}$, $\nmap u = \pdiff{u}{n}\vert_{\partial D}$, the boundary space is $\ltwo{\partial D}{S}$, and the Green's identity is the homonymous identity from vector calculus.
+Boundary triples extend these ideas to (a class of) operators on Hilbert spaces, replacing the boundary space with another Hilbert space and allowing for different notions of Dirichlet and Neumann data in the boundary space.
+The $M$-matrix itself is a generalisation of the classical Weyl-Titchmarsh $m$-function, and a particular case of the abstract $M$-operator or Dirichlet-to-Neumann map as it appears in this theory.
+Here we have restricted ourselves to a short review of the specific results will be relevant to our work in chapter \ref{ch:ScalarSystem}; however a reader who is interested in learning more about the $M$-function should consult the ``classical" studies \cite{kochubei1975extensions, kochubei1980characteristic, gorbachuk1991boundary}, and the more recent surveys \cite{derkach1991generalized, derkach2014boundary}.
+For further information on the more general $m$-function, one should consult \cite{titchmarsh1962eigenfunction, atkinson1964discrete}.
 
 Before continuing, we address a detail concerning how we formulate our quantum graph problems and the definition of the $M$-matrix.
 In this work we will use an embedded, periodic graph (usually in $\reals^2$) to represent our singular-structure, however will typically only specify its period cell $\ddom$ and period graph $\graph$ --- this does not cause any ambiguity, as one can reconstruct the entire graph from $\graph$ and $\ddom$ if they so wish.
@@ -227,7 +228,7 @@ By choosing a different embedding, one could obtain a different set of fibres $\
 \begin{align*}
 	\bigcup_{\qm\in B} \sigma\bracs{\mathcal{A}_{\qm}} &= \bigcup_{\qm\in B} \sigma\bracs{\widetilde{\mathcal{A}}_{\qm}} = \sigma\bracs{\mathcal{A}}.
 \end{align*}
-Again, we highlight that one such way to circumnavigate this issue would be to adopt the definition of periodicity for a quantum (or metric) graph $\tilde{\graph}$ without prescribing an embedding, as is done in \cite[Chapter~4]{berkolaiko2013introduction}.
+Again, we highlight that one such way to circumnavigate this issue would be to adopt the definition of periodicity for a quantum (or metric) graph $\tilde{\graph}$ without prescribing an embedding, as is done in \cite[chapter 4]{berkolaiko2013introduction}.
 Since the graph $\tilde{\graph}$ prescribes a notion of length and derivative, its $M$-matrix can then also be defined and computed, and analysed to obtain the spectrum --- potentially in a manner involving an abstract version of the Gelfand transform.
 Proceeding this way means that, since no embedding of $\tilde{\graph}$ would be made into a realisable (or physical) space, the resulting analysis is free of the additional geometric dependencies described above.
 When it is possible to prescribe an embedded ``realisation" $\graph$ of $\tilde{\graph}$, the two approaches would produce the same spectrum in the manner previously described.

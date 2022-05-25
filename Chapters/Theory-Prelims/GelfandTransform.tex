@@ -1,75 +1,75 @@
 \section{The Gelfand Transform} \label{sec:TP-GelfandTransform}
-We will begin with a more detailed overview of the Gelfand transform, for our study of (the spectrum of) differential operators.
-Let $\ddom=[0,1)^d$  and construct the ``dual cell" or Brillouin zone to $\ddom$, $B=[-\pi,\pi)^d$.
+We will begin with a more detailed overview of the Gelfand transform, for our study of (the spectrum of) variational problems on periodic singular structures.
+Our review is restricted to the key ideas and results that we will require in the later chapters, and as such should not be considered a complete introduction to the subject.
+For a more complete introduction to the Floquet-Bloch theory of periodic differential operators (under which the Gelfand transform falls), one should consult a source such as \cite[section 7.3]{kuchment2001mathematics} and the references provided therein.
+
+Let $\ddom=[0,1)^d$  and construct the \emph{dual cell} or \emph{Brillouin zone} to $\ddom$, $B=[-\pi,\pi)^d$.
 The \emph{Gelfand transform} of a function $u\in\csmooth{\reals^d}$ can be defined as
 \begin{align*}
-	\gelfand u\bracs{x,\qm} := \sum_{m\in\integers^d}u(x+m)\e^{-\rmi\qm\cdot(x+m)}.
+	\gelfand u\bracs{x,\qm} := \sum_{m\in\integers^d}u(x+m)\e^{\rmi\qm\cdot(x+m)}.
 \end{align*}
 The parameter $\qm\in B$ is called the \emph{quasi-momentum} --- it is the analogue of the dual variable $\kappa$ introduced when taking the Fourier transform of a function.
 The function $\gelfand u$ is $\ddom$-periodic in $x$, and satisfies the equality
 \begin{align} \label{eq:GelfandTransform}
-	\gelfand u\bracs{x,\qm+2\pi m'} &= \e^{-2\pi m'\rmi\cdot x}\gelfand u\bracs{x,\qm},
+	\gelfand u\bracs{x,\qm+2\pi m'} &= \e^{2\pi m'\rmi\cdot x}\gelfand u\bracs{x,\qm},
 \end{align}
 for any $m'\in\integers^d$, so provided we know $\gelfand u$ on $\ddom\times B$, we can reconstruct $\gelfand u$ for any $x\in\reals^d$.
 In addition, for each $u\in\csmooth{\reals^d}$ and $\qm\in B$, the function $\gelfand u\bracs{\cdot,\qm}$ belongs to the space of smooth functions on the torus --- this new domain is compact, which is central to the utility of this transform.
 It is simple to see that $\gelfand u\bracs{\cdot,\qm}$ can also be thought of as an element of $\psmooth{\ddom}$, the space of smooth, $\ddom$-periodic functions on $\reals^d$.
 The formula for the inverse transform of $\gelfand$ is
 \begin{align*}
-	\gelfand^{-1}v (x) := \integral{B}{\e^{\rmi\qm\cdot x}v\bracs{x,\qm}}{\qm},
+	\gelfand^{-1}v (x) := \integral{B}{\e^{-\rmi\qm\cdot x}v\bracs{x,\qm}}{\qm},
 \end{align*}
 where for each $\qm$, $v\bracs{\cdot,\qm}\in\psmooth{\ddom}$.
-One can demonstrate (using density arguments) that $\gelfand$ can be extended to an isometry from $L^2\bracs{\reals^d}$ to $L^2\bracs{\ddom}$-valued functions on $B$. \tstk{kuchment review, section 7.3 and references therein}.
+One can demonstrate (using density arguments) that $\gelfand$ can be extended to an isometry from $L^2\bracs{\reals^d}$ to $L^2\bracs{\ddom}$-valued functions on $B$ \cite[theorem 7.3]{kuchment2001mathematics}.
 
-Now consider a differential operator $\mathcal{A} = \mathcal{A}\bracs{\grad}$ with $\ddom$-periodic coefficients acting on functions defined in $\reals^d$, for example the acoustic approximation operator $-\grad\cdot a(x)\grad u$ for some $\ddom$-periodic $a(x)$.
-Through a short (and formal) computation, we can deduce that
+Let us now examine how the Gelfand transform interacts with differential operators.
+Notice that, if $\grad_x$ denotes the usual gradient operator in $\reals^d$ and $u(x)$ is a differentiable function, we have that
+\begin{align*}
+	\grad_x\gelfand u\bracs{x,\qm} 
+	&= \sum_{m\in\integers^d} \e^{\rmi\qm\cdot\bracs{x+m}}\grad_x u(x+m) + \rmi\qm\e^{\rmi\qm\cdot\bracs{x+m}}u(x+m) \\
+	&= \sum_{m\in\integers^d} \bracs{\grad_x u + \rmi\qm u}(x+m)\e^{\rmi\qm\cdot\bracs{x+m}}
+	= \sqbracs{\gelfand\bracs{\grad_x+\rmi\qm}u}(x,\qm).
+\end{align*}
+That is, the Gelfand transform induces a shift in the gradient operator.
+We have used the subscript $x$ to emphasise that the gradient is taken with respect to the variable $x$, however will drop this additional notation upon completion of this section.
+For a general differential operator $\mathcal{A} = \mathcal{A}\bracs{\grad_x}$ with $\ddom$-periodic coefficients acting on functions defined in $\reals^d$, we can deduce that
 \begin{align*}
 	\sqbracs{\gelfand\bracs{\mathcal{A}\bracs{\grad_x}u}}(x,\qm) 
-	&= \mathcal{A}\bracs{\grad_x + \rmi\qm}\gelfand u\bracs{x,\qm},
+	&= \mathcal{A}\bracs{\grad_x + \rmi\qm}\gelfand u\bracs{x,\qm}.
 \end{align*}
-where we have used the subscript $x$ to indicate that the gradient operator $\grad$ still acts with respect to the variable $x$.
 Denote by $\mathcal{A}_{\qm}$ the operator $\mathcal{A}\bracs{\grad+\rmi\qm}$ for each $\qm\in B$ --- the domain $D_{\mathcal{A}}$ of these operators is the space of $\ddom$-periodic functions, identifiable with the space of functions defined on the torus.
 The Gelfand transform has effectively ``expanded" the operator $\mathcal{A}$ which acted on (functions on) $\reals^d$ into the family of operators $\mathcal{A}_{\qm}$ parametrised by $\qm$.
 Typically one sees $\mathcal{A}$ written as a ``direct integral" of operators
 \begin{align*}
 	\mathcal{A} &= \int_{B}^{\bigoplus}\mathcal{A}_{\qm} \ \md\qm,
 \end{align*}
-the notation for which is discussed in \cite{reed1978iv}.
-The operators $\mathcal{A}_{\qm}$ are referred to as the \emph{fibres} of $\mathcal{A}$.
-We can think of the direct integral as a generalisation of a direct sum over a countable index to a continuous index ($\qm$).
-Perhaps more helpful is the interpretation that the action of the original operator $\mathcal{A}$ can be thought of as acting independently on an infinite number of copies of $D_{\mathcal{A}}$ indexed by $\qm$, the action on each of these spaces being $\mathcal{A}_{\qm}$.
-%To draw a complete analogy, consider a Hilbert space $H$ and an operator $T$ on $H$ which acts independently on two (closed) subspaces $H_1, H_2$, such that $H = H_1 \oplus H_2$.
-%We could denote by $T_i$ the restriction of $T$ to $H_i$ ($i=1,2$), and then write the action of $T$ as
-%\begin{align*}
-%	Tu &= \begin{pmatrix} T_1 & 0 \\ 0 & T_2 \end{pmatrix}
-%	\begin{pmatrix} u_1 \\ u_2	\end{pmatrix},
-%\end{align*}
-%for any element $u = u_1 + u_2$ for $u_i\in H_i$ (an example of this would be the decoupling of Maxwell operator $\mathcal{M}$ into the TE and TM modes, see the discussion in section \ref{sec:Intro-Maxwell} around equation \eqref{eq:Intro-AcousticApprox}).
-%By studying the operators $T_1$ and $T_2$, we can deduce the behaviour of the operator $T$, and in particular deduce its spectrum from the union of the spectra of the $T_i$.
-%The direct integral notation extends this to when an operator $\mathcal{A}$ cannot be broken down into a countable (or finite) direct sum, and analogous conclusions apply: 
-The action of $\mathcal{A}$ on a function $u$ can then be recovered from the ``sum" of actions of the $\mathcal{A}_{\qm}$ on $\gelfand u(\cdot,\qm)$,
-\begin{align} \label{eq:GelfandDirectIntegral}
-	\mathcal{A}u(x) = \gelfand^{-1}\int_{B}^{\bigoplus}\mathcal{A}_{\qm}\gelfand u\bracs{x,\qm} \ \md\qm.
-\end{align}
-The consequence that we are concerned with is that the spectrum of $\mathcal{A}$ is formed from the union of the spectra of $\mathcal{A}_{\qm}$ over $\qm$ \tstk{ref for this? It's a standard result...}, 
+the notation for which is discussed in \cite{reed1978iv}, and the operators $\mathcal{A}_{\qm}$ are referred to as the \emph{fibres} of $\mathcal{A}$.
+In the interest of avoiding technical details that are tangential to our work, but still providing the reader with an idea of the purpose of this transform, let us draw analogy with the use of the Fourier transform in the case of constant coefficients.
+If $\mathcal{L}\bracs{\grad}$ is an operator with constant coefficients, that defines a system of differential equations, the natural course of action when studying the problem $\mathcal{L}\bracs{\grad}u=\lambda u$ is to apply a Fourier transform.
+This turns the action of $\mathcal{L}\bracs{\grad}$ into multiplication by a (self-adjoint) matrix $L(\wavenumber)$ in the dual variable $\wavenumber$, resulting in the equation $L\bracs{\wavenumber}\hat{u}\bracs{\wavenumber}=\lambda\hat{u}\bracs{\wavenumber}$ (with hats denoting the Fourier transform).
+The eigenvalues $\lambda$ of our problem in real space are then the union of the eigenvalues $\lambda_i\bracs{\wavenumber}$ of the matrix $L\bracs{\wavenumber}$, over the range of $\wavenumber$.
+The direct integral expansion is analogous; except we will be looking for the eigenvalues $\lambda_i(\qm)$ of a family of operators $\mathcal{A}_{\qm}$ parametrised by the quasi-momentum, rather than a family of eigenvalues $\lambda_i(\wavenumber)$ of matrices $L(\wavenumber)$ parametrised by $\wavenumber$. 
+Consequentially, the key result of the Gelfand transform is that the spectrum of $\mathcal{A}$ is formed from the union of the spectra of $\mathcal{A}_{\qm}$ over $\qm$,
 \begin{align*}
 	\sigma\bracs{\mathcal{A}} = \bigcup_{\qm\in B}\sigma\bracs{\mathcal{A}_{\qm}}.
 \end{align*}
-As mentioned in section \ref{sec:Intro-Maxwell}, the space $D_{\mathcal{A}}$ consists of functions defined on a compact domain, and so provided that the $\mathcal{A}_{\qm}$ satisfy suitable ellipticity conditions, each of these operators will have compact resolvent, and thus a discrete spectrum of eigenvalues.
+The space $D_{\mathcal{A}}$ consists of functions defined on a compact domain (the torus), and so provided that the $\mathcal{A}_{\qm}$ satisfy suitable ellipticity conditions, each of these operators will have compact resolvent, and thus a discrete spectrum of eigenvalues \cite[section 7.3]{kuchment2001mathematics}.
 This allows us to order the eigenvalues $\lambda_i\bracs{\qm}$ of $\mathcal{A}_{\qm}$ in ascending order, and when viewed as functions of $\qm$, these $\lambda_i$ are called \emph{dispersion branches}, or individual branches of the \emph{dispersion relations}.
 They are also continuous in $\qm$, and thus allow the spectrum of the original operator $\mathcal{A}$ to be written as
 \begin{align*}
 	\sigma\bracs{\mathcal{A}} &= \bigcup_{i\in\naturals}\sqbracs{ \min_{\qm}\lambda_i, \max_{\qm}\lambda_i },
 \end{align*}
 where the interval $\sqbracs{ \min_{\qm}\lambda_i, \max_{\qm}\lambda_i }$ is labelled as the $i^{\text{th}}$ spectral band of $\mathcal{A}$.
-With the dispersion branches being continuous functions of $\qm$, we also have the important result that if $B^*$ is a dense subset of $B$,
+With the dispersion branches being continuous functions of $\qm$, there is also the useful result that if $B^*$ is a dense subset of $B$,
 \begin{align} \label{eq:TP-DenseQMSubsetSuffices}
 	\sigma\bracs{\mathcal{A}} &= \bigcup_{i\in\naturals}\overline{\lambda_i\bracs{B^*}}
 	= \overline{\bigcup_{\qm\in B^*}\sigma\bracs{\mathcal{A}_{\qm}}}.
 \end{align}
-This is to say, not all values of the quasi-momentum have to be considered when computing the spectrum of the original operator $\mathcal{A}$ \tstk{kuchment review paper, page 223}, which is something that we shall exploit in our discussion in section \ref{ssec:ApproachConsiderations}.
+This is to say, not all values of the quasi-momentum have to be considered when computing the spectrum of the original operator $\mathcal{A}$ \cite[section 7.4]{kuchment2001mathematics}, which is something that we can exploit in our discussion in section \ref{ssec:ApproachConsiderations}.
 
 The Gelfand transform will be an incredibly useful tool for us in our analysis of variational problems on periodic, singular structures.
-As such we introduce some shorthand for the ``$\qm$-shifted" gradient operator that the transform introduces, in $\reals^2$ we denote
+To this end, we introduce some shorthand for the ``$\qm$-shifted" gradient operator that the transform introduces, in (subregions of) $\reals^2$ we denote
 \begin{align*}
 	\tgrad = \grad + \rmi\qm 
 	= \begin{pmatrix} \partial_1 + \rmi\qm_1 \\ \partial_2 + \rmi\qm_2 \end{pmatrix},
