@@ -130,6 +130,18 @@
   publisher={Optical Society of America}
 }
 
+%% Kuchment's survey of photonic crystals from a mathematical perspective
+%% A lot of these results are quoted from our other references, including his own papers
+%% But the stuff on the Gelfand/Floquet transform is useful to have in one place
+@incollection{kuchment2001mathematics,
+  title={The mathematics of photonic crystals},
+  author={Kuchment, Peter},
+  booktitle={Mathematical modeling in optical science},
+  pages={207--272},
+  year={2001},
+  publisher={SIAM}
+}
+
 % [S] CONVERGENCE TO QUANTUM GRAPHS
 
 %% Extends Kuchment-Zeng (2001) in the sense that additional geometric parameters will affect the resulting spectral limits
@@ -233,6 +245,35 @@
   publisher={Springer}
 }
 
+% [S] STUDIES ON SINGULAR STRUCTURES OR WRT ARBITRARY BOREL MEASURES
+
+%% Kirill and Serena's paper on homogenisation of periodic singular structures
+%% Operator-norm convergence for the solutions are proved, at convergence rate O(\epsilon)
+@article{cherednichenko2018operator,
+  title={Operator-norm convergence estimates for elliptic homogenization problems on periodic singular structures},
+  author={Cherednichenko, Kirill and D’Onofrio, Serena},
+  journal={Journal of Mathematical Sciences},
+  volume={232},
+  number={4},
+  pages={558--572},
+  year={2018},
+  publisher={Springer}
+}
+
+%% Kirill and Serena's paper on homogenisation of the Maxwell system (curl-curl)
+%% More operator-norm estimates with convergence rates, and a generalisation of the Helmholtz decomposition
+%% This one includes definition of the curl-Borel measure spaces in the context of the Floquet transform
+@article{cherednichenko2022operator,
+  title={Operator-norm homogenisation estimates for the system of Maxwell equations on periodic singular structures},
+  author={Cherednichenko, Kirill and D’Onofrio, Serena},
+  journal={Calculus of Variations and Partial Differential Equations},
+  volume={61},
+  number={2},
+  pages={1--41},
+  year={2022},
+  publisher={Springer}
+}
+
 % [S] CONCERNING QUANTUM GRAPHS IN THE LITERATURE
 
 %% Textbook that was written to lay some common foundations for the theory of quantum graphs, and to outline some of the most essential techniques used to study them.
@@ -256,6 +297,20 @@
   journal={arXiv preprint arXiv:1405.2997},
   year={2014}
 }
+
+%% Follow-up to the 2016 paper
+%% Now identifies precisely the conditions on the spectrum to be able to reconstruct the matching conditions at the vertices for "almost all" graphs.
+@article{ershova2016isospectrality,
+  title={Isospectrality for graph Laplacians under the change of coupling at graph vertices: necessary and sufficient conditions},
+  author={Ershova, Yulia and Karpenko, Irina I and Kiselev, Alexander V},
+  journal={Mathematika},
+  volume={62},
+  number={1},
+  pages={210--242},
+  year={2016},
+  publisher={London Mathematical Society}
+}
+
 
 % A technicality that requires us to introduce our artificial vertices.
 %% Simplicity of the operator that we extend is guranteed by making sure our graph contains no loops, and all edge lengths are irrationally related.
@@ -492,6 +547,19 @@
   publisher={Elsevier}
 }
 
+%% Paper containing the Ventcell' conditions - very general class of boundary conditions.
+%% One particular incarnation of such boundary conditions appear in our composite-medium problem
+@article{venttsel1959boundary,
+  title={On boundary conditions for multidimensional diffusion processes},
+  author={Venttsel’, Alexander D},
+  journal={Theory of Probability \& Its Applications},
+  volume={4},
+  number={2},
+  pages={164--177},
+  year={1959},
+  publisher={SIAM}
+}
+
 % [S] GENERALISED RESOLVENTS AND BOUNDARY TRIPLES
 
 %% Strauss' (translated) survey of generalised spectral functions and generalised resolvents
@@ -516,6 +584,61 @@
   pages={1--95},
   year={1991},
   publisher={Elsevier}
+}
+
+%% A more recent survey of the uses of Boundary triples in modern (c 2014) mathematics
+%% A useful place to point an interested reader to, so they're no longer my problem!
+@article{derkach2014boundary,
+  title={Boundary triplets, Weyl functions, and the Kre{\u\i}n formula},
+  author={Derkach, Vladimir},
+  journal={Operator theory},
+  pages={183--218},
+  year={2014},
+  publisher={Springer Basel}
+}
+
+%% This next collection are the ``classical" references on the M-function
+@article{kochubei1975extensions,
+  title={Extensions of symmetric operators and symmetric binary relations},
+  author={Ko{\v{c}}ube{{\u\i}}, Anatoly Naumovich},
+  journal={Mat. Zametki},
+  volume={17},
+  pages={41--48},
+  year={1975}
+}
+
+@article{kochubei1980characteristic,
+  title={Characteristic functions of symmetric operators and their extensions},
+  author={Ko{\v{c}}ube{{\u\i}}, Anatoly Naumovich},
+  journal={Izv. Akad. Nauk Arm. SSR Ser. Mat.},
+  volume={15},
+  number={3},
+  pages={219--232},
+  year={1980}
+}
+
+@book{gorbachuk1991boundary,
+  title={Boundary value problems for operator differential equations},
+  author={Gorbachuk, V I and Gorbackuk, Myroslav L},
+  volume={48},
+  year={1991},
+  publisher={Kluwer Academic Publishers, Dordrecht}
+}
+
+%% And the following collection are some introductory works on the considerably more abstract m-function!
+@book{titchmarsh1962eigenfunction,
+  title={Eigenfunction expansions associated with second-order differential equations, Part 1},
+  author={Titchmarsh, Edward Charles},
+  year={1962},
+  publisher={Oxford University Press}
+}
+
+@book{atkinson1964discrete,
+  title={Discrete and continuous boundary problems},
+  author={Atkinson, Frederick Valentine},
+  year={1964},
+  publisher={Academic Press},
+  address={New York, London}
 }
 
 % Article pointed to by Kirill's "the methods will work even with omega^2-dependence" paper
