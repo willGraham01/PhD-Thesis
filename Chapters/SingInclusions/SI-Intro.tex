@@ -1,13 +1,16 @@
 \section{Chapter Introduction} \label{sec:SingIncChapterIntro}
 The focus of the chapters \ref{ch:ScalarSystem} and \ref{ch:CurlCurl} was on the analysis of variational problems on the singular structure itself, how to understand the notion of a derivative (or curl) on such a structure, and the solution and analysis of said problems.
 In each of these problems, ``bulk" of our domain ($\ddom\setminus\graph$) is ignored by the singular measures we consider --- an observation that we exploit in the analysis of the various Sobolev spaces.
-These setups are more akin to setups from \tstk{quantum wires, etc stuff}, rather than the setting of photonic crystals.
+These setups are more akin to the contexts highlighted in section \ref{ssec:Intro-ThinStructures}, rather than the setting of photonic crystals.
 One can argue that by choosing to ignore this bulk region, the variational problems reflect a physical situation where we expect there to be no electromagnetic field (or wave propagation) in this region.
 In the context of electromagnetism, this would represent some (singular) dielectric material surrounded by conductors --- there would be no field in the conducting regions, and only ``along" the dielectric materials.
 Of course, photonic crystals (and the fibres they are manufactured into) do not consist of a (thin, periodic) dielectric encased in a conducting material; rather they are composed of a (thin, periodic) dielectric material surrounded by \emph{another} dielectric material.
 This is where the motivation for our final problem stems from --- we will examine a problem on a two dimensional composite domain with one of the components being singular.
-We would like to view such a problem as (some appropriate) limit of a problem on a domain with thin-structure inclusions, as the thickness of such inclusions tends to zero.
-There have been studies related to this topic, \tstk{check thesis introduction. Kirill-Evans, Zhikov-Past. on how what we're doing here is similar to this stuff, but is not it exactly. Highlight that this means we are shooting in the dark a bit, as we have nothing to go off of! Kuch-Fig also have a paper on this.}
+Such a structure is the (visual) limit of a problem on a domain with thin-structure inclusions, as the thickness of such inclusions tends to zero.
+We have discussed some of these studies on domains such as these in section \ref{ssec:Intro-DoubleLimits}, highlighting that these did not consider geometric contrast between the vertex and edge regions of the thin-structure inclusions.
+As such, our final problem mimics the limit of a domain that does possess this geometric contrast.
+This gives us a so-called ``composite measure" to consider, and opens up the potential for interactions between three different length scales: the ``bulk regions", the singular structure, and the vertices.
+Although we do not include any material contrast in our problem initially, we will later remark at how one can introduce a parameter representing this contrast.
 
 Let us formalise the notation and terminology we will us to describe the domain we will be working with in this section.
 As usual, we take $\graph$ to be the period graph of an embedded, metric graph $\hat{\graph}$ in $\reals^2$ with unit cell $\ddom$.
