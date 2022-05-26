@@ -8,7 +8,7 @@
 
 % finally, talk about when both $\delta$ and $\eps$ are present, and lead into Research Overview
 \subsection{Double limits in $\eps$ and $\delta$.} \label{ssec:Intro-DoubleLimits}
-So far we have considered the result of a shrinking domain thickness given fixed material properties, and then various asymptotic limits of high contrast materials with fixed inclusion sizes. 
+So far we have considered the results of a shrinking domain thickness given fixed material properties (section \ref{ssec:Intro-ThinStructures}, and then various asymptotic limits of high contrast materials with fixed inclusion sizes (section \ref{ssec:Intro-CritContrast}). 
 It is natural to ask whether any consideration has been put into considering the effects that might emerge when both the (relative) size $\delta$ of the region $Q_1$ shrinks to zero \emph{and} the contrast in the material properties increases to infinity.
 The series of papers \cite{figotin1996band-scalar, figotin1996band-maxwell, figotin1998spectral} was dedicated to investigating the spectral properties that emerge in the aforementioned limits, for a variety of operators relevant to models of wave propagation.
 This series begins \cite{figotin1996band-scalar} by studying the acoustic equation on a non-magnetic composite material whose period cell $Q$ is the unit square in $\reals^2$, and whose inclusion $Q_0$ is a smaller square of side length $1-\delta$.
@@ -25,5 +25,9 @@ Under these assumptions, it is shown that the spectrum of the acoustic equation 
 where $\lambda$ is the spectral parameter and $\delta_{\graph}$ is the delta function supporting the graph $\graph$.
 Note that this convergence is not in the norm-resolvent sense, and only demonstrates coincidence of the limit of the acoustic equation as $\delta\rightarrow0$, $\bracs{\delta\eps}^{-1}\rightarrow W<\infty$ with the spectrum of the problem \eqref{eq:Intro-KuchFigQGLimit}.
 This is of particular interest to our work in chapter \ref{ch:SingInc}, where we will consider a composite medium with one of the components being a singular structure, and look to obtain (and solve) a non-local quantum graph problem from our singular structure formulation.
-However we note that our approach via singular structures is motivated by geometric contrasts, rather than the combination of geometric and material contrasts that these studies consider.
-\tstk{anything that goes beyond these studies regarding the double limit? I don't think there is.}
+A similar setup has been studied for materials at high contrast in the context of linear elasticity in \cite{cherednichenko2016homogenisation}; again the domain consists of a periodic structure composed of thin rods of width $\delta$ and whose material properties are of order $\delta^2$, surrounded by soft inclusions filling the regions between the rods.
+This work establishes convergence of the solutions to the resolvent problem in the two-scale sense (introduced in \cite{zhikov2000extension}), and conducts further analysis to establish convergence of the spectra to that of the ``two-scale" limit operator.
+
+The aforementioned studies does not consider the possible relations between the vertex and edge volume of the ``thickened graph" region $Q_1$ as $\delta\rightarrow0$, and as a result such a geometric parameter is absent from the analysis and resulting equations.
+Our approach via singular structures is motivated by such geometric contrasts, although we shall see that we can incorporate such material contrasts into the problems we study in chapter \ref{ch:SingInc}.
+We also have a more geometrically motivated starting point in mind; our choice to start from a measure-theoretic formulation reflects the different length scales of the components of our ``material", and through the interactions of these length scales we expect to see effects due to contrast emerge.

@@ -13,18 +13,16 @@ By ensuring the cladding material has a lower refractive index than the core mat
 \end{figure} 
 One can imagine light entering the core of the fibre at one end, and (totally internally) reflecting off the boundaries of core and cladding as it moves along the fibre (although this intuition uses the ray description of light rather than the wave description).
 Wave guidance in fibres using TIR is known as weak guiding, and typically allows light to be propagated over tens of kilometres before a signal boost is required.
-However despite the majority of modern optical fibres utilising this method of guidance, all improvements to the technology have been incremental and largely centre around the manufacturing process. \newline
+However despite the majority of modern optical fibres utilising this method of guidance, all improvements to the technology have been incremental and largely centre around the manufacturing process.
 
 The first significant departure from this traditional setup came with the realisation that the ability to 
 structure a material on the same scale as the wavelength of optical light will drastically alter its optical properties.
 With the advancement of fabrication techniques to allow for these structures to be physically manufactured, the development and study of materials known as ``photonic crystals" begun in earnest.
 These photonic crystals are materials composed of a periodic microstructure (on the aforementioned length scale), typically a periodic arrangement (``matrix") of one dielectric material within another.
-They can be used as cladding for a traditional optical fibre in the same manner as described above, by encasing a core material of a higher refractive index within the photonic crystal --- such fibres are referred to as ``photonic crystal fibres" (PCFs).
-However more radical designs for PCFs utilise the fact that, depending on their frequency (or equivalently wavelength), certain modes of light cannot propagate through a given photonic crystal.
-Due to the inhomogeneity of the photonic crystal, waves propagating (or attempting to propagate) within it undergo multiple scattering and are subject to interference.
-At certain frequencies, a wave attempting to propagate through the crystal may be subject to cumulative destructive inference off the inclusions, effectively forbidding wave propagation within the crystal at that frequency.
+They can be used as cladding for a traditional optical fibre in the same manner as described above, by encasing a core material of a higher refractive index within the photonic crystal --- such fibres are referred to as \emph{photonic crystal fibres} (PCFs).
+However more radical designs for PCFs utilise the fact that certain frequencies of light incident onto the crystal do not give rise to any modes within a given photonic crystal.
 These intervals or ranges of frequencies at which light cannot propagate within the crystal are referred to as \emph{photonic} or \emph{frequency band gaps}, and their compliment as \emph{bands}.
-These photonic band gaps offer an alternative method of ``guidance", rather than having light undergo TIR within a core material, instead these modes can be confined to the core by virtue of having a frequency within one of these band gaps.
+These photonic band gaps offer an alternative method of wave-guidance, rather than having light undergo TIR within a core material, instead these modes can be confined to the core by virtue of having a frequency within one of these band gaps.
 Since such a mode of light cannot propagate in the surrounding crystal, it is confined, and can propagate along the core (provided its propagation \emph{is} supported by the core).
 From these ideas came several new designs for PCFs, the first being the design and manufacture of ``hollow-core"\footnote{The name coming from the fact that the first such fibres were typically made from a photonic crystal of glass periodically punctured with air holes, surrounding a larger air cavity that played the role of the core. The core consisting of air rather than a solid dielectric material gave rise to the term ``hollow".} fibres schematically illustrated in figure \ref{fig:Diagram_PCF-AirHollowConfine.pdf}.
 \begin{figure}[b!]
@@ -54,19 +52,16 @@ Hence there has been much to motivate study of the optical properties of PCFs; a
 
 \subsection{Exisiting Models for PCFs} \label{ssec:ExistingPCFModels}
 Before moving on to introduce the systems to be studied in this work, we briefly outline some of the existing modelling techniques for PCFs.
+We remark that the survey \cite{kuchment2001mathematics} provides a comprehensive introduction to the mathematical landscape of modelling photonic crystals and periodic structures in general, even touching on their connection to so-called quantum graph problems that we will explore in section \ref{ssec:Intro-ThinStructures}.
+Here we aim to provide a brief survey of some of the methods used in the explicit determination of band-gaps or other physical properties of said fibres
 The most conceptually straightforward of these is the use of numerical techniques to solve Maxwell's equations to determine modes that are supported by the PCF.
-These modes can then be used to construct an approximate band-gap plot for the fibre, with the level of precision in the computational results coming at the cost of increasing the computing time.
 Whilst this can provide detailed information about a fibre, it does not provide any insight into how the structure of the photonic crystal has contributed or affected the resulting band-gap plot.
 Furthermore numerical schemes (particularly those based off finite elements) are known to require special treatment when being used to solve Maxwell's equations, but this in itself has been studied in detail (see for example \cite{monk2003finite}).
-We will attempt to steer clear of these kinds of solvers, primarily because they will not be directly applicable to the (variational) problems we will be considering (section \ref{sec:TP-DomainSetup}), and the aforementioned lack of insight into the dependence of the band-gap structure on the underlying fibre geometry. \newline
+We will attempt to steer clear of these kinds of solvers, primarily because they will not be directly applicable to the (variational) problems we will be considering (section \ref{sec:TP-DomainSetup}), and the aforementioned lack of insight into the dependence of the band-gap structure on the underlying fibre geometry.
 
 There has been some success in developing approximate models for wave guidance in PCFs that retain key features of experimental band-gap plots.
-Typically one reduces (by means of an appropriate transform or use of Bloch's theorem) the analysis of the governing equations for wave guidance in the photonic crystal to that on a period cell, and reassembles the band-gap structure through the analysis of the family of problems on the unit cell.
-The ARROW model \tstk{Litchinitser, N., Dunn, S., Steinvurzel, P., Eggleton, B., White, T., McPhedran,
-R., and De Sterke, C. Application of an arrow model for designing tunable photonic
-devices. Opt. Express 12, (8) (2004), 15401550. Also references within \cite{birks2006approximate}} has been highly effective at explaining confinement of light to the core in certain solid-core fibres through anti-resonant reflections off the higher-index inclusions.
-Models such as \cite{birks2006approximate}, simplify the geometry of the period cell and solve the (scalar) wave equation in the resulting structure, reporting good agreement with numerical solvers for the types of PCF the approximate model considers.
+Typically one reduces the analysis of the governing equations for wave guidance in the photonic crystal to that on a period cell, and reassembles the band-gap structure through the analysis of the family of problems on the unit cell.
+The ARROW model (see \cite{laegsgaard2004gap, litchinitser2004application} and references therein) suggests that the confinement of modes to the (low index) core in solid-core fibres can be attributed to anti-resonant reflections off the (higher-index) inclusions --- the allows such fibres to be studied through the properties of guided modes in conventional, weakly guiding fibres.
+Models such as \cite{birks2006approximate} simplify the geometry of the period cell and solve the (scalar) wave equation in the resulting structure, reporting good agreement with numerical solvers for the original (unsimplified) problems.
 Other works such as \cite{birks2004scaling} look to understand how band-gaps for hollow-core fibres scale with the contrast in refractive index.
 Such approaches useful when speed is more important than high accuracy, or when an intuitive picture of the band-structure is desired.
-\tstk{now Cooper's pre-print too? not entirely sure how to transition here}
-\tstk{also, with mention of ARROW, now's probably a good time to mention resonance for the first time!}
