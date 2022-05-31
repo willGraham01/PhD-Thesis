@@ -14,25 +14,26 @@ This system is incomplete without constitutive relations informing us how $\math
 where $\epsilon_m$ (respectively $\mu_m$) is the electric permittivity (magnetic permeability) of the material.
 Further to our consideration of photonic crystals, we also treat $\epsilon_m$ and $\mu_m$ as time-independent, scalar-valued functions of position $x$, which is suitable for studying inhomogeneous, isotropic media such as photonic crystals\footnote{For a more general material the constitutive relations can be much more complex, potentially being non-linear and spatially varying. 
 Other effects such as hysteresis in ferromagnets can introduce time dependencies, whilst Lorentz materials have material parameters that depend on the frequency of incident electromagnetic radiation.}.
-Under these constitutive relations and in the absence of free charges and currents, the Maxwell system reduces to
+Under these constitutive relations, and in the absence of free charges and currents, the Maxwell system reduces to
 \begin{align*}
 	\grad\cdot \epsilon_m \mathbf{E} = 0, &\qquad
 	\curl{}\mathbf{E} = -\mu_m\pdiff{\mathbf{H}}{t}, \\
 	\grad\cdot \mu_m \mathbf{H} = 0, &\qquad
 	\curl{}\mathbf{H} = \epsilon_m \pdiff{\mathbf{E}}{t}.
 \end{align*}
-One can then seek time-harmonic solutions (or more precisely, take a Fourier transform in time), 
+One can then seek time-harmonic solutions (by taking a Fourier transform in time), 
 \begin{align*}
 	\mathbf{E}\bracs{x,t} = E\bracs{x}e^{-\rmi\omega t},
 	&\qquad \mathbf{H}\bracs{x,t} = H\bracs{x}e^{-\rmi\omega t},
 \end{align*}
-and write the resulting system
+obtaining system
 \begin{align*}
 	\grad\cdot \epsilon_m \mathbf{E} = 0,
 	&\qquad \recip{\rmi\mu_m}\curl{}E = \omega H, \\ 
 	\grad\cdot \mu_m \mathbf{H} = 0,
-	&\qquad -\recip{\rmi\epsilon_m}\curl{}H = \omega E,.
+	&\qquad -\recip{\rmi\epsilon_m}\curl{}H = \omega E,
 \end{align*}
+as a result.
 The equations involving the curl can be written in matrix form, and correspond to the spectral problem for the ``operator" 
 \begin{align*}
 	\mathcal{M} &:=
@@ -41,7 +42,7 @@ The equations involving the curl can be written in matrix form, and correspond t
 		\recip{\rmi\mu_m}\curl{} & 0
 	\end{pmatrix}.
 \end{align*}
-We will come to call $\mathcal{M}$ the Maxwell operator, however we need to be slightly careful in defining it so that we respect the divergence-free conditions, and end up with a self adjoint operator.
+We will come to call $\mathcal{M}$ the Maxwell operator, however we need to be slightly careful in defining it so that we respect the divergence-free conditions, and end up with a self-adjoint operator.
 Typically this not difficult if the domain we are considering is smooth (or the whole of $\reals^d$), even the regularity of $\epsilon_m$ and $\mu_m$ tends not to be an issue in these contexts.
 However there is significantly more work that needs to be done for domains with (possibly non-smooth) metallic inclusions or boundaries, with the work of \cite{birman1987l2, birman1989selfadjoint} providing a detailed study of the Maxwell operator in these contexts.
 For the purposes of this review, we can define the Maxwell operator $\mathcal{M}$ by assigning it the domain
@@ -59,63 +60,65 @@ The weighted spaces $L^2\bracs{\ddom, w\md x}^3$ consist of the square-integrabl
 \begin{align*}
 	\norm{ f }_{L^2\bracs{\ddom, w\md x}^3} &= \integral{\ddom}{\abs{f(x)}^2 w(x)}{x}.
 \end{align*}
-Under this setup, the Maxwell operator $\mathcal{M}$ is self-adjoint and the ``Maxwell system" is the spectral problem for this operator.
-The spectrum of $\mathcal{M}$ determines the frequencies of light that can propagate in the medium, with any intervals in $\omega$ that are absent from the spectrum of $\mathcal{M}$ corresponding to band gaps.
+Under this setup, the Maxwell operator $\mathcal{M}$ is self-adjoint and the \emph{Maxwell system} is the spectral problem for this operator.
+The spectrum of $\mathcal{M}$ determines the frequencies of light that support modes, with any intervals that are absent from the spectrum of $\mathcal{M}$ corresponding to band gaps.
 
 Even with the Maxwell operator being self-adjoint, it is still not elliptic and has eigenvalues that extend across the whole real line (that is, to both $\pm\infty$), making direct analysis of it difficult.
-To tackle this, $\mathcal{M}$ is applied to itself (also referred to as squaring the operator) to produce a positive-definite operator whose action decouples the $E$ and $H$ fields, resulting in the ``curl-of-the-curl" spectral problems
+To tackle this, $\mathcal{M}$ can be applied to itself to produce a positive-definite operator whose action decouples the $E$ and $H$ fields, resulting in the \emph{curl-of-the-curl} spectral problems
 \begin{subequations} \label{eq:Intro-CurlCurlEqns}
 	\begin{align}
 		\epsilon_m^{-1}\curl{}\bracs{\mu_m^{-1}\curl{}E} &= \omega^2 E, \\
 		\mu_m^{-1}\curl{}\bracs{\epsilon_m^{-1}\curl{}H} &= \omega^2 H,
 	\end{align}
 \end{subequations}
-the eigenvalues $\omega^2$ \emph{of either problem} then determining the eigenvalues of $\mathcal{M}$.
-If the mediums properties are independent of one of the coordinates (say $x_3$), so $\epsilon_m(x)=\epsilon_m(x_1,x_2)$ and $\mu_m(x)=\mu_m(x_1,x_2)$ only, then one can also consider the waves propagating in the $\bracs{x_1,x_2}$-plane.
-In this case, the action of $\mathcal{M}$ decouples into separate actions on the transverse electric (TM) field $\bracs{E_1,E_2,0,0,0,H}^\top$ and transverse magnetic (TM) field $\bracs{0,0,E_3,H_1,H_2,0}^\top$, yielding the equations
+the eigenvalues $\omega^2$ of either problem then determining the eigenvalues of $\mathcal{M}$.
+A further reduction is possible if the material properties of the medium are independent of one of the coordinate directions (say $x_3$), so $\epsilon_m(x)=\epsilon_m(x_1,x_2)$ and $\mu_m(x)=\mu_m(x_1,x_2)$ only.
+One can then one can consider waves propagating ``in the $\bracs{x_1,x_2}$-plane" by taking a Fourier transform in the $x_3$ direction and setting the corresponding propagation constant equal to zero.
+Upon doing so, the action of $\mathcal{M}$ decouples into separate actions on the transverse electric (TM) field $\bracs{E_1,E_2,0,0,0,H}^\top$ and transverse magnetic (TM) field $\bracs{0,0,E_3,H_1,H_2,0}^\top$, yielding the equations
 \begin{subequations} \label{eq:Intro-AcousticApprox}
 	\begin{align}
 		-\mu_m^{-1}\grad\cdot\epsilon_m^{-1}\grad E_3(x_1,x_2) &= \omega^2 E_3(x_1,x_2), \\
 		-\epsilon_m^{-1}\grad\cdot\mu_m^{-1}\grad H_3(x_1,x_2) &= \omega^2 H_3(x_1,x_2).
 	\end{align}
 \end{subequations}
-These equations may also be referred to as ``acoustic approximations", as they also appear when studying acoustic waves in periodic media.
+These equations are be referred to as \emph{acoustic approximations}, as they also appear when studying acoustic waves in periodic media.
 
-Having provided an outline of the important governing equations and operators that describe wave propagation in photonic crystals, we move on to a brief discussion of the spectra of periodic media.
-Here, we have an operator $\mathcal{A}$ with\footnote{Think of $\mathcal{A}$ as being one of \eqref{eq:Intro-CurlCurlEqns} or \eqref{eq:Intro-AcousticApprox} with $\epsilon_m$ and $\mu_m$ periodic.} periodic coefficients with respect to the period cell $Q=[0,1)^d$.
-The natural transform to apply is the Gelfand (or Floquet) transform, which first requires us to introduce the dual cell (also termed the Brillouin zone in solid state physics) $B=[-\pi,\pi)^d$ to $Q$.
-We then define the Gelfand transform $\gelfand u$ of the function $u$ as 
+Having provided an outline of the important governing equations (and corresponding operators) that describe wave propagation in PCs, we move on to a brief discussion of the structure of the eigenvalues of differential equations with periodic coefficients.
+An excellent introduction to this topic (with a particular emphasis on applications to PCs) is provided in the survey \cite{kuchment2001mathematics}, and we will go into more details in section \ref{sec:TP-GelfandTransform}.
+Let us suppose we have an operator $\mathcal{A}$ with periodic coefficients\footnote{Think of $\mathcal{A}$ as being one of \eqref{eq:Intro-CurlCurlEqns} or \eqref{eq:Intro-AcousticApprox} with $\epsilon_m$ and $\mu_m$ periodic.} with respect to a period cell $\ddom=[0,1)^d$.
+A natural transform to apply is the Gelfand transform, which first requires us to introduce the dual cell (or Brillouin zone) $B=[-\pi,\pi)^d$ to $\ddom$.
+Then we can define the Gelfand transform $\gelfand u$ of a function $u$ as 
 \begin{align*}
 	\gelfand u(x, \qm) &= \sum_{n\in\integers^d} u(x+n)\e^{\rmi\qm(x+n)},
 \end{align*}
 where the variable $\qm$ is called the \emph{quasi-momentum}, the analogue of the dual variable in the Fourier transform.
-We will go into more details in section \ref{sec:TP-GelfandTransform}, restricting ourselves to a short summary of the key affects of this transform.
-The foremost effect of this transform is that we can replace the spectral problem for $\mathcal{A}$ with the spectral problem for each member of a family of operators $\mathcal{A}_{\qm}$ parametrised by the quasi-momentum.
-Importantly, since each $\mathcal{A}_{\qm}$ now acts on a compact domain, under ellipticity assumptions these operators (have compact resolvents and thus) possess discrete spectra.
+The Gelfand transform allows us to obtain the spectrum of $\mathcal{A}$ from the spectrum of each member of a family of operators $\mathcal{A}_{\qm}$ parametrised by the quasi-momentum.
+Importantly, each $\mathcal{A}_{\qm}$ acts on the period cell (which is a compact domain) rather than the whole of $\reals^d$ that the original medium fills, so under ellipticity assumptions the $\mathcal{A}_{\qm}$ will possess discrete spectra.
 This allows us to order the eigenvalues $\lambda_j\bracs{\qm}$, $j\in\naturals$, of $\mathcal{A}_{\qm}$ in ascending order in $j$.
-The (continuous) functions $\lambda_j$ of $\qm$ are called the \emph{dispersion branches}, or alternatively the \emph{dispersion relations} or \emph{(spectral) band functions}.
-It holds that the spectrum of $\mathcal{A}$ is equal to the union of the spectra of the $\mathcal{A}_\qm$ --- that is, the projection of the graphs $y=\lambda_j(\qm)$ onto the $y$ axis provides the spectrum of $\mathcal{A}$.
+The (continuous) functions $\lambda_j$ of $\qm$ are called \emph{dispersion branches}, \emph{dispersion relations}, or \emph{(spectral) band functions}.
+It holds that the spectrum of $\mathcal{A}$, $\sigma\bracs{\mathcal{A}}$, is equal to the union of the spectra of the $\mathcal{A}_\qm$.
+Equivalently, the projection of the graphs $y=\lambda_j(\qm)$ onto the $y$ axis provides the spectrum of $\mathcal{A}$.
 Explicitly, we have that
 \begin{align*}
 	\sigma\bracs{\mathcal{A}} &= \bigcup_{\qm\in B} \sigma\bracs{\mathcal{A}_{\qm}}
 	= \bigcup_{j\in\naturals} \lambda_j\bracs{B}
 	= \bigcup_{j\in\naturals} \sqbracs{ \min_{\qm\in B}\lambda_j, \max_{\qm\in B}\lambda_j },
 \end{align*}
-the final equality coming from the fact that the branches $\lambda_j$ are continuous functions of $\qm$, and the interval $\sqbracs{ \min_{\qm}\lambda_j, \max_{\qm}\lambda_j }$ being labelled the $j^{\text{th}}$ spectral band of $\mathcal{A}$.
+the final equality coming from the fact that the branches $\lambda_j$ are continuous functions of $\qm$.
+The interval $\sqbracs{ \min_{\qm}\lambda_j, \max_{\qm}\lambda_j }$ is often referred to as the $j^{\text{th}}$ \emph{spectral band} of $\mathcal{A}$.
 This highlights where the band-gap structure of these composite materials comes from, whenever 
 \begin{align} \label{eq:Intro-DispersionBranchGapIneq}
 	\max_{\qm}\lambda_{j-1} < \min_{\qm}\lambda_{j},
 \end{align}
 there is a corresponding gap between the end of the $(j-1)^{\text{th}}$ band and the beginning of the $j^{\text{th}}$.
-It is known that for ordinary differential equations of second order the strict version of the inequality in \eqref{eq:Intro-DispersionBranchGapIneq} holds, so the spectral bands cannot overlap but may touch \cite[chapter XIII]{reed1978iv}.
-As such, it is conceivable that alterations to the material may open up gaps between adjacent bands.
-In two dimensions (or higher) the spectral bands can and usually do overlap, which makes the task of designing a material with band gaps harder though not impossible.
+It is known that for second-order ordinary differential equations \eqref{eq:Intro-DispersionBranchGapIneq} holds with a non-strict inequality, so the spectral bands cannot overlap but may touch \cite[chapter XIII]{reed1978iv}, so it is conceivable that alterations to the material may open up gaps between adjacent bands.
+In two dimensions (or higher) the spectral bands can (and usually do) overlap, which makes the task of designing a material with band gaps harder though not impossible.
 
 \subsection{Non-dimensionalisation of the Maxwell System} \label{ssec:Intro-NonDimMax}
-We now turn specifically towards the setup of domains that model photonic crystals, and the process of non-dimensionalising the governing equations and consideration of the various free parameters that emerge from this process.
+We now turn specifically towards domains that model PCs, the process of non-dimensionalising the governing equations, and the various free parameters that emerge from this process.
 Regrettably, this process is often skipped over in the mathematical literature, with most works electing to start from a non-dimensionalised system.
-Whilst there is nothing wrong with choosing to start here, there are several sets of non-dimensional parameters that one can choose to express the resulting system in, and it is important to keep track of what each set represents when interpreting physical behaviour.
-This can also lead to some rather confusing (and seemingly conflicting) language in the literature, and as such we provide an explicit account of this process.
+Whilst there is nothing wrong with choosing such a starting point, there are several sets of non-dimensional parameters that one can choose to express the resulting system in, and it is important to keep track of what each set represents when interpreting the physical behaviours the non-dimensionalised system is describing.
+This can also lead to some rather confusing (and seemingly conflicting) language in the literature, so we provide an explicit account of this process.
 
 A periodic medium can be modelled by specifying a period cell $Q=[0,L)^d$, $L>0$, and then taking a union of translated copies of this period cell
 \begin{align*}
@@ -123,20 +126,21 @@ A periodic medium can be modelled by specifying a period cell $Q=[0,L)^d$, $L>0$
 \end{align*}
 to fill the whole of $\reals^d$.
 Note that the requirement that $Q$ be (hyper-) cubic in shape is not restrictive, as long as the material is periodic in $d$ linearly independent directions one can apply a linear transform to produce a (hyper-) cubic period cell.
-For a composite such as a photonic crystal, this period cell $Q$ is then further divided into two regions, the \emph{inclusions} $Q_0$ with $\overline{Q_0}\subset Q$ and the \emph{bulk} (also called \emph{matrix} or \emph{background}) $Q_1:=Q\setminus \overline{Q_0}$.
-The electric permittivity and magnetic permeability of the medium are then defined as the $Q$-periodic functions with
+For composite media such as PCs, $Q$ is then further divided into two regions, the \emph{inclusions} $Q_0$ with $\overline{Q_0}\subset Q$ and the \emph{bulk} (also called \emph{matrix} or \emph{background}) $Q_1:=Q\setminus \overline{Q_0}$.
+The electric permittivity $\epsilon_m$ and magnetic permeability $\mu_m$ of the medium are then defined as the $Q$-periodic functions with
 \begin{align*}
 	\epsilon_m(x) = \begin{cases} \epsilon^{\mathrm{inc}} & x\in Q_0, \\ \epsilon^{\mathrm{bulk}} & x\in Q_1, \end{cases}
 	\qquad
-	\mu_m(x) = \begin{cases} \mu^{\mathrm{inc}} & x\in Q_0, \\ \mu^{\mathrm{bulk}} & x\in Q_1, \end{cases}
+	\mu_m(x) = \begin{cases} \mu^{\mathrm{inc}} & x\in Q_0, \\ \mu^{\mathrm{bulk}} & x\in Q_1. \end{cases}
 \end{align*}
-and we also suppose that the inclusions have a characteristic size $L-l$, $0<l<L$, giving the period cell illustrated in figure \ref{fig:Diagram_ScalingDimensionfull}.
+The materials that make up PCs tend to have similar (if not identical) permeabilities, so one typically adopts the assumption that the materials are non-magnetic and takes $\mu^{\mathrm{inc}}$ and $\mu^{\mathrm{bulk}}$ to both be equal to the permeability of free space, $\muFS$.
+We also assign $Q_0$ a characteristic size $L-l$, $0<l<L$, giving the period cell illustrated in figure \ref{fig:Diagram_ScalingDimensionfull}.
 \begin{figure}[t]
 	\centering
 	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
 		\includegraphics[scale=1.0]{Diagram_ScalingDimensionfull.pdf}
-		\caption{\label{fig:Diagram_ScalingDimensionfull} Schematic illustration of the period cell of a composite, periodic medium, prior to non-dimensionalisation.}
+		\caption{\label{fig:Diagram_ScalingDimensionfull} Schematic illustration of the period cell of a non-magnetic, periodic, composite medium, prior to non-dimensionalisation.}
 	\end{subfigure}
 	~
 	\begin{subfigure}[t]{0.45\textwidth}
@@ -146,90 +150,58 @@ and we also suppose that the inclusions have a characteristic size $L-l$, $0<l<L
 	\end{subfigure}
 \end{figure}
 
-We now wish to treat the system of Maxwell equations mathematically, and so proceed to write the equations with respect to dimensionless variables.
-Introduce the dimensionless ``electric" and ``magnetic" fields $\tilde{E}$ and $\tilde{H}$ and corresponding dimensionless ``spatial" variable $\tilde{x}$ by
+We now proceed to write the system of Maxwell equations with respect to dimensionless variables.
+Let $\lambda_0$ be the wavelength in vacuum of some light incident onto the structure described by $\ddom$, and define (the reference frequency in vacuum as) $\omega_0 = \lambda_0^{-1}\bracs{\epsFS\muFS}^{-\recip{2}}$.
+Introduce the dimensionless electric and magnetic fields $\tilde{E}$ and $\tilde{H}$ and corresponding dimensionless spatial variable $\tilde{x}$ by
 \begin{align*}
 	H = \hat{h}\tilde{H}, 
-	\qquad E = \hat{h}\bracs{\frac{\mu^{\mathrm{bulk}}}{\epsilon^{\mathrm{bulk}}}}^{\recip{2}}\tilde{E},
-	\qquad x = L\tilde{x},
+	\qquad E = \hat{h}\bracs{\frac{\muFS}{\epsFS}}^{\recip{2}}\tilde{E},
+	\qquad x = \lambda_0\tilde{x},
 \end{align*}
-where $\hat{h}$ is a constant with the units of magnetic field (Amperes per metre, $\mathrm{A}\mathrm{m}^{-1}$), and $\epsFS$ and $\muFS$ are (respectively) the permittivity and permeability of vacuum.
-The Maxwell system
+where $\hat{h}$ is a constant with the units of magnetic field (Amperes per metre, $\mathrm{A}\mathrm{m}^{-1}$), and $\epsFS$ the permittivity of free space.
+The Maxwell system then becomes
 \begin{align*}
-	\mu_m^{-1}\curl{}E &= -\rmi\omega H, \\
-	\epsilon_m^{-1}\curl{}H &= \rmi\omega E,
+	\curl{\tilde{x}}\tilde{E} 
+	&= \rmi\omega\lambda_0\epsFS^{\recip{2}}\mu_m\muFS^{-\recip{2}} \tilde{H}, \\
+	\curl{\tilde{x}}\tilde{H} 
+	&= -\rmi\omega\lambda_0\muFS^{\recip{2}}\eps_m\epsFS^{-\recip{2}} \tilde{E}.
 \end{align*}
-then becomes
+Defining the (non-dimensional) frequency $z := \omega_0^{-1}\omega = \omega\lambda_0\bracs{\epsFS\muFS}^{\recip{2}}$ and dimensionless permittivity $\epsilon=\epsFS^{-1}\epsilon_m$, we have the system
+\begin{align} \label{eq:Intro-NonDimMaxwell}
+	\curl{\tilde{x}}\tilde{E} 
+	&= \rmi z \tilde{H}, \\
+	\epsilon^{-1} \ \curl{\tilde{x}}\tilde{H} 
+	&= -\rmi z \tilde{E}.
+\end{align}
+This results in the domain setup illustrated in figure \ref{fig:Diagram_ScalingDimensionless}: we are now studying the (dimensionless) equations \eqref{eq:Intro-NonDimMaxwell} for $\tilde{x}\in\reals^d$, with a period cell $\widetilde{Q} = \lambda_0^{-1}Q$ of size $\tilde{L}:=\lambda_0^{-1}L$, a bulk region $\widetilde{Q}_1 = \lambda_0^{-1}Q_1$ of size $\delta:=\lambda_0^{-1}l$, an inclusion $\widetilde{Q}_0 = \lambda_0^{-1}Q_0$ of size $\tilde{L}-\delta$, and dimensionless permittivity
 \begin{align*}
-	\mu_m^{-1}(x) \ \curl{\tilde{x}}\tilde{E} 
-	&= -\rmi\omega L\bracs{\frac{\epsilon^{\mathrm{bulk}}}{\mu^{\mathrm{bulk}}}}^{\recip{2}} \tilde{H}, \\
-	\epsilon_m^{-1}(x) \ \curl{\tilde{x}}\tilde{H} 
-	&= \rmi\omega L\bracs{\frac{\mu^{\mathrm{bulk}}}{\epsilon^{\mathrm{bulk}}}}^{\recip{2}} \tilde{E},
-\end{align*}
-Multiplying by $\mu^{\mathrm{bulk}}$ in the first equation, and $\epsilon^{\mathrm{bulk}}$ in the second then gives us
-\begin{align*}
-	\bracs{\frac{\mu_m}{\mu^{\mathrm{bulk}}}}^{-1}(x) \ \curl{\tilde{x}}\tilde{E} 
-	&= -\rmi\omega L\bracs{\epsilon^{\mathrm{bulk}}\mu^{\mathrm{bulk}}}^{\recip{2}} \tilde{H}, \\
-	\bracs{\frac{\epsilon_m}{\epsilon^{\mathrm{bulk}}}}^{-1}(x) \ \curl{\tilde{x}}\tilde{H} 
-	&= \rmi\omega L\bracs{\epsilon^{\mathrm{bulk}}\mu^{\mathrm{bulk}}}^{\recip{2}} \tilde{E}.
-\end{align*}
-Defining the relative permittivity and permeabilities
-\begin{align*}
-	\eps_r\bracs{\tilde{x}} = \frac{\epsilon_m(x)}{\epsilon^{\mathrm{bulk}}},
-	\qquad \mu_r\bracs{\tilde{x}} = \frac{\mu_m(x)}{\mu^{\mathrm{bulk}}},
-\end{align*}
-and the ``bulk frequency"
-\begin{align*}
-	\omega_{\mathrm{bulk}}
-	&= L^{-1}\bracs{\epsilon^{\mathrm{bulk}}\mu^{\mathrm{bulk}}}^{-\recip{2}},
-\end{align*}
-we finally obtain
-\begin{align*}
-	\mu_r^{-1} \ \curl{\tilde{x}}\tilde{E} 
-	&= -\rmi\frac{\omega}{\omega_{\mathrm{bulk}}} \tilde{H}, \\
-	\eps_r^{-1} \ \curl{\tilde{x}}\tilde{H} 
-	&= \rmi\frac{\omega}{\omega_{\mathrm{bulk}}} \tilde{E}.
-\end{align*}
-This results in the domain setup illustrated in figure \ref{fig:Diagram_ScalingDimensionless}: we are now studying the (dimensionless) equations
-\begin{subequations}
-	\begin{align} \label{eq:Intro-NonDimMaxwell}
-		\mu_r^{-1} \ \curl{}\tilde{E} 
-		&= -\rmi z \tilde{H}, \\
-		\eps_r^{-1} \ \curl{}\tilde{H} 
-		&= \rmi z \tilde{E},
-	\end{align}
-\end{subequations}
-for $\tilde{x}\in\reals^d$, with a period cell $\widetilde{Q} = \recip{L}Q = [0,1)^d$, a bulk region $\widetilde{Q}_1 = \recip{L}Q_1$ of size $0<\delta:=\frac{l}{L}<1$, an inclusion $\widetilde{Q}_0 = \recip{L} Q_0$ of size $1-\delta$, and (dimensionless) relative permittivity and permeability
-\begin{align*}
-	\eps_r\bracs{\tilde{x}} = 
+	\epsilon\bracs{\tilde{x}} = 
 	\begin{cases} 
-		1 & \tilde{x}\in\widetilde{Q}_1, \\ 
-		\frac{\epsilon^{\mathrm{inc}}}{\epsilon^{\mathrm{bulk}}} & \tilde{x}\in\widetilde{Q}_0, 
-	\end{cases}
-	&\qquad
-	\mu_r\bracs{\tilde{x}} = 
-	\begin{cases} 
-		1 & \tilde{x}\in\widetilde{Q}_1, \\ 
-		\frac{\mu^{\mathrm{inc}}}{\mu^{\mathrm{bulk}}} & \tilde{x}\in\widetilde{Q}_0.
+		\epsFS^{-1}\epsilon^{\mathrm{inc}} & \tilde{x}\in\widetilde{Q}_0, \\
+		\epsFS^{-1}\epsilon^{\mathrm{bulk}} & \tilde{x}\in\widetilde{Q}_1.
 	\end{cases}
 \end{align*}
-From here, one can derive the dimensionless ``curl-of-the-curl" equations and acoustic approximations.
+From here, one can derive the dimensionless curl-of-the-curl equations and acoustic approximation.
+The values of the (dimensionless) parameters
+\begin{align*}
+	\tilde{L} = \lambda_0^{-1}L, \quad
+	\delta = \lambda_0^{-1}l, \quad
+	\epsFS^{-1}\epsilon^{\mathrm{inc}}, \quad
+	\epsFS^{-1}\epsilon^{\mathrm{bulk}},
+\end{align*}
+characterise the various behaviours that the system can exhibit.
 
-Now we highlight that our choice of non-dimensionalisation is far from unique, and there are several alternatives one could choose from.
-For example, we could non-dimensionalise $E$ as
-\begin{align*}
-	E = \hat{h}\bracs{\frac{\mu^{\mathrm{inc}}}{\epsilon^{\mathrm{inc}}}}^{\recip{2}}\tilde{E},
-\end{align*}
-in which case one would still obtain a dimensionless system with three free parameters akin to figure \ref{fig:Diagram_ScalingDimensionless}, only with the values of $\epsilon_r$ and $\mu_r$ being unity on the inclusion and the ratio of bulk to inclusion properties on $\tilde{Q}_1$.
-Furthermore, it is common to adopt the non-magnetic approximation when modelling photonic crystals, assuming that the magnetic permeabilities of the inclusion and bulk materials are equal (without loss of generality, to $\muFS$).
-In this case, we can define the quantities
-\begin{align*}
-	\omega_0 = L^{-1}\bracs{\epsFS\muFS}^{-\recip{2}}, \quad
-	\lambda^{\mathrm{inc}} = \omega_0^{-1}\bracs{\epsilon^{\mathrm{inc}}\muFS}^{-\recip{2}}, \quad
-	\lambda^{\mathrm{bulk}} = \omega_0^{-1}\bracs{\epsilon^{\mathrm{bulk}}\muFS}^{-\recip{2}},
-\end{align*}
-with $\omega_0$ representing the frequency at which a wave in free space of wavelength $L$ propagates with, and $\lambda^{\mathrm{inc}}$ (respectively $\lambda^{\mathrm{bulk}}$) the corresponding wavelength of a wave propagating with frequency $\omega_0$ in the inclusion (bulk).
-The system \eqref{eq:Intro-NonDimMaxwell} then becomes
+Now we highlight that our choice of non-dimensionalisation is far from unique, and there are several alternatives one could choose from, arriving at a different set of dimensionless parameters --- however in each case the number of (independent) parameters would be the same.
+One other selection of dimensionless parameters worth highlighting are the following;
+\begin{align} \label{eq:Intro-NonDimLengthScales}
+	\tilde{L} = \lambda_0^{-1}L, \quad
+	\delta = \lambda_0^{-1}l, \quad
+	\lambda^{\mathrm{inc}} := \lambda_0\omega_0\bracs{\epsilon^{\mathrm{inc}}\muFS}^{-\recip{2}}, \quad
+	\lambda^{\mathrm{bulk}} := \lambda_0\omega_0\bracs{\epsilon^{\mathrm{bulk}}\muFS}^{-\recip{2}},
+\end{align}
+where each of the dimensionless parameters are now ratios of lengths.
+The parameters $\lambda^{\mathrm{inc}}$ and $\lambda^{\mathrm{bulk}}$ (respectively) represent the ratio of the wavelength of light in the inclusion (bulk) to that in free space, and satisfy $\epsFS^{-1}\epsilon^{\mathrm{inc}} = \lambda_0^2\bracs{\lambda^{\mathrm{inc}}}^{-2}$.
+The equivalent non-dimensional system would then be
 \begin{subequations} \label{eq:Intro-NonDimMaxwellLengths}
 	\begin{align}
 		\curl{}\tilde{E} &= -\rmi z\tilde{H}, \\
@@ -240,26 +212,20 @@ where
 \begin{align*}
 	\lambda_r\bracs{\tilde{x}} = 
 	\begin{cases} 
-		\frac{\lambda^{\mathrm{bulk}}}{L} & \tilde{x}\in\widetilde{Q}_1, \\ 
-		\frac{\lambda^{\mathrm{inc}}}{L} & \tilde{x}\in\widetilde{Q}_0,
+		\lambda^{\mathrm{inc}} & \tilde{x}\in\widetilde{Q}_0, \\
+		\lambda^{\mathrm{bulk}} & \tilde{x}\in\widetilde{Q}_1.
 	\end{cases}
-	\qquad
-	z = \frac{\omega}{\omega_0}.
 \end{align*}
-Here we have three independent, dimensionless parameters
-\begin{align} \label{eq:Intro-NonDimLengthScales}
-	\delta = \frac{l}{L}, \quad
-	\tilde{l}^{\mathrm{inc}} = \frac{\lambda^{\mathrm{inc}}}{L}, \quad
-	\tilde{l}^{\mathrm{bulk}} = \frac{\lambda^{\mathrm{bulk}}}{L},
-\end{align}
-which are all ratios of lengths.
-Having all the dimensionless parameters represent ratios of lengths is typically done to make the description of the phenomenons of \emph{resonance} and \emph{critical contrast} more intuitive, which will be done in section \ref{ssec:Intro-CritContrast}.
-In fact, in the mathematical literature the non-dimensional Maxwell system (under the non-magnetic assumption) \eqref{eq:Intro-NonDimMaxwellLengths} is simply introduced as \emph{the} Maxwell system, and one typically sees the notation ``$\eps^{-1}$" for $\lambda_r^2$ in \eqref{eq:Intro-NonDimMaxwellLengths}.
-This can lead to some confusion on the part of a new researcher in the field, as it is common to see such an ``$\eps$" used implicitly as both the (reciprocal square) ratio of lengths $\lambda_r^2$ (as it appears in \eqref{eq:Intro-NonDimMaxwellLengths}) and as the relative permittivity $\eps_r$ (as it appears in \eqref{eq:Intro-NonDimMaxwell} in the literature).
-As such, publications may talk about $\eps$ as if it were a ratio of length scales, whilst others may refer to seemingly the same quantity as a contrast between permittivites.
+Having all the dimensionless parameters represent ratios of lengths is typically done to make the description of the phenomenons of \emph{resonance} and \emph{critical contrast} more intuitive, which we elaborate on in section \ref{ssec:Intro-CritContrast}.
+However as mentioned previously, in the mathematical literature the non-dimensional Maxwell system (under the non-magnetic assumption) \eqref{eq:Intro-NonDimMaxwellLengths} is simply introduced as \emph{the} Maxwell system, and one typically sees the notation ``$\eps^{-1}$" for $\lambda_r^2$ in \eqref{eq:Intro-NonDimMaxwellLengths}.
+This can lead to some confusion on the part of a new researcher in the field, as it is common to see such an ``$\eps$" used (and treated) implicitly as both the (reciprocal square) ratio of lengths $\lambda_r^2$ (as it appears in \eqref{eq:Intro-NonDimMaxwellLengths}) and as the relative permittivity $\epsilon$ (as it appears in \eqref{eq:Intro-NonDimMaxwell}).
+As such, studies may talk about $\eps$ as if it were a ratio of length scales, whilst others may refer to seemingly the same quantity as a contrast between material permittivites.
 
-The benefits of non-dimensionalising are that all possible behaviours of the Maxwell system are characterised by the values these independent parameters take, and the (non-dimensional) spectrum is qualitatively representative of the physical frequencies, and can be obtained through ``re-dimensionalising" the spectral parameter $z$.
-Given that the various regimes of these parameters govern the behaviour of the system, it is natural to consider the various asymptotic limits of these free parameters and the resulting asymptotic problems.
-Typically these asymptotic (or effective) problems are easier to handle analytically and numerically than the original system --- which is particularly pronounced for the Maxwell system --- and can reveal effects that are otherwise hard to notice.
-A discussion of these asymptotic limits and their relation to homogenisation of so called \emph{critical contrast} materials is the focal point of section \ref{ssec:Intro-CritContrast}.
-Upon completion of this section, we now drop the overhead tilde notation on our non-dimensional fields and independent variables for brevity, and adopt $\omega$ as the symbol for the non-dimensional spectral parameter rather than $z$.
+The benefits of non-dimensionalising are that all possible behaviours of the Maxwell system are characterised by the values these dimensionless parameters take, and the (non-dimensional) spectrum is qualitatively representative of the physical frequencies, which can be obtained through ``re-dimensionalising" the spectral parameter $z$.
+It is natural to now consider the various (combinations of) asymptotic limits of these free parameters and the resulting behaviours they describe.
+Typically these asymptotic (or effective) problems and can reveal effects that are otherwise hard to notice, and are easier to work with analytically and numerically when compared to the original system.
+A discussion of these asymptotic limits and their relation to \emph{resonance} and homogenisation of so called \emph{critical contrast} materials is the focal point of section \ref{ssec:Intro-CritContrast}.
+
+Upon completing this section, we drop the overhead tilde notation on the dimensionless electric and magnetic fields and spatial variables for brevity, and adopt $\omega$ as the symbol for the non-dimensional spectral parameter over $z$.
+We will also use the symbol $u$ to represent (one of) the fields $E$ or $H$ in the curl-of-the-curl equation, and $E_3$ or $H_3$ in the acoustic approximation.
+We now move on to a description of the various effects one can expect from asymptotic regimes of these dimensionless parameters.
