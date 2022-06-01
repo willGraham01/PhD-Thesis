@@ -1,10 +1,10 @@
-\section{Research Overview} \label{sec:Intro-ProblemIntroduction}
-As we have already mentioned in our reviews in sections \ref{ssec:Intro-ThinStructures}-\ref{ssec:Intro-DoubleLimits}, our interest lies in studying problems involving so-called singular structures, akin to the visual ``limits" discussed in the aforementioned sections.
-Whilst we postpone the more involved and formal definitions to chapter \ref{ch:TheoryPrelims}; here we provide the reader with an overview of the various problems that are considered, some further motivation and ideas behind why we consider such problems, and then direct them to the details in the subsequent sections.
-Before we begin, let us establish some notation and concepts that will be integral to our discussion, foremost amongst them the notion of a singular structure.
-A singular structure is a subset $S\subset\reals^d$ with $d$-dimensional Lebesgue measure is zero, perhaps more useful is its description as a region or object which has no area from the perspective of the space into which is is embedded.
+\section{Overview of research presented in this thesis} \label{sec:Intro-ProblemIntroduction}
+As we have alluded to sections \ref{ssec:Intro-ThinStructures}-\ref{ssec:Intro-DoubleLimits}, our interest is not in employing asymptotic techniques to study composite materials in various parameter regimes.
+Instead, our interest is in studying problems involving singular structures, motivated by the ``visual limit" as the width of one of the components of a composite medium shrinks to zero.
+Whilst we postpone the more involved and formal definitions to chapter \ref{ch:TheoryPrelims}; here we elaborate on the problems that we shall consider, our motivation for doing so, and their connection to the asymptotic studies we have already discussed.
+Before we begin, let us establish some basic notation and concepts to enable our discussion.
+A singular structure is a subset $S\subset\reals^d$ with $d$-dimensional Lebesgue measure zero, although more generally such structures can be described as a regions that have no area from the perspective of the space into which they are is embedded.
 We will always choose to represent singular structures through a graph $\graph=\bracs{\vertSet,\edgeSet}$, where each vertex is associated with a point in $\reals^d$ and each edge to the line segment joining the (points associated to the) vertices at each endpoint.
-In addition, we will place a ``coupling constant" $\alpha_j$ at each $v_j\in\vertSet$, which we think of as playing the role of the ratio $V_{\mathrm{edge}} / V_{\mathrm{vertex}}$ as described in section \ref{ssec:Intro-ThinStructures}.
 
 Now that we have a singular structure, we then have to ask how we can define differential equations (or more precisely, operators) on them.
 To motivate this thought process, let us take a singular structure (represented by a graph) $\graph$ and consider the more familiar setup of a differential equation complimented by boundary conditions on the corresponding thickened graph $G_{\delta}$.
@@ -12,13 +12,14 @@ For illustrative purposes, we will consider the system
 \begin{subequations} \label{eq:Intro-ThinToSingularSys}
 	\begin{align}
 		-\grad\cdot\grad u &= f, \qquad x\in G_{\delta}, \label{eq:Intro-ThinToSingularDE} \\
-		\pdiff{u}{n}\big\vert_{\partial G_{\delta}} &= 0. \label{eq:Intro-ThinToSingularBC}
+		\pdiff{u}{n}\big\vert_{\partial G_{\delta}} &= 0, \label{eq:Intro-ThinToSingularBC}
 	\end{align}
 \end{subequations}
-Now consider which pieces of this formulation either change or cease to have clear meaning as $\delta$ shrinks to zero:
+for twice-differentiable $u$ and square-integrable $f$.
+Now consider which pieces of this formulation either change or cease to have clear meaning as the thickness $\delta$ shrinks to zero:
 \begin{enumerate}
 	\item The most notable effect is the loss of a distinction between the boundary $\partial G_{\delta}$ and the interior of $G_{\delta}$ when $\delta$ ``reaches" zero and becomes the singular structure $\graph$ --- the edges of this graph correspond to the overlap between what was previously two parts of the boundary of $G_{\delta}$.
-	\item Furthermore, the graph $\graph$ has no interior to speak of and so the ``differential equation" \eqref{eq:Intro-ThinToSingularDE} becomes meaningless.
+	\item The graph $\graph$ itself has no interior from the perspective of $\reals^d$, differential equation \eqref{eq:Intro-ThinToSingularDE} becomes meaningless.
 	Where or how do we pose this if our new domain doesn't have any interior?
 \end{enumerate}
 We can address our first observation by realising that it is only our explicit separation of the boundary condition \eqref{eq:Intro-ThinToSingularBC} and differential equation \eqref{eq:Intro-ThinToSingularDE} that leads to this problem.
@@ -28,35 +29,50 @@ Instead we can consider the variational formulation for \eqref{eq:Intro-ThinToSi
 	&= \integral{G_{\delta}}{ f\overline{\phi} }{x}, \qquad\forall\phi\in V_{\mathrm{test}},
 \end{align}
 for some suitable set of test functions $V_{\mathrm{test}}$ (typically the set of smooth functions on the domain $G_{\delta}$).
-Notably the equation \eqref{eq:Intro-ThinToSingularVar} ``combines" the boundary condition and differential equation in \eqref{eq:Intro-ThinToSingularSys}, in the sense that one can obtain \eqref{eq:Intro-ThinToSingularDE} by considering the test functions whose support does not intersect the boundary of $G_{\delta}$, then \eqref{eq:Intro-ThinToSingularBC} from those that do.
-This would potentially allow us to circumnavigate the coincidence of the interior of our singular structure with what was previously the boundary of our thin structure, however we are not out of the woods yet.
-If we simply replace the domain of integration $G_{\delta}$ with $\graph$ in \eqref{eq:Intro-ThinToSingularVar}, both sides of the equation are identically zero in lieu of $\graph$s singular nature --- which is another incarnation of the second observation we made.
-To address this we have to stop viewing our singular structure from the perspective of the Lebesgue measure, and instead properly view our singular structure as an embedded object in a higher dimensional space.
+A ``weak" formulation such as \eqref{eq:Intro-ThinToSingularVar} provides us with a formulation of \eqref{eq:Intro-ThinToSingularSys} where the boundary conditions are implicitly incorporated into the formulation --- they of course can be recovered from \eqref{eq:Intro-ThinToSingularDE} by considering the test functions whose support touches the boundary of $G_{\delta}$.
+This allows us to circumnavigate the coincidence of the interior of our singular structure with what was previously the boundary of our thin structure, however we are not out of the woods yet.
+If we simply replace the domain of integration $G_{\delta}$ with $\graph$ in \eqref{eq:Intro-ThinToSingularVar}, both sides of the equation are identically zero as a result of the singular nature of  $\graph$.
+To address this we have to stop viewing our singular structure from the perspective of the Lebesgue measure, and instead in a manner that acknowledges that our structure is of a lower dimension to the surrounding space.
+Further to this, the classical gradient is no longer appropriate for studying problems on singular structures --- there is difficulty in defining this object in the classical sense involving two-sided limits.
+If we want to consider problems motivated by the Maxwell system, we run into similar problems regarding the curl and divergence of vector fields.
 This leads us to introduce the notion of singular measures (section \ref{sec:SingularMeasures}) that support graphs embedded into $\reals^d$, and pose variational problems of the form \eqref{eq:Intro-ThinToSingularVar} with respect to these measures, and on the singular domain $\graph$.
-Changing measure in this way forces us to change the notion of area, and thus integration and correspondingly differentiation too.
-The classical gradient is no longer appropriate for studying problems on singular structures, and again there is difficulty in defining this object in the classical sense involving limits.
-Similar problems emerge for the interpretation of the curl and divergence of vector fields.
-However, if we can overcome these final difficulties, the resulting variational problems we are left with have a striking resemblance to their classical analogues --- in fact, the only differences being the measure in the variational problem and the ``Sobolev space" that our solution $u$ belongs to.
-This motivates our study of the so-called ``non-classical" Sobolev spaces (section \ref{sec:BorelMeasSobSpaces}) and later generalisation to curls and divergences in chapter \ref{ch:CurlCurl} and ``composite materials" in chapter \ref{ch:SingInc}.
+Changing measure of course changes the notion of area, integration and thus differentiation too.
+The variational problems we are able to define with these reworked concepts have a striking resemblance to their classical analogues --- in fact, the only differences being the measure in the variational problem and the ``Sobolev space" that our solution $u$ belongs to.
+This motivates our study of the so-called ``non-classical" Sobolev spaces (section \ref{sec:BorelMeasSobSpaces}) and later generalisation to curls and divergences in chapter \ref{ch:CurlCurl} and to composite materials with singular regions in chapter \ref{ch:SingInc}.
 
 Consideration of variational problems with respect to Borel measures is not an unexplored concept, although considerations for the explicit solution of such problems (both analytically and numerically) is largely untouched in the literature.
-The work \cite{bouchitte2001homogenization} introduced the notion of two-scale convergence with respect to Borel measures into the existing toolbox of homogenisation theory, which was built upon by the study \cite{zhikov2000extension}.
+Works such as \cite{bouchitte2001homogenization, zhikov2000extension} introduced the notion of two-scale convergence with respect to Borel measures into the existing toolbox of homogenisation theory.
 Other works have since begun studying variational problems with respect to measures, within the context of homogenisation problems in elasticity the studies one can see \cite{zhikov2002homogenization, zhikov2003homogenization, cherednichenko2019homogenisation}.
 The studies \cite{cherednichenko2018operator, cherednichenko2022operator, cherednichenko2020order} have considered the homogenisation of problems within the context of electromagnetism, posed with respect to arbitrary (Borel) measures, and derived the appropriate effective problems.
 For an example of an explicit study of a variational problem on a singular structure, the study \cite{zhikov2013spectrum} considers the spectrum of the operator of transverse displacements (within the context of elasticity), proving that it possesses a discrete spectrum.
 However we reiterate that none of these studies touch upon how one might proceed with the explicit solution of the effective problem that is obtained --- whilst having such analytic properties are useful, the limiting models aren't much use if they are as hard to solve as the problems they are approximating.
-This is one particular topic we look to address in chapters \ref{ch:ScalarSystem} and \ref{ch:SingInc}.
+Furthermore, none of these studies consider setups in which there the structure shrinking to zero possesses contrast between its vertex and edge volumes.
+These are two particular topics we look to address in chapters \ref{ch:ScalarSystem} and \ref{ch:SingInc}.
+
+The singular structure problems we consider remain true to the idea that they coincide with the ``visual limit" of a composite domain with the thickness of one component shrinking to zero.
+Our variational problems with respect to singular measures are motivated by their classical counterparts (which employ the Lebesgue measure), however the appropriate spaces and formulations are very easy to set up.
+Appealing to analogy, it is natural to question whether (in the parameter regimes where the effective problem is known) these variational problems, or the behaviours they display, will coincide with those of the effective problems for composite media.
+If this is the case, we can look to extend our approaches into situations where the analysis of zero-thickness limits has not been conducted.
+We have already highlighted that such analysis has not been conducted for the curl-of-the-curl equation nor indeed the complete Maxwell system, whilst only spectral convergence for the acoustic approximation has been considered.
+Singular structure problems thus offer us a potential tool to aid in obtaining candidates for effective problems in certain parameter regimes --- such candidates are required before one can begin to consider proving convergence results.
+Finally, we also wish to explore how problems on singular structures can be explicitly solved (numerically or analytically) to recover the spectrum and eigenfunctions.
+Whilst an valid topic to explore in its own right, this line of investigation also allows us to predict the behaviours that may emerge from the zero-thickness limits of thin-structures (and composite materials) should the former association prove fruitful.
 
 We now outline the arrangement of the content of this work.
-Concepts and standing assumptions that will be utilised across all chapters are detailed in chapter \ref{ch:TheoryPrelims}; notably the concepts of singular measures, an overview of the Gelfand transform and the ``shifted" gradient operators, an introduction to ``non-classical" Sobolev spaces, a more thorough introduction to quantum graphs, and the notion we shall employ for handling singular structures.
+Concepts and standing assumptions that will be utilised across all chapters are detailed in chapter \ref{ch:TheoryPrelims}; notably the concepts of singular measures, an overview of the Gelfand transform, the ``shifted" gradient operators, an introduction to ``non-classical" Sobolev spaces, quantum graphs, and the notion we shall employ for handling singular structures.
 Chapter \ref{ch:ScalarSystem} looks to firmly establish the connection between singular structure problems and quantum graph problems that are the limit of thin structure problems, in the sense of the discussion in section \ref{ssec:Intro-ThinStructures}.
-We shall consider a variational formulation akin to the acoustic approximation \eqref{eq:Intro-AcousticApprox}, and through analysis of the aforementioned non-classical Sobolev spaces, derive a familiar quantum graph problem.
-Solution to this problem through use of the M-matrix will be discussed and performed, and the connection to generalised resolvents will be highlighted.
+We shall consider a variational formulation motivated by the acoustic approximation \eqref{eq:Intro-AcousticApprox}, and through analysis of the aforementioned non-classical Sobolev spaces, demonstrate its coincidence with a quantum graph problem with Wentzell vertex conditions --- like those obtained in the zero thickness limit of thin-structures.
+Solution to this problem through use of the $M$-matrix will be discussed and performed, and the connection between the non-classical Sobolev spaces and the extended spaces introduced in section \ref{ssec:Intro-ThinStructures} made explicit.
+This will provide solidify our approach via singular measures as a basis for us to extend to more complex situations --- namely to the curl-of-the-curl equation and composite media.
+
 The objective of chapter \ref{ch:CurlCurl} is to use the foundations established in chapter \ref{ch:ScalarSystem} to further explore the analogue of the curl-of-the-curl equation \eqref{eq:Intro-CurlCurlEqns} on singular structures.
-Here we are looking to aid in bridging the existing gap in the theory concerning limits of thin structures as $\delta\rightarrow0$ in the Maxwell context, which was highlighted in section \ref{ssec:Intro-ThinStructures} and is currently unexplored.
-Our objective here is to explore our variational problem on a singular structure and, similarly to chapter \ref{ch:ScalarSystem}, derive an alternative problem (likely a quantum graph problem) which we can then look to solve or analyse.
-In principle, such a problem can then provide a candidate for the ``limit" of a sequence of thin structure problems for the curl-of-the-curl equation, analogously to those which are currently known for the acoustic approximation.
-Finally, in chapter \ref{ch:SingInc} we consider a composite medium consisting of a background material containing a singular ``skeleton", again through the lens of a variational problem representing the acoustic approximation.
-This moves us away from considerations of limits of thin structures, and towards the photonic crystal setting where the inclusion material is shrinking to a singular structure, and the compliment is expanding to form the background.
-Following our analysis of the appropriate function spaces, we explore several equivalent forms of the variational problem that we pose, attempting to again reduce the problem to a quantum graph --- although in this case, the resulting operator is non-local, due to the presence of the background.
-We also suggest and implement a couple of numerical schemes, and conclude with a discussion of further considerations and extensions worth exploring.
+We will again establish a variational problem on a singular structure and, similarly to chapter \ref{ch:ScalarSystem}, look to derive an alternative problem which we can then look to solve or analyse.
+This requires us to extend our previous analysis concerning the definition of appropriate ``gradient-like" objects from chapter \ref{ch:ScalarSystem} to incorporate curls of vector fields, and a divergence-free condition.
+In principle, the variational problem studied can provide a candidate for the ``limit" of a sequence of thin structure problems for the curl-of-the-curl equation, analogously to those which are currently known for the acoustic approximation.
+We are looking to bridge the existing gap in the theory concerning the behaviour of the equations of electromagnetism on thin structures as $\delta\rightarrow0$, which was highlighted in section \ref{ssec:Intro-ThinStructures} and the convergence results presently unexplored.
+
+Finally, in chapter \ref{ch:SingInc} we consider a composite medium consisting of a background material interlaced with a singular ``skeleton", again studying a variational problem representing the acoustic approximation.
+This moves us away from considerations of the limits of thin structures, and towards the setting of PCs and the ``limits" of the domains in section \ref{sec:Intro-Maxwell}, where the inclusion material is shrinking to a singular structure, and there is contrast between the vertex and edge regions of the shrinking structure.
+Following our analysis of the appropriate function spaces, we explore several equivalent forms of the variational problem that we pose, attempting to again reduce the variational problem to a problem more tractable to solution. 
+We will end up with a quantum graph problem --- although in this case, the resulting operator is non-local.
+We also suggest and implement a couple of numerical schemes for an example geometry, to explore the potential behaviours of such a system.
