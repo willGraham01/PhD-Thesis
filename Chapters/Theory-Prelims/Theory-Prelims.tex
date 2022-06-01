@@ -1,17 +1,19 @@
 \chapter{Preliminaries and Theory} \label{ch:TheoryPrelims}
-Throughout this work there will be a number of common themes and conventions whose content is not specific to one particular chapter or research problem.
-To avoid redirecting the reader to a number of different points in this work, and in the interest of preventing chapters \ref{ch:ScalarSystem}, \ref{ch:CurlCurl}, and \ref{ch:SingInc} becoming bloated with further introductions and notational conventions, we provide an introduction to the key concepts that will be prevalent throughout.
+There will be a number of common themes touched upon in this work that are not specific to one particular chapter or research problem.
+To avoid constantly redirecting the reader, and in the interest of preventing chapters \ref{ch:ScalarSystem}, \ref{ch:CurlCurl}, and \ref{ch:SingInc} becoming bloated with further introductions and notational conventions, we provide an introduction to the key concepts that will be prevalent throughout.
 
 In section \ref{sec:TP-GelfandTransform}, we introduce the Gelfand transform and the resulting ``shifted gradient" operators $\tgrad, \ktgrad$.
 Section \ref{sec:QuantumGraphs} contains the notation we will use, and theory that we will require, from the field of quantum graphs.
-This covers how we will choose to represent our ``singular structures" (section \ref{ssec:EmbeddedGraphs}), how one defines differential operators on (metric) graphs (sections \ref{ssec:QG-FunctionSpaces}-\ref{ssec:DiffOpsOnGraphs}), and a valuable tool for the analysis of the spectrum of such operators --- the $M$-matrix (section \ref{ssec:MMatrix}).
-The introduction of embedded graphs will then allow us to define the singular measures of interest to us in section \ref{sec:SingularMeasures}, before moving on to the definition of the ``non-classical" Sobolev spaces (section \ref{sec:BorelMeasSobSpaces}) that will be the backbone of the variational problems we consider in later chapters.
+This in particular includes how we will choose to represent our ``singular structures" (section \ref{ssec:EmbeddedGraphs}), how one defines differential operators on (metric) graphs (sections \ref{ssec:QG-FunctionSpaces}-\ref{ssec:DiffOpsOnGraphs}), and the $M$-matrix (section \ref{ssec:MMatrix}).
+The introduction of embedded graphs will then allow us to define the singular measures of interest to us (section \ref{sec:SingularMeasures}), before moving on to the definition of the ``non-classical" Sobolev spaces (section \ref{sec:BorelMeasSobSpaces}) that will be the backbone of the variational problems we consider in later chapters.
 
 Before we begin, we set out some notation for frequently occurring function spaces.
-Let $\ddom\subset\reals^n$, and denote by $\smooth{\ddom}$ the set of infinitely differentiable (\emph{smooth}) functions on $\ddom$, $\csmooth{\ddom}$ the set of smooth functions with compact support in the interior of $\ddom$, and $\psmooth{\ddom}$ the set of infinitely differentiable functions on $\reals^2$ that are $\ddom$-periodic.
-For a measure $\rho$ be a Borel measure on $\ddom$, and denote by $\ltwo{\ddom}{\rho}$ the space of $\rho$-square-integrable functions on $\ddom$.
-If the measure is omitted, it is taken to be the $n$-dimensional Lebesgue measure on $\ddom$.
-An exception to this will be cases where we are considering an interval $I\subset\reals$ equipped with the Lebesgue measure; here we will write $\ltwo{I}{y}$ for the space of square integrable functions on this interval, and similarly write $\gradSob{I}{y}$ for the (Sobolev) space of $u\in\ltwo{I}{y}$ that possess a weak derivative $u'\in\ltwo{I}{y}$.
+Let $\ddom\subset\reals^d$, and denote by $\smooth{\ddom}$ the set of infinitely differentiable (\emph{smooth}) functions on $\ddom$, $\csmooth{\ddom}$ the set of smooth functions with compact support in the interior of $\ddom$, and $\psmooth{\ddom}$ the set of infinitely differentiable functions on $\reals^d$ that are $\ddom$-periodic.
+For a Borel measure $\rho$ on $\ddom$, and denote by $\ltwo{\ddom}{\rho}$ the space of $\rho$-square-integrable functions on $\ddom$.
+If the measure is omitted, it is taken to be the $d$-dimensional Lebesgue measure on $\ddom$.
+An exception to this will be cases where we are considering an interval $I\subset\reals$ equipped with the Lebesgue measure; where due to notational conventions for our singular structures we will write $\ltwo{I}{y}$ for the space of square integrable functions on this interval, and similarly write $\gradSob{I}{y}$ for the (Sobolev) space of $u\in\ltwo{I}{y}$ that possess a weak derivative $u'\in\ltwo{I}{y}$.
+If $\ddom$ is the unit cell of some periodic structure, we also think of $\ltwo{\ddom}{\rho}$ as the space of $\rho$-square integrable functions on the torus homeomorphic to $\ddom$, and of course $\psmooth{\ddom}$ as the space of smooth functions on the torus.
+Finally, for vector fields $u\in\ltwo{\ddom}{\rho}^d$, a subscript $u_i$ denotes the $i^{\text{th}}$ component of $u$.
 
 \input{./Chapters/Theory-Prelims/GelfandTransform}
 
