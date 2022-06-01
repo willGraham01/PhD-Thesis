@@ -37,12 +37,11 @@
 
 	% indicate length scales
 	% period cell size
-	\draw[<->] (0,6.2) -- (6,6.2); \node[anchor=south] at (3,6.2) {$1$};
+	\draw[<->] (0,6.2) -- (6,6.2); \node[anchor=south] at (3,6.2) {$\tilde{L}=\lambda_0^{-1}L$};
 	% inclusion size
-	\draw[<->] (1,0.875) -- (5.0,0.875); \node[anchor=north] at (3.0,0.875) {$1-\delta$};
+	\draw[<->] (1,0.875) -- (5.0,0.875); \node[anchor=north] at (3.0,0.875) {$\tilde{L}-\delta=\tilde{L}-\lambda_0^{-1}l$};
 	% draw example material params: go for soft inclusion (a(x)=a) inside stiff matrix (a(x)=1)
-	\node[anchor=center, align=center] at (3,3) {$\epsilon_r(\tilde{x})= \varepsilon = \frac{\epsilon^{\mathrm{inc}}}{\epsilon^{\mathrm{bulk}}}$ \\ $\mu_r(\tilde{x})= \mu = \frac{\mu^{\mathrm{inc}}}{\mu^{\mathrm{bulk}}}$};
-	\node[anchor=north, align=center] at (1.5,5.5) {$\epsilon_r(\tilde{x})=1$ \\ $\mu_r(\tilde{x})=1$};
-
+	\node[anchor=center, align=center] at (3,3) {$\epsilon_r(\tilde{x})= \varepsilon_0^{-1}\epsilon^{\mathrm{inc}}$};
+	\node[anchor=north, align=center] at (1.5,5.5) {$\epsilon_r(\tilde{x})= \varepsilon_0^{-1}\epsilon^{\mathrm{bulk}}$};
 \end{tikzpicture}
 \end{document}

@@ -135,7 +135,7 @@ The electric permittivity $\epsilon_m$ and magnetic permeability $\mu_m$ of the 
 \end{align*}
 The materials that make up PCs tend to have similar (if not identical) permeabilities, so one typically adopts the assumption that the materials are non-magnetic and takes $\mu^{\mathrm{inc}}$ and $\mu^{\mathrm{bulk}}$ to both be equal to the permeability of free space, $\muFS$.
 We also assign $Q_0$ a characteristic size $L-l$, $0<l<L$, giving the period cell illustrated in figure \ref{fig:Diagram_ScalingDimensionfull}.
-\begin{figure}[t]
+\begin{figure}[b!]
 	\centering
 	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
@@ -148,6 +148,7 @@ We also assign $Q_0$ a characteristic size $L-l$, $0<l<L$, giving the period cel
 		\includegraphics[scale=1.0]{Diagram_ScalingDimensionless.pdf}
 		\caption[Illustration of the relationship between physical properties and dimensionless parameters for composite media.]{\label{fig:Diagram_ScalingDimensionless} The period cell of the domain of the non-dimensionalised problem.}
 	\end{subfigure}
+	\caption[Dimensionfull and dimensionless (non-magnetic) composite domains.]{\label{fig:Diagram_ScalingND} Dimensionfull and dimensionless (non-magnetic) composite domains.}
 \end{figure}
 
 We now proceed to write the system of Maxwell equations with respect to dimensionless variables.
@@ -166,16 +167,16 @@ The Maxwell system then becomes
 	\curl{\tilde{x}}\tilde{H} 
 	&= -\rmi\omega\lambda_0\muFS^{\recip{2}}\eps_m\epsFS^{-\recip{2}} \tilde{E}.
 \end{align*}
-Defining the (non-dimensional) frequency $z := \omega_0^{-1}\omega = \omega\lambda_0\bracs{\epsFS\muFS}^{\recip{2}}$ and dimensionless permittivity $\epsilon=\epsFS^{-1}\epsilon_m$, we have the system
+Defining the (non-dimensional) frequency $z := \omega_0^{-1}\omega = \omega\lambda_0\bracs{\epsFS\muFS}^{\recip{2}}$ and dimensionless permittivity $\epsilon_{r}=\epsFS^{-1}\epsilon_m$, we have the system
 \begin{align} \label{eq:Intro-NonDimMaxwell}
 	\curl{\tilde{x}}\tilde{E} 
 	&= \rmi z \tilde{H}, \\
-	\epsilon^{-1} \ \curl{\tilde{x}}\tilde{H} 
+	\epsilon^{-1}_{r} \ \curl{\tilde{x}}\tilde{H} 
 	&= -\rmi z \tilde{E}.
 \end{align}
-This results in the domain setup illustrated in figure \ref{fig:Diagram_ScalingDimensionless}: we are now studying the (dimensionless) equations \eqref{eq:Intro-NonDimMaxwell} for $\tilde{x}\in\reals^d$, with a period cell $\widetilde{Q} = \lambda_0^{-1}Q$ of size $\tilde{L}:=\lambda_0^{-1}L$, a bulk region $\widetilde{Q}_1 = \lambda_0^{-1}Q_1$ of size $\delta:=\lambda_0^{-1}l$, an inclusion $\widetilde{Q}_0 = \lambda_0^{-1}Q_0$ of size $\tilde{L}-\delta$, and dimensionless permittivity
+This results in the domain setup illustrated in figure \ref{fig:Diagram_ScalingDimensionless}: we are now studying the (dimensionless) equations \eqref{eq:Intro-NonDimMaxwell} for $\tilde{x}\in\reals^d$, with a period cell $\widetilde{Q} = \lambda_0^{-1}Q$ of size $\tilde{L}:=\lambda_0^{-1}L$, a bulk region $\widetilde{Q}_1 = \lambda_0^{-1}Q_1$ of size $\delta:=\lambda_0^{-1}l$, an inclusion $\widetilde{Q}_0 = \lambda_0^{-1}Q_0$ of size $\tilde{L}-\delta$, and dimensionless (or ``relative") permittivity
 \begin{align*}
-	\epsilon\bracs{\tilde{x}} = 
+	\epsilon_{r}\bracs{\tilde{x}} = 
 	\begin{cases} 
 		\epsFS^{-1}\epsilon^{\mathrm{inc}} & \tilde{x}\in\widetilde{Q}_0, \\
 		\epsFS^{-1}\epsilon^{\mathrm{bulk}} & \tilde{x}\in\widetilde{Q}_1.
@@ -200,7 +201,7 @@ One other selection of dimensionless parameters worth highlighting are the follo
 	\lambda^{\mathrm{bulk}} := \lambda_0\omega_0\bracs{\epsilon^{\mathrm{bulk}}\muFS}^{-\recip{2}},
 \end{align}
 where each of the dimensionless parameters are now ratios of lengths.
-The parameters $\lambda^{\mathrm{inc}}$ and $\lambda^{\mathrm{bulk}}$ (respectively) represent the ratio of the wavelength of light in the inclusion (bulk) to that in free space, and satisfy $\epsFS^{-1}\epsilon^{\mathrm{inc}} = \lambda_0^2\bracs{\lambda^{\mathrm{inc}}}^{-2}$.
+The parameters $\lambda^{\mathrm{inc}}$ and $\lambda^{\mathrm{bulk}}$ (respectively) represent the ratio of the wavelength of light in the inclusion (bulk) to that in free space, and satisfy $\epsilon_{r} = \lambda_{r}^{-2}$.
 The equivalent non-dimensional system would then be
 \begin{subequations} \label{eq:Intro-NonDimMaxwellLengths}
 	\begin{align}
