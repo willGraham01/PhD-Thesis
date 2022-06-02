@@ -2,13 +2,12 @@
 In this section we introduce the ``non-classical" Sobolev spaces with respect to Borel measures, the final ingredient that we require to pose variational problems on our singular structures.
 Since we will be working with a number of different measures (section \ref{sec:SingularMeasures}) in two  (and occasionally three) dimensions, the content of this section is presented with respect to a general Borel measure $\rho$ defined on a bounded $\ddom\subset\reals^2$, which should be thought of as the period cell of some periodic structure.
 Our overarching goal is to construct an analogy to a Sobolev space for the measure $\rho$, and hence obtain a concept of (weak) derivative.
-We will predominantly work ``post-Gelfand transform", hence our definitions will involve the shifted gradient ($\ktgrad$) and curl operators ($\ktcurl{}$) operators introduced in section \ref{sec:TP-GelfandTransform}.
+We will work ``post-Gelfand transform", and thus our definitions will involve the shifted gradient ($\ktgrad$) and curl operators ($\ktcurl{}$) operators introduced in section \ref{sec:TP-GelfandTransform}.
 Section \ref{ssec:SobSpacesAndGelfand} clarifies the relationship between the spaces we introduce here and the non-classical Sobolev spaces one would consider when studying a periodic problem in $\reals^2$.
 
-We will follow the ideas developed in \cite{zhikov2000extension, zhikov2002homogenization}
-\tstk{V. V. Zhikov, “A note on Sobolev spaces,” J. Math. Sci., New York 129, No. 1, 3593–3595 (2005) talks about a weak definition of these spaces, however I think there's an error in here.} concerning the definition of a gradient with respect to non-Lebesgue measures, and the corresponding ``non-classical" Sobolev spaces.
-Our definition of the space of functions possessing curls is motivated by this approach, and the definitions of \cite{cherednichenko2022operator}, although the latter works with a Floquet transform rather than a Gelfand transform (see section \ref{sec:TP-GelfandTransform}).
-Let us begin by defining
+We will follow the ideas developed in \cite{zhikov2000extension, zhikov2002homogenization} concerning the definition of a gradient with respect to non-Lebesgue measures, and the corresponding ``non-classical" Sobolev spaces.
+Our definition of the space of functions possessing curls is motivated by this approach, and the definitions of \cite{cherednichenko2022operator, cherednichenko2022order}, although the latter works with a Floquet transform rather than a Gelfand transform (see section \ref{sec:TP-GelfandTransform}).
+Let us begin by defining the sets
 \begin{align*}
 	W^{\kt}_{\rho,\mathrm{grad}} &:= \overline{\clbracs{ \bracs{\phi, \ktgrad\phi} \setVert \phi\in\psmooth{\ddom} }},
 \end{align*}
@@ -18,6 +17,9 @@ where the closure is taken in $\ltwo{\ddom}{\rho}\times\ltwo{\ddom}{\rho}^3$, an
 \end{align*}
 where the closure is taken in $\ltwo{\ddom}{\rho}^3\times\ltwo{\ddom}{\rho}^3$.
 This mimics the ``$H$"-definition of classical Sobolev spaces (when $\rho$ is the Lebesgue measure), however for general measures $\rho$ the Meyers-Serrin ``$H=W$" theorem (see \cite[Theorem 3.17]{adams2003sobolev}) doesn't hold due to the lack of the integration by parts technique.
+The short article \cite{zhikov2005note} discusses an alternative approach to the definition of a gradient via analogy with the integration by parts technique and the ``W"-definition of Sobolev spaces.
+Although the sets of functions obtained from each definition coincide, the concept of what it means to be ``the" gradient does not, and it is considerably harder to compute the explicit form of said gradients.
+
 We would like to call the second element of a pair $\bracs{u,g}\in W^{\kt}_{\rho,\mathrm{grad}}$ ``the gradient" of the function $u$, however notice that if $\bracs{u,g_1}, \bracs{0, g_2}\in W^{\kt}_{\rho,\mathrm{grad}}$ then we also have that $\bracs{u, g_1+g_2}\in W^{\kt}_{\rho,\mathrm{grad}}$.
 As such, the term ``gradient" being used in reference to the second element of a pair in $W^{\kt}_{\rho,\mathrm{grad}}$ does not indicate a unique function --- both $g_1$ and $g_1+g_2$ are ``gradients" of $u$ in this sense.
 An analogous deduction can be made for ``curl" and the second member of elements of $W^{\kt}_{\rho,\mathrm{curl}}$.
@@ -31,16 +33,17 @@ and analogously define the set of ``($\rho$)-curls of zero" as
 	\curlZero{\ddom}{\rho} &= \clbracs{ c\in \ltwo{\ddom}{\rho}^3 \setVert \bracs{0,c}\in W^{\kt}_{\rho,\mathrm{curl}}}, \\
 	&= \clbracs{ c\in\ltwo{\ddom}{\rho}^3 \setVert \exists\Phi^n\in\psmooth{\ddom}^3 \text{ s.t. } \Phi^n\lconv{\ltwo{\ddom}{\rho}^3}0, \ \ktcurl{}\Phi\lconv{\ltwo{\ddom}{\rho}^3} c}. \labelthis\label{eq:CurlZeroSequenceDef}
 \end{align*}
-Given an element $g\in\gradZero{\ddom}{\rho}$, we will refer to a sequence $\phi_n$ as in \eqref{eq:GradZeroSequenceDef} as an ``approximating sequence" for $g$, and will make use of the phrase ``take an approximating sequence $\phi_n$ for $g$" (or similar) to mean ``let $\phi_n$ be a sequence as in \eqref{eq:GradZeroSequenceDef} for the element $g$ of $\gradZero{\ddom}{\rho}$".
-We also adopt a similar convention for elements $c\in\curlZero{\ddom}{\rho}$ and ``approximating sequences" as in \eqref{eq:CurlZeroSequenceDef}.
+Given an element $g\in\gradZero{\ddom}{\rho}$, we will refer to a sequence $\phi_n$ as in \eqref{eq:GradZeroSequenceDef} as an \emph{approximating sequence} for $g$, and will make use of the phrase ``take an approximating sequence $\phi_n$ for $g$" (or similar) to mean ``let $\phi_n$ be a sequence as in \eqref{eq:GradZeroSequenceDef} for the element $g$ of $\gradZero{\ddom}{\rho}$".
+We also adopt a similar convention for elements $c\in\curlZero{\ddom}{\rho}$ and similar phrasing for approximating sequences as in \eqref{eq:CurlZeroSequenceDef}.
 The functions that belong to these sets can be thought of as the functions that are changing (or vector fields that are rotating) in such a way that the measure $\rho$ cannot see these changes, whilst the Lebesgue measure can --- concrete interpretations for the singular measures we study in depth can be found in sections \ref{ssec:3DGradGeometric} and \ref{sec:CC-Geometric}.
 
 We remark that it is not necessary to explicitly separate tangential gradients from the set of gradients of zero, if one is only concerned with establishing solubility of the variational problems we shall shortly define in chapters \ref{ch:ScalarSystem}, \ref{ch:CurlCurl}, and \ref{ch:SingInc}.
 Indeed the studies \cite{zhikov2000extension, zhikov2002homogenization, cherednichenko2018operator, cherednichenko2022operator} follow such a course, since their objective is not the explicit study of the resulting operators, but rather the convergence properties for the homogenisation problem.
-However for our analysis it is very convenient for us to do so; largely because the tangential gradient is precisely \emph{the} gradient that solves such variational problems anyway, and we require an explicit description of these objects if we are to realise our variational problems in a form tractable to solution.
+The solution to the problems defined in these works is a pair $\bracs{u,g}\in W^{\kt}_{\rho,\mathrm{grad}}$, which can be shown to be unique (through use of the Riesz theorem) and so implies the existence of a unique ``gradient" $g$ to said problems.
+However for our analysis it is convenient for us to make this separation; largely because the tangential gradient is precisely \emph{the} gradient that solves the variational problems we come to consider anyway, and we require an explicit description of these objects if we are to realise our variational problems in a form tractable to solution.
 
 One may notice the absence of any $\kt$ labelling on the sets $\gradZero{\ddom}{\rho}$ and $\curlZero{\ddom}{\rho}$, which is due to their independence of these quantities, as demonstrated in proposition \ref{prop:ZeroInvariantUnderQM-Wavenumber} below.
-This is not unexpected --- given that $\phi_n$ converging to zero, adding $\phi_n$ multiplied by a combination of the quasi-momentum $\qm$ and Fourier variable $\wavenumber$ is not going to change any behaviour.
+This is not unexpected --- given that $\phi_n$ is converging to zero, adding multiples or shifts of $\phi_n$ is not going to change any behaviour.
 \begin{prop} \label{prop:ZeroInvariantUnderQM-Wavenumber}
 	Fix a wavenumber $\wavenumber$ and a quasi-momentum $\qm$, and let
 	\begin{align*}
@@ -58,10 +61,10 @@ This is not unexpected --- given that $\phi_n$ converging to zero, adding $\phi_
 \begin{proof}
 	This is seen by observing that for $\phi\in\psmooth{\ddom}$ and $\Phi\in\psmooth{\ddom}^3$,
 	\begin{align*}
-		\grad^{\kt}\phi &= \grad^{\bracs{0, 0}}\phi + \rmi\wavenumber\begin{pmatrix} 0 \\ 0 \\ \phi \end{pmatrix} + \rmi\begin{pmatrix} \qm_1 \\ \qm_2 \\ 0 \end{pmatrix}\phi, \\
-		\grad^{\kt}\wedge\Phi &= \grad^{\bracs{0, 0}}\wedge\Phi + \rmi\wavenumber\begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}\wedge\Phi + \rmi\begin{pmatrix} \qm_1 \\ \qm_2 \\ 0 \end{pmatrix} \wedge \Phi.
+		\grad^{\kt}\phi &= \ograd\phi + \rmi\wavenumber\begin{pmatrix} 0 \\ 0 \\ \phi \end{pmatrix} + \rmi\begin{pmatrix} \qm_1 \\ \qm_2 \\ 0 \end{pmatrix}\phi, \\
+		\grad^{\kt}\wedge\Phi &= \ograd\wedge\Phi + \rmi\wavenumber\begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}\wedge\Phi + \rmi\begin{pmatrix} \qm_1 \\ \qm_2 \\ 0 \end{pmatrix} \wedge \Phi.
 	\end{align*}
-	Thus, if $g\in \mathcal{G}_{\ddom,\md\rho}^{\kt}(0)$ there exists a sequence $\phi_n\in\smooth{\ddom}$ such that
+	Thus, if $g\in \mathcal{G}_{\ddom,\md\rho}^{\kt}(0)$ there exists a sequence $\phi_n\in\psmooth{\ddom}$ such that
 	\begin{align*}
 		\phi_n \lconv{\ltwo{\ddom}{\rho}} 0, &\quad \ktgrad\phi_n \lconv{ \ltwo{\ddom}{\rho}^3 } g,
 	\end{align*}
@@ -89,8 +92,8 @@ Another useful property of the sets $\gradZero{\ddom}{\rho}$ and $\curlZero{\ddo
 	
 	Next we prove that $\gradZero{\ddom}{\rho}$ is closed, through a diagonal argument.
 	To this end, let $g_n$ be a sequence in $\gradZero{\ddom}{\rho}$ that converges (in $\ltwo{\ddom}{\rho}^3$) to some function $g$.
-	For each $n\in\naturals$, there exists an approximating sequence of (periodic) smooth functions $\phi_n^l$ for $g_n$ since each $g_n\in\gradZero{\ddom}{\rho}$.
-	Now, let $m\in\naturals$.
+	For each $n\in\naturals$, there exists an approximating sequence $\phi_n^l$ for $g_n$ since $g_n\in\gradZero{\ddom}{\rho}$.
+	Now let $m\in\naturals$.
 	Since $g_n\rightarrow g$, there exists $N_m\in\naturals$ such that $\norm{g_n-g}_{\ltwo{\ddom}{\rho}^3}<\recip{2m}$ for all $n\geq N_m$ --- in particular, $g_{N_m}$ satisfies this inequality.
 	Then, since $\phi_{N_m}^l$ is an approximating sequence for $g_{N_m}$, we have that there exist $L_{N_m}^{(1)}, L_{N_m}^{(2)}\in\naturals$ such that
 	\begin{align*}
@@ -102,14 +105,14 @@ Another useful property of the sets $\gradZero{\ddom}{\rho}$ and $\curlZero{\ddo
 	\begin{align*}
 		\norm{\psi_m}_{\ltwo{\ddom}{\rho}} &= \norm{\phi_{N_m}^{L_{N_m}}}_{\ltwo{\ddom}{\rho}} < \recip{m}, \\
 		\norm{\ograd\psi_m - g}_{\ltwo{\ddom}{\rho}^3} &= \norm{\ograd\phi_{N_m}^{L_{N_m}} - g}_{\ltwo{\ddom}{\rho}^3} \\
-		&\leq \norm{\ograd\phi_{N_m}^{L_{N_m}} - g_{N_m}} + \norm{g_{N_m} - g}_{\ltwo{\ddom}{\rho}^3} \\
+		&\leq \norm{\ograd\phi_{N_m}^{L_{N_m}} - g_{N_m}}_{\ltwo{\ddom}{\rho}^3} + \norm{g_{N_m} - g}_{\ltwo{\ddom}{\rho}^3} \\
 		&< \recip{2m} + \recip{2m} = \recip{m}.
 	\end{align*}
 	Therefore,
 	\begin{align*}
 		\psi_m \lconv{\ltwo{\ddom}{\rho}} 0, \quad \ograd\psi_m \lconv{\ltwo{\ddom}{\rho}^3} g,
 	\end{align*}
-	and each $\psi_m\in\psmooth{\ddom}$, and so $g\in\gradZero{\ddom}{\rho}$.
+	and each $\psi_m\in\psmooth{\ddom}$, so $g\in\gradZero{\ddom}{\rho}$.
 \end{proof}
 
 Since $\gradZero{\ddom}{\rho}$ is a closed, linear subspace of $\ltwo{\ddom}{\rho}^3$ we have the direct sum decomposition
@@ -129,7 +132,7 @@ However,
 \end{align*}
 so $g_1 - g_2\in \gradZero{\ddom}{\rho}$ too --- therefore we must have that $g_1=g_2$.
 With this in mind, we see that each $u$ possesses a unique gradient \emph{that is orthogonal to} $\gradZero{\ddom}{\rho}$.
-This allows construction of the \emph{non-classical} Sobolev space of gradients with respect to the measure $\rho$:
+This allows construction of the \emph{non-classical} Sobolev space of functions with gradients with respect to the measure $\rho$:
 \begin{definition}[Sobolev Space of $\kt$-Gradients] \label{def:3DGradSobSpace}
 	The set
 	\begin{align*}
@@ -158,17 +161,26 @@ We can also perform analogous steps for $\curlZero{\ddom}{\rho}$, which allows u
 	\end{align*}
 	is called the \emph{Sobolev space of $\kt$-curls with respect to the measure $\rho$}.
 	The member $\ktcurl{\rho}u$ of the pair $\bracs{u, \ktcurl{\rho}u}$ is the \emph{$\kt$-tangential curl of $u$ with respect to $\rho$}.
+	Again, we can give $\ktcurlSob{\ddom}{\rho}$ the inner product
+	\begin{align*}
+		\ip{u}{v}_{\ktcurlSob{\ddom}{\rho}} 
+		&= \integral{\ddom}{u\overline{v}}{\rho}
+		+ \integral{\ddom}{\ktcurl{\rho}u \cdot \overline{\ktcurl{\rho}v}}{\rho},
+	\end{align*}
+	to make it a Hilbert space.
 \end{definition}
 Like with tangential gradients; we will use the shorthand $u\in\ktcurlSob{\ddom}{\rho}$ to refer to the element $\bracs{u, \ktcurl{\rho}u}\in\ktcurlSob{\ddom}{\rho}$, since each $u$ has a unique $\ktcurl{\rho}u$ that is orthogonal to $\curlZero{\ddom}{\rho}$, and when the context is clear will refer to $\ktcurl{\rho}u$ as the \emph{tangential curl} or \emph{$\kt$-tangential curl}.
 
-Having provided the definition of the Sobolev spaces that we will later be considering, we provide some simple results which will prove useful throughout our analysis.
-By construction, functions with tangential gradients or curls can also be approximated by smooth functions.
+Having provided the definition of the non-classical Sobolev spaces, we provide some simple yet useful results.
+The foremost thing to make explicit from our construction is that functions with tangential gradients or curls can also be approximated by smooth functions.
 \begin{cory} \label{cory:SobSpaceApproxSequences}
 	\begin{align*}
 		\ktgradSob{\ddom}{\rho} &= \clbracs{ \bracs{u, \ktgrad_{\rho}u} \setVert \exists\phi_n\in\psmooth{\ddom} \text{ s.t. } \right. \\ 
-		&\hspace{0.25\textwidth} \left. \phi_n\lconv{\ltwo{\ddom}{\rho}}u, \ \ktgrad\phi_n\lconv{\ltwo{\ddom}{\rho}^3}\ktgrad_{\rho}u }, \\
+		&\hspace{0.25\textwidth} \left. \phi_n\lconv{\ltwo{\ddom}{\rho}}u, \ \ktgrad\phi_n\lconv{\ltwo{\ddom}{\rho}^3}\ktgrad_{\rho}u, \right. \\
+		&\hspace{0.25\textwidth} \left. \ktgrad_{\rho}u \perp \gradZero{\ddom}{\rho} }, \\
 		\ktcurlSob{\ddom}{\rho} &= \clbracs{ \bracs{u, \ktcurl{\rho}u} \setVert \exists\Phi^n\in\psmooth{\ddom}^3 \text{ s.t. } \right. \\
-		&\hspace{0.25\textwidth} \left. \Phi^n\lconv{\ltwo{\ddom}{\rho}^3}u, \ \ktcurl{}\Phi^n\lconv{\ltwo{\ddom}{\rho}^3}\ktgrad_{\rho}u }.
+		&\hspace{0.25\textwidth} \left. \Phi^n\lconv{\ltwo{\ddom}{\rho}^3}u, \ \ktcurl{}\Phi^n\lconv{\ltwo{\ddom}{\rho}^3}\ktcurl{\rho}u, \right. \\
+		&\hspace{0.25\textwidth} \left. \ktcurl{\rho}u \perp \curlZero{\ddom}{\rho} }.
 	\end{align*}
 \end{cory}
 \begin{proof}
@@ -177,6 +189,7 @@ By construction, functions with tangential gradients or curls can also be approx
 We will adopt analogous terminology and phrasing when using sequences $\phi_n$ and $\Phi^n$ as they appear in corollary \ref{cory:SobSpaceApproxSequences} to that used for sequences in \eqref{eq:GradZeroSequenceDef}-\eqref{eq:CurlZeroSequenceDef} regarding gradients and curls of zero --- referring to them as \emph{approximating sequences} for elements of $\ktgradSob{\ddom}{\rho}$ or $\ktcurlSob{\ddom}{\rho}$.
 
 Given our choice to construct (tangential) gradients and curls via approximation, we retain the rule that the curl of a gradient is 0 --- once translated into its analogue for gradients and curls with respect to the measure $\rho$.
+First we establish this for smooth functions.
 \begin{lemma} \label{lem:CurlOfGradSmoothFunctions}
 	For $\phi\in\psmooth{\ddom}$, we have that
 	\begin{align*}
@@ -234,9 +247,9 @@ with the closure taken in $\ltwo{\reals^d}{\upsilon}\times\ltwo{\reals^d}{\upsil
 One can again define a set of gradients of zero, demonstrate that it forms a closed linear subspace of $\ltwo{\reals^d}{\upsilon}^d$, and construct the Sobolev space $\gradSob{\reals^d}{\upsilon}$ consisting of functions $u$ and their tangential gradients $\grad_{\upsilon}u$ (\cite[section 5]{zhikov2002homogenization}).
 We can also define the Sobolev space $\tgradSob{\ddom}{\rho}$ via the same procedure by first considering the closure of pairs $\bracs{\phi, \tgrad\phi}, \phi\in\psmooth{\ddom}$ in $\ltwo{\ddom}{\rho}\times\ltwo{\ddom}{\rho}^2$.
 
-Upon recalling section \ref{sec:TP-GelfandTransform}, the reader may notice that our notation and construction of the Sobolev spaces $\ktgradSob{\ddom}{\rho}$ and $\ktcurlSob{\ddom}{\rho}$ is heavily suggestive of being the result of the combination of a Gelfand transform in the first two coordinate directions and a Fourier transform in the third.
+Recalling section \ref{sec:TP-GelfandTransform}, the reader may notice that our notation and construction of the Sobolev spaces $\ktgradSob{\ddom}{\rho}$ and $\ktcurlSob{\ddom}{\rho}$ is heavily suggestive of being the result of the combination of a Gelfand transform in the first two coordinate directions and a Fourier transform in the third.
 Indeed, our choice to use periodic smooth functions and the shifted gradient operator to construct these spaces was not a coincidence.
-Now suppose that $\hat{\graph}$ is a periodic graph embedded into $\reals^2$ with period cell $\ddom$, and let $\upsilon$ be one of the singular measures detailed in section \ref{sec:SingularMeasures} with respect to the graph $\hat{\graph}$.
+Suppose that $\hat{\graph}$ is a periodic graph embedded into $\reals^2$ with period cell $\ddom$, and let $\upsilon$ be one of the singular measures detailed in section \ref{sec:SingularMeasures} with respect to the graph $\hat{\graph}$.
 Let $\graph$ be the period graph of $\hat{\graph}$ and let $\rho$ be the ``restriction" of the measure $\upsilon$ to $\ddom$.
 Finally, consider the extrusion $\dddom:=\hat{\graph}\times[0,\infty)\subset\reals^3$ equipped with the product measure $\upsilon\times\lambda_1$, and the image of the set
 \begin{align*}
@@ -247,5 +260,5 @@ For given quasi-momentum $\qm$ and Fourier variable (wavenumber) $\kappa$, the r
 \begin{align*}
 	\clbracs{ \bracs{\phi, \ktgrad\phi} \setVert \phi\in\psmooth{\ddom} }.
 \end{align*}
-By virtue of how we chose to construct the space $\gradSob{\dddom}{\bracs{\upsilon\times\lambda_1}}$, we have that the image of a function $u\in\gradSob{\dddom}{\bracs{\upsilon\times\lambda_1}}$ will be some $\hat{u}\in\ktgradSob{\ddom}{\rho}$.
-Similar conclusions can be drawn for the spaces $\curlSob{\dddom}{\bracs{\upsilon\times\lambda_1}}$ and $\ktcurlSob{\ddom}{\rho}$ and the spaces $\gradSob{\reals^2}{\upsilon}$ and $\tgradSob{\ddom}{\rho}$.
+By virtue of how our decision to construct the space $\gradSob{\dddom}{\bracs{\upsilon\times\lambda_1}}$ through smooth approximations, we have that the image of a function $u\in\gradSob{\dddom}{\bracs{\upsilon\times\lambda_1}}$ will be some $\hat{u}\in\ktgradSob{\ddom}{\rho}$.
+Similar conclusions can be drawn for the spaces $\curlSob{\dddom}{\bracs{\upsilon\times\lambda_1}}$ and $\ktcurlSob{\ddom}{\rho}$, and the spaces $\gradSob{\reals^2}{\upsilon}$ and $\tgradSob{\ddom}{\rho}$.

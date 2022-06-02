@@ -3,14 +3,14 @@ Now that we have established how we can represent singular structures through em
 The introduction of these measures also necessitates a change in the way we view gradients, curls, and divergences, which is the subject of section \ref{sec:BorelMeasSobSpaces}, and is our solution to the problems discussed in section \ref{sec:Intro-ProblemIntroduction}.
 
 Let $\ddom\subset\reals^d$, and let $\mathcal{B}_{\ddom}$ denote the Borel sigma algebra for $\ddom$ (with the topology inherited from $\reals^d$).
-A (Borel) measure $\rho$ on the measurable space $\bracs{\ddom,\mathcal{B}_{\ddom}}$ is called \emph{singular} if there exist two disjoint sets $S_1,S_2\in \mathcal{B}_{\ddom}$ such that $\rho$ is zero on all (measurable) subsets of $S_1$ and the $d$-dimensional Lebesgue measure $\lambda_d$ is zero on all subsets of $S_2$.
+A (Borel) measure $\rho$ on the measurable space $\bracs{\ddom,\mathcal{B}_{\ddom}}$ is called \emph{singular} if there exist two disjoint measurable sets $S_1,S_2\in \mathcal{B}_{\ddom}$ such that $\rho$ is zero on all measurable subsets of $S_1$ and the $d$-dimensional Lebesgue measure $\lambda_d$ is zero on all measurable subsets of $S_2$.
 The textbook example of a singular measure is the point-mass measure (or \emph{$\delta$-function}) placed at a point $x_0\in\ddom$,
 \begin{align*}
 	\delta_{x_0}\bracs{B} &= \begin{cases} 1 & x_0\in B, \\ 0 & x_0\not\in B, \end{cases}
 	\qquad \forall B\in\mathcal{B}_{\ddom},
 \end{align*}
 for which we can take $S_1=\ddom\setminus\clbracs{x_0}$ and $S_2=\clbracs{x_0}$.
-In addition to point masses, we will also want to consider singular measures which support our singular structures.
+In addition to point masses, we will also want to consider singular measures which support the edges of our singular structure, that are line segments in $\reals^d$.
 Let $\graph=\bracs{\vertSet, \edgeSet}$ be a metric graph embedded into $\reals^d$.
 For each $I_{jk}\in\edgeSet$ define the (Borel) measure $\lambda_{jk}$ as the measure which supports the one-dimensional measure $\lambda_1$ on (or ``along") $I_{jk}$,
 \begin{align*}
@@ -29,7 +29,7 @@ Since the sum of two singular measures is another singular measure, we can then 
 \end{align}
 where we refer to $\ddmes$ as the ``\emph{singular measure} that supports $\graph$", and $\massMes$ is the singular measure supporting the masses $\alpha_j$ at the vertices of $\graph$.
 For graphs embedded into two and three dimensions, figure \ref{fig:Diagram_SingularMeasure2D} illustrates the $\dddmes$ notion of size.
-\begin{figure}[b!]
+\begin{figure}[t!]
 	\centering
 	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
@@ -44,5 +44,7 @@ For graphs embedded into two and three dimensions, figure \ref{fig:Diagram_Singu
 	\end{subfigure}
 	\caption[Singular measures supporting embedded graphs.]{\label{fig:Diagram_SingularMeasure} Singular measures supporting embedded graphs and their vertices.}
 \end{figure}
-In chapter \ref{ch:SingInc}, we will reintroduce the background material into which our singular structure is embedded.
-This will require us to consider the sum of singular measures and the ``background" Lebesgue measure $\lambda_2$, so for a singular measure $\rho$ we shall write $\lambda_2^{\rho} = \lambda_2 + \rho$.
+
+The measure $\dddmes$ will be our focus during chapters \ref{ch:ScalarSystem} and \ref{ch:CurlCurl}, where we study the acoustic approximation and curl-of-the-cul equation on a singular structure without the presence of a surrounding background material.
+In chapter \ref{ch:SingInc}, we will reintroduce the background material and consequentially require us to change the measure our problems are posed with respect to.
+Precisely, we will consider the sum of singular measures and the ``background" Lebesgue measure $\lambda_2$, so for a singular measure $\rho$ we shall write $\lambda_2^{\rho} = \lambda_2 + \rho$.
