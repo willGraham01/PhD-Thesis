@@ -1,57 +1,58 @@
 \section{Derivation of quantum graph problem} \label{sec:ScalarDerivation}
-In this section we provide an overview of a system of the form \eqref{eq:SingularWaveEqnQGProblem} is obtained from \eqref{eq:SingularScalarWaveEqn}, which will setup our discussion revolving around the methods we employ for solving \eqref{eq:SingularWaveEqnQGProblem} in section \ref{sec:ScalarDiscussion}.
-However, before doing so we provide the reader with an intuitive understanding, stemming from the analysis of section \ref{sec:3DGradSobSpaces}, of the space $\tgradSob{\ddom}{\dddmes}$.
+In this section we demonstrate how system of the form \eqref{eq:SingularWaveEqnQGProblem} is obtained from \eqref{eq:SingularScalarWaveEqn}, which will setup our discussion revolving around the methods we employ for solving \eqref{eq:SingularWaveEqnQGProblem} in section \ref{sec:ScalarDiscussion}.
+To do so, we will need to provide the reader with an intuitive understanding, stemming from the analysis of section \ref{sec:3DGradSobSpaces}, of the space $\tgradSob{\ddom}{\dddmes}$.
 Upon deriving the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem}, we will elaborate on its link to our variational problem in the context of Strauss extensions in section \ref{ssec:ExtendedSpaces}.
 
 \input{./Chapters/Scalar-System/Scalar-GradientGeometricInterpretation}
 
 \subsection{Derivation of the system \eqref{eq:SingularWaveEqnQGProblem}} \label{ssec:Scalar-QGDerivation}
 We can now provide an argument for how a system of the form \eqref{eq:SingularWaveEqnQGProblem} arises from \eqref{eq:SingularScalarWaveEqn}.
-
-We first note that whenever the equality in \eqref{eq:SingularScalarWaveEqn-VariationalForm} holds for all smooth functions $\phi$, it holds in particular when $\phi$ has support that intersects the interior of a single edge $I_{jk}\in\edgeSet$ and no other parts of $\graph$.
-Combined with the fact that $\dddmes$ is a sum of the edge measures and point masses at the vertices, and that $\tgrad_{\dddmes}u=\tgrad_{\lambda_{jk}}u$ on the edge $I_{jk}$, equation \eqref{eq:SingularScalarWaveEqn-VariationalForm} implies
+Take any $\varphi\in\csmooth{\sqbracs{0,l_{jk}}}$ and let $\phi\in\psmooth{\ddom}$ be such that $\phi\circ r_{jk} = \varphi$ on $\sqbracs{0,l_{jk}}$, with $\supp\phi\cap\graph\subset I_{jk}^{\circ}$.
+Testing against such $\phi$ in \eqref{eq:SingularScalarWaveEqn-VariationalForm}, combined with the fact that $\dddmes$ is a sum of the edge measures and point masses at the vertices, and that $\tgrad_{\dddmes}u=\tgrad_{\lambda_{jk}}u$ on the edge $I_{jk}$, equation \eqref{eq:SingularScalarWaveEqn-VariationalForm} implies
 \begin{align*}
 	0 &= \integral{\ddom}{ \bracs{\tgrad_\ddmes u \cdot \overline{\tgrad\phi} - \omega^2 u\overline{\phi}} }{\ddmes}
 	= \integral{I_{jk}}{ \bracs{\tgrad_{\lambda_{jk}}u \cdot \overline{\tgrad\phi} - \omega^2 u^{(jk)}\overline{\phi}} }{\lambda_{jk}} \\
 	&= \integral{I_{jk}}{ \clbracs{ \bracs{\bracs{u^{(jk)}}' + \rmi\qm_{jk} u^{(jk)}}\bracs{\overline{\phi}' - \rmi\qm_{jk} \overline{\phi} } - \omega^2 u^{(jk)}\overline{\phi} } }{\lambda_{jk}}.
 \end{align*}
-Now using the change of variables $r_{jk}$ and denoting $\tilde{u}^{(jk)} = u^{(jk)} \circ r_{jk}$ and $\varphi = \phi\circ r_{jk}$, we arrive at
+Now using the change of variables $r_{jk}$ and denoting $\tilde{u}^{(jk)} = u^{(jk)} \circ r_{jk}$, we arrive at
 \begin{align*}
 	0 &= \int_{0}^{l_{jk}} \bracs{\bracs{\tilde{u}^{(jk)}}' + \rmi\qm_{jk} \tilde{u}^{(jk)}}\bracs{\overline{\varphi}' - \rmi\qm_{jk} \overline{\varphi} } - \omega^2 \tilde{u}^{(jk)}\overline{\varphi} \ \md y. \\
 	\implies
 	\int_{0}^{l_{jk}} \bracs{\tilde{u}^{(jk)}}'\overline{\varphi}' \ \md y &=
 	\int_{0}^{l_{jk}} \clbracs{ \omega^2\tilde{u}^{(jk)} + 2\rmi\qm_{jk}\bracs{\tilde{u}^{(jk)}}' + \bracs{\rmi\qm_{jk}}^2\tilde{u}^{(jk)} } \overline{\varphi} \ \md y.
 \end{align*}
-This holds for all smooth $\varphi$ with support contained in the interior of $\sqbracs{0,l_{jk}}$, and as such we can deduce that $\tilde{u}^{(jk)}$ is twice (weakly) differentiable, and obtain the (strong) equation
+This holds for all $\varphi\in\csmooth{\sqbracs{0,l_{jk}}}$, and thus implies that $\tilde{u}^{(jk)}$ is twice (weakly) differentiable along $\sqbracs{0,l_{jk}}$.
+Furthermore, we then obtain the (strong) equation
 \begin{align*}
 	-\bracs{\diff{}{y} + \rmi\qm_{jk}}^2 \tilde{u}^{(jk)} &= \omega^2 \tilde{u}^{(jk)}, \quad y\in\sqbracs{0,l_{jk}}.
 \end{align*}
 
 Now we turn our attention to the derivation of the vertex conditions.
-Fix a vertex $v_j\in \vertSet$, and consider functions $\phi\in\psmooth{\ddom}$ whose support intersects $\graph$ in a neighbourhood of $v_j$ that only contains edges which connect to $v_j$ (which can be, for example, a ball of sufficiently small radius centred on $v_j$).
+Fix a vertex $v_j\in \vertSet$, and consider functions $\phi\in\psmooth{\ddom}$ with $\supp\phi\cap\graph\subset \mathcal{J}(v_j)\setminus\clbracs{v_j}$ (that is, smooth functions that are only non-zero on $\graph$ close to the vertex $v_j$).
 Using the change of variables $r_{jk}$ on each edge and writing $\tilde{u}^{(jk)} = u^{(jk)} \circ r_{jk}$, $\varphi_{jk} = \phi\circ r_{jk}$ for each $k\con j$, we can work from \eqref{eq:SingularScalarWaveEqn-VariationalForm} to obtain
 \begin{align*}
 	0 &= \sum_{k: \ k\con j} \integral{I_{jk}}{ \bracs{ \tgrad_\ddmes u \cdot \overline{\tgrad\phi} - \omega^2 u\overline{\phi} } }{\lambda_{jk}} 
-	+ \integral{\ddom}{ \bracs{ \tgrad_{\dddmes}u\cdot\overline{\tgrad_{\dddmes}\phi}-\omega^2 u\overline{\phi} } }{\nu} \\
-	&= \sum_{k: \ k\con j} \int_{0}^{l_{jk}} \clbracs{ \bracs{\bracs{\tilde{u}^{(jk)}}' + \rmi\qm_{jk} \tilde{u}^{(jk)}}\bracs{\overline{\varphi}' - \rmi\qm_{jk} \overline{\varphi} } - \omega^2 \tilde{u}^{(jk)}\overline{\varphi} } \ \md y \\
+	+ \integral{\ddom}{ \bracs{ \tgrad_{\dddmes}u\cdot\overline{\tgrad_{\dddmes}\phi}-\omega^2 u\overline{\phi} } }{\massMes} \\
+	&= \sum_{k: \ k\con j} \int_{0}^{l_{jk}} \clbracs{ \bracs{\bracs{\tilde{u}^{(jk)}}' + \rmi\qm_{jk} \tilde{u}^{(jk)}}\bracs{\overline{\varphi}_{jk}' - \rmi\qm_{jk} \overline{\varphi}_{jk} } - \omega^2 \tilde{u}^{(jk)}\overline{\varphi}_{jk} } \ \md y \\
 	&\qquad + \alpha_j\left.\bracs{ \tgrad_{\dddmes}u\cdot\overline{\tgrad_{\dddmes}\phi}-\omega^2 u\overline{\phi} }\right\vert_{v_j} \\
-	&= \sum_{k: \ k\con j} \int_{0}^{l_{jk}} \clbracs{ \bracs{\bracs{\tilde{u}^{(jk)}}' + \rmi\qm_{jk} \tilde{u}^{(jk)}}\bracs{\overline{\varphi}' - \rmi\qm_{jk} \overline{\varphi} } - \omega^2 \tilde{u}^{(jk)}\overline{\varphi} } \ \md y
+	&= \sum_{k: \ k\con j} \int_{0}^{l_{jk}} \clbracs{ \bracs{\bracs{\tilde{u}^{(jk)}}' + \rmi\qm_{jk} \tilde{u}^{(jk)}}\bracs{\overline{\varphi}_{jk}' - \rmi\qm_{jk} \overline{\varphi}_{jk} } - \omega^2 \tilde{u}^{(jk)}\overline{\varphi}_{jk} } \ \md y
 	 - \alpha_j \omega^2 u\bracs{v_j}\overline{\phi}\bracs{v_j}.
 \end{align*}
 Here we have used the fact that $\tgrad_{\dddmes}u\bracs{v_j}=0$ (see section \ref{sec:3DGradSobSpaces}).
-Given that (from before) $u$ is twice differentiable on each $I_{jk}$, it follows that
+Given that (from our considerations along the edges) $u$ is twice differentiable on each $I_{jk}$, and $\phi$ is zero at every vertex except $v_j$, it follows that
 \begin{align*}
 	\alpha_j\omega^2 u\bracs{v_j}\overline{\phi}\bracs{v_j} 
-	&= - \sum_{k: \ k\con j} \int_{0}^{l_{jk}} \bracs{ \bracs{\diff{}{x} + \rmi\qm_{jk}}^2 \tilde{u}^{(jk)} +\omega^2 \tilde{u}^{(jk)} }\overline{\varphi} \ \md x \\
-	&\qquad + \sum_{k: \ k\con j}\overline{\varphi}\bracs{v_j}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}\tilde{u}^{(jk)}\bracs{v_j} \\
-	&= \overline{\varphi}\bracs{v_j}\sum_{k: \ k\con j}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}\tilde{u}^{(jk)}\bracs{v_j}. \labelthis\label{eq:DerivationVertexConditionWeak}
+	&= - \sum_{k: \ k\con j} \int_{0}^{l_{jk}} \bracs{ \bracs{\diff{}{x} + \rmi\qm_{jk}}^2 \tilde{u}^{(jk)} +\omega^2 \tilde{u}^{(jk)} }\overline{\varphi}_{jk} \ \md y \\
+	&\qquad + \sum_{k: \ k\con j}\overline{\varphi}_{jk}\bracs{v_j}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}\tilde{u}^{(jk)}\bracs{v_j} \\
+	&= \overline{\phi}\bracs{v_j}\sum_{k: \ k\con j}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}\tilde{u}^{(jk)}\bracs{v_j}. \labelthis\label{eq:DerivationVertexConditionWeak}
 \end{align*}
-Given that \eqref{eq:DerivationVertexConditionWeak} holds for every smooth $\varphi$, and that $\overline{\varphi}\bracs{v_j}=\overline{\phi}\bracs{v_j}$, we arrive at the condition
+Given that \eqref{eq:DerivationVertexConditionWeak} holds for every smooth $\varphi$, and that $\varphi_{jk}\bracs{v_j}=\phi\bracs{v_j}$, we arrive at the condition
 \begin{align*}
-	\alpha_j\omega^2 u\bracs{v_j} &= \sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}\tilde{u}^{(jk)}\bracs{v_j}, \quad \forall v_j \in \vertSet.
+	\alpha_j\omega^2 u\bracs{v_j} &= \sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}\tilde{u}^{(jk)}\bracs{v_j}.
 \end{align*}
+
 Repeating the argument for each $v_j\in \vertSet$ then provides us with a condition of this form at each vertex.
-One should note the presence of $\omega^2$ in this equation, so this is not a standard Robin condition on the derivatives of the edge-wise components of $u$, but rather indicates that our problem belongs to the class of problems with generalised resolvents, as mentioned in section \ref{ssec:DiffOpsOnGraphs}.
+One should note the presence of $\omega^2$ in this equation, so this is not a Kirchoff condition on the derivatives of the edge functions $u^{(jk)}$, and indicates that the problem we have arrived at is defined through an operator acting in an extended space, as mentioned in section \ref{ssec:DiffOpsOnGraphs}.
 The result of theorem \ref{thm:dddmesTangGradImplication} tells us that functions $u\in\gradSobQM{\ddom}{\dddmes}$ are also continuous at each vertex $v_j$, and thus the following problem (precisely \eqref{eq:SingularWaveEqnQGProblem}) has been derived:
 \begin{subequations}
 	\begin{align*}
@@ -61,15 +62,14 @@ The result of theorem \ref{thm:dddmesTangGradImplication} tells us that function
 	\end{align*}
 \end{subequations}
 where we henceforth drop the overhead tilde notation and simply write $u^{(jk)}$ for brevity (appealing to the obvious association between $u^{(jk)}$ and $\tilde{u}^{(jk)}$).
-As will be made clear in the discussion that follows, the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem} is much easier to handle both analytically and numerically thanks to the utility of the $M$-matrix.
+As will be made clear in the discussion that follows, the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem} is much easier to handle (than \eqref{eq:SingularScalarWaveEqn}) analytically and numerically thanks to the utility of the $M$-matrix.
 
 Now that we have obtained the system \eqref{eq:SingularWaveEqnQGProblem}, we can affirm our interpretation of the coupling constants $\alpha_j$ as the (limit of the) ratio of vertex volume $V_{\mathrm{vertex}}$ to edge volume $V_{\mathrm{edge}}$ that was described in section \ref{ssec:Intro-ThinStructures}.
-As can clearly be seen from \eqref{eq:SingularWaveEqnQGProblem-3}, when $\alpha_j$ is non-zero and finite, we obtain a non-classical Kirchoff conditions between the incoming (normal) derivatives into the vertex $v_j$.
-This is precisely the boundary condition we would obtain in the limiting problem for the corresponding thickened graph, provided the ratio $\frac{V_{\mathrm{vertex}}}{V_{\mathrm{edge}}}\rightarrow\alpha_j$ as the thickness of the graph tended to zero.
+As can clearly be seen from \eqref{eq:SingularWaveEqnQGProblem-3}, when $\alpha_j$ is non-zero and finite, we obtain Wentzell conditions between the incoming derivatives to the vertex $v_j$.
+This is precisely the boundary condition we would obtain in the zero-thickness limit for the (Neumann) Laplacian on a thickened graph, provided the ratio $\frac{V_{\mathrm{vertex}}}{V_{\mathrm{edge}}}\rightarrow\alpha_j$ as the thickness of the structure tended to zero.
 Moreover, notice that if $\alpha_j=0$ in \eqref{eq:SingularWaveEqnQGProblem-3}, we obtain an exact Kirchoff condition at the vertex $v_j$, along with continuity of the incoming edge functions --- precisely the case when $V_{\mathrm{vertex}}\ll V_{\mathrm{edge}}$.
 Finally, if one divides through by $\alpha_j$ in \eqref{eq:SingularWaveEqnQGProblem-3} and takes a formal limit as $\alpha_j\rightarrow\infty$, the resulting system imposes homogeneous Dirichlet boundary conditions on the solution $u$ at $v_j$ --- corresponding to the conditions obtained in the limiting case $V_{\mathrm{vertex}}\gg V_{\mathrm{edge}}$.
-Armed with this interpretation, our consideration of singular measures also allows us to predict the limiting problems for ``non-uniform" thickened graphs.
-By this we mean a thickened graph $\mathcal{G}_{\delta}$ of $\graph$, where $V_{\mathrm{edge}}\bracs{\delta}$ is the same for every (thickened) edge, yet the volume of the thickened vertices $V_{v_j}\bracs{\delta}, v_j\in\vertSet$ changes between vertices.
+We can also predict the resulting problems of thickened graphs that possess a mixture of vertex and edge volumes; that is when a thickened graph $\mathcal{G}_{\delta}$ of $\graph$ is such that $V_{\mathrm{edge}}\bracs{\delta}$ is the same for every (thickened) edge, yet the scaling of the volume of the thickened vertices $V_{v_j}\bracs{\delta}, v_j\in\vertSet$ with $\delta$ changes between vertices.
 Letting $\alpha_j = \lim_{\delta\rightarrow0}\frac{V_{v_j}}{V_{\mathrm{edge}}}$ (where we formally allow $\alpha_j=\infty$) for each $v_j$, our consideration of singular measures and the variational problem \eqref{eq:SingularScalarWaveEqn} predicts that the resulting system will be realisable as the following quantum graph problem:
 \begin{subequations}
 	\begin{align*}
@@ -80,11 +80,11 @@ Letting $\alpha_j = \lim_{\delta\rightarrow0}\frac{V_{v_j}}{V_{\mathrm{edge}}}$ 
 		u\bracs{v_j} &= 0, \quad &\forall v_j\in\vertSet, \ \alpha_j = \infty.
 	\end{align*}
 \end{subequations}
-We also remark that, for a graph with $\alpha_j<\infty$ for every $v_j$, our approach via the $M$-matrix (section \ref{sec:ScalarDiscussion}) for determining the spectrum of the above problem remains valid.
+We also remark that, for a graph with $\alpha_j<\infty$ for every $v_j$, our approach via the $M$-matrix (section \ref{sec:ScalarDiscussion}) for determining the spectrum of the above problem can be employed.
 
 \subsection{$\tgradSob{\ddom}{\dddmes}$ and Extended Spaces} \label{ssec:ExtendedSpaces}
-As we have already discussed, the problem \eqref{eq:SingularWaveEqnQGProblem} is not a quantum graph problem \emph{per se}, in the sense that it does not correspond to the eigenvalue problem of an operator on a metric graph, but rather an operator that acts in an \emph{extended space}.
-More precisely, consider the operator $\mathcal{A}_{\mathrm{ext}}$ with domain
+As we have already discussed, the problem \eqref{eq:SingularWaveEqnQGProblem} coincides with the problems that arise in the zero-thickness limit of thin-structures.
+Indeed, the system \eqref{eq:SingularWaveEqnQGProblem} corresponds to the operator $\mathcal{A}_{\mathrm{ext}}$ that acts in the \emph{extended space}
 \begin{align*}
 	\dom\mathcal{A}_{\mathrm{ext}} 
 	&= \clbracs{ (u, \beta) \setVert u\in H^2\bracs{\graph}, \ u \text{ is continuous at each } v_j\in\vertSet, \ \beta_j=\alpha_j u(v_j) } \\
@@ -95,7 +95,7 @@ The element $\bracs{u,\beta}$ is a $\abs{\edgeSet}+\abs{\vertSet}$ ``vector" (mo
 	\begin{pmatrix} u \\ \beta \end{pmatrix}
 	&= \begin{pmatrix} \clbracs{u^{(jk)}}_{I_{jk}\in\edgeSet} \\ \clbracs{\beta_j}_{v_j\in\vertSet} \end{pmatrix}.
 \end{align*}
-With the action of $\mathcal{A}_{\mathrm{ext}}$ defined as
+The action of $\mathcal{A}_{\mathrm{ext}}$ defined as
 \begin{align*}
 	\mathcal{A}_{\mathrm{ext}} \begin{pmatrix} u \\ \beta \end{pmatrix}
 	&= 
@@ -104,12 +104,12 @@ With the action of $\mathcal{A}_{\mathrm{ext}}$ defined as
 		\clbracs{\sum_{j\con k}\bracs{ \pdiff{}{n} + \rmi\qm_{jk} }u^{(jk)}(v_j)}_{v_j\in\vertSet}
 	\end{pmatrix},
 \end{align*}
-we recognise \eqref{eq:SingularWaveEqnQGProblem} as the spectral problem for $\mathcal{A}_{\mathrm{ext}}$.
-The space $L^2\bracs{\graph}\oplus\complex^{\abs{\vertSet}}$ is the extended space, and $\mathcal{A}_{\mathrm{ext}}$ the Strauss extension for the problem \eqref{eq:SingularWaveEqnQGProblem}.
+the space $L^2\bracs{\graph}\oplus\complex^{\abs{\vertSet}}$ is the extended space, and $\mathcal{A}_{\mathrm{ext}}$ the Strauss extension for the problem \eqref{eq:SingularWaveEqnQGProblem}.
 
-Now let us consider our space $\tgradSob{\ddom}{\dddmes}$ in light of theorem \ref{thm:CharOfSobSpaces}.
-It is clear that $\tgradSob{\ddom}{\dddmes}\cong\dom\mathcal{A}_{\mathrm{ext}}$; these spaces are not identical since $\tgradSob{\ddom}{\dddmes}$ is a set of pairs, and the $\alpha_j$ enter through the measure $\dddmes$ rather than being a part of the entries $\beta_j$ directly.
-Furthermore that $-\laplacian_{\qm}^{\dddmes}$ and $\mathcal{A}_{\mathrm{ext}}$ share the same spectrum (in light of defining the same spectral problem), and setting aside questions of solubility for the time being, a solution to the problem $\mathcal{A}_{\mathrm{ext}}u=f$ (for $f\in L^2\bracs{\graph}\oplus\complex^{\abs{\vertSet}}$) also gives rise to a solution to $-\laplacian_{\qm}^{\dddmes}u=f$ and vice-versa.
-Ultimately our approach via singular measures has resulted in the construction of the extended spaces one expects to obtain in the zero-thickness limit of thin-structure problems.
-In the context of the acoustic approximation, we already knew what kind of problem we should end up with (section \ref{ssec:Intro-ThinStructures}) and thus the corresponding extended space.
-However this also presents an opportunity for our work going forward; the non-classical Sobolev spaces and variational problems concerning them provide us with a method of defining (up to isomorphism) the spaces and problems that may correspond to the --- presently unknown --- ``limits" of other thin-structure problems.
+It is clear that the operators $\mathcal{A}_{\mathrm{ext}}$ and $-\laplacian_{\dddmes}^{\qm}$ possess the same spectrum and eigenfunctions, by virtue of theorem \ref{thm:CharOfSobSpaces}.
+Now let $f\in L^2\bracs{\graph}\oplus\complex^{\abs{\vertSet}} \cong \ltwo{\ddom}{\dddmes}$.
+Setting aside questions of solubility for the time being, a solution to the problem $\mathcal{A}_{\mathrm{ext}}u=f$ is also guaranteed to provide a solution to $-\laplacian_{\qm}^{\dddmes}u=f$ and vice-versa through this theorem.
+The converse also assured upon realising the problem $-\laplacian_{\qm}^{\dddmes}u=f$ can be written in the form \eqref{eq:SingularWaveEqnQGProblem}\footnote{The fact that $f\in\ltwo{\ddom}{\dddmes}$ is important here, as it provides enough regularity for $u$ to be an element of $H^2\bracs{\graph}$.}, except replacing $\omega^2 u$ with $f$ in \eqref{eq:SingularWaveEqnQGProblem-1} and $\omega^2\alpha_j u(v_j)$ with $\alpha_j f(v_j)$ in \eqref{eq:SingularWaveEqnQGProblem-3}.
+Our approach via singular measures has resulted in the immediate construction of the extended space \emph{and corresponding operator} one obtains in the zero-thickness limit of thin-structure problems.
+Within the context of the acoustic approximation we already knew what these limits where, however our original formulation provides a method of defining this limiting problem by appealing to the geometry.
+This also presents an opportunity we look to investigate going forward; the non-classical Sobolev spaces and variational problems provide us with a method of defining (up to isomorphism) the spaces and problems that may correspond to the --- presently unknown --- ``limits" of other thin-structure problems.

@@ -1,33 +1,36 @@
 \section{General formula for the $M$-matrix of a finite period graph} \label{sec:ScalarDiscussion}
 Having obtained the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem}, we turn our attention to determining the eigenvalues $z := \omega^2$.
-The advantage of \eqref{eq:SingularWaveEqnQGProblem} over working directly with \eqref{eq:SingularScalarWaveEqn} is that we can now use the $M$-matrix (introduced in section \ref{ssec:MMatrix}) as a tool in our analysis.
-In this section we contextualise the theory introduced in section \ref{ssec:MMatrix}, showing how it is employed for studying the spectrum of \eqref{eq:SingularWaveEqnQGProblem} and thus $\sigma\bracs{-\laplacian_{\dddmes}^{\qm}}$.
-In doing so, we provide a general formula for the $M$-matrix in terms of the underlying (period) graph on which \eqref{eq:SingularWaveEqnQGProblem} is posed.
-We will follow up on this in section \ref{sec:ScalarExamples}, where we provide some explicit examples of quantum graph problems that can be solved by employing the $M$-matrix in the manner discussed below.
+In this section we contextualise the theory introduced in section \ref{ssec:MMatrix}, showing how it is employed for studying $\sigma\bracs{-\laplacian_{\dddmes}^{\qm}}$.
+Our key result will be the provision of an explicit formula for (the entries of) the $M$-matrix in terms of the underlying (period) graph on which \eqref{eq:SingularWaveEqnQGProblem} is posed.
+We will follow up on this in section \ref{sec:ScalarExamples}, where we provide some explicit examples of quantum graph problems whose spectra can be determined through the study of the $M$-matrix.
 
-One will note that only $\alpha_j$ appears in the Robin-like condition in \eqref{eq:GraphLaplacianExample}, but $\alpha_j\omega^2$ is present on the right hand side of \eqref{eq:SingularWaveEqnQGProblem}.
+One will note that only $\alpha_j$ appears in the Wentzell condition in \eqref{eq:GraphLaplacianExample}, but $\alpha_j\omega^2$ is present on the right hand side of \eqref{eq:SingularWaveEqnQGProblem}.
 As was raised in section \ref{ssec:Intro-ThinStructures}, the problem \eqref{eq:SingularWaveEqnQGProblem} belongs to the class of problems with generalised resolvents.
 In section \ref{ssec:MMatrix} we introduced the $M$-matrix in a more familiar setting, with no $\omega^2$-dependence in the vertex conditions.
-However the analysis of the spectrum of $-\laplacian_{\dddmes}^{\qm}$ can be carried by replacing the matrix $B$ (in section \ref{ssec:MMatrix}) with $\omega^2 B$, as will be done in section \ref{ssec:MMatrixConsequences}.
-Justification lies in the observation that introducing explicit $\omega^2$-dependence should not affect the (structure of) the arguments in the supporting theory (see \cite[page 1846]{cherednichenko2018effective}, concerning the results of \cite{ryzhov2009weyl} \tstk{check with Kirill - are there other works that are more directly applicable that could be adapted?}), and consequentially we should be able to draw the same conclusions with this ``alteration" to $B$.
-We do remark here though that a formal argument to justify methodology based on the $M$-matrix and boundary triples (in the context of generalised resolvents) has not been carried out in the literature --- it remains open to investigation, but would closely follow and resemble arguments that are already available.
+However the analysis of the spectrum of $-\laplacian_{\dddmes}^{\qm}$ can be carried by replacing the matrix $B=-\alpha$ (in section \ref{ssec:MMatrix}) with $\omega^2 B$, as will be done in section \ref{ssec:MMatrixConsequences}.
+Justification lies in the observation that introducing explicit $\omega^2$-dependence should not affect the (structure of) the arguments in the supporting theory (see \cite[page 1846]{cherednichenko2018effective}, concerning the results of \cite{ryzhov2009weyl} \tstk{check with Kirill - are there other works that are more directly applicable that could be adapted?}), and consequentially similar conclusions can be drawn with this alteration to $B$.
+However we highlight that a formal presentation of these arguments has not been conducted in the literature, and remains open.
 If one has reservations about this ``gap" in the available theory, an alternative to analysing a problem with generalised resolvents directly is explored in \cite[Section 6]{cherednichenko2017norm}.
 One could look to transform a problem with $\omega^2$-dependent $\delta$-type vertex condition (like \eqref{eq:SingularWaveEqnQGProblem}) into a problem with $\omega^2$-independent $\delta'$-type vertex conditions.
 This comes at the cost of having to determine the appropriate (unitary) transform to apply to \eqref{eq:SingularWaveEqnQGProblem}, but the theory of section \ref{ssec:MMatrix} would apply to the transformed problem, could be used to analyse the spectrum, and then the inverse transform applied.
 
-Let $\mathcal{A}$ be the operator (on the metric graph $\graph$) that defines the problem \eqref{eq:SingularWaveEqnQGProblem}, and define the Dirichlet map $\dmap$ as in \eqref{eq:GraphDNMapDef}.
-The Neumann map $\nmap$ is defined sightly differently to how it appears in \eqref{eq:GraphDNMapDef} (by virtue of our need to take a Gelfand transform), however ultimately conveys the same meaning:
+Define the (Dirichlet) map $\dmap$ as in \eqref{eq:GraphDNMapDef}.
+The action of the Neumann map $\nmap$ is defined sightly differently to how it appears in \eqref{eq:GraphDNMapDef} (by virtue of our need to take a Gelfand transform), however ultimately conveys the same meaning:
 \begin{align} \label{eq:GraphNMapQM}
-	\nmap:\dom\mathcal{A} \rightarrow \complex^{\abs{\vertSet}}, \qquad
 	\bracs{\nmap u}_j = -\sum_{j\con k} \bracs{\pdiff{}{n} + \rmi\qm_{jk} }u(v_j).
 \end{align}
-The action of $\mathcal{A}$ on each edge of $\graph$ is provided by the left-hand side of \eqref{eq:SingularWaveEqnQGProblem-1}, so the Green's identity \eqref{eq:GraphGreensIdentity} holds, and the map $u\mapsto\bracs{\dmap u, \nmap u}$ is clearly surjective onto $\complex^{\abs{\vertSet}}\times\complex^{\abs{\vertSet}}$.
-As such, we can define the $M$-matrix for the problem \eqref{eq:SingularWaveEqnQGProblem} in the manner described in section \ref{ssec:MMatrix}, and in particular know that $\omega^2$ is an eigenvalue of $-\laplacian_{\qm}^{\dddmes}$ whenever $M\bracs{\omega^2}$ possesses a zero eigenvalue.
+With these definitions, the Green's identity \eqref{eq:GraphGreensIdentity} 
+\begin{align*}
+	\ip{ -\bracs{\diff{}{y}+\rmi\qm_{jk}}^2 u }{ v }_{L^2\bracs{\graph}} - \ip{ u }{ -\bracs{\diff{}{y}+\rmi\qm_{jk}}^2 v }_{L^2\bracs{\graph}}
+	&= \ip{\nmap u}{\dmap v}_{\complex^{\abs{\vertSet}}} - \ip{\dmap u}{\nmap v}_{\complex^{\abs{\vertSet}}},
+\end{align*}
+holds, and the map $u\mapsto\bracs{\dmap u, \nmap u}$ is clearly surjective onto $\complex^{\abs{\vertSet}}\times\complex^{\abs{\vertSet}}$.
+As such, we can define the $M$-matrix for the problem \eqref{eq:SingularWaveEqnQGProblem} in the manner described in section \ref{ssec:MMatrix}, and in particular know that $\omega^2$ is an eigenvalue of $-\laplacian_{\qm}^{\dddmes}$ whenever $M\bracs{\omega^2}-\omega^2 B$ possesses a zero eigenvalue.
 In the abstract, this is not particularly helpful for explicitly determining the eigenvalues --- however the nature of the problem \eqref{eq:SingularWaveEqnQGProblem} allows us to compute the entries of $M\bracs{\omega^2}$ explicitly.
 
 \subsection{General formula for the $M$-matrix} \label{ssec:MMatrixResult}
-One of the foremost advantages of the $M$-matrix is that we can explicitly (and analytically) compute its entries for any (finite period) metric graph $\graph$ on which the system \eqref{eq:SingularWaveEqnQGProblem} is posed.
-The proposition allows for $\graph$ to possess looping edges, although this is largely for completeness because when we come to use the $M$-matrix to determine the eigenvalues of \eqref{eq:SingularWaveEqnQGProblem}, we will want to introduce \emph{artificial vertices} (section \ref{ssec:ArtificialVertices}) to break these loops.
+The relatively simple nature of the structure provided by the metric graph $\graph$, and the action on each edge of the graph, allows us to explicitly compute the entries of the $M$-matrix.
+The proposition we present allows for $\graph$ to possess looping edges, although this is largely for completeness because we will want to introduce \emph{artificial vertices} (section \ref{ssec:ArtificialVertices}) to break these loops.
 The following proposition provides the entries of the $M$-matrix.
 \begin{prop}[$M$-matrix entries] \label{prop:M-MatrixEntries}
 	Let $\graph=\bracs{\vertSet,\edgeSet}$ be an embedded graph on which the problem \eqref{eq:SingularWaveEqnQGProblem} is posed.
@@ -93,16 +96,12 @@ Also recall the convention for summing over $j\con k$:
 		-\lim_{x\rightarrow0}\bracs{\bracs{u^{(jj)}}'+i\qm_{jj}u^{(jj)}}(x) + \lim_{x\rightarrow l_{jj}} & \bracs{\bracs{u^{(jj)}}'+i\qm_{jj}u^{(jj)}}(x) \\
 		&\qquad = 2\omega\bigl( \cot\bracs{\omega l_{jj}} - \cos\bracs{\qm_{jj}l_{jj}}\csc\bracs{\omega l_{jj}} \bigr).	
 	\end{align*}
-	We then use the formula
-	\begin{align*}
-		\bracs{\nmap u}_j &= -\sum_{j\con l} \bracs{\pdiff{}{n}+\rmi\qm_{jl}}u^{(jl)}\bracs{v_j},
-	\end{align*}
-	which yields the desired result for $\bracs{\nmap u}_j$.
+	We then use the formula \eqref{eq:GraphNMapQM} to obtain the desired result for $\bracs{\nmap u}_j$.
 	Since $M(\dmap u) = \nmap u$, and the $e_k$ are a basis for $\complex^{\abs{V}}$, we have also deduced the $k^{\text{th}}$ column of the $M$-matrix.
 \end{proof}
-Proposition \ref{prop:M-MatrixEntries} also explicitly demonstrates that the $M$-matrix (in the context of \eqref{eq:SingularWaveEqnQGProblem}) is parametrised by $\qm$, and so we shall denote it by $M_{\qm}$ henceforth.
+Proposition \ref{prop:M-MatrixEntries} also demonstrates how the $M$-matrix is parametrised by $\qm$, and so we shall denote it by $M_{\qm}$ henceforth.
 The dependence of $M_\qm$ on $\qm$ is due to our decision to specify our singular structure as an embedded, periodic metric graph and then apply the Gelfand transform (see section \ref{ssec:MMatrix}).
-In the following section, we continue our analysis of the $M$-matrix and outline how it can be used to recover the eigenvalues $z=\omega^2$ of \eqref{eq:SingularWaveEqnQGProblem}.
+In the following section, we continue our analysis of this family of $M$-matrices and how it can be used to recover the eigenvalues of \eqref{eq:SingularWaveEqnQGProblem}.
 
 \subsection{Consequences of Proposition \ref{prop:M-MatrixEntries}} \label{ssec:MMatrixConsequences}
 Whilst proposition \ref{prop:M-MatrixEntries} provides an explicit form for the entries of the $M$-matrix,  it is not the most convenient when looking for a method for determining the spectrum of \eqref{eq:SingularWaveEqnQGProblem}.
@@ -153,14 +152,14 @@ Proposition \ref{prop:M-MatrixEntries} does however show that $M_\qm$ is meromor
 The product notation should be understood analogously to the summation notation over $j\con k$ introduced in section \ref{sec:QuantumGraphs}.
 The zeros of $H^{(2)}$ exactly coincide with the poles of $M_\qm$, both $H^{(1)}_\qm$ and $H^{(2)}$ are analytic, and the matrix $H^{(1)}_\qm$ even has its entry at position $jk$ bounded (uniformly in $\omega$) by the number of (direct) connections between $v_j$ and $v_k$.
 
-Recall that (section \ref{ssec:MMatrix}) we need to determine those $z$ for which the matrix $M_\qm(z)-B(z)$ has at least one zero eigenvalue, where we have $B(z) = -z\alpha$.
+Recall that (section \ref{ssec:MMatrix}) we need to determine those $z$ for which the matrix $M_\qm(z)-B(z)$ has at least one zero eigenvalue, where we have set $B(z) = -z\alpha$.
 Now let $\beta_j^{\qm}\bracs{z}, j\in\clbracs{1,...,\abs{\vertSet}}$ denote the eigenvalue branches of the matrix $M_\qm(z)-B(z)$.
 Also set 
 \begin{align*}
 	\mathfrak{M}_\qm(z) = H^{(1)}_\qm(z) - H^{(2)}(z)B(z),
 \end{align*}
 and let $\widetilde{\beta}_j^{\qm}\bracs{z}, j\in\clbracs{1,...,\abs{\vertSet}}$ denote the eigenvalue branches of $\mathfrak{M}_\qm$.
-With the poles removed, and the entries of $\mathfrak{M}_\qm$ being continuous (even smooth on $\bracs{0,\infty}$) functions of $\omega$ and $\qm$, the $\widetilde{\beta}_j^{\qm}$ are also continuous with respect to $\omega$ and $\qm$.
+With the poles removed, and the entries of $\mathfrak{M}_\qm$ being continuous (even smooth) functions of $\omega$ and $\qm$, the $\widetilde{\beta}_j^{\qm}$ are also continuous with respect to $\omega$ and $\qm$.
 For each fixed $\qm$, the matrix $\mathfrak{M}_\qm$ is analytic and so has at least one zero eigenvalue at those $z$ for which there exists a $w\in\complex^{\abs{\vertSet}}\setminus\clbracs{0}$ such that
 \begin{align} \label{eq:QGGenEvalSolveNoPoles}
 	\mathfrak{M}_\qm\bracs{z}w = 0.
@@ -175,28 +174,29 @@ If $z_0$ solves \eqref{eq:QGGenEvalSolveNoPoles} (or equivalently \eqref{eq:QGDe
 	\lim_{z\rightarrow z_0} \beta_j^{\qm}\bracs{z} = \lim_{z\rightarrow z_0} \bracs{ H^{(2)}\bracs{z} }^{-1} \widetilde{\beta}_j^{\qm}\bracs{z} = 0
 \end{align}
 for at least one $j$ with $\widetilde{\beta}_j^{\qm}\bracs{z_0}=0$.
-Checking the limit in \eqref{eq:EigenvalueBranchLimit} is not necessary for all solutions $z_0$ to \eqref{eq:QGDetSolveCondition}; provided that $H^{(2)}\bracs{z_0}\neq 0$, which by corollary \ref{cory:M-MatrixEntriesNoPoles} occurs when
+Checking the limit in \eqref{eq:EigenvalueBranchLimit} is not necessary for all solutions $z_0$ to \eqref{eq:QGDetSolveCondition}; indeed it is only necessary when $H^{(2)}\bracs{z_0} = 0$, which by corollary \ref{cory:M-MatrixEntriesNoPoles} occurs when
 \begin{align} \label{eq:H2ZerosEqn}
-	z_0 \neq \bracs{ \frac{n\pi}{l_{jk}} }^2, \quad j\conLeft k, \ n\in\naturals_{0},
+	z_0 = \bracs{ \frac{n\pi}{l_{jk}} }^2, \quad j\conLeft k, \ n\in\naturals_{0},
 \end{align}
-the limit in \eqref{eq:EigenvalueBranchLimit} is clearly zero and so $z_0$ belongs to the spectrum of \eqref{eq:SingularWaveEqnQGProblem}.
+which is a countable set of isolated points.
 As we will discuss in section \ref{ssec:ApproachConsiderations}, one may be able to circumvent checking the limit \eqref{eq:EigenvalueBranchLimit} by exploiting \eqref{eq:TP-DenseQMSubsetSuffices}.
 Considerations concerning which of the two equations \eqref{eq:QGGenEvalSolveNoPoles} or \eqref{eq:QGDetSolveCondition} should be used for determining the spectrum $\sigma_\qm$ are also discussed in section \ref{ssec:ApproachConsiderations}.
 In any event, \eqref{eq:SingularScalarWaveEqn} has now been reduced to a more accessible (family of) matrix-eigenvalue problems for $\mathfrak{M}_\qm$.
 
 \subsection{Artificial Vertices and Splitting Edges} \label{ssec:ArtificialVertices}
 As noted in section section \ref{ssec:MMatrix}, it is required that the underlying graph $\graph$ contains no looping edges and has all edge-lengths pairwise irrationally-related.
-Failure to ensure that this condition is met may result in the ``loss" of certain eigenvalues when using the $M$-matrix to determine the spectrum of \eqref{eq:SingularWaveEqnQGProblem} --- these are highlighted explicitly in section \ref{ssec:Example1DLoop}.
-Of course, the graphs motivated by physical applications generally do not adhere to these restrictions, so it is necessary to introduce \emph{artificial} or \emph{dummy} vertices.
-These artificial vertices split edges of the original graph, removing any loops and ensuring all (new) edges have irrationally-related lengths.
+Failure to ensure that this condition is met results in the ``loss" of certain eigenvalues when using the $M$-matrix to determine the spectrum of \eqref{eq:SingularWaveEqnQGProblem} --- these are highlighted explicitly in section \ref{ssec:Example1DLoop}.
+Of course, the graphs motivated by physical applications generally do not adhere to these restrictions --- typically being highly symmetric or and potentially consisting of loops.
+It is thus necessary to introduce \emph{artificial vertices} (or \emph{dummy vertices}) to split the edges of the original graph, removing any loops and ensuring all (new) edges have irrationally-related lengths.
 
-Introducing an artificial vertex to split an edge is as intuitive as it sounds --- suppose $\graph=\bracs{\vertSet, \edgeSet}$ and one wishes to split the edge $I_{jk}$ (where it may be the case that $j=k$).
+Introducing an artificial vertex to split an edge is as intuitive as it sounds.
+Suppose $\graph=\bracs{\vertSet, \edgeSet}$ and one wishes to split the edge $I_{jk}$ (where it may be the case that $j=k$ and we have a loop).
 Place a vertex $v_l$ at some point along the edge $I_{jk}$, and replace $I_{jk}$ with the edges $I_{jl}$ and $I_{lk}$, to obtain a new graph $\graph^*$.
-The total length of the edges must be preserved, so $l_{jk} = l_{jl} + l_{lk}$, but the lengths of the new edges should be chosen in accordance with the requirements above in mind.
+The total length of the edges must be preserved, so $l_{jk} = l_{jl} + l_{lk}$, but the lengths of the new edges should be chosen bearing in mind the aforementioned requirements.
 Furthermore, a zero coupling constant should be placed at the artificial vertex $v_l$ --- this ensures matching of the solution $u$ and its derivative at the artificial vertex, as would have been the case along the original edge if it had not been split.
-The quasi-momentum parameters should also satisfy $\qm_{jl}=\qm_{lk}=\qm_{jk}$ (although this is a by-product of having straight edges, see assumption \ref{ass:MeasTheoryProblemSetup}).
+The quasi-momentum parameters should also satisfy $\qm_{jl}=\qm_{lk}=\qm_{jk}$ (although this is a by-product of having straight edges, see assumption \ref{ass:MeasTheoryProblemSetup}), and the direction of the original edge should be preserved.
 This ensures (via \eqref{eq:SingularWaveEqnQGProblem-2} and \eqref{eq:SingularWaveEqnQGProblem-3}) that any eigenvalues $\omega^2$ of \eqref{eq:SingularWaveEqnQGProblem} on $\graph^*$ are also eigenvalues of \eqref{eq:SingularWaveEqnQGProblem} on $\graph$, with the eigenfunction $u^{(jk)}$ being related to $u^{(jl)}$ and $u^{(lk)}$ in the obvious manner.
-This process can be iterated, splitting edges iteratively to remove rational-relations between edge lengths, and any loops themselves.
+This process can be executed iteratively, splitting edges to remove rational-relations between edge lengths and any loops.
 Doing so means that any graph representing a singular-structure can now be treated in the manner described in section \ref{ssec:MMatrixConsequences}.
 
 \subsection{Considerations for the Approach to Solving \eqref{eq:QGGenEvalSolveNoPoles} or \eqref{eq:QGDetSolveCondition}} \label{ssec:ApproachConsiderations}

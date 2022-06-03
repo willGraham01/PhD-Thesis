@@ -25,7 +25,7 @@ A directed graph $\graph=\bracs{\vertSet, \edgeSet}$ is embedded into $\reals^d$
 	We drop the distinction between $I_{jk}$ and $\gamma_{jk}$, using $I_{jk}$ for both.
 \end{itemize}
 Clearly an embedded graph gives rise to a metric graph, and a metric graph can be assigned an embedding to construct an embedded graph --- although in general there is more than a one choice of embedding to do this, as we will touch on at the end of section \ref{sec:QuantumGraphs}.
-The choice of $\reals^2$ is simply to cover the situations that we will later want to consider, and there are more general definitions for the embedding depending on the space into which the graph is to be embedded.
+The choice of $\reals^d$ is simply to cover the situations that we will later want to consider, and there are more general definitions for the embedding depending on the space into which the graph is to be embedded.
 
 Our choice to embed (metric) graphs into $\reals^d$ is both a convenient way to represent the singular structures we want to examine (see section \ref{sec:TP-DomainSetup}), and allows us to define what it means for a graph to be periodic rather intuitively.
 For a unit vector $x\in\reals^d$, an embedded graph is said to be \emph{$T$-periodic} in the direction $x$ if it is invariant under the translation $Tx$ applied to its vertices and edges --- in what follows, we always refer to the minimal such $T>0$ (the \emph{period}) for a given $x\in\reals^d$.
@@ -127,7 +127,8 @@ so for example
 	\sum_{j\con k}u^{(jk)}\bracs{v_j} &= \sum_{j\conLeft k}u^{(jk)}\bracs{v_j} + \sum_{j\conRight k}u^{(kj)}\bracs{v_j}.
 \end{align*}
 If there are multiple edges $I_{jk}^l$ connecting two vertices, these sums are interpreted as running over all such edges.
-It is also worth noting that the function spaces \eqref{eq:GraphFuncSpaces} do not convey any information about the connectivity of $\graph$ in themselves --- indeed it is not even necessary for the traces of the edge functions $u^{(jk)}$ of $u\in H^1\bracs{\graph}$ to match at a common vertex. 
+It is also convenient to introduce notation for the junction of a vertex $v_j\in\vertSet$: let $J\bracs{v_j}$ denote the \emph{collection of connecting edges} to $v_j$, $J\bracs{v_j} = \clbracs{I_{jk} \setVert j\con k}$ and $\mathcal{J}\bracs{v_j}$ the \emph{junction region} $\mathcal{J}\bracs{v_j}=\bigcup_{J(v_j)}I_{jk}$.
+The function spaces \eqref{eq:GraphFuncSpaces} do not convey any information about the connectivity of $\graph$ in themselves --- indeed it is not even necessary for the traces of the edge functions $u^{(jk)}$ of $u\in H^1\bracs{\graph}$ to match at a common vertex. 
 The connectivity of $\graph$ is introduced through the definition of the (domains of the) differential operators on such graphs, which we introduce now.
 
 \subsection{Differential operators on graphs} \label{ssec:DiffOpsOnGraphs}

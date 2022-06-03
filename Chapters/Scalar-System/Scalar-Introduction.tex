@@ -1,26 +1,30 @@
 \section{Chapter Introduction} \label{sec:ScalarEqnChapterIntro}
-This chapter aims to provide a concrete introduction to variational problems on singular structures, and their link to the quantum graph problems that arise in the asymptotic limit of thin structures as the thickness shrinks to zero.
-We will concern ourselves with the study of the acoustic equation on a singular structure, and the corresponding non-classical Sobolev spaces of functions possessing gradients with respect to the measure $\dddmes$.
-By understanding this function space we will be able to derive a quantum graph problem, or more precisely an operator that acts on an extended space whose spectral problem is realisable as a quantum graph problem, from our original variational problem.
-This will solidify the link between our variational problems and the limits of thin structure problems as discussed in section \ref{ssec:Intro-ThinStructures}, with our non-classical Sobolev spaces forming the natural ``extended" spaces, and providing us with a springboard for our work in the later chapters \ref{ch:CurlCurl} and \ref{ch:SingInc}.
+This chapter aims to provide a concrete introduction to variational problems on singular structures, and their link to the quantum graph problems that arise in the zero-thickness limit of thin structures under geometric contrast between the vertex and edge volumes (section \ref{ssec:Intro-ThinStructures}).
+We will concern ourselves with the study of the acoustic equation on a singular structure, and the corresponding non-classical Sobolev spaces $\tgradSob{\ddom}{\dddmes}$, where $\ddom$ is the period cell of a periodic, embedded graph.
+By understanding this function space we will be able to derive a quantum graph problem --- or more precisely an operator that acts on an extended space whose spectral problem is realisable as a quantum graph problem --- from our original variational problem.
+This will solidify the link between our variational problems and the existing results concerning the convergence of thin structure problems \cite{kuchment2001convergence, kuchment2003asymptotics, exner2005convergence, post2012spectral} in the zero thickness limit.
+Our non-classical Sobolev spaces will naturally form the extended spaces, and their construction provides us with a springboard for our work in the later chapters \ref{ch:CurlCurl} and \ref{ch:SingInc}.
 We will then turn our attention to the use of the $M$-matrix to analyse the spectrum of the resulting quantum graph problems, providing an explicit formula for its entries.
 We shall conclude with an examination of some specific singular structure geometries, complimenting some of the discussion points in sections \ref{ssec:MMatrix} and \ref{sec:ScalarDiscussion}.
 
 Let us now formulate the problem that we wish to consider.
-Let $\tgradSob{\ddom}{\dddmes}$ be the non-classical Sobolev space introduced in section \ref{sec:BorelMeasSobSpaces}, and let $\graph=\bracs{\vertSet, \edgeSet}$ be the period graph of a (periodic) metric graph embedded into $\reals^2$, with unit cell $\ddom\subset\reals^2$, in accordance with the notation and setup of section \ref{sec:TP-DomainSetup}.
+Let $\tgradSob{\ddom}{\dddmes}$ be the non-classical Sobolev space introduced in section \ref{sec:BorelMeasSobSpaces}, and let $\graph=\bracs{\vertSet, \edgeSet}$ be the period graph of a (periodic) metric graph $\hat{\graph}$ embedded into $\reals^2$, with unit cell $\ddom\subset\reals^2$, in accordance with the notation and setup of section \ref{sec:TP-DomainSetup}.
 In this chapter, we will concern ourselves with the analysis of the \emph{acoustic equation}\footnote{In order to avoid sounding monotonous in the text, we will also refer to \eqref{eq:SingularScalarWaveEqn} as the \emph{wave equation}.}
 \begin{align} \label{eq:SingularScalarWaveEqn}
 	-\laplacian_{\dddmes}^{\qm} u = \omega^2 u, \quad\text{in } \ddom,
 \end{align}
 where $u\in\tgradSob{\ddom}{\dddmes}$.
-A detailed study of the functions that lie in the space $\tgradSob{\ddom}{\dddmes}$ is left to section \ref{sec:3DGradSobSpaces}, however we provide a geometric interpretation of the gradients of zero and tangential gradients $\tgrad_{\dddmes}u$ in section \ref{ssec:3DGradGeometric}.
+We perform a detailed study of the functions that lie in the space $\tgradSob{\ddom}{\dddmes}$ in section \ref{sec:3DGradSobSpaces}.
+In the interest of presenting a consistent narrative of the work conducted, but also not wanting to disrupt this with a large technical section, we move this analysis to the end of the chapter. but provide However we provide a geometric interpretation of the gradients of zero and tangential gradients $\tgrad_{\dddmes}u$ in section \ref{ssec:3DGradGeometric}.
 Perhaps a more pressing issue is that we must provide a suitable definition for the problem \eqref{eq:SingularScalarWaveEqn}; to this end we interpret \eqref{eq:SingularScalarWaveEqn} as the problem of finding $u\in\tgradSob{\ddom}{\dddmes}\setminus\clbracs{0}$, $\omega>0$, such that
 \begin{align} \label{eq:SingularScalarWaveEqn-VariationalForm}
 	\integral{\ddom}{ \tgrad_{\dddmes}u\cdot\overline{\tgrad_{\dddmes}\phi} }{\dddmes}
 	&= \omega^2 \integral{\ddom}{ u\overline{\phi} }{\dddmes},
 	\qquad\forall\phi\in\psmooth{\ddom}.
 \end{align}
-Our concern is predominantly the ``spectral" problem \eqref{eq:SingularScalarWaveEqn} defined through \eqref{eq:SingularScalarWaveEqn-VariationalForm}, however with the knowledge (from section \ref{sec:BorelMeasSobSpaces}) that $\tgradSob{\ddom}{\dddmes}$ is a Hilbert space, we can consider defining the ``operator" $-\laplacian_{\qm}^{\dddmes}$.
+Notice that this is a direct analogue of the weak formulation for the Neumann Laplacian, except we now consider the gradients and measures that respect our singular structures, rather than the standard weak derivatives and Lebesgue integrals.
+
+Although our concern is predominantly the ``spectral" problem \eqref{eq:SingularScalarWaveEqn} defined through \eqref{eq:SingularScalarWaveEqn-VariationalForm}, however with the knowledge (from section \ref{sec:BorelMeasSobSpaces}) that $\tgradSob{\ddom}{\dddmes}$ is a Hilbert space, we can consider defining $-\laplacian_{\qm}^{\dddmes}$ as an operator on $\tgradSob{\ddom}{\dddmes}$.
 Consider the bilinear form $b_{\qm}$ defined by
 \begin{align*}
 	\dom\bracs{b_{\qm}} &= \tgradSob{\ddom}{\dddmes}\times\tgradSob{\ddom}{\dddmes}, \\
@@ -42,9 +46,9 @@ So (by Kato's representation theorem) there exists a self-adjoint operator $-\la
 %	\left. \integral{\ddom}{ \tgrad_{\dddmes}u\cdot\overline{\tgrad_{\dddmes}v} }{\dddmes} = \integral{\ddom}{ f\overline{v}}{\dddmes}, \quad \forall v\in\tgradSob{\ddom}{\dddmes} },
 \end{align*}
 with action $-\laplacian_{\dddmes}^{\qm} u = f$, with $u$ and $f$ related as in \eqref{eq:AcousticOperatorDefinition}, and the acoustic equation \eqref{eq:SingularScalarWaveEqn} is then the eigenvalue problem for this operator.
-Although we will not be concerned with the resolvent problem for the operator $-\laplacian_{\qm}^{\dddmes}$ thus defined, our ability to define such an operator in lieu of our understanding of the space $\tgradSob{\ddom}{\dddmes}$ will be relevant when we come to the discussion in section \ref{ssec:ExtendedSpaces}.
+Although we will not be particularly concerned with the solution of the resolvent problem for $-\laplacian_{\qm}^{\dddmes}$ thus defined, our ability to define such an operator in lieu of our understanding of the space $\tgradSob{\ddom}{\dddmes}$ will be relevant when we come to the discussion in section \ref{ssec:ExtendedSpaces}.
 
-Recall the periodic graph $\hat{\graph}$ and measure $\upsilon$ from section \ref{sec:TP-DomainSetup}.
+Recall the measure $\upsilon$ from section \ref{sec:TP-DomainSetup} for $\hat{\graph}$.
 We can follow a similar construction to define the operator $-\laplacian_{\upsilon}$ on $\gradSob{\reals^2}{\upsilon}$, using the form
 \begin{align*}
 	\integral{\reals^2}{ \grad_{\upsilon}u\cdot\overline{\grad_{\upsilon}v} }{\upsilon},
@@ -54,8 +58,7 @@ Through the use of a Gelfand transform (and via passage through approximating se
 \begin{align*}
 	\sigma\bracs{ -\laplacian_{\upsilon} } &= \bigcup_{\qm\in[-\pi,\pi)^2} \sigma\bracs{ -\laplacian_{\dddmes}^{\qm} }.
 \end{align*}
-That is to say, we are studying the spectrum of the periodic operator $-\laplacian_{\upsilon}$ on $\reals^d$ --- the analogue of the acoustic equation for our singular structure domain --- through the family of operators $-\laplacian_{\dddmes}^{\qm}$ defined on periodic functions with domain $\ddom$.
-Each member of this family is defined on a space of functions with a compact domain, so provided they are (uniformly) elliptic they will each posses discrete eigenvalues, and we can obtain dispersion branches as detailed in section \ref{sec:TP-GelfandTransform}.
+Each fibre $-\laplacian_{\dddmes}^{\qm}$ is defined on a space of functions with a compact domain, so provided they are (uniformly) elliptic they will each posses discrete eigenvalues, and we can obtain dispersion branches as detailed in section \ref{sec:TP-GelfandTransform}.
 It will be clear from both our examples and the derived quantum graph problem that this is the case for the operators $-\laplacian_{\dddmes}^{\qm}$.
 
 Further to this point, in section \ref{sec:ScalarDerivation} we demonstrate that solutions to \eqref{eq:SingularScalarWaveEqn} satisfy the following quantum graph problem:
@@ -71,8 +74,10 @@ Note that \eqref{eq:SingularWaveEqnQGProblem} is a realisation of an operator th
 As such, section \ref{ssec:ExtendedSpaces} will also make explicit the link between our variational formulation and the Strauss extension for the problem \eqref{eq:SingularWaveEqnQGProblem}.
 
 Having derived \eqref{eq:SingularWaveEqnQGProblem} and made the connection between its extension and our starting variational problems, we move on to how one can analyse the spectrum of such problems (both analytically and numerically).
-This culminates in section \ref{sec:ScalarDiscussion} with an explicit expression for the $M$-matrix of \eqref{eq:SingularWaveEqnQGProblem}, opening a discussion into the methodology and considerations for using it to analyse the spectrum of \eqref{eq:SingularWaveEqnQGProblem}, which we then employ in section \ref{sec:ScalarExamples}, before concluding.
-At the end of this chapter we will have an understanding of the relationship between our variational problems with respect to singular measures and quantum graph problems of generalised resolvent type, and the considerations one needs to make when defining derivatives on such structures.
-This will form the basis from which we develop our framework for handling the analogues of the curl and divergence operator on singular-structures, naturally bringing us towards the analysis of the curl-of-the-curl equation in chapter \ref{ch:CurlCurl} and an investigation into the first-order Maxwell system.
-Furthermore, our understanding of tangential gradients will be invaluable to our analysis in chapter \ref{ch:SingInc}, when we consider a singular structure surrounded by a bulk material.
-We will also have reviewed the use of the $M$-matrix as a tool for analysing the spectrum of the resulting quantum graph problems, providing access numerically to the spectrum of our starting singular structure problem.
+This culminates in section \ref{sec:ScalarDiscussion} with an explicit expression for the $M$-matrix of \eqref{eq:SingularWaveEqnQGProblem}, opening a discussion into the methodology and considerations for using it to analyse the spectrum of \eqref{eq:SingularWaveEqnQGProblem}.
+We then employ this approach in section \ref{sec:ScalarExamples}, where we will explicitly examine the spectrum of some particular singular structures, chosen to compliment the discussion points raised in section \ref{sec:ScalarDiscussion}.
+
+At the end of this chapter we will have a detailed understanding of the function spaces one needs to work on when considering singular structures, an understanding of the relationship between our variational problems with respect to singular measures the systems describing zero-thickness limits of thin structures.
+This will form the basis from which we develop our framework for the curl and divergence of vector fields on singular-structures, naturally bringing us towards the analysis of the curl-of-the-curl equation in chapter \ref{ch:CurlCurl} and further considerations for investigation of the first-order Maxwell system.
+Furthermore, our understanding of tangential gradients will be invaluable to our analysis in chapter \ref{ch:SingInc}, when we consider a singular structure surrounded by a background material.
+We will also have reviewed the use of the $M$-matrix as a tool for analysing the spectrum of the resulting quantum graph problems, providing access numerically to the spectrum of our original singular structure problem.
