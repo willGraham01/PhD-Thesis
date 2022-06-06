@@ -1,40 +1,45 @@
 \section{Concluding Remarks} \label{sec:Scalar-Conc}
-The work of this chapter provides us with a concrete foundation upon which to build, as we turn our attention towards extensions to systems of vector equations on singular structures (chapter \ref{ch:CurlCurl}), taking us closer to an analogue of the Maxwell system.
-The analysis of section \ref{sec:3DGradSobSpaces} provides us with an understanding, both intuitively and rigorously, of the derivative-like objects that our variational problem requires us to work with.
-We have seen that gradients of zero emerge due to our singular measures inability to determine the behaviour of functions on $\ddom$ outside $\graph$, and that the tangential gradient corresponds to the 1 dimensional analogue of the gradient --- the derivative --- directed along each of the edges of $\graph$.
-This is an expected behaviour; the singular measure $\dddmes$ only respects 1 dimensional lengths along $\graph$, effectively throwing away the information in the direction normal to the edges of $\graph$, and as a result the 2 dimensional gradient is replace with the 1 dimensional tangential gradient.
-Whilst for gradients this one-dimensional analogue is fairly easy to accept intuitively, note that there is no such analogue for the curl (or divergence) operator acting on a vector field.
-However, the analysis of $\ktgradSob{\ddom}{\dddmes}$ has also provided us with the method to identify what the analogous tangential curls (and notions of divergence) should be, which will be the focus of section \ref{sec:CC-CurlAnalysis}.
-Our knowledge of $\ktgradSob{\ddom}{\dddmes}$ will also prove valuable in chapter \ref{ch:SingInc}, when we reintroduce the ``background" material that surrounds the graph $\graph$.
+The work of this chapter provides us with a foundation to build upon, as we turn our attention towards problems motivated by the equations of electromagnetism and towards domains that better reflect composite materials.
 
-Section \ref{sec:ScalarDerivation} establishes the link between the singular structure problem \eqref{eq:SingularScalarWaveEqn} and the class of problems that emerge from thin-structure problems in the limit that the structure becomes singular, with the coupling constants $\alpha_j$ taking on the role of the ratio of vertex-to-edge volumes (see section \ref{ssec:Intro-ThinStructures}).
-We also observed how the space $\tgradSob{\ddom}{\dddmes}$ allows us to construct these ``limiting" problems as the realisation of a self-adjoint operator ($-\laplacian_{\dddmes}^{\qm}$), defined through a bilinear form motivated by analogy with the ``weak formulation" of the classical acoustic equation.
-Maintaining this analogy will be the reason behind the variational problems we will later consider in chapters \ref{ch:CurlCurl} and \ref{ch:SingInc}.
+Our analysis in section \ref{sec:3DGradSobSpaces} provides us with an understanding, both intuitively and rigorously, of the gradient-like objects that our variational problem requires us to work with.
+We have seen that gradients of zero emerge due to our singular measures inability to determine the behaviour of functions on $\ddom$ outside $\graph$, and that the tangential gradient corresponds to the derivative -- the one dimensional analogue of the gradient --- directed along each of the edges of $\graph$.
+This is an intuitive and expected behaviour; the singular measure $\dddmes$ only respects one dimensional lengths along $\graph$, effectively throwing away the information in the direction normal to the edges of $\graph$, and as a result the two dimensional gradient is replaced with the (essentially) one dimensional tangential gradient.
+For gradients this one-dimensional analogue is fairly easy to accept, however there is no such analogue for the curl (or divergence) operator acting on a vector field.
+That being said, the analysis of $\ktgradSob{\ddom}{\dddmes}$ has also provided us with the method to employ in identifying what the notion of curl (and to an extent divergence) should be, which will be the focus of section \ref{sec:CC-CurlAnalysis}.
+Our knowledge of $\ktgradSob{\ddom}{\dddmes}$ will also prove valuable in chapter \ref{ch:SingInc}, when we reintroduce the background material that surrounds the graph $\graph$.
+
+Section \ref{sec:ScalarDerivation} establishes the link between the singular structure problem \eqref{eq:SingularScalarWaveEqn} and the class of problems that emerge in the zero-thickness limit of thin structures.
+The coupling constants $\alpha_j$ take on the role of the ratio of vertex-to-edge volumes (see section \ref{ssec:Intro-ThinStructures}), that is the parameters quantifying the geometric contrast in the thin structures.
+We also observed how the space $\tgradSob{\ddom}{\dddmes}$ allows us to define operators ($-\laplacian_{\dddmes}^{\qm}$) corresponding to these limiting problems, through bilinear forms motivated by analogy with the weak formulation of the classical acoustic equation.
+Both the construction of $\tgradSob{\ddom}{\dddmes}$ and the variational problem \eqref{eq:SingularScalarWaveEqn} were motivated by the simplicity of the ``visual" limit of a thin-structure and analogy with the classical acoustic approximation.
+Exploring this analogy has provided us with an effective tool for the definition of the extended spaces and operators that one obtains in this limit.
+Exploring the extent of this analogy will be the motivation behind the variational problems we will come to consider in chapters \ref{ch:CurlCurl} and \ref{ch:SingInc}; we have seen that our approach coincides with known results for the acoustic approximation on thin structures in the zero-thickness limit, and we now ask whether our approach can be used as a predictive tool for the curl of the curl problem, and for the limit of a composite material.
+
 Our derivation in section \ref{sec:ScalarDerivation} also allows us to use the theory surrounding the $M$-matrix for explicitly determining the spectrum of $-\laplacian_{\dddmes}^{\qm}$, as discussed in section \ref{sec:ScalarDiscussion}.
-It is worth reiterating that a formal analysis in the use of the $M$-matrix for the solution of problems bearing generalised resolvents has yet to be carried out (see the introduction to this chapter), although the expected procedure and conclusions are apparent.
-Here we provide an explicit expression for the $M$-matrix of \eqref{eq:SingularWaveEqnQGProblem} on any graph topology, and cover a number of considerations one might wish to take on board when using the $M$-matrix to analyse the spectrum.
-We built on our discussion with the examples of section \ref{sec:ScalarExamples}; including how one can also gain access to the eigenfunctions and (integrated) density of states (section \ref{ssec:ExampleCrossInPlane}), the necessity of artificial vertices (section \ref{ssec:Example1DLoop}), and how potential freedoms in the choice of embedding for a quantum graph do not affect the resulting spectrum (section \ref{ssec:EmbeddingDependentExample}).
+It is reiterated here that a formal analysis in the use of the $M$-matrix for the solution of problems bearing generalised resolvents has yet to be carried out (see section \ref{sec:ScalarDiscussion}).
+We have provided an explicit expression for the $M$-matrix of \eqref{eq:SingularWaveEqnQGProblem} on any finite, connected, periodic graph and discussed a number of considerations when using the $M$-matrix to analyse the spectrum.
+Our discussion points are complimented with the examples of section \ref{sec:ScalarExamples}; including how one can also gain access to the eigenfunctions and (integrated) density of states (section \ref{ssec:ExampleCrossInPlane}), the necessity of artificial vertices (section \ref{ssec:Example1DLoop}), and how potential freedoms in the choice of embedding for a quantum graph do not affect the resulting spectrum (section \ref{ssec:EmbeddingDependentExample}).
 
-Before we move on to considering systems of vector equations (chapter \ref{ch:CurlCurl} and composite domains (chapter \ref{ch:SingInc}), we highlight the possibility of extending the analysis carried out thus far to embedded graphs whose edges are not assumed to be straight line segments.
+Before we move on to considering the analogue of the curl-of-the-curl equation (chapter \ref{ch:CurlCurl} and composite domains with singular components (chapter \ref{ch:SingInc}), we highlight the possibility of extending the analysis carried out thus far to embedded graphs whose edges are not assumed to be straight line segments, and to accommodate the presence of external fields.
 
 \subsection{Extensions: Curved Edges and Potential Fields} \label{ssec:CurvedEdges}
-Our analysis has been, and in the following chapters will continue to be, carried out within the context of the standing assumptions \ref{ass:MeasTheoryProblemSetup} --- this includes the assumption that the edges of our singular structure are straight lines.
-Of course, the cross sections of physical photonic crystals are not limited to unions of straight struts, nor are the applications of quantum graphs to \tstk{introduction context, quantum wires, chemical reactions, etc}.
-With our analysis of $\gradZero{\ddom}{\dddmes}$ and $\ktgradSob{\ddom}{\dddmes}$ complete, we can predict through analogy the changes that would arise if this restriction was dropped, to help motivate any future work in this direction.
+Our analysis has been, and in the following chapters will continue to be, carried out within the context of the standing assumptions \ref{ass:MeasTheoryProblemSetup} --- this in particular enforces the edges of our singular structure are straight lines.
+However the inclusions within the periodic cross sections of physical photonic crystals, and the thin structure systems modelled by quantum graphs, are not limited to unions of straight edges.
+With our analysis of $\gradZero{\ddom}{\dddmes}$ and $\ktgradSob{\ddom}{\dddmes}$ complete, we can articulate on some of the changes to the arguments one would need to make, and the resulting changes to the realisation \eqref{eq:SingularWaveEqnQGProblem} one would obtain.
 
 To this end, let us now suppose that the edges $I_{jk}$ of our (period) graph $\graph$ are (continuous) curves in $\ddom$.
 We know that, when our graph consists of straight edges, that tangential gradients are directed along the edges $I_{jk}$ and gradients of perpendicular to the edges.
-With the change from straight edges to curved ones, nothing in this geometric understanding changes --- we should still expect tangential gradients to point ``along" the edges $I_{jk}$, for example.
-Indeed, the (now curved) edges $I_{jk}$ are still related to the intervals $\interval{l_{jk}}$, it is simply the case now that the vector $e_{jk}$ is no longer constant along $I_{jk}$.
+Nothing in this geometric understanding changes when moving from straight to curved edges --- we should still expect tangential gradients to point ``along" the edges $I_{jk}$.
+Indeed, the (now curved) edges $I_{jk}$ are still related to the intervals $\sqbracs{0,l_{jk}}$, it is simply the case now that the vector $e_{jk}$ is no longer constant along $I_{jk}$.
 However we also remark that the vector $e_{jk}$ being no longer constant means that the quasi-momentum-related terms $\qm_{jk}$ are now \emph{also} non constant.
 As such, we should expect that
 \begin{align*}
 	\tgrad_{\lambda_{jk}}u(x) = \bracs{ u_{jk}'(y) + \rmi\qm_{jk}(y) u_{jk}(y)}e_{jk}(y),
 	\qquad x = r_{jk}(y),
 \end{align*}
-where $r_{jk}:\interval{l_{jk}}\rightarrow I_{jk}$ is the (measure-preserving) parametrisation of the curve $I_{jk}$, and $e_{jk}(y) = r_{jk}'(y)$ is the direction tangential to the edge $I_{jk}$ at the point $x$, and $\qm_{jk}(y)=\qm\cdot e_{jk}(y)$.
+where $r_{jk}:\interval{l_{jk}}\rightarrow I_{jk}$ is the (measure-preserving) parametrisation of the curve $I_{jk}$, and $e_{jk}(y) = r_{jk}'(y)$ is the direction tangential to the edge $I_{jk}$ at the point $y$, and $\qm_{jk}(y)=\qm\cdot e_{jk}(y)$.
 We make these predictions not only because of the geometric interpretations we now have for tangential gradients (and gradients of zero), but because the arguments of section \ref{sec:3DGradSobSpaces} do not depend on our requirement that $I_{jk}$ be straight, \emph{except} when we come to identify the explicit form for gradients of zero and tangential gradients on our edges.
-Of course, there are likely to be some technicalities to overcome, for example the smoothness of the curves $I_{jk}$ might affect how one goes about constructing smooth approximating sequences.
+Of course there are some technicalities to overcome --- the smoothness of the curves $I_{jk}$ will affect how one goes about constructing explicit approximating sequences for determining gradients of zero, for example.
 
 Further to these expectations, one would expect to obtain a system of the form
 \begin{subequations} \label{eq:SS-QGProblemCurvedEdges}
@@ -50,15 +55,16 @@ The Green's identity still holds for the operator that defines the problem \eqre
 \begin{align*}
 	\bracs{\nmap u}_j &= \sum_{j\con k} \bracs{ \pdiff{}{n} + \rmi\qm_{jk}(v_j) }u(v_j) .
 \end{align*}
-One can thus construct the $M$-matrix for this problem and attempt to use it to analyse the spectrum, however an explicit construction is now greatly complicated by the $y$-dependence of the $\qm_{jk}$.
-The proof of proposition \ref{prop:M-MatrixEntries} relies on being able to compute the general solution to \eqref{eq:SS-QGProblemCurvedEdges-1}, which is non-trivial for general functions $\qm_{jk}(y)$.
+One can thus construct the $M$-matrix for this problem and attempt to use it to analyse the spectrum, however an explicit form for the entries is greatly complicated by the $y$-dependence of the $\qm_{jk}$.
+The proof of proposition \ref{prop:M-MatrixEntries} relies on being able to compute the general solution to \eqref{eq:SS-QGProblemCurvedEdges-1}, which is now a non-trivial task for general functions $\qm_{jk}(y)$.
 Further investigation into possible alternatives, or the viability of solving via the $M$-matrix, would be warranted.
 
-Following on from the above discussion, the system \eqref{eq:SS-QGProblemCurvedEdges} resembles that of the magnetic Schr\"{o}dinger operator on a graph --- see \cite[section 7.5.1]{berkolaiko2013introduction} --- although the coefficients $\qm_{jk}$ are not physical potentials but rather artefacts of our Gelfand transform.
-This observation brings a further generalisation to \eqref{eq:SingularScalarWaveEqn} to light, that is within immediate reach --- the introduction of (to use the terminology from the Schr\"{o}dinger context) a magnetic field $\vec{A}$ and\footnote{We can draw the immediate conclusion that $\vec{A}$ must be parallel to each edge on $I_{jk}$ by testing against gradients of zero.} potential $V$, and consideration of a variational problem such as
+Following on from the above discussion, the system \eqref{eq:SS-QGProblemCurvedEdges} resembles that of the magnetic Schr\"{o}dinger operator on a graph --- see \cite[section 7.5.1]{berkolaiko2013introduction} --- although the coefficients $\qm_{jk}$ a mixture of the geometry of our structure and the use of the Gelfand transform.
+This observation brings a further generalisation to \eqref{eq:SingularScalarWaveEqn} to light, that is within immediate reach --- the introduction of (to use the terminology from the Schr\"{o}dinger context) a magnetic field $\vec{A}$ and potential $V$, and consideration of a variational problem such as
 \begin{align*}
 	\integral{\ddom}{ \bracs{\tgrad_{\dddmes}u + \vec{A}u}\cdot \overline{\bracs{ \tgrad_{\dddmes}\phi + \vec{A}\phi}} + Vu\overline{\phi} }{\dddmes} 
 	&= \omega^2\integral{\ddom}{u\overline{\phi}}{\dddmes},
 	\qquad \forall\phi\in\psmooth{\ddom}.
 \end{align*}
-The analysis of section \ref{sec:3DGradSobSpaces} continues to provide us with a method of interpreting such a variational problem, however its realisation as a quantum graph problem will likely bear all of the challenges the previous discussion raised, if not more.
+The analysis of section \ref{sec:3DGradSobSpaces} continues to provide us with an understanding of the objects involved in this variational problem --- we can even draw the immediate conclusion that $\vec{A}$ must be parallel to each edge on $I_{jk}$ by testing against gradients of zero.
+However the method of solving such a problem will likely bear all of the challenges the previous discussion raised, if not more.

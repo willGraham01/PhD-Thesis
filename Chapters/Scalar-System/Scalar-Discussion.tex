@@ -60,7 +60,7 @@ Also recall the convention for summing over $j\con k$:
 	
 	We first write the general form of the edge solution $u^{(jk)}$ from \eqref{eq:SingularWaveEqnQGProblem-1}:
 	\begin{align} \label{eq:EdgeEqnGeneralSolution}
-		u^{(jk)} &= \e^{-\rmi\qm_{jk}t}\bracs{ C_{+}^{(jk)}\e^{-\rmi\omega x} + C_{-}^{(jk)}\e^{\rmi\omega x} },
+		u^{(jk)} &= \e^{-\rmi\qm_{jk}y}\bracs{ C_{+}^{(jk)}\e^{-\rmi\omega y} + C_{-}^{(jk)}\e^{\rmi\omega y} },
 		\quad C_{+}^{(jk)}, C_{-}^{(jk)}\in\complex.
 	\end{align}
 	Since the $M$-matrix maps $\complex^{\abs{\vertSet}}$ to $\complex^{\abs{\vertSet}}$, it is sufficient to determine its action on the canonical basis of $\complex^{\abs{\vertSet}}$.
@@ -201,33 +201,21 @@ Doing so means that any graph representing a singular-structure can now be treat
 
 \subsection{Considerations for the Approach to Solving \eqref{eq:QGGenEvalSolveNoPoles} or \eqref{eq:QGDetSolveCondition}} \label{ssec:ApproachConsiderations}
 In this section we briefly discuss some considerations for recovering the spectrum $\sigma\bracs{-\laplacian_{\upsilon}}=:\sigma$, through determination the spectra $\sigma_{\qm}:=\sigma\bracs{-\laplacian_{\dddmes}^{\qm}}$ via \eqref{eq:QGGenEvalSolveNoPoles} or \eqref{eq:QGDetSolveCondition}.
-Recall that our use of the Gelfand transform informs us that $\sigma = \bigcup_{\qm}\sigma_{\qm}$.
-We also take as a baseline that one has to hand an appropriate numerical scheme for handling the generalised eigenvalue problem \eqref{eq:QGGenEvalSolveNoPoles} (a good introduction to which can be found in \cite{guttel2017nonlinear}), and so do not delve into the details of how such an algorithm would operate.
-It is however worth mentioning that $\mathfrak{M}_\qm$ is Hermitian, from which most numerical schemes benefit.
-%\tstk{move to introduction when we first talk about band-gap spectra?}
-%There are also several known results concerning the spectra of (periodic) quantum graphs, and here we highlight those most relevant to our context. 
-%A detailed discussion of the spectral structure of (periodic) quantum graphs, including statements (and proofs) of the results cited here, can be found in \cite[Chapter 4]{berkolaiko2013introduction}.
-%We have already mentioned that it is known that $\sigma$ possesses a band-gap structure \cite[Chapter 4.3]{berkolaiko2013introduction}; there exist real numbers $a_j, b_j, j\in\naturals$ such that $\sigma = \bigcup_{j\in\naturals}\sqbracs{a_j,b_j}$.
-%%The \emph{spectral bands} are the intervals $I_j=\sqbracs{a_j,b_j}, \ j\in\naturals$, with the regions between $b_j$ and $a_{j+1}$ being referred to as \emph{spectral gaps}, where there are no eigenvalues.
-%%For this reason the points $a_j$ and $b_j$ sometimes referred to as the \emph{spectral edges}, and in general $a_j\rightarrow\infty$ as $j\rightarrow\infty$.
-%Knowing that $\sigma$ has a band-gap representation is particularly useful when attempting to use either \eqref{eq:QGGenEvalSolveNoPoles} or \eqref{eq:QGDetSolveCondition} to determine it, which we will touch on shortly.
-%%Other notable results are that $\sigma$ has no singular continuous part (\cite[Chapter 4.4]{berkolaiko2013introduction}) but may have non-empty pure-point part (\cite[Chapter 4.5]{berkolaiko2013introduction}) --- a non-empty pure-point spectrum implies the existence of a compactly supported eigenfunction for the graphs considered in this work.
-
-Using corollary \ref{cory:M-MatrixEntriesNoPoles}, the following proposition can be proved.
+%Recall that our use of the Gelfand transform informs us that $\sigma = \bigcup_{\qm}\sigma_{\qm}$.
+We take as given that one has to hand an appropriate numerical scheme for handling the generalised eigenvalue problem \eqref{eq:QGGenEvalSolveNoPoles} (a good introduction to which can be found in \cite{guttel2017nonlinear}), and so do not delve into the details of how such an algorithm would operate.
+However it is worth highlighting that $\mathfrak{M}_\qm$ is Hermitian\footnote{Our requirement that $\alpha_j>0$ is implicitly used here --- in general $\mathfrak{M}_{\qm}$ is Hermitian provided $\alpha_j\in\reals$. The $M$-matrix $M_{\qm}$ is Hermitian regardless of the values of the coupling constants.}, from which most numerical schemes benefit.
+The element-wise derivative with respect to $\omega$ is also easily computed (this derivative is required for generalised eigenvalue solvers based on Newton's method), although the resulting expressions are often cumbersome.
+If we are intent on working directly with the determinant, then we can use corollary \ref{cory:M-MatrixEntriesNoPoles} to prove the following result about its form.
 \begin{prop} \label{prop:MMatrixDetForm}
-	Given a graph $\graph = \bracs{\vertSet, \edgeSet}$ containing no loops, there exists a function $F\bracs{\qm,\omega}$ such that
+	Given a graph $\graph = \bracs{\vertSet, \edgeSet}$ containing no loops, there exists a function $F\bracs{\qm,\omega}$ that is analytic in both its arguments, such that
 	\begin{align} \label{eq:MMatrixDetForm}
 		\det\mathfrak{M}_\qm\bracs{\omega^2} = \bracs{ \omega H^{(2)}\bracs{\omega^2} }^{\abs{\vertSet}-2} F\bracs{\qm,\omega}.
 	\end{align}
-	Furthermore, $F\bracs{\qm,\omega}$ is analytic in both its arguments.
 \end{prop}
-A proof of this result can be found in section \ref{sec:ProofOfProp}, but essentially involves counting the number of times a given factor can appear in the expression for the determinant.
+A proof of this result can be found in section \ref{sec:ProofOfProp}, but is just book-keeping the number of times a given factor can appear in the expression for the determinant.
 Note that a graph with only one vertex can \emph{only} have looping edges, which must be broken via an artificial vertex to produce a graph with (at least two) vertices.
-
-The zero level set of the function $F$, that is the preimage $F^{-1}\bracs{\clbracs{0}}$, determines majority of the spectrum --- in particular, the ``width" of the spectral bands.
-More precisely, it determines $\sigma$ up to the roots of the prefactor $\bracs{ \omega H^{(2)}\bracs{\omega^2} }^{\abs{\vertSet}-2}$ in \eqref{eq:MMatrixDetForm}:
-\begin{cory}
-	Adopt the assumptions and notation of proposition \ref{prop:MMatrixDetForm}.
+We can then use proposition \ref{prop:MMatrixDetForm} to prove the following result.
+\begin{cory} \label{cory:ScalarSetInclusions}
 	Define the sets
 	\begin{align*}
 		F_0^{\qm} := \clbracs{\omega \setVert F\bracs{\qm, \omega}=0},
@@ -244,9 +232,9 @@ More precisely, it determines $\sigma$ up to the roots of the prefactor $\bracs{
 \end{cory}
 \begin{proof}
 	\begin{enumerate}[(i)]
-		\item This follows from the relation $\widetilde{\beta}_j^{\qm} = H^{(2)}\beta_j^\qm$.
-		Clearly if $\omega_0\in F_0\setminus H_0$, there exists some $\qm\in B$ such that $F\bracs{\qm,\omega_0}=0$, and so proposition \ref{prop:MMatrixDetForm} implies that $\det\mathfrak{M}_\qm\bracs{\omega_0^2}=0$.
-		So there is in particular one eigenvalue branch $\widetilde{\beta}_j^{\qm}$ with $\widetilde{\beta}_j^{\qm}\bracs{\omega_0^2}=0$, hence $\beta_j^\qm\bracs{\omega_0^2}=0$ too, so $\omega_0\in\sigma$.
+		\item This follows from the relation $\widetilde{\beta}_j^{\qm} = H^{(2)}\beta_j^\qm$ between the eigenvalue branches $\widetilde{\beta}_j^{\qm}$ of $\mathfrak{M}_{\qm}$ and $\beta_j^{\qm}$ of $M_{\qm}-B$.
+		If $\omega_0\in F_0\setminus H_0$, there exists some $\qm\in B$ such that $F\bracs{\qm,\omega_0}=0$, and so proposition \ref{prop:MMatrixDetForm} implies that $\det\mathfrak{M}_\qm\bracs{\omega_0^2}=0$.
+		So there is in particular one eigenvalue branch $\widetilde{\beta}_j^{\qm}$ with $\widetilde{\beta}_j^{\qm}\bracs{\omega_0^2}=0$, and since $\omega_0\not\in H_0$ we have $\beta_j^\qm\bracs{\omega_0^2}=0$ too, so $\omega_0\in\sigma$.
 		Conversely, if $\omega_0\in \sigma\setminus H_0$, there exists some $\qm\in B$ and an eigenvalue branch with $\beta_j^\qm\bracs{\omega_0^2}=0$.
 		Since $\omega_0\not\in H_0$, $\widetilde{\beta}_j^{\qm}\bracs{\omega_0^2}=0$ too, so $\det\mathfrak{M}_{\qm}\bracs{\omega_0^2}=0$, and thus by proposition \ref{prop:MMatrixDetForm} so is $F\bracs{\qm,\omega_0}$.
 		\item By (i), $F_0\setminus H_0 \subset \sigma$.
@@ -254,52 +242,44 @@ More precisely, it determines $\sigma$ up to the roots of the prefactor $\bracs{
 	\end{enumerate}
 \end{proof}
 Corollary \ref{cory:M-MatrixEntriesNoPoles} demonstrates that the majority of the spectrum can thus be found through examination of the function $F$.
-It is even unnecessary to check \eqref{eq:EigenvalueBranchLimit} for $\omega_0\in H_0$ provided this $\omega_0$ also lies in the closure of $F_0\setminus H_0$.
-However, all other values satisfying \eqref{eq:H2ZerosEqn} must be checked through \eqref{eq:EigenvalueBranchLimit} to determine whether the corresponding $\omega$ form part of $\sigma$.
+The preimage $F^{-1}\bracs{\clbracs{0}}$ coincides with $\sigma$ up to the roots of $H^{(2)}\bracs{\omega^2}$ --- in particular, it dictates the spectral bands.
+This also allows us to avoid manually checking the limit \eqref{eq:EigenvalueBranchLimit} at roots of $H^{(2)}\bracs{\omega^2}$ within the spectral bands --- such values are necessarily within the closure of $F_0\setminus H_0$.
+All that remains are then those $\omega_0\in F_0\setminus H_0$ that are not within $\overline{F_0\setminus H_0}$ --- a set of isolated points along the positive real line.
+Our example in section \ref{ssec:ExampleCrossInPlane} illustrates that the inclusion in (ii) can indeed be strict.
 
-Finding $\sigma$ (up to checking roots of $H^{(2)}$) now becomes a question of obtaining $F_0$ efficiently.
-There is always the ``brute-force" approach of computing $F_0^{\qm}$ for each $\qm$ (or for each $\qm$ in a suitable mesh if working numerically), and then take the union over $\qm$ to obtain $F_0$.
-However some alternatives are available if $F$ admits additional properties, however these will rely on our ability to find an analytic expression for $F$ (one is obtained in the proof of proposition \ref{prop:MMatrixDetForm}, however it is rather cumbersome to use).
+Finding $\sigma$ (up to checking isolated roots of $H^{(2)}$) now becomes a question of obtaining $F_0$ efficiently.
+There is always brute force; computing $F_0^{\qm}$ for each $\qm$ (or for each $\qm$ in a suitable mesh if working numerically), and then taking the union over $\qm$ to obtain $F_0$.
+Alternatives are available if $F$ admits additional properties, however these will rely on our ability to find an analytic expression for $F$ (one is obtained in the proof of proposition \ref{prop:MMatrixDetForm}, however it is rather cumbersome to use).
 The ideal case being when we can write $F\bracs{\qm,\omega} = F_1\bracs{\qm} - F_2\bracs{\omega}$ for continuous $F_1$ and $F_2$, then \eqref{eq:QGDetSolveCondition} implies $F_0$ can be found simply by examining
 \begin{align*}
 	\min_{\qm}\clbracs{F_1(\qm)} \leq F_2\bracs{\omega} \leq \max_{\qm}\clbracs{F_1(\qm)},
 \end{align*} 
 although such a separation of $F$ will not generally be possible.
 Of course, if an analytic expression for $F$ can be obtained, we can always then employ a root-finding algorithm to determine the set $F_0$.
-Further to this, (the proof of) proposition \ref{prop:MMatrixDetForm} informs us that an explicit expression for $F$ will be in terms of $\omega^2$, sine and cosine functions of $\omega$, and complex exponentials in $\qm$.
-Indeed, if one so chooses, $F$ can even be evaluated numerically through the formula given in section \ref{sec:ProofOfProp}.
+Further to this, (the proof of) proposition \ref{prop:MMatrixDetForm} informs us that (for each fixed $\qm$) such an expression for $F$ will be solely in terms of $\omega^2$, sine and cosine functions of $\omega$.
 
-Whilst we can discuss in the abstract methods for determining $\sigma$ through the function $F$, we should not ignore the elephant in the room concerning \emph{how practical} it is to work with the function $F$ in the first place.
-As can be seen from corollary \ref{cory:M-MatrixEntriesNoPoles}, the complexity of the entries of $\mathfrak{M}_{\qm}$ (and thus the determinant in \eqref{eq:QGDetSolveCondition} and $F$) increases as one adds additional vertices and edges.
-The complexity of the off-diagonal entries $\bracs{\mathfrak{M}_\qm}_{jk}$ depends on the number of edges between the vertices $v_j$ and $v_k$, whilst the complexity of the diagonal entries depends on the degree of the vertex $v_j$.
-Furthermore, the sparsity of $\mathfrak{M}_\qm$ depends on the number of pairs of vertices that are not (directly) connected by an edge.
-With this in mind, the ratio $\frac{\abs{\edgeSet}}{\abs{\vertSet}}$ can be a good indicator of ``how sparse" $\mathfrak{M}_\qm$ is, and how difficult $\mathfrak{M}_\qm$ will be to work with.
-If $\frac{\abs{\edgeSet}}{\abs{\vertSet}}\approx 1$, then the number of non-zero entries in any row (or column) of $\mathfrak{M}_\qm$ should be approximately 2 --- the diagonal entry plus the entry corresponding to the expected single connection of this vertex.
-At the extremes, $\frac{\abs{\edgeSet}}{\abs{\vertSet}}\approx 0$ corresponds to an almost-diagonal $\mathfrak{M}_\qm$, whilst $\frac{\abs{\edgeSet}}{\abs{\vertSet}}\approx \abs{\vertSet}$ corresponds to an almost-dense $\mathfrak{M}_\qm$.
-A sparse $\mathfrak{M}_\qm$ is efficient to work with numerically, although if $\abs{\vertSet}$ is large can still be difficult to work with analytically.
-For denser $\mathfrak{M}_\qm$, one begins to lean toward numerical schemes based on \eqref{eq:QGGenEvalSolveNoPoles}, as the expressions involved in \eqref{eq:QGDetSolveCondition} become increasingly cumbersome, and determining the function $F$ explicitly corresponding difficult.
-This leads to the colloquial rule that solving \eqref{eq:QGDetSolveCondition} (analytically) is generally manageable for graphs with a ``small number" of edges and/or vertices, whilst graphs with a large number of edges and/or vertices often warrant solution via \eqref{eq:QGGenEvalSolveNoPoles} --- ff course, the cut-off for the terms ``small number" and ``large number" will depend on the person (or program) solving the problem themselves!
-
-Another topical question worth addressing at this point is whether, given the expectation that $\sigma$ has a band-gap structure, an alternative to finding all $\omega\in F_0$ is to only compute the spectral edges $a_j, b_j$ and then reconstruct $F_0$ from them.
-It is known for (second order) periodic PDE problems that the edges of the spectrum occur at the symmetry values of the quasi-momentum --- those values of $\qm$ which correspond to the periodic and anti-periodic problems (in each axis direction) on the unit cell.
-If the above statement were true for the problem \eqref{eq:SingularWaveEqnQGProblem}, then the dimensionality of the problem of computing $F_0$ (hence $\sigma$) could be reliably reduced to determining $F_0^\qm$ for the aforementioned symmetry values of $\qm$.
-However as discussed in \cite[Chapter 4.6]{berkolaiko2013introduction}, whilst this has been experimentally observed to be true for most motivated quantum graph problems based on physical topologies, it is in fact untrue in general for (standard) quantum graph problems.
-As such, it is unlikely to be true for \eqref{eq:SingularWaveEqnQGProblem}; despite this however, \cite[Chapter 4.6]{berkolaiko2013introduction} remarks that adopting this approach of assuming the spectral edges lie at the symmetry points of the quasi-momentum doesn't often lead to errors in practice when concerned with quantum graph problems, although it is unclear why.
-The ``working hypothesis" or ``rule of thumb" is that the period graph needs to be made (very) asymmetric to move the spectral edges away from the symmetry points of the quasi-momentum, and since most physical structures of interest display symmetries in their unit cells, the statement appears to be ``true in practice".
-In our examples in section \ref{sec:ScalarExamples}, we will also see that preserving some underlying symmetries in our graphs indeed results in the symmetry values of the quasi-momentum being the boundaries of the spectral gaps.
-
-%The discussion in the previous paragraph focused on obtaining $\sigma$ and $\sigma_\qm$ via the solution to \eqref{eq:QGDetSolveCondition}.
-%Here we discuss some situations where it is more appropriate to use \eqref{eq:QGGenEvalSolveNoPoles} to determine $\sigma_{\qm}$ (and thus $\sigma$), although the discussion concerning the determination of the spectral edges $a_j, b_j$ is still applicable to solution methods that work via \eqref{eq:QGGenEvalSolveNoPoles}.
-%If one is looking to numerically solve for $\sigma_\qm$, then the default choice should be to solve the generalised eigenvalue problem \eqref{eq:QGGenEvalSolveNoPoles}.
-%Eigenvalue-finding schemes usually benefit from knowing that $\mathfrak{M}_\qm$ is Hermitian, and \eqref{eq:QGGenEvalSolveNoPoles} avoids having to work with $\det\mathfrak{M}_\qm$ --- which is generally advisable when handling matrices numerically. 
-%On the other hand, if one is willing to perform some analytic work, solving via \eqref{eq:QGDetSolveCondition} offers the possibility of finding an expression for $\det\mathfrak{M}_\qm$ in terms of rational functions ($\sin, \cos$, etc) on which less expensive numerical schemes can be used, or determining $\sigma_\qm$ outright.
-%As such, the choice of approach largely depends on how willing the solver is to work analytically with $\mathfrak{M}_\qm$.
-%With this in mind, corollary \ref{cory:M-MatrixEntriesNoPoles} tells us that the complexity of the entry of $\bracs{\mathfrak{M}_\qm}_{jk}$ depends on the number of edges between the vertices $v_j$ and $v_k$, whilst the complexity of the diagonal entries depends on the degree of the vertex $v_j$.
-%Furthermore, the number of vertices in the graph determines the dimensions of $\mathfrak{M}_\qm$, and the sparsity of $\mathfrak{M}_\qm$ depends on the number of pairs of vertices that are not (directly) connected by an edge.
-%This leads to the colloquial rule that solving \eqref{eq:QGDetSolveCondition} (analytically) is generally manageable for graphs with a ``small number" of edges and/or vertices, whilst graphs with a large number of edges and/or vertices often warrant solution via \eqref{eq:QGGenEvalSolveNoPoles}.
-%Of course, the cut-off for the terms ``small number" and ``large number" will depend on the person (or program) solving the problem themselves!
-%With this in mind, the ratio $\frac{\abs{\edgeSet}}{\abs{\vertSet}}$ can also be a good indicator the ``sparsity" of $\mathfrak{M}_\qm$, and thus how difficult $\mathfrak{M}_\qm$ will be to work with.
+We should not ignore the elephant in the room concerning \emph{how practical} it is to obtain, and work with, the matrix $\mathfrak{M}_\qm$ and the function $F$ in the first place.
+Corollary \ref{cory:M-MatrixEntriesNoPoles} affords some insight into the sparsity of $\mathfrak{M}_{\qm}$; for every pair of vertices $v_j$ and $v_k$ that are directly connected by (at least one) edge, there are two non-zero off-diagonal entries introduced to $\mathfrak{M}_{\qm}$, whilst the diagonal entries are always not identically zero (for a connected, periodic graph).
+For a given number of vertices in a connected periodic graph without loops, we thus minimise the number of non-zero off-diagonal entries when the graph is a chain --- each vertex $v_j$ has precisely two direct connections to $v_{j-1}$ and $v_{j+1}$.
+The ratio $\frac{\abs{\edgeSet}}{\abs{\vertSet}}$ provides a good indicator of how ``close" to a chain graph $\graph$ is (and consequentially, how close to a diagonal matrix $\mathfrak{M}_\qm$ is) --- if $\frac{\abs{\edgeSet}}{\abs{\vertSet}} = 1$, the graph is necessarily a chain.
+The opposite extreme $\frac{\abs{\edgeSet}}{\abs{\vertSet}} = \recip{2}(\abs{\vertSet}-1)$ corresponds to a fully connected graph and thus dense $\mathfrak{M}_\qm$.
+For graphs with $\frac{\abs{\edgeSet}}{\abs{\vertSet}} \approx 1$, $\mathfrak{M}_{\qm}$ is relatively sparse and computing $F$ is more feasible, although still difficult analytically if $\abs{\vertSet}$ is large.
+Therefore for denser $\mathfrak{M}_\qm$ and larger (in the sense of number of edges) graphs, one begins to lean toward numerical schemes based on \eqref{eq:QGGenEvalSolveNoPoles}.
+% OLD DICSUSSION PARAGRAPH
+%As can be seen from corollary \ref{cory:M-MatrixEntriesNoPoles}, the complexity of the entries of $\mathfrak{M}_{\qm}$ (and thus the determinant in \eqref{eq:QGDetSolveCondition} and $F$) increases as one adds additional vertices and edges.
+%The complexity of the off-diagonal entries $\bracs{\mathfrak{M}_\qm}_{jk}$ depends on the number of edges between the vertices $v_j$ and $v_k$, whilst the complexity of the diagonal entries depends on the degree of the vertex $v_j$.
+%Furthermore, the sparsity of $\mathfrak{M}_\qm$ depends on the number of pairs of vertices that are not (directly) connected by an edge.
+%With this in mind, the ratio $\frac{\abs{\edgeSet}}{\abs{\vertSet}}$ can be a good indicator of ``how sparse" $\mathfrak{M}_\qm$ is, and how difficult $\mathfrak{M}_\qm$ will be to work with.
 %If $\frac{\abs{\edgeSet}}{\abs{\vertSet}}\approx 1$, then the number of non-zero entries in any row (or column) of $\mathfrak{M}_\qm$ should be approximately 2 --- the diagonal entry plus the entry corresponding to the expected single connection of this vertex.
 %At the extremes, $\frac{\abs{\edgeSet}}{\abs{\vertSet}}\approx 0$ corresponds to an almost-diagonal $\mathfrak{M}_\qm$, whilst $\frac{\abs{\edgeSet}}{\abs{\vertSet}}\approx \abs{\vertSet}$ corresponds to an almost-dense $\mathfrak{M}_\qm$.
-%A sparse $\mathfrak{M}_\qm$ can be easy to handle analytically and efficient to work with numerically, even if $\abs{\vertSet}$ is relatively large.
-%For denser $\mathfrak{M}_\qm$, one likely begins to lean toward numerical schemes, as the expressions involved in \eqref{eq:QGDetSolveCondition} becomes increasingly cumbersome.
+%A sparse $\mathfrak{M}_\qm$ is efficient to work with numerically, although if $\abs{\vertSet}$ is large can still be difficult to work with analytically.
+%For denser $\mathfrak{M}_\qm$, one begins to lean toward numerical schemes based on \eqref{eq:QGGenEvalSolveNoPoles}, as the expressions involved in \eqref{eq:QGDetSolveCondition} become increasingly cumbersome, and determining the function $F$ explicitly corresponding difficult.
+%This leads to the colloquial rule that solving \eqref{eq:QGDetSolveCondition} (analytically) is generally manageable for graphs with a ``small number" of edges and/or vertices, whilst graphs with a large number of edges and/or vertices often warrant solution via \eqref{eq:QGGenEvalSolveNoPoles} --- ff course, the cut-off for the terms ``small number" and ``large number" will depend on the person (or program) solving the problem themselves!
+
+Another topical question worth addressing at this point is whether, given the expectation that $\sigma$ has a band-gap structure, an alternative to finding all $\omega\in F_0$ is to only compute the spectral edges and then reconstruct $F_0$ from them.
+It is known for (second order) periodic PDE problems that the edges of the spectral bands occur at the symmetry values of the quasi-momentum --- those values of $\qm$ which correspond to the periodic and anti-periodic problems (in each axis direction) on the unit cell.
+If the above statement were true for the problem \eqref{eq:SingularWaveEqnQGProblem}, then the dimensionality of the problem of computing $F_0$ (hence $\sigma$) could be reliably reduced to determining $F_0^\qm$ for the aforementioned symmetry values of $\qm$.
+However as discussed in \cite[Chapter 4.6]{berkolaiko2013introduction}, whilst this has been experimentally observed to be true for quantum graph problems motivated by physical structures, it is in fact untrue in general.
+This extends to \eqref{eq:SingularWaveEqnQGProblem}, however \cite[Chapter 4.6]{berkolaiko2013introduction} remarks that adopting the approach of assuming the spectral edges lie at the symmetry points of the quasi-momentum doesn't often lead to errors in practice.
+It is unclear why this is the case; the current hypothesis is that the underlying (period) graph needs to be made highly asymmetric to move the spectral edges away from the symmetry points of the quasi-momentum, and since most physical structures of interest display symmetries in their unit cells, the assumption ``holds in practice".
+In our examples in section \ref{sec:ScalarExamples}, we will also see that preserving some underlying symmetries in our graphs indeed results in the symmetry values of the quasi-momentum being the boundaries of the spectral gaps.
