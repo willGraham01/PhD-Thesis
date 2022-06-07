@@ -1,0 +1,46 @@
+\documentclass[crop, tikz]{standalone}
+
+\usepackage[utf8]{inputenc}
+% 'crop' is the default for v1.0, before it was 'preview'
+%\usetikzlibrary{...}% tikz package already loaded by 'tikz' option
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{calc}
+
+%hexagon drawing variables
+\def\ly{0.866025} %sin(pi/3) = sqrt(3)/2
+\def\lx{0.5} %cos(pi/3) = 0.5
+\def\hexSize{5} %size of the hexagon that'll be the extent of the fibre cross section
+\def\coreSize{0.2} %size of hollow cores
+\def\coreSep{0.5} %separation between core CENTRES HORIZONTALLY
+\def\coreSepHeight{0.4464} %separation between core CENTRES VERTICALLY
+
+\newcommand{\hexagon}[4]{
+\begin{scope}[shift={#2}]
+	\draw[#3, fill=#4] (-#1*\lx, #1*\ly) -- (#1*\lx, #1*\ly) -- (#1,0) -- (#1*\lx, -#1*\ly) -- (-#1*\lx, -#1*\ly) -- (-#1,0) -- cycle;
+\end{scope}
+} %\hexagon{centre-to-corner-length}{shift (x,y)}{line spec}{fill colour} [none is allowed for fillcolour]
+
+\begin{document}
+\begin{tikzpicture}[]
+
+	% period cell boundary, weird start b/c of tikz cutoff behaviour
+	\filldraw[black!10!white, draw=black, dashed] (0,-0.01) rectangle (6,6);
+
+	% draw inclusion, label parts of the domain
+	\filldraw[black!20!white, draw=black] plot [smooth cycle, tension=0] coordinates {(1,1) (5,1) (5,5) (1,5)};
+	\node[anchor=north west] at (0,6) {$\widetilde{Q}_1$};
+	\node[anchor=south] at (3,4) {$\widetilde{Q}_0$};
+
+	% indicate length scales
+	% period cell size
+	\draw[<->] (0,6.2) -- (6,6.2); \node[anchor=south] at (3,6.2) {$\tilde{L}=1$};
+	% inclusion size
+	\draw[<->] (1,0.875) -- (5.0,0.875); \node[anchor=north] at (3.0,0.875) {$1-\delta$};
+	\draw[<->] (5.05,3) -- (5.95,3); \node[anchor=north] at (5.5,3) {$\delta$};
+	\node[anchor=center, align=center] at (3,3) {$\varepsilon_0^{-1}\epsilon^{\mathrm{inc}}=1$};
+	\node[anchor=north, align=center] at (3,5.75) {$\varepsilon_0^{-1}\epsilon^{\mathrm{bulk}}=\varepsilon$};
+\end{tikzpicture}
+\end{document}
