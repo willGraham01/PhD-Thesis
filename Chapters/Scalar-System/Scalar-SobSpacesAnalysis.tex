@@ -1,20 +1,22 @@
 \section{Sobolev Spaces of Functions with Gradients} \label{sec:3DGradSobSpaces}
-In this section we deal with the details of the analysis of gradients of zero and tangential gradients with respect to the measures $\ddmes, \massMes$, and $\dddmes$ --- our aim is to determine the behaviour of these objects and relate them to more familiar objects like weak derivatives.
+In this section we deal with the details of the analysis of gradients of zero and tangential gradients with respect to the measures $\ddmes, \massMes$, and $\dddmes$.
+Our objective is to determine the behaviour of these objects and then relate them to more familiar objects like classical weak derivatives.
 Thematic throughout our analysis of gradients of zero and Sobolev functions will be the following procedure; we will first aim to understand gradients of zero on a single edge $I_{jk}$ that is parallel to (one of) the co-ordinate axes, and then employ rotation ideas to generalise our arguments to edges at any angle to the axes.
-Next, we demonstrate that gradients of zero on $\graph$ can be built up from those on the individual edges --- this is unsurprising given that $\ddmes$ is just the sum of the individual singular measures supporting each edge.
+Given that $\ddmes$ is just the sum of the individual $\lambda_{jk}$, we then demonstrate that gradients of zero on $\graph$ can assembled by combining gradients of zero on each of the individual edges.
 Once we understand gradients of zero on edges, we can then understand the tangential gradients on the edges and on $\graph$ by following a similar line of reasoning --- working on the edges first and then looking at the implications for functions on the entire graph.
-We will also have to consider (and analyse) the behaviour of gradients of zero and tangential gradients at the vertices, induced by $\massMes$.
-This finally allows us to understand Sobolev functions and their tangential gradients (and gradients of zero) on $\graph$ with respect to the measure $\dddmes$.
-This approach will also guide us when we come to examine the Sobolev spaces of curls in section \ref{sec:CC-CurlAnalysis}.
+There is further behaviour of functions at the vertices to examine, due to the presence of $\massMes$, although this is of a much simpler nature.
+Doing so allows us to understand Sobolev functions and their tangential gradients (and gradients of zero) on $\graph$ with respect to the measure $\dddmes$.
+This approach will also guide us when we come to examine the Sobolev spaces of functions that possess curls in section \ref{sec:CC-CurlAnalysis}.
 
 Since we will later be considering the space $\ktcurlSob{\ddom}{\dddmes}$, to avoid repetition in later sections we will examine $\ktgradSob{\ddom}{\dddmes}$ here, rather than the slightly simpler $\tgradSob{\ddom}{\dddmes}$.
 Ultimately this amounts to us considering the operator $\ktgrad$ rather than $\tgrad$ everywhere, however the results be obtain concerning $\ktgrad$ and $\ktgradSob{\ddom}{\dddmes}$ translate in the obvious manner for $\tgrad$ and $\tgradSob{\ddom}{\dddmes}$.
-In practice of course, the space $\tgradSob{\ddom}{\dddmes}$ was studied first, and only then when the extension to curls was made was it realised that similar conclusions and arguments concerning $\ktgradSob{\ddom}{\dddmes}$ could be made.
+In practice of course, the space $\tgradSob{\ddom}{\dddmes}$ was studied first, and then the extension to curls was made which necessitated extension to $\ktgradSob{\ddom}{\dddmes}$.
+Throughout this section we take as given that we have some embedded, period graph $\graph$ in $\ddom$ that adheres to assumption \ref{ass:MeasTheoryProblemSetup}.
 As promised, we begin with an examination of gradients of zero.
 
 \subsection{Gradients of Zero} \label{ssec:GradZero}
-In this section we will characterise gradients of zero with respect to the measures $\ddmes, \massMes$, and $\dddmes$, in that order.
-Given proposition \ref{prop:ZeroInvariantUnderQM-Wavenumber}, without loss of generality we can always take any approximating sequence $\phi_n$ for a gradient of zero $g$ to be such that $\grad\phi_n\rightarrow g$, as opposed to $\ktgrad\phi_n\rightarrow g$.
+In this section we will characterise the spaces of gradients of zero with respect to the measures $\ddmes, \massMes$, and $\dddmes$, in that order.
+Given proposition \ref{prop:ZeroInvariantUnderQM-Wavenumber}, without loss of generality we can always take any approximating sequence $\phi_n$ for a gradient of zero $g$ to be such that $\ograd\phi_n\rightarrow g$ as opposed to $\ktgrad\phi_n\rightarrow g$, which we will do throughout.
 \begin{prop}[Gradients of Zero on a Segment Parallel to the $x_2$-axis] \label{prop:3DGradZeroParallel}
 	Suppose that the edge $I_{jk}$ is parallel to the $x_2$-axis.
 	Then 
@@ -24,7 +26,7 @@ Given proposition \ref{prop:ZeroInvariantUnderQM-Wavenumber}, without loss of ge
 	\end{align*}
 \end{prop}
 \begin{proof}
-	This is a version of the argument in \cite[Section~3.1]{zhikov2000extension} and proposition \ref{prop:3DGradZeroRotated}, which we present in detail below.
+	This is a version of the argument in \cite[Section~3.1]{zhikov2000extension} and a specific case of the argument presented for proposition \ref{prop:3DGradZeroRotated}, below.
 \end{proof}
 
 \begin{prop} \label{prop:3DGradZeroRotated}
@@ -33,11 +35,11 @@ Given proposition \ref{prop:ZeroInvariantUnderQM-Wavenumber}, without loss of ge
 	\begin{align*}
 		\gradZero{\ddom}{\lambda_{jk}} 
 		&= \clbracs{ g_{jk}\hat{n}_{jk} \setVert g_{jk}\in\pltwo{\ddom}{\lambda_{jk}} } \\
-		&= \clbracs{ \begin{pmatrix} R_{jk}^{\top} & 0 \\ 0 & 1 \end{pmatrix} \bracs{g_{jk},0,0}^\top \setVert g_{jk}\in\pltwo{\ddom}{\lambda_{jk}} } \\
-		&= \clbracs{ g_{jk}\in\ltwo{\ddom}{\ddmes}^2 \setVert g_{jk}\cdot e_{jk} = 0 }.
+%		&= \clbracs{ \begin{pmatrix} R_{jk}^{\top} & 0 \\ 0 & 1 \end{pmatrix} \bracs{g_{jk},0,0}^\top \setVert g_{jk}\in\pltwo{\ddom}{\lambda_{jk}} } \\
+		&= \clbracs{ g\in\ltwo{\ddom}{\lambda_{jk}}^3 \setVert g\cdot \widehat{e}_{jk} = 0 }.
 	\end{align*}
 \end{prop}
-Note that the three sets on the right hand side are all equal by definition of $n_{jk}, e_{jk}$, and $R_{jk}$.
+Note that the sets on the right hand side are equal to each other by definition of the unit vectors $n_{jk}$ and $e_{jk}$, and we denote them by $\tilde{\mathcal{G}}(0)$.
 As such, we will demonstrate the equality on the first line in the proof. 
 \begin{proof}
 	Clearly, if $g=\bracs{0,0,g_3}^\top\in\gradZero{\ddom}{\lambda_{jk}}$, then \eqref{eq:GradZeroSequenceDef} implies that $g_3=0$.
@@ -46,34 +48,41 @@ As such, we will demonstrate the equality on the first line in the proof.
 	Given proposition \ref{prop:ZeroInvariantUnderQM-Wavenumber}, this implies that
 	\begin{align*}
 		\phi_n\lconv{\ltwo{\ddom}{\lambda_{jk}}}0, \quad
-		\grad\phi_n \lconv{\ltwo{\ddom}{\lambda_{jk}}^3} g_{jk}\hat{e}_{jk}.
+		\ograd\phi_n \lconv{\ltwo{\ddom}{\lambda_{jk}}^3} g_{jk}\hat{e}_{jk}.
 	\end{align*}
-	Therefore, $\grad\phi_n\cdot\hat{e}_{jk}\rightarrow g_{jk}$, and thus
+	Therefore, $\ograd\phi_n\cdot\hat{e}_{jk}\rightarrow g_{jk}$, and thus
 	\begin{align*}
-		\int_0^{\abs{I_{jk}}} \abs{\diff{\phi_n}{y}\bracs{r_{jk}(y)} - g_{jk}\bracs{r_{jk}(y)} }^2 \ \md y
-		&= \integral{I_{jk}}{ \abs{\grad\phi_n\cdot\hat{e}_{jk} - g_{jk}}^2 }{\lambda_{jk}} \toInfty{n}, \\
-		\implies \diff{\phi_n}{y}\bracs{r_{jk}(y)} &\lconv{\ltwo{\interval{I_{jk}}}{y}} g_{jk}\bracs{r_{jk}(y)}.
+		\int_0^{l_{jk}} \abs{\diff{\phi_n}{y}\bracs{r_{jk}(y)} - g_{jk}\bracs{r_{jk}(y)} }^2 \ \md y
+		&= \integral{I_{jk}}{ \abs{\ograd\phi_n\cdot\hat{e}_{jk} - g_{jk}}^2 }{\lambda_{jk}} \toInfty{n}, \\
+		\implies \diff{\phi_n}{y}\bracs{r_{jk}(y)} &\lconv{\ltwo{\sqbracs{0,l_{jk}}}{y}} g_{jk}\bracs{r_{jk}(y)}.
 	\end{align*}
-	We also observe that $\phi_n\bracs{r_{jk}(y)}\rightarrow 0$ in $\ltwo{\interval{I_{jk}}}{y}$, and thus $g_{jk}\bracs{r_{jk}(y)}$ is the derivative (in the classical $\gradSob{\interval{I_{jk}}}{y}$-sense) of the zero function, and thus $g_{jk}=0$.
+	We also observe that $\phi_n\bracs{r_{jk}(y)}\rightarrow 0$ in $\ltwo{\sqbracs{0,l_{jk}}}{y}$, and thus $g_{jk}\bracs{r_{jk}(y)}$ is the derivative (in the classical $\gradSob{\sqbracs{0,l_{jk}}}{y}$-sense) of the zero function, hence $g_{jk}=0$.
 	
-	Finally, suppose that $g\in\psmooth{\ddom}$ and consider a compactly supported smooth function $\phi$ which, within some neighbourhood of the edge $I_{jk}$, has the form $\phi(x) = \bracs{\bracs{x-v_j}\cdot n_{jk}}g(x)$.
-	Then we have that $\grad\phi_n = \bracs{\bracs{x-v_j}\cdot n_{jk}}\grad g + g\hat{n}_{jk}$, and notice that $\bracs{x-v_j}\cdot n_{jk}	=0$ when $x\in I_{jk}$.
-	It is now clear that $\phi=0$ and $\grad\phi = g\hat{n}_{jk}$ on $I_{jk}$, so $g\hat{n}_{jk}\in\gradZero{\ddom}{\lambda_{jk}}$.
+	This demonstrates that
+	\begin{align*}
+		\gradZero{\ddom}{\lambda_{jk}} \cap 
+		\bracs{ \ltwo{\ddom}{\lambda_{jk}}^3\setminus\tilde{\mathcal{G}}(0) }
+		&= \clbracs{0},
+	\end{align*}
+	so $\gradZero{\ddom}{\lambda_{jk}}\subset\tilde{\mathcal{G}}(0)$.
+	
+	Now suppose that $g\in\psmooth{\ddom}$ and consider $\phi\in\psmooth{\ddom}$ which, within some neighbourhood of the edge $I_{jk}$, has the form $\phi(x) = \bracs{\bracs{x-v_j}\cdot n_{jk}}g(x)$.
+	Then we have that $\ograd\phi_n = \bracs{\bracs{x-v_j}\cdot n_{jk}}\ograd g + g\hat{n}_{jk}$, and notice that $\bracs{x-v_j}\cdot n_{jk}	=0$ when $x\in I_{jk}$.
+	It is now clear that $\phi=0$ and $\ograd\phi = g\hat{n}_{jk}$ on $I_{jk}$, so $g\hat{n}_{jk}\in\gradZero{\ddom}{\lambda_{jk}}$.
 	By density of $\psmooth{\ddom}$ in $\pltwo{\ddom}{\lambda_{jk}}$, we can conclude that $g\hat{n}_{jk}\in\gradZero{\ddom}{\lambda_{jk}}$ for every $g\in\pltwo{\ddom}{\lambda_{jk}}$.
+	Thus $\tilde{\mathcal{G}}(0)\subset\gradZero{\ddom}{\lambda_{jk}}$, and the proof is complete.
 \end{proof}
-Taking $R_{jk}$ as the identity matrix recovers proposition \ref{prop:3DGradZeroParallel}.
 
-We now focus on demonstrating that the set of gradients of zero on the entirety of $\graph$ is formed from gradients of zero on each edge.
-That is, we look to prove the following characterisation of $\gradZero{\ddom}{\ddmes}$:
+We now demonstrate that the set of gradients of zero on the entirety of $\graph$ is formed from gradients of zero on each edge, by proving the following characterisation of $\gradZero{\ddom}{\ddmes}$:
 \begin{prop}[Characterisation of $\gradZero{\ddom}{\ddmes}$] \label{prop:3DGradZeroChar}
 	For an embedded graph $\graph$ in $\ddom$, we have that
 	\begin{align*}
 		\gradZero{\ddom}{\ddmes} &= \clbracs{ g\in\pltwo{\ddom}{\ddmes}^3 \setVert g^{(jk)}\in\gradZero{\ddom}{\lambda_{jk}} \ \forall I_{jk}\in\edgeSet }.
 	\end{align*}
 \end{prop}
-We will denote $B := \clbracs{ g\in\pltwo{\ddom}{\ddmes}^3 \setVert g^{(jk)}\in\gradZero{\ddom}{\lambda_{jk}} \ \forall I_{jk}\in\edgeSet }$ for the time being.
+Write $B := \clbracs{ g\in\pltwo{\ddom}{\ddmes}^3 \setVert g^{(jk)}\in\gradZero{\ddom}{\lambda_{jk}} \ \forall I_{jk}\in\edgeSet }$ for the time being.
 In order to prove proposition \ref{prop:3DGradZeroChar} we will need some supporting results, however the argument can be sketched out like so.
-Showing that $\gradZero{\ddom}{\ddmes}\subset B$ is straightforward due to the definition of $\ddmes$ and that the norms we are interested in are related:
+Showing that $\gradZero{\ddom}{\ddmes}\subset B$ is straightforward due to the definition of $\ddmes$ providing the following relation between norms;
 \begin{align*}
 	\norm{\cdot}_{\ltwo{\ddom}{\lambda_{jk}}} &\leq \norm{\cdot}_{\ltwo{\ddom}{\ddmes}}, \\
 	\norm{\cdot}_{\ltwo{\ddom}{\ddmes}}^2 &= \sum_{v_j\in\vertSet}\sum_{j\conLeft k}\norm{\cdot}_{\ltwo{\ddom}{\lambda_{jk}}}^2.
@@ -84,7 +93,7 @@ This ``smoothing" requires us to always have some non-zero distance between the 
 Having overcome this obstacle, one can show that any $g_{jk}\in\gradZero{\ddom}{\lambda_{jk}}$ \emph{can} be extended by zero to obtain a function $g\in\gradZero{\ddom}{\ddmes}$, and then using linearity of the subspace $\gradZero{\ddom}{\ddmes}$, the proof will be complete.
 
 Before continuing, we introduce two families of smooth functions that we shall make use of during the proof of proposition \ref{prop:3DGradZeroChar}.
-Let $\eta\in\csmooth{\ddom}$ have the properties
+Let $\eta\in\psmooth{\ddom}$ have the properties
 \begin{align*}
 	0 \leq \eta(x) \leq 1, \quad
 	\eta(x) = 0 \text{ when } \abs{x} \leq 1, \quad
@@ -114,7 +123,7 @@ since
 	+ \integral{\ddom\setminus\clbracs{v_j}}{ \abs{\eta_j^n - 1}^2 }{\massMes} \\
 	&= \norm{\eta_j^n - 1}_{\ltwo{\ddom}{\ddmes}}^2 \rightarrow 0.
 \end{align*}
-Unsurprisingly we also need a family of smooth functions to help us ``smooth off" any approximating sequences.
+Unsurprisingly we also need a family of smooth functions to help us ``smooth off" any approximating sequences on the edges themselves.
 Let $I_{jk}\in\edgeSet$, $\eps>0$, and set
 \begin{align} \label{eq:ShortenedEdgeDef}
 	I_{jk}^\eps := \clbracs{ x\in I_{jk} \setVert \mathrm{dist}\bracs{x,\partial I_{jk}}\geq\recip{\eps} }.
@@ -125,23 +134,32 @@ Let $\chi_{jk}^\eps\in\csmooth{\ddom}$ be such that
 	\chi_{jk}^\eps(x) = 1 \text{ when } \mathrm{dist}\bracs{x, I_{jk}^\eps}\leq \recip{3\eps}, \quad
 	\chi_{jk}^\eps(x) = 0 \text{ when } \mathrm{dist}\bracs{x, I_{jk}^\eps}\geq \frac{2}{3\eps}.
 \end{align}
-As $\graph$ is finite, we can assume without loss of generality that the only edge of $\graph$ that $\supp\bracs{\chi_{jk}^\eps}$ intersect is $I_{jk}$ (otherwise, we just rescale the argument).
+As $\graph$ is finite, we can assume without loss of generality that the only edge of $\graph$ that $\supp\bracs{\chi_{jk}^\eps}$ intersects is $I_{jk}$ --- otherwise we just rescale the argument of $\chi_{jk}^{\eps}$ in the direction $n_{jk}$.
 We can also assemble $\chi_{jk}^\eps$ such that $\abs{ \grad\chi_{jk}^{\eps} } \leq c\eps$ for some $c\geq 0$ independent of $\eps$.
 We can check the convergence of $\chi_{jk}^\eps \toInfty{\eps}$ in $\ltwo{\ddom}{\ddmes}$ to the characteristic function of the edge $I_{jk}$, denoted by $\charFunc{jk}$;
 \begin{align*}
 	\integral{\ddom}{ \abs{\chi_{jk}^\eps - \charFunc{jk}}^2 }{\ddmes}
 	&= \integral{I_{jk}}{ \abs{\chi_{jk}^\eps - \charFunc{jk}}^2 }{\lambda_{jk}}
 	\leq \integral{I_{jk}\cap\clbracs{\chi_{jk}^\eps\leq 1}}{}{\lambda_{jk}}
-	= \frac{2}{3\eps} \rightarrow 0 \toInfty{\eps}.
+	= \frac{4}{3\eps} \rightarrow 0 \toInfty{\eps}.
 \end{align*}
-We also have that $\chi_{jk}^\eps$ converges to the characteristic function $\charFunc{jk}^\circ$ of the interior of $I_{jk}$ in $\ltwo{\ddom}{\dddmes}$, since
+We also have that $\chi_{jk}^\eps$ converges to the characteristic function $\charFunc{jk}^\circ$ of the interior of $I_{jk}$ in $\ltwo{\ddom}{\dddmes}$, 
+\begin{align*}
+	\charFunc{jk}^{\circ} &=
+	\begin{cases}
+		1 & x\in I_{jk}^\circ, \\
+		0 & x\in\graph\setminus I_{jk}, \\
+		0 & x\in\vertSet,
+	\end{cases}
+\end{align*}
+since
 \begin{align*}
 	\integral{\ddom}{ \abs{\chi_{jk}^\eps - \charFunc{jk}^\circ}^2 }{\dddmes}
 	&= \integral{\ddom}{ \abs{\chi_{jk}^\eps - \charFunc{jk}^\circ}^2 }{\ddmes}
 	= \integral{\ddom}{ \abs{\chi_{jk}^\eps - \charFunc{jk}}^2 }{\ddmes}.
 \end{align*}
 
-We can now prove proposition \ref{prop:3DGradZeroChar} --- the inclusion $\gradZero{\ddom}{\ddmes}\subset B$ follows immediately.
+We can now begin the proof of proposition \ref{prop:3DGradZeroChar} --- the inclusion $\gradZero{\ddom}{\ddmes}\subset B$ follows immediately:
 \begin{lemma} \label{lem:3DGradZeroSubsetB}
 	\begin{align*}
 		\gradZero{\ddom}{\ddmes} \subset B.
@@ -153,9 +171,9 @@ We can now prove proposition \ref{prop:3DGradZeroChar} --- the inclusion $\gradZ
 	Then clearly
 	\begin{align*}
 		\norm{\phi_n}_{\ltwo{\ddom}{\lambda_{jk}}} &\leq \norm{\phi_n}_{\ltwo{\ddom}{\ddmes}} \rightarrow 0, \\
-		\norm{\grad\phi_n - g^{(jk)}}_{\ltwo{\ddom}{\lambda_{jk}}} &\leq \norm{\grad\phi_n - g}_{\ltwo{\ddom}{\ddmes}} \rightarrow 0,
+		\norm{\ograd\phi_n - g^{(jk)}}_{\ltwo{\ddom}{\lambda_{jk}}^3} &\leq \norm{\ograd\phi_n - g}_{\ltwo{\ddom}{\ddmes}^3} \rightarrow 0,
 	\end{align*}
-	thus $g\in\ltwo{\ddom}{\lambda_{jk}}$ for every $I_{jk}$, so $g\in B$.
+	thus $g\in\gradZero{\ddom}{\lambda_{jk}}$ for every $I_{jk}$, so $g\in B$.
 \end{proof}
 Turning our attention to the reverse inclusion, we first demonstrate that so long as a gradient of zero on an edge $I_{jk}$ has support contained within the interior of $I_{jk}$, we can extend it to a gradient of zero on the whole graph.
 \begin{lemma}[Extension lemma for Gradients of Zero] \label{lem:3DExtensionLemmaGrads}
@@ -170,7 +188,7 @@ Turning our attention to the reverse inclusion, we first demonstrate that so lon
 	Then $g\in\gradZero{\ddom}{\ddmes}$ and $\tilde{g}\in\gradZero{\ddom}{\dddmes}$.
 \end{lemma}
 \begin{proof}
-	Let $\phi_n$ be an approximating sequence for $g_{jk}$, and consider the sequence (of smooth functions) $\psi_l = \chi_{jk}^n\phi_l$.
+	Let $\phi_l$ be an approximating sequence for $g_{jk}$, and consider the sequence $\psi_l = \chi_{jk}^n\phi_l\in\psmooth{\ddom}\cap\csmooth{\ddom}$.
 	We have that
 	\begin{align*}
 		\norm{\psi_l}_{\ltwo{\ddom}{\ddmes}} 
@@ -179,32 +197,35 @@ Turning our attention to the reverse inclusion, we first demonstrate that so lon
 	\end{align*}
 	Furthermore,
 	\begin{align*}
-		\norm{\grad\psi_l - g}_{\ltwo{\ddom}{\ddmes}^2}^2
-		&= \norm{\chi_{jk}^n\grad\phi_l + \phi_l\grad\chi_{jk}^n - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^2}^2 \\
-		&\leq 2\norm{\phi_l\grad\chi_{jk}^n}_{\ltwo{\ddom}{\lambda_{jk}}^2}^2 + 2\norm{\chi_{jk}^n\grad\phi_l - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^2}^2 \\
-		&\leq 2\sup_{I_{jk}}\abs{\grad\chi_{jk}^n}^2 \norm{\phi_l}_{\ltwo{\ddom}{\lambda_{jk}}^2}^2
-		+ 2\norm{\grad\phi_l - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^2}^2 \\
+		\norm{\ograd\psi_l - g}_{\ltwo{\ddom}{\ddmes}^3}^2
+		&= \norm{\chi_{jk}^n\ograd\phi_l + \phi_l\ograd\chi_{jk}^n - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^3}^2 \\
+		&\leq 2\norm{\phi_l\ograd\chi_{jk}^n}_{\ltwo{\ddom}{\lambda_{jk}}^2}^2 + 2\norm{\chi_{jk}^n\ograd\phi_l - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^3}^2 \\
+		&\leq 2\sup_{I_{jk}}\abs{\grad\chi_{jk}^n}^2 \norm{\phi_l}_{\ltwo{\ddom}{\lambda_{jk}}^3}^2
+		+ 2\norm{\ograd\phi_l - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^3}^2 \\
 		&\rightarrow 0 \toInfty{l}.
 	\end{align*}
 	Therefore, $\psi_l$ is an approximating sequence for $g$, and thus $g\in\gradZero{\ddom}{\ddmes}$, as required.
 	
-	Next, notice that $\psi_l\bracs{v_j} = \psi_l\bracs{v_k} = 0$, and $\grad\psi_l\bracs{v_j} = \grad\psi_l\bracs{v_k} = 0$ for every $l\in\naturals$.
+	Next, notice that $\psi_l\bracs{v_j} = \psi_l\bracs{v_k} = 0$, and $\ograd\psi_l\bracs{v_j} = \ograd\psi_l\bracs{v_k} = 0$ for every $l\in\naturals$.
 	Therefore,
 	\begin{align*}
-		\norm{\psi_l}_{\ltwo{\ddom}{\massMes}} = 0 = \norm{\grad\psi_l}_{\ltwo{\ddom}{\massMes}^2},
+		\norm{\psi_l}_{\ltwo{\ddom}{\massMes}} = 0 = \norm{\ograd\psi_l}_{\ltwo{\ddom}{\massMes}^3},
 	\end{align*}
 	for every $l\in\naturals$, and so
 	\begin{align*}
 		\norm{\psi_l}_{\ltwo{\ddom}{\dddmes}} &= \norm{\psi_l}_{\ltwo{\ddom}{\ddmes}} \rightarrow 0, \\
-		\norm{\grad\psi_l - \tilde{g}}_{\ltwo{\ddom}{\dddmes}^2} &= \norm{\grad\psi_l - g}_{\ltwo{\ddom}{\ddmes}^2}^2 \rightarrow 0,
+		\norm{\ograd\psi_l - \tilde{g}}_{\ltwo{\ddom}{\dddmes}^3} &= \norm{\ograd\psi_l - g}_{\ltwo{\ddom}{\ddmes}^3} \rightarrow 0,
 	\end{align*}
 	and thus $\tilde{g}\in\gradZero{\ddom}{\dddmes}$.
 \end{proof}
-The hypothesis that $\supp\bracs{g_{jk}}\subset I_{jk}^n$ is essential for the inequality 
+The hypothesis that $\supp\bracs{g_{jk}}\subset I_{jk}^n$ is essential for the inequalities 
 \begin{align*}
-	\norm{\grad\phi_l - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^2} \leq \norm{\grad\phi_l - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^2}
+	\norm{\chi_{jk}^n\phi_l}_{\ltwo{\ddom}{\lambda_{jk}}} \leq \norm{\phi_l}_{\ltwo{\ddom}{\lambda_{jk}}},
+	\qquad
+	\norm{\ograd\phi_l - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^3} \leq \norm{\ograd\phi_l - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^3}
 \end{align*} 
-to hold, and so that we can use the function $\chi_{jk}^n$ to ensure that our approximating sequence $\psi_l$ is ``restricted" to the edge $I_{jk}$ only, on which we know that $\phi_l$ has the properties we need.
+to hold.
+It is also requires so that we can use the function $\chi_{jk}^n$ to ensure that the support of our approximating sequence $\psi_l$ is only intersects $\graph$ on the edge $I_{jk}$, so we can utilise the properties of $\phi_l$.
 
 We can now use the fact that the space of gradients of zero is closed to complete the proof of proposition \ref{prop:3DGradZeroChar}.
 \begin{prop} \label{prop:3DBSubsetGradZero}
@@ -221,10 +242,11 @@ We can now use the fact that the space of gradients of zero is closed to complet
 \begin{proof}
 	Let $g\in B$, and define a family of functions $g_n$ by
 	\begin{align*}
-		g_n &= \sum_{v_j\in\vertSet}\sum_{j\conLeft k}\eta_j^n \eta_k^n g^{(jk)}.
+		g_n &= \sum_{v_j\in\vertSet}\sum_{j\conLeft k}\eta_j^n \eta_k^n g^{(jk)},
 	\end{align*}
-	The graph $\graph$ is finite, so the sum converges.
-	For each $j,k$ in the sum, the function $\eta_j^n \eta_k^n g^{(jk)}$ is an element of $\pltwo{\ddom}{\lambda_{jk}}$ with support in $I_{jk}^n$, so satisfies the hypothesis of the Extension lemma \ref{lem:3DExtensionLemmaGrads}.
+	where we recall that $g^{(jk)}$ is the edge function of $g$ along $I_{jk}$, extended by zero the the rest of $\graph$.
+	Since $\graph$ is finite, $g_n$ is well-defined and an element of $\ltwo{\ddom}{\ddmes}^3$.
+	For each $j,k$ in the sum, the function $\eta_j^n \eta_k^n g^{(jk)}$ is an element of $\pltwo{\ddom}{\lambda_{jk}}$ with support in $I_{jk}^n$, so satisfies the hypothesis of the extension lemma \ref{lem:3DExtensionLemmaGrads}.
 	Therefore, $\eta_j^n \eta_k^n g^{(jk)}\in\gradZero{\ddom}{\ddmes}$ and since $\gradZero{\ddom}{\ddmes}$ is a linear subspace, $g_n\in\gradZero{\ddom}{\ddmes}$ for every $n\in\naturals$.
 	Furthermore, we can see that $g_n\rightarrow g \toInfty{n}$ in $\ltwo{\ddom}{\ddmes}$ by the algebra of limits.
 	Since $\gradZero{\ddom}{\ddmes}$ is closed, we conclude that $g\in\gradZero{\ddom}{\ddmes}$ too.
@@ -244,10 +266,10 @@ This analysis is far more straightforward than for $\ddmes$, in no small part du
 Let us begin by defining some useful functions and constants.
 Set 
 \begin{align} \label{eq:HalfMinDistBetweenVertsDef}
-	d := \recip{2}\min\clbracs{\abs{I_{jk}} \setVert I_{jk}\in\edgeSet},
+	d := \recip{2}\min\clbracs{l_{jk} \setVert I_{jk}\in\edgeSet},
 \end{align}
 which exists and is strictly greater than 0 since $\graph$ is finite.
-For $c\in\complex$, let $\varphi_c:\reals^2\rightarrow\complex$ be a smooth function such that
+For $c\in\reals^2$, let $\varphi_c$ be a smooth function such that
 \begin{align} \label{eq:NuSmoothVertexFunctionDef}
 	\varphi_c(0) = 0, \quad
 	\grad\varphi_c(0) = c, \quad
@@ -256,11 +278,11 @@ For $c\in\complex$, let $\varphi_c:\reals^2\rightarrow\complex$ be a smooth func
 where $B_d(0)$ is the ball of radius $d$ centred at the origin.
 Finally, set $N = \abs{\vertSet}$ and for each $v_j\in\vertSet$ define
 \begin{align*}
-	g_1^j(x) = \begin{cases} \bracs{1,0,0}^\top, & x=v_j, \\ 0 & x\neq v_j, \end{cases}
+	g_1^j(x) = \begin{cases} \widehat{x}_1, & x=v_j, \\ 0 & x\neq v_j, \end{cases}
 	\quad
-	g_2^j(x) = \begin{cases} \bracs{0,1,0}^\top, & x=v_j, \\ 0 & x\neq v_j, \end{cases}
+	g_2^j(x) = \begin{cases} \widehat{x}_2, & x=v_j, \\ 0 & x\neq v_j, \end{cases}
 	\quad
-	g_3^j(x) = \begin{cases} \bracs{0,0,1}^\top, & x=v_j, \\ 0 & x\neq v_j. \end{cases}
+	g_3^j(x) = \begin{cases} \widehat{x}_3, & x=v_j, \\ 0 & x\neq v_j. \end{cases}
 \end{align*}
 We will now demonstrate that $\pltwo{\ddom}{\massMes}^3$ is isomorphic to $\complex^{3N}$. 
 \begin{lemma} \label{lem:L2nuIsomCN}
@@ -306,35 +328,28 @@ The reason for observing that the collection $B_{\massMes}$ is a basis of $\pltw
 	\end{align*}
 	and therefore $g_3 = 0$ since $\rmi\wavenumber\phi_n$ converges to $g_3$ and the zero function.
 	
-	Now take $c=\bracs{1,0,0}^\top$ and $v_j\in\vertSet$, and let $\phi(x) = \varphi_c\bracs{x-v_j}$ for $\varphi_c$ as in \eqref{eq:NuSmoothVertexFunctionDef}.
-	The function $\phi$ is smooth, has support contained in $B_d\bracs{v_j}$, and is such that $\grad\phi(x) = \grad\varphi_c\bracs{x-v_j}$.
+	Now take $c=\widehat{x}_1$ and $v_j\in\vertSet$, and let $\phi(x) = \varphi_c\bracs{x-v_j}$ for $\varphi_c$ as in \eqref{eq:NuSmoothVertexFunctionDef}.
+	The function $\phi$ is smooth, has support contained in $B_d\bracs{v_j}$, and is such that $\ograd\phi(x) = \ograd\varphi_c\bracs{x-v_j}$.
 	Clearly
 	\begin{align*}
 		\integral{\ddom}{\abs{\phi}^2}{\massMes} = 0, \quad
-		\integral{\ddom}{\abs{\grad\phi - g_1^j}^2}{\massMes} = 0,
+		\integral{\ddom}{\abs{\ograd\phi - g_1^j}^2}{\massMes} = 0,
 	\end{align*}
 	hence $g_1^j\in\gradZero{\ddom}{\massMes}$.
 	By a similar construction, we can show that $g_2^j\in\gradZero{\ddom}{\massMes}$ too, and since $\gradZero{\ddom}{\massMes}$ is a closed linear subspace of $\ltwo{\ddom}{\massMes}^3$, we have the desired result.
 \end{proof}
 
-Given that the measure $\dddmes = \ddmes + \massMes$, propositions \ref{prop:3DGradZeroChar} and \ref{prop:NuGradZeroChar} allow us to understand $\gradZero{\ddom}{\dddmes}$.
-Intuitively, $\gradZero{\ddom}{\dddmes}$ is made up of linear combinations of gradients of zero with respect to $\ddmes$ and $\massMes$, although we will qualify this statement since the functions (or rather, equivalence classes of functions) that live in $\gradZero{\ddom}{\ddmes}$ and $\gradZero{\ddom}{\massMes}$ are defined on different parts of $\graph$.
-\begin{theorem}[``Characterisation" of $\gradZero{\ddom}{\dddmes}$] \label{thm:3DdddmesCharGradZero}
+Given that $\dddmes = \ddmes + \massMes$, propositions \ref{prop:3DGradZeroChar} and \ref{prop:NuGradZeroChar} allow us to understand $\gradZero{\ddom}{\dddmes}$; this space consists of linear combinations of gradients of zero with respect to $\ddmes$ and $\massMes$, although we will qualify this statement since the functions that live in $\gradZero{\ddom}{\ddmes}$ and $\gradZero{\ddom}{\massMes}$ are defined on different parts of $\graph$.
+\begin{theorem}[Characterisation of $\gradZero{\ddom}{\dddmes}$] \label{thm:3DdddmesCharGradZero}
 	Let $\tilde{g}\in\pltwo{\ddom}{\dddmes}^3$ where
 	\begin{align*}
 		\tilde{g} = 
 		\begin{cases} 
 			g_{\ddmes}(x) & x\neq v_j, \ \forall v_j\in\vertSet, \\
-			g_{\massMes}(x) & x=v_j, \ v_j\in\vertSet.
+			g_{\massMes}(x) & x=v_j, \ v_j\in\vertSet,
 		\end{cases}
 	\end{align*}
-%	and define
-%	\begin{align*}
-%		g_\ddmes(x) = \begin{cases} \tilde{g}(x) & x\neq v_j, \ \forall v_j\in\vertSet, \\ 0 & x=v_j, \ v_j\in\vertSet, \end{cases}
-%		\qquad
-%		g_\massMes(x) = \begin{cases} 0 & x\neq v_j, \ \forall v_j\in\vertSet, \\ \tilde{g}\bracs{v_j} & x=v_j, \ v_j\in\vertSet, \end{cases}
-%	\end{align*}
-%	so $\tilde{g} = g_\ddmes + g_\massMes$ (in $\pltwo{\ddom}{\dddmes}^3$).
+	and $g_{\ddmes}\in\ltwo{\ddom}{\ddmes}^3$ and $g_{\massMes}\in\ltwo{\ddom}{\massMes}^3$.
 	Then
 	\begin{align*}
 		\tilde{g}\in\gradZero{\ddom}{\dddmes} \quad\Leftrightarrow\quad
@@ -348,10 +363,13 @@ Intuitively, $\gradZero{\ddom}{\dddmes}$ is made up of linear combinations of gr
 	\end{align*}
 	so any approximating sequence for $\tilde{g}$ also converges to $g_\ddmes$ in $\ltwo{\ddom}{\ddmes}^3$ and $g_\massMes$ in $\ltwo{\ddom}{\massMes}^3$.
 	
-	$\bracs{\Leftarrow}$ For the left-directed implication, it will be sufficient for us to show the result holds when $g_\ddmes=0$ and then for when $g_\massMes=0$, since we can use linearity of $\gradZero{\ddom}{\dddmes}$ to complete the proof.
-	With this in mind, notice that the Extension lemma \ref{lem:3DExtensionLemmaGrads} and proposition \ref{prop:3DBSubsetGradZero} deal with the case $g_\massMes=0$, demonstrating that $\tilde{g}\in\gradZero{\ddom}{\dddmes}$.
-	For the case when $g_\ddmes=0$, we can again take without loss of generality $g_\massMes$ to be non-zero at exactly one vertex $v_j\in\vertSet$ (as again, we can then use linearity of $\gradZero{\ddom}{\dddmes}$).
-	Let this be the case, so $g_\ddmes=0$ and $g_\massMes=0$ except at the vertex $v=\bracs{v_1,v_2}^\top\in\vertSet$, where $g_\massMes(v) =: g = \bracs{g_1,g_2,0}^\top$.
+	$\bracs{\Leftarrow}$ For the left-directed implication, we break the proof down further into more manageable parts. 
+	It will be sufficient for us to show the implications holds in cases when $g_\massMes=0$, and then for when $g_\ddmes=0$, since we can use linearity of $\gradZero{\ddom}{\dddmes}$ to complete the proof.
+	Additionally in the $g_\ddmes=0$ case, it is also sufficient for us to consider the situation where $g_\massMes$ is non-zero at precisely one vertex $v$, as we can again appeal to the linearity of the gradient of zero subspaces.
+	
+	With this in mind, the extension lemma \ref{lem:3DExtensionLemmaGrads} and proposition \ref{prop:3DBSubsetGradZero} deal with the case $g_\massMes=0$, demonstrating that $\tilde{g}\in\gradZero{\ddom}{\dddmes}$.
+	
+	For the case when $g_\ddmes=0$, take $g_\massMes$ to be non-zero at exactly one vertex $v=\bracs{v_1,v_2}^\top\in\vertSet$, where $g_\massMes(v) =: g = \bracs{g_1,g_2,0}^\top$.
 	Consider smooth functions $\phi_n$ for each $n\in\naturals$ where
 	\begin{align*}
 		\phi_n(x) &= \bracs{x_1-v_1}g_1 + \bracs{x_2-v_2}g_2, &\text{when } \abs{x-v}\leq\recip{n}, \\
@@ -366,22 +384,21 @@ Intuitively, $\gradZero{\ddom}{\dddmes}$ is made up of linear combinations of gr
 		\leq \integral{B_{2/n}(v)}{ \recip{n^2}\abs{g}^2 }{\ddmes} \\
 		&= \frac{2\abs{g}^2 \mathrm{deg}(v)}{n^3} \rightarrow 0, \\
 		\integral{\ddom}{ \abs{\grad\phi_n - \tilde{g}}^2 }{\dddmes}
-		&= \integral{B_{2/n}(v)}{ \abs{\grad\phi_n}^2 }{\ddmes} + \alpha_v\abs{\grad\phi_n(v) - g}^2
+		&= \integral{B_{2/n}(v)}{ \abs{\ograd\phi_n}^2 }{\ddmes} + \alpha_v\abs{\grad\phi_n(v) - g}^2
 		\leq c\abs{g}^2\integral{B_{2/n}(v)}{}{\ddmes} \\
-		&= \frac{2c\abs{g}^2\mathrm{deg}(v)}{n} \rightarrow 0,
+		&= \frac{2c\abs{g}^2\mathrm{deg}(v)}{n} \rightarrow 0.
 	\end{align*}
-	where $\mathrm{deg}(v)$ denotes the degree of the vertex $v$.
 	The sequence $\phi_n$ thus serves as an approximating sequence for $g_\massMes$, so $g_\massMes\in\gradZero{\ddom}{\dddmes}$, and since $\gradZero{\ddom}{\dddmes}$ is a linear subspace, the proof is complete.
 \end{proof}
 
 \subsection{Tangential Gradients on Edges and at Vertices} \label{ssec:3DTangGradients}
 Thanks to theorem \ref{thm:3DdddmesCharGradZero}, we have an explicit description of gradients of zero with respect to $\dddmes$.
-This will allow us to determine the form of the tangential gradients that functions $u\in\ktgradSob{\ddom}{\dddmes}$ due to the requirement that they be orthogonal to $\gradZero{\ddom}{\dddmes}$.
+We can now determine the form of the tangential gradients of functions $u\in\ktgradSob{\ddom}{\dddmes}$, exploiting the requirement that they be orthogonal to $\gradZero{\ddom}{\dddmes}$.
 We will begin by studying tangential gradients with respect to $\ddmes$ and $\massMes$, since theorem \ref{thm:3DdddmesCharGradZero} will then allow us to use this information in deducing the form of tangential gradients with respect to $\dddmes$.
 \begin{prop} \label{prop:3DTangGradParallel}
 	\sloppy Suppose that the edge $I_{jk}$ is parallel to the $x_2$-axis, and that $u\in\ktgradSob{\ddom}{\lambda_{jk}}$.
 	Let $\widetilde{u} = u\circ r_{jk}$.
-	Then $\widetilde{u}\in\gradSob{\interval{I_{jk}}}{y}$ and
+	Then $\widetilde{u}\in\gradSob{\sqbracs{0,l_{jk}}}{y}$ and
 	\begin{align*}
 		\ktgrad_{\lambda_{jk}}u = 
 		\begin{pmatrix}
@@ -391,20 +408,19 @@ We will begin by studying tangential gradients with respect to $\ddmes$ and $\ma
 	where $u' := \widetilde{u}'\circ r_{jk}^{-1}$.
 \end{prop}
 The proof is a special case of the argument presented for corollary \ref{cory:3DTangGradRotated}.
-Given the association between $\pltwo{\ddom}{\lambda_{jk}}$ and $\ltwo{\interval{I_{jk}}}{y}$, we have elected to use prime notation $u'$ to indicate that $u$ possesses some (analogue of) a classical derivative (almost everywhere).
-This is of due to $\widetilde{u}\in\gradSob{\interval{I_{jk}}}{y}$ being equal almost everywhere to an absolutely continuous function \cite[chapter 5, page 259]{evans2010partial}, so $\widetilde{u}$ possesses a trace into $y=0$ and $y=\abs{I_{jk}}$, and so $u$ also has well-defined traces onto the vertices $v_j$ and $v_k$ \emph{from the edge $I_{jk}$}.
-Importantly though, $u'$ is only a ``derivative" on the edge $I_{jk}$ --- there is no a priori requirement that these derivatives (or even $u$ itself) behave at shared vertices.
-For example, if a vertex $v_j$ is shared between two edges $I_{jk}$ and $I_{jl}$, there is no guarantee that that the traces $u_{jk}\bracs{v_j}$ and $u_{jl}\bracs{v_l}$ coincide. 
-We shall address this matter when we come to look at tangential gradients with respect to $\ddmes$.
+Given the association between $\pltwo{\ddom}{\lambda_{jk}}$ and $\ltwo{\sqbracs{0,l_{jk}}}{y}$, we have elected to use prime notation $u'$ to indicate that $u$ possesses some (analogue of) a classical derivative (almost everywhere).
+Furthermore, since functions $\widetilde{u}\in\gradSob{\sqbracs{0,l_{jk}}}{y}$ are equal almost everywhere on $\sqbracs{0,l_{jk}}$ to an absolutely continuous function \cite[chapter 5, page 259]{evans2010partial}, $\widetilde{u}$ possesses a trace into $y=0$ and $y=l_{jk}$, and so $u$ also has well-defined traces onto the vertices $v_j$ and $v_k$ \emph{from the edge $I_{jk}$}.
+It is important to keep in mind that $u'$ is only a ``derivative" along the edge $I_{jk}$, and there is no a priori requirement that these derivatives (or even $u$ itself) be consistent at shared vertices, should $u$ happen to be in both $\ktgradSob{\ddom}{\lambda_{jk}}$ and $\ktgradSob{\ddom}{\lambda_{jl}}$.
+We can only address this matter when we come to look at tangential gradients with respect to $\ddmes$.
 
 \begin{cory} \label{cory:3DTangGradRotated}
 	Let $I_{jk}\in\edgeSet$ and suppose that $u\in\ktgradSob{\ddom}{\lambda_{jk}}$.
 	Set $\widetilde{u} = u\circ r_{jk}$.
-	Then $u\in\gradSob{\interval{I_{jk}}}{y}$ and 
+	Then $u\in\gradSob{\sqbracs{0,l_{jk}}}{y}$ and 
 	\begin{align*}
 		\ktgrad_{\lambda_{jk}}u = \bracs{u'+\rmi\qm_{jk}u}\hat{e}_{jk} + \rmi\wavenumber u\hat{x}_3,
 	\end{align*}
-	where $\qm_{jk}:=\qm\cdot e_{jk} = \bracs{R_{jk}\qm}_2$, and $u' = \widetilde{u}'\circ r_{jk}^{-1}$.
+	where $\qm_{jk}:=\qm\cdot e_{jk}$, and $u' = \widetilde{u}'\circ r_{jk}^{-1}$.
 \end{cory}
 \begin{proof}
 	Since $\ktgrad_{\lambda_{jk}}u$ is orthogonal to $\gradZero{\ddom}{\lambda_{jk}}$ and given proposition \ref{prop:3DGradZeroRotated}, we have that for any $g\in\pltwo{\ddom}{\lambda_{jk}}$,
@@ -437,21 +453,43 @@ We shall address this matter when we come to look at tangential gradients with r
 		\end{pmatrix}
 		\rightarrow v_{jk}e_{jk},
 		\quad \implies
-		\begin{pmatrix}
-			\partial_1\phi_n \\
-			\partial_2\phi_n
-		\end{pmatrix}
-		\cdot e_{jk}
+		\grad\phi_n\cdot e_{jk}
 		\rightarrow v_{jk} - \rmi\bracs{\qm\cdot e_{jk}}u = v_{jk} - \rmi\qm_{jk}u
 	\end{align*}
 	Write $\widetilde{\phi}_n = \phi_n\circ r_{jk}$ and $\widetilde{v}_{jk}=v_{jk}\circ r_{jk}$, then the above implies that
 	\begin{align*}
-		\int_0^{\abs{I_{jk}}} \abs{ \widetilde{\phi}_n'(y) - \widetilde{v}_{jk}(y) + \rmi\qm_{jk}  }^2
+		\int_0^{l_{jk}} \abs{ \widetilde{\phi}_n'(y) - \widetilde{v}_{jk}(y) + \rmi\qm_{jk}  }^2
 		&= \integral{\ddom}{ \abs{ \grad\phi_n\cdot e_{jk} - v_{jk} + \rmi\qm_{jk}u }^2 }{\lambda_{jk}} \\
 		&\rightarrow 0 \toInfty{n}.
 	\end{align*}
-	We can also deduce that $\widetilde{\phi}_n\rightarrow \widetilde{u}$ in $\ltwo{\interval{I_{jk}}}{y}$ too, which implies that $\widetilde{u}\in\gradSob{\interval{I_{jk}}}{y}$ with $\widetilde{u}' = \widetilde{v}_{jk} - \rmi\qm_{jk}\widetilde{u}$.
+	We can also deduce that $\widetilde{\phi}_n\rightarrow \widetilde{u}$ in $\ltwo{\sqbracs{0,l_{jk}}}{y}$ too, which implies that $\widetilde{u}\in\gradSob{\sqbracs{0,l_{jk}}}{y}$ with $\widetilde{u}' = \widetilde{v}_{jk} - \rmi\qm_{jk}\widetilde{u}$.
 	Rearranging for $\widetilde{v}_{jk}$ and undoing the change of variables $r_{jk}$ then provides the result.
+\end{proof}
+
+Tangential gradients of functions in $\ktgradSob{\ddom}{\massMes}$ are essentially zero (save for the third components), owing to the fact that $\gradZero{\ddom}{\massMes}$ encompasses almost the entirety of $\ltwo{\ddom}{\dddmes}^3$.
+Indeed, we have the following result that follows immediately from proposition \ref{prop:NuGradZeroChar}.
+\begin{cory}[Characterisation of $\ktgradSob{\ddom}{\massMes}$] \label{cory:NuTangGradChar}
+	It holds that:
+	\begin{enumerate}[(i)]
+		\item If $u\in\ktgradSob{\ddom}{\massMes}$ then $\ktgrad_{\massMes}u = \bracs{0,0,\rmi\wavenumber u}^\top$.
+		\item If $u\in\ltwo{\ddom}{\massMes}$, then $u\in\ktgradSob{\ddom}{\massMes}$.
+	\end{enumerate}
+\end{cory}
+That is to say, every $\ltwo{\ddom}{\massMes}$ function possesses a tangential gradient, and that tangential gradient is simply the function $\bracs{0,0,\rmi\wavenumber u}^\top\in\ltwo{\ddom}{\massMes}^3$.
+\begin{proof}
+	\begin{enumerate}[(i)]
+		\item Suppose that $u\in\ktgradSob{\ddom}{\massMes}$ with $\ktgrad_{\massMes}u = \bracs{v_1,v_2,v_3}^\top$.
+		Since $\ktgrad_{\massMes}u\perp\gradZero{\ddom}{\massMes}$, and given proposition \ref{prop:NuGradZeroChar}, we must have that $v_1 = v_2 = 0$.
+		Now let $\phi_n$ be an approximating sequence for $u$.
+		Since $\phi_n\rightarrow u$, we must have that $\rmi\wavenumber\phi_n\rightarrow\rmi\wavenumber u$, which forces $v_3 = \rmi\wavenumber u$.
+		\item If $u\in\ltwo{\ddom}{\massMes}$, for each $v_j\in\vertSet$ let $\psi_j$ denote the smooth ``bump" function centred on $v_j$ with
+		\begin{align*}
+			\psi_j\bracs{v_j} = 1, \quad \supp\bracs{\psi_j}\subset B_d\bracs{v_j},
+		\end{align*}
+		where $d$ is as in \eqref{eq:HalfMinDistBetweenVertsDef}.
+		Setting $\phi\bracs{x} = \sum_{v_j\in\vertSet}u\bracs{v_j}\psi_j\bracs{x}$, we have that $\phi\in\psmooth{\ddom}$ and that $\phi = u$ in $\ltwo{\ddom}{\massMes}$.
+		Therefore, $\bracs{u, \ktgrad\phi}\in W^{\kt}_{\massMes,\mathrm{grad}}$, and hence there exists some $\ktgrad_\massMes u\in\gradZero{\ddom}{\massMes}^\perp$ such that $u\in\ktgradSob{\ddom}{\massMes}$.
+	\end{enumerate}
 \end{proof}
 
 % Since there are a lot of long arguments in the section on characterising tangential gradient Sobolev spaces, I've put these into a new file.
@@ -494,6 +532,6 @@ We shall address this matter when we come to look at tangential gradients with r
 %	\end{align*}
 %\end{proof}
 
-This concludes our investigation into the gradient Sobolev spaces, specifically the behaviour of functions that possess tangential gradients.
-In section \ref{ssec:3DGradGeometric} we provide a geometric interpretation of the tangential gradient that highlights the connection between the singular measures, the geometry of the singular structure, and the notion of ``gradient" that the measures provide.
-We will come to utilise the knowledge of tangential gradients in section \ref{sec:ScalarDerivation}, where knowing their functional form is essential to allow us to obtain the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem} from \eqref{eq:SingularScalarWaveEqn}.
+This concludes our investigation into $\ktgradSob{\ddom}{\dddmes}$ and the behaviour of the tangential gradients.
+In section \ref{ssec:3DGradGeometric} we provide a geometric interpretation of gradients of zero and tangential gradients that highlights the connection between the singular measures, the geometry of the singular structure, and the notion of ``gradient" that the measures provide.
+We will come to utilise the knowledge of tangential gradients in section \ref{sec:ScalarDerivation}, where knowing their explicit form is essential to us obtaining the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem} from \eqref{eq:SingularScalarWaveEqn}.

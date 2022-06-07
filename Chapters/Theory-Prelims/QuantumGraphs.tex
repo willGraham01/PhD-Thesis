@@ -128,6 +128,7 @@ so for example
 \end{align*}
 If there are multiple edges $I_{jk}^l$ connecting two vertices, these sums are interpreted as running over all such edges.
 It is also convenient to introduce notation for the junction of a vertex $v_j\in\vertSet$: let $J\bracs{v_j}$ denote the \emph{collection of connecting edges} to $v_j$, $J\bracs{v_j} = \clbracs{I_{jk} \setVert j\con k}$ and $\mathcal{J}\bracs{v_j}$ the \emph{junction region} $\mathcal{J}\bracs{v_j}=\bigcup_{J(v_j)}I_{jk}$.
+Also write $\mathrm{deg}(v_j)$ for the degree of the vertex $v_j$, which coincides with the number of elements in the collection of connecting edges $\mathrm{deg}(v_j)=\abs{J(v_j)}$.
 The function spaces \eqref{eq:GraphFuncSpaces} do not convey any information about the connectivity of $\graph$ in themselves --- indeed it is not even necessary for the traces of the edge functions $u^{(jk)}$ of $u\in H^1\bracs{\graph}$ to match at a common vertex. 
 The connectivity of $\graph$ is introduced through the definition of the (domains of the) differential operators on such graphs, which we introduce now.
 
