@@ -1,8 +1,8 @@
 \section{Geometric Interpretation of Tangential Curls} \label{sec:CC-Geometric}
-Unlike the gradient, the curl of a vector field does not have an intuitive one-dimensional analogue that we can appeal to when looking to work on singular structure domains.
-This makes the analysis of section \ref{sec:CC-CurlAnalysis} crucial to our understanding of the curl of the curl equation \eqref{eq:SingularCurlEquation}.
-In the interests of providing the reader an intuitive idea of what the tangential curl is for a singular measure, we provide a geometric interpretation in this section prior to beginning the process of deriving a quantum graph problem from our variational formulation.
-We will also address a remark made in section \ref{sec:TP-DomainSetup}, concerning why we do not consider a singular structure modelled by a (periodic) graph embedded into $\reals^3$, and instead consider a domain formed from the extrusion into 3 dimensions of a periodic graph embedded in $\reals^2$.
+Unlike the gradient, the curl of a vector field does not have a natural one-dimensional analogue that we can appeal to when looking to work on singular structure domains.
+This makes the analysis of section \ref{sec:CC-CurlAnalysis}, which takes the procedure laid out in section \ref{sec:3DBorelGradSobSpaces} and extends it to curls, crucial to our understanding of the problem \eqref{eq:SingularCurlEquation} and the tangential curls themselves.
+In the interests of providing the reader an intuitive idea of what the tangential curl with respect to a singular measure is, we provide a geometric interpretation in this section prior along with a summary of the key behaviours $\ktcurl{\dddmes}u$ exhibits.
+We will also address a remark made in section \ref{sec:TP-DomainSetup}, concerning why we do not consider a singular structure modelled by a (periodic) graph embedded into $\reals^3$, and instead only consider a domain formed from the extrusion into 3 dimensions of a periodic graph embedded in $\reals^2$.
 
 Let us begin by demonstrating why curls of zero on a singular structure embedded into $\reals^3$ do not give rise to any interesting variational problems.
 Consider a segment $I_{jk}\subset\reals^3$, with $I_{jk} = \clbracs{0}\times\sqbracs{0,l_{jk}}\times\clbracs{0}$, which we can view as one edge of a graph embedded into $\reals^3$ --- the illustration in figure \ref{fig:Diagram_SingularMeasure3D} is representative of the situation.
@@ -14,8 +14,6 @@ We can then prove the following result:
 	\end{align*}
 	and consequentially every vector field $u\in\ltwo{\reals^3}{\lambda_{jk}}^3$ is also an element of $\ktcurlSob{\reals^3}{\lambda_{jk}}$ with tangential curl equal to zero.
 \end{prop}
-The assumption on the position and orientation of $I_{jk}$ is not restrictive, in the sense that the result we prove will generalise to any line segment (and thus edge) in $\reals^3$.
-This result also holds when we replace $\reals^3$ with a finite domain $U\subset\reals^3$ (with non-zero $\lambda_3$-measure) and consider $I_{jk}\subset U$, and consequentially if we consider $U$ the period cell of some 3-dimensional singular structure $\graph$ and consider curls on the torus.
 \begin{proof}
 	We construct explicit approximating sequences for any function in $\ltwo{\reals^3}{\lambda_{jk}}^3$, by first considering $\phi\in\csmooth{\reals^3}$, and considering the vector field $\varphi^{(2)} = -x_1\phi\widehat{x}_3\in\csmooth{\reals^3}^3$.
 	We observe that $\varphi^{(2)}=0$ on $I_{jk}$ (since $x_1=0$ here) and 
@@ -31,55 +29,58 @@ This result also holds when we replace $\reals^3$ with a finite domain $U\subset
 	\end{align*}
 	so $\phi\widehat{x}_2\in\curlZero{\reals^3}{\lambda_{jk}}$.
 	Consideration of the functions $\varphi^{(1)} = -x_3\phi\widehat{x}_2$ and $\varphi^{(3)}=x_1\phi\widehat{x}_2$ demonstrates that $\phi\widehat{x}_1$ and $\phi\widehat{x}_3$ are also elements of $\curlZero{\reals^3}{\lambda_{jk}}$.
-	By linearity, we have that $\csmooth{\reals^3}^3\subset\curlZero{\reals^3}{\lambda_{jk}}$ and then by the density of smooth functions in $\ltwo{\reals^3}{\lambda_{jk}}$, we obtain
+	By linearity we have that $\csmooth{\reals^3}^3\subset\curlZero{\reals^3}{\lambda_{jk}}$, and then by a density argument we obtain
 	\begin{align*}
 		\curlZero{\reals^3}{\lambda_{jk}} = \ltwo{\reals^3}{\lambda_{jk}}^3.
 	\end{align*}
 	We can also infer that any smooth vector field $\Phi\in\csmooth{\reals^3}{\lambda_{jk}}^3$ is an element of $\ktcurlSob{\reals^3}{\lambda_{jk}}$ with $\ktcurl{\lambda_{jk}}\Phi = 0$ since $\ltwo{\reals^3}{\lambda_{jk}}^{\perp} = \clbracs{0}$.
 	Density of smooth functions in $\ltwo{\reals^3}{\lambda_{jk}}^3$ then demonstrates that any $u\in\ltwo{\reals^3}{\lambda_{jk}}^3$ is also an element of $\ktcurlSob{\reals^3}{\lambda_{jk}}$ with tangential curl equal to zero.
 \end{proof}
-That is to say, a singular structure in 3 dimensions represented by a graph does not give rise to any non-trivial notion of the curl of a vector field.
-Needless to say, this makes exploration of the curl of the curl equation trivial in this context --- it is clear from section \ref{sec:CC-CurlAnalysis} that tangential curls with respect to the measure $\ddmes$ will inherit the behaviour of tangential curls with respect to each $I_{jk}$ on the respective edges, and thus only produce trivial variational problems.
+The assumption on the position and orientation of $I_{jk}$ is not restrictive, in the sense that the result we prove will generalise to any line segment (and thus edge) in $\reals^3$.
+This result also holds when we replace $\reals^3$ with a finite domain $U\subset\reals^3$ (with non-zero $\lambda_3$-measure) and consider $I_{jk}\subset U$.
+We can also obtain a similar conclusion when $U$ is considered to be the period cell of some 3-dimensional singular structure, and $I_{jk}$ a piece of this structure.
+Arguments similar to those in section \ref{sec:CC-CurlAnalysis} can then be used to deduce that tangential curls with respect to $\ddmes$ will inherit the behaviour of tangential curls with respect to each $I_{jk}$ on the respective edges.
+This culminates in the realisation that a singular structure in 3 dimensions represented by a graph does not give rise to a non-trivial notion of the (tangential) curl of a vector field, and consequentially there are no non-trivial solutions to \eqref{eq:SingularCurlEquation} on such a structure.
 
-Rather than examining a graph embedded into $\reals^3$, let us instead return to the domain $\dddom$.
-First, recall that $\dddom$ consists of a periodic graph embedded into $\reals^2$ with unit cell $\ddom$, and then extruded into $\dddom = \ddom\times[0,\infty)$ to form a domain that consists of a union of planes parallel to the $x_3$-axis.
-Our use of a Fourier transform in $x_3$ then brings us back onto the 2 dimensional domain $\ddom$, however it is important for us to remember that each edge of $\graph$ in $\ddom$ actually represents a \emph{plane} in $\reals^3$.
-In what follows, we will let $P_{jk}$ be the plane induced by the edge $I_{jk}$ of the graph $\graph$, so $P_{jk} = I_{jk}\times[0,\infty)\subset\ddom\times[0,\infty)$.
-
-Classically, one can interpret the curl $c$ of a vector field $u$ by identifying $c(x)$ as the axis of rotation that an (infinitesimally small) spherical body would undergo if placed in the field $u$ at position $x$, with the angular speed of the rotation equal to half the magnitude of $c(x)$.
-Our intuition and geometric interpretation for tangential gradients (section \ref{ssec:3DGradGeometric}) was largely based on the idea that the singular measure $\lambda_{jk}$ cannot ``see" changes in functions \emph{across} the edges $I_{jk}$.
-Formally, the interpretation we have for tangential curls (and curls of zero) also appeals to this idea; the measure $\lambda_{jk}$ does not have any concept of normal derivative across $I_{jk}$, and correspondingly the product measure $\lambda_{jk}\times\lambda_1$ does not have any concept of a derivative \emph{outward} from the plane $P_{jk}$.
-However, when we are restricted to only observing the values of $u$ in the plane $P_{jk}$, any changes in $u$ in the direction of the outward normal $\widehat{n}_{jk}$ to $P_{jk}$ cannot be seen, or observed.
-Such changes in $u$ only affect the components of $c(x)$ in the directions orthogonal to $\widehat{n}_{jk}$, but if we do not know how we are rotating in one direction, we do not know how to orient \emph{the axis} about which we rotate.
-In this case, the directions $\widehat{e}_{jk}$ and $\widehat{x}_3$ are those which are orthogonal to $\widehat{n}_{jk}$ (corollary \ref{cory:CurlZero-Rotated}).
+This trivial behaviour is consistent with the interpretation of tangential curls that we obtain from our analysis in section \ref{sec:CC-CurlAnalysis} of the space $\ktcurlSob{\ddom}{\dddmes}$.
+Classically, one can interpret the curl $c$ of a vector field $u$ by identifying $c(x)$ as the axis of rotation that an (infinitesimally small) spherical body would undergo if placed in the field $u$ at position $x$ (with the angular speed of the rotation proportional to the magnitude of $c(x)$).
+Our intuition and geometric interpretation for tangential gradients (section \ref{ssec:3DGradGeometric}) was largely based on the idea that the singular measure $\lambda_{jk}$ cannot perceive changes in functions \emph{across} the edges $I_{jk}$.
+The interpretation we have for tangential curls (and curls of zero) also appeals to this idea; the measure $\lambda_{jk}$ does not have any concept of normal derivative across $I_{jk}$, and correspondingly the product measure $\lambda_{jk}\times\lambda_1$ does not have any concept of a derivative \emph{outward} from the plane $P_{jk}$.
+When we are restricted to only observing the values of $u$ in the plane $P_{jk}$, any changes in $u$ in the direction of the outward normal $\widehat{n}_{jk}$ to $P_{jk}$ cannot be observed.
+Such changes in $u$ only affect the components of $c(x)$ in the directions orthogonal to $\widehat{n}_{jk}$ --- but if we do not know how we are rotating in these directions, we do not know how to orient \emph{the axis} about which we rotate.
+As a result, any ``rotations" with axes parallel to the $\widehat{x}_3$ and $\widehat{e}_{jk}$ directions must correspond to curls of zero (corollary \ref{cory:CurlZero-Rotated}).
 On the other hand, the only component of $c(x)$ that isn't derived from changes in $u$ in the direction $\widehat{n}_{jk}$ is the component along the direction $\widehat{n}_{jk}$ itself, which is the only component in tangential curls that is non-zero (corollary \ref{cory:TangCurlEdgeRotated}).
-This idea carries over into our previous consideration of singular structures (and conclusion in proposition \ref{prop:3DGraph-CurlsAreZero}) in three dimensions too ---  $\lambda_{jk}$ still has no concept of derivative across the edge $I_{jk}$, and in three dimensions this means there are two linearly independent directions in which rates of change cannot be seen.
-Consequentially, we can never accurately reconstruct the axis about which we are rotating, as all three components of the curl would need to know the rate of change in $u$ in at least one of the directions normal to $I_{jk}$.
-The measure $\massMes$ tells a similar story --- except in this case we have thrown away the ability to detect change in \emph{every} axial direction!
+We can apply these ideas to our previous consideration of singular structures represented by graphs embedded into $\reals^3$ (proposition \ref{prop:3DGraph-CurlsAreZero}) ---  $\lambda_{jk}$ has no concept of derivative across the edge $I_{jk}$, and in three dimensions this means there are two linearly independent directions in which rates of change cannot be seen.
+Consequentially, we can never accurately reconstruct the axis about which we are rotating, as all three components of any ``curl" require information about the rate of change in $u$ in at least one of the directions normal to $I_{jk}$.
+The measure $\massMes$ tells a similar story: in this case we have thrown away the ability to perceive change in \emph{every} axial direction, and like the case for tangential gradients we find that $\ktcurl{\massMes}u=0$ for any vector field.
 
-For a visual interpretation of tangential curls, one can imagine the following picture (illustrated in figure \ref{fig:Diagram_CurlGeometric} with the commentary that follows).
-Place a sphere of radius $\ll 1$\footnote{Or alternatively, think of the sphere as being infinitesimally small.} centred at a point $x\in P_{jk}$.
-Place a point $p$ on the intersection between the surface of the sphere and the plane $P_{jk}$, and consider the (closed) path $\gamma_p$ that $p$ traces out under the rotation induced by the vector field $u$.
-Under the axis of rotation provided by $\ktcurl{\lambda_{jk}}u$, the curve $\gamma_p$ will be entirely contained in the plane $P_{jk}$, and thus the rotation is ``visible" to\footnote{Or for want of a better phrase, the rotation \emph{traces out a path that can be followed by}.} the measure $\lambda_{jk}\times\lambda_1$.
-\begin{figure}[b!]
+For a visual interpretation of tangential curls one can imagine the following scenario, which is illustrated in figure \ref{fig:Diagram_CurlGeometric} using the language of the commentary that follows.
+\begin{figure}[t!]
 	\centering
 	\includegraphics[scale=1.0]{./Diagram_CurlGeometric.pdf}
 	\caption[Geometric interpretation of tangential curls with respect to $\dddmes$.]{\label{fig:Diagram_CurlGeometric} An illustration of the notation of tangential curl and curls of zero on $P_{jk}$. Tangential curls cause points on an (infinitesimally small) sphere to rotate within the plane $P_{jk}$, whilst curls of zero induce rotations that move points on the sphere out of the plane.}
 \end{figure}
+Imagine an infinitesimally small sphere whose centre is at a point $x\in P_{jk}$, and then place another point $p$ on the intersection between the surface of the sphere and the plane $P_{jk}$.
+Then consider the (closed) path $\gamma_p$ that $p$ traces out under the rotation induced by the vector field $u$.
+Under the axis of rotation provided by $\ktcurl{\lambda_{jk}}u$, the curve $\gamma_p$ will be entirely contained in the plane $P_{jk}$, and thus the rotation is visible to\footnote{Or for want of a better phrase, the rotation \emph{traces out a path that can be followed by}.} the measure $\lambda_{jk}\times\lambda_1$.
 However under the axis of rotation provided by a curl of zero, the curve $\gamma_p$ is not contained in the plane $P_{jk}$ --- in fact, it's intersection with the plane will be at most a finite number of points.
 If instead $P_{jk}\cap\gamma_p\supset\clbracs{p,p^*}$ for $p^*\neq p$, the measure $\lambda_{jk}\times\lambda_1$ still has no way of knowing \emph{how} $p$ travelled to $p^*$, since the path $\gamma_p$ is not visible (and, from the 3-dimensional perspective, there are infinitely many curls of varying magnitudes that could rotate $p$ to $p^*$ and back).
 In the event that $P_{jk}\cap\gamma_p=\clbracs{p}$, then it appears that the sphere is not rotating at all.
-That is to say, curls of zero induce rotations ``out of the plane" $P_{jk}$, which the measure $\lambda_{jk}$ cannot observe, whilst tangential curls ensure that all rotation happens ``within" the plane $P_{jk}$.
+That is to say, curls of zero induce rotations ``out of the plane" $P_{jk}$, which the measure $\lambda_{jk}\times\lambda_1$ cannot observe, whilst tangential curls ensure that all rotation happens ``within" the plane $P_{jk}$.
 
-Similarly to chapter \ref{ch:ScalarSystem}, having an edge-wise behaviour for the tangential curl and curls of zero (that is, with respect to $\lambda_{jk}$) will allow us to construct those with respect to $\ddmes$ and $\dddmes$.
+Similarly to chapter \ref{ch:ScalarSystem}, it is the case that the behaviours of tangential curls and curls of zero on the edges of our singular structure (that is, with respect to $\lambda_{jk}$) are inherited by vector fields with tangential curls with respect to $\ddmes$ and $\dddmes$.
 These arguments are the focus of section \ref{sec:CC-CurlAnalysis}, however we again provide the reader with a summary of the key properties of the tangential curl so that the manipulations in section \ref{sec:3DSystemDerivation} can be followed.
 To this end, a function $u\in\ktcurlSob{\ddom}{\dddmes}$ has the following properties:
 \begin{enumerate}[(i)]
 	\item On a given edge $I_{jk}$, we have that $\ktcurl{\dddmes}u = \ktcurl{\lambda_{jk}}u$.
 	\item Along the edge $I_{jk}$, only the ``in-plane" components of $u$ are relevant.
-	To this end we set $U^{(jk)} = R_{jk}\begin{pmatrix} u^{(jk)}_1 \\ u^{(jk)}_2 \end{pmatrix}$.
-	Then we have that $\ktcurl{\lambda_{jk}}u = \bracs{u_3' + \rmi\qm_{jk}u_3 - \rmi\wavenumber U^{(jk)}_2}\widehat{n}_{jk}$, where $\qm_{jk}$ are the same constants from section \ref{sec:ScalarDerivation}, and $u_3'$ is the derivative in the $H^1$ sense of $u^{(jk)}_3\circ r_{jk}$.
+	To this end we set $U^{(jk)} = R_{jk}\begin{pmatrix} u^{(jk)}_1 \\ u^{(jk)}_2 \end{pmatrix}$, so that $U_2^{(jk)} = \bracs{u_1^{(jk)},u_2^{(jk)}}^\top e_{jk}$, and we have that
+	\begin{align*}
+		\ktcurl{\lambda_{jk}}u = \bracs{\bracs{u_3^{(jk)}}' + \rmi\qm_{jk}u_3^{(jk)} - \rmi\wavenumber U^{(jk)}_2}\widehat{n}_{jk}.
+	\end{align*}
+	The constants $\qm_{jk}=\qm\cdot e_{jk}$ are the same constants from section \ref{sec:ScalarDerivation}, and $u_3'$ is the derivative in the $H^1$ sense of $u^{(jk)}_3\circ r_{jk}$.
 	The term $\rmi\wavenumber U^{(jk)}_2$ resembles the information about any rotation induced by changes in $u$ along the $x_3$-axis that the measure $\lambda_{jk}\times\lambda_1$ can see.
 	\item We have that $u_3\in\ktgradSob{\ddom}{\dddmes}$, so in particular it is continuous at each vertex $v_j$.
 	\item At each $v_j$, we have that $\ktcurl{\dddmes}u = 0$.
+	However much like the case with gradients, the incoming curls to a vertex from the connecting edges do not have to have a limit of zero into the vertex!
 \end{enumerate}

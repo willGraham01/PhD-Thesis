@@ -1,47 +1,16 @@
 \section{The Divergence-Free Condition} \label{sec:DivFreeCondition}
-As was mentioned in section \ref{sec:Intro-Maxwell}, the definition of the Maxwell operator requires us to pay respect to the divergence-free nature of the electric and magnetic fields; in particular the vector fields that make up the space on which the curl of the curl equation is posed on are required to be divergence-free.
+As was mentioned in section \ref{sec:Intro-Maxwell}, the absence of free electric charges requires us to impose that the electric and magnetic fields are divergence-free.
+This extends to the vector field $u$ that solves the curl-of-the-curl equation, which is derived under the aforementioned assumption of no free charges.
 This divergence-free condition adds extra constraints to the fields, and the analysis of section \ref{sec:CC-CurlAnalysis} indicates that we require an analogue of this divergence-free condition to constrain the behaviour of vector fields with $\dddmes$-tangential curls near the vertices.
+We thus require an analogue of the divergence-free condition to impose on the space of vector fields in which we look for solutions to the problem \eqref{eq:SingularCurlEquation}.
 Given the motivation for our consideration of the curl of the curl equation on a singular structure, it is natural for us to consider what the analogue of a divergence free field would be.
 Using the classical notion of a divergence-free vector field as our starting point, we find ourselves presented with several reasonable definitions for the notion of a divergence free vector field with respect to our singular measures, which we will discuss in turn below.
-However, we will see that a ``strong" definition through approximating sequences fails to provide a rather underwhelming\footnote{If not entirely unexpected.} description (see lemma \ref{lem:DivZero-Everything}), whilst the ``weaker" definitions \ref{def:DivFree-AllGradients} and \ref{def:DivFree-TangGradients} do provide some additional constraints on our vector fields, but section \ref{sec:3DSystemDerivation} will show that these constraints are also directly obtainable from \eqref{eq:SingularCurlEquation}.
+Ultimately, we adopt a ``weak" notion of divergence-free by appealing to orthogonality of a vector field to all gradient (or potential) fields, as is done in the classical case.
+However the existence of gradients of zero presents us with two candidates for the definition of this notion: definitions \ref{def:DivFree-AllGradients} and \ref{def:DivFree-TangGradients}.
+This will then motivate a short discussion on the implications of a ``strong" definition of the divergence (with respect to a singular measure) of a vector field through approximating sequences, although this provides a rather underwhelming\footnote{If not entirely unexpected.} description (see lemma \ref{lem:DivZero-Everything}).
 
-Given how we have chosen to define gradients and curls with respect to our singular measures, it is natural to ask whether it would be possible to define the tangential divergence through an approximation via smooth functions in a similar manner.
-A short investigation proves that this is not be the case.
-If we follow our motivations for gradients and curls, for a (Borel) measure $\rho$ we could define
-\begin{align*}
-	W_{\rho,\mathrm{div}}^{\kt} = \overline{\clbracs{ \bracs{\phi,\ktgrad\cdot\phi} \setVert \phi\in\psmooth{\ddom}^3 }},
-\end{align*}
-with the closure taken in $\ltwo{\ddom}{\rho}^3\times\ltwo{\ddom}{\rho}$, and define the space of divergences of zero (with respect to $\rho$) as
-\begin{align*}
-	\divZero{\ddom}{\rho} &= \clbracs{d \setVert \bracs{0,d}\in W_{\rho,\mathrm{div}}^{\kt}}.
-\end{align*}
-Similar arguments to those in section \ref{sec:BorelMeasSobSpaces} establish that $\divZero{\ddom}{\rho}$ does not depend on the value of $\kt$, and is a closed, linear subspace of $\pltwo{\ddom}{\rho}$.
-Hence we can decompose $\pltwo{\ddom}{\rho}$ as the direct sum of $\divZero{\ddom}{\rho}$ and its orthogonal complement.
-In turn, we would find that a function has at most one ``tangential divergence", and thus could define the Sobolev space of functions possessing divergences as
-\begin{align*}
-	\ktdivSob{\ddom}{\rho}
-	&= \clbracs{ \bracs{u,\ktdiv{\rho}u}\in W_{\rho,\mathrm{div}}^{\kt} \setVert d\perp\mathcal{D}_{\ddom,\md\rho}\bracs{0} }.
-\end{align*}
-Then any vector field whose tangential divergence is zero, we would label as a divergence free field.
-However once we consider the divergences of zero on a single edge of our singular structure, we will quickly run into an unpleasant consequence:
-\begin{lemma} \label{lem:DivZero-Everything}
-	For any edge $I_{jk}$, we have that $\divZero{\ddom}{\lambda_{jk}}=\pltwo{\ddom}{\lambda_{jk}}$.
-\end{lemma}
-\begin{proof}
-	Let $\phi\in\psmooth{\ddom}$, and let $\varphi\in\csmooth{\ddom}$ be a smooth function with $\varphi(x)=\bracs{x-v_j}\cdot n_{jk}\phi(x)$ in some neighbourhood of $I_{jk}$.
-	Then the smooth function $\varphi\widehat{n}_{jk}\in\csmooth{\ddom}^3$ is such that $\varphi=0$ and $\grad\cdot\varphi\widehat{n}_{jk}=\phi$ on $I_{jk}$, so $\phi\in\divZero{\ddom}{\lambda_{jk}}$.
-	A density argument then completes the proof.
-\end{proof}
-Further to this, it is not difficult to prove an analogy of the extension results (proposition \ref{prop:3DGradZeroChar} and theorem \ref{thm:CurlZeroChar}) for these divergences of zero.
-Neither is it difficult to show that $\divZero{\ddom}{\massMes}=\pltwo{\ddom}{\massMes}$, and consequentially that an analogue of theorem \ref{thm:3DdddmesCharGradZero} and proposition \ref{prop:ThickVertexCurlZeroCharacterisation} holds, so every tangential divergence is zero!
-We should not be surprised at this result --- the divergence is a scalar representing the net flow of a vector field out of a given point $x$.
-However our singular measure cannot see any such flux across the edges $I_{jk}$ (or out of the planes $P_{jk}$), thus any divergence induced by such a flux must be a divergence of zero.
-However it is then impossible to know ``how much" of the scalar divergence would be due to these unobservable fluxes across $I_{jk}$, and how much was from the observable portions of the vector field along $I_{jk}$.
-
-Naturally, one might find it dissatisfying that all vector fields are divergence free in lieu of the above computation, and instead look for other possible definitions or interpretations.
-However we are getting ahead of ourselves by trying to define the notion of divergence-free in this ``strong" manner.
-The expression ``$u$ is divergence-free" for an $L^2$ vector field does not necessitate the existence of \emph{another} $L^2$ function related to $u$ in the manner proposed above, but rather indicates that the vector field $u$ is orthogonal to all gradients.
-Utilising this analogue with the classical divergence, we adopt the following definition for our analogue of divergence-free fields:
+The divergence does not appear as an interior operator in the curl-of-the-curl equation, and thus the statement ``$u$ is divergence-free" for an $L^2$ vector field is defined as meaning the vector field $u$ is orthogonal (in $L^2$) to all gradient fields.
+Utilising this analogue with the classical divergence, we adopt the following definition for the notion of divergence-free with respect to a singular measure:
 \begin{definition}[$\dddmes$-Divergence Free] \label{def:DivFree-AllGradients}
 	A field $u\in\pltwo{\ddom}{\dddmes}^3$ is divergence free (with respect to $\dddmes$) if (and only if)
 	\begin{align*}
@@ -50,7 +19,7 @@ Utilising this analogue with the classical divergence, we adopt the following de
 	for every $g\in W_{\mathrm{grad}}^{\kt}\bracs{\ddom,\md\dddmes}$.
 \end{definition}
 That is, a field is divergence free only if it is orthogonal in $\ltwo{\ddom}{\dddmes}$ to any gradient field, including the gradients of zero.
-This ``weak" definition is the most consistent given that we do not need to consider any equations explicitly involving the divergence of a vector field, and it admits the following characterisation.
+The $\dddmes$-divergence free fields admit the following characterisation.
 \begin{prop} \label{prop:DivFree-AllGradsConditions}
 	Let $u\in\pltwo{\ddom}{\dddmes}^3$ and define (for each edge $I_{jk}$)
 	\begin{align*}
@@ -74,7 +43,9 @@ This ``weak" definition is the most consistent given that we do not need to cons
 		\item We first utilise theorem \ref{thm:3DdddmesCharGradZero} to deduce that $\ip{u}{g}_{\ltwo{\ddom}{\lambda_{jk}}}=0$ for every $g\in\gradZero{\ddom}{\lambda_{jk}}$.
 		Then since we know that $\gradZero{\ddom}{\lambda_{jk}}$ consists of all functions of the form $g_{jk}\hat{n}_{jk}$ (proposition \ref{prop:3DGradZeroChar}), we must conclude that
 		\begin{align*}
-			0 &= \integral{\ddom}{ \overline{g}_{jk}\begin{pmatrix} u_1^{(jk)} \\ u_2^{(jk)} \end{pmatrix}\cdot n_{jk} }{\lambda_{jk}}, \qquad \forall g_{jk}\in\pltwo{\ddom}{\lambda_{jk}},
+			0 &= \integral{\ddom}{ \overline{g}_{jk}\begin{pmatrix} u_1^{(jk)} \\ u_2^{(jk)} \end{pmatrix}\cdot n_{jk} }{\lambda_{jk}} 
+			= \integral{\ddom}{ \overline{g}_{jk}U_1^{(jk)} }{\lambda_{jk}},
+			\qquad \forall g_{jk}\in\pltwo{\ddom}{\lambda_{jk}},
 		\end{align*}
 		so $U_1^{(jk)}=0$ on $I_{jk}$.
 		\item Let $\phi\in\csmooth{\sqbracs{0,l_{jk}}}$.
@@ -90,7 +61,7 @@ This ``weak" definition is the most consistent given that we do not need to cons
 			\int_0^{l_{jk}} \overline{\phi}'\widetilde{U}_2^{(jk)} \ \md y
 			&= \int_0^{l_{jk}} \overline{\phi}\bracs{ \rmi\qm_{jk}\widetilde{U}_2^{(jk)} + \rmi\wavenumber\widetilde{u}_3^{(jk)} } \ \md y.
 		\end{align*}
-		This holds for every $\phi\in\csmooth{\sqbracs{0,l_{jk}}}$, and so we can conclude that $\widetilde{U}_2^{(jk)}\in\gradSob{\sqbracs{0,l_{jk}}}{y}$.
+		This holds for every $\phi\in\csmooth{\sqbracs{0,l_{jk}}}$, and $\rmi\qm_{jk}\widetilde{U}_2^{(jk)} + \rmi\wavenumber\widetilde{u}_3^{(jk)}\in\ltwo{\sqbracs{0,l_{jk}}}{y}$ so we can conclude that $\widetilde{U}_2^{(jk)}\in\gradSob{\sqbracs{0,l_{jk}}}{y}$.
 		\item Following immediately on from the above, we have that
 		\begin{align*}
 			\bracs{U_2^{(jk)}}' = - \bracs{ \rmi\qm_{jk}U_2^{(jk)} + \rmi\wavenumber u_3^{(jk)} },
@@ -100,16 +71,16 @@ This ``weak" definition is the most consistent given that we do not need to cons
 		Fix $v_j\in\vertSet$, and take $g=\bracs{g_1,g_2,0}^\top$ at $v_j$ and zero elsewhere.
 		Given the characterisation in proposition \ref{prop:NuGradZeroChar}, we can conclude that
 		\begin{align*}
-			0 &= \integral{\ddom}{ u_\cdot\overline{g} }{\massMes}
+			0 &= \integral{\ddom}{ u\cdot\overline{g} }{\massMes}
 			= \alpha_j\bracs{\overline{g_1}u_1 + \overline{g_2}u_2},
 		\end{align*}
 		for all $g_1,g_2\in\complex$.
 		Therefore, we must have that $u_1\bracs{v_j}=u_2\bracs{v_j}=0$.
-		\item Finally, take $\varphi\in\csmooth{\ddom}$ with support
+		\item Finally, take $\varphi\in\csmooth{\ddom}$ with
 		\begin{align*}
 			\supp\bracs{\varphi} \subset \mathcal{J}\bracs{v_j}\setminus\clbracs{v_k\in\vertSet \setVert v_k\neq v_j}.
 		\end{align*}
-		Since this $\varphi$ is smooth, it is an element of $\ktgradSob{\ddom}{\dddmes}$ by definition, and we have that
+		Since $\varphi$ is smooth, it is an element of $\ktgradSob{\ddom}{\dddmes}$ by definition, and we have that
 		\begin{align*}
 		0 &= \integral{\ddom}{ u\cdot\overline{\ktgrad_{\dddmes}\varphi} }{\dddmes} \\
 		&= \sum_{j\con k}\integral{I_{jk}}{ U_2^{(jk)}\bracs{\overline{\varphi}' - \rmi\qm_{jk}\overline{\varphi}} - \rmi\wavenumber u_3^{(jk)}\overline{\varphi} }{\lambda_{jk}} 
@@ -140,30 +111,31 @@ This ``weak" definition is the most consistent given that we do not need to cons
 	\end{align*}
 	from which we can use (ii), (iii), and (v) to deduce that $\ip{u}{\ktgrad\phi_n}_{\ltwo{\ddom}{\dddmes}^3}=0$ for every $n\in\naturals$, providing orthogonality to tangential gradients.
 \end{proof}
-We highlight that a field $u$ being divergence-free provides us with some additional information about the regularity of the components of $u$, however still falls short of establishing any kind of continuity of the in-plane components $u_1$ and $u_2$ near the vertices.
+We highlight that a field $u$ being $\dddmes$-divergence free provides us with some additional information about the regularity of the components of $u$, however still falls short of establishing any kind of continuity of the in-plane components $u_1$ and $u_2$ near the vertices.
 The condition (ii) provides us with regularity of (some linear combination of) these components along each edge, but we do not obtain any information about their traces, other than the condition (v) --- which does not imply the traces must match even when $u_3(v_j)=0$.
 
-We can make some remarks about each of the conditions (i)-(v) in proposition \ref{prop:DivFree-AllGradsConditions} to draw parallels with the usual notion of divergence free.
+We can make some remarks about each of the conditions (i)-(v) in proposition \ref{prop:DivFree-AllGradsConditions} to draw parallels with the geometric interpretation of the divergence of a vector field one has in calculus.
 The left hand side of condition (iii) bears close resemblance to the expression for the three dimensional divergence; recalling our use of a Fourier transform in the $\widehat{x}_3$ direction, the $\rmi\wavenumber u_3$ term is the result of the presence of a $\partial_3 u_3$ term in non-Fourier space.
 Furthermore, we can also associate
 \begin{align*}
 	\bracs{U_2^{(jk)}}' + \rmi\qm_{jk}U_2^{(jk)} &= \bracs{\pdiff{}{e_{jk}} + \rmi\qm\cdot e_{jk}}\bracs{U^{(jk)}\cdot e_{jk}},
 \end{align*}
 which is the (shifted) derivative along the edge $I_{jk}$ (which exists thanks to (ii)).
-Given that the vectors $\widehat{e}_{jk}$ and $\widehat{x}_3$ span the plane $P_{jk}$ induced by the edge $I_{jk}$, the left hand side of (iii) amounts to an ``in-plane" divergence (using the local coordinate frame $y_{jk}$ over the axial reference frame in the $\bracs{x_1,x_2}$-plane) which, for a divergence free field is required to be zero as one might expect.
+Given that the vectors $\widehat{e}_{jk}$ and $\widehat{x}_3$ span the plane $P_{jk}$ induced by the edge $I_{jk}$, the left hand side of (iii) amounts to an ``in-plane" divergence (using the local coordinate frame $y_{jk}$ over the axial reference frame in the $\bracs{x_1,x_2}$-plane), which is required to be zero for a divergence-free field.
 It is not surprising that the condition (iii) does not involve any rates of change in the $\hat{n}_{jk}$ direction (``out of the plane" $P_{jk}$), since our singular measure cannot see such changes as they occur across the edges $I_{jk}$.
 The presence of the conditions (i) and (iv) is slightly more perplexing.
 Condition (i) informs us that our vector field $u$ is \emph{not} the result of changes across the edges $I_{jk}$, that our singular measure cannot observe.
-We can take this as the only assurance $\lambda_{jk}$ can provide that our vector field $u$ is not inducing any flux or flow in the direction normal to $I_{jk}$ --- whilst we cannot see changes across the edges, we can at least observe the direction of the field \emph{on} the edge, and make the ``out-of-plane" component zero.
+We can interpret this as the only way in which the measure $\lambda_{jk}$ can ensure that $u$ does not induce any flux or flow across the edge $I_{jk}$.
+Whilst $\lambda_{jk}$ cannot observe changes across the edges, we can at least observe the direction of the field \emph{on} the edge, and force the out-of-plane component zero.
 The condition (iv) fills the same role at the vertices --- recall that $\massMes$ cannot observe the function $u$ outside of the vertices, so $\massMes\times\lambda_1$ can only observe changes along the line induced by $v_j$ and thus the ``in-plane" components $u_1$ and $u_2$ must be zero at each vertex.
-The condition (v) is then the result of the interaction of the incoming fields at the vertices\footnote{The condition (v) even bears resemblance to a $\delta'$-type vertex condition in a quantum graph problem --- the ``derivative" $\rmi\wavenumber u_3$ at $v_j$ must equal a multiple of the incoming edge functions.}.
+The condition (v) is then the result of the interaction between the incoming fields at the vertices\footnote{The condition (v) even bears resemblance to a $\delta'$-type vertex condition in a quantum graph problem --- the ``derivative" $\rmi\wavenumber u_3$ at $v_j$ must equal a multiple of the incoming edge functions.}.
 To be divergence free at the vertex $v_j$; the sum of the ``flux" seen by the measure $\ddmes$, represented by the trace values of the $U_2^{(jk)}$ (the sign depending on whether the corresponding edge is directed into or out of the vertex $v_j$), and the ``flux" observed by $\massMes\times\lambda_1$ along the line induced by $v_j$, must balance.
 
-This interpretation does raise the question as to whether we can define some kind of \emph{weak tangential divergence} of a vector field with respect to our singular measures.
-However we can note from proposition \ref{prop:DivFree-AllGradsConditions} that only conditions (iii) and (v) actually affect what such a thing would look like --- the requirement that a field be orthogonal to gradients of zero to be divergence-free directly affects the field itself.
-Classically of course, there are no ``gradients of zero" and so there is no distinction between tangential gradients and gradients of zero.
+This interpretation and the slightly odd nature of the conditions (i) and (iv) raises the question as to whether we have been over-zealous with definition \ref{def:DivFree-AllGradients}.
+When working classically (that is, with the Lebesgue measure), there are no (non-zero) gradients of zero and so there is no distinction between tangential gradients and gradients of zero.
 Consequentially, divergence free functions being orthogonal to gradients is functionally the same as them being orthogonal to all tangential gradients.
-However, we are able to put forward a weaker definition of ``divergence-free", which for ease of language we will refer to as \emph{tangentially divergence-free}.
+However we can notice from proposition \ref{prop:DivFree-AllGradsConditions} that conditions (ii), (iii) and (v) are those which come from the requirement that $u$ be orthogonal to tangential gradients, and the more unusual conditions (i) and (iv) from orthogonality to gradients of zero. 
+Thus we face another, less restrictive, candidate for the notion of divergence free, which for ease of language we will refer to as \emph{tangentially divergence-free}.
 \begin{definition}[Tangentially $\dddmes$-Divergence Free] \label{def:DivFree-TangGradients}
 	A field $u\in\pltwo{\ddom}{\dddmes}^3$ is tangentially divergence free with respect to $\dddmes$ if (and only if)
 	\begin{align*}
@@ -171,9 +143,7 @@ However, we are able to put forward a weaker definition of ``divergence-free", w
 	\end{align*}
 	for every $v\in\ktgradSob{\ddom}{\dddmes}$.
 \end{definition}
-
-As one might expect from the differences between the definitions \ref{def:DivFree-AllGradients} and \ref{def:DivFree-TangGradients}, a characterisation of tangentially divergence free can be obtained by recycling the proof of proposition \ref{prop:DivFree-AllGradsConditions}.
-Indeed, this characterisation retains precisely the conditions (ii), (iii), and (v):
+As we have already mentioned, a characterisation of tangentially divergence free can be obtained by recycling the proof of proposition \ref{prop:DivFree-AllGradsConditions} for the conditions (ii), (iii), and (v):
 \begin{cory} \label{cory:DivFree-TangGradsConditions}
 	Let $u\in\pltwo{\ddom}{\dddmes}^3$ and define (for each edge $I_{jk}$)
 	\begin{align*}
@@ -190,9 +160,11 @@ Indeed, this characterisation retains precisely the conditions (ii), (iii), and 
 	where $\bracs{U_2^{(jk)}}' = \bracs{\widetilde{U}_2^{(jk)}}'\circ r_{jk}^{-1}$.
 \end{cory}
 We purposefully retain the same labels as proposition \ref{prop:DivFree-AllGradsConditions}.
-Similarly to how tangential gradients and curls only encode information about changes of functions or fields in the plane, a field being tangentially divergence free only imposes balance between the changes (in their respective directions) of the in-plane components of a vector field $u$.
+Similarly to how tangential gradients and curls only encode information about changes of functions or fields in the plane, a vector field being tangentially $\dddmes$-divergence free only imposes balance between the changes (in their respective directions) of the in-plane components of the field.
 
-This brings us closer to the idea of defining some kind of \emph{(weak) tangential divergence}; bringing each of the terms in (v) over to the left-hand side, we would have a function $F\in\pltwo{\ddom}{\dddmes}$ with
+The idea of a field being tangentially divergence-free brings us closer to the idea defining some kind of \emph{(weak) tangential divergence}.
+This is particularly relevant if one wishes to study a more general electromagnetic problem in which free charges are present (which we discuss in section \ref{sec:CC-Discussion}) --- as one will have the requirement that the divergence of the electric field be non-zero in this case.
+Bringing each of the terms in (v) over to the left-hand side, this suggests the form of a function $F\in\pltwo{\ddom}{\dddmes}$ with
 \begin{align} \label{eq:ktDivergence-Guess}
 	F(x) &= 
 	\begin{cases} 
@@ -202,8 +174,8 @@ This brings us closer to the idea of defining some kind of \emph{(weak) tangenti
 		x=v_j\in\vertSet,
 	\end{cases}
 \end{align}
-and that suggestively satisfies $u$ is tangentially divergence free if and only if $F=0$.
-Indeed, we could elect to define the $\kt$-divergence with respect to $\dddmes$ of a vector field $u$ in the following manner:
+and we suggestively have that $u$ is tangentially divergence free if and only if $F=0$.
+With this in mind, we could elect to define the (weak) $\kt$-divergence with respect to $\dddmes$ of a vector field $u$ in the following manner:
 \begin{definition}[(Weak) $\kt$-Divergence (with respect to $\dddmes$)] \label{def:dddmesDivergence}
 	Let $u\in\pltwo{\ddom}{\dddmes}^3$.
 	If there exists a function $d\in\pltwo{\ddom}{\dddmes}$ such that
@@ -215,10 +187,8 @@ Indeed, we could elect to define the $\kt$-divergence with respect to $\dddmes$ 
 	Then we call $d:=\ktdiv{\dddmes}u$ the $\kt$-divergence with respect to $\dddmes$ of the vector field $u$.
 	If $\ktdiv{\dddmes}u=0$, then $u$ is tangentially divergence free.
 \end{definition}
-Clearly we could produce a similar definition for any Borel measure $\rho$ on $\ddom$.
-The notions of $\kt$-tangentially divergence free (definition \ref{def:DivFree-TangGradients}) and weakly $\kt$-divergence free as in definition \ref{def:dddmesDivergence} coincide.
-This means that it is possible for us to define the object $\ktdiv{\dddmes}u$ in a manner that does not result in all vector fields being (trivially) divergence free, although this is beyond our requirements for studying the equation \eqref{eq:SingularCurlEquation}.
-We do conclude by remarking that this weak $\kt$-divergence of a field $u$ is unique --- if there are two such divergences, the difference integrated against all $\phi\in\psmooth{\ddom}$ must be zero, from which we can deduce the difference is zero almost everywhere.
+The notions of $\kt$-tangentially divergence free (definition \ref{def:DivFree-TangGradients}) and weakly $\kt$-divergence free as in definition \ref{def:dddmesDivergence} of course coincide.
+This weak $\kt$-divergence of a field $u$ is also unique --- if there are two such divergences, the difference integrated against all $\phi\in\psmooth{\ddom}$ must be zero, from which we can deduce the difference is zero almost everywhere.
 And finally, we can conclude that the weak $\kt$-divergence has the same form as the function $F$ in \eqref{eq:ktDivergence-Guess}, up to the position of the constant $\alpha_j$.
 \begin{cory}
 	Let $u\in\pltwo{\ddom}{\dddmes}^3$, and define (for each edge $I_{jk}$)
@@ -231,7 +201,7 @@ And finally, we can conclude that the weak $\kt$-divergence has the same form as
 	\begin{enumerate}[(i)]
 		\item If $u$ admits a $\kt$-divergence, then $\widetilde{U}_2^{(jk)}\in\ktgradSob{\sqbracs{0,l_{jk}}}{y}$ for each $I_{jk}$ and 
 		\begin{align} \label{eq:dddmesDivergence-Form}
-			\ktgrad_{\dddmes}\cdot u &= 
+			\ktdiv{\dddmes}u &= 
 			\begin{cases} 
 				\bracs{U_2^{(jk)}}' + \rmi\qm_{jk}U_2^{(jk)} + \rmi\wavenumber u_3 &
 				x\in I_{jk}\setminus\clbracs{v_j,v_k}, \\
@@ -244,6 +214,42 @@ And finally, we can conclude that the weak $\kt$-divergence has the same form as
 	\end{enumerate}
 \end{cory}
 The proof of this corollary follows the same arguments as those for the conditions (ii), (iii), and (v) in proposition \ref{prop:DivFree-AllGradsConditions}.
+
+The previous ``weak" definition \ref{def:dddmesDivergence} only implicitly defines the divergence of a vector field through an integral relation.
+This is because the divergence does not appear as an interior operator in the problem we wish to study; at no point are we required to take the $\kt$-tangential gradient \emph{of} the object $\ktdiv{\dddmes}u$, for example, and as a result the ``weak" definitions provided thus far have are sufficient for our needs.
+In the interest of completeness we do address the question surrounding whether a ``strong" notion of the $\dddmes$-divergence of a vector field can be provided, should anyone later want to study problems in which the divergence appears as an interior operator.
+Given our approach in defining gradients and curls with respect to our singular measures, it is natural to attempt to define (strong) divergence through an approximation via smooth functions in a similar manner.
+For a (Borel) measure $\rho$ we could define
+\begin{align*}
+	W_{\rho,\mathrm{div}}^{\kt} = \overline{\clbracs{ \bracs{\phi,\ktgrad\cdot\phi} \setVert \phi\in\psmooth{\ddom}^3 }},
+\end{align*}
+with the closure taken in $\ltwo{\ddom}{\rho}^3\times\ltwo{\ddom}{\rho}$, and define the space of divergences of zero (with respect to $\rho$) as
+\begin{align*}
+	\divZero{\ddom}{\rho} &= \clbracs{d \setVert \bracs{0,d}\in W_{\rho,\mathrm{div}}^{\kt}}.
+\end{align*}
+Similar arguments to those in section \ref{sec:BorelMeasSobSpaces} establish that $\divZero{\ddom}{\rho}$ does not depend on the value of $\kt$, and is a closed, linear subspace of $\pltwo{\ddom}{\rho}$.
+Hence we can decompose $\pltwo{\ddom}{\rho}$ as the direct sum of $\divZero{\ddom}{\rho}$ and its orthogonal complement.
+In turn, we would find that a function has at most one ``tangential divergence", and thus could define the Sobolev space of functions possessing divergences as
+\begin{align*}
+	\ktdivSob{\ddom}{\rho}
+	&= \clbracs{ \bracs{u,\ktdiv{\rho}u}\in W_{\rho,\mathrm{div}}^{\kt} \setVert d\perp\mathcal{D}_{\ddom,\md\rho}\bracs{0} }.
+\end{align*}
+Then any vector field whose tangential divergence is zero, we would label as a divergence free field.
+However if we contextualise this definition to our current domain setup with $\dddmes$, we run into an unpleasant consequence:
+\begin{lemma} \label{lem:DivZero-Everything}
+	For any edge $I_{jk}$, we have that $\divZero{\ddom}{\lambda_{jk}}=\pltwo{\ddom}{\lambda_{jk}}$.
+\end{lemma}
+\begin{proof}
+	Let $\phi\in\psmooth{\ddom}$, and let $\varphi\in\csmooth{\ddom}$ be a smooth function with $\varphi(x)=\bracs{x-v_j}\cdot n_{jk}\phi(x)$ in some neighbourhood of $I_{jk}$.
+	Then the smooth function $\varphi\widehat{n}_{jk}\in\csmooth{\ddom}^3$ is such that $\varphi=0$ and $\grad\cdot\varphi\widehat{n}_{jk}=\phi$ on $I_{jk}$, so $\phi\in\divZero{\ddom}{\lambda_{jk}}$.
+	A density argument then completes the proof.
+\end{proof}
+Further to this, it is not difficult to prove an analogy of the extension results (proposition \ref{prop:3DGradZeroChar} and theorem \ref{thm:CurlZeroChar}) for these divergences of zero.
+Neither is it difficult to show that $\divZero{\ddom}{\massMes}=\pltwo{\ddom}{\massMes}$, and consequentially that an analogue of theorem \ref{thm:3DdddmesCharGradZero} and proposition \ref{prop:ThickVertexCurlZeroCharacterisation} holds, so every tangential divergence is zero!
+We should not be surprised at this result --- the divergence is a scalar representing the net flow of a vector field out of a given point $x$.
+However our singular measure cannot see any such flux across the edges $I_{jk}$ (or out of the planes $P_{jk}$), thus any divergence induced by such a flux must be a divergence of zero.
+However it is then impossible to know ``how much" of the scalar divergence would be due to these unobservable fluxes across $I_{jk}$, and how much was from the observable portions of the vector field along $I_{jk}$.
+This intuition applies whenever there is at least one direction that the singular measure we are considering cannot perceive --- and so we conjecture that any singular measure on a domain in $\reals^d$ produces (strong) tangential divergences that are identically zero.
 
 %\tstk{now do the de Rham stuff. Also, the curl-curl equation automatically gives us the other, weak definitions of divergence free to play with, so de Rham is a kind of tie-breaker in this respect.}
 %\begin{theorem}[de Rham]
