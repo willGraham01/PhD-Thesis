@@ -207,7 +207,7 @@ However it is worth highlighting that $\mathfrak{M}_\qm$ is Hermitian\footnote{O
 The element-wise derivative with respect to $\omega$ is also easily computed (this derivative is required for generalised eigenvalue solvers based on Newton's method), although the resulting expressions are often cumbersome.
 If we are intent on working directly with the determinant, then we can use corollary \ref{cory:M-MatrixEntriesNoPoles} to prove the following result about its form.
 \begin{prop} \label{prop:MMatrixDetForm}
-	Given a graph $\graph = \bracs{\vertSet, \edgeSet}$ containing no loops, there exists a function $F\bracs{\qm,\omega}$ that is analytic in both its arguments, such that
+	Given a graph $\graph = \bracs{\vertSet, \edgeSet}$ containing no loops and whose edge-lengths are pairwise irrationally related, there exists a function $F\bracs{\qm,\omega}$ that is analytic in both its arguments, such that
 	\begin{align} \label{eq:MMatrixDetForm}
 		\det\mathfrak{M}_\qm\bracs{\omega^2} = \bracs{ \omega H^{(2)}\bracs{\omega^2} }^{\abs{\vertSet}-2} F\bracs{\qm,\omega}.
 	\end{align}
