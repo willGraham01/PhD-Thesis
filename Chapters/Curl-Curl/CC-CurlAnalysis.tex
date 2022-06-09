@@ -1,8 +1,10 @@
 \section{Sobolev Spaces of Functions with Curls} \label{sec:CC-CurlAnalysis}
 In similar vein to section \ref{sec:3DGradSobSpaces}, our focus for this section will be the analysis of curls of zero and tangential curls with respect to the measures $\ddmes$, $\massMes$ and $\dddmes$.
-We will again utilise the thematic approach of the aforementioned section; first looking to understand curls of zero and tangential curls on (planes induced by an) edge $I_{jk}$, then show that we can ``add" such edge functions together to form functions on the whole graph $\graph$.
+We will again utilise the thematic approach of the aforementioned section; first looking to understand curls of zero and tangential curls on (planes induced by an) edge $I_{jk}$, then show that we can combine such edge functions together to form functions on the whole graph $\graph$.
 
 \subsection{Curls of Zero} \label{ssec:CurlsOfZero}
+Utilising proposition \ref{prop:ZeroInvariantUnderQM-Wavenumber}, for any curl of zero $c$ we will (without loss of generality) take approximating sequences $\phi_n$ for which $\phi_n\rightarrow0$ and $\ocurl{}\phi\rightarrow c$.
+Here, $\ocurl{}$ is the operator $\ktcurl{}$ with $\kt=\bracs{0,0}$.
 Our analysis begins, analogously to how it did in section \ref{ssec:GradZero}, with an examination of $\curlZero{\ddom}{\lambda_{jk}}$.
 \begin{prop} \label{prop:CurlZero-Parallel}
 	Let $I_{jk}$ be an edge in $\ddom$ with $e_{jk} = \widehat{x}_2$.
@@ -12,7 +14,7 @@ Our analysis begins, analogously to how it did in section \ref{ssec:GradZero}, w
 	\end{align*}
 \end{prop}
 The proof of this result is one particular case of the more general proof that we present for the following corollary, when we no longer assume that the edge $I_{jk}$ is parallel to the $x_2$-axis.
-However we note that for any $c\in\pltwo{\ddom}{\lambda_{jk}}^3$, the function $\bracs{0,c_2,c_3}^{\top}$ is simply the function $c$ with its $\widehat{x}_1$ component removed, and in the setup of proposition \ref{prop:CurlZero-Parallel} $n_{jk} = \widehat{x}_1$.
+However we note that for any $c\in\pltwo{\ddom}{\lambda_{jk}}^3$, the function $\bracs{0,c_2,c_3}^{\top}$ is simply the function $c$ with its $\widehat{x}_1$ component removed, and in the setup of proposition \ref{prop:CurlZero-Parallel} $\widetilde{n}_{jk} = \widehat{x}_1$.
 \begin{cory}[Curls of Zero on an Edge] \label{cory:CurlZero-Rotated}
 	Let $I_{jk}$ be an edge of $\graph$.
 	Then we have that
@@ -21,6 +23,8 @@ However we note that for any $c\in\pltwo{\ddom}{\lambda_{jk}}^3$, the function $
 	\end{align*}
 \end{cory}
 \begin{proof}
+	Write $C = \clbracs{ c_{jk}\widehat{e}_{jk} + c_3\widehat{x}_3 \setVert c_{jk},c_3\in\pltwo{\ddom}{\lambda_{jk}} }$.
+	
 	First, suppose that $c\widehat{n}_{jk}\in\curlZero{\ddom}{\lambda_{jk}}$ and take an approximating sequence $\Phi^n$ for it.
 	This means that we have the following convergences in $\ltwo{\ddom}{\lambda_{jk}}$:
 	\begin{align*}
@@ -37,6 +41,10 @@ However we note that for any $c\in\pltwo{\ddom}{\lambda_{jk}}^3$, the function $
 	\end{align*}
 	and $\Phi^n_3\rightarrow 0$ in $\ltwo{\ddom}{\lambda_{jk}}$.
 	As such, $c\widehat{e}_{jk}\in\gradZero{\ddom}{\lambda_{jk}}$, and then proposition \ref{prop:3DGradZeroRotated} implies that $c=0$.
+	This informs us that 
+	\begin{align*}
+		\curlZero{\ddom}{\lambda_{jk}}\cap \bracs{\ltwo{\ddom}{\lambda_{jk}}^3\setminus C} = \clbracs{0}.
+	\end{align*}
 	
 	Now, let $c\in\psmooth{\ddom}$.
 	Take $\Phi, \Psi\in\csmooth{\ddom}$ which, within some open neighbourhood of $I_{jk}$, have the form
@@ -47,20 +55,21 @@ However we note that for any $c\in\pltwo{\ddom}{\lambda_{jk}}^3$, the function $
 	This ensures that both $\Phi$ and $\Psi$ are zero on $I_{jk}$, as for $x\in I_{jk}$ we have that $v_j-x$ is some scalar multiple of $e_{jk}$.
 	Furthermore, we also have that
 	\begin{align*}
-		\curl{}\Phi &= \begin{pmatrix} \bracs{v_j-x}\cdot n_{jk} \partial_2 c - c n_2^{(jk)} \\ -\bracs{v_j-x}\cdot n_{jk} \partial_1 c + c n_1^{(jk)} \\ 0 \end{pmatrix}
+		\ocurl{}\Phi &= \begin{pmatrix} \bracs{v_j-x}\cdot n_{jk} \partial_2 c - c n_2^{(jk)} \\ -\bracs{v_j-x}\cdot n_{jk} \partial_1 c + c n_1^{(jk)} \\ 0 \end{pmatrix}
 		= \begin{pmatrix} \bracs{v_j-x}\cdot n_{jk} \partial_2 c + c e_1^{(jk)} \\ -\bracs{v_j-x}\cdot n_{jk} \partial_1 c + c e_2^{(jk)} \\ 0 \end{pmatrix}, \\
-		\curl{}\Psi &= \begin{pmatrix} 0 \\ 0 \\ \bracs{\partial_1 c + \partial_2 c}\bracs{x-v_j}\cdot n_{jk} + c\norm{n_{jk}}_2 \end{pmatrix}
+		\ocurl{}\Psi &= \begin{pmatrix} 0 \\ 0 \\ \bracs{\partial_1 c + \partial_2 c}\bracs{x-v_j}\cdot n_{jk} + c\norm{n_{jk}}_2 \end{pmatrix}
 		= \begin{pmatrix} 0 \\ 0 \\ \bracs{\partial_1 c + \partial_2 c}\bracs{x-v_j}\cdot n_{jk} + c \end{pmatrix},
 	\end{align*}
 	so again for $x\in I_{jk}$, we have that
 	\begin{align*}
-		\curl{}\phi = c\widehat{e}_{jk}, \qquad \curl{}\psi = c\widehat{x}_3,
+		\ocurl{}\Phi = c\widehat{e}_{jk}, \qquad \ocurl{}\Psi = c\widehat{x}_3,
 	\end{align*}
 	whenever $x\in I_{jk}$, and thus $c\widehat{e}_{jk}, c\widehat{x}_3\in\curlZero{\ddom}{\lambda_{jk}}$.
-	Density of $\psmooth{\ddom}$ in $\pltwo{\ddom}{\lambda_{jk}}$ then completes the proof.
+	Density of $\psmooth{\ddom}$ in $\pltwo{\ddom}{\lambda_{jk}}$ then implies that $C\subset\curlZero{\ddom}{\lambda_{jk}}$.
+	Combined with our earlier deduction, the proof is complete.
 \end{proof}
 
-Corollary \ref{cory:CurlZero-Rotated} provides the backbone for our geometric interpretation of curls of zero and tangential curls, which was given in section \ref{sec:CC-Geometric}.
+Corollary \ref{cory:CurlZero-Rotated} provides the backbone for our geometric interpretation of curls of zero and tangential curls, given in section \ref{sec:CC-Geometric}.
 The curls of zero always lie in the plane induced by $I_{jk}$, as vectors within the plane only serve to induce rotations perpendicular to said plane.
 In three dimensions (that is, with the usual Lebesgue measure) we would be able to observe such rotations, however with our limited view (through $\lambda_{jk}$), we cannot.
 As one might expect, the behaviour of curls of zero on $\graph$ can be characterised by the behaviour of in the individual edges, as was the case for gradients of zero and tangential gradients.
@@ -72,10 +81,10 @@ As one might expect, the behaviour of curls of zero on $\graph$ can be character
 \end{theorem}
 For ease, let us denote $C = \clbracs{ c\in\pltwo{\ddom}{\ddmes}^3 \setVert c\in\curlZero{\ddom}{\lambda_{jk}}, \ \forall I_{jk}\in\edgeSet }$, and we note that thanks to corollary \ref{cory:CurlZero-Rotated} we have that
 \begin{align*}
-	C &= \clbracs{ c\in\pltwo{\ddom}{\ddmes} \setVert c\cdot\widehat{n}_{jk}\vert_{I_{jk}}=0, \ \forall I_{jk}\in\edgeSet }.
+	C &= \clbracs{ c\in\pltwo{\ddom}{\ddmes}^3 \setVert c\cdot\widehat{n}_{jk}\vert_{I_{jk}}=0, \ \forall I_{jk}\in\edgeSet }.
 \end{align*}
 
-The method of proof proceeds in much the same way as that of proposition \ref{prop:3DGradZeroChar}, the inclusion $\curlZero{\ddom}{\ddmes}\subset C$ is immediate, the reverse direction requires us to deal with the issue of reconciling the different edge-wise curls of zero as we approach the vertices.
+The method of proof proceeds in much the same way as that of proposition \ref{prop:3DGradZeroChar}, the inclusion $\curlZero{\ddom}{\ddmes}\subset C$ is immediate, the reverse direction requires us to deal with the issue of reconciling the different edge functions of curls of zero as we approach the vertices.
 Our first target is the aforementioned easier inclusion:
 \begin{lemma} \label{lem:CurlZeroInC}
 	\begin{align*}
@@ -87,7 +96,7 @@ Our first target is the aforementioned easier inclusion:
 	Clearly we have that
 	\begin{align*}
 		\norm{ \Phi^n }_{\ltwo{\ddom}{\lambda_{jk}}^3} &\leq \norm{ \Phi^n }_{\ltwo{\ddom}{\ddmes}^3} \rightarrow 0, \\
-		\norm{ \grad^{(0)}\wedge\Phi^n - c }_{\ltwo{\ddom}{\lambda_{jk}}^3} & \leq \norm{ \grad^{(0)}\wedge\Phi^n - c }_{\ltwo{\ddom}{\ddmes}^3} \rightarrow 0,
+		\norm{ \ocurl{}\Phi^n - c }_{\ltwo{\ddom}{\lambda_{jk}}^3} & \leq \norm{ \ocurl{}\Phi^n - c }_{\ltwo{\ddom}{\ddmes}^3} \rightarrow 0,
 	\end{align*}
 	and so $c\in C$.
 \end{proof}
@@ -115,23 +124,28 @@ Next, we require an extension lemma for curls of zero (compare this result with 
 	\end{align*}
 	Since $\chi_{jk}^n$ and $\Phi^l$ are smooth, we can use the identity
 	\begin{align*}
-		\curl{}\Psi^l &= \grad\chi_{jk}^n\wedge\Phi^l + \chi_{jk}^n\curl{}\Phi^l,
+		\ocurl{}\Psi^l &= \ograd\chi_{jk}^n\wedge\Phi^l + \chi_{jk}^n\ocurl{}\Phi^l,
 	\end{align*}
 	to deduce that
 	\begin{align*}
-		\integral{\ddom}{ \abs{ \curl{}\Psi^l - c }^2 }{\ddmes}
-		&\leq 2\integral{I_{jk}}{ \abs{ \chi_{jk}^n\curl{}\Phi^l - c }^2 }{\lambda_{jk}}
-		+ 2\sup\abs{\grad\chi_{jk}^n}^2 \integral{I_{jk}}{ \abs{ \Phi^l }^2 }{\lambda_{jk}} \\
-		&\leq2\integral{I_{jk}}{ \abs{ \curl{}\Phi^l - c }^2 }{\lambda_{jk}}
+		\integral{\ddom}{ \abs{ \ocurl{}\Psi^l - c }^2 }{\ddmes}
+		&\leq 2\integral{I_{jk}}{ \abs{ \chi_{jk}^n\ocurl{}\Phi^l - c }^2 }{\lambda_{jk}}
+		+ 2\sup\abs{\ograd\chi_{jk}^n}^2 \integral{I_{jk}}{ \abs{ \Phi^l }^2 }{\lambda_{jk}} \\
+		&\leq2\integral{I_{jk}}{ \abs{ \ocurl{}\Phi^l - c }^2 }{\lambda_{jk}}
 		+ 2(kn)^2 \integral{I_{jk}}{ \abs{ \Phi^l }^2 }{\lambda_{jk}} \\
 		&\rightarrow 0 \toInfty{l}.
 	\end{align*}
 	The sequence $\Psi^l$ now serves as the required approximating sequence, giving us that $c\in\curlZero{\ddom}{\ddmes}$.
 	Furthermore, we also notice that $\Psi^l\bracs{v_j}=0$ and $\curl{}\Psi^l\bracs{v_j}=0$ for every $v_j\in\vertSet$, so we additionally have that
 	\begin{align*}
+		\norm{\Psi^l}_ {\ltwo{\ddom}{\massMes}^3} = 0
+		= \norm{\ocurl{}\Psi^l}_{\ltwo{\ddom}{\massMes}^3},
+	\end{align*}
+	and thus
+	\begin{align*}
 		\Psi^l \lconv{\ltwo{\ddom}{\dddmes}^3} 0, 
 		\qquad
-		\curl{}\Psi^l \lconv{\ltwo{\ddom}{\dddmes}^3} \tilde{c},
+		\ocurl{}\Psi^l \lconv{\ltwo{\ddom}{\dddmes}^3} \tilde{c},
 	\end{align*}
 	which demonstrates that $\tilde{c}\in\curlZero{\ddom}{\dddmes}$.
 \end{proof}
@@ -140,7 +154,7 @@ Next, we require an extension lemma for curls of zero (compare this result with 
 	\begin{align*}
 		C \subset \curlZero{\ddom}{\ddmes}.
 	\end{align*}
-	Furthermore, the function
+	Furthermore, for $c\in C$ the function
 	\begin{align*}
 		\tilde{c} &= \begin{cases} c & x\not\in\vertSet, \\ 0 & x\in\vertSet, \end{cases}
 	\end{align*}

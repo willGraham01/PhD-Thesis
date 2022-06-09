@@ -1,27 +1,22 @@
 \section{Derivation of quantum graph problem} \label{sec:3DSystemDerivation}
-We now look to find an alternative formulation to \eqref{eq:SingularCurlEquation}, which is more amenable to analysis.
-Similarly to our working in section \ref{sec:ScalarDerivation}, the result will be a problem consisting of ODEs on the edges of $\graph$ coupled through the behaviour of incoming functions at the vertices.
-
-Let $u=\bracs{u_1,u_2,u_3}^\top\in\ktcurlSob{\ddom}{\dddmes}$ and let $\Phi=\bracs{\phi_1,\phi_2,\phi_3}^\top\in\psmooth{\ddom}^3$.
-Also define for each $I_{jk}\in\edgeSet$,
+We now look to find an alternative formulation of \eqref{eq:SingularCurlEquation}, which is more amenable to analysis.
+Similarly to our working in section \ref{sec:ScalarDerivation}, the result will be a problem realisable as a quantum graph problem.
+To ease the notational burden, for $u=\bracs{u_1,u_2,u_3}^\top\in\ktcurlSob{\ddom}{\dddmes}$ and $\Phi=\bracs{\phi_1,\phi_2,\phi_3}^\top\in\psmooth{\ddom}^3$ we define (for each $I_{jk}\in\edgeSet$),
 \begin{align*}
 	U^{(jk)} := R_{jk} \begin{pmatrix} u_1^{(jk)} \\ u_2^{(jk)} \end{pmatrix},
 	\qquad
 	\Psi^{(jk)} := R_{jk} \begin{pmatrix} \phi_1^{(jk)} \\ \phi_2^{(jk)} \end{pmatrix}.
 \end{align*}
 We use an overhead tilde to denote composition with $r_{jk}$, and for a function $v$ with $\widetilde{v}^{(jk)}\in\ktgradSob{\sqbracs{0,l_{jk}}}{y}$ write $\bracs{v^{(jk)}}' := \bracs{\widetilde{v}^{(jk)}}' \circ r_{jk}^{-1}$.
-Finally, for a given quasi-momentum $\qm$, set $\qm_{jk} = \bracs{ R_{jk}\qm }_2 = \qm\cdot e_{jk}$.
-Immediately, we can notice that $u$ is tangentially-divergence free (definition \ref{def:DivFree-TangGradients}), since for any $v\in\ktgradSob{\ddom}{\dddmes}$ we can take an approximating sequence $\Phi^n$ for $v$ and obtain
-\begin{align*}
-	\omega^2\integral{\ddom}{ u\cdot\overline{\ktgrad_{\dddmes}v} }{\dddmes}
-	&= \omega^2 \lim_{n\rightarrow\infty} \integral{\ddom}{ u\cdot\overline{\ktgrad\Phi^n} }{\dddmes} \\
-	&= \lim_{n\rightarrow\infty} \integral{\ddom}{ \ktcurl{\dddmes}u\cdot\overline{\ktcurl{\dddmes}\bracs{\ktgrad\Phi^n}} }{\dddmes}
-	= 0,
-\end{align*}
-through using lemma \ref{lem:CurlOfGradSmoothFunctions}.
-Note that we cannot employ the same technique show that $u$ is orthogonal to all gradients of zero,, however we will see that the additional information (the conditions (i) and (iv) in proposition \ref{prop:DivFree-AllGradsConditions}) are obtained from the argument that follows.
+Finally, for a given quasi-momentum $\qm$ we set $\qm_{jk} = \qm\cdot e_{jk}$.
 
-Now let us fix an edge $I_{jk}$ and take $\Phi$ such that $\supp\Phi\cap\graph\subset I_{jk}^{\circ}$.
+Now suppose that $u\in\ktcurlSob{\ddom}{\dddmes}$ is divergence free with respect to $\dddmes$, and is a solution to \eqref{eq:SingularCurlEquation} for some $\omega>0$, and take arbitrary $\varphi_1,\varphi_2\in\csmooth{\sqbracs{0,l_{jk}}}$.
+Since $R_{jk}\in\mathrm{SO}(2)$, the system
+\begin{align*}
+	\begin{pmatrix} \phi_1 \\ \phi_2 \end{pmatrix} &= R_{jk}^\top \begin{pmatrix} \varphi_1 \\ \varphi_2 \end{pmatrix}
+\end{align*}
+has a unique solution for $\bracs{\phi_1,\phi_2}^\top$, and we can construct a $\Phi\in\csmooth{\ddom}$ with $\supp\Phi\cap\graph\subset I_{jk}^{\circ}$, $\widetilde{\Psi}_1^{(jk)}=\varphi_1$, and $\widetilde{\Psi}_2^{(jk)}=\varphi_2$.
+Fix an edge $I_{jk}$ and take $\Phi$ such that $\supp\Phi\cap\graph\subset I_{jk}^{\circ}$.
 The equation \eqref{eq:SingularCurlEquation-VariationalForm} reduces to
 \begin{align*}
 	\omega^2 \integral{I_{jk}}{ u\cdot\overline{\Phi} }{\lambda_{jk}}
@@ -29,22 +24,16 @@ The equation \eqref{eq:SingularCurlEquation-VariationalForm} reduces to
 	&= \integral{I_{jk}}{ \bracs{ \bracs{u_3^{(jk)}}' + \rmi\qm_{jk} u_3^{(jk)} - \rmi\wavenumber U_2^{(jk)} }\overline{\bracs{ \bracs{\phi_3^{(jk)}}' + \rmi\qm_{jk} \phi_3^{(jk)} - \rmi\wavenumber \Psi_2^{(jk)} }} }{\lambda_{jk}}.
 \end{align*}
 Using the change of variables $r_{jk}$ we obtain
+%\begin{align*}
+%	\int_0^{l_{jk}} & \bracs{ \bracs{\widetilde{u}_3^{(jk)}}' + \rmi\qm_{jk} \widetilde{u}_3^{(jk)} - \rmi\wavenumber \widetilde{U}_2^{(jk)} } \bracs{ \bracs{\overline{\widetilde{\phi}}_3^{(jk)}}' - \rmi\qm_{jk} \overline{\widetilde{\phi}}_3^{(jk)} + \rmi\wavenumber \overline{\widetilde{\Psi}}_2^{(jk)} } \ \md y \\
+%	&= \omega^2 \int_0^{l_{jk}} \widetilde{U}_1^{(jk)}\overline{\widetilde{\Psi}}_1^{(jk)} + \widetilde{U}_2^{(jk)}\overline{\widetilde{\Psi}}_2^{(jk)} + \widetilde{u}_3^{(jk)}\overline{\widetilde{\phi}}_3^{(jk)} \ \md y.
+%\end{align*}
+%We thus observe that
 \begin{align*}
-	\int_0^{l_{jk}} & \bracs{ \bracs{\widetilde{u}_3^{(jk)}}' + \rmi\qm_{jk} \widetilde{u}_3^{(jk)} - \rmi\wavenumber \widetilde{U}_2^{(jk)} } \bracs{ \bracs{\overline{\widetilde{\phi}}_3^{(jk)}}' - \rmi\qm_{jk} \overline{\widetilde{\phi}}_3^{(jk)} + \rmi\wavenumber \overline{\widetilde{\Psi}}_2^{(jk)} } \ \md y \\
-	&= \omega^2 \int_0^{l_{jk}} \widetilde{U}_1^{(jk)}\overline{\widetilde{\Psi}}_1^{(jk)} + \widetilde{U}_2^{(jk)}\overline{\widetilde{\Psi}}_2^{(jk)} + \widetilde{u}_3^{(jk)}\overline{\widetilde{\phi}}_3^{(jk)} \ \md y.
+	\int_0^{l_{jk}} & \bracs{ \bracs{\widetilde{u}_3^{(jk)}}' + \rmi\qm_{jk} \widetilde{u}_3^{(jk)} - \rmi\wavenumber \widetilde{U}_2^{(jk)} } \bracs{ \bracs{\overline{\widetilde{\phi}}_3^{(jk)}}' - \rmi\qm_{jk} \overline{\widetilde{\phi}}_3^{(jk)} + \rmi\wavenumber \overline{\varphi_2} } \ \md y \\
+	&= \omega^2 \int_0^{l_{jk}} \widetilde{U}_1^{(jk)}\overline{\varphi_1} + \widetilde{U}_2^{(jk)}\overline{\varphi_2} + \widetilde{u}_3^{(jk)}\overline{\widetilde{\phi}}_3^{(jk)} \ \md y,
 \end{align*}
-Now suppose we have $\varphi_1,\varphi_2\in\csmooth{\sqbracs{0,l_{jk}}}$.
-Since $R_{jk}\in\mathrm{SO}(2)$, the system
-\begin{align*}
-	\begin{pmatrix} \phi_1 \\ \phi_2 \end{pmatrix} &= R_{jk}^\top \begin{pmatrix} \varphi_1 \\ \varphi_2 \end{pmatrix}
-\end{align*}
-has a unique solution for $\bracs{\phi_1,\phi_2}^\top$, and we can construct a $\Phi\in\csmooth{\ddom}$ with $\supp\Phi\cap\graph\subset I_{jk}^{\circ}$, $\widetilde{\Psi}_1^{(jk)}=\varphi_1$, and $\widetilde{\Psi}_2^{(jk)}=\varphi_2$.
-We thus observe that
-\begin{align*}
-	\int_0^{l_{jk}} & \bracs{ \bracs{\widetilde{u}_3^{(jk)}}' + \rmi\qm_{jk} \widetilde{u}_3^{(jk)} - \rmi\wavenumber \widetilde{U}_2^{(jk)} } \bracs{ \overline{\varphi_3}' - \rmi\qm_{jk} \overline{\varphi_3} + \rmi\wavenumber \overline{\varphi_2} } \ \md y \\
-	&= \omega^2 \int_0^{l_{jk}} \widetilde{U}_1^{(jk)}\overline{\varphi_1} + \widetilde{U}_2^{(jk)}\overline{\varphi_2} + \widetilde{u}_3^{(jk)}\overline{\varphi_3} \ \md y
-\end{align*}
-holds for any $\varphi_1,\varphi_2,\varphi_3\in\csmooth{\sqbracs{0,l_{jk}}}$.
+which holds for any $\varphi_1,\varphi_2,\widetilde{\phi}_3^{(jk)}\in\csmooth{\sqbracs{0,l_{jk}}}$.
 Therefore it must hold that for any $\varphi\in\csmooth{\sqbracs{0,l_{jk}}}$,
 \begin{subequations}
 	\begin{align*}
@@ -52,19 +41,19 @@ Therefore it must hold that for any $\varphi\in\csmooth{\sqbracs{0,l_{jk}}}$,
 		0 &= \int_0^{l_{jk}} \overline{\varphi} \bracs{ \rmi\wavenumber\bracs{\widetilde{u}_3^{(jk)}}' + \bracs{\wavenumber^2 - \omega^2}\widetilde{U}_2^{(jk)} - \wavenumber\qm_{jk}\widetilde{u}_3^{(jk)}  } \ \md y, \labelthis\label{eq:CurlCurlWeakFormPhi2} \\
 		0 &= \int_0^{l_{jk}} \overline{\varphi}' \bracs{ \bracs{\widetilde{u}_3^{(jk)}}'
 		- \rmi\wavenumber\widetilde{U}_2^{(jk)} + \rmi\qm_{jk}\widetilde{u}_3^{(jk)} } \\
-		&\qquad -\rmi\qm_{jk}\overline{\varphi}\bracs{ \bracs{\widetilde{u}_3^{(jk)}}' - \rmi\wavenumber\bracs{\widetilde{U}_2^{(jk)}}' + \rmi\qm_{jk}\widetilde{u}_3^{(jk)} }
+		&\qquad -\rmi\qm_{jk}\overline{\varphi}\bracs{ \bracs{\widetilde{u}_3^{(jk)}}' - \rmi\wavenumber\widetilde{U}_2^{(jk)} + \rmi\qm_{jk}\widetilde{u}_3^{(jk)} }
 		- \omega^2 \widetilde{u}_3^{(jk)}\overline{\varphi} \ \md y. \labelthis\label{eq:CurlCurlWeakFormPhi3}
 	\end{align*}
 \end{subequations}
-The equation \eqref{eq:CurlCurlWeakFormPhi1} implies that $U_1^{(jk)}=0$ (almost everywhere) on $I_{jk}$, whilst \eqref{eq:CurlCurlWeakFormPhi2} implies that
+The equation \eqref{eq:CurlCurlWeakFormPhi1} implies that $U_1^{(jk)}=0$ on $I_{jk}$, whilst \eqref{eq:CurlCurlWeakFormPhi2} implies that
 \begin{align*}
 	\rmi\wavenumber\bracs{\diff{}{y} + \rmi\qm_{jk}}\widetilde{u}_3^{(jk)} + \wavenumber^2\widetilde{U}_2^{(jk)} &= \omega^2\widetilde{U}_2^{(jk)},
 \end{align*}
 on $I_{jk}$.
-Given that $u$ is divergence-free, we know that $\widetilde{U}_2^{(jk)}$ is weakly differentiable in the $\gradSob{\sqbracs{0,l_{jk}}}{y}$-sense and can manipulate \eqref{eq:CurlCurlWeakFormPhi3} to obtain
+Given that $u$ is divergence-free, proposition \ref{prop:DivFree-AllGradsConditions} informs us that $\widetilde{U}_2^{(jk)}$ is weakly differentiable in the $\gradSob{\sqbracs{0,l_{jk}}}{y}$-sense and we can manipulate \eqref{eq:CurlCurlWeakFormPhi3} to obtain
 \begin{align*}
 	\int_0^{l_{jk}} \overline{\varphi}' \widetilde{u}'_{3,jk} \ \md y
-	&= -\int_0^{l_{jk}} \overline{\psi} \bracs{ \rmi\wavenumber\widetilde{U}'_{2,jk} - \wavenumber\qm_{jk}\widetilde{U}_{2,jk} - 2\rmi\qm_{jk}\widetilde{u}'_{3,jk} + \qm_{jk}^2\widetilde{u}_{3,jk} - \omega^2\widetilde{u}_{3,jk} } \ \md y.,
+	&= -\int_0^{l_{jk}} \overline{\varphi} \bracs{ \rmi\wavenumber\widetilde{U}'_{2,jk} - \wavenumber\qm_{jk}\widetilde{U}_{2,jk} - 2\rmi\qm_{jk}\widetilde{u}'_{3,jk} + \qm_{jk}^2\widetilde{u}_{3,jk} - \omega^2\widetilde{u}_{3,jk} } \ \md y.,
 \end{align*}
 for all $\varphi\in\csmooth{\sqbracs{0,l_{jk}}}$.
 Thus we can conclude that $\widetilde{u}_3\in\gradgradSob{\sqbracs{0,l_{jk}}}{y}$, from which we deduce that
@@ -72,7 +61,8 @@ Thus we can conclude that $\widetilde{u}_3\in\gradgradSob{\sqbracs{0,l_{jk}}}{y}
 	-\bracs{ \diff{}{y} + \rmi\qm_{jk} }^2\widetilde{u}_3^{(jk)} + \rmi\wavenumber\bracs{ \diff{}{y} + \rmi\qm_{jk} }\widetilde{U}_2^{(jk)} &= \omega^2 \widetilde{u}_3^{(jk)}
 \end{align*}
 on $I_{jk}$.
-This provides us with a system of coupled ODEs on each of the edges $I_{jk}$ (and the information that the component $\widetilde{U}_1^{(jk)}=0$ on each edge).
+This provides us with a system of two coupled ODEs on each of the edges $I_{jk}$.
+The information that the component $\widetilde{U}_1^{(jk)}=0$ on each edge is also obtained, which we remark is one of the consequences of $u$ being divergence-free with respect to $\dddmes$.
 
 Now we look at how these edge ODEs are coupled at the vertices.
 Fix a vertex $v_j$ and consider a $\Phi\in\csmooth{\ddom}$ whose support contains $v_j$ in its interior, and no other vertices of $\graph$.
@@ -90,31 +80,40 @@ Testing against such $\Phi$ in \eqref{eq:SingularCurlEquation-VariationalForm} i
 	&\qquad + \overline{\phi}_3(v_j)\sqbracs{ \sum_{j\con k}\bracs{\pdiff{}{n}+\rmi\qm_{jk}}u_3^{(jk)}(v_j) + \sum_{j\conRight k}U_2^{(kj)}(v_j) - \sum_{j\conLeft k}U_2^{(jk)}(v_j) } \\
 	&= \overline{\phi}_3(v_j)\sqbracs{ \sum_{j\con k}\bracs{\pdiff{}{n}+\rmi\qm_{jk}}u_3^{(jk)}(v_j) + \sum_{j\conRight k}U_2^{(kj)}(v_j) - \sum_{j\conLeft k}U_2^{(jk)}(v_j) },
 \end{align*}
-where $U_2^{(jk)}(v_j)$ is the trace of $U_2^{(jk)}$ to the vertex $v_j$.
-Identifying that this holds for all $\phi_1(v_j), \phi_2(v_j), \phi_3(v_j)\in\complex$, we must conclude that
+where $U_2^{(jk)}(v_j)$ is the trace of $U_2^{(jk)}$ to the vertex $v_j$ --- these exist since $\widetilde{U}_2^{(jk)}(v_j)\in\gradSob{\sqbracs{0,l_{jk}}}{y}$, although of course they do not have to coincide at common vertices.
+Identifying that the above procedure can be conducted for any $\phi_1(v_j), \phi_2(v_j), \phi_3(v_j)\in\complex$, we conclude that
 \begin{align*}
 	u_1(v_j) &= 0, \\
 	u_2(v_j) &= 0, \\
 	\alpha_j\omega^2u_3(v_j) &= \sum_{j\con k}\bracs{\pdiff{}{n}+\rmi\qm_{jk}}u_3^{(jk)}(v_j) + \sum_{j\conRight k}U_2^{(kj)}(v_j) - \sum_{j\conLeft k}U_2^{(jk)}(v_j).
 \end{align*}
+
 We are thus presented with the following set of equations on each edge $I_{jk}$;
 \begin{subequations} \label{eq:QGRawSystem}
-	\begin{align*}
+	\begin{align}
 		\widetilde{U}_1^{(jk)} &= 0 \\
 		\rmi\wavenumber \bracs{ \diff{}{y} + \rmi\qm_{jk} }\widetilde{u}_3^{(jk)} + \wavenumber^2\widetilde{U}_2^{(jk)} &= \omega^2\widetilde{U}_2^{(jk)}, \labelthis\label{eq:QGPhi2} \\
 		-\bracs{ \diff{}{y} + \rmi\qm_{jk} }^2\widetilde{u}_3^{(jk)} + \rmi\wavenumber\bracs{ \diff{}{y} + \rmi\qm_{jk} }\widetilde{U}_2^{(jk)} &= \omega^2 \widetilde{u}_3^{(jk)}, \labelthis\label{eq:QGPhi3} 
-	\end{align*}
-	complemented by the vertex conditions
-	\begin{align*}
+	\end{align}
+complemented by the vertex conditions
+	\begin{align}
 		\widetilde{u}_3 \text{ is continuous at } v_j &\quad\forall v_j\in\vertSet, \labelthis\label{eq:QGContinuity} \\
-		u_1(v_j) &= 0, \\
-		u_2(v_j) &= 0, \\
+		u_1(v_j) &= 0, \labelthis\label{eq:QGu1VertCond} \\
+		u_2(v_j) &= 0, \labelthis\label{eq:QGu2VertCond} \\
 		\alpha_j \omega^2 u_3\bracs{v_j}
 		&= \sum_{j\con k} \bracs{ \pdiff{}{n} + \rmi\qm_{jk} }u_3^{(jk)}\bracs{v_j} - \rmi\wavenumber\bracs{ \sum_{j\conRight k} U_2^{(jk)} - \sum_{j\conLeft k} U_2^{(jk)} }. \labelthis\label{eq:QGVertexCondition}
-	\end{align*}
+	\end{align}
 \end{subequations}
-Determining the solution to \eqref{eq:QGRawSystem} requires us to find the function $u_3$ and the edge-functions $U_2^{(jk)}$.
-However we can eliminate the $U_2^{(jk)}$ from the system \eqref{eq:QGRawSystem} via substitution of \eqref{eq:QGPhi2} into \eqref{eq:QGPhi3}, and use of corollary \ref{cory:DivFree-TangGradsConditions}(v), to obtain
+The short discussion in section \ref{ssec:CalderonOp} will demonstrate that this problem greatly resembles a ``graph-version" of the curl-of-the-curl equation, through analogy with the classical curl-of-the-curl equation.
+Further to this, the same discussion will also demonstrate that the vertex conditions \eqref{eq:QGu1VertCond}-\eqref{eq:QGVertexCondition} can be written as ``Wentzell-like" conditions, but concerning the incoming curls rather than the incoming derivatives (see \eqref{eq:NGMap-CurlTraceForm}).
+It is worth remarking here that the conditions (i) and (iv) from proposition \ref{prop:DivFree-AllGradsConditions} appear explicitly in the system \eqref{eq:QGRawSystem}.
+By contrast, the conditions (ii), and (v) are both utilised in the manipulations performed above, and the condition (iii) combined with \eqref{eq:CurlCurlWeakFormPhi2} can be used to obtain \eqref{eq:CurlCurlWeakFormPhi3}.
+This places a particular emphasis on our earlier discussion (section \ref{sec:DivFreeCondition}) concerning whether the correct analogue of the (classical) divergence-free condition includes orthogonality to gradients of zero or not.
+In the case of the problem \eqref{eq:SingularCurlEquation} and the derivation of \eqref{eq:QGRawSystem}, this distinction is moot: any solution $u\in\ktcurl{\ddom}{\dddmes}$ to \eqref{eq:SingularCurlEquation} is necessarily both divergence free and tangentially divergence free, as one can take approximating sequences for $g\in\gradZero{\ddom}{\dddmes}$ or $v\in\ktgradSob{\ddom}{\dddmes}$, just test against these approximating sequences in \eqref{eq:SingularCurlEquation-VariationalForm}, and then apply lemma \ref{lem:CurlOfGradSmoothFunctions}.
+However this distinction will become particularly important if one wants to examine the first-order Maxwell system, which we discuss in section \ref{sec:CC-1stOrderMaxwell}.
+
+As we will discuss in section \ref{ssec:CalderonOp}, we can construct (an operator analogous to) the $M$-matrix for the problem \eqref{eq:QGRawSystem} which opens us a route to explicitly determining the eigenvalues $\omega^2$.
+However we can eliminate the $U_2^{(jk)}$ from the system \eqref{eq:QGRawSystem} via substitution of \eqref{eq:QGPhi2} into \eqref{eq:QGPhi3}, and use corollary \ref{cory:DivFree-TangGradsConditions}(v), to obtain
 \begin{subequations} \label{eq:CurlCurl-ScalarQGProblem}
 	\begin{align}
 		-\bracs{ \diff{}{y} + \rmi\qm_{jk} }^2 u_3^{(jk)} &= \bracs{\omega^2-\wavenumber^2}u,
@@ -123,33 +122,34 @@ However we can eliminate the $U_2^{(jk)}$ from the system \eqref{eq:QGRawSystem}
 		\sum_{j\con k}\bracs{\pdiff{}{n}+\rmi\qm_{jk}}u_3^{(jk)}(v_j) &= \alpha_j\bracs{\omega^2-\wavenumber^2}u_3(v_j), \qquad &\forall v_j\in\vertSet.
 	\end{align}
 \end{subequations}
-The system \eqref{eq:SingularCurlEquation} has reduced to the scalar system obtained in section \ref{sec:ScalarDerivation}, except with $\sqrt{\omega^2-\wavenumber^2}$ playing the role of the spectral parameter.
-We have already surveyed and explored the methods one can employ for studying \eqref{eq:CurlCurl-ScalarQGProblem} in chapter \ref{ch:ScalarSystem}, so whilst we know how to solve this problem, there is nothing new to be done concerning this process (save extracting the band-gap plot for $\wavenumber$ and $\omega$).
-To this end, the discussion of section \ref{sec:ScalarDiscussion} covers the techniques one can employ through the study of the $M$-matrix.
+That is, the system \eqref{eq:SingularCurlEquation} has reduced to the scalar system \eqref{eq:SingularWaveEqnQGProblem} obtained in section \ref{sec:ScalarDerivation}, except with $\sqrt{\omega^2-\wavenumber^2}$ playing the role of the spectral parameter.
+This revelation is rather disappointing with regards to investigations into the explicit solution of the system --- we have already explored the methods one can employ for studying \eqref{eq:CurlCurl-ScalarQGProblem} in chapter \ref{ch:ScalarSystem}.
+To this end, reader is referred to the discussion of section \ref{sec:ScalarDiscussion}, covering the techniques one can employ through the study of the $M$-matrix.
 
-It is both regrettable and surprising from an investigative perspective that our analysis of \eqref{eq:SingularCurlEquation} and the associated function spaces has resulted in us obtaining what is essentially the acoustic approximation.
-Even when we do not consider oblique waves (for which $\kappa=0)$), we still find that we have this reduction to a scalar system, which does not occur for the classical Maxwell system or curl of the curl equation.
-Having said this, we have ultimately still managed to obtain the solvable (and realisable) system \eqref{eq:CurlCurl-ScalarQGProblem} through the analysis of sections \ref{sec:CC-CurlAnalysis} and \ref{sec:DivFreeCondition}, and non-trivial manipulations of unfamiliar objects like $\ktcurl{\dddmes}u$.
-This demonstrates that our approach to the postulation and solution of variational problems on singular structures is consistent, and provides a coherent framework for the handling of such problems.
+From an investigative perspective, it is surprising that our analysis of \eqref{eq:SingularCurlEquation} and the associated function spaces has resulted in us obtaining what is essentially the (singular) acoustic approximation.
+Even when we do not consider oblique waves (for which $\kappa=0$), we still find that we have this reduction to a scalar system, which does not occur for the classical Maxwell system or curl of the curl equation.
+We will continue to discuss the implications of \eqref{eq:CurlCurl-ScalarQGProblem}, and give an a posteriori understanding as to why we have obtained it, in section \ref{sec:CC-Discussion}.
+Having said this, we have ultimately still managed achieved out objective of obtaining a solvable system \eqref{eq:CurlCurl-ScalarQGProblem} through the analysis of sections \ref{sec:CC-CurlAnalysis} and \ref{sec:DivFreeCondition}, and non-trivial manipulations of unfamiliar objects like $\ktcurl{\dddmes}u$.
+Combined with our treatment of the divergence-free condition, this demonstrates that our approach to the postulation and solution of variational problems on singular structures is consistent, and provides a coherent framework for the handling of such problems.
 We will continue to discuss the implications of \eqref{eq:CurlCurl-ScalarQGProblem}, and give an a posteriori understanding as to why we have obtained it, in section \ref{sec:CC-Discussion}.
 
 \subsection{Remarks on the Calder\'on Operator} \label{ssec:CalderonOp}
 Whilst \eqref{eq:SingularCurlEquation} reduces to the acoustic approximation, there are further parallels that can be drawn between the (classical) curl-of-the-curl problem and the system \eqref{eq:QGRawSystem}.
 One of our key motivating factors and themes throughout this work has been retaining an intuitive link between the spaces and objects necessary for studying variational problems on singular structures and their classical counterparts.
-Further to this, the Dirichlet-to-Neumann operator (or $M$-operator) associated with the problem \eqref{eq:QGRawSystem} is a direct analogue of the Calder\'{o}n operator $\mathcal{C}$, the Dirichlet-to-Neumann operator for the curl of the curl equation.
-The Dirichlet and Neumann maps for the classical curl of the curl problem motivate the definitions for their counterparts associated to the problem \eqref{eq:QGRawSystem}; and we will observe that the resulting maps form a boundary triple, providing us with an $M$-operator and thus a graph analogue of $\mathcal{C}$.
+With this in mind, we will demonstrate that the Dirichlet map, Neumann map, and consequentially the Dirichlet-to-Neumann map associated with the problem \eqref{eq:QGRawSystem} are direct analogues of their counterparts in the classical context.
+In particular, the Dirichlet-to-Neumann map associated to the operator \eqref{eq:QGRawSystem} is a graph-version of the Calder\'{o}n operator $\mathcal{C}$ --- the Dirichlet-to-Neumann operator for the curl-of-the-curl equation.
 
-Let us quickly introduce the Calder\'{o}n operator; let $D\subset\reals^3$ be a domain, and define $\mathcal{A}$ as the curl of the curl operator
+Let us quickly introduce the Calder\'{o}n operator; let $D\subset\reals^3$ be a domain, and let $\mathcal{A}$ be the (classical) curl of the curl operator
 \begin{align*}
-	\dom\bracs{\mathcal{A}} &= \clbracs{ u\in H^2_{\mathrm{curl}}(D) \setVert \hat{n}\wedge\curl{}u\vert_{\partial D} = m }, \\
-	\mathcal{A}u &= \curl{}\bracs{\curl{}u},
+	\dom\bracs{\mathcal{A}} = H^2\bracs{D}, \qquad
+	\mathcal{A}u = \curl{}\bracs{\curl{}u}.
 \end{align*}
-and the Dirichlet and Neumann maps ($\dmap$ and $\nmap$ respectively) by
+The Dirichlet map $\dmap$ and Neumann map $\nmap$ associated to $\mathcal{A}$ are defined as
 \begin{align} \label{eq:ClassicalEM-DNMaps}
 	\dmap u = u\vert_{\partial D}, \qquad
 	\nmap u = \hat{n}\wedge\curl{u}\vert_{\partial D}.
 \end{align}
-We can quickly validate Green's identity:
+The Green's identity follows from standard vector calculus identities;
 \begin{align*}
 	\integral{D}{ \mathcal{A}u \cdot \overline{v} - u \cdot \overline{\mathcal{A}v} }{x}
 	&= \integral{D}{ \curl{}\bracs{\curl{}u}\cdot\overline{v} - u\cdot\overline{\curl{}\bracs{\curl{}v}} }{x} \\
@@ -157,14 +157,31 @@ We can quickly validate Green's identity:
 	&\quad + \integral{\partial D}{ \hat{n}\wedge\curl{}u\cdot\overline{v} - u\cdot\hat{n}\wedge\overline{\curl{}v} }{S} \\
 	&= \integral{\partial D}{ \nmap u \cdot \overline{\dmap v} - \dmap u \cdot \overline{\nmap v} }{S},
 \end{align*}
-so $\bracs{\ltwo{\partial D}{S}^3, \dmap, \nmap}$ is a boundary triple for the operator $\mathcal{A}$, and we can talk about its associated Dirichlet-to-Neumann map.
-This is the Calder\'{o}n operator $\mathcal{C}$, acting as
+so $\bracs{\ltwo{\partial D}{S}^3, \dmap, \nmap}$ is a boundary triple for the curl-of-the-curl operator $\mathcal{A}$.
+The Calder\'{o}n operator $\mathcal{C}$ is the associated Dirichlet-to-Neumann map, acting as
 \begin{align*}
 	u\vert_{\partial D} \rightarrow \hat{n}\wedge\bracs{\curl{}u}\vert_{\partial D}.
 \end{align*}
 
-Now let us turn to the quantum graph problem \eqref{eq:QGRawSystem}.
-Given the definition of $\dmap$ in \eqref{eq:ClassicalEM-DNMaps}, we should expect that
+Now let us turn to the (vector) quantum graph problem \eqref{eq:QGRawSystem}, and define the operator $\ag$ with domain 
+\begin{align*}
+	u\in\mathrm{dom}\bracs{\ag} \quad\Leftrightarrow\quad &
+	\begin{cases}
+	u\in L^2\bracs{\graph}\times L^2\bracs{\graph}\times H^2\bracs{\graph}, \\
+	U_2^{(jk)}\in \gradSob{I_{jk}}{y}, & \forall I_{jk}\in\edgeSet, \\
+	u_3 \text{ is continuous at } v_j, & \forall v_j\in\vertSet, \\
+	u_1(v_j) = u_2(v_j) = 0, & \forall v_j\in\vertSet, %\\
+%	\text{\eqref{eq:QGVertexCondition} is satisfied at } v_j, & \forall v_j\in\vertSet,
+	\end{cases}
+\end{align*}
+whose action on each edge is given by
+\begin{align*}
+	\ag u &= 
+	\sqbracs{ \rmi\wavenumber\bracs{\diff{}{y} + \rmi\qm_{jk} }u_3^{(jk)} + \wavenumber^2 U_2^{(jk)} }\widehat{e}_{jk}
+	+ U_1^{(jk)} \widehat{n}_{jk} \\
+	&\qquad + \sqbracs{ - \bracs{\diff{}{y} + \rmi\qm_{jk} }^2 u_3^{(jk)} + \rmi\wavenumber \bracs{\diff{}{y} + \rmi\qm_{jk} }U_2^{(jk)} }\widehat{x}_3.
+\end{align*}
+Given the definition of $\dmap$ in \eqref{eq:ClassicalEM-DNMaps}, we define the map
 \begin{align} \label{eq:DGMapDef}
 	\dgmap u &= 
 	\begin{pmatrix}
@@ -172,95 +189,80 @@ Given the definition of $\dmap$ in \eqref{eq:ClassicalEM-DNMaps}, we should expe
 	\end{pmatrix}
 	\in\complex^{3N},
 \end{align}
-where we have stacked the 3-vectors on top of each other and set $N=\abs{\vertSet}$.
-As for $\ngmap u$, this should be the analogue of $\nmap$ in \eqref{eq:ClassicalEM-DNMaps} --- only now the boundary of our domain is the vertices of $\graph$.
+where we have stacked the 3-vectors on top of each other and set $N=\abs{\vertSet}$ --- the map $\dgmap$ will be the Dirichlet map associated to $\ag$.
+As for the Neumann map $\ngmap$, for $j\in\clbracs{1,...,N}$ we define
+\begin{align} \label{eq:NGMapDef}
+	\bracs{\ngmap u}_{3j-2} &= 0 \\
+	\bracs{\ngmap u}_{3j-1} &= 0 \\
+	\bracs{\ngmap u}_{3j} &= \rmi\wavenumber\sum_{j\con k} \sgn_{jk}(v_j) U_2^{(jk)}\bracs{v_j}
+	- \sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}u_3^{(jk)}\bracs{v_j}
+\end{align}
+so $\ngmap u\in\complex^{3N}$.
+Notice that
+\begin{align*}
+	\integral{I_{jk}}{ &\ag u \cdot \overline{v} }{y} - \integral{I_{jk}}{ u \cdot \overline{\ag v} }{y} \\
+	&= \sqbracs{ -\bracs{u^{(jk)}_3}' \overline{v}^{(jk)}_3 + u^{(jk)}_3 \bracs{\overline{v}^{(jk)}_3}' - 2\rmi\qm_{jk}u_3^{(jk)} \overline{v}^{(jk)}_3 + \rmi\wavenumber\bracs{U_2^{(jk)} \overline{v}^{(jk)}_3 + u^{(jk)}_3 \overline{V}^{(jk)}_2} }_{v_j}^{v_k} \\
+	&= -\sqbracs{ \overline{v}^{(jk)}_3\bracs{ \bracs{\diff{}{y} + \rmi\qm_{jk} }u^{(jk)}_3 - \rmi\wavenumber U^{(jk)}_2 } }_{v_j}^{v_k} \\
+	&\qquad + \sqbracs{ u^{(jk)}_3\overline{\bracs{ \bracs{\diff{}{y} + \rmi\qm_{jk} }v^{(jk)}_3 - \rmi\wavenumber V^{(jk)}_2 }} }_{v_j}^{v_k},
+\end{align*}
+implying
+\begin{align*}
+	&\ip{\ag u}{v}_{L^2\bracs{\graph}^3} - \ip{u}{\ag v}_{L^2\bracs{\graph}^3} \\
+	&\quad = \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \integral{I_{jk}}{ \ag u \cdot \overline{v} - u \cdot \overline{\ag v} }{y} \\
+	&\quad = \sum_{v_j\in\vertSet}\sum_{j\conLeft k} -\sqbracs{ \overline{v}_3^{(jk)}\bracs{ \bracs{\diff{}{y} + \rmi\qm_{jk} }u_3^{(jk)} - \rmi\wavenumber U_2^{(jk)} } }_{v_j}^{v_k}
+	+ \sqbracs{ u_3^{(jk)}\overline{\bracs{ \bracs{\diff{}{y} + \rmi\qm_{jk} }v_3^{(jk)} - \rmi\wavenumber V_2^{(jk)} }} }_{v_j}^{v_k} \\
+	&\quad = \sum_{v_j\in\vertSet} u_3\bracs{v_j}\overline{\bracs{ \sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}v_3^{(jk)} - \rmi\wavenumber\sum_{j\con k} \sgn_{jk}(v_j) V_2^{(jk)}\bracs{v_j} }} \\
+	&\quad + \sum_{v_j\in\vertSet} \overline{v}_3\bracs{v_j}\bracs{ \sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}u_3^{(jk)} - \rmi\wavenumber\sum_{j\con k} \sgn_{jk}(v_j) U_2^{(jk)}\bracs{v_j} } \\
+	&\quad = \ngmap u \cdot \overline{\dgmap v} - \dgmap u \cdot \overline{\ngmap v}
+	= \ip{\ngmap u}{\dgmap v}_{\complex^{3N}} - \ip{\dgmap u}{\ngmap v}_{\complex^{3N}}.
+\end{align*}
+So the Green's identity holds, and $\bracs{\complex^{3N}, \dgmap, \ngmap}$ is a boundary triple for the operator $\ag$.
+Additionally, the vertex conditions \eqref{eq:QGu1VertCond}-\eqref{eq:QGVertexCondition} can be written in the form \eqref{eq:BoundaryConditionAsDNMaps}.
+
+The analogy between $\dmap$ and $\dgmap$ is apparent, however the relationship between $\nmap$ and $\ngmap$ is not immediately obvious without performing some computations.
 Define the functions
 \begin{align*}
 	\sgn_{jk}: \clbracs{v_j, v_k} \rightarrow \clbracs{-1,0,1}, 
 	&\qquad
 	\sgn_{jk}(x) = \begin{cases} -1 & x=v_j, \\ 1 & x=v_k, \end{cases}
 	&\qquad
-	\hat{\sigma}_{jk} &= \sgn_{jk}\widehat{e}_{jk},
+	\hat{\sigma}_{jk}(x) &= \sgn_{jk}(x)\widehat{e}_{jk},
 \end{align*}
 so $\hat{\sigma}_{jk}$ is the ``exterior normal" to the edge $I_{jk}$.
-The classical action of $\nmap$ in \eqref{eq:ClassicalEM-DNMaps} then suggests the following candidate for $\ngmap$:
-\begin{align} \label{eq:NGMapDef}
-	\ngmap u &= 
-	\begin{pmatrix}
-		\sum_{1\con k} \hat{\sigma}_{1k}\bracs{v_1}\wedge\ktcurl{\dddmes}u\bracs{v_1} \\
-		\sum_{2\con k} \hat{\sigma}_{2k}\bracs{v_2}\wedge\ktcurl{\dddmes}u\bracs{v_2} \\
-		\vdots \\
-		\sum_{N\con k} \hat{\sigma}_{Nk}\bracs{v_N}\wedge\ktcurl{\dddmes}u\bracs{v_N}
-	\end{pmatrix}
-	\in\complex^{3N},
-\end{align}
-where we have again stacked the 3-vectors vertically.
 From our analysis of $\kt$-tangential curls (corollary \ref{cory:TangCurlEdgeRotated}), on each edge $I_{jk}$ we have
 \begin{align*}
-	\widehat{e}_{jk}\wedge\ktcurl{\dddmes}u &= \bracs{ \bracs{ u_3^{(jk)} }' + \rmi\qm_{jk}u_3^{(jk)} - \rmi\wavenumber U_2^{(jk)} }\widehat{x}_3,
+	\widehat{e}_{jk}\wedge\ktcurl{\lambda_{jk}}u &= \bracs{ \bracs{ u_3^{(jk)} }' + \rmi\qm_{jk}u_3^{(jk)} - \rmi\wavenumber U_2^{(jk)} }\widehat{x}_3.
 \end{align*}
-and noticing that 
+For those $u\in\dom\bracs{\ag}$, the trace
+\begin{align*}
+	\ktcurl{\lambda_{jk}}u\bracs{v_j}:= \bracs{ \bracs{ u_3^{(jk)} }'(v_j) + \rmi\qm_{jk}u_3^{(jk)}(v_j) - \rmi\wavenumber U_2^{(jk)}(v_j) }\widehat{x}_3
+\end{align*}
+exists, and we can notice that 
 \begin{align*}
 	\sum_{j\conRight k} U_2^{(kj)}\bracs{v_j} - \sum_{j\conLeft k} U_2^{(jk)}\bracs{v_j} &=
-	\sum_{j\con k} \sgn_{jk}(v_j) U_2^{(jk)}\bracs{v_j},
+	\sum_{j\con k} \sgn_{jk}(v_j) U_2^{(jk)}\bracs{v_j}.
 \end{align*} 
-we have for each $v_j\in\vertSet$,
+Thus for each $v_j\in\vertSet$,
 \begin{align*}
 	\sum_{j\con k} \hat{\sigma}_{jk}\bracs{v_j} \wedge \ktcurl{\dddmes}u\bracs{v_j}
 	&= \bracs{ 
 	\rmi\wavenumber\sum_{j\con k} \sgn_{jk}(v_j) U_2^{(jk)}\bracs{v_j}
 	- \sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}u_3^{(jk)}\bracs{v_j}
-	} \widehat{x}_3.
+	} \widehat{x}_3,
 \end{align*}
-We observe that the vertex conditions for the system \eqref{eq:QGRawSystem} can be written as
-\begin{align} \label{eq:VertConditionExplicit}
-	\sum_{j\con k} \hat{\sigma}_{jk}\bracs{v_j} \wedge \ktcurl{\dddmes}u\bracs{v_j}
-	&= \alpha_j\omega^2 u\bracs{v_j},
-	\qquad \forall v_j\in\vertSet.
-\end{align}
-We can identify \eqref{eq:VertConditionExplicit} as being of the form \eqref{eq:BoundaryConditionAsDNMaps},
-\begin{align*}
-	\tilde{\alpha} = 
-	\mathrm{diag}\bracs{\alpha_1, \alpha_1, \alpha_1, \alpha_2, \alpha_2, \alpha_2, ..., \alpha_N, \alpha_N, \alpha_N} \in \complex^{3N\times 3N},
-\end{align*}
-and $\dgmap, \ngmap$ are as in \eqref{eq:DGMapDef}, \eqref{eq:NGMapDef}.
-To complete the analogy, define the operator $\ag$ via the action
-\begin{align*}
-	\ag u &= 
+and the action of the Neumann map $\ngmap$ can be written as
+\begin{align} \label{eq:NGMap-CurlTraceForm}
+	\ngmap u &= 
 	\begin{pmatrix}
-		\sqbracs{ \rmi\wavenumber\bracs{\diff{}{y} + \rmi\qm_{jk} }u_3^{(jk)} + \wavenumber^2 U_2^{(jk)} }e_{jk}
-		+ U_1^{(jk)} n_{jk} \\
-		- \bracs{\diff{}{y} + \rmi\qm_{jk} }^2 u_3^{(jk)} + \rmi\wavenumber \bracs{\diff{}{y} + \rmi\qm_{jk} }U_2^{(jk)}
+		\sum_{1\con k} \hat{\sigma}_{1k}\bracs{v_1}\wedge\ktcurl{\lambda_{jk}}u^{(jk)}\bracs{v_1} \\
+		\sum_{2\con k} \hat{\sigma}_{2k}\bracs{v_2}\wedge\ktcurl{\lambda_{jk}}u^{(jk)}\bracs{v_2} \\
+		\vdots \\
+		\sum_{N\con k} \hat{\sigma}_{Nk}\bracs{v_N}\wedge\ktcurl{\lambda_{jk}}u^{(jk)}\bracs{v_N}
 	\end{pmatrix}
-\end{align*}
-on each edge, where $\mathrm{dom}\bracs{\ag}$ consists of all functions $u$ with the following properties:
-\begin{align*}
-	u\in\mathrm{dom}\bracs{\ag} \quad\Leftrightarrow\quad &
-	\begin{cases}
-	u\in L^2\bracs{\graph}\times L^2\bracs{\graph}\times H^2\bracs{\graph}, \\
-	U_2^{(jk)}\in \gradSob{I_{jk}}{y}, & \forall I_{jk}\in\edgeSet, \\
-	u_3 \text{ is continuous at } v_j, & \forall v_j\in\vertSet, \\
-	u_1(v_j) = u_2(v_j) = 0, & \forall v_j\in\vertSet, \\
-	\text{\eqref{eq:QGVertexCondition} is satisfied at } v_j, & \forall v_j\in\vertSet.
-	\end{cases}
-\end{align*}
-The eigenvalue problem for the operator $\ag$ is then \eqref{eq:QGRawSystem} and we have that
-\begin{align*}
-	\integral{I_{jk}}{ \ag u \cdot \overline{v} }{y} - \integral{I_{jk}}{ u \cdot \overline{\ag v} }{y}
-	&= \sqbracs{ -u'_3 v_3 + u_3 v_3' - 2\rmi\qm_{jk}u_3 v_3 + \rmi\wavenumber\bracs{U_2 v_3 + u_3 V_2} }_{v_j}^{v_k} \\
-	&= -\sqbracs{ \overline{v}_3\bracs{ \bracs{\diff{}{y} + \rmi\qm_{jk} }u_3 - \rmi\wavenumber U_2 } }_{v_j}^{v_k} \\
-	&\qquad + \sqbracs{ u_3\overline{\bracs{ \bracs{\diff{}{y} + \rmi\qm_{jk} }v_3 - \rmi\wavenumber V_2 }} }_{v_j}^{v_k},
-\end{align*}
-implying
-\begin{align*}
-	&\ip{\ag u}{v}_{L^2\bracs{\graph}^3} - \ip{u}{\ag v}_{L^2\bracs{\graph}^3} \\
-	&\quad = \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \integral{I_{jk}}{ \ag u \cdot \overline{v} - u \cdot \overline{\ag v} }{y} \\
-	&\quad = \sum_{v_j\in\vertSet}\sum_{j\conLeft k} -\sqbracs{ \overline{v}_3\bracs{ \bracs{\diff{}{y} + \rmi\qm_{jk} }u_3 - \rmi\wavenumber U_2 } }_{v_j}^{v_k}
-	+ \sqbracs{ u_3\overline{\bracs{ \bracs{\diff{}{y} + \rmi\qm_{jk} }v_3 - \rmi\wavenumber V_2 }} }_{v_j}^{v_k} \\
-	&\quad = \sum_{v_j\in\vertSet} u_3\bracs{v_j}\overline{\bracs{ \sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}v_3 - \rmi\wavenumber\sum_{j\con k} \sgn_{jk}(v_j) V_2^{(jk)}\bracs{v_j} }} \\
-	&\quad + \sum_{v_j\in\vertSet} \overline{v}_3\bracs{v_j}\bracs{ \sum_{j\con k}\bracs{\pdiff{}{n} + \rmi\qm_{jk}}u_3 - \rmi\wavenumber\sum_{j\con k} \sgn_{jk}(v_j) U_2^{(jk)}\bracs{v_j} } \\
-	&\quad = \ngmap u \cdot \overline{\dgmap v} - \dgmap u \cdot \overline{\ngmap v}
-	= \ip{\ngmap u}{\dgmap v}_{\complex^{3N}} - \ip{\dgmap u}{\ngmap v}_{\complex^{3N}},
-\end{align*}
-and so the Green's identity holds, and $\bracs{\complex^{3N}, \dgmap, \ngmap}$ is a boundary triple for the operator $\ag$.
-Given \eqref{eq:ClassicalEM-DNMaps} served as the motivation for the definitions \eqref{eq:DGMapDef} and \eqref{eq:NGMapDef}, the $M$-operator associated with \eqref{eq:QGRawSystem} really is a ``graph version" of the Calder\'on operator for the problem \eqref{eq:SingularCurlEquation}.
+	\in\complex^{3N},
+\end{align}
+where we have again stacked the 3-vectors vertically.
+Our construction and understanding of the tangential curls has enabled us to demonstrate that the Neumann data for the operator $\ag$ is precisely the trace of (a suitable rotation of) the incoming curls from the edges.
+The similarity between the Dirichlet-to-Neumann map associated to the triple $\bracs{\complex^{3N}, \dgmap, \ngmap}$ for $\ag$ and the Caulder\'{o}n operator is now clear.
+Whilst only an analogy, this demonstrates that our variational problems and studies of the space $\ktcurlSob{\ddom}{\dddmes}$ have allowed us to formulate a problem on a zero thickness structure that involves curl-like objects.
+Given our studies of the properties of tangential curls, the boundary data associated with these problems also match our expectations by analogy with the classical setting.

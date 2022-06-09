@@ -1,59 +1,49 @@
 \section{Discussion and Research Outlook} \label{sec:CC-Discussion}
-In this chapter we have performed a detailed analysis of the equation \eqref{eq:SingularCurlEquation} and the associated function spaces.
-By extending the definitions and techniques from chapter \ref{ch:ScalarSystem}, we have been able to provide a definition for a curl-like object in one dimension (the tangential curl), and understand the properties of said object on our singular structure.
-Complementing this analysis is the analysis and discussion of section \ref{sec:DivFreeCondition}, on the condition of being divergence free in our singular structure context.
-It is possible to define a ``strong" notion of the divergence of a vector field in a similar manner to gradients and curls, but forces us to accept that the divergence of any vector field is the zero function.
-Were we considering a problem in which the divergence appeared as an interior operator, this approach would be necessary for our understanding of the variational form of said problem, as we would need to explicitly work with the object $\ktdiv{\dddmes}u$.
-However the problem \eqref{eq:SingularCurlEquation} does not require us to provide such a ``strong" definition of the divergence, and we instead interpret the divergence free condition weakly, as is done classically.
-This enables us to characterise divergence-free vector fields, and its utility extends into exploration of the first order Maxwell system, which we discuss shortly.
+Our efforts to find a more tractable form for the problem \eqref{eq:SingularCurlEquation} have culminated in us arriving at the same system that described the acoustic approximation on a singular structure.
+This marks a departure from the classical setting when one considers the curl of the curl equation; we only obtain the acoustic approximation from \eqref{eq:Intro-CurlCurlEqns} under the assumption of oblique wave propagation --- when the propagation constant in one of the axial directions is zero.
+This would imply that we should only obtain \eqref{eq:SingularScalarWaveEqn} from \eqref{eq:SingularCurlEquation} when we set $\wavenumber=0$, however we obtain \eqref{eq:SingularScalarWaveEqn} regardless of the value of $\wavenumber$.%, and even have $\wavenumber$ appearing as part of an effective spectral parameter in $\omega^2-\wavenumber^2$.
+The reason for this reduction lies in the nature of our variational problem itself --- specifically the tangential curls themselves.
+Let us imagine we have a wave $u = u_0\e^{\rmi\vec{k}\cdot x}$ propagating in our material with wave-vector $\vec{k} = \qm_1\widehat{x}_1 + \qm_2\widehat{x}_2 + \wavenumber\widehat{x}_3$.
+For each edge $I_{jk}$ (or plane $P_{jk}$) we can write this wave-vector using the local frame of reference provided by $\widehat{e}_{jk}$ and $\widehat{n}_{jk}$, obtaining $\vec{k} := \qm_{jk}\widehat{e}_{jk} + \qm_{jk}^\perp\widehat{n}_{jk} + \wavenumber\widehat{x}_3$, where $\qm_{jk}^\perp := \qm\cdot n_{jk}$.
+The tangential curl $\ktcurl{\dddmes}u$ on $I_{jk}$ is directed in the $\widehat{n}_{jk}$ direction, implying that any changes in $u$ are only occurring in the $\widehat{e}_{jk}$ and $\widehat{x}_3$ directions.
+Therefore, there is no propagation out of the plane $P_{jk}$, which corresponds to when we have the component of $\vec{k}$ in the $\widehat{n}_{jk}$ direction being zero --- $\vec{k}\cdot\widehat{n}_{jk}=0$, which happens only if $\qm_{jk}^\perp=0$.
+By analogy with the classical setting, one component of our wave-vector being zero results in the curl-of-the-curl equation reducing to the acoustic approximation.
+This occurs on each plane $P_{jk}$, and thus we find that our edge ODEs always reduce to the (singular analogue of the) acoustic approximation.
+We also stress that this is a direct consequence of the behaviour that the measure $\dddmes$ bestows upon the tangential curls.
+There is no way to avoid such a reduction since it is inherent to our singular structure being \emph{singular}.
+This last observation does provide an idea that might prevent this reduction to the acoustic approximation: we need part of our domain to be non-singular, which can be achieved by ``filling" the regions between the edges $I_{jk}$ with some background material.
+Doing this will move us towards considering a true ``fibre-like" geometry, where we have a background material interlaced with periodic inclusions forming a cross section, which is then extruded into three dimensions.
+Pursuit of this idea naturally leads us on to the work in chapter \ref{ch:SingInc}, where we do precisely this --- introduce a background material surrounding our singular structure.
 
-Our efforts to turn \eqref{eq:SingularCurlEquation} into a more tractable problem in section \ref{sec:3DSystemDerivation} culminate in us arriving at the acoustic approximation.
-This marks a departure from the classical setting when one considers the curl of the curl equation \eqref{eq:Intro-CurlCurlEqns} on a periodic medium in the $\bracs{x_1,x_2}$-plane that is extruded into $x_3$.
-In such a setup, we only obtain the acoustic approximation from \eqref{eq:Intro-CurlCurlEqns} under the assumption of oblique wave propagation --- when the propagation constant in one of the axial directions is zero.
-This would imply that we should only obtain \eqref{eq:SingularScalarWaveEqn} from \eqref{eq:SingularCurlEquation} when we set $\wavenumber=0$, however we obtain \eqref{eq:SingularScalarWaveEqn} regardless of the value of $\wavenumber$, and even have $\wavenumber$ appearing as part of an effective spectral parameter in $\omega^2-\wavenumber^2$.
-The reason for this reduction lies in the nature of our variational problem itself --- specifically the dynamics induced by the tangential curls.
-Let us imagine we now have a wave $u = u_0\e^{\rmi\vec{k}\cdot x}$ propagating in our material with wave-vector $\vec{k} = \qm_1\widehat{x}_1 + \qm_2\widehat{x}_2 + \wavenumber\widehat{x}_3$.
-For each edge $I_{jk}$ (or plane $P_{jk}$) we can write this wave-vector using the local frame of reference provided by $\widehat{e}_{jk}$ and $\widehat{n}_{jk}$, obtaining $\vec{k}_{jk} := \qm_{jk}\widehat{e}_{jk} + \qm_{jk}^\perp\widehat{n}_{jk} + \wavenumber\widehat{x}_3$, where $\qm_{jk}^\perp := \qm\cdot n_{jk}$.
-Now $\ktcurl{\dddmes}u$ on $I_{jk}$ is directed in the $\widehat{n}_{jk}$ direction, effectively only inducing dynamics or changes in $u$ in the $\widehat{e}_{jk}$ and $\widehat{x}_3$ directions.
-There is no propagation out of the plane $P_{jk}$ as a result, which corresponds to when we have the component of $\vec{k}$ in the $\widehat{n}_{jk}$ direction being zero --- $\vec{k}\cdot\widehat{n}_{jk}=0$, which happens only if $\qm_{jk}^\perp=0$.
-By analogy with the classical setting, one component of our wave-vector being zero will then result in the curl of the curl equation reducing to the acoustic approximation.
-This occurs for each plane $P_{jk}$, and thus we find that our edge ODEs always reduce to the (singular analogue of the) acoustic approximation.
-We also highlight that this is a direct consequence of the behaviour of the tangential curls on the singular structure geometry --- a union of planes induced by the extrusion of $\hat{\graph}$ --- which we have chosen to study.
-There is no way to avoid such a reduction since it is tied to the nature of our singular structure being \emph{singular} --- we are always going to effectively ``loose" the ability to observe wave propagation in one direction.
+Despite the rather disappointing discovery that our candidate for the curl-of-the-curl equation \eqref{eq:SingularCurlEquation} reduces to the same system as the singular acoustic approximation, the analysis we have performed demonstrates that our approach via singular measures provides a rigid framework for the postulation and solution of variational problems with respect to measures.
+Our extension of the definitions and techniques from chapter \ref{ch:ScalarSystem} has enabled us to provide an explicit form for curl-like objects in one dimension (the tangential curl), and understand the properties of said object on our singular structure.
+We are also able to demonstrate that the quantum graph problem \eqref{eq:QGRawSystem} derived from our variational starting point bears resemblance to the classical curl-of-the-curl equation, and is solvable via the methods of section \ref{sec:ScalarDiscussion}.
+Obtaining \eqref{eq:SingularScalarWaveEqn} from \eqref{eq:SingularCurlEquation} additionally fulfils one of the objectives we set out to achieve: to provide a candidate for the problem that arises in the zero-thickness limit of a thin-structure domain on which the curl-of-the-curl equation is posed.
+It has already been highlighted that determining this limit (or the limit of the spectra) is currently an open problem in the literature.
+By providing \eqref{eq:SingularCurlEquation} and from it \eqref{eq:QGRawSystem} as a candidate for this limit, we hope to motivate and invite analysis for the curl-of-the-curl equation akin to that conducted in the studies \cite{kuchment2001convergence, kuchment2003asymptotics, exner2005convergence, post2012spectral} for the Neumann Laplacian on thin structures.
+The outcome of such a study would either confirm that sending the thickness of a thin structure to zero does indeed result in the curl-of-the-curl equation reducing to the same problem as the acoustic approximation, or indicate the effects that are present in the zero-thickness limit but which are not captured by the corresponding variational problems on the limiting singular structure.
+Confirmation of the former would justify our approach utilising singular measures and classically-motivated variational problems as a tool for probing zero-thickness limits of thin structures, and provide a useful justification for physical modelling of such structures in an electromagnetic context.
+The latter case being confirmed would also provide a number of insights into why our classically-motivated variational approach fails.
+It may be the case that \eqref{eq:SingularCurlEquation} is not the correct analogue of \eqref{eq:Intro-CurlCurlEqns}, and there are considerations that we have overlooked when assuming that the ``visual" limit provides enough information to model the zero-thickness limit correctly.
+In any event, we have provided a starting point for future investigations into the zero-thickness limit of the curl-of-the-curl equation, and demonstrated that we can realise our variational problems on singular structures as more tractable systems that are explicitly solvable.
 
-This last observation does provide an idea that might prevent this collapse to the acoustic approximation:  we need part of our domain to be non-singular, which can be done by ``filling" the regions between the edges $I_{jk}$ with some background material.
-Doing so will move us closer towards a true ``fibre-like" geometry, where we have a background material interlaced with periodic inclusions, and then extruded into three dimensions.
-Pursuit of this idea naturally leads us on to the work in chapter \ref{ch:SingInc}.
-Before moving on however, we highlight some further considerations and open problems that have been bought to the forefront of our attention in light of the results of this section.
-
-\subsection{Open Questions} \label{ssec:CC-OpenQuestions}
-Obtaining \eqref{eq:SingularScalarWaveEqn} from \eqref{eq:SingularCurlEquation} ultimately fulfils one of the objectives established at the start of this chapter: to provide a candidate for (the spectrum of) the limit of the curl of the curl equation on a thin structure as the thickness tends to zero.
-With the success of our analogous variational approach in chapter \ref{ch:ScalarSystem} in obtaining the known limit of the acoustic equation on thin structures, we can put forward \eqref{eq:QGRawSystem} as a candidate for the limit of the aforementioned curl of the curl problems.
-We have highlighted already that determining this limit (or the limit of the spectra) is currently an open problem in the literature.
-By providing a candidate for the limit we motivate and invite analysis akin to \cite{kuchment2001convergence, kuchment2003asymptotics, exner2005convergence}; either to confirm that sending the thickness of a structure to zero results in the same effective problem as the acoustic setting, or to indicate the effects that are present in the thin structure setting that do not disappear in the singular limit but which are not captured by our variational problems.
-The former being confirmed would further cement our approach via singular measures as a tool for probing limits of thin structures, and provide a useful justification for physical modelling of such structures in an electromagnetic context.
-It could also motivate further analysis into the first order Maxwell system in such limits, of which the curl of the curl equation a consequence, similar to how the acoustic approximation is a consequence of a particular case of the curl of the curl equations. 
-Confirmation of the latter case would also provide a number of insights into why our classically-motivated variational approach fails.
-It may simply be the case that \eqref{eq:SingularCurlEquation} is not the correct analogue of \eqref{eq:Intro-CurlCurlEqns}, and with adjustments any effects that are lost can be recovered --- with the explanation as to how and why lying in the aforementioned analysis.
-Or it may be that there is an alternative approach to defining gradients and curls to the one we have adopted, which is not so restrictive and preserves any effects our current approach looses.
-In any event, this would shed further light onto the behaviour of the curl of the curl operator on increasingly fine thin structures.
-
+\subsection{Considerations for the 1st order Maxwell system} \label{ssec:CC-1stOrderMaxwell}
 Prior to obtaining the result of section \ref{sec:3DSystemDerivation}, we had expected that any behaviour of the solutions to (or eigenvalues of) \eqref{eq:SingularScalarWaveEqn} would be obtainable from \eqref{eq:SingularCurlEquation}.
 Whilst this is certainly the case, we were also expecting behaviours in \eqref{eq:SingularCurlEquation} that were \emph{not} realisable from \eqref{eq:SingularScalarWaveEqn}.
-Given that \eqref{eq:Intro-CurlCurlEqns} are themselves particular consequences of the more general (first-order) Maxwell system; it is natural for us to ask whether we can define an analogue of the first order Maxwell system on our singular structures, whether \eqref{eq:SingularCurlEquation} follows as a consequence, and whether there is behaviour exhibited by this first order system that is not captured by \eqref{eq:SingularCurlEquation}.
+Given that \eqref{eq:Intro-CurlCurlEqns} are themselves particular consequences of the more general (first-order) Maxwell system; it is natural for us to ask whether we can define an analogue of the first order Maxwell system on our singular structures, whether reduction to \eqref{eq:SingularCurlEquation} follows as a direct consequence, or whether there is behaviour exhibited by the first order system that is not captured by \eqref{eq:SingularCurlEquation}.
 The first order equations that we would need to assign a meaning to in pursuit of this are,
 \begin{subequations} \label{eq:CC-Maxwell1stOrder}
 	\begin{align}
 		\ktdiv{*} E = 0,
 		&\qquad
-		\ktcurl{*}E = \rmi\omega\mu_m H, \\
+		\ktcurl{*}E = \rmi\omega\mu_m H, \label{eq:CC-Maxwell1stOrderCurlE} \\
 		\ktdiv{*} H = 0,
 		&\qquad
-		\ktcurl{*}H = -\rmi\omega\epsilon_m E,
+		\ktcurl{*}H = -\rmi\omega\epsilon_m E, \label{eq:CC-Maxwell1stOrderCurlH}
 	\end{align}
 \end{subequations}
 for the purpose of this discussion, we will assume the material parameters are constant and we are working on the domain $\ddom$.
-By analogy with the classical case, we interpret \eqref{eq:CC-Maxwell1stOrder} as the problem of finding divergence-free $E,H\in\pltwo{\ddom}{\dddmes}^3$ such that
+By analogy with the classical case, we would need to interpret \eqref{eq:CC-Maxwell1stOrder} as a variational problem, for example the problem of finding divergence-free $E,H\in\pltwo{\ddom}{\dddmes}^3$ such that
 \begin{subequations} \label{eq:CC-Maxwell1stOrderVariational}
 	\begin{align} 
 		\integral{\ddom}{ E\cdot\overline{\ktcurl{}\phi} - \rmi\omega\mu_m H\cdot\overline{\phi} }{\dddmes} &= 0, 
@@ -62,27 +52,12 @@ By analogy with the classical case, we interpret \eqref{eq:CC-Maxwell1stOrder} a
 		\qquad &\forall \psi\in\psmooth{\ddom}^3.
 	\end{align}
 \end{subequations}
-We place asterisks on the curl operators in \eqref{eq:CC-Maxwell1stOrder} as we need to distinguish $\ktcurl{*}E$ of a vector field $E\in\pltwo{\ddom}{\dddmes}^3$ from $\ktcurl{\dddmes}E$ for $E\in\ktcurlSob{\ddom}{\dddmes}$.
-Indeed, $\ktcurl{*}E$ and $\ktcurl{*}H$ are only ``defined" once a solution $E,H$ to \eqref{eq:CC-Maxwell1stOrderVariational} is determined --- unlike in \eqref{eq:SingularCurlEquation}, the curl no longer appears as an interior operator, so we do not need $\ktcurlSob{\ddom}{\dddmes}$ to make sense of the equations \eqref{eq:CC-Maxwell1stOrder}.
-A thorough analysis would establish a formal definition for the Maxwell operator (and hence $\ktdiv{*}$ and $\ktcurl{*}$), the eigenvalue problem for which corresponds to \eqref{eq:CC-Maxwell1stOrder}.
-For example, one could define the operator $\mathcal{M}$ with domain consisting of all functions $u=\bracs{E,H}\in\sqbracs{\pltwo{\ddom}{\dddmes}^3}^2$ for which there exists some $f=\bracs{f^E, f^H}\in\sqbracs{\pltwo{\ddom}{\dddmes}^3}^2$ such that
-\begin{align*}
-	\ktdiv{*}f^E = 0, &\qquad
-	\ktdiv{*}f^H = 0, & \\
-	\integral{\ddom}{ \epsilon_m^{-1}H\cdot\overline{\ktcurl{}\phi} &- \mu_m^{-1}E\cdot\overline{\ktcurl{}\psi} + \rmi\omega\bracs{H\cdot\overline{\psi} + E\cdot\overline{\phi}} }{\dddmes} & \\
-	&= \integral{\ddom}{ f^E\cdot\overline{\phi} + f^H\cdot\overline{\psi} }{\dddmes},
-	&\qquad\forall \phi,\psi\in\psmooth{\ddom}^3,
-\end{align*}
-then set $\mathcal{M}u = f - \rmi\omega u$.
-One then has to decide how to interpret the divergence-free conditions, for example by imposing that
-\begin{align*}
-	\ktdiv{*}f^E = 0 \quad\Leftrightarrow\quad
-	\integral{\ddom}{f^E\cdot\overline{\ktgrad\phi}}{\dddmes} = 0, 
-	\qquad \forall \phi\in\psmooth{\ddom}^3,
-\end{align*}
-akin to definition \ref{def:DivFree-AllGradients} (although avoiding the involvement of $W_{\dddmes,\mathrm{grad}}^{\kt}$).
-Overcoming the requirements involved in the definition and performing an analysis of the resulting operator is the natural next step in pursuit of understanding the Maxwell system on singular structures, and the behaviour of the modes supported by such structures.
-With such a definition established, one can continue to investigate whether \eqref{eq:SingularCurlEquation} would be a particular case of the more general system \eqref{eq:CC-Maxwell1stOrder}.
-More precisely, under what additional conditions does a solution $E,H$ to \eqref{eq:CC-Maxwell1stOrder}, gives rise to a solution $\bracs{v, \ktcurl{\dddmes}v }\in\ktcurlSob{\ddom}{\dddmes}$ to \eqref{eq:SingularCurlEquation}?
-If such conditions exist, then this also addresses the question as to whether there are additional phenomena hidden in the first order system that are not captured by the curl of the curl equation.
+We note that we have placed asterisks on the ``curls" in \eqref{eq:CC-Maxwell1stOrder} in order to make a distinction between these and the tangential curls that appear in \eqref{eq:SingularCurlEquation}.
+There is indeed a distinction between $\ktcurl{*}E$ of a vector field $E\in\pltwo{\ddom}{\dddmes}^3$, which is only defined by finding a field $H$ that satisfies \eqref{eq:CC-Maxwell1stOrderCurlE}, and $\ktcurl{\dddmes}E$ for $E\in\ktcurlSob{\ddom}{\dddmes}$, which defined through approximations by smooth functions.
+This is because the curl no longer appears as an interior operator in \eqref{eq:CC-Maxwell1stOrder}, unlike \eqref{eq:SingularCurlEquation} where we need to define the tangential curl $\ktcurl{\dddmes}u$ independently of our problem so that we can then understand the variational problem \eqref{eq:SingularCurlEquation-VariationalForm}.
+This raises the question of under what additional conditions does a solution $E,H$ to \eqref{eq:CC-Maxwell1stOrder} give rise to a solution $\bracs{v, \ktcurl{\dddmes}v }\in\ktcurlSob{\ddom}{\dddmes}$ to \eqref{eq:SingularCurlEquation}?
+More precisely, what additional conditions need to be imposed upon the more general system \eqref{eq:CC-Maxwell1stOrder} to obtain \eqref{eq:SingularCurlEquation}?
+If such conditions exist, this answers the question as to whether there are additional behaviours exhibited by (solutions to) the first order singular Maxwell system that are not captured by the singular curl-of-the-curl equation.
 Conversely, \eqref{eq:CC-Maxwell1stOrder} collapsing to \eqref{eq:SingularCurlEquation} in all cases would imply that the acoustic approximation \eqref{eq:SingularScalarWaveEqn} provides a complete description of electromagnetism on singular structures.
+
+\tstk{but the sets of curls of zero do bad things here!!!!!!}
