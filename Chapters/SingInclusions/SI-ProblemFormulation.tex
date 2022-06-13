@@ -1,6 +1,6 @@
 \section{Problem Formulation} \label{sec:SI-ProblemFormulation}
 Let us begin defining the objects in \eqref{eq:SI-WaveEqn} accurately.
-This requires us to first analyse the gradients of functions that live in the space $\tgradSob{\ddom}{\ccompMes}$ in the same vein as did with $\ktgradSob{\ddom}{\dddmes}$ and $\ktcurlSob{\ddom}{\dddmes}$ before, and is the focus of section \ref{sec:CompSobSpaces}.
+This requires us to first analyse the tangential gradients of functions that live in the space $\tgradSob{\ddom}{\ccompMes}$ in the same vein as did with $\ktgradSob{\ddom}{\dddmes}$ and $\ktcurlSob{\ddom}{\dddmes}$ before, and is the focus of section \ref{sec:CompSobSpaces}.
 As we might expect from the previous chapters, we find that:
 \begin{itemize}
 	\item The tangential gradient $\tgrad_{\ccompMes}u$ of $u$ is such that
@@ -12,50 +12,44 @@ As we might expect from the previous chapters, we find that:
 			0 & x\in\vertSet,			
 		\end{cases}
 	\end{align*}
-	where $\grad u$ denotes the weak gradient of $u\in\gradSob{\ddom}{\lambda_2}$.
-	Essentially, in the bulk regions the function $u$ and its tangential gradient coincide with the familiar notion of a weak derivative (with respect to the Lebesgue measure).
+	where $\grad u$ denotes the weak gradient of $u\in H^1\bracs{\ddom}\cong\gradSob{\ddom}{\lambda_2}$.
+	This is to say, in the bulk regions the function $u$ and its tangential gradient coincide with the familiar notion of a weak derivative (with respect to the Lebesgue measure).
 	\item The function $u$ lives in $\gradSob{\ddom_i}{\lambda_2}$ for each of the bulk regions, and the traces of $u$ from $\ddom_i$ onto the inclusions $I_{jk}$ coincide with the values of $u^{(jk)}$ on the inclusions.
 	This is as close to a condition of ``continuity across the inclusions" as we can get.
 	Additionally, the $u^{(jk)}$ are continuous at the vertices of $\graph$, as was the case for functions in $\ktgradSob{\ddom}{\dddmes}$.
 \end{itemize}
 
-Now consider (for a fixed $\qm$) the bilinear form $b_{\qm}$ defined on pairs $(u,v)\in\tgradSob{\ddom}{\ccompMes}\times\tgradSob{\ddom}{\ccompMes}$ where
-\begin{align*}
-	b_{\qm}(u,v) &= \integral{\ddom}{ \tgrad_{\ccompMes}u\cdot\overline{\tgrad_{\ccompMes}v} }{\compMes}
-	= \ip{\tgrad_{\ccompMes}u}{\tgrad_{\ccompMes}v}_{\ltwo{\ddom}{\ccompMes}^2}.
-\end{align*}
-Clearly $b_{\qm}$ is symmetric and satisfies $b_{\qm}(u,u)\geq 0$ with equality if and only if $u=0$, and thus defines a self-adjoint operator
-\begin{align*}
-	\mathcal{A}_{\qm} := -\bracs{\tgrad_{\ccompMes}}^2,
-\end{align*}
-by
-\begin{align*} 
-	\dom\bracs{ \mathcal{A}_{\qm} } &= \clbracs{ u\in\tgradSob{\ddom}{\ccompMes} \setVert \exists f\in\ltwo{\ddom}{\ccompMes} \text{ s.t. } \right.
-	\\
-	& \qquad
-	\left. \integral{\ddom}{ \tgrad_{\ccompMes}u\cdot\overline{\tgrad_{\ccompMes}v} }{\ccompMes} = \integral{\ddom}{ f\overline{v}}{\ccompMes}, \quad \forall v\in\tgradSob{\ddom}{\ccompMes} }, \labelthis\label{eq:CompLaplaceOpDom}
-\end{align*}
-with action
-\begin{align*}
-	\mathcal{A}_{\qm}u = -\bracs{\tgrad_{\ccompMes}}^2 u = f,
-\end{align*}
-where $u$ and $f$ are related as in \eqref{eq:CompLaplaceOpDom}.
-Equation \eqref{eq:SI-WaveEqn} is then the eigenvalue equation for the operator $\mathcal{A}_{\qm}$, interpreted as the problem of finding $\omega^2>0$ and non-zero $u\in\tgradSob{\ddom}{\compMes}$ such that
+As with the variational problems of chapters \ref{ch:ScalarSystem} and \ref{ch:CurlCurl}, we understand \eqref{eq:SI-WaveEqn} in the variational sense: the problem of finding $\omega^2>0$ and non-zero $u\in\tgradSob{\ddom}{\ccompMes}$ such that
 \begin{align} \label{eq:SI-WeakWaveEqn}
 	\integral{\ddom}{ \tgrad_{\ccompMes}u\cdot\overline{\tgrad_{\ccompMes}\phi} }{\ccompMes}
 	&= \omega^2 \integral{\ddom}{ u\overline{\phi} }{\ccompMes}, \quad\forall\phi\in\psmooth{\ddom}.
 \end{align}
-With $\ddom$ being bounded and $\mathcal{A}_{\qm}$ self-adjoint, the spectrum of $\mathcal{A}_{\qm}$ consists of a discrete set of values $\omega^2\in\reals$ (as we expect from the Gelfand transform and introduction of the quasi-momentum) and taking the union of the spectra of the $\mathcal{A}_{\qm}$ over $\qm$ will provide us with the spectrum of a periodic operator on $\reals^2$ with period cell $\ddom$.
-More importantly, we can utilise the min-max principle to write down a variational formulation whose solution determines the eigenvalues (and eigenfunctions) of $\mathcal{A}_{\qm}$, which will form the basis of our numerical approach to solving this problem.
-Yet despite these useful analytic properties, \eqref{eq:CompLaplaceOpDom} and \eqref{eq:SI-WeakWaveEqn} do not lend themselves particularly well to explicit analytic solution, nor provide any insight into how to handle objects like $\tgrad_{\ccompMes}u$ numerically.
-This places us in something of a catch-22; the variational formulation \eqref{eq:SI-WeakWaveEqn} is the standard form\footnote{Within the framework of existing theory concerning operators on Hilbert spaces.} of the eigenvalue problem for our operator $\mathcal{A}_{\qm}$ --- ensuring that it exists, is well-defined, and providing qualitative information about the spectrum.
-However the tangential gradients and the integrals in \eqref{eq:SI-WeakWaveEqn} with respect to $\compMes$ are unfamiliar both from an analytic and numerical standpoint --- we know some of their properties when restricted to different regions of $\ddom$, but not how to work with them directly to obtain a solution (or approximation thereof) to \eqref{eq:SI-WeakWaveEqn}.
-This motivates us to find an alternative formulation to \eqref{eq:SI-WeakWaveEqn}, leading to the formulation obtained in section \ref{sec:SI-StrongDerivation}.
+However as before we highlight that we could consider (for a fixed $\qm$) the bilinear map $b_{\qm}$ defined on pairs $(u,v)\in\tgradSob{\ddom}{\ccompMes}\times\tgradSob{\ddom}{\ccompMes}$ where
+\begin{align*}
+	b_{\qm}(u,v) &= \integral{\ddom}{ \tgrad_{\ccompMes}u\cdot\overline{\tgrad_{\ccompMes}v} }{\compMes}
+	= \ip{\tgrad_{\ccompMes}u}{\tgrad_{\ccompMes}v}_{\ltwo{\ddom}{\ccompMes}^2},
+\end{align*}
+and use $b_{\qm}$ to define the self-adjoint operator $-\laplacian_{\ccompMes}^\qm$ by
+\begin{align*} 
+	\dom\bracs{ -\laplacian_{\ccompMes}^\qm } &= \clbracs{ u\in\tgradSob{\ddom}{\ccompMes} \setVert \exists f\in\ltwo{\ddom}{\ccompMes} \text{ s.t. } \right.
+	\\
+	& \qquad
+	\left. \integral{\ddom}{ \tgrad_{\ccompMes}u\cdot\overline{\tgrad_{\ccompMes}v} }{\ccompMes} = \integral{\ddom}{ f\overline{v}}{\ccompMes}, \quad \forall v\in\tgradSob{\ddom}{\ccompMes} }, \labelthis\label{eq:CompLaplaceOpDom}
+\end{align*}
+with action $-\laplacian_{\ccompMes}^\qm = f$, where $u$ and $f$ are related as in \eqref{eq:CompLaplaceOpDom}.
+Equation \eqref{eq:SI-WaveEqn} is then the eigenvalue equation for the operator $-\laplacian_{\ccompMes}^\qm$.
+With $\ddom$ being bounded and $-\laplacian_{\ccompMes}^\qm$ self-adjoint, the spectrum of each $-\laplacian_{\ccompMes}^\qm$ consists of a discrete set of values $\omega^2\in\reals$.
+We can even utilise the min-max principle to write down a variational formulation whose solution determines the eigenvalues (and eigenfunctions) of $-\laplacian_{\ccompMes}^\qm$, which will form the basis of our first approach to numerically solving this problem.
+Through our use of the Gelfand transform, taking the union of the spectra over $\qm$ will provide us with the spectrum of a periodic operator on $\reals^2$ with period cell $\ddom$.
+
+Despite their useful analytic properties (as operators), \eqref{eq:CompLaplaceOpDom} and \eqref{eq:SI-WeakWaveEqn} do not lend themselves particularly well to explicit analytic solution, nor provide any insight into how to handle objects like $\tgrad_{\ccompMes}u$ numerically.
+Indeed, the tangential gradients and the integrals in \eqref{eq:SI-WeakWaveEqn} with respect to $\compMes$ are unfamiliar both from an analytic and numerical standpoint --- we know some of their properties when restricted to different regions of $\ddom$, but not how to work with them directly to obtain a solution (or approximation thereof) to \eqref{eq:SI-WeakWaveEqn}.
+The complications this gives rise to will motivate us to continue our search of an alternative (and more informative) realisation of \eqref{eq:SI-WeakWaveEqn}, leading to the ``strong formulation" obtained in section \ref{sec:SI-StrongDerivation}.
 We will take this idea further in section \ref{sec:SI-NonLocalQG} when we attempt to reformulate our problem on the skeleton, and discard the bulk regions.
 
-We will use the "cross-in-the-plane" geometry from the example in section \ref{ssec:ExampleCrossInPlane} (now equipped with $\ccompMes$) to ground our discussion of each of our numerical approaches, and illustrate their implementation.
-For convenience, we have translated the period cell by $-\bracs{\recip{2},\recip{2}}$, which allows us to avoid carrying additional constant terms around in what follows.
-Recall that this geometry consists of a skeleton $\graph$ within $\ddom=\left[0,1\right)^2$, with a single vertex $v_0=\bracs{0,0}^\top$ with coupling constant $\alpha$, and two ``looping" edges $I_h = \sqbracs{0,1}\times\clbracs{0}$, $I_v=\clbracs{0}\times\sqbracs{0,1}$.
+Our investigation into the acoustic approximation on composite domains will lean on the cross-in-the-plane geometry from the example in section \ref{ssec:ExampleCrossInPlane} (now equipped with $\ccompMes$) to ground our discussion of each of our numerical approaches, and illustrate their implementation.
+For convenience, we have translated the period graph by $\bracs{-\recip{2},-\recip{2}}$, which allows us to avoid carrying constant terms around.
+The period cell of this geometry now consists of a skeleton $\graph$ within $\ddom=\left[0,1\right)^2$, with a single vertex $v_0=\bracs{0,0}^\top$ with coupling constant $\alpha_0$, and two ``looping" edges $I_h = \sqbracs{0,1}\times\clbracs{0}$, $I_v=\clbracs{0}\times\sqbracs{0,1}$.
 The quasi-momentum parameters $\qm_{jk}$ are easily computable as $\qm_h = \qm_1$ and $\qm_v = \qm_2$, and we only have a single bulk region, $\ddom_1 = \ddom^{\circ}=\bracs{0,1}^2$.
 There are a number of properties that we expect of our eigenvalues due to the symmetric nature of our geometry, notably the following:
 \begin{prop}[Cross in the plane symmetries] \label{prop:CrossInPlaneSymmetries}
@@ -67,25 +61,26 @@ There are a number of properties that we expect of our eigenvalues due to the sy
 	\end{itemize}
 \end{prop}
 
-Additionally for the cross-in-the-plane geometry, we can obtain analytic expressions for a subset of the eigenfunctions and eigenvalues --- namely those inherited from the Dirichlet laplacian on $\bracs{0,1}^2$.
-Observe that for $n,m\in\naturals$ the function
+Additionally for the cross-in-the-plane geometry, we can obtain analytic expressions for a subset of the eigenfunctions and eigenvalues --- namely those inherited from the Dirichlet Laplacian on $\bracs{0,1}^2$.
+Observe that for $n,m\in\naturals$, the function
 \begin{align*}
 	u_{n,m}(x) &= \e^{-\rmi\qm\cdot x}\sin\bracs{n\pi x_1}\sin\bracs{m\pi x_2},
 \end{align*}
-is an eigenfunction of the Dirichlet laplacian $-\laplacian_{\qm}$,
+is an eigenfunction of the Dirichlet Laplacian $-\laplacian^{\qm}_0$, solving the system
 \begin{align*}
-	-\laplacian_{\qm}u &= \omega_{n,m}^2 u, &\qquad \text{on } \bracs{0,1}^2, \\
-	u\bracs{0,x_2} = u\bracs{1,x_2} &= u\bracs{x_1,0} = u\bracs{x_1,1} = 0,
+	-\laplacian^{\qm}_0 u 
+	:= \bracs{\partial_1+\rmi\qm_1}^2 u + \bracs{\partial_2+\rmi\qm_2}^2 u
+	&= \omega_{n,m}^2 u, \qquad \text{on } \bracs{0,1}^2, \\
+	u\bracs{0,x_2} = u\bracs{1,x_2} = u\bracs{x_1,0} = u\bracs{x_1,1} &= 0,
 \end{align*}
 where $\omega_{n,m}^2 = \bracs{n^2+m^2}\pi^2$.
-It is clear that $u_{n,m}$ also solves \eqref{eq:SI-BulkEqn} with $\omega^2 = \omega_{n,m}^2$ and has $u=0$ on the skeleton, and furthermore is such that $u_{n,m}\in\tgradSob{\ddom}{\ccompMes}$.
+It is clear that $u_{n,m}\in\tgradSob{\ddom}{\ccompMes}$ and has $u=0$ on the skeleton.
 In the event that both
 \begin{itemize}
 	\item ($n$ is even and $\qm_1=0$) or ($n$ is odd and $\qm_1=-\pi$),
 	\item ($m$ is even and $\qm_2=0$) or ($m$ is odd and $\qm_2=-\pi$),
 \end{itemize}
-hold, then $u_{n,m}$ is also an eigenfunction of \eqref{eq:SI-BulkEqn}-\eqref{eq:SI-VertexCondition} with the same eigenvalue (the quasi-momentum values are required to ensure that the normal derivative traces cancel out in \eqref{eq:SI-InclusionEqn}).
-Of course, one can also substitute $\omega^2_{n,m}, u_{n,m}$ and into \eqref{eq:SI-WaveEqn} to arrive at the same conclusion.
-Knowing that \eqref{eq:SI-WaveEqn} shares eigenvalues with the Dirichlet Laplacian will have consequences for us in section \ref{sec:SI-NonLocalQG}, when we attempt to reduce \eqref{eq:SI-WaveEqn} to a quantum graph problem.
-For now however, $u_{n,m}$ and $\omega_{n,m}^2$ provide some suitable test cases for our numerical schemes.
+hold, then $u_{n,m}$ solves \eqref{eq:SI-WaveEqn} with $\omega^2 = \omega_{n,m}^2$ --- the phase-factor $\e^{-\rmi\qm\cdot x}$ is required to ensure that certain terms in the variational formulation cancel out\footnote{Specifically, the normal derivative traces onto the skeleton (see \eqref{eq:SI-InclusionEqn}) only cancel under these assumptions.}.
+This provides us with some suitable test cases for our numerical schemes.
 It will be clear (upon viewing figure \ref{fig:CompositeCross-VP-SpectralBands}) that these eigenvalues of the Dirichlet Laplacian are also not the \emph{only} eigenvalues of the problem \eqref{eq:SI-WaveEqn} --- the two spectra are distinct and neither is contained in the other.
+Knowing that \eqref{eq:SI-WaveEqn} shares eigenvalues with the Dirichlet Laplacian will also have consequences for us in section \ref{sec:SI-NonLocalQG}, when we attempt to reduce \eqref{eq:SI-WaveEqn} to a quantum graph problem.

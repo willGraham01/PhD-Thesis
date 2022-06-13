@@ -1,11 +1,10 @@
-\section{Variational Approach to \eqref{eq:SI-WaveEqn}} \label{sec:SI-VarProbMethod}
-Now that \eqref{eq:SI-WaveEqn} is well-defined through \eqref{eq:SI-WeakWaveEqn} and the operator $\mathcal{A}_{\qm}$, we can begin to consider our approach to solving it.
-As mentioned in section \ref{sec:SI-ProblemFormulation}, the fact that $\mathcal{A}_{\qm}$ is self-adjoint for each $\qm$ combined with the min-max principle implies that the eigenvalues $\omega_{n}^2$ (and eigenfunctions $u_n$) of $\mathcal{A}_{\qm}$ are the minimum values (respectively minimisers) of the following variational problem:
+\section{Variational Approach for determination of the eigenvalues of \eqref{eq:SI-WaveEqn}} \label{sec:SI-VarProbMethod}
+As mentioned in section \ref{sec:SI-ProblemFormulation}, the fact that $-\laplacian_{\ccompMes}^\qm$ is self-adjoint for each $\qm$, combined with use of the min-max principle, implies that the eigenvalues $\omega_{n}^2$ (and eigenfunctions $u_n$) of $-\laplacian_{\ccompMes}^\qm$ are the minimum values (respectively minimisers) of the following variational problem:
 \begin{align} \label{eq:SI-VarProb}
-	\omega_n^2 &:= \min_{u}\clbracs{ \integral{\ddom}{ \abs{\tgrad_{\ccompMes}u}^2 }{\ccompMes} \setVert \norm{u}_{\ltwo{\ddom}{\ccompMes}}=1, \ u\perp u^{(l)} \ \forall 1\leq l\leq n-1 },
+	\omega_n^2 &:= \min_{u}\clbracs{ \integral{\ddom}{ \abs{\tgrad_{\ccompMes}u}^2 }{\ccompMes} \setVert \norm{u}_{\ltwo{\ddom}{\ccompMes}}=1, \ \ip{u}{u^{(l)}}_{\ltwo{\ddom}{\dddmes}}=0 \ \forall 1\leq l\leq n-1 },
 \end{align} 
-where the eigenvalues are numbered in ascending order, and the orthogonality condition is meant with respect to the inner product in $\ltwo{\ddom}{\ccompMes}$.
-Our interest is in determining the eigenvalues $\omega_n^2$, however we also need to determine the eigenfunctions $u_n$ since we need to use $u_{n-1}$ through $u_1$ in the computation of $u_{n}$.
+where the eigenvalues (and their corresponding eigenfunctions) are numbered in ascending order.
+Our interest is in determining the eigenvalues $\omega_n^2$, however we also need to determine the eigenfunctions $u_n$ since $u_{n-1}$ through $u_1$ are required for computation of $u_{n}$.
 Since we can obtain the eigenvalue $\omega_n^2$ from the eigenfunction $u_n$, by evaluating the integral in \eqref{eq:SI-VarProb}, we will focus our discussion on the approximation (and computation) of the eigenfunctions.
 We also drop the explicit subscript $n$, and just consider the problem of determining the function $u\in\tgradSob{\ddom}{\ccompMes}$ which solves the optimisation problem;
 \begin{subequations} \label{eq:SI-MinProblem}
@@ -15,42 +14,42 @@ We also drop the explicit subscript $n$, and just consider the problem of determ
 		& \quad \integral{\ddom}{ u\cdot\overline{u}^{(l)} }{\ccompMes} = 0, \ 1\leq l\leq n-1,
 	\end{align}
 \end{subequations}
-where $n\in\naturals$, $u^{(l)}, 1\leq l\leq n-1$ are given (pairwise) orthogonal functions.
+where $n\in\naturals$, $u^{(l)}, 1\leq l\leq n-1$ are a finite list of (given) orthonormal functions.
 
-The traditional idea when attempting to approximate a minimising function is to represent the minimising function $u$ in terms of a basis $\clbracs{\varphi_m}_{m\in\naturals_0}\subset\tgradSob{\ddom}{\ccompMes}$, truncate the basis expansion at some index $M$,
+The traditional idea when attempting to approximate a minimising function is to select a finite-dimensional subspace of the solution space ($\tgradSob{\ddom}{\ccompMes}$ in this case), and then find the best approximation to the minimising function $u$ in this space.
+For example, we could elect to represent the minimising function $u$ in terms of a basis $\clbracs{\varphi_m}_{m\in\naturals_0}$ for $\tgradSob{\ddom}{\ccompMes}$, truncate the basis expansion at some index $M$,
 \begin{align} \label{eq:SI-VPTruncatedBasis}
 	u &\approx \sum_{m=0}^M u_m \varphi_m,
 \end{align}
-and solve the minimisation problem (that arises from substituting \eqref{eq:SI-VPTruncatedBasis} into \eqref{eq:SI-MinProblem}) in the coefficients of the basis expansion that remain.
-The choice of basis and $M$ will affect the accuracy of the approximate eigenfunction (and hence eigenvalue).
-This minimisation problem will be discrete (solving for the $M+1$ independent variables $u_m$), and can be handled using optimisation methods.
-In principle, we can apply these ideas for the problem \eqref{eq:SI-MinProblem}.
-Our first task is to decide on the basis functions $\varphi_m$ that we want to use to approximate $u$.
-From the standpoint of accuracy (and typically speed) of the numerical solution there are several properties that it is desirable for this basis to have; orthonormality between the $\varphi_m$, similar shape to that expected of $u$, and of course periodicity.
-This is where problems concerning the unfamiliar nature of our space $\tgradSob{\ddom}{\ccompMes}$ begin to arise, as the choice of basis is considerably more complex --- as choosing the behaviour of $\varphi_m$ in the bulk regions then restricts what $\varphi_m$ can do on the skeleton, and vice-versa. 
-The geometry of the skeleton can also compound this issue, particularly if there are a large number of bulk regions $\ddom_i$, if they have irregular shapes, or if their shapes are significantly different (in terms of size or shape) from each other.
-In such a setting one could consider choosing a basis in similar fashion to how this is done for finite element schemes; mesh $\ddom$ into a union of simplexes (usually triangles) by placing nodes $\tau_i$, and  ensure that none of the simplexes straddle any parts of the skeleton (that is, the interior of a simplex always has empty intersection with the skeleton).
-Then, use ``tent" or ``hat" functions centred on each node $\tau_i$ for the truncated basis functions $\varphi_m$.
+and solve the minimisation problem (that arises from substituting \eqref{eq:SI-VPTruncatedBasis} into \eqref{eq:SI-MinProblem}) in the coefficients of the basis expansion $\clbracs{u_m}_{1\leq m\leq M}$.
+This minimisation problem will be discrete (solving for the $M+1$ independent variables $u_m$) and can be handled using optimisation methods, with the choice of $\varphi_m$ and $M$ affecting the accuracy of the approximate eigenfunction (and eigenvalue).
+We can look to apply these ideas to the problem \eqref{eq:SI-MinProblem}.
+
+Our first task is to decide on the finite-dimensional subspace and/or the basis functions $\varphi_m$ that we want to use to approximate $u$.
+From the standpoint of accuracy (and typically speed of computation) of the numerical solution there are a number of properties that it is desirable for this basis to have; orthonormality between the $\varphi_m$, similar shape to that expected of $u$, and a quantifiable rate of decay of the coefficients $u_m$.
+This is where the unfamiliar nature of our space $\tgradSob{\ddom}{\ccompMes}$ begins to cause problems as the choices we have for such bases are considerably more complex --- choosing the behaviour of $\varphi_m$ in the bulk regions then restricts what $\varphi_m$ can do on the skeleton, and vice-versa. 
+The geometry of the skeleton can also compound this issue, particularly if there are a large number of bulk regions $\ddom_i$, if their shapes are significantly different (in terms of size or layout) from each other, or there are a small number of irregularly shaped bulk regions.
+In such settings one could consider choosing ``local" basis functions in similar fashion to finite element schemes; mesh the domain $\ddom$ into a union of simplexes (usually triangles) by placing nodes $\tau_i\in\ddom$, and use ``tent" (or ``hat") functions\footnote{These are functions that are equal to unity at a given node $\tau_i$, decay to zero on the simplexes that have $\tau_i$ as a node, and are zero on the rest of $\ddom$.} centred on each node $\tau_i$ for the truncated basis functions $\varphi_m$.
 This allows sufficient flexibility in the behaviour of $u$ on the edges and in the bulk regions, at the expense of requiring a new mesh for every new graph geometry.
+We will continue this train of thought in our discussion in section \ref{sec:SI-Conc}.
 
 Fortunately, the geometry of our cross-in-the-plane example is rather simple, since the two edges $I_h, I_v$ are aligned with the coordinate axes.
-This makes computing integrals on the skeleton much simpler, and traces from the bulk region can be computed with relative ease, so we can avoid taking the approach of meshing $\ddom$ as described above.
-Instead, we can opt to choose a basis in a way more akin to spectral methods --- by choosing ``global" basis functions rather than the ``local" tent-basis functions that meshing $\ddom$ would utilise.
+This makes computing integrals on the skeleton and traces from the bulk region relatively simple (compared to more general geometries), so we can avoid taking the approach of meshing $\ddom$ as described above.
+Instead we can opt to choose a basis in a way more akin to spectral methods --- by choosing ``global" basis functions rather than the ``local" basis functions described above.
 Combined with the fact that we only have one bulk region that spans the entire period cell, the natural candidate for our basis functions would be the 2D Fourier basis $\e^{2\pi\rmi(\alpha x + \beta y)}$.
-These functions are orthogonal in $\ltwo{\ddom}{\compMes}$, however are not orthogonal in $\ltwo{\ddom}{\ccompMes}$ (the inner product of two distinct functions is exactly $\alpha$).
-More problematically, they also possess a continuous (in the sense of matching traces) normal derivative across the skeleton which functions in $\tgradSob{\ddom}{\ccompMes}$ are not required to have, so do not constitute a suitable basis for our approximation.
-Instead, we will look to use 2D polynomials to approximate our function $u$, by taking $M\in\naturals$ and setting
+These functions are orthogonal in $\ltwo{\ddom}{\compMes}$, however are not orthogonal in $\ltwo{\ddom}{\ccompMes}$ --- the inner product of two distinct functions is exactly $\alpha_0$.
+This on its own does not prevent us from utilising these functions as a basis; however they also possess a continuous (in the sense of matching traces) normal derivative across the skeleton, which functions in $\tgradSob{\ddom}{\ccompMes}$ are not required to have\footnote{We will later see in section \ref{sec:SI-StrongDerivation} exactly how this potential mismatch in the traces of the normal derivative affects the eigenfunctions.}.
+Instead we use periodic, two-dimensional polynomials to approximate our function $u$, by taking an order $M\in\naturals$ and setting
 \begin{align} \label{eq:2DPolyBasisDef}
-	\varphi_m(x,y) &= x^{i_m} y^{j_m}, \quad m = j_m + Mi_m, \ i,j\in\clbracs{0,...,M-1}.
+	\varphi_m(x,y) &= x^{i_m} y^{j_m}, \quad m = j_m + Mi_m, \ i,j\in\clbracs{0,...,M-1},
 \end{align}
-These functions are not periodic by definition, so we are required to add the additional constraints
+and imposing the periodicity constraint that
 \begin{align*}
 	u\bracs{0,y} = u\bracs{1,y}, \ \forall y\in\sqbracs{0,1}, 
 	\qquad 
-	u\bracs{x,0} = u\bracs{x,1}, \ \forall x\in\sqbracs{0,1},
+	u\bracs{x,0} = u\bracs{x,1}, \ \forall x\in\sqbracs{0,1}.
 \end{align*}
-to our minimisation problem to account for this.
-This is a suitable basis for $\tgradSob{\ddom}{\ccompMes}$; two dimensional (periodic) polynomials are dense in $\tgradSob{\ddom}{\lambda_2}$, and since we have that functions $u\in\tgradSob{\ddom}{\ccompMes}$ are continuous across the skeleton, the trace of such polynomials also approximates $u$ on the skeleton.
+This is a suitable finite-dimensional subspace for $\tgradSob{\ddom}{\ccompMes}$ in which to approximate $u$; two dimensional (periodic) polynomials are dense in $\tgradSob{\ddom}{\lambda_2}$, and since we have that functions $u\in\tgradSob{\ddom}{\ccompMes}$ are continuous across the skeleton, the trace of such polynomials also approximates $u$ on the skeleton.
 We also know that $u$ is continuous at the vertices, which such polynomial approximations provide, but they also do not enforce matching normal derivative traces across the skeleton.
 In the case where one has multiple bulk regions, one can build on this idea by approximating with ``piecewise polynomials" --- approximate via a polynomial basis on each bulk region $\ddom_i$, then impose that the approximations must coincide on any part of the skeleton common to the boundary of two bulk regions.
 
@@ -74,13 +73,14 @@ With our choice of polynomial basis, and writing $U = \bracs{u_0,...,u_{M^2-1}}^
 	\end{subequations}
 \end{problem}
 The minimiser $U$ of problem \ref{prob:DiscVarProb} then provides our approximation of $u$, and we have that $\omega^2 \approx J[U]$.
-Equation \eqref{eq:SI-EMPNormConstraint} is the norm constraint on the eigenfunction $u$, \eqref{eq:SI-EMPxPeriodicity} (respectively \eqref{eq:SI-EMPyPeriodicity}) are the constraints that ensure periodicity of the eigenfunction in the $x$ (respectively $y$) directions, and \eqref{eq:SI-EMPOrthogonality} forces $u$ to be orthogonal to the previously computed eigenfunctions $u^l$.
+Equation \eqref{eq:SI-EMPNormConstraint} is the norm constraint on the eigenfunction $u$, \eqref{eq:SI-EMPxPeriodicity} (respectively \eqref{eq:SI-EMPyPeriodicity}) are the constraints that ensure periodicity of the eigenfunction in the $\widehat{x}_1$ (respectively $\widehat{x}_2$) directions, and \eqref{eq:SI-EMPOrthogonality} forces $u$ to be orthogonal to the previously computed eigenfunctions $u^l$.
 
-A glaring drawback to this method is its sequential nature --- if we want to compute the eigenvalues (or eigenfunctions) of the $n^{\text{th}}$ spectral band, then we need to compute those for each band below too.
-Compounding this is that the finite dimension of our problem (through the truncation at order $M$) means that we are only ever able to compute approximations to the lowest $M^2 - \bracs{2M + 1} + 1$ eigenvalues due to the number of constraints in the problem \ref{prob:DiscVarProb}.
-This in particular makes it difficult to examine any part of the spectrum that is far away from zero --- if one does not know a priori which band the eigenvalues of a certain order fall into, one simply has to continue computing successive eigenvalues until they reach the region of the spectrum they want to explore.
-This being said, we can recover each of the spectral bands (and dispersion relations) in succession, provided we are willing to put in the required computation time and power.
-One can view the approximate spectral bands as computed from the problem \ref{prob:DiscVarProb} with $M=12$ and $\alpha=0$ in figure \ref{fig:CompositeCross-VP-SpectralBands}.
+A glaring drawback to this method is its sequential nature --- if we want to compute the $n^{\text{th}}$ eigenvalue, then we need to compute each of $u_1,...,u_{n-1}$ too.
+Compounding this is that the finite dimension of our problem (through the truncation at order $M$) means that we are only ever able to compute approximations to the lowest $M^2 - \bracs{2M + 1} + 1$ eigenvalues, due to the number of constraints in the problem \ref{prob:DiscVarProb}.
+This in particular makes it difficult to examine any part of the spectrum that is far away from zero --- if one does not know \emph{a priori} how the eigenvalues $\omega_n$ scale with $n$, one simply has to continue computing successive eigenvalues until they reach the region of the spectrum they want to explore.
+In doing so, one might find that the approximating subspace is of too small a dimension, or might grossly overestimate how large the dimension should be and waste computation time.
+This being said, we are able to recover each of the spectral bands (and dispersion relations) in succession, provided we are willing to put in the required computation time and power.
+The approximate spectral bands as computed from the problem \ref{prob:DiscVarProb} with $M=12$ and $\alpha=0$ can be viewed in figure \ref{fig:CompositeCross-VP-SpectralBands}.
 \begin{figure}[t!]
 	\centering
 	\includegraphics[scale=0.5]{CompositeCross-VP-SpectralBands.pdf}
@@ -93,3 +93,8 @@ We can also notice that the eigenvalues within each band obey the symmetries in 
 	\includegraphics[width=\textwidth]{VP_2022-05-13-14-26_AllBands.pdf}
 	\caption[Dispersion relations for the first 5 spectral bands of \eqref{eq:SI-WaveEqn}, computed via solution of problem \ref{prob:DiscVarProb}.]{\label{fig:VP_AllBands} The dispersion relations for the first 5 spectral bands, approximated via the problem \ref{prob:DiscVarProb}.}
 \end{figure}
+
+Although we have a method of computing the eigenvalues and eigenfunctions, we are no closer to understanding \emph{how} the presence of the skeleton and geometric contrast is affecting the problem \eqref{eq:SI-WaveEqn}.
+It is also only by virtue of our analysis of the tangential gradients $\tgradSob{\ddom}{\ccompMes}$ that we are able to compute the integrals in \eqref{eq:SI-MinProblem}, and gain some insight into how we might want to approximate functions that live in $\tgradSob{\ddom}{\ccompMes}$.
+In search of answers to these questions, we turn to the investigation in section \ref{sec:SI-StrongDerivation}.
+We will also return to the idea of utilising a finite-element style approach to the solution of \eqref{eq:SI-WaveEqn} in our discussion in section \ref{sec:SI-Conc}.
