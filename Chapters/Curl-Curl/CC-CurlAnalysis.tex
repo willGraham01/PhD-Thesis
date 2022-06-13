@@ -174,8 +174,8 @@ Next, we require an extension lemma for curls of zero (compare this result with 
 \end{proof}
 Lemmas \ref{lem:CurlZeroInC}, \ref{lem:CurlZeroExtensionLemma}, and \ref{lem:CInCurlZero} then form the proof of theorem \ref{thm:CurlZeroChar}.
 
-Our next brief stop will be an examination of the set $\curlZero{\ddom}{\massMes}$, before we then look to fully characterise the set $\curlZero{\ddom}{\dddmes}$.
-Much of the same intuition that we had for gradients also holds for curls in the context of the measure $\massMes$ --- given that $\massMes$ only respects a finite number of points in $\ddom$, there is no way to measure rotations at these points, and so all curls will be curls of zero.
+Our next brief stop will be an examination of the set $\curlZero{\ddom}{\massMes}$, before we then look to fully characterise curls of zero with respect to $\dddmes$.
+Much of the same intuition that we had for gradients also holds for curls in the context of the measure $\massMes$ --- given that $\massMes$ only respects a finite number of points in $\ddom$, there is no way to quantify rotations at these points, and so all $\ltwo{\ddom}{\massMes}^3$-vector fields turn out to be curls of zero.
 \begin{prop} \label{prop:VertexCurlZero}
 	\begin{align*}
 		\curlZero{\ddom}{\massMes} &= \pltwo{\ddom}{\massMes}^3.
@@ -198,14 +198,14 @@ Much of the same intuition that we had for gradients also holds for curls in the
 	\end{align*}
 	Then for each $v_j\in\vertSet$, the function $\Phi_j\in\csmooth{\ddom}^3$ via 
 	\begin{itemize}
-		\item $\Phi_j(x) = \bracs{0, 0, \psi\bracs{x_2 - v_j^{(2)}}}^\top$ is such that $\Phi_j = 0, \ \grad^{(0)}\wedge\Phi_j = c^j_1$ in $\ltwo{\ddom}{\massMes}^3$,
-		\item $\Phi_j(x) = \bracs{0, 0, \psi\bracs{v_j^{(1)} - x_1}}^\top$ is such that $\Phi_j = 0, \ \grad^{(0)}\wedge\Phi_j = c^j_2$ in $\ltwo{\ddom}{\massMes}^3$,
-		\item $\Phi_j(x) = \bracs{0, \psi\bracs{x_1 - v_j^{(1)}}, 0}^\top$ is such that $\Phi_j = 0, \ \grad^{(0)}\wedge\Phi_j = c^j_3$ in $\ltwo{\ddom}{\massMes}^3$,
+		\item $\Phi_j(x) = \bracs{0, 0, \psi\bracs{x_2 - v_j^{(2)}}}^\top$ is such that $\Phi_j = 0, \ \ocurl{}\Phi_j = c^j_1$ in $\ltwo{\ddom}{\massMes}^3$,
+		\item $\Phi_j(x) = \bracs{0, 0, \psi\bracs{v_j^{(1)} - x_1}}^\top$ is such that $\Phi_j = 0, \ \ocurl{}\Phi_j = c^j_2$ in $\ltwo{\ddom}{\massMes}^3$,
+		\item $\Phi_j(x) = \bracs{0, \psi\bracs{x_1 - v_j^{(1)}}, 0}^\top$ is such that $\Phi_j = 0, \ \ocurl{}\Phi_j = c^j_3$ in $\ltwo{\ddom}{\massMes}^3$,
 	\end{itemize}
-	and thus, after multiplying by a smooth cut-off function equal to unity on some open neighbourhood of $v_j$, we see that $\mathcal{C}\subset\curlZero{\ddom}{\massMes}$ and the result follows.
+	and thus (possibly after multiplying by a smooth cut-off function equal to unity on some neighbourhood of $v_j$) we see that $\mathcal{C}\subset\curlZero{\ddom}{\massMes}$, and the result follows.
 \end{proof}
 
-Although we usually conduct a study of tangential curls after completing our study of the curls of zero (akin to our methodology for studying gradients of zero and tangential gradients), there is little point in delaying the obvious characterisation for $\ktcurl{\ddom}{\massMes}$.
+Although we usually conduct a study of tangential curls after completing our study of the curls of zero (akin to our methodology for studying gradients of zero and tangential gradients), there is little point in delaying the obvious characterisation for $\ktcurlSob{\ddom}{\massMes}$.
 \begin{cory} \label{cory:VertexCurlSob}
 	\begin{align*}
 		\ktcurlSob{\ddom}{\massMes} &= \clbracs{ \bracs{u,0} \setVert u\in\pltwo{\ddom}{\massMes}^3 }.
@@ -225,7 +225,7 @@ Although we usually conduct a study of tangential curls after completing our stu
 	Therefore, there exists some $c\in\curlZero{\ddom}{\massMes}^{\perp}$ such that $\bracs{u,c}\in\ktcurlSob{\ddom}{\massMes}$, however from the ``$\subset$" inclusion we can then conclude that $c = 0$.
 \end{proof}
 
-We can now combine our understanding of $\curlZero{\ddom}{\ddmes}$ and $\curlZero{\ddom}{\massMes}$ to show that linear combinations of these functions make up the set $\curlZero{\ddom}{\dddmes}$.
+We now combine our understanding of $\curlZero{\ddom}{\ddmes}$ and $\curlZero{\ddom}{\massMes}$ to show that linear combinations of functions in these spaces make up the set $\curlZero{\ddom}{\dddmes}$.
 \begin{prop} \label{prop:ThickVertexCurlZeroCharacterisation}
 	Let $\tilde{c}\in\ltwo{\ddom}{\dddmes}^3$ where
 	\begin{align*}
@@ -245,21 +245,23 @@ We can now combine our understanding of $\curlZero{\ddom}{\ddmes}$ and $\curlZer
 	\end{align*}
 	so any approximating sequence for $c$ that converges in $\ltwo{\ddom}{\dddmes}^3$ also converges in $\ltwo{\ddom}{\ddmes}^3$ to $c_{\ddmes}$ and in $\ltwo{\ddom}{\massMes}^3$ to $c_{\massMes}$.
 	
-	($\Leftarrow$) For the left-directed implication, it is sufficient for us to demonstrate the implication holds for the case when $c_{\massMes}=0$, and the case that $c_{\ddmes}=0$ with $c_{\massMes}\neq0$ at precisely one vertex $v$.
+	($\Leftarrow$) For the left-directed implication it is sufficient for us to demonstrate the implication holds when $c_{\massMes}=0$, then when $c_{\ddmes}=0$ and $c_{\massMes}\neq0$ at precisely one vertex $v$.
 	Having shown the implication in these cases, linearity of $\curlZero{\ddom}{\dddmes}$ will then complete the proof.
 	
-	The case when $c_{\massMes}=0$ is handled by the extension lemma \ref{lem:CurlZeroExtensionLemma} and lemma \ref{lem:CInCurlZero}.
+	The case with $c_{\massMes}=0$ is handled by the extension lemma \ref{lem:CurlZeroExtensionLemma} and lemma \ref{lem:CInCurlZero}.
 	
-	Next, consider the case when $c_{\ddmes}=0$, and when $c_{\massMes}=0$ at all vertices except $v\in\vertSet$, with $v=\bracs{v_1, v_2}\in\ddom$ and with $c_{\massMes}(v) = \bracs{c_1, c_2, c_3}^\top$.
+	So consider the case when $c_{\ddmes}=0$, and when $c_{\massMes}=0$ at all vertices except $v\in\vertSet$, with $v=\bracs{v_1, v_2}\in\ddom$ and with $c_{\massMes}(v) = \bracs{c_1, c_2, c_3}^\top$.
 	For each $n\in\naturals$ take a smooth function $\phi_n:\reals\rightarrow\sqbracs{-1,1}$ with the properties
 	\begin{align*}
 		\phi_n(0) = 0,
 		&\quad	\phi'_n(0) = 1, \\
-		\phi_n(t) = 0, &\quad t\not\in B_{\frac{2}{n}}(0), \\
-		\abs{\phi_n(t)} \leq \recip{n} &\quad t\in B_{\frac{2}{n}}(0).
+		\supp\bracs{\phi_n} &\subset\bracs{-\frac{2}{n},\frac{2}{n}}, \\
+		%\phi_n(t) = 0, &\quad t\not\in B_{\frac{2}{n}}(0), \\
+		\abs{\phi_n(y)} \leq \recip{n}, &\quad y\in \bracs{-\frac{2}{n},\frac{2}{n}}.
+		% B_{\frac{2}{n}}(0).
 	\end{align*}
-	Since $\abs{\phi_n(t)} \leq \recip{n}$ when $\abs{t}\leq\recip{n}$, $\phi_n$ can be chosen so that exists a constant $K$ independent of $n$ such that $\abs{\grad\phi_n} \leq K$ when $\recip{n} \leq \abs{x-v} \leq \frac{2}{n}$.
-	Define the functions $\Phi^n\in\csmooth{\ddom}$ (and compute their curls) as follows;
+	Since $\abs{\phi_n(y)} \leq \recip{n}$, $\phi_n$ can be chosen so that exists a constant $K$ independent of $n$ such that $\abs{\phi_n'(y)} \leq K$ for any $y\in\supp\bracs{\phi_n}$.
+	Define the functions $\Phi^n\in\csmooth{\ddom}$ for all $n\geq\recip{d}$ as follows;
 	\begin{align*}
 		\Phi^n(x) = 
 		\begin{pmatrix} 
@@ -268,7 +270,7 @@ We can now combine our understanding of $\curlZero{\ddom}{\ddmes}$ and $\curlZer
 			c_1\phi_n\bracs{x_2-v_2} + c_2\phi_n\bracs{v_1-x_1} 
 		\end{pmatrix},
 		&\qquad
-		\curl{}\Phi_n(x) =
+		\ocurl{}\Phi_n(x) =
 		\begin{pmatrix}
 			c_1\phi'_n\bracs{x_2-v_2} \\
 			c_2\phi'_n\bracs{v_1-x_1} \\
@@ -281,9 +283,9 @@ We can now combine our understanding of $\curlZero{\ddom}{\ddmes}$ and $\curlZer
 		&\leq \bracs{c_3^2 + \bracs{c_1 + c_2}^2} \bracs{ \integral{B_{\frac{2}{n}}(v)}{ \recip{n^2} }{\ddmes}
 		+ \alpha_v\abs{\phi_n(0)}^2 } \\
 		&= \frac{2\mathrm{deg}(v)}{n^3}\bracs{\abs{c_3}^2 + \abs{c_1 + c_2}^2} \rightarrow 0 \toInfty{n}, \\
-		\integral{\ddom}{ \abs{ \curl{}\Phi^n - c }^2 }{\dddmes}
-		&= \integral{\ddom}{ \abs{ \curl{}\Phi^n}^2 }{\ddmes}
-		+ \integral{\ddom}{ \abs{ \curl{}\Phi^n - c_{\massMes} }^2 }{\massMes} \\
+		\integral{\ddom}{ \abs{ \ocurl{}\Phi^n - c }^2 }{\dddmes}
+		&= \integral{\ddom}{ \abs{ \ocurl{}\Phi^n}^2 }{\ddmes}
+		+ \integral{\ddom}{ \abs{ \ocurl{}\Phi^n - c_{\massMes} }^2 }{\massMes} \\
 		&= \abs{c_1}^2\integral{\ddom}{ \abs{\phi'_n\bracs{x_2-v_2}}^2 }{\ddmes}
 		+ \abs{c_2}^2\integral{\ddom}{ \abs{\phi'_n\bracs{v_1-x_1}}^2 }{\ddmes} \\
 		&\quad + \abs{c_3}^2\integral{\ddom}{ \abs{\phi'_n\bracs{x_1-v_1}}^2 }{\ddmes}
@@ -293,7 +295,8 @@ We can now combine our understanding of $\curlZero{\ddom}{\ddmes}$ and $\curlZer
 		&= \frac{2\mathrm{deg}(v)}{n}\abs{c(v)}^2 K^2 \rightarrow 0 \toInfty{n},
 	\end{align*}
 	where $\mathrm{\deg}(v)$ is the degree of the vertex $v$.
-	We thus conclude that $c\in\curlZero{\ddom}{\dddmes}$, and given the linearity of $\curlZero{\ddom}{\dddmes}$, the proof is complete.
+	We thus conclude that $c\in\curlZero{\ddom}{\dddmes}$.
+	With the linearity of $\curlZero{\ddom}{\dddmes}$ and the previous case, the proof is complete.
 \end{proof}
 
 \subsection{Tangential Curls} \label{ssec:TangCurls}
@@ -310,8 +313,9 @@ We begin, as has become standard, with an edge parallel to one of the coordinate
 	where $u_3'=\tilde{u}_3'\circ r_{jk}^{-1}$.
 \end{prop}
 
-The proof follows from the general argument presented in corollary \ref{cory:TangCurlEdgeRotated}, however proposition \ref{prop:TangCurlEdgeParallel} is useful for validating our expectations that the tangential curl is directed ``out of" the plane induced by $I_{jk}$, and only concerns ``rates of change" that the measure $\lambda_{jk}$ can see.
-Indeed we can observe that we essentially have the operation $\partial_2+\rmi\qm_2$ acting on $u_3$; and $\rmi\wavenumber$ acting on $u_2$, which is essentially a rate of change along $x_3$ due to our previous taking of a  Fourier transform in $\widehat{x}_3$.
+The proof follows from the general argument presented in corollary \ref{cory:TangCurlEdgeRotated}.
+However proposition \ref{prop:TangCurlEdgeParallel} is useful for validating our expectations that the tangential curl is directed ``out of" the plane induced by $I_{jk}$, when the geometry of the edge simplified by being aligned to the coordinate axes.
+We also observe that we have the operation $\partial_2+\rmi\qm_2$ acting on $u_3$ and $\rmi\wavenumber$ acting on $u_2$ --- effectively the expression $\grad u_3\cdot\widehat{e}_{jk} - \partial_3 u_2$, which resembles the ``in-plane" part of the classical curl.
 \begin{cory} \label{cory:TangCurlEdgeRotated}
 	Let $I_{jk}\in\edgeSet$, and let $u\in\ktcurlSob{\ddom}{\lambda_{jk}}$.
 	Define
@@ -320,7 +324,7 @@ Indeed we can observe that we essentially have the operation $\partial_2+\rmi\qm
 		\qquad
 		\tilde{u}_3 &= u_3\circ r_{jk}, 
 		\qquad
-		\qm_{jk} = \qm\cdot e_{jk} = \bracs{R_{jk}\qm}_2.
+		\qm_{jk} = \qm\cdot e_{jk}.
 	\end{align*}
 	Then $\tilde{u}_3\in\gradSob{\sqbracs{0,l_{jk}}}{y}$ and
 	\begin{align*}
@@ -328,7 +332,7 @@ Indeed we can observe that we essentially have the operation $\partial_2+\rmi\qm
 	\end{align*}
 	where $u_3' := \tilde{u}_3'\circ r_{jk}^{-1}$.
 \end{cory}
-It is worth remarking that $U_2 = \bracs{u_1,u_2}^{\top}e_{jk}$ on $I_{jk}$, so that we can see that $U_2$ retains precisely the component of $U$ in the direction along $I_{jk}$.
+It is worth remarking that $U_2 = \bracs{u_1,u_2}^{\top}e_{jk}$ on $I_{jk}$, so the tangential curl only retains the projection of the components of $u$ onto the plane $P_{jk}$.
 \begin{proof}
 	Let us write $c = \ktcurl{\lambda_{jk}}u$.
 	The requirement that $c\perp\curlZero{\ddom}{\lambda_{jk}}$, combined with theorem \ref{thm:CurlZeroChar}, implies that
@@ -379,7 +383,8 @@ A simple comparison of norms shows us that the edge-wise behaviour must be inher
 \end{proof}
 
 The proof of corollary \ref{cory:TangCurlEdgeRotated} hints at a connection between the third component $u_3$ of a function $u\in\ktcurlSob{\ddom}{\ddmes}$ and the space $\ktgradSob{\ddom}{\ddmes}$.
-Further to this, we know from theorem \ref{thm:CharOfSobSpaces} that functions in this space are precisely those that can be constructed from edge functions, provided these edge functions are continuous at the vertices.
+Indeed in this argument we saw that an approximating sequence for the curl also provides us with an approximating sequence for the third component \emph{and its gradient}.
+Knowing that the third component of a function $u\in\ktcurlSob{\ddom}{\dddmes}$ is very informative, since we have theorem \ref{thm:CharOfSobSpaces} informing us that these functions are precisely those that can be constructed from edge functions, provided these edge functions are continuous at the vertices.
 \begin{prop} \label{prop:TC-3rdComponentIFF}
 	Let $u_3^{(jk)}\in\pltwo{\ddom}{\lambda_{jk}}$, $u_3\in\pltwo{\ddom}{\ddmes}$, and $\tilde{u}_3\in\pltwo{\ddom}{\dddmes}$.
 	Then the following equivalences hold.
@@ -429,8 +434,8 @@ Further to this, we know from theorem \ref{thm:CharOfSobSpaces} that functions i
 \end{proof}
 
 Proposition \ref{prop:TC-3rdComponentIFF} also allows us to invoke theorem \ref{thm:CharOfSobSpaces} to conclude that the component $u_3$ is continuous at the vertices of $\graph$.
-This just leaves questions concerning the remaining two components $u_1$ and $u_2$; we have already seen from proposition \ref{prop:TC-dddmesImpliesOthers} that a function on the whole graph breaks down edge-wise.
-However we are lacking continuity of $u_1$ and $u_2$ at the vertices, (and even weak differentiability along the edges), so cannot sum edge-functions to obtain a function on the whole graph as we could with scalar functions possessing gradients.
+This just leaves questions concerning the behaviour of the components $u_1$ and $u_2$.
+We have already seen from proposition \ref{prop:TC-dddmesImpliesOthers} that a function on the whole graph breaks down edge-wise, however we lack continuity of $u_1$ and $u_2$ at the vertices (and even weak differentiability along the edges), so cannot utilise an argument that will allow us to combine these edge-functions together like we did with scalar functions possessing gradients.
 The best we can do (utilising only knowledge of curls) comes when we have a vector field whose first and second components have support contained in the interior of an edge, analogous to lemma \ref{lem:ExtensionLemmaEdgeFunctions}.
 \begin{prop}
 	Suppose that $=\bracs{u_1,u_2,0}^\top\in\ktcurlSob{\ddom}{\lambda_{jk}}$ with $u=0$ outside $I_{jk}^\eps$ for some $\eps>0$.
@@ -483,7 +488,7 @@ The best we can do (utilising only knowledge of curls) comes when we have a vect
 	for every $n\in\naturals$.
 \end{proof}
 
-The issue preventing us from establishing the converse implication to that in proposition \ref{prop:TC-dddmesImpliesOthers} is the aforementioned lack of control over the components $u_1$ and $u_2$ near the vertices of a graph when we attempt to ``lift" edge-functions.
-In the case of tangential gradients, the we had to depend on continuity of the incoming edge functions at the vertex to circumnavigate this issue, and we also depend on this fact when handling the component $u_3$ of vector fields with tangential curls.
-This continuity does not hold for the incoming components $u_1$ and $u_2$ since knowing the field $u$ possesses a tangential curl does not establish whether these components have gradients of their own, or even directional derivatives along the edges (which would also suffice).
-Consideration of what it means for a field to be divergence-free with respect to $\dddmes$ (section \ref{sec:DivFreeCondition}) goes some of the way towards to remedying this.
+The issue preventing us from establishing the converse implication to that in proposition \ref{prop:TC-dddmesImpliesOthers} is the aforementioned lack of control over the components $u_1$ and $u_2$ near the vertices of a graph.
+In the case of tangential gradients, the we had to depend on continuity of the incoming edge functions at the vertex to circumnavigate this issue, and this continuity does not hold for the components $u_1$ and $u_2$ on approach to shared vertices.
+Knowing the field $u$ possesses a tangential curl is not a strong enough condition to establish whether these components have matching traces into the vertices, or even directional derivatives along the edges.
+Consideration of what it means for a field to be divergence-free with respect to $\dddmes$ (section \ref{sec:DivFreeCondition}) goes some of the way towards to remedying this --- providing $u_1$ and $u_2$ with some additional properties.
