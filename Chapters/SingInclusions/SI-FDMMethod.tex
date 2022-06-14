@@ -171,7 +171,7 @@ Regrettably, we do not have to hand any analytic solutions to \eqref{eq:SI-WaveE
 That being said, we can predict that such a rate would be proportional to $N^{-1}$, since this approach via finite differences relies on one-sided approximations for the trace terms onto the boundary.
 
 Compared to the variational approach in section \ref{sec:SI-VarProbMethod}, this approach avoids working with $\ccompMes$ directly and instead allows us to work solely in terms of classical derivatives, approximating them in each bulk region and on each skeletal edge through Taylor's theorem.
-However by choosing to approximate our function within each region and then ``stitch" these approximations together, we must choose our mesh accordingly which leads to further considerations.
+However by choosing to approximate our function within each region and then ``stitch" these approximations together, we must choose our mesh accordingly, which leads to further considerations.
 Let us begin by considering the requirements of the placement of nodes within the bulk regions --- each node must have neighbours in each of the coordinate directions that lie within the (closure of) the bulk region.
 Now, consider a bulk region like that in figure \ref{fig:Diagram_FDMMeshIssue}, where a part of the skeleton is not aligned to the coordinate axes.
 \begin{figure}[b!]
@@ -210,4 +210,6 @@ We again have the option of interpolating a value for $u$ in the bulk regions, s
 Note that we cannot simply decide to make the mesh in the bulk region finer, so that a node is placed in the position we want to interpolate --- in general, doing so will end up in us then requiring more nodes on the skeleton through the issue in figure \ref{fig:Diagram_FDMMeshIssue-a}, sending us in circles!
 These issues arise due to how the skeleton (or more precisely, each edge of the skeleton) is effectively using a different coordinate system (for its derivatives) to the bulk regions, which is why this issue disappears when the edges of the skeleton are aligned to the coordinate axes --- the ``neighbouring" nodes we need on the skeleton are in the directions $e_{jk}, n_{jk}$ rather than the coordinate directions $\widehat{x}_1, \widehat{x}_2$.
 Whilst the complications this brings can be combatted in the manners discussed above, it does highlight the need for care when setting up and implementing this approach for general skeleton geometries.
+Indeed, non-rectangular skeleton geometries only amplify the problems that finite difference schemes already encounter on irregular geometries.
 Contrastingly, the approach via \eqref{eq:SI-VarProb} does not run into these issues since (in that approach) we have made the choice to work with $\ccompMes$ directly and approximate the related gradients globally (over the whole domain) rather than utilising their properties on sub-regions.
+We again remark that for irregular geometries, finite element based approaches are typically preferred over finite difference approaches due to them being better equipped to handle such irregularities in the domain --- we revisit this in our discussion in section \ref{sec:SI-Conc}.
