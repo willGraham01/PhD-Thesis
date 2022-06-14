@@ -134,14 +134,13 @@ Our next result demonstrates that we gradients of zero with respect to $\lambda_
 	is an element of $\gradZero{\ddom}{\lcompMes}$.
 \end{lemma}
 \begin{proof}
-	By the characterisation proposition \ref{prop:3DGradZeroRotated} we can write $g = g_{jk}n_{jk}$ for some $g_{jk}\in\ltwo{\ddom}{\lambda_{jk}}$.
+	By proposition \ref{prop:3DGradZeroRotated} we can write $g = g_{jk}n_{jk}$ for some $g_{jk}\in\ltwo{\ddom}{\lambda_{jk}}$.
 	Let $\phi_n$ be an approximating sequence for $g$, and notice that since $\grad\phi_n\rightarrow g$, we have that
 	\begin{align*}
-		\grad\phi_n\cdot n_{jk} \rightarrow g\cdot n_{jk} = g_{jk}, 
+		\grad\phi_n\cdot n_{jk} \lconv{\ltwo{\ddom}{\lambda_{jk}}} g\cdot n_{jk} = g_{jk}, 
 		&\implies
-		\bracs{ \grad\phi_n\cdot n_{jk} }n_{jk} \rightarrow g_{jk}n_{jk} = g,
+		\bracs{ \grad\phi_n\cdot n_{jk} }n_{jk} \lconv{\ltwo{\ddom}{\lambda_{jk}}^2} g_{jk}n_{jk} = g.
 	\end{align*}
-	in $\ltwo{\ddom}{\lambda_{jk}}^2$.
 	Each of the functions $\grad\phi_n\cdot n_{jk}$ are smooth, and thus by lemma \ref{lem:SI-SmoothGradZero} we have that the functions
 	\begin{align*}
 		\tilde{g}_n &= \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ \bracs{ \grad\phi_n\cdot n_{jk} }n_{jk} & x\in I_{jk}, \end{cases}
@@ -158,7 +157,7 @@ Our next result demonstrates that we gradients of zero with respect to $\lambda_
 	Since $\gradZero{\ddom}{\lcompMes}$ is closed, and $\tilde{g}_n\in\gradZero{\ddom}{\lcompMes}$ for every $n\in\naturals$, we thus conclude that the limit $\tilde{g}\in\gradZero{\ddom}{\lcompMes}$, and we are done.
 \end{proof}
 
-Now that we can ``lift" (via lemma \ref{lem:SI-GradZeroEdgeToComposite}) gradients of zero on an edge up to a gradients of zero with respect to the composite measure $\lcompMes$, and that all gradients of zero with respect to $\lambda_2$ are zero, this effectively gives us our characterisation of $\gradZero{\ddom}{\lcompMes}$.
+Now that lemma \ref{lem:SI-GradZeroEdgeToComposite} allows us to ``lift" gradients of zero with respect to $\lambda_{jk}$ up to gradients of zero with respect to $\lcompMes$, and knowing that all gradients of zero with respect to $\lambda_2$ are zero, we can characterise $\gradZero{\ddom}{\lcompMes}$.
 \begin{cory}[Characterisation of $\gradZero{\ddom}{\lcompMes}$.] \label{cory:SI-GradZeroEdgeChar}
 	The following characterisations hold:
 	\begin{enumerate}[(i)]
@@ -190,7 +189,7 @@ Now that we can ``lift" (via lemma \ref{lem:SI-GradZeroEdgeToComposite}) gradien
 			\tilde{g} = \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ g & x\in I_{jk}, \end{cases}
 		\end{align*}
 		where $g = \tilde{g}$ $\lambda_{jk}$-almost-everywhere.
-		Since $g = \tilde{g}\in\gradZero{\ddom}{\lambda_{jk}}$, have shown the desired inclusion.
+		Since $g\in\gradZero{\ddom}{\lambda_{jk}}$, have shown the desired inclusion.
 	\end{enumerate}
 \end{proof}
 
@@ -213,9 +212,9 @@ Now we look to demonstrate that the set $\gradZero{\ddom}{\compMes}$ is construc
 		Then $g\in\gradZero{\ddom}{\compMes}$ and $\widetilde{g}\in\gradZero{\ddom}{\ccompMes}$.
 		\item Now only assume that $g_{jk}\in\gradZero{\ddom}{\lcompMes}$ with
 		\begin{align*}
-			g = \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ g^{(jk)} & x\in I_{jk}. \end{cases}
+			g_{jk} = \begin{cases} 0 & x\in\ddom\setminus I_{jk}, \\ g^{(jk)} & x\in I_{jk}. \end{cases}
 		\end{align*}
-		Then the functions $g$ and $\widetilde{g}$ defined in \eqref{eq:SI-GradZeroChar-ExtendedFunctions} are elements of $\gradZero{\ddom}{\compMes}$ and $\gradZero{\ddom}{\ccompMes}$ respectively.
+		Then the functions $g$ and $\widetilde{g}$ defined by the formulae in \eqref{eq:SI-GradZeroChar-ExtendedFunctions} are elements of $\gradZero{\ddom}{\compMes}$ and $\gradZero{\ddom}{\ccompMes}$ respectively.
 		\item Let $g\in\ltwo{\ddom}{\compMes}^2$ where
 	\begin{align*}
 		g = \begin{cases} g_{\lambda_2} & x\in\ddom\setminus\graph, \\ g_{\ddmes} & x\in\graph, \end{cases}
@@ -309,7 +308,11 @@ However proposition \ref{prop:NuGradZeroChar} makes this contribution relatively
 		S := \supp\bracs{\xi_n^j} =
 		\clbracs{ x=v_j+aw+bw^{\perp} \setVert -\recip{n}\leq a\leq\recip{n}, \ -\gamma^{-1}\leq b\leq\gamma^{-1} }.
 	\end{align*}
-	Without loss of generality we can choose $\gamma, N$ such that for every $n\geq N$ we have that $S\subset\mathcal{J}(v_j)\setminus\vertSet$, and additionally that $\xi_n^j\in\csmooth{\ddom}$ so after extending by periodicity, $\xi_n^j\in\psmooth{\ddom}$.
+	Without loss of generality we can choose $\gamma, N$ such that for every $n\geq N$ we have that both
+	\begin{align*}
+		S\subset\mathcal{J}(v_j)\setminus\bracs{\vertSet\setminus\clbracs{v_j}},
+	\end{align*}
+	and $\xi_n^j\in\csmooth{\ddom}$ (so after extending by periodicity, $\xi_n^j\in\psmooth{\ddom}$).
 	From this construction, we note that $\abs{\xi_n^j(x)}\leq\recip{n}$ for every $x\in\ddom$, and in particular $\xi_n^j(v_j)=0$.
 	Additionally,
 	\begin{align*}
@@ -317,7 +320,7 @@ However proposition \ref{prop:NuGradZeroChar} makes this contribution relatively
 	\end{align*}
 	so
 	\begin{align*}
-		\abs{\grad\xi_n^j}^2 \leq \sup\abs{\xi'}^2 + \gamma^2\sup\abs{\varphi'}^2 =: C < \infty,
+		\recip{2}\abs{\grad\xi_n^j}^2 \leq \sup\abs{\xi'}^2 + \gamma^2\sup\abs{\varphi'}^2 =: C < \infty,
 	\end{align*}
 	and $\grad\xi_n^j(v_j)=w$.
 	We now have that
@@ -330,7 +333,7 @@ However proposition \ref{prop:NuGradZeroChar} makes this contribution relatively
 	so $\xi_n^j\rightarrow0$ in $\ltwo{\ddom}{\ccompMes}$.
 	For convergence of the gradients, we note that
 	\begin{align*}
-		\integral{\ddom}{\abs{\grad\xi_n^j}^2}{\lambda_2}
+		\recip{2}\integral{\ddom}{\abs{\grad\xi_n^j}^2}{\lambda_2}
 		&\leq C\integral{S}{}{\lambda_2} = \frac{4C}{\gamma}\recip{n},
 	\end{align*}
 	since $\lambda_2(S)\leq 4\bracs{n\gamma}^{-1}$.
@@ -344,14 +347,14 @@ However proposition \ref{prop:NuGradZeroChar} makes this contribution relatively
 	\end{align*}
 	Therefore,
 	\begin{align*}
-		\integral{\ddom}{\abs{\grad\xi_n^j}^2}{\ddmes}
-		&= \sum_{I_{jk}\in J(v_j)} \integral{I_{jk}}{\abs{\grad\xi_n^j}^2}{\lambda_{jk}} \\
+		\recip{2}\integral{\ddom}{\abs{\grad\xi_n^j}^2}{\ddmes}
+		&= \recip{2}\sum_{I_{jk}\in J(v_j)} \integral{I_{jk}}{\abs{\grad\xi_n^j}^2}{\lambda_{jk}} \\
 		&\leq \sum_{I_{jk}\in J(v_j)} C\integral{I_{jk}\cap S}{}{\lambda_{jk}}
 		= \frac{C}{n} \sum_{I_{jk}\in J(v_j)} \recip{\abs{\cos\beta_{jk}}},
 	\end{align*}
 	and so we have that
 	\begin{align*}
-		\integral{\ddom}{\abs{\grad\xi_n^j - w\charFunc{v_j}}^2}{\ccompMes}
+		\recip{2}\integral{\ddom}{\abs{\grad\xi_n^j - w\charFunc{v_j}}^2}{\ccompMes}
 		&\leq \frac{C}{n}\bracs{ 4\gamma^{-1} + \sum_{I_{jk}\in J(v_j)} \recip{\abs{\cos\beta_{jk}}} }
 		\rightarrow0 \toInfty{n},
 	\end{align*}
@@ -360,7 +363,7 @@ However proposition \ref{prop:NuGradZeroChar} makes this contribution relatively
 	
 	Now consider the set $E' = E \cup \clbracs{w^{\perp}, -w^{\perp}}$.
 	There again exists some unit vector $\hat{w}\in\reals^2$ such that $\hat{w}$ is not perpendicular to any element of $E'$, and following the construction above we can conclude that $\hat{w}\charFunc{v_j}\in\gradZero{\ddom}{\ccompMes}$ too.
-	Furthermore, we are guaranteed that $w$ and $\hat{w}$ are linearly independent in $\reals^2$, and in particular there exist constants $c_1,\hat{c}_1,c_2,\hat{c}_2\in\reals$ such that $\widehat{x}_1 = c_1 w + \hat{c}_1\hat{w}$ and $\widehat{x}_2 = c_2 + \hat{c}_2\hat{w}_2$.
+	Furthermore, we are guaranteed that $w$ and $\hat{w}$ are linearly independent in $\reals^2$, and in particular there exist constants $c_1,\hat{c}_1,c_2,\hat{c}_2\in\reals$ such that $\widehat{x}_1 = c_1 w + \hat{c}_1\hat{w}$ and $\widehat{x}_2 = c_2 w + \hat{c}_2\hat{w}_2$.
 	This informs us that $\widehat{x}_1\charFunc{v_j}, \widehat{x}_2\charFunc{v_j}\in\gradZero{\ddom}{\ccompMes}$ by linearity, and consequentially so is $c\charFunc{v_j}$.
 \end{proof}
 
@@ -397,7 +400,7 @@ The most direct result that follows from proposition \ref{prop:SI-GradZeroExtens
 \end{cory}
 \begin{proof}
 	The requirement that $\tgrad_{\compMes}u$ be orthogonal to $\gradZero{\ddom}{\compMes}$ and proposition \ref{prop:SI-GradZeroExtensionAndChar}(iii) implies that $\tgrad_{\compMes}u = \tgrad_{\lambda_{jk}}u^{(jk)}$ on $\graph$.
-	For the bulk regions, we again notice that any approximating sequence $\phi_n$ for $u\in\tgradSob{\ddom}{\compMes}$ also serves as an approximating sequence in for $u\in\tgradSob{\ddom}{\lambda_2}$, and $\tgrad_{\lambda_2}u = \grad u + \rmi\qm u$.
+	For the bulk regions, we again notice that any approximating sequence $\phi_n$ for $u\in\tgradSob{\ddom}{\compMes}$ also serves as an approximating sequence for $u\in\tgradSob{\ddom}{\lambda_2}$, and $\tgrad_{\lambda_2}u = \grad u + \rmi\qm u$.
 	This implies that $\tgrad_{\compMes}u = \grad u + \rmi\qm u$ ($\lambda_2$-almost-everywhere) in $\ddom\setminus\graph$, completing the proof.
 	Similar deductions can be made concerning $\widetilde{u}$.
 \end{proof}
@@ -413,8 +416,8 @@ This is not immediately obvious from the definition (by approximation of smooth 
 \begin{proof}
 	Take an approximating sequence $\phi_n$ for $u\in\tgradSob{\ddom}{\compMes}$; clearly this sequence is also such that
 	\begin{align*}
-		\phi_n \lconv{\ltwo{\ddom_i}{\lambda_2}} u, &\qquad \grad\phi_n\lconv{\ddom_i}{\lambda_2}\grad u, \\
-		\phi_n \lconv{\ltwo{\ddom}{\lambda_{jk}}} u, &\qquad \tgrad\phi_n\lconv{\ddom}{\lambda_{jk}}\ktgrad_{\lambda_{jk}} u.
+		\phi_n \lconv{\ltwo{\ddom_i}{\lambda_2}} u, &\qquad \grad\phi_n\lconv{\ltwo{\ddom_i}{\lambda_2}}\grad u, \\
+		\phi_n \lconv{\ltwo{\ddom}{\lambda_{jk}}} u, &\qquad \tgrad\phi_n\lconv{\ltwo{\ddom}{\lambda_{jk}}^2}\ktgrad_{\lambda_{jk}} u.
 	\end{align*}
 	Furthermore, since $\phi_n\in\psmooth{\ddom}$ and $\overline{\ddom}_i\subset\ddom$ (since the boundary of $\ddom_i$ consists of a union of edges of $\graph\subset\ddom$), we have $\phi_n\in\smooth{\overline{\ddom}_i}$.
 	The regions $\ddom_i$ are also Lipschitz so the trace operator
@@ -439,6 +442,6 @@ This is not immediately obvious from the definition (by approximation of smooth 
 	and so $\phi_n\rightarrow u\vert_{\partial\ddom_i}$ in $\ltwo{\ddom}{\lambda_{jk}}$.
 	But we know that $\phi_n\rightarrow u^{(jk)}$ in $\ltwo{\ddom}{\lambda_{jk}}$ too, so it must be the case that $u^{(jk)} = u\vert_{\partial\ddom_i}$, and we are done.
 \end{proof}
-Clearly theorem \ref{thm:SI-SobFuncEdgeContinuity} also implies that traces from any two bulk regions $\ddom_1$ and $\ddom_2$ onto a common inclusion (that is, a shared boundary) must coincide with each other, as they both coincide with the values of $u^{(jk)}$ on the shared edges.
-Also worth noting is that $u$ (restricted to the graph $\graph$) is continuous at the vertices (see theorem \ref{thm:3DTangGradGraph}), and thus combined with the previous remark will be continuous in the vicinity of any graph edges too.
+Theorem \ref{thm:SI-SobFuncEdgeContinuity} also implies that traces from any two bulk regions $\ddom_1$ and $\ddom_2$ onto a common inclusion (that is, a shared boundary) must coincide with each other, as they both coincide with the values of $u^{(jk)}$ on the shared edges.
+We also remark that $u\in\tgradSob{\ddom}{\ccompMes}$ (restricted to the graph $\graph$) is continuous at the vertices (see theorem \ref{thm:3DTangGradGraph}), and thus combined with theorem \ref{thm:SI-SobFuncEdgeContinuity} will also be continuous (in the sense of traces) onto the vertices.
 Much like how theorem \ref{thm:3DTangGradGraph} established continuity of a function at the vertices of a graph, theorem \ref{thm:SI-SobFuncEdgeContinuity} will play an important part in our reformulation of the problem \eqref{eq:SI-WeakWaveEqn}.
