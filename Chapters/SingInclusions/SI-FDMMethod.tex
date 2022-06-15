@@ -1,4 +1,4 @@
-\subsection{Solution of \eqref{eq:SI-StrongForm} via Finite-Differences} \label{ssec:SI-FDMMethod}
+\subsection{Solution of \eqref{eq:SI-StrongForm} via (regional) finite differences} \label{ssec:SI-FDMMethod}
 Now that we have the problem \eqref{eq:SI-StrongForm} to work with, we can attempt to solve \eqref{eq:SI-WaveEqn} through a formulation that involves familiar gradients and derivatives, rather than the more abstract tangential gradients.
 Before we do so, it is convenient to notice that we can move the ``trace" terms in \eqref{eq:SI-InclusionEqn} to the left-hand-side to obtain the slightly nicer (in terms of the numerics that follow) looking system
 \begin{subequations} \label{eq:SI-FDMEquationsToDisc}
@@ -126,7 +126,7 @@ However by examining the eigenvalues in this band as functions of $\qm$, as in f
 \begin{figure}[t!]
 	\centering
 	\includegraphics[width=\textwidth]{FDM_2022-01-28-09-33_AllBands.pdf}
-	\caption[Dispersion relations for the first 10 spectral bands of \eqref{eq:SI-WaveEqn}, computed via solution of \eqref{eq:SI-StrongForm} with $\alpha=0$.]{\label{fig:FDM_2022-01-28-09-33_AllBands} The eigenvalues $\omega$ in each spectral band, plotted as functions of the quasi-momentum $\qm$. Observe the symmetries that are expected from proposition \ref{prop:CrossInPlaneSymmetries}.}
+	\caption[Dispersion relations for the first 10 spectral bands of \eqref{eq:SI-WaveEqn}, computed via solution of \eqref{eq:SI-StrongForm} with $\alpha_0=0$.]{\label{fig:FDM_2022-01-28-09-33_AllBands} The eigenvalues $\omega$ in each spectral band, plotted as functions of the quasi-momentum $\qm$. Observe the symmetries that are expected from proposition \ref{prop:CrossInPlaneSymmetries}.}
 \end{figure}
 Similarly to our approach via \eqref{eq:SI-VarProb}, the eigenvalues within each band obey the symmetries expected from proposition \ref{prop:CrossInPlaneSymmetries}.
 We also note that the presence of non-zero $\alpha$, that is \emph{geometric contrast} in our material, has been sufficient to open spectral gaps.

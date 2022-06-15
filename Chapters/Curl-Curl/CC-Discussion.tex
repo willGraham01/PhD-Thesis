@@ -27,7 +27,7 @@ The latter case being confirmed would also provide a number of insights into why
 It may be the case that \eqref{eq:SingularCurlEquation} is not the correct analogue of \eqref{eq:Intro-CurlCurlEqns}, and there are considerations that we have overlooked when assuming that the ``visual" limit provides enough information to model the zero-thickness limit correctly.
 In any event, we have provided a starting point for future investigations into the zero-thickness limit of the curl-of-the-curl equation, and demonstrated that we can realise our variational problems on singular structures as more tractable systems that are explicitly solvable.
 
-\subsection{Considerations for the 1st order Maxwell system} \label{ssec:CC-1stOrderMaxwell}
+\subsection{Considerations for the study of the first order Maxwell system} \label{ssec:CC-1stOrderMaxwell}
 Prior to obtaining the result of section \ref{sec:3DSystemDerivation}, we had expected that any behaviour of the solutions to (or eigenvalues of) \eqref{eq:SingularScalarWaveEqn} would be obtainable from \eqref{eq:SingularCurlEquation}.
 Whilst this is certainly the case, we were also expecting behaviours in \eqref{eq:SingularCurlEquation} that were \emph{not} realisable from \eqref{eq:SingularScalarWaveEqn}.
 Given that \eqref{eq:Intro-CurlCurlEqns} are themselves particular consequences of the more general (first-order) Maxwell system; it is natural for us to ask whether we can define an analogue of the first order Maxwell system on our singular structures, whether reduction to \eqref{eq:SingularCurlEquation} follows as a direct consequence, or whether there is behaviour exhibited by the first order system that is not captured by \eqref{eq:SingularCurlEquation}.
@@ -54,10 +54,8 @@ By analogy with the classical case, we would need to interpret \eqref{eq:CC-Maxw
 \end{subequations}
 We note that we have placed asterisks on the ``curls" in \eqref{eq:CC-Maxwell1stOrder} in order to make a distinction between these and the tangential curls that appear in \eqref{eq:SingularCurlEquation}.
 There is indeed a distinction between $\ktcurl{*}E$ of a vector field $E\in\pltwo{\ddom}{\dddmes}^3$, which is only defined by finding a field $H$ that satisfies \eqref{eq:CC-Maxwell1stOrderCurlE}, and $\ktcurl{\dddmes}E$ for $E\in\ktcurlSob{\ddom}{\dddmes}$, which defined through approximations by smooth functions.
-This is because the curl no longer appears as an interior operator in \eqref{eq:CC-Maxwell1stOrder}, unlike \eqref{eq:SingularCurlEquation} where we need to define the tangential curl $\ktcurl{\dddmes}u$ independently of our problem so that we can then understand the variational problem \eqref{eq:SingularCurlEquation-VariationalForm}.
+This is because the curl no longer appears as an interior operator in \eqref{eq:CC-Maxwell1stOrder}, unlike \eqref{eq:SingularCurlEquation} where we need to define $\ktcurl{\dddmes}u$ independently of our problem so that we can then understand the variational problem \eqref{eq:SingularCurlEquation-VariationalForm}.
 This raises the question of under what additional conditions does a solution $E,H$ to \eqref{eq:CC-Maxwell1stOrder} give rise to a solution $\bracs{v, \ktcurl{\dddmes}v }\in\ktcurlSob{\ddom}{\dddmes}$ to \eqref{eq:SingularCurlEquation}?
 More precisely, what additional conditions need to be imposed upon the more general system \eqref{eq:CC-Maxwell1stOrder} to obtain \eqref{eq:SingularCurlEquation}?
 If such conditions exist, this answers the question as to whether there are additional behaviours exhibited by (solutions to) the first order singular Maxwell system that are not captured by the singular curl-of-the-curl equation.
 Conversely, \eqref{eq:CC-Maxwell1stOrder} collapsing to \eqref{eq:SingularCurlEquation} in all cases would imply that the acoustic approximation \eqref{eq:SingularScalarWaveEqn} provides a complete description of electromagnetism on singular structures.
-
-\tstk{but the sets of curls of zero do bad things here!!!!!!}

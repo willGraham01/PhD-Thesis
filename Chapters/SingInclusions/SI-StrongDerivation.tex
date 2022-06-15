@@ -1,4 +1,4 @@
-\section{``Strong Formulation" of the acoustic approximation \eqref{eq:SI-WaveEqn}} \label{sec:SI-StrongDerivation}
+\section{``Strong Formulation" of the Acoustic Approximation \eqref{eq:SI-WaveEqn}} \label{sec:SI-StrongDerivation}
 Whilst we can choose to work directly from the min-max principle \eqref{eq:SI-VarProb} in an attempt to solve \eqref{eq:SI-WaveEqn}, we still do not have any explicit insights into how the presence of the skeleton is affecting the (solutions and eigenvalues of) this problem.
 It is also desirable for us to move away from working with (approximations to) the tangential gradients themselves --- compared to classical gradients and derivatives, we do not have many tools to handle these objects numerically.
 Therefore, in this section our goal is to derive a ``strong" formulation for \eqref{eq:SI-WaveEqn}, with motivations similar to those of sections \ref{sec:ScalarDerivation} and \ref{sec:3DSystemDerivation} --- we want to be able to analyse a more tractable problem, preferably in terms of objects familiar to us from classical calculus or chapter \ref{ch:ScalarSystem}.
@@ -193,47 +193,62 @@ There are however two ``scales" on which a solution $u$ behaves, being 2D in the
 It is worth making some remarks here to reconnect \eqref{eq:SI-StrongForm} with the physical (or ``dimensionfull") material it represents.
 The domain on which the system \eqref{eq:SI-StrongForm} is posed is motivated by the ``visual" limit of the acoustic approximation on a composite material with thin inclusions that are shrinking to zero thickness.
 The \emph{material} properties in the background material and on the inclusions\footnote{That is, the permittivities and under the non-magnetic assumption, permeabilities.} in these domains are identical, but there is (geometric) contrast between the edge and vertex volumes of the inclusions.
-Indeed, the (dimensionless) parameters $\alpha_j$ only appear in one of the three equations, \eqref{eq:SI-VertexCondition} because this is the only equation that relates the two regions of these domains (the ``edge" and ``vertex" regions of the thin inclusions) to each other.
-This is directly analogous to the situation one ends in when studying composite materials with contrasting material properties; the dimensionless parameters representing the contrast appear in (what is normally a boundary condition) relating the values of the solution across the interface between the inclusion and background material.
-With this in mind, it is natural to ask how allowing for the possibilities of such material contrast might affect our problem formulation and the system \eqref{eq:SI-StrongForm}.
-Let us now suppose there is material contrast in the material properties of the bulk regions and skeleton, represented through the (dimensionless) function
+Indeed, the (dimensionless) parameters $\alpha_j$ only appear in one of the three equations \eqref{eq:SI-VertexCondition}, because this is the only equation in which the vertex and edge regions interact.
+%This is directly analogous to the situation one ends in when studying composite materials with contrasting material properties; the dimensionless parameters representing the contrast appear in (what is normally a boundary condition) relating the values of the solution across the interface between the inclusion and background material.
+It is natural to ask whether our approach allows for the presence of material contrast, as well as geometric contrast, and how this might affect our problem formulation and the system \eqref{eq:SI-StrongForm}.
+With this in mind, let us introduce some material contrast between the bulk regions and the skeleton, represented through the (dimensionless) function
 \begin{align*}
 	\epsilon_m =
 	\begin{cases} 1 & x\in\ddom_i, \\ \epsilon & x\in\graph, \end{cases}
 \end{align*}
-where $\epsilon$ is the dimensionless parameter representing the contrast between the material properties on the skeleton and the bulk.
-One would then need to consider the problem \eqref{eq:SI-WaveEqn} in the weighted space $\tgradSob{\ddom}{\lambda_2^{\epsilon^{-1}\dddmes}}$. 
-The changes this amounts to are minimal, and one obtains a (``strong") system of the form 
+where $\epsilon$ is the parameter quantifying the contrast between the material properties (the permittivities in this context) on the skeleton and in the bulk.
+We also let $m>0$ (whose interpretation will become clear shortly) and modify the system \eqref{eq:SI-WaveEqn} slightly to account for this contrast, considering the problem
+\begin{align*}
+	-\epsilon_m^{-1}\laplacian_{\ccompMes}^{\qm} u &= \omega^2 u,
+	\qquad u\in\tgradSob{\ddom}{\lambda_2^{m\dddmes}},
+\end{align*}
+understood as the problem of finding $u\in\tgradSob{\ddom}{\lambda_2^{m\dddmes}}$ and $\omega^2>0$ such that
+\begin{align} \label{eq:SI-ContrastWeakWaveEqn}
+	\integral{\ddom}{ \epsilon_m^{-1}\tgrad_{\ccompMes}u\cdot\overline{\tgrad_{\ccompMes}\phi} }{\lambda_2^{m\dddmes}}
+	&= \omega^2 \integral{\ddom}{ u\overline{\phi} }{\lambda_2^{m\dddmes}}, \quad\forall\phi\in\psmooth{\ddom}.
+\end{align}
+Utilising an identical argument to the above, \eqref{eq:SI-ContrastWeakWaveEqn} admits the ``strong" formulation
+\begin{subequations}
+	\begin{align*}
+		-\laplacian_\qm u 
+		&= \omega^2 u 
+		&\text{in } \ddom_i, \\
+		- \epsilon^{-1}\bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)}  
+		&= \omega^2 u^{(jk)} + \recip{m}\bracs{\bracs{\grad u\cdot n_{jk}}^+ - \bracs{\grad u\cdot n_{jk}}^-}
+		&\text{in } I_{jk}, \\
+		m\epsilon^{-1}\sum_{j\con k} \bracs{\pdiff{}{n}+\rmi\qm_{jk}} u^{(jk)}(v_j) 
+		&= m\omega^2 \alpha_j u(v_j)
+		&\text{at } v_j\in\vertSet.
+	\end{align*}
+\end{subequations}
+Let us consider the case where $\alpha_j=0$ and examine the high-index limit $\epsilon\rightarrow0$ --- we obtain the system
 \begin{subequations}
 	\begin{align*}
 		\laplacian_\qm u 
 		&= \omega^2 u 
 		&\text{in } \ddom_i, \\
-		- \epsilon^{-1}\bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)}  
-		&= \epsilon^{-1}\omega^2 u^{(jk)} + \bracs{\bracs{\grad u\cdot n_{jk}}^+ - \bracs{\grad u\cdot n_{jk}}^-}
-		&\text{in } I_{jk}, \\
-		\epsilon^{-1}\sum_{j\con k} \bracs{\pdiff{}{n}+\rmi\qm_{jk}} u^{(jk)}(v_j) 
-		&= \epsilon^{-1}\alpha_j\omega^2 u(v_j)
-		&\text{at } v_j\in\vertSet.
+		\omega^2 u^{(jk)}
+		&= \bracs{\bracs{\grad u\cdot n_{jk}}^- - \bracs{\grad u\cdot n_{jk}}^+}
+		&\text{in } I_{jk},
 	\end{align*}
 \end{subequations}
-The effects of material contrast can thus be introduced in an identical fashion to the effects of geometric contrast --- through ``adding" mass to one part of the medium and not to the others.
-For our geometric effects, we have added the mass $\alpha_j$ to the vertices $v_j$.
-For material contrast, mass $\epsilon^{-1}$ is ``taken away"\footnote{We could also introduce this affect by ``adding" mass to the skeleton, by considering $\epsilon\dddmes$ in place of $\dddmes$.} from the bulk regions $\ddom_i$.
-Moreover, the formal limit $\epsilon\rightarrow0$ (assuming $\alpha_j$ independent of $\epsilon$) coincides with the problem \eqref{eq:Intro-KuchFigQGLimit} obtained in \cite{figotin1998spectral} --- one of the few studies that has examined the ``double" limit of a material under geometric and material contrast.
-By addition of mass to the relevant measures, the problems our composite measures once again provide us with a predictive tool for the effective problems of composite material under both material \emph{and} geometric contrast --- and notably the parameters that introduce this contrast are introduced to the system \eqref{eq:SI-WaveEqn} in the same manner.
-For example, if one wants to ask the question of what happens if there is further material contrast between the vertex regions and edge region, and how this might affect the spectrum, they can introduce a second contrast parameter as a prefactor to the measure $\massMes$.
-One even has the flexibility to do this at any combination of edges and vertices by placing parameters in front of the measures $\lambda_{jk}$ and $\delta_{v_j}$ that make up $\dddmes$!
+which is a realisation of the system \eqref{eq:Intro-KuchFigQGLimit} upon identifying $W=m^{-1}$ and rescaling the spectral parameter $\omega^2=zm^{-1}$ by the constant $m$.
+In the study \cite{figotin1998spectral}, the spectrum of \eqref{eq:Intro-KuchFigQGLimit} was shown to coincide with the limit of the spectra of the acoustic equation on the domains illustrated in figure  \ref{fig:Diagram_KF-DoubleLimitStudy} in the limit that the inclusion thickness $\delta\rightarrow0$ simultaneously with $\epsilon\bracs{\delta}\delta\rightarrow m$.
+By including the ``mass" $m = \lim_{\delta\rightarrow0}\delta\epsilon\bracs{\delta}$ as a prefactor to the singular measure $\dddmes$ that supports the corresponding singular limit of this region (the skeleton), our variational problem also describes the effective problem.
+We also remark that the parameter $m$ fulfils a similar role to the $\alpha_j$; in being the parameter that describes the limiting behaviour of the interactions between the shrinking thickness $\delta$ and increasing permittivity $\epsilon$, and it is introduced in precisely the same manner as $\alpha_j$ --- as a prefactor to the relevant measure.
+In light of this, our problem \eqref{eq:SI-WaveEqn} also suggests the effective problem one might obtain if the study \eqref{eq:Intro-KuchFigQGLimit} was extended to \emph{also} encompass possible geometric contrast between the edge and vertex regions of the shrinking inclusions (that is, reintroducing non-zero $\alpha_j$).
 
-Our final comments on the system \eqref{eq:SI-StrongForm} pertain to the form of the ODEs on the skeleton \eqref{eq:SI-InclusionEqn}.
-Notice that there is a coupling between the flux across the skeleton and the ``diffusion" (the second-derivative operator) along the skeleton.
-Analogous boundary conditions (and equations in the bulk) are observed in the study \cite{cherednichenko2019homogenisation} for a similar material setup, but considering the effective problem for the equations of (linearised) elasticity as the period cell size shrinks to zero.
-The effective problem obtained in this study also consisted of equations on the bulk regions, with a coupling between diffusion along and flux across the interfaces between the two components\footnote{It is noted in \cite{cherednichenko2019homogenisation} that such conditions, in which coupling diffusion along a boundary to diffusion along said boundary, belong to the (very broad) class of \emph{Ventcel}' conditions \cite{venttsel1959boundary}. This is the same class that the \emph{Wentzell} conditions for quantum graphs belong to --- it is likely that Wentzell and Ventcel' are different spellings of the same translated name.}.
-The material considered in \cite{cherednichenko2019homogenisation} did not possess geometric contrast (between the vertex and edge volume) however, so there is no analogous equation to \eqref{eq:SI-VertexCondition} appears in the effective problem.
-Our having obtained analogous conditions in the ``electromagnetic" setting provides further evidence that our motivation for studying \eqref{eq:SI-WaveEqn} was well-founded; obtaining the system \eqref{eq:SI-StrongForm}, the discussion of the previous paragraph, and the analogous results in the elasticity context suggest that it is the limiting problem for the acoustic equation on a material with thin-structure inclusions that possess some geometric contrast.
+Our final comments on the system \eqref{eq:SI-StrongForm} pertain to the form of the ODEs on the skeleton \eqref{eq:SI-InclusionEqn} --- in particular the presence of a coupling between the flux across the skeleton and the ``diffusion" (the second-derivative operator) along the skeleton.
+Analogous conditions (and equations in the bulk) are derived in the study \cite{cherednichenko2019homogenisation} in a similar domain setup, but concerning the problem of homogenisation for the equations of (linearised) elasticity.
+The effective problem obtained in this study also exhibited coupling between the diffusion along the (equivalent of the) skeleton and flux across the skeleton\footnote{It is noted in \cite{cherednichenko2019homogenisation} that such conditions, in which coupling diffusion along a boundary to diffusion along said boundary, belong to the (very broad) class of \emph{Ventcel}' conditions \cite{venttsel1959boundary}. This is the same class that the \emph{Wentzell} conditions for quantum graphs belong to --- it is likely that Wentzell and Ventcel' are different spellings of the same translated name.}.
+Again we highlight that the material considered in \cite{cherednichenko2019homogenisation} did not consider different geometric contrasts (between the vertex and edge regions), so there is no analogous equation to \eqref{eq:SI-VertexCondition} appears in the effective problem, much like in the system obtained from \eqref{eq:Intro-KuchFigQGLimit}.
 
-%Another comment should be made on how the ODEs on the skeleton \eqref{eq:SI-InclusionEqn} depend on the spectral parameter $\omega^2$. \tstk{Venstcel conditions, see Kirill and Evans: that the skeleton no longer acts as a simple boundary between the bulk regions $\ddom_i$.}
-%The system \eqref{eq:SingularWaveEqnQGProblem} had $\omega^2$ appearing in the vertex conditions, that is what would normally be the \emph{boundary conditions} for the ODEs on $I_{jk}$.
-%The appearance of $\omega^2$ in these conditions was a direct consequence of the presence of the measure $\massMes$ providing the vertices with some ``size".
-%Rather than a graph with ``bulky vertices", we now have a set of regions $\ddom_i$ with ``bulky boundaries" (the skeleton).
-%And again, we observe that bestowing a notion of length to our singular inclusions (through $\ddmes$) has caused $\omega^2$ to appear in what would normally be our boundary conditions for the regions $\ddom_i$.
+Having obtained \eqref{eq:SI-StrongForm} from \eqref{eq:SI-WaveEqn} lends further weight to our motivations for using \eqref{eq:SI-WaveEqn} (and the other variational problems we have studied) as a predictive tool, as well as reinforcing the idea that \eqref{eq:SI-WaveEqn} does provide a model of ``wave propagation" on structures with singular components.
+Indeed, our construction and setup of the problem \eqref{eq:SI-WaveEqn} enables us to provide the definition of a (candidate) limit operator for the acoustic equation on a material with thin inclusions, that possesses both geometric and material contrasts some geometric contrast.
+The reduction under certain regimes to the problem \eqref{eq:Intro-KuchFigQGLimit}; and the similarities with the effective problem derived in \cite{cherednichenko2019homogenisation}, further support the idea that our variational problems can be used to provide the definitions of the limiting operators in such contexts.
+Our attempts to compute the spectra of such problems gain additional traction because of this --- being able to do so enables exploration of the parameter space spanned by the ``contrast parameters" ($\alpha_j$, $m$, and potentially others) and thus insights into the behaviours of physical materials under the corresponding asymptotic limits.

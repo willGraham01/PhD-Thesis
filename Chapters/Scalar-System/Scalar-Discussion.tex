@@ -1,4 +1,4 @@
-\section{General formula for the $M$-matrix of a finite period graph} \label{sec:ScalarDiscussion}
+\section{General formula for the $M$-Matrix of a Finite, Periodic Graph} \label{sec:ScalarDiscussion}
 Having obtained the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem}, we turn our attention to determining the eigenvalues $z := \omega^2$.
 In this section we contextualise the theory introduced in section \ref{ssec:MMatrix}, showing how it is employed for studying $\sigma\bracs{-\laplacian_{\dddmes}^{\qm}}$.
 Our key result will be the provision of an explicit formula for (the entries of) the $M$-matrix in terms of the underlying (period) graph on which \eqref{eq:SingularWaveEqnQGProblem} is posed.
@@ -8,7 +8,7 @@ One will note that only $\alpha_j$ appears in the Wentzell condition in \eqref{e
 As was raised in section \ref{ssec:Intro-ThinStructures}, the problem \eqref{eq:SingularWaveEqnQGProblem} belongs to the class of problems with generalised resolvents.
 In section \ref{ssec:MMatrix} we introduced the $M$-matrix in a more familiar setting, with no $\omega^2$-dependence in the vertex conditions.
 However the analysis of the spectrum of $-\laplacian_{\dddmes}^{\qm}$ can be carried by replacing the matrix $B=-\alpha$ (in section \ref{ssec:MMatrix}) with $\omega^2 B$, as will be done in section \ref{ssec:MMatrixConsequences}.
-Justification lies in the observation that introducing explicit $\omega^2$-dependence should not affect the (structure of) the arguments in the supporting theory (see \cite[page 1846]{cherednichenko2018effective}, concerning the results of \cite{ryzhov2009weyl} \tstk{check with Kirill - are there other works that are more directly applicable that could be adapted?}), and consequentially similar conclusions can be drawn with this alteration to $B$.
+Justification lies in the observation that introducing explicit $\omega^2$-dependence should not affect the (structure of) the arguments in the supporting theory\footnote{See \cite[page 1846]{cherednichenko2018effective} in reference to the results of \cite{ryzhov2009weyl} and references therein.} and consequentially similar conclusions can be drawn with this alteration to $B$.
 However we highlight that a formal presentation of these arguments has not been conducted in the literature, and remains open.
 If one has reservations about this ``gap" in the available theory, an alternative to analysing a problem with generalised resolvents directly is explored in \cite[Section 6]{cherednichenko2017norm}.
 One could look to transform a problem with $\omega^2$-dependent $\delta$-type vertex condition (like \eqref{eq:SingularWaveEqnQGProblem}) into a problem with $\omega^2$-independent $\delta'$-type vertex conditions.
@@ -103,7 +103,7 @@ Proposition \ref{prop:M-MatrixEntries} also demonstrates how the $M$-matrix is p
 The dependence of $M_\qm$ on $\qm$ is due to our decision to specify our singular structure as an embedded, periodic metric graph and then apply the Gelfand transform (see section \ref{ssec:MMatrix}).
 In the following section, we continue our analysis of this family of $M$-matrices and how it can be used to recover the eigenvalues of \eqref{eq:SingularWaveEqnQGProblem}.
 
-\subsection{Consequences of Proposition \ref{prop:M-MatrixEntries}} \label{ssec:MMatrixConsequences}
+\subsection{Consequences of proposition \ref{prop:M-MatrixEntries}} \label{ssec:MMatrixConsequences}
 Whilst proposition \ref{prop:M-MatrixEntries} provides an explicit form for the entries of the $M$-matrix,  it is not the most convenient when looking for a method for determining the spectrum of \eqref{eq:SingularWaveEqnQGProblem}.
 Proposition \ref{prop:M-MatrixEntries} does however show that $M_\qm$ is meromorphic, and thus has the following decomposition:
 \begin{cory} \label{cory:M-MatrixEntriesNoPoles}
@@ -183,7 +183,7 @@ As we will discuss in section \ref{ssec:ApproachConsiderations}, one may be able
 Considerations concerning which of the two equations \eqref{eq:QGGenEvalSolveNoPoles} or \eqref{eq:QGDetSolveCondition} should be used for determining the spectrum $\sigma_\qm$ are also discussed in section \ref{ssec:ApproachConsiderations}.
 In any event, \eqref{eq:SingularScalarWaveEqn} has now been reduced to a more accessible (family of) matrix-eigenvalue problems for $\mathfrak{M}_\qm$.
 
-\subsection{Artificial Vertices and Splitting Edges} \label{ssec:ArtificialVertices}
+\subsection{Artificial vertices and splitting edges} \label{ssec:ArtificialVertices}
 As noted in section section \ref{ssec:MMatrix}, it is required that the underlying graph $\graph$ contains no looping edges and has all edge-lengths pairwise irrationally-related.
 Failure to ensure that this condition is met results in the ``loss" of certain eigenvalues when using the $M$-matrix to determine the spectrum of \eqref{eq:SingularWaveEqnQGProblem} --- these are highlighted explicitly in section \ref{ssec:Example1DLoop}.
 Of course, the graphs motivated by physical applications generally do not adhere to these restrictions --- typically being highly symmetric or and potentially consisting of loops.
@@ -199,7 +199,7 @@ This ensures (via \eqref{eq:SingularWaveEqnQGProblem-2} and \eqref{eq:SingularWa
 This process can be executed iteratively, splitting edges to remove rational-relations between edge lengths and any loops.
 Doing so means that any graph representing a singular-structure can now be treated in the manner described in section \ref{ssec:MMatrixConsequences}.
 
-\subsection{Considerations for the Approach to Solving \eqref{eq:QGGenEvalSolveNoPoles} or \eqref{eq:QGDetSolveCondition}} \label{ssec:ApproachConsiderations}
+\subsection{Considerations for the approach to solving \eqref{eq:QGGenEvalSolveNoPoles} or \eqref{eq:QGDetSolveCondition}} \label{ssec:ApproachConsiderations}
 In this section we briefly discuss some considerations for recovering the spectrum $\sigma\bracs{-\laplacian_{\upsilon}}=:\sigma$, through determination the spectra $\sigma_{\qm}:=\sigma\bracs{-\laplacian_{\dddmes}^{\qm}}$ via \eqref{eq:QGGenEvalSolveNoPoles} or \eqref{eq:QGDetSolveCondition}.
 %Recall that our use of the Gelfand transform informs us that $\sigma = \bigcup_{\qm}\sigma_{\qm}$.
 We take as given that one has to hand an appropriate numerical scheme for handling the generalised eigenvalue problem \eqref{eq:QGGenEvalSolveNoPoles} (a good introduction to which can be found in \cite{guttel2017nonlinear}), and so do not delve into the details of how such an algorithm would operate.

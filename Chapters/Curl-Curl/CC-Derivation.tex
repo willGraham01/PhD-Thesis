@@ -1,4 +1,4 @@
-\section{Derivation of quantum graph problem} \label{sec:3DSystemDerivation}
+\section{Reduction to a Quantum Graph Problem} \label{sec:3DSystemDerivation}
 We now look to find an alternative formulation of \eqref{eq:SingularCurlEquation}, which is more amenable to analysis.
 Similarly to our working in section \ref{sec:ScalarDerivation}, the result will be a problem realisable as a quantum graph problem.
 To ease the notational burden, for $u=\bracs{u_1,u_2,u_3}^\top\in\ktcurlSob{\ddom}{\dddmes}$ and $\Phi=\bracs{\phi_1,\phi_2,\phi_3}^\top\in\psmooth{\ddom}^3$ we define (for each $I_{jk}\in\edgeSet$),
@@ -110,7 +110,7 @@ It is worth remarking here that the conditions (i) and (iv) from proposition \re
 By contrast, the conditions (ii), and (v) are both utilised in the manipulations performed above, and the condition (iii) combined with \eqref{eq:CurlCurlWeakFormPhi2} can be used to obtain \eqref{eq:CurlCurlWeakFormPhi3}.
 This places a particular emphasis on our earlier discussion (section \ref{sec:DivFreeCondition}) concerning whether the correct analogue of the (classical) divergence-free condition includes orthogonality to gradients of zero or not.
 In the case of the problem \eqref{eq:SingularCurlEquation} and the derivation of \eqref{eq:QGRawSystem}, this distinction is moot: any solution $u\in\ktcurl{\ddom}{\dddmes}$ to \eqref{eq:SingularCurlEquation} is necessarily both divergence free and tangentially divergence free, as one can take approximating sequences for $g\in\gradZero{\ddom}{\dddmes}$ or $v\in\ktgradSob{\ddom}{\dddmes}$, just test against these approximating sequences in \eqref{eq:SingularCurlEquation-VariationalForm}, and then apply lemma \ref{lem:CurlOfGradSmoothFunctions}.
-However this distinction will become particularly important if one wants to examine the first-order Maxwell system, which we discuss in section \ref{sec:CC-1stOrderMaxwell}.
+However this distinction will become particularly important if one wants to examine the first-order Maxwell system, which we discuss in section \ref{ssec:CC-1stOrderMaxwell}.
 
 As we will discuss in section \ref{ssec:CalderonOp}, we can construct (an operator analogous to) the $M$-matrix for the problem \eqref{eq:QGRawSystem} which opens us a route to explicitly determining the eigenvalues $\omega^2$.
 However we can eliminate the $U_2^{(jk)}$ from the system \eqref{eq:QGRawSystem} via substitution of \eqref{eq:QGPhi2} into \eqref{eq:QGPhi3}, and use corollary \ref{cory:DivFree-TangGradsConditions}(v), to obtain
@@ -133,7 +133,7 @@ Having said this, we have ultimately still managed achieved out objective of obt
 Combined with our treatment of the divergence-free condition, this demonstrates that our approach to the postulation and solution of variational problems on singular structures is consistent, and provides a coherent framework for the handling of such problems.
 We will continue to discuss the implications of \eqref{eq:CurlCurl-ScalarQGProblem}, and give an a posteriori understanding as to why we have obtained it, in section \ref{sec:CC-Discussion}.
 
-\subsection{Remarks on the Calder\'on Operator} \label{ssec:CalderonOp}
+\subsection{Analogies with the Calder\'on operator} \label{ssec:CalderonOp}
 Whilst \eqref{eq:SingularCurlEquation} reduces to the acoustic approximation, there are further parallels that can be drawn between the (classical) curl-of-the-curl problem and the system \eqref{eq:QGRawSystem}.
 One of our key motivating factors and themes throughout this work has been retaining an intuitive link between the spaces and objects necessary for studying variational problems on singular structures and their classical counterparts.
 With this in mind, we will demonstrate that the Dirichlet map, Neumann map, and consequentially the Dirichlet-to-Neumann map associated with the problem \eqref{eq:QGRawSystem} are direct analogues of their counterparts in the classical context.

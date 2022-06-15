@@ -1,4 +1,4 @@
-\section{Dispersion relations for concrete graph topologies} \label{sec:ScalarExamples}
+\section{Dispersion Relations for Concrete Graph Geometries} \label{sec:ScalarExamples}
 In this section we provide examples to demonstrate how the spectrum $\sigma=\sigma\bracs{-\laplacian_{\upsilon}}$ is obtained via the analysis of the $M$-matrix for the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem}.
 The examples are chosen to highlight the methodology and some of the remarks discussed in sections \ref{sec:QuantumGraphs} and \ref{sec:ScalarDiscussion}.
 In each of these examples we will encounter a number of terms with similar forms, so to avoid repetition we define these quantities here.
@@ -11,7 +11,7 @@ Let $a\in\bracs{0,1}$ and define
 \end{align}
 The quantities in \eqref{eq:SE-CommonTrigFns} are $\omega$-dependent, however throughout this section we will suppress this dependency unless providing important formulae. 
 
-\subsection{One-Dimensional Loop} \label{ssec:Example1DLoop}
+\subsection{One-dimensional chain} \label{ssec:Example1DLoop}
 We begin with the simplest example, a chain of vertices periodic in one direction, to demonstrate how one takes the period graph of a physical singular-structure and employs proposition \ref{prop:M-MatrixEntries} to construct the $M$-matrix and extract the spectral information.
 We also use the simplicity of this example to highlight the necessity of splitting edges via the introduction of artificial vertices to remove loops and edge-lengths that are rationally-related, to compliment section \ref{ssec:ArtificialVertices}.
 
@@ -119,7 +119,7 @@ which are also solutions to \eqref{eq:SingularWaveEqnQGProblem}.
 Similar problems occur when one breaks the loop into two edges of rationally-related edge lengths --- taking $a=\recip{2}$ results in similar ``loss" of the eigenvalues $\omega=2k\pi, \ k\in\naturals$, for example.
 Provided that the value of $a$ is correctly (adhering to pairwise-irrational edge lengths) however, the value used does not affect the resulting conclusions, as can be seen in this example.
 
-\subsection{``Decorated" Graph with Dependencies Arising from the Embedding} \label{ssec:EmbeddingDependentExample}
+\subsection{``Decorated" graph with dependencies arising from the embedding} \label{ssec:EmbeddingDependentExample}
 We next provide an explicit example to complement the discussion that concluded section \ref{ssec:MMatrix}, concerning our decision to bestow our graphs with an embedding prior to determination of the $M$-matrix. 
 To avoid confusion in this section, the term \emph{quantum graph} will be prefixed with \emph{embedded} when we are discussing a quantum graph that has been equipped with an embedding, and prefixed with \emph{abstract} when referring to a quantum graph that has not been assigned an embedding.
 
@@ -259,7 +259,7 @@ which again is precisely those $\omega$ such that there is some $\qm$ such that 
 Furthermore, and as expected, the spectrum does not depend on $\beta$ despite the fact that the $M$-matrix for each operator on $\graph^*$ does.
 The spectrum does of course differ from the spectrum of the quantum graph in section \ref{ssec:Example1DLoop} due to the presence of the ``decoration" $I_{12}$, although this difference only depends on the length this additional edge (and were the coupling constant at $v_2$ non-zero, this too).
 
-\subsection{Cross in the plane geometry} \label{ssec:ExampleCrossInPlane}
+\subsection{Cross-in-the-plane geometry} \label{ssec:ExampleCrossInPlane}
 Our final example is a two-dimensional graph whose period cell represents a lattice-like structure in $\reals^2$.
 Consider the embedded, periodic graph $\hat{\graph}$ defined as follows --- for each $\bracs{n,m}\in\integers^2$ define
 \begin{align*}

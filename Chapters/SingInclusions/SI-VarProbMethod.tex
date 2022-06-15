@@ -1,4 +1,4 @@
-\section{Variational Approach for determination of the eigenvalues of \eqref{eq:SI-WaveEqn}} \label{sec:SI-VarProbMethod}
+\section{Variational Approach for Determination of the Eigenvalues of \eqref{eq:SI-WaveEqn}} \label{sec:SI-VarProbMethod}
 As mentioned in section \ref{sec:SI-ProblemFormulation}, the fact that $-\laplacian_{\ccompMes}^\qm$ is self-adjoint for each $\qm$, combined with use of the min-max principle, implies that the eigenvalues $\omega_{n}^2$ (and eigenfunctions $u_n$) of $-\laplacian_{\ccompMes}^\qm$ are the minimum values (respectively minimisers) of the following variational problem:
 \begin{align} \label{eq:SI-VarProb}
 	\omega_n^2 &:= \min_{u}\clbracs{ \integral{\ddom}{ \abs{\tgrad_{\ccompMes}u}^2 }{\ccompMes} \setVert \norm{u}_{\ltwo{\ddom}{\ccompMes}}=1, \ \ip{u}{u^{(l)}}_{\ltwo{\ddom}{\dddmes}}=0 \ \forall 1\leq l\leq n-1 },
