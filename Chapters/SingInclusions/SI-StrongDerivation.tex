@@ -290,7 +290,7 @@ Formally, we obtain the system
 	\end{align*}
 \end{subequations}
 which is a realisation of the system \eqref{eq:Intro-KuchFigQGLimit} upon identifying $W=1$.
-In the study \cite{figotin1998spectral}, the spectrum of \eqref{eq:Intro-KuchFigQGLimit} was shown to coincide with the limit of the spectra of the acoustic equation on the domains illustrated in figure  \ref{fig:Diagram_KF-DoubleLimitStudy} in the limit that the inclusion thickness $\delta\rightarrow0$ simultaneously with $\bracs{\delta\epsilon\bracs{\delta}}^{-1}\rightarrow W$.
+In the study \cite{figotin1998spectral}, the spectrum of \eqref{eq:Intro-KuchFigQGLimit} was shown to coincide with the limit of the spectra of the acoustic equation on the domains illustrated in figure  \ref{fig:Diagram_KF-DoubleLimitStudy} in the limit that the inclusion thickness $\delta\rightarrow0$ simultaneously with $\bracs{\delta\epsilon}^{-1}\rightarrow W$.
 If we include the ``mass" $W^{-1}$ as a prefactor to $\ddmes$ and study the problem of finding $u\in\tgradSob{\ddom}{\compMes}$
 \begin{align*}
 	\integral{\ddom}{ \epsilon_m^{-1}\tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}\phi} }{\lambda_2^{W^{-1}\ddmes}}
@@ -309,12 +309,12 @@ we will obtain
 \end{subequations}
 Notice that in the limits $\delta\rightarrow0$, $\epsilon\rightarrow\infty$ we have:
 \begin{itemize}
-	\item If $\delta\epsilon\bracs{\delta}\rightarrow W^{-1}=\infty$ the resulting system is a collection of \emph{decoupled} Dirichlet Laplacians on each of the regions $\ddom_i$.
+	\item If $\delta\epsilon\rightarrow W^{-1}=\infty$ the resulting system is a collection of \emph{decoupled} Dirichlet Laplacians on each of the regions $\ddom_i$.
 	That is to say, our composite material is essentially composed of independent bulk regions $\ddom_i$ --- the singular regions we have interlaced into our material have a permittivity so high they prevent transmission across the skeleton.
-	\item If $\delta\epsilon\bracs{\delta}\rightarrow W^{-1}=0$ the resulting system is the acoustic approximation on each of the regions $\ddom_i$, coupled through matching conditions for the flux across the skeleton.
+	\item If $\delta\epsilon\rightarrow W^{-1}=0$ the resulting system is the acoustic approximation on each of the regions $\ddom_i$, coupled through matching conditions for the flux across the skeleton.
 	These are precisely the interface conditions one poses when working on a periodic composite (without singular regions).
 	Despite the increasing permittivity of the thin inclusions discouraging wave propagation between the bulk regions, the thickness shrinks fast enough to allow $u$ to leak through into the other regions.
-	\item If $\delta\epsilon\bracs{\delta}\rightarrow W^{-1}\in\bracs{0,\infty}$ as $\delta\rightarrow0$, $\epsilon\rightarrow\infty$, we obtain the system \eqref{eq:Intro-KuchFigQGLimit}.
+	\item If $\delta\epsilon\rightarrow W^{-1}\in\bracs{0,\infty}$ as $\delta\rightarrow0$, $\epsilon\rightarrow\infty$, we obtain the system \eqref{eq:Intro-KuchFigQGLimit}.
 	In this case, the equation along the skeleton is precisely a Wentzell condition --- relating the value of the solution $u$ to the incoming fluxes.
 	Analogous conditions (and equations in the bulk) are derived in the study \cite{cherednichenko2019homogenisation} in this ``critical" case and on a similar domain, but concerning the problem of homogenisation for the equations of (linearised) elasticity\footnote{It is noted in \cite{cherednichenko2019homogenisation} that such conditions, in which coupling diffusion along a boundary to diffusion along said boundary, belong to the (very broad) class of \emph{Ventcel}' conditions \cite{venttsel1959boundary}. This is the same class that the \emph{Wentzell} conditions for quantum graphs belong to --- it is likely that Wentzell and Ventcel' are different spellings of the same translated name.}.
 \end{itemize}
