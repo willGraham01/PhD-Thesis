@@ -19,8 +19,8 @@ An optical fibre utilising a PC in its design is referred to as a \emph{photonic
 PCs can be used as the cladding materials to form weakly guiding PCFs, however more radical designs utilise the fact that certain frequencies of light incident onto a PC do not support any modes of light.
 These frequency intervals or ranges of frequencies that do not support modes are referred to as (\emph{photonic-} or \emph{frequency-}) \emph{band gaps}, and their compliment as \emph{bands}.
 This offers an alternative method of wave-guidance, rather than having light undergo TIR within a core material, modes can be confined to a core material by virtue of having a frequency within one of these band gaps.
-From these ideas came several new designs for PCFs, the first being \emph{hollow-core}\footnote{The name coming from the fact that the first such fibres were typically made from a photonic crystal of glass periodically punctured with air holes, surrounding a larger air cavity that played the role of the core. The core consisting of air rather than a solid dielectric material gave rise to the term ``hollow".} fibres schematically illustrated in figure \ref{fig:Diagram_PCF-AirHollowConfine.pdf}.
-\begin{figure}[b!]
+From these ideas came several new designs for PCFs, the first being \emph{hollow-core} fibres schematically illustrated in figure \ref{fig:Diagram_PCF-AirHollowConfine.pdf}.
+\begin{figure}[t]
 	\centering
 	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
@@ -35,10 +35,12 @@ From these ideas came several new designs for PCFs, the first being \emph{hollow
 	\end{subfigure}
 	\caption[Schematic illustration of the cross-section of a photonic crystal fibre.]{\label{fig:Diagram_PCF} Schematic illustration of the cross-section of a PCF. A photonic crystal surrounds a core, whose bandgaps confine certain modes of light to the cores, and support their propagation down the fibre. Darker colours represent higher refractive indices.}
 \end{figure}
-These PCFs confine light of a given frequency to a core at the centre of the fibre, which is typically a defect in a PC formed from a periodic arrangement of low-index inclusions.
-However, band-gaps can also be used to confine light to a low refractive index core via the placement of higher-index inclusions in the crystal (in figure \ref{fig:Diagram_PCF-LowIndexConfine.pdf}), in \emph{solid-core} PCFs --- see for example the study \cite{luan2004allsolid}.
+The cross section of the first of these fibres was comprised of a PC made from glass and periodically punctured with air holes, surrounding a larger air cavity that played the role of the core.
+This core consisting of air, rather than a solid dielectric material, gave rise to the term ``hollow".
+However the same principle can be used to confine light to a core composed of an arbitrary (low refractive index) dielectric material via the placement of higher-index inclusions in the crystal (in figure \ref{fig:Diagram_PCF-LowIndexConfine.pdf}) --- see for example the study \cite{luan2004allsolid}.
+One often sees such fibre designs referred to as \emph{solid-core} PCFs in the literature, however in principle they operate under via the same mechanism as hollow-core PCFs so we will elect to continue using the term ``hollow-core" for this class of fibres.
 Further investigations into PCF designs have even shown confinement and propagation of light using metallic reflection \cite{hou2008metallic}.
-Significantly, none of these new PCF designs utilise TIR to guide light, breaking tradition with established optical fibre technology \cite{knight2003photonic, russell2003photonic}.
+Significantly, none of these new PCF designs utilise TIR to guide light, breaking tradition with established optical fibre technology \cite{knight2003photonic, russell2003photonic}\footnote{For completeness, we should remark here that PCFs that guide light through a combination of TIR and band-gap effects have also seen study and manufacture --- see \cite{xu2018hybrid} and references therein.}.
 
 The physical theory underlying the process by which PCFs operate gives them the potential to replace traditional weakly guiding optical fibres as the industry standard.
 PCFs have an advantage over conventional optical fibres in that their applications are not limited to telecommunications, with alternative applications including non-linear optics (where they offer high optical intensities per unit power, making them highly efficient) and particle guidance (dielectric particles can be guided by the dipole forces exerted by light).
@@ -53,7 +55,7 @@ Additionally, numerical schemes (particularly those based off finite elements) a
 The closet we will come to employing such solvers in this work will be when we come to consider (``singular") composite media in chapter \ref{ch:SingInc}, and even then there are a number of considerations to be made before such methods can be applied to our problems.
 
 There has been some success in developing approximate models for wave guidance in PCFs that retain key features of experimental band-gap plots.
-The ARROW model (see \cite{laegsgaard2004gap, litchinitser2004application} and references therein) suggests that the confinement of modes to the (low index) core in solid-core fibres can be attributed to anti-resonant reflections off the (higher-index) inclusions --- the allows such fibres to be studied through the properties of guided modes in conventional, weakly guiding fibres.
+The ARROW model (see \cite{laegsgaard2004gap, litchinitser2004application} and references therein) suggests that the confinement of modes to the (low index) core in hollow-core PCFs can be attributed to anti-resonant reflections off the (higher-index) inclusions --- the allows such fibres to be studied through the properties of guided modes in conventional, weakly guiding fibres.
 Models such as \cite{birks2006approximate} simplify the geometry of the period cell and solve the (scalar) wave equation in the resulting structure, reporting good agreement with numerical solvers for the original (unsimplified) problems.
 Other works such as \cite{birks2004scaling} look to understand how band-gaps for hollow-core fibres scale with the contrast in refractive index.
 Such approaches are useful when speed is more important than high accuracy, or when an intuitive picture of the band-structure is desired.
