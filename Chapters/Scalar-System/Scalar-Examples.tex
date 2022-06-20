@@ -92,9 +92,11 @@ which (after applying L'h\^{o}spital's rule) only occurs when
 that is precisely when there is some $\qm_0$ such that $\Xi\bracs{\qm_0,\omega_0}=0$.
 Therefore, the spectrum of \eqref{eq:SingularWaveEqnQGProblem} is fully described by those $\omega$ satisfying
 \begin{align*}
-	\-1 \leq \cos\omega - \frac{\omega\alpha_1}{2}\sin\omega \leq 1.
+	-1 \leq \cos\omega - \frac{\omega\alpha_1}{2}\sin\omega \leq 1.
 \end{align*}
 We remark here that in the notation of proposition \ref{prop:MMatrixDetForm} and corollary \ref{cory:ScalarSetInclusions}, $F\bracs{\omega, \qm}$ is defined by the right-hand side of equation \eqref{eq:1DChainDetEqual0}, and we have that $\overline{F_0\setminus H_0}=\sigma$ in this case.
+In fact, any chain graph whose period graph consists of two vertices connected by edges of irrationally related lengths can be studied through the above analysis and the same conclusion reached.
+The resulting spectrum only depends on the \emph{total} length of the edges within the period cell, and we again find that roots of $H^{(2)}$ only form part of the spectrum when (a factor independent of $H^{(2)}$  in) $\mathrm{det} \ \mathfrak{M}_{\qm}$ is zero --- see section \ref{sec:Scalar-General1DChain} for the relevant computations.
 
 Breaking the looping edge and ensuring that the resulting edge-lengths are irrationally-related is necessary to obtain a full description of $\sigma$ --- failure to do so results in the loss of certain Dirichlet eigenvalues.
 By way of illustration, if the looping edge is not broken then one obtains
@@ -130,7 +132,7 @@ Consider the embedded graph $\hat{\graph}$ in $\reals\times\sqbracs{0,1}$, with 
 \end{align*}
 for a fixed angle $\beta\in\bracs{0,\pi}$, and edges $I_{1}^{m} = \sqbracs{v_1^m, v_1^{m+1}}$ and $I_{12}^m=\sqbracs{v_1^m, v_2^m}$ for $m\in\integers$.
 Place a coupling constant $\alpha_1$ at each $v_1^m$, and let $v_2^m$ have zero coupling constant, for each $m$.
-Then let $\graph$ be the period graph of $\hat{\graph}$ and let $\graph_{\mathcal{Q}}=\bracs{\vertSet_{\mathcal{Q}}, edgeSet_{\mathcal{Q}}}$ be the abstract quantum graph described by
+Then let $\graph$ be the period graph of $\hat{\graph}$ and let $\graph_{\mathcal{Q}}=\bracs{\vertSet_{\mathcal{Q}}, \edgeSet_{\mathcal{Q}}}$ be the abstract quantum graph described by
 \begin{align*}
 	\vertSet_{\mathcal{Q}} = \clbracs{v_1, v_2},
 	\qquad
@@ -156,7 +158,7 @@ We again have scalar quasi-momentum $\qm\in\left[-\pi,\pi\right)$ with
 \end{align*}
 and the coupling constant at $v_1$ is $\alpha_1$, whilst the coupling constants at $v_2$ and $v_3$ are zero.
 We again illustrate the embedded periodic graph $\hat{\graph}$, as well as the abstract quantum graphs $\graph_{\mathcal{Q}}$ and that corresponding to $\graph^*$ in figure \ref{fig:Diagram_1DAngledEdgeExample}.
-\begin{figure}[b!]
+\begin{figure}[t!]
 	\centering
 	\begin{subfigure}[t]{0.3\textwidth}
 		\centering
@@ -219,13 +221,14 @@ however it will be slightly more convenient for us to work with $\Xi\bracs{\omeg
 The rest of the spectrum is determined by the zeros of $F$, which occur at either $\omega=(2k-1)\pi$ for $k\in\naturals$ or when there exists at least one $\qm$ such that $\Xi\bracs{\omega} = \cos\theta + \recip{2}$.
 The latter part of the spectrum consists of those $\omega$ such that
 \begin{align*}
-	\min_{\qm\in\left[-\pi,\pi\right)}\bracs{\cos\theta + \recip{2}} &\leq \Xi\bracs{\omega} 
+	\min_{\qm\in\left[-\pi,\pi\right)}\bracs{\cos\theta + \recip{2}} \leq \ 
+	& \Xi\bracs{\omega} 
 	\leq \max_{\qm\in\left[-\pi,\pi\right)} \bracs{\cos\theta + \recip{2}}, \\
-	\Leftrightarrow & \abs{ 3\cos\omega - \alpha_1\omega\sin\omega + 1 } \leq 2, 
+	\Leftrightarrow  \abs{ 3\cos\omega \ - \right. & \left. \alpha_1\omega\sin\omega + 1 } \leq 2, 
 \end{align*}
 these points are visualised in figure \ref{fig:1DDecoratedGraph}.
 Note that the points $\omega=(2k-1)\pi$ are included here too.
-\begin{figure}[b!]
+\begin{figure}[t!]
 	\centering
 	\begin{subfigure}[t]{0.45\textwidth}
 		\centering
@@ -245,7 +248,7 @@ Zeros of $H^{(2)}$ occur at $\omega= 2n\pi, \frac{n\pi}{a}, \frac{n\pi}{1-a}$, b
 That is, we once again require $F\bracs{\qm,\omega}=0$ for a root of $H^{(2)}$ to be part of the spectrum.
 It is also worth noting that (in figure \ref{fig:1DDecoratedGraphEvalBranches-Thetas}) there are two eigenvalue branches $\widetilde{\beta}_j^{\qm}$ which are zero at $\omega_0$ (the third being non-zero at $\omega_0$).
 The limit \eqref{eq:EigenvalueBranchLimit} exists for both branches, however only for one is it zero --- these branches and the corresponding limits in the vicinity of root $\omega_0=\pi\sqrt{2}$ are plotted in figure \ref{fig:1DDecoratedGraphEvalBranches-Thetas}.
-\begin{figure}[b!]
+\begin{figure}[t!]
 	\centering
 	\includegraphics[width=\textwidth]{1DDecoratedGraphEvalBranches-Thetas.pdf}
 	\caption[Eigenvalue branches of the $M$-matrix near a pole of the determinant, for the geometry of section \ref{ssec:EmbeddingDependentExample}.]{\label{fig:1DDecoratedGraphEvalBranches-Thetas} Eigenvalue branches of the matrix $\mathfrak{M}_{\qm}$ near $\omega_0 = \pi\sqrt{2}$, which is a root of $H^{(2)}$. The value $\qm_0\approx-0.691\pi$ solves $\Xi\bracs{\omega_0}=\cos\qm_0+\recip{2}$, and the limit \eqref{eq:EigenvalueBranchLimit} is zero. For all other values of $\qm$ however, the limit \eqref{eq:EigenvalueBranchLimit} is non-zero.}
@@ -256,8 +259,8 @@ In summary, $\sigma$ consists of those $\omega^2$ such that
 	\abs{ 3\cos\omega - \alpha_1\omega\sin\omega + 1 } \leq 2,
 \end{align*}
 which again is precisely those $\omega$ such that there is some $\qm$ such that $\bracs{\qm,\omega}\in F^{-1}\bracs{\clbracs{0}}$.
-Furthermore, and as expected, the spectrum does not depend on $\beta$ despite the fact that the $M$-matrix for each operator on $\graph^*$ does.
-The spectrum does of course differ from the spectrum of the quantum graph in section \ref{ssec:Example1DLoop} due to the presence of the ``decoration" $I_{12}$, although this difference only depends on the length this additional edge (and were the coupling constant at $v_2$ non-zero, this too).
+As expected, the spectrum does not depend on $\beta$ despite the fact that the $M$-matrix for each operator on $\graph^*$ does.
+The spectrum differs from the spectrum of the quantum graph in section \ref{ssec:Example1DLoop} due to the presence of the ``decoration" $I_{12}$, although this difference only\footnote{If the coupling constant were non-zero, it would of course depend on this value too.} depends on the length of the decorating edge. This can be attributed to the graphs $\graph$ for every angle $\beta$ being a realisation of the same abstract quantum graph $\graph_{\mathcal{Q}}$, the problem on which can only depend on the lengths assigned to each of the edges.
 
 \subsection{Cross-in-the-plane geometry} \label{ssec:ExampleCrossInPlane}
 Our final example is a two-dimensional graph whose period cell represents a lattice-like structure in $\reals^2$.

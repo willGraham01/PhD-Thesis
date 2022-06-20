@@ -1,0 +1,66 @@
+\section{Example: Spectrum of a ``Zig-Zag" Graph} \label{sec:Scalar-General1DChain}
+Upon splitting the looping edge in the example of section \ref{ssec:Example1DLoop}, one obtains (the period graph of) a ``zig-zag" graph, or a chain graph with a kink.
+Thanks to the relative simplicity of such graphs, we can use the $M$-matrix to extract the spectrum of the problem \eqref{eq:SingularWaveEqnQGProblem} on such graphs explicitly --- even dealing with analysis of the limit \eqref{eq:EigenvalueBranchLimit}.
+
+For $0<a<1$ and $0\leq b<1$, consider the period graph $\graph$ described by
+\begin{align*}
+	v_1=\bracs{0,0}, \quad
+	v_2=\bracs{a,b}, \quad
+	\edgeSet = \bracs{I_{12},I_{21}},
+\end{align*}
+illustrated in figure \ref{fig:Diagram_1DZigZagGraph}.
+\begin{figure}[b!]
+	\centering
+	\includegraphics[scale=0.75]{Diagram_1DZigZagGraph.pdf}
+	\caption[A periodic ``zig-zag" graph.]{\label{fig:Diagram_1DZigZagGraph} The periodic zig-zag graph $\graph$, with the period cell highlighted with the red outline.}
+\end{figure}
+We assume that $a$, $1-a$, and $b$ are pairwise irrationally related, and there is a coupling constant $\alpha_2$ at $v_2$ and zero coupling constant at $v_1$\footnote{With regards to the example in section \ref{ssec:Example1DLoop}, $v_1$ is the artificial vertex, and we have $b=0$.}.
+The lengths of the edges, and for given $\theta\in[-\pi,\pi)$ the constants $\qm_{12}$ and $\qm_{21}$ are
+\begin{align*}
+	l_{12} = \bracs{a^2+b^2}^{\recip{2}}, \quad
+	l_{21} = \bracs{(1-a)^2+b^2}^{\recip{2}}, \quad
+	\qm_{12} = \frac{\qm a}{l_{12}}, \quad
+	\qm_{21} = \frac{\qm (1-a)}{l_{21}},
+\end{align*}
+and we also set $L:=l_{12}+l_{21}$.
+Again we set $H^{(2)}=s_{12}s_{21}$ and construct and compute the following functions;
+\begin{align*}
+	\mathfrak{M}_{\qm}(\omega) &=
+	\begin{pmatrix}
+		-\omega c_{12}s_{21} - \omega s_{12}c_{21} & 
+		\omega \e^{\rmi\qm a}s_{21} + \omega \e^{-\rmi\qm(1-a)}s_{12} \\
+		\omega \e^{-\rmi\qm a}s_{21} + \omega \e^{\rmi\qm(1-a)}s_{12} &
+		-\omega c_{12}s_{21} - \omega s_{12}c_{21} + \omega^2\alpha_2 s_{12}s_{21}
+	\end{pmatrix}, \\
+	\Xi_{\qm}(\omega) &:= \cos(L\omega) - \frac{\omega\alpha_2}{2}\sin(L\omega) - \cos\qm, \\
+	D_{\qm}(\omega) &:= \mathrm{det} \ \mathfrak{M}_{\qm}(\omega) = 2 \omega^2 H^{(2)}(\omega)\Xi(\omega), \\
+	T_{\qm} &:= \mathrm{tr} \ \mathfrak{M}_{\qm} = \omega^2\alpha_2 s_{12}s_{21} - 2\omega\sin(L\omega).
+\end{align*}
+Now $D_{\qm}(\omega_0)=0$ whenever $H^{(2)}\bracs{\omega_0^2}=0$ or there exists a $\qm_0\in[-\pi,\pi)$ such that $\Xi_{\qm_0}(\omega_0)=0$.
+For those $\omega_0$ that are also roots of $H^{(2)}$, we are required to examine the limit \eqref{eq:EigenvalueBranchLimit} to determine if these points constitute part of the spectrum.
+To this end, let us take some $\omega_0$ that is a root of $H^{(2)}$ and which satisfies $D_{\qm}(\omega_0)=0$; notice that $\bracs{H^{(2)}}'(\omega_0^2)\neq 0$ since the edges are pairwise irrationally related, and furthermore $T_{\qm}(\omega_0)\neq0$ too.
+The eigenvalue branches $\widetilde{\beta}^{\qm}$ satisfy
+\begin{align*}
+	0 &= \bracs{\widetilde{\beta}^{\qm}}^2 + \bracs{-T_{\qm}}\widetilde{\beta}^{\qm} + D_{\qm},
+\end{align*}
+so are given by
+\begin{align*}
+	\widetilde{\beta}_{\pm}^{\qm}(\omega) = \recip{2}T_{\qm}(\omega) \pm \recip{2}\sqbracs{T_{\qm}(\omega)^2 - 4D_{\qm} }^{\recip{2}}.
+\end{align*}
+Since $T_{\qm}(\omega_0)\neq0$, only the branch $\widetilde{\beta}_{-}^{\qm}$ can be $0$ at $\omega_0$.
+Furthermore, we have that
+\begin{align*}
+	0 = \lim_{\omega\rightarrow\omega_0} \frac{\widetilde{\beta}_{-}^{\qm}(\omega)}{H^{(2)}(\omega^2)}
+	\quad\Leftrightarrow\quad &
+	0 = \lim_{\omega\rightarrow\omega_0} \frac{\bracs{\widetilde{\beta}_{-}^{\qm}}'(\omega)}{\bracs{H^{(2)}}'(\omega^2)}, \\
+	\quad\Leftrightarrow\quad &
+	0 = \bracs{\widetilde{\beta}_{-}^{\qm}}'(\omega_0)
+	= \frac{D'_{\qm}(\omega_0)}{T_{\qm}(\omega_0)}
+	= \frac{\omega_0^2 \bracs{H^{(2)}}'(\omega_0^2)}{T_{\qm}(\omega_0)}\Xi_{\qm}(\omega_0),
+\end{align*}
+and thus deduce that a root of $H^{(2)}$ forms part of the spectrum precisely when it is also a root of $\Xi_{\qm_0}$ for some $\qm_0$.
+Therefore, the spectrum is fully determined by the function $\Xi_{\qm}$, being those $\omega$ for which
+\begin{align*}
+	-1 \leq \cos(L\omega) - \frac{\omega\alpha_2}{2}\sin(L\omega) \leq 1.
+\end{align*}
+We remark here that 

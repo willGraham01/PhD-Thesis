@@ -1,0 +1,75 @@
+\documentclass[crop, tikz]{standalone}
+
+\usepackage[utf8]{inputenc}
+% 'crop' is the default for v1.0, before it was 'preview'
+%\usetikzlibrary{...}% tikz package already loaded by 'tikz' option
+
+\usetikzlibrary{arrows}
+\usetikzlibrary{decorations.markings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{calc}
+
+%hexagon drawing variables
+\def\ly{0.866025} %sin(pi/3) = sqrt(3)/2
+\def\lx{0.5} %cos(pi/3) = 0.5
+\def\hexSize{5} %size of the hexagon that'll be the extent of the fibre cross section
+\def\coreSize{0.2} %size of hollow cores
+\def\coreSep{0.5} %separation between core CENTRES HORIZONTALLY
+\def\coreSepHeight{0.4464} %separation between core CENTRES VERTICALLY
+
+\newcommand{\hexagon}[4]{
+\begin{scope}[shift={#2}]
+	\draw[#3, fill=#4] (-#1*\lx, #1*\ly) -- (#1*\lx, #1*\ly) -- (#1,0) -- (#1*\lx, -#1*\ly) -- (-#1*\lx, -#1*\ly) -- (-#1,0) -- cycle;
+\end{scope}
+} %\hexagon{centre-to-corner-length}{shift (x,y)}{line spec}{fill colour} [none is allowed for fillcolour]
+
+\begin{document}
+\begin{tikzpicture}[]
+
+	% scaling parameter
+	\pgfmathsetmacro\l{5}
+	% setup parameters
+	\pgfmathsetmacro\a{{\l/sqrt(2.75)}}
+	\pgfmathsetmacro\b{\l*0.5}
+	% non-period cell line colours
+	\def\col{black!25!white}
+
+	% period cell border
+	\draw[dashed, red] (0,-\l/4) rectangle (\l,3*\l/4);
+	
+	% other edges to illustrate zig-zag (draw first for overlay effects)
+	\foreach \x in {-\l,\l} {
+		\begin{scope}[decoration={markings, mark=at position 0.5 with {\arrow{>}}}, shift={(\x,0)}]
+			\coordinate (v1) at (0,0);
+			\coordinate (v1p) at (\l,0);
+			\coordinate (v2) at (\a,\b);
+			
+			\draw[\col, thick, postaction={decorate}] (v1) -- (v2);
+			\draw[\col, thick, postaction={decorate}] (v2) -- (v1p);
+	
+			%\filldraw[\col] (v1) circle (2pt);
+			%\filldraw[\col] (v1p) circle (2pt);
+			\filldraw[\col] (v2) circle (2pt);
+		\end{scope}
+	}
+
+	% period cell with labels
+	\begin{scope}[decoration={markings, mark=at position 0.5 with {\arrow{>}}}]
+		\coordinate (v1) at (0,0);
+		\coordinate (v1p) at (\l,0);
+		\coordinate (v2) at (\a,\b);
+		
+		\draw[thick, postaction={decorate}] (v1) -- (v2);
+		\draw[thick, postaction={decorate}] (v2) -- (v1p);
+
+		\draw[dashed] (v1) -- (\a,0) node[anchor=north] at (\a/2,0) {$a$};
+		\draw[dashed] (\a,0) -- (v1p) node[anchor=north] at ({(\l+\a)/2},0) {$1-a$};
+		\draw[dashed] (\a,0) -- (v2) node[anchor=east] at (\a,\b/2) {$b$};
+
+		\filldraw[black] (v1) circle (2pt) node[anchor=north] {$v_1$};
+		\filldraw[black] (v1p) circle (2pt) node[anchor=north] {$v_1$};
+		\filldraw[black] (v2) circle (2pt) node[anchor=south] {$v_2$};
+	\end{scope}
+
+\end{tikzpicture}
+\end{document}
