@@ -1,0 +1,173 @@
+\subsection{Heuristic Connection between \eqref{eq:SI-StrongForm} and Effective Problems for Critical-Contrast Materials} \label{ssec:SI-DoubleLimitReconcile}
+The domain on which the system \eqref{eq:SI-StrongForm} is posed is motivated by the ``visual" limit of the acoustic approximation on a composite material with thin inclusions that are shrinking to zero thickness.
+Insofar we have only considered the case when the material properties in the bulk regions and on the skeleton are identical.
+The dimensionless parameters $\alpha_j$ are present, and it is our expectation that they encode geometric contrast between shrinking edge and vertex regions --- indeed they appear in \eqref{eq:SI-VertexCondition} in much the same capacity as they did in chapters \ref{ch:ScalarSystem} and \ref{ch:CurlCurl}.
+It is natural for us to seek more insight into the role of the $\alpha_j$, and indeed ask whether we can also incorporate contrasts between the material properties of the bulk and skeleton into our formulation.
+
+With this in mind, let us introduce a difference in material parameters in the bulk regions and on the skeleton, represented through the (dimensionless) permittivity
+\begin{align*}
+	\epsilon_m =
+	\begin{cases} 1 & x\in\ddom_i, \\ \epsilon & x\in\graph, \end{cases}
+\end{align*}
+where $\epsilon > 1$ is the parameter quantifying this difference.
+Modifying the system \eqref{eq:SI-WaveEqn} slightly to account for the now varying material properties, consider the problem of finding $u\in\tgradSob{\ddom}{\lambda_2^{\dddmes}}$ and $\omega^2>0$ such that
+\begin{align} \label{eq:SI-ContrastWeakWaveEqn}
+	\integral{\ddom}{ \epsilon_m^{-1}\tgrad_{\ccompMes}u\cdot\overline{\tgrad_{\ccompMes}\phi} }{\ccompMes}
+	&= \omega^2 \integral{\ddom}{ u\overline{\phi} }{\ccompMes}, \quad\forall\phi\in\psmooth{\ddom}.
+\end{align}
+Utilising an identical argument to that of section \ref{sec:SI-StrongDerivation}, \eqref{eq:SI-ContrastWeakWaveEqn} admits the ``strong" formulation
+\begin{subequations}
+	\begin{align*}
+		-\laplacian_\qm u 
+		&= \omega^2 u 
+		&\text{in } \ddom_i, \\
+		- \epsilon^{-1}\bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)}  
+		&= \omega^2 u^{(jk)} + \bracs{\bracs{\grad u\cdot n_{jk}}^+ - \bracs{\grad u\cdot n_{jk}}^-}
+		&\text{in } I_{jk}, \\
+		\epsilon^{-1}\sum_{j\con k} \bracs{\pdiff{}{n}+\rmi\qm_{jk}} u^{(jk)}(v_j) 
+		&= \omega^2 \alpha_j u(v_j)
+		&\text{at } v_j\in\vertSet.
+	\end{align*}
+\end{subequations}
+
+Introducing non-constant material parameters is thus a straightforward process.
+However notice that in the case where $\alpha_j=0$ and in the high-permittivity limit $\epsilon\rightarrow\infty$, we obtain the system
+\begin{subequations}
+	\begin{align*}
+		\laplacian_\qm u 
+		&= \omega^2 u 
+		&\text{in } \ddom_i, \\
+		\omega^2 u^{(jk)}
+		&= \bracs{\bracs{\grad u\cdot n_{jk}}^- - \bracs{\grad u\cdot n_{jk}}^+}
+		&\text{in } I_{jk},
+	\end{align*}
+\end{subequations}
+which is a realisation of the system \eqref{eq:Intro-KuchFigQGLimit} upon identifying $W=1$.
+In the study \cite{figotin1998spectral}, the spectrum of \eqref{eq:Intro-KuchFigQGLimit} was shown to coincide with the limit of the spectra of the acoustic equation on the domains illustrated in figure  \ref{fig:Diagram_KF-DoubleLimitStudy} in the limit that the inclusion thickness $\delta\rightarrow0$ simultaneously with $\bracs{\delta\epsilon}^{-1}\rightarrow W$.
+If we include the ``mass" $W^{-1}$ as a prefactor to $\ddmes$ and study the problem of finding $u\in\tgradSob{\ddom}{\compMes}$
+\begin{align*}
+	\integral{\ddom}{ \epsilon_m^{-1}\tgrad_{\compMes}u\cdot\overline{\tgrad_{\compMes}\phi} }{\lambda_2^{W^{-1}\ddmes}}
+	&= \omega^2 \integral{\ddom}{ u\overline{\phi} }{\lambda_2^{W^{-1}\ddmes}}, \quad\forall\phi\in\psmooth{\ddom},
+\end{align*}
+we will obtain
+\begin{subequations}
+	\begin{align*}
+		-\laplacian_\qm u 
+		&= \omega^2 u 
+		&\text{in } \ddom_i, \\
+		- \epsilon^{-1}\bracs{\diff{}{y} + \rmi\qm_{jk}}^2u^{(jk)}  
+		&= \omega^2 u^{(jk)} + W\bracs{\bracs{\grad u\cdot n_{jk}}^+ - \bracs{\grad u\cdot n_{jk}}^-}
+		&\text{in } I_{jk}.
+	\end{align*}
+\end{subequations}
+Notice that in the limits $\delta\rightarrow0$, $\epsilon\rightarrow\infty$ we have:
+\begin{itemize}
+	\item If $\delta\epsilon\rightarrow W^{-1}=\infty$ the resulting system is a collection of \emph{decoupled} Dirichlet Laplacians on each of the regions $\ddom_i$.
+	That is to say, our composite material is essentially composed of independent bulk regions $\ddom_i$ --- the singular regions we have interlaced into our material have a permittivity so high they prevent transmission across the skeleton.
+	\item If $\delta\epsilon\rightarrow W^{-1}=0$ the resulting system is the acoustic approximation on each of the regions $\ddom_i$, coupled through matching conditions for the flux across the skeleton.
+	These are precisely the interface conditions one poses when working on a periodic composite (without singular regions).
+	Despite the increasing permittivity of the thin inclusions discouraging wave propagation between the bulk regions, the thickness shrinks fast enough to allow $u$ to leak through into the other regions.
+	\item If $\delta\epsilon\rightarrow W^{-1}\in\bracs{0,\infty}$ as $\delta\rightarrow0$, $\epsilon\rightarrow\infty$, we obtain the system \eqref{eq:Intro-KuchFigQGLimit}.
+	In this case, the equation along the skeleton is precisely a Wentzell condition --- relating the value of the solution $u$ to the incoming fluxes.
+	Analogous conditions (and equations in the bulk) are derived in the study \cite{cherednichenko2019homogenisation} in this ``critical" case and on a similar domain, but concerning the problem of homogenisation for the equations of (linearised) elasticity\footnote{It is noted in \cite{cherednichenko2019homogenisation} that such conditions, in which coupling diffusion along a boundary to diffusion along said boundary, belong to the (very broad) class of \emph{Ventcel}' conditions \cite{venttsel1959boundary}. This is the same class that the \emph{Wentzell} conditions for quantum graphs belong to --- it is likely that Wentzell and Ventcel' are different spellings of the same translated name.}.
+\end{itemize}
+These situations are analogous to the three cases that arise in the limits of thin-structure problems under the different vertex-to-edge volume scalings (section \ref{ssec:Intro-ThinStructures}); and manifest themselves in precisely the same manner, only through the values of the parameter $W$ rather than $\alpha_j$.
+The similarities in observing Dirichlet decoupling, exact flux matching, and a Wentzell condition are also emphasised --- the latter case even requiring us to work in an extension of the space $H^2\bracs{\ddom}$, which can be viewed as a subspace of $\tgradSob{\ddom}{\ccompMes}$.
+
+The introduction of the mass $W$ likely comes across as rather arbitrary at this point --- what reason do we have for placing it in front of the measure $\ddmes$, besides noticing the coincidence of the resulting problem with \eqref{eq:Intro-KuchFigQGLimit}?
+Furthermore, what are the implications and interpretations of reintroducing the masses $\alpha_j$ (via use of $\dddmes$ in place of $\ddmes$) at the vertices in the ``high-contrast" limit?
+To address these questions we can extend the heuristic argument provided in \cite{figotin1998spectral} to encompass geometric contrast, and establish a link between the high contrast limit of our singular structure problems and the double limits explored in section \ref{ssec:Intro-DoubleLimits}.
+
+Consider a domain consisting of a thickened graph $G_{\delta}$ with underlying graph $\graph$.
+Let the thickened edges $\mathbb{I}_{jk}$ be of thickness $\delta$ for each edge $I_{jk}$, and the ``vertex regions" have volume $r_j(\delta)$ for each vertex $v_j$.
+Equip this domain with (relative) permittivity
+\begin{align*}
+	\epsilon(x) &= 
+	\begin{cases}
+		\epsilon_{\mathrm{bulk}} & x\in\ddom\setminus G_{\delta}, \\
+		\epsilon_{jk} & x\in\mathbb{I}_{jk}, \\
+		\epsilon_{v_j} & x\in r_j(\delta),
+	\end{cases} \\
+	&= \epsilon_{\mathrm{bulk}} \charFunc{\ddom\setminus G_{\delta}}
+	+ \sum_{I_{jk}\in\edgeSet} \bracs{\delta\epsilon_{jk}} \delta^{-1}\charFunc{\mathbb{I}_{jk}}
+	+ \sum_{v_j\in\vertSet} \bracs{\delta\epsilon_{v_j}} \delta^{-1}\charFunc{r_j(\delta)},
+\end{align*}
+where $\charFunc{B}$ is the characteristic function of the set $B$.
+Set 
+\begin{align*}
+	W_{jk}^{-1} = \lim_{\delta\rightarrow0}\delta\epsilon_{jk}, \qquad
+	Y_{j}^{-1} = \lim_{\delta\rightarrow0}\delta\epsilon_{v_j}, \qquad
+	\alpha_j = \lim_{\delta\rightarrow0} \delta^{-1}r_j(\delta),
+\end{align*}
+and interpret the product $Y_{j}^{-1}\alpha_j = \lim_{\delta\rightarrow0} r_j(\delta)\epsilon_{v_j}$.
+Note in particular that $\alpha_j$ is proportional to the ratio of the volumes of the edge region $\mathbb{I}_{jk}$ to the vertex region $r_j(\delta)$, up to a factor of $l_{jk}^{-1}$.
+Temporarily forbidding the above limits from being infinite, and sending $\delta\rightarrow0$ we have
+\begin{align*}
+	\integral{\ddom}{ \delta^{-1}\charFunc{\mathbb{I}_{jk}} }{\lambda_2}
+	&\rightarrow \integral{\ddom}{ }{\lambda_{jk}}, \\
+	\integral{\ddom}{ \delta^{-1}\charFunc{r_j(\delta)}}{\lambda_2}
+	&\rightarrow \alpha_j\integral{\ddom}{ }{\delta_{v_j}},
+\end{align*}
+understood in the distributional sense, that is for (suitable) functions $\phi$,
+\begin{align*}
+	\integral{\ddom}{ \phi\delta^{-1}\charFunc{\mathbb{I}_{jk}} }{\lambda_2}
+	&\rightarrow \integral{\ddom}{ \phi }{\lambda_{jk}}, \\
+	\integral{\ddom}{ \phi \delta^{-1}\charFunc{r_j(\delta)}}{\lambda_2}
+	&\rightarrow \alpha_j\integral{\ddom}{ \phi }{\delta_{v_j}} = \alpha_j\phi(v_j).
+\end{align*}
+Therefore, as $\delta\rightarrow0$ we have that
+\begin{align*}
+	\integral{\ddom}{\epsilon u\phi}{\lambda_2}
+	&\rightarrow \integral{\ddom}{u\phi}{\lambda_2}
+	+ \sum_{I_{jk}} W_{jk}^{-1}\integral{\ddom}{u\phi}{\lambda_{jk}}
+	+ \sum_{v_j} Y_{j}^{-1}\alpha_j\integral{\ddom}{u\phi}{\delta_{v_j}}
+	= \integral{\ddom}{u\phi}{\widetilde{\lambda}},
+\end{align*}
+where
+\begin{align*}
+	\widetilde{\lambda} &= \lambda_2 + \sum_{I_{jk}} W_{jk}^{-1} \lambda_{jk} + \sum_{v_j}Y_{j}^{-1}\alpha_j\delta_{v_j}.
+\end{align*}
+
+Now consider the problem of finding $\omega>0$, $u\in\tgradSob{\ddom}{\ccompMes}$ such that
+\begin{align*}
+	\integral{\ddom}{ \tgrad_{\ccompMes} u\cdot\overline{\tgrad_{\ccompMes}}\phi }{\widetilde{\lambda}}
+	&= \omega^2 \integral{\ddom}{u\overline{\phi}}{\widetilde{\lambda}},
+	\qquad\forall \phi\in\psmooth{\ddom},
+\end{align*}
+where
+\begin{align*}
+	\widetilde{\epsilon}(x) &=
+	\begin{cases}
+		\epsilon_{\mathrm{bulk}} & x\in\ddom_i, \\
+		\epsilon_{jk} & x\in I_{jk}, \\
+		\epsilon_{v_j} & x=v_j\in\vertSet.
+	\end{cases}
+\end{align*}
+Following the argument of section \ref{sec:SI-StrongDerivation} one would obtain the problem
+\begin{subequations} \label{eq:SI-StrongFormGeneralLimit}
+\begin{align*}
+	-\epsilon_{\mathrm{bulk}}^{-1}\laplacian_{\qm}u &= \omega^2 u, 
+	\qquad & \text{in each } \ddom_i, \labelthis\label{eq:SI-StrongFormGeneralLimit1} \\
+	-\epsilon_{jk}^{-1}W_{jk}^{-1}\bracs{ \diff{}{y} + \rmi\qm_{jk} }^2 u^{(jk)} &= & \\
+	W_{jk}^{-1}\omega^2 u^{(jk)} &+ \epsilon_{\mathrm{bulk}}^{-1}\bracs{ \bracs{\grad u\cdot n_{jk}}^+ - \bracs{\grad u\cdot n_{jk}}^- }, 
+	\qquad & \text{on each } I_{jk}, \labelthis\label{eq:SI-StrongFormGeneralLimit2} \\
+	-\epsilon_{jk}^{-1}W_{jk}^{-1}\bracs{ \pdiff{}{n} + \rmi\qm_{jk} } u^{(jk)}(v_j) &= Y_{jk}^{-1}\alpha_j\omega^2 u(v_j),
+	\qquad & \text{at each } v_j. \labelthis\label{eq:SI-StrongFormGeneralLimit3}
+\end{align*}
+\end{subequations}
+With such heuristics, it is clear why the high-permittivity limit of \eqref{eq:SI-StrongForm} corresponds to the limiting problem derived in \cite{figotin1998spectral}.
+Indeed, the setup of \cite{figotin1998spectral} corresponds to \eqref{eq:SI-StrongFormGeneralLimit} under the following assumptions:
+\begin{itemize} 
+	\item The domain $\ddom$ consists of regular $n$-gons, so the edges of the skeleton are the same length.
+	\item The permittivity is constant across the skeleton, being $\epsilon := \epsilon_{jk}=\epsilon_{v_l}$ for every $I_{jk}\in\edgeSet$, $v_l\in\vertSet$.
+	In the bulk regions, the permittivity is equal to unity.
+	\item The edges dominate in the zero-thickness limit, so $\alpha_j=0$.
+	\item The scaling of the permittivity with the edge thickness is constant in the zero-thickness limit.
+	Under the previous assumption of identical lengths, this implies $W := W_{jk} = Y_l$ is finite (where the equality holds for every $I_{jk}\in\edgeSet$, $v_l\in\vertSet$).
+\end{itemize}
+Additionally, \eqref{eq:SI-StrongFormGeneralLimit} enables us to suggest the effective problems one might encounter if the study \cite{figotin1998spectral} was extended\footnote{The study of \cite{cherednichenko2019homogenisation} also does not account for other possible contrasts between the shrinking edge and volume regions. In this regard, we conjecture that similar extensions might be realised if one studies the singular analogue of the equations of linearised  elasticity.} to encompass the case where $Y_{jk}^{-1}\alpha_j\neq0$.
+
+We now have a (heuristic) connection between the high-permittivity limit of our variational problems on singular structures and the effective problems derived from composite materials under critical contrast.
+The presence of each measure indicates interactions between different regions, with the weights assigned to each measure corresponding representing the relative strength of any material or geometric contrast.
+Additionally, the high-permittivity limit of such variational problems appears to capture the possible behaviours of composite materials in the ``double limit" of shrinking inclusion size and increasing permittivity on the inclusions.
+We remark of course that this argument is still only heuristic; however this insight contextualises the roles of the measures that are present in our singular structure problems, and the place that our variational problems have as predictive tools for composite materials.
