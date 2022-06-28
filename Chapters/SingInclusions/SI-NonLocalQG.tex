@@ -128,7 +128,7 @@ This makes evaluation of the action of $\dtn^i_\omega$ cheap, provided one has a
 These are the so-called Steklov eigenvalues and eigenfunctions, that solve the system (Steklov eigenvalue problem)
 \begin{align*}
 	\bracs{\laplacian_\qm + \omega^2}\varphi^{(i)}_n &= 0, \qquad\text{in } \ddom_i, \\
-	\varphi^{(i)}_n\vert_{\partial\ddom_i} &= w^{(i)}_n\partial{\varphi^{(i)}_n}{n}\vert_{\partial\ddom_i}. 
+	\varphi^{(i)}_n\vert_{\partial\ddom_i} &= w^{(i)}_n\pdiff{\varphi^{(i)}_n}{n}\vert_{\partial\ddom_i}. 
 \end{align*}
 However one then needs to be able to reconcile different representations of $u$ on edges common to two different bulk regions, and still faces the prospect of computing solutions to the Steklov problem in each of the bulk regions.
 Further details and the questions that require answers pertaining to these points, from our attempts to implement such a method, are available for the interested reader in the appendix \ref{sec:SIApp-NonLocalSolve}.

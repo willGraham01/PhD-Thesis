@@ -223,7 +223,7 @@ The major complication that we have to deal with is that we now have to reconcil
 There is also the compounding issue that without a proper distance to the vertex, we cannot use our usual cut-off functions to ensure that approximating sequences on each edge \emph{remain} supported on that edge when we move from considering $\lambda_{jk}$ to $\ddmes$.
 Our solution is to ``bloat" the vertex into a ball, and approximate $u$ with the central vertex value $u(v_j)$ on this ball.
 This provides us with a proper distance to the vertex, in which we can ``cut-off" the approximating sequences for each of the edge functions.
-\begin{lemma}[Extension lemma near vertices] \label{lem:ExtensionLemmaVertexFunctions}
+\begin{lemma}[Extension lemma for functions near vertices] \label{lem:ExtensionLemmaVertexFunctions}
 	Let $v_j\in\vertSet$ and suppose that $u\in\ktgradSob{\ddom}{\lambda_{jk}}$ for all $I_{jk}\in J\bracs{v_j}$, and that there exists some $r>0$ such that $u=0$ outside $B_r\bracs{v_j}\cap \mathcal{J}\bracs{v_j}$.
 	Suppose further that $r<\min_{J\bracs{v_j}}\clbracs{l_{jk}}$, and that $u$ is continuous at $v_j$, taking the value $u(v_j)$.
 	Then $u\in\ktgradSob{\ddom}{\ddmes}$ with
