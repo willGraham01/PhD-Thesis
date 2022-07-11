@@ -25,7 +25,9 @@ jobs:
       
       # Install dependencies needed to compile
       - name: Install LaTeX dependencies
-        run: sudo apt-get install latexmk
+        run: |
+          sudo apt-get install texlive-latex-base
+          sudo apt-get install latexmk
 
       # Attempts to produce the thesis output file using make
       - name: Make thesis
