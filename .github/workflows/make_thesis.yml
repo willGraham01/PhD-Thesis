@@ -22,8 +22,12 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
+      
+      # Install dependencies needed to compile
+      - name: Install LaTeX dependencies
+        run: sudo apt-get install latexmk
 
-      # Runs a single command using the runners shell
+      # Attempts to produce the thesis output file using make
       - name: Make thesis
         run: make
 
