@@ -2,6 +2,8 @@
 This repository holds all documents, images, code, and auxillary files that are used in creating ThesisWG270.pdf.
 It is standalone, and contains all files required to assemble the thesis `.pdf` file from `ThesisWG270.tex` and `makefile`.
 
+Upon pushing to branch `main`, GitHub actions will attempt to execute the `make` command provided by the `Makefile` after installing appropriate $\LaTeX$ dependencies.
+
 ### File Structure
 This is seperate from PhD-Work-Git repository to avoid repository bloat; as such, it should only contain the following types of files:
 
