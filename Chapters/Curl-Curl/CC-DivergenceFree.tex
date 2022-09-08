@@ -111,10 +111,20 @@ The $\dddmes$-divergence free fields admit the following characterisation.
 	\end{align*}
 	from which we can use (ii), (iii), and (v) to deduce that $\ip{u}{\ktgrad\phi_n}_{\ltwo{\ddom}{\dddmes}^3}=0$ for every $n\in\naturals$, providing orthogonality to tangential gradients.
 \end{proof}
-We highlight that a field $u$ being $\dddmes$-divergence free provides us with some additional information about the regularity of the components of $u$, however still falls short of establishing any kind of continuity of the in-plane components $u_1$ and $u_2$ near the vertices.
-The condition (ii) provides us with regularity of (some linear combination of) these components along each edge, but we do not obtain any information about their traces, other than the condition (v) --- which does not imply the traces must match even when $u_3(v_j)=0$.
+Following the method of proof of proposition \ref{prop:DivFree-AllGradsConditions}, one can see that the properties (i) and (iv) are direct results of orthogonality to gradients of zero.
+This is due to the nature of the space $\gradZero{\ddom}{\dddmes}$ that we analysed in section \ref{ssec:GradZero} (specifically, theorem \ref{thm:3DdddmesCharGradZero}); gradients of zero have their components normal to the edges free, whilst their components parallel to the segment identically zero.
+The former condition removes any freedom in the component of divergence-free fields $u$ normal to the edges (that is $U_1^{(jk)}$), hence providing condition (i).
+Condition (iv) follows from similar deductions about the behaviour of gradients of zero at the vertices; the ``in-plane" (first and second) components of all gradients of zero are free at the vertices so fields that are orthogonal to them must be fixed at 0 (condition (iv)).
 
-We can make some remarks about each of the conditions (i)-(v) in proposition \ref{prop:DivFree-AllGradsConditions} to draw parallels with the geometric interpretation of the divergence of a vector field one has in calculus.
+The remaining conditions (ii), (iii), and (v) are all in virtue of the orthogonality to tangential gradients, the properties bestowed upon such gradients by theorem \ref{thm:CharOfSobSpaces}, and the fact that such gradients are approximated (strongly) in $\ltwo{\ddom}{\dddmes}^3$.
+It has been established that tangential gradients are $H^1$-functions along the \emph{individual} edges of the graph, directed tangentially to the edges.
+We are thus able to argue that this regularity, whilst on the edge $I_{jk}$, must also translate across to the tangential component ($U{_2}^{(jk)}$) of divergence-free fields, providing us with (ii) and (iii).
+This also establishes that the tangential components on each edge possess traces into the vertex, and we can obtain information about their traces into the vertex in condition (v).
+However we are not able to establish \emph{global} approximation of the tangential components $U_2^{(jk)}$ --- that is find a single sequence $\Phi_n\in\psmooth{\ddom}^3$ that for each edge $I_{jk}$ is such that $\Phi_n\cdot\widehat{e}_{jk}$ converges to $U_2^{(jk)}$ in $\ltwo{\ddom}{\lambda_{jk}}$ --- soley through this orthogonality condition.
+Such a global approximating sequence is crucial to establishing continuity through the vertices of $\ktgradSob{\ddom}{\dddmes}$ functions, or more precisely imposing a matching condition on the incoming traces.
+Ergo, we are left with the condition (v), the traces cannot be completely unrelated (since the edge-wise components of tangential gradients are related) but are not bound togther in as strict a manner.
+
+We can make further remarks about each of the conditions (i)-(v) in proposition \ref{prop:DivFree-AllGradsConditions} to draw parallels with the geometric interpretation of the divergence of a vector field one has in calculus.
 The left hand side of condition (iii) bears close resemblance to the expression for the three dimensional divergence; recalling our use of a Fourier transform in the $\widehat{x}_3$ direction, the $\rmi\wavenumber u_3$ term is the result of the presence of a $\partial_3 u_3$ term in non-Fourier space.
 Furthermore, we can also associate
 \begin{align*}
@@ -134,7 +144,7 @@ To be divergence free at the vertex $v_j$; the sum of the ``flux" seen by the me
 This interpretation and the slightly odd nature of the conditions (i) and (iv) raises the question as to whether we have been over-zealous with definition \ref{def:DivFree-AllGradients}.
 When working classically (that is, with the Lebesgue measure), there are no (non-zero) gradients of zero and so there is no distinction between tangential gradients and gradients of zero.
 Consequentially, divergence free functions being orthogonal to gradients is functionally the same as them being orthogonal to all tangential gradients.
-However we can notice from proposition \ref{prop:DivFree-AllGradsConditions} that conditions (ii), (iii) and (v) are those which come from the requirement that $u$ be orthogonal to tangential gradients, and the more unusual conditions (i) and (iv) from orthogonality to gradients of zero. 
+We also recall our previous remarks that conditions (ii), (iii) and (v) are those which come from the requirement that $u$ be orthogonal to tangential gradients, and the more unusual conditions (i) and (iv) from orthogonality to gradients of zero. 
 Thus we face another, less restrictive, candidate for the notion of divergence free, which for ease of language we will refer to as \emph{tangentially divergence-free}.
 \begin{definition}[Tangentially $\dddmes$-Divergence Free] \label{def:DivFree-TangGradients}
 	A field $u\in\pltwo{\ddom}{\dddmes}^3$ is tangentially divergence free with respect to $\dddmes$ if (and only if)
