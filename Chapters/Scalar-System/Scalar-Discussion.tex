@@ -200,6 +200,43 @@ This ensures (via \eqref{eq:SingularWaveEqnQGProblem-2} and \eqref{eq:SingularWa
 This process can be executed iteratively, splitting edges to remove rational-relations between edge lengths and any loops.
 Doing so means that any graph representing a singular-structure can now be treated in the manner described in section \ref{ssec:MMatrixConsequences}.
 
+We highlight here that there are a number of considerations to make regarding the design of a \emph{general algorithm} to create a graph with pairwise irrationally-related edge lengths, from a graph without this quality.
+Design of such an algorithm lies outside the objectives of this thesis, however we hope to provide readers interested in developing such a proceedure with a helpful starting point for such considerations.
+In the event that one begins with a graph with $L$ edges all of which are \emph{all} pairwise-rationally related, then one has the following proceedural method for creating a graph with $2L$ edges of pairwise irrationally-related lengths:
+\begin{enumerate}
+   \item Split the edge $I_1$ of length $l_1$ into two edges of lengths $\frac{l_1}{\sqrt{2}}$ and $l_1\bracs{1 - \frac{1}{\sqrt{2}}}$.
+   These edges now have lengths that are irrationally related to each other, and all other edges in the graph.
+   \item Split the edge $I_2$ of length $l_2$ into two edges of lengths $\frac{l_2}{\sqrt{3}}$ and $l_2\bracs{1-\frac{1}{\sqrt{3}}}$.
+   These edges now have lengths that are irrationally related to each other, all edges $I_n$, $2<n<L$, and the two new edges created in step 1.
+   \item Proceeding iteratively, one splits the edge $I_n$ of length $l_n$ into two edges of length $\frac{l_n}{\sqrt{p_n}}$ and $l_n\bracs{1-\frac{1}{\sqrt{p_n}}}$ where $p_n$ is the $n^{\text{th}}$ prime number.   
+\end{enumerate}
+Here we have are dependent on the following result:
+\begin{lemma} \label{lem:NumTheory-GraphSplitAlgorithm}
+    Suppose that $a,b>0$ and there exists $q\in\rationals$ such that $\frac{a}{b}=q$.
+    Let $p_1$ and $p_2$ be distinct prime numbers. 
+    Then the values
+    \begin{align} \label{eq:NumTheory-PairsWithoutAssumption}
+        \frac{a}{\sqrt{p_1}}, \quad
+        a\bracs{1-\frac{1}{\sqrt{p_1}}}, \quad
+        b,    
+    \end{align}
+    are pairwise-irrationally related.
+    If additionally $\sqrt{\frac{p_1}{p_2}}\frac{\sqrt{p_2}-1}{\sqrt{p_1}-1}$ is irrational\footnote{It is not known to the author whether this condition is always satisfied for primes $p_1$ and $p_2$, so the result may be true without the need to add this additional assumption.}, the values
+    \begin{align} \label{eq:NumTheory-PairsWithAssumption}
+        \frac{a}{\sqrt{p_1}}, \quad
+        a\bracs{1-\frac{1}{\sqrt{p_1}}}, \quad
+        \frac{b}{\sqrt{p_2}}, \quad
+        b\bracs{1-\frac{1}{\sqrt{p_2}}},
+    \end{align}
+    are pairwise-irrationally related.
+\end{lemma}
+\begin{proof}
+    This proof is simply a case of comparing the quotients of the possible pairs in \eqref{eq:NumTheory-PairsWithoutAssumption} and \eqref{eq:NumTheory-PairsWithAssumption}, and realising they are irrational.
+\end{proof}
+For the purposes of completing the proceedure listed above, it would be sufficient to demonstrate the weaker conclusion that there exist at least $L$ such pairs of primes --- because after $L$ steps we would be left with $2L$ edges of irrationally-related lengths.
+Things are further complicated however if the original graph contains a mixture of rationally and irrationally related edge lengths, as one might now split an edge in the above manner only to find it then rationally relates to another edge that it previously did not.
+A stronger version of lemma \ref{lem:NumTheory-GraphSplitAlgorithm} would be needed in this case (dropping the assumption that $a$ and $b$ are rationally related); or one would have to produce a less-n\"{i}ave approach to the order in which edges are split, as it may no longer be sufficient to simply use reciprocal roots of prime numbers to ensure edges are irrationally-related.
+
 \subsection{Considerations for the approach to solving \eqref{eq:QGGenEvalSolveNoPoles} or \eqref{eq:QGDetSolveCondition}} \label{ssec:ApproachConsiderations}
 In this section we briefly discuss some considerations for recovering the spectrum $\sigma\bracs{-\laplacian_{\upsilon}}=:\sigma$, through determination the spectra $\sigma_{\qm}:=\sigma\bracs{-\laplacian_{\dddmes}^{\qm}}$ via \eqref{eq:QGGenEvalSolveNoPoles} or \eqref{eq:QGDetSolveCondition}.
 %Recall that our use of the Gelfand transform informs us that $\sigma = \bigcup_{\qm}\sigma_{\qm}$.
