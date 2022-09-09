@@ -104,7 +104,7 @@ This system can then be written in matrix form as
 where $B=\mathrm{diag}\bracs{1,...,1,\alpha_0,1,...,1}$ is a (positive semi-definite) diagonal matrix with $\alpha_0$ in the row corresponding to the equation \eqref{eq:SI-FDMDiscVertex}.
 The equation \eqref{eq:SI-FDMMatrixEqn} can then be solved using a generalised eigenvalue solver\footnote{We remark that, unlike the problem \eqref{eq:QGGenEvalSolveNoPoles}, solvers that can handle a generalised eigenvalue problem of the form \eqref{eq:SI-FDMMatrixEqn} are readily available in most standard libraries.} to obtain the approximate eigenvalues $\omega^2$ and eigenvectors $U$.
 
-The approximate eigenvalues computed by the finite difference scheme using $N=251$ grid-points in each of the coordinate directions are displayed in figure \ref{fig:CompositeCross-FDM-SpectralBands}.
+The approximate eigenvalues computed by the finite difference scheme using $N=251$ grid-points in each of the coordinate directions are displayed in figure \ref{fig:CompositeCross-FDM-SpectralBands} --- the scripts used to generate these figures and execute this scheme can be found in the GitHub repository \cite{graham2022asymptotic}.
 \begin{figure}[b!]
 	\centering
 	\begin{subfigure}[t]{0.45\textwidth}

@@ -1,0 +1,22 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: >-
+  Asymptotic and Numerical Analysis of Wave
+  Propagation in Thin-Structure Waveguides
+message: >-
+  If you adapt or utilise the scripts provided in
+  this repository, please cite it using the metadata
+  from this file in addition to referencing the
+  thesis itself. You can find information for
+  referencing the thesis on the University of Bath
+  Library page. 
+type: software
+authors:
+  - given-names: William Michael
+    family-names: Graham
+    email: 1willgraham@gmail.com
+    affiliation: University of Bath
+url: https://github.com/willGraham01/PhD-Thesis
+date-released: 2022-09-07
