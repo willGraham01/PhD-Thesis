@@ -1,0 +1,84 @@
+\section{Divergence-Free Fields with Non-Matching Tangential Traces} \label{sec:CC-DivFree-ExampleFunctions}
+In this section we work in the context of section \ref{sec:DivFreeCondition}, and look to provide an example of a divergence-free field whose tangential-components possess mismatching traces into a vertex.
+That is, a situation in which proposition \ref{prop:DivFree-AllGradsConditions}(v) holds for non-zero $u_3$ at the vertices and non-zero coupling constant $\alpha_j$.
+The examples provided are simple adn rather trivial one-dimensional constructions, however they illustrate how one might come across such situations in the more general setting (where the underlying graph is properly embedded into a two-dimensional space) --- the component $u_3$ needs to possess some erroneous behaviour near the vertices.
+
+In the simplest case, let $\graph$ be the one-dimensional graph with a single vertex $v=\bracs{0,\recip{2}}$ with coupling constant $\alpha\neq 0$, and (``looping") edge $I = \sqbracs{0,1}\times\clbracs{\recip{2}}$\footnote{
+This is an alternative realisation of the one-dimensional chain graph of section \ref{ssec:Example1DLoop}.}.
+In this setting, the ``tangential component" $U_2^{(jk)}$ is simply the component $u_1$.
+Let the quasi-momentum $\qm\in\left[-\pi,\pi\right)\setminus\clbracs{0}$, and take $u_3\in\ltwo{\ddom}{\dddmes}$ to be the function with $u_3=0$ on $I$ and $u_3(v)=1$.
+Then the function
+\begin{align*}
+    u(x_1,x_2) &=
+    \begin{pmatrix}
+        \frac{i\wavenumber\alpha}{e^{-\rmi\qm}-1}e^{-\rmi\qm x_1} \\
+        0 \\
+        u_3
+    \end{pmatrix}
+\end{align*}
+is divergence-free by proposition \ref{prop:DivFree-AllGradsConditions}, as it satisfies the conditions (i) through (v).
+However notice that the ``trace values" satisfy
+\begin{align*}
+    \lim_{x_1\rightarrow0+}u_1(x_1) = \frac{i\wavenumber\alpha}{e^{-\rmi\qm}-1}
+    \neq \frac{i\wavenumber\alpha}{e^{-\rmi\qm}-1}e^{-\rmi\qm}
+    = \lim_{x_1\rightarrow1-}u_1(x_1),
+\end{align*}
+and so do not match at the vertex.
+This is not unsuprising --- after all, we have provided a $u_3$ with a behaviour at the vertices that is unexpected given its behaviour on the edges.
+However even if we require that $u_3\in\ktgradSob{\ddom}{\dddmes}$, we can still obtain divergence-free fields with mismatching traces of the tangential components.
+
+To this end, consider the same graph $\graph$ as before, however embedded such that the vertex $v$ now lies at position $v = \bracs{\recip{2},\recip{2}}$.
+Let $u_3$ be the function
+\begin{align*}
+    u_3(x) &=
+    \begin{cases}
+        2x & 0 \leq x \leq \recip{2}, \\
+        2(1-x) & \recip{2} \leq x < 1.
+    \end{cases}
+\end{align*}
+We note that $u_3\in\ktgradSob{\ddom}{\dddmes}$ by virtue of the characterisation of this space; $u_3$ is continuous at $v$ and takes the value $u(v)=1$, and is a member of $H^1$ along the single edge of the graph.
+Fix the one-dimensional quasi-momentum $\qm$, and let the coupling constant at $v$ take the value $\alpha = 4\qm^{-2}$.
+Now define the function
+\begin{align*}
+    u_1(x) &=
+    \begin{cases}
+        \frac{2\rmi\wavenumber}{\qm^2}\bracs{\rmi\qm x - 1}, 
+        & 0\leq x\leq \recip{2}, \\
+        -\frac{2\wavenumber}{\qm} - \frac{2\rmi\wavenumber}{\qm^2}\bracs{\rmi\qm x - 1}, 
+        & \recip{2}\leq x\leq 1,
+    \end{cases}
+\end{align*}
+whose weak derivative is the function
+\begin{align*}
+    u_1'(x) &=
+    \begin{cases}
+        -\frac{2\wavenumber}{\qm} & 0\leq x\leq \recip{2}, \\
+        \frac{2\wavenumber}{\qm} & \recip{2}\leq x\leq 1,
+    \end{cases}
+\end{align*}
+and thus is $H^1$ on the single edge of $\graph$.
+Observe that for all $x\in\bracs{0,\recip{2}}\cup\bracs{\recip{2},1}$,
+\begin{align*}
+    u_1'(x) + \rmi\qm u_1(x) = -\rmi\wavenumber u_3(x).
+\end{align*}
+Furthermore,
+\begin{align*}
+    -\lim_{x\rightarrow\recip{2}-}u_1(x) + \lim_{x\rightarrow\recip{2}+}u_1(x)
+    &= \frac{4\rmi\wavenumber}{\qm^2} = \rmi\wavenumber\alpha u_1(v),
+\end{align*}
+however the traces 
+\begin{align*}
+    \lim_{x\rightarrow\recip{2}-}u_1(x) 
+    &= -\frac{\wavenumber}{\qm} - \frac{2\rmi\wavenumber}{\qm^2}
+    \neq -\frac{\wavenumber}{\qm} + \frac{2\rmi\wavenumber}{\qm^2} 
+    = \lim_{x\rightarrow\recip{2}+}u_1(x).
+\end{align*}
+
+As such, consider the field $u\in\ltwo{\ddom}{\dddmes}^3$ defined by
+\begin{align*}
+    u(v) = \begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix},
+    \quad
+    u(x) = \begin{pmatrix} u_1(x) \\ 0 \\ u_3 \end{pmatrix}.
+\end{align*}
+By the computations performed above and proposition \ref{prop:DivFree-AllGradsConditions}, this field is divergence-free, and is such that $u_1$ has non-matching traces into the vertex $v$.
+In this case, it is the fact that the space $\ktgradSob{\ddom}{\dddmes}$ does not enforce matching of the incoming derivatives to the vertices which contributes to the mismatching traces in a divergence-free field.
