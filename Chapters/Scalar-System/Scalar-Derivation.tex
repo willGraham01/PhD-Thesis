@@ -1,12 +1,16 @@
 \section{Derivation of an Equivalent Quantum Graph Problem} \label{sec:ScalarDerivation}
-In this section we demonstrate how system of the form \eqref{eq:SingularWaveEqnQGProblem} is obtained from \eqref{eq:SingularScalarWaveEqn}, which will setup our discussion revolving around the methods we employ for solving \eqref{eq:SingularWaveEqnQGProblem} in section \ref{sec:ScalarDiscussion}.
+In this section we demonstrate how system of the form \eqref{eq:SingularWaveEqnQGProblem} is obtained from \eqref{eq:SingularScalarWaveEqn}:
+\begin{theorem} \label{thm:ScalarDerivation-Theorem}
+	The problem \eqref{eq:SingularScalarWaveEqn} is equivalent to the problem \eqref{eq:SingularWaveEqnQGProblem}.
+\end{theorem}
+Section \ref{ssec:Scalar-QGDerivation} provides the proof of theorem \ref{thm:ScalarDerivation-Theorem}, and will setup our discussion revolving around the methods we employ for solving \eqref{eq:SingularWaveEqnQGProblem} in section \ref{sec:ScalarDiscussion}.
 To do so, we will need to provide the reader with an intuitive understanding, stemming from the analysis of section \ref{sec:3DGradSobSpaces}, of the space $\tgradSob{\ddom}{\dddmes}$.
 Upon deriving the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem}, we will elaborate on its link to our variational problem in the context of Strauss extensions in section \ref{ssec:ExtendedSpaces}.
 
 \input{./Chapters/Scalar-System/Scalar-GradientGeometricInterpretation}
 
 \subsection{Derivation of the system \eqref{eq:SingularWaveEqnQGProblem}} \label{ssec:Scalar-QGDerivation}
-We can now provide an argument for how a system of the form \eqref{eq:SingularWaveEqnQGProblem} arises from \eqref{eq:SingularScalarWaveEqn}.
+We can now provide an argument for the proof of theorem \ref{thm:ScalarDerivation-Theorem}, that is how a system of the form \eqref{eq:SingularWaveEqnQGProblem} arises from \eqref{eq:SingularScalarWaveEqn}.
 Take any $\varphi\in\csmooth{\sqbracs{0,l_{jk}}}$ and let $\phi\in\psmooth{\ddom}$ be such that $\phi\circ r_{jk} = \varphi$ on $\sqbracs{0,l_{jk}}$, with $\supp\phi\cap\graph\subset I_{jk}^{\circ}$.
 Recall that the change of variables $r_{jk}$ is affine (see \eqref{eq:EdgeParameterisation}), so in particular this change of variables is invertable.
 Testing against such $\phi$ in \eqref{eq:SingularScalarWaveEqn-VariationalForm}, combined with the fact that $\dddmes$ is a sum of the edge measures and point masses at the vertices, and that $\tgrad_{\dddmes}u=\tgrad_{\lambda_{jk}}u$ on the edge $I_{jk}$, equation \eqref{eq:SingularScalarWaveEqn-VariationalForm} implies
