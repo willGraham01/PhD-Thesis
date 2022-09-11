@@ -38,7 +38,7 @@ and use $b_{\qm}$ to define the self-adjoint operator $-\laplacian_{\ccompMes}^\
 \end{align*}
 with action $-\laplacian_{\ccompMes}^\qm = f$, where $u$ and $f$ are related as in \eqref{eq:CompLaplaceOpDom}.
 Equation \eqref{eq:SI-WaveEqn} is then the eigenvalue equation for the operator $-\laplacian_{\ccompMes}^\qm$.
-With $\ddom$ being bounded and $-\laplacian_{\ccompMes}^\qm$ self-adjoint, the spectrum of each $-\laplacian_{\ccompMes}^\qm$ consists of a discrete set of values $\omega^2\in\reals$.
+With $\ddom$ being bounded and $-\laplacian_{\ccompMes}^\qm$ self-adjoint, the spectrum of each $-\laplacian_{\ccompMes}^\qm$ consists of a discrete set\footnote{As we did in chapter \ref{ch:ScalarSystem}, we reiterate that it is not the purpose of this thesis to investigate the \emph{nature} of the spectrum, which is left to future work. Our interest lies solely in the computation of the values $\omega^2$ that make up the spectrum.} of values $\omega^2\in\reals$.
 We can even utilise the min-max principle to write down a variational formulation whose solution determines the eigenvalues (and eigenfunctions) of $-\laplacian_{\ccompMes}^\qm$, which will form the basis of our first approach to numerically solving this problem.
 Through our use of the Gelfand transform, taking the union of the spectra over $\qm$ will provide us with the spectrum of a periodic operator on $\reals^2$ with period cell $\ddom$.
 
