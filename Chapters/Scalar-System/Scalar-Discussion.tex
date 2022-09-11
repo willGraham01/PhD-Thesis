@@ -185,10 +185,13 @@ Considerations concerning which of the two equations \eqref{eq:QGGenEvalSolveNoP
 In any event, \eqref{eq:SingularScalarWaveEqn} has now been reduced to a more accessible (family of) matrix-eigenvalue problems for $\mathfrak{M}_\qm$.
 
 \subsection{Artificial vertices and splitting edges} \label{ssec:ArtificialVertices}
-As noted in section section \ref{ssec:MMatrix}, it is required that the underlying graph $\graph$ contains no looping edges and has all edge-lengths pairwise irrationally-related.
+As noted in section section \ref{ssec:MMatrix}, it is required that the underlying graph $\graph$ contains no looping edges and has all edge-lengths pairwise irrationally-related\footnote{More precisely, it was noted that the operator we wish to study is required to be simple, which in the context of quantum graphs is equivalent to these conditions \cite{ashurova2014simplicity}.}.
 Failure to ensure that this condition is met results in the ``loss" of certain eigenvalues when using the $M$-matrix to determine the spectrum of \eqref{eq:SingularWaveEqnQGProblem} --- these are highlighted explicitly in section \ref{ssec:Example1DLoop}.
 Of course, the graphs motivated by physical applications generally do not adhere to these restrictions --- typically being highly symmetric or and potentially consisting of loops.
 It is thus necessary to introduce \emph{artificial vertices} (or \emph{dummy vertices}) to split the edges of the original graph, removing any loops and ensuring all (new) edges have irrationally-related lengths.
+Here it is relevant to highlight the discussions in \cite[examples 1.4.3 and 2.1.12]{berkolaiko2013introduction}; which consider a star-graph with Neumann vertex conditions, and demonstrate that the edge lengths being pairwise irrationally-related is also sufficient for all the eigenvalues to have multiplicity one.
+The result \cite[theorem 3.7.1]{berkolaiko2013introduction} handles more general graph settings, and using techniques surrounding so-called bond scattering matrices, culminates with \cite[theorem 3.7.1]{berkolaiko2013introduction} relating the multiplicity of the eigenvalues to the multiplicity of the roots of the so-called \emph{secular equation}.
+A discussion is provided in \cite[section 3.5]{berkolaiko2013introduction} that relates this framework with the to the Dirichlet-to-Neumann map, and hence our approach via \eqref{eq:QGGenEvalSolveNoPoles} and \eqref{eq:QGDetSolveCondition}.
 
 Introducing an artificial vertex to split an edge is as intuitive as it sounds.
 Suppose $\graph=\bracs{\vertSet, \edgeSet}$ and one wishes to split the edge $I_{jk}$ (where it may be the case that $j=k$ and we have a loop).
@@ -303,16 +306,6 @@ The ratio $\frac{\abs{\edgeSet}}{\abs{\vertSet}}$ provides a good indicator of h
 The opposite extreme $\frac{\abs{\edgeSet}}{\abs{\vertSet}} = \recip{2}(\abs{\vertSet}-1)$ corresponds to a fully connected graph and thus dense $\mathfrak{M}_\qm$.
 For graphs with $\frac{\abs{\edgeSet}}{\abs{\vertSet}} \approx 1$, $\mathfrak{M}_{\qm}$ is relatively sparse and computing $F$ is more feasible, although still difficult analytically if $\abs{\vertSet}$ is large.
 Therefore for denser $\mathfrak{M}_\qm$ and larger (in the sense of number of edges) graphs, one begins to lean toward numerical schemes based on \eqref{eq:QGGenEvalSolveNoPoles}.
-% OLD DICSUSSION PARAGRAPH
-%As can be seen from corollary \ref{cory:M-MatrixEntriesNoPoles}, the complexity of the entries of $\mathfrak{M}_{\qm}$ (and thus the determinant in \eqref{eq:QGDetSolveCondition} and $F$) increases as one adds additional vertices and edges.
-%The complexity of the off-diagonal entries $\bracs{\mathfrak{M}_\qm}_{jk}$ depends on the number of edges between the vertices $v_j$ and $v_k$, whilst the complexity of the diagonal entries depends on the degree of the vertex $v_j$.
-%Furthermore, the sparsity of $\mathfrak{M}_\qm$ depends on the number of pairs of vertices that are not (directly) connected by an edge.
-%With this in mind, the ratio $\frac{\abs{\edgeSet}}{\abs{\vertSet}}$ can be a good indicator of ``how sparse" $\mathfrak{M}_\qm$ is, and how difficult $\mathfrak{M}_\qm$ will be to work with.
-%If $\frac{\abs{\edgeSet}}{\abs{\vertSet}}\approx 1$, then the number of non-zero entries in any row (or column) of $\mathfrak{M}_\qm$ should be approximately 2 --- the diagonal entry plus the entry corresponding to the expected single connection of this vertex.
-%At the extremes, $\frac{\abs{\edgeSet}}{\abs{\vertSet}}\approx 0$ corresponds to an almost-diagonal $\mathfrak{M}_\qm$, whilst $\frac{\abs{\edgeSet}}{\abs{\vertSet}}\approx \abs{\vertSet}$ corresponds to an almost-dense $\mathfrak{M}_\qm$.
-%A sparse $\mathfrak{M}_\qm$ is efficient to work with numerically, although if $\abs{\vertSet}$ is large can still be difficult to work with analytically.
-%For denser $\mathfrak{M}_\qm$, one begins to lean toward numerical schemes based on \eqref{eq:QGGenEvalSolveNoPoles}, as the expressions involved in \eqref{eq:QGDetSolveCondition} become increasingly cumbersome, and determining the function $F$ explicitly corresponding difficult.
-%This leads to the colloquial rule that solving \eqref{eq:QGDetSolveCondition} (analytically) is generally manageable for graphs with a ``small number" of edges and/or vertices, whilst graphs with a large number of edges and/or vertices often warrant solution via \eqref{eq:QGGenEvalSolveNoPoles} --- ff course, the cut-off for the terms ``small number" and ``large number" will depend on the person (or program) solving the problem themselves!
 
 Another topical question worth addressing at this point is whether, given the expectation that $\sigma$ has a band-gap structure, an alternative to finding all $\omega\in F_0$ is to only compute the spectral edges and then reconstruct $F_0$ from them.
 It is known for (second order) periodic PDE problems that the edges of the spectral bands occur at the symmetry values of the quasi-momentum --- those values of $\qm$ which correspond to the periodic and anti-periodic problems (in each axis direction) on the unit cell.
