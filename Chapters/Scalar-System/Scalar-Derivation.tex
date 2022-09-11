@@ -111,10 +111,15 @@ The action of $\mathcal{A}_{\mathrm{ext}}$ defined as
 \end{align*}
 the space $L^2\bracs{\graph}\oplus\complex^{\abs{\vertSet}}$ is the extended space, and $\mathcal{A}_{\mathrm{ext}}$ the Strauss extension for the problem \eqref{eq:SingularWaveEqnQGProblem}.
 
-It is clear that the operators $\mathcal{A}_{\mathrm{ext}}$ and $-\laplacian_{\dddmes}^{\qm}$ possess the same spectrum and eigenfunctions, by virtue of theorem \ref{thm:CharOfSobSpaces}.
-Now let $f\in L^2\bracs{\graph}\oplus\complex^{\abs{\vertSet}} \cong \ltwo{\ddom}{\dddmes}$.
-Setting aside questions of solubility for the time being, a solution to the problem $\mathcal{A}_{\mathrm{ext}}u=f$ is also guaranteed to provide a solution to $-\laplacian_{\qm}^{\dddmes}u=f$ and vice-versa through this theorem.
-The converse also assured upon realising the problem $-\laplacian_{\qm}^{\dddmes}u=f$ can be written in the form \eqref{eq:SingularWaveEqnQGProblem}\footnote{The fact that $f\in\ltwo{\ddom}{\dddmes}$ is important here, as it provides enough regularity for $u$ to be an element of $H^2\bracs{\graph}$.}, except replacing $\omega^2 u$ with $f$ in \eqref{eq:SingularWaveEqnQGProblem-1} and $\omega^2\alpha_j u(v_j)$ with $\alpha_j f(v_j)$ in \eqref{eq:SingularWaveEqnQGProblem-3}.
+The operators $\mathcal{A}_{\mathrm{ext}}$ and $-\laplacian_{\dddmes}^{\qm}$ possess the same eigenvalues and eigenfunctions by virtue of theorem \ref{thm:CharOfSobSpaces}.
+If $\omega^2$, $u$ is an eigenpair of $-\laplacian_{\dddmes}^{\qm}$, then this eigenpair solves \eqref{eq:SingularWaveEqnQGProblem} by virtue of theorem \ref{thm:ScalarDerivation-Theorem}.
+In particular we have that $u\in H^2\bracs{\graph}$ and is continuous through the vertices (as a consequence of theorem \ref{thm:CharOfSobSpaces}), so one has that $\bracs{u,\beta = \clbracs{\alpha_j u(v_j)}_{v_j\in\vertSet}}$ satisfies $\mathcal{A}_{\mathrm{ext}}\bracs{u,\beta} = \omega^2\bracs{u,\beta}$.
+Conversely if $\omega^2, \bracs{u,\beta}$ is an eigenpair of $\mathcal{A}_{\mathrm{ext}}$, then $u\in\tgradSob{\ddom}{\dddmes}$ by theorem \ref{thm:CharOfSobSpaces} (it is continuous through the vertices and $H^1$ on the edges) and takes the values $u(v_j) = \alpha_j^{-1}\beta_j$ at the vertices.
+The pair $omega^2, u$ also solves the system \eqref{eq:SingularWaveEqnQGProblem}, so by theorem \ref{thm:CharOfSobSpaces} also constitutes an eigenpair of $-\laplacian_{\dddmes}^{\qm}$.
+A similar argument also extends to the situation where one considers $f\in L^2\bracs{\graph}\oplus\complex^{\abs{\vertSet}} \cong \ltwo{\ddom}{\dddmes}$ and solution to the problem $\mathcal{A}_{\mathrm{ext}}u=f$ and $-\laplacian_{\qm}^{\dddmes}u=f$. 
+Here one follows a similar procedure to the proof of theorem \ref{thm:ScalarDerivation-Theorem}, realising that the problem $-\laplacian_{\qm}^{\dddmes}u=f$ can be written in the form \eqref{eq:SingularWaveEqnQGProblem}, except replacing $\omega^2 u$ with $f$ in \eqref{eq:SingularWaveEqnQGProblem-1} and $\omega^2\alpha_j u(v_j)$ with $\alpha_j f(v_j)$ in \eqref{eq:SingularWaveEqnQGProblem-3}.
+The fact that $f\in\ltwo{\ddom}{\dddmes}$ is important here, as it provides enough regularity for $u$ to be an element of $H^2\bracs{\graph}$.
+
 Our approach via singular measures has resulted in the immediate construction of the extended space \emph{and corresponding operator} one obtains in the zero-thickness limit of thin-structure problems.
 Within the context of the acoustic approximation we already knew what these limits where, however our original formulation provides a method of defining this limiting problem by appealing to the geometry.
 This also presents an opportunity we look to investigate going forward; the non-classical Sobolev spaces and variational problems provide us with a method of defining (up to isomorphism) the spaces and problems that may correspond to the --- presently unknown --- ``limits" of other thin-structure problems.
