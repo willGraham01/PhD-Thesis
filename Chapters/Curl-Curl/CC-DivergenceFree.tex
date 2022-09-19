@@ -1,7 +1,12 @@
 \section{The Divergence-Free Condition} \label{sec:DivFreeCondition}
 As was mentioned in section \ref{sec:Intro-Maxwell}, the absence of free electric charges requires us to impose that the electric and magnetic fields are divergence-free.
 This extends to the vector field $u$ that solves the curl-of-the-curl equation, which is derived under the aforementioned assumption of no free charges.
-This divergence-free condition adds extra constraints to the fields, and the analysis of section \ref{sec:CC-CurlAnalysis} indicates that we require an analogue of this divergence-free condition to constrain the behaviour of vector fields with $\dddmes$-tangential curls near the vertices.
+Imposing that the field $u$ be divergence-free also serves a mathematical purpose; the kernel of the (matrix) operator $\mathcal{M}$ in \eqref{eq:Intro-MaxwellInMatrxForm} is infinite-dimensional, being the space of (pairs of) potential fields.
+After ``squaring" $\mathcal{M}$ to obtain the curl-of-the-curl ``operator" (with non-negative spectrum), we still have this infinite-dimensional kernel and thus the zero eigenvalue has infinite multiplicity.
+The zero eigenvalue, which is now the least eigenvalue, having infinite multiplicity makes numerical approaches that are justified through use of the min-max principle redundant --- with the least eigenvalue having an infinite-dimensional eigenspace, one can never compute non-zero eigenvalues.
+Including the divergence-free condition in the definition of the domain of the Maxwell operator removes potential fields from the domain of our operator, and consequentially removes the eigenvalue of infinite multiplicity at zero.
+The divergence-free condition also adds extra constraints to the fields, and the analysis of section \ref{sec:CC-CurlAnalysis} indicates that we require an analogue of this divergence-free condition to constrain the behaviour of vector fields with $\dddmes$-tangential curls near the vertices.
+
 We thus require an analogue of the divergence-free condition to impose on the space of vector fields in which we look for solutions to the problem \eqref{eq:SingularCurlEquation}.
 Given the motivation for our consideration of the curl of the curl equation on a singular structure, it is natural for us to consider what the analogue of a divergence free field would be.
 Using the classical notion of a divergence-free vector field as our starting point, we find ourselves presented with several reasonable definitions for the notion of a divergence free vector field with respect to our singular measures, which we will discuss in turn below.

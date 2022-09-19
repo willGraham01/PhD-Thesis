@@ -7,15 +7,6 @@ Furthermore, in choosing to study vectorial systems we move outside the reach of
 Furthermore, the arguments available in the context of the acoustic approximation rely on knowing \emph{a priori} the resulting limiting problem one should obtain.
 Our physically motivated approach serves as a predictive tool in this regard; we use our variational problems with respect to singular structures to provide candidates for such problems (or even operators) to support such analysis.
 This builds off the success of our variational approach and singular structures in the previous chapter; the system \eqref{eq:SingularWaveEqnQGProblem} matches that of the limiting problems one obtains for the acoustic equation on a thin structure, and the variational problem studied is the direct analogue its thin-structure counterpart.
-%
-%The focus of this chapter is extending the work of chapter \ref{ch:ScalarSystem} in understanding variational problems on singular structures, the spaces and objects involved, and their explicit solution to the ``curl of the curl" equation.
-%Using the ideas and concepts developed in chapter \ref{ch:ScalarSystem}, we can begin to define analogues of the curl and divergence of vector fields with respect to our singular measures.
-%This takes us outside the realms in which we can rely on intuition to guide us --- the curl and divergence do not have (obvious) one-dimensional analogues in the same way that the gradient possesses (with the derivative).
-%However it in turn allows us to consider variational problems motivated by the Maxwell system that go beyond the acoustic approximation, examine candidates for ``limiting" problems for the Maxwell system on thin structures, and provide insights into the effects that might be lost when considering the acoustic approximation over the vectorial equations.
-%Unlike with the acoustic approximation, an analysis of the curl of the curl equation (and broader Maxwell system) on a thin structure as the thickness tends to zero is presently an open problem in the literature.
-%Furthermore, the closest analogue available in the context of the acoustic approximation --- the studies \cite{kuchment2001convergence, kuchment2003asymptotics, exner2005convergence} --- rely on knowing \emph{a priori} the resulting limiting problem one should obtain.
-%Here we appeal to the success of our variational approach and singular structures in the previous chapter; the system \eqref{eq:SingularWaveEqnQGProblem} matches that of the limiting problems one obtains for the acoustic equation on a thin structure, and the variational problem studied is the direct analogue its thin-structure counterpart.
-%By starting from a variational problem on a singular structure that reflects the curl of the curl equation, we aim to provide a candidate for the thin structure limit of said equation, and to examine some of the behaviours one can expect from the spectrum and/or solutions.
 
 We now formulate the variational problem for the curl-of-the-curl equation on a singular structure.
 Let $\ktcurlSob{\ddom}{\dddmes}$ be the space of functions with $\dddmes$-tangential curls as introduced in section \ref{sec:BorelMeasSobSpaces}, and let $\graph=\bracs{\vertSet,\edgeSet}$ be the period graph of a (periodic) metric graph $\hat{\graph}$ embedded into $\reals^2$, with unit cell $\ddom=[0,1)^2$.
@@ -26,7 +17,7 @@ The invariance along the fibre axis, and periodic structure in the $\bracs{x_1,x
 	\ktcurl{\dddmes}\bracs{ \ktcurl{\dddmes}u } &= \omega^2 u,
 	\qquad \text{in } \ddom,
 \end{align}
-for \emph{divergence-free} $u\in\ktcurlSob{\ddom}{\dddmes}$, with $\wavenumber$ the Fourier variable (and $\qm$ the quasi-momentum).
+for \emph{divergence-free} $u\in\ktcurlSob{\ddom}{\dddmes}$ (the importance of which we will elaborate on in section \ref{sec:DivFreeCondition}), with $\wavenumber$ the Fourier variable (and $\qm$ the quasi-momentum).
 We again need to study the spaces $\curlZero{\ddom}{\dddmes}$ and $\ktcurlSob{\ddom}{\dddmes}$ in order to understand what the tangential curl of a vector field \emph{is} and how it behaves, which is the subject of analysis in section \ref{sec:CC-CurlAnalysis}.
 Additionally, we need an analogue of the divergence-free condition that compliments the curl-of-the-curl equation, which is the topic of discussion in section \ref{sec:DivFreeCondition}.
 It is also important that we bear in mind that each edge $I_{jk}$ induces a plane $P_{jk} = I_{jk}\times[0,\infty)$ parallel to $\widehat{x}_3$, and multiplication by $\rmi\wavenumber$ in Fourier space represents differentiation with respect to $x_3$ --- the interpretation of tangential curls in section \ref{sec:CC-Geometric} relies on this.
