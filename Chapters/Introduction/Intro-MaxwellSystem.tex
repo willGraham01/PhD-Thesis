@@ -35,13 +35,13 @@ obtaining system
 \end{align*}
 as a result.
 The equations involving the curl can be written in matrix form, and correspond to the spectral problem for the ``operator" 
-\begin{align*}
+\begin{align} \label{eq:Intro-MaxwellInMatrxForm}
 	\mathcal{M} &:=
 	\begin{pmatrix}
 		0 & -\recip{\rmi\epsilon_m}\curl{} \\
 		\recip{\rmi\mu_m}\curl{} & 0
 	\end{pmatrix}.
-\end{align*}
+\end{align}
 We will come to call $\mathcal{M}$ the Maxwell operator, however we need to be slightly careful in defining it so that we respect the divergence-free conditions, and end up with a self-adjoint operator.
 Typically this not difficult if the domain we are considering is smooth (or the whole of $\reals^d$), even the regularity of $\epsilon_m$ and $\mu_m$ tends not to be an issue in these contexts.
 However there is significantly more work that needs to be done for domains with (possibly non-smooth) metallic inclusions or boundaries, with the work of \cite{birman1987l2, birman1989selfadjoint} providing a detailed study of the Maxwell operator in these contexts.
