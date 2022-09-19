@@ -225,7 +225,7 @@ The hypothesis that $\supp\bracs{g_{jk}}\subset I_{jk}^n$ is essential for the i
 	\norm{\ograd\phi_l - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^3} \leq \norm{\ograd\phi_l - g_{jk}}_{\ltwo{\ddom}{\lambda_{jk}}^3}
 \end{align*} 
 to hold.
-It is also requires so that we can use the function $\chi_{jk}^n$ to ensure that the support of our approximating sequence $\psi_l$ is only intersects $\graph$ on the edge $I_{jk}$, so we can utilise the properties of $\phi_l$.
+It is also required so that we can use the function $\chi_{jk}^n$ to ensure that the support of our approximating sequence $\psi_l$ is only intersects $\graph$ on the edge $I_{jk}$, so we can utilise the properties of $\phi_l$.
 
 We can now use the fact that the space of gradients of zero is closed to complete the proof of proposition \ref{prop:3DGradZeroChar}.
 \begin{prop} \label{prop:3DBSubsetGradZero}
@@ -492,46 +492,8 @@ That is to say, every $\ltwo{\ddom}{\massMes}$ function possesses a tangential g
 	\end{enumerate}
 \end{proof}
 
-% Since there are a lot of long arguments in the section on characterising tangential gradient Sobolev spaces, I've put these into a new file.
 \input{./Chapters/Scalar-System/Scalar-SobSpacesAnalysisCharacterisation}
-
-%\tstk{do we want the IBP result to appear here? It doesn't actually work --- can't cancel the vertex contributions in lieu of our functions being non-constant across different vertices...}
-%With theorem \ref{thm:CharOfSobSpaces}, we have enough understanding of the space $\ktgradSob{\ddom}{\dddmes}$ to proceed with the argument of section \ref{sec:ScalarDerivation}.
-%On a number of equations, we have highlighted our choice to understand tangential gradients through approximation by smooth functions, rather than in a ``weak" or distributional sense through analogy with the integration by parts technique.
-%When working with the Lebesgue measure, these two methods of defining gradients (and the classical Sobolev spaces) coincide thanks to the Meyers-Serin theorem.
-%We have remarked on a number of occasions that this equivalence will not hold for general Borel measures $\rho$, in particular the singular measures we have considered here.
-%However, the association of $I_{jk}$ with the intervals $\sqbracs{0,l_{jk}}$ and our ``removal" of the tangential gradients \emph{does} provide a partial analogy involving the tangential gradients.
-%\begin{prop}
-%	Let $u,v\in\ktgradSob{\ddom}{\dddmes}$, and $i\in\clbracs{1,2,3}$.
-%	Then we have that
-%	\begin{align*}
-%		\integral{\ddom}{ u\overline{\ktgrad_{\dddmes}v}\cdot\widehat{x}_i }{\dddmes}
-%		&= - \integral{\ddom}{ \overline{v}\ktgrad_{\dddmes}u\cdot\widehat{x}_i }{\dddmes}.
-%	\end{align*}
-%\end{prop}
-%\begin{proof}
-%	If $i=3$, then we have trivially that
-%	\begin{align*}
-%		\integral{\ddom}{ u\overline{\ktgrad_{\dddmes}v}\cdot\widehat{x}_3 }{\dddmes}
-%		&= \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \integral{I_{jk}}{ -\rmi\wavenumber u^{(jk)}\overline{v}^{(jk)} }{\lambda_{jk}} -\rmi\wavenumber\sum_{v_j\in\vertSet}\alpha_j u(v_j)\overline{v}(v_j) \\
-%		&= - \integral{\ddom}{ \overline{v}\ktgrad_{\dddmes}u\cdot\widehat{x}_i }{\dddmes}.
-%	\end{align*}
-%	
-%	Now suppose that $i\in\clbracs{1,2}$.
-%	Note that theorem \ref{thm:CharOfSobSpaces} informs us that $u^{(jk)}, v^{(jk)}$ are continuous (hence uniformly continuous) on $\sqbracs{0,l_{jk}}$, and are also elements of $\gradSob{\sqbracs{0,l_{jk}}}{y}$.
-%	Therefore, we have that
-%	\begin{align*}
-%		\integral{\ddom}{ u\overline{\ktgrad_{\dddmes}v}\cdot\widehat{x}_i }{\dddmes}
-%		&= \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \integral{I_{jk}}{ u^{(jk)}\overline{\ktgrad_{\lambda_{jk}}v}\cdot\widehat{x}_i }{\lambda_{jk}} \\
-%		&= \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \integral{I_{jk}}{ u^{(jk)}\bracs{ \bracs{\overline{v}^{(jk)}}' -\rmi\qm_{jk}\overline{v}^{(jk)} }\widehat{e}_{jk}\cdot\widehat{x}_i }{\lambda_{jk}} \\
-%		&= \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \int_0^{l_{jk}} u^{(jk)}\bracs{ \bracs{\overline{v}^{(jk)}}' -\rmi\qm_{jk}\overline{v}^{(jk)} }\widehat{e}_{jk}\cdot\widehat{x}_i \ \md y \\
-%		&= \sum_{v_j\in\vertSet}\sum_{j\conLeft k} \int_0^{l_{jk}} \overline{v}^{(jk)}\bracs{ \bracs{\overline{v}^{(jk)}}' -\rmi\qm_{jk}\overline{v}^{(jk)} }\widehat{e}_{jk}\cdot\widehat{x}_i \ \md y
-%		+  \sum_{v_j\in\vertSet}\sum_{j\conLeft k}\sqbracs{u^{(jk)}v^{(jk)}}_0^{l_{jk}} \\
-%		&= \integral{\ddom}{ \overline{v}^{(jk)}\ktgrad_{\dddmes}u }{\dddmes}
-%		+ \sum_{v_j\in\vertSet}\sum_{I_{jk}\in J(v_j)} u(v_j)\overline{v}(v_j)
-%	\end{align*}
-%\end{proof}
 
 This concludes our investigation into $\ktgradSob{\ddom}{\dddmes}$ and the behaviour of the tangential gradients.
 In section \ref{ssec:3DGradGeometric} we provide a geometric interpretation of gradients of zero and tangential gradients that highlights the connection between the singular measures, the geometry of the singular structure, and the notion of ``gradient" that the measures provide.
-We will come to utilise the knowledge of tangential gradients in section \ref{sec:ScalarDerivation}, where knowing their explicit form is essential to us obtaining the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem} from \eqref{eq:SingularScalarWaveEqn}.
+We shall come to utilise the knowledge of tangential gradients in section \ref{sec:ScalarDerivation}, where knowing their explicit form is essential to us obtaining the quantum graph problem \eqref{eq:SingularWaveEqnQGProblem} from \eqref{eq:SingularScalarWaveEqn}.

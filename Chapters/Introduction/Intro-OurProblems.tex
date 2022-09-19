@@ -20,7 +20,7 @@ Now consider which pieces of this formulation either change or cease to have cle
 \begin{enumerate}
 	\item The most notable effect is the loss of a distinction between the boundary $\partial G_{\delta}$ and the interior of $G_{\delta}$ when $\delta$ ``reaches" zero and becomes the singular structure $\graph$ --- the edges of this graph correspond to the overlap between what was previously two parts of the boundary of $G_{\delta}$.
 	\item The graph $\graph$ itself has no interior from the perspective of $\reals^d$, differential equation \eqref{eq:Intro-ThinToSingularDE} becomes meaningless.
-	Where or how do we pose this if our new domain doesn't have any interior?
+	Where or how do we pose this if our new domain has no interior?
 \end{enumerate}
 We can address our first observation by realising that it is only our explicit separation of the boundary condition \eqref{eq:Intro-ThinToSingularBC} and differential equation \eqref{eq:Intro-ThinToSingularDE} that leads to this problem.
 Instead we can consider the variational formulation for \eqref{eq:Intro-ThinToSingularSys}, to find $u$ such that
@@ -42,10 +42,10 @@ This motivates our study of the so-called ``non-classical" Sobolev spaces (secti
 
 Consideration of variational problems with respect to Borel measures is not an unexplored concept, although considerations for the explicit solution of such problems (both analytically and numerically) is largely untouched in the literature.
 Works such as \cite{bouchitte2001homogenization, zhikov2000extension} introduced the notion of two-scale convergence with respect to Borel measures into the existing toolbox of homogenisation theory.
-Other works have since begun studying variational problems with respect to measures, within the context of homogenisation problems in elasticity the studies one can see \cite{zhikov2002homogenization, zhikov2003homogenization, cherednichenko2019homogenisation}.
+Other works have since begun studying variational problems with respect to measures, within the context of homogenisation problems in elasticity one can see the studies \cite{zhikov2002homogenization, zhikov2003homogenization, cherednichenko2019homogenisation}.
 The studies \cite{cherednichenko2018operator, cherednichenko2022operator, cherednichenko2020order} have considered the homogenisation of problems within the context of electromagnetism, posed with respect to arbitrary (Borel) measures, and derived the appropriate effective problems.
 For an example of an explicit study of a variational problem on a singular structure, the study \cite{zhikov2013spectrum} considers the spectrum of the operator of transverse displacements (within the context of elasticity), proving that it possesses a discrete spectrum.
-However we reiterate that none of these studies touch upon how one might proceed with the explicit solution of the effective problem that is obtained --- whilst having such analytic properties are useful, the limiting models aren't much use if they are as hard to solve as the problems they are approximating.
+However we reiterate that none of these studies touch upon how one might proceed with the explicit solution of the effective problem that is obtained --- whilst having such analytic properties are useful, the limiting models are not much use if they are as hard to solve as the problems they are approximating.
 Furthermore, none of these studies consider setups in which there the structure shrinking to zero possesses contrast between its vertex and edge volumes.
 These are two particular topics we look to address in chapters \ref{ch:ScalarSystem} and \ref{ch:SingInc}.
 

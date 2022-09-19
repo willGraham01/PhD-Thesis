@@ -15,7 +15,8 @@ In this chapter, we will concern ourselves with the analysis of the \emph{acoust
 \end{align}
 where $u\in\tgradSob{\ddom}{\dddmes}$.
 We perform a detailed study of the functions that lie in the space $\tgradSob{\ddom}{\dddmes}$ in section \ref{sec:3DGradSobSpaces}.
-In the interest of presenting a consistent narrative of the work conducted, but also not wanting to disrupt this with a large technical section, we move this analysis to the end of the chapter. but provide However we provide a geometric interpretation of the gradients of zero and tangential gradients $\tgrad_{\dddmes}u$ in section \ref{ssec:3DGradGeometric}.
+In the interest of presenting a consistent narrative of the work conducted, but also not wanting to disrupt this with a large technical section, we move this analysis to the end of the chapter.
+However we provide a geometric interpretation of the gradients of zero and tangential gradients in section \ref{ssec:3DGradGeometric}.
 Perhaps a more pressing issue is that we must provide a suitable definition for the problem \eqref{eq:SingularScalarWaveEqn}; to this end we interpret \eqref{eq:SingularScalarWaveEqn} as the problem of finding $u\in\tgradSob{\ddom}{\dddmes}\setminus\clbracs{0}$, $\omega>0$, such that
 \begin{align} \label{eq:SingularScalarWaveEqn-VariationalForm}
 	\integral{\ddom}{ \tgrad_{\dddmes}u\cdot\overline{\tgrad_{\dddmes}\phi} }{\dddmes}
@@ -24,7 +25,7 @@ Perhaps a more pressing issue is that we must provide a suitable definition for 
 \end{align}
 Notice that this is a direct analogue of the weak formulation for the Neumann Laplacian, except we now consider the gradients and measures that respect our singular structures, rather than the standard weak derivatives and Lebesgue integrals.
 
-Although our concern is predominantly the ``spectral" problem \eqref{eq:SingularScalarWaveEqn} defined through \eqref{eq:SingularScalarWaveEqn-VariationalForm}, however with the knowledge (from section \ref{sec:BorelMeasSobSpaces}) that $\tgradSob{\ddom}{\dddmes}$ is a Hilbert space, we can consider defining $-\laplacian_{\qm}^{\dddmes}$ as an operator on $\tgradSob{\ddom}{\dddmes}$.
+Although our concern is predominantly the ``spectral" problem \eqref{eq:SingularScalarWaveEqn} defined through \eqref{eq:SingularScalarWaveEqn-VariationalForm}, with the knowledge (from section \ref{sec:BorelMeasSobSpaces}) that $\tgradSob{\ddom}{\dddmes}$ is a Hilbert space, we can consider defining $-\laplacian^{\qm}_{\dddmes}$ as an operator on $\tgradSob{\ddom}{\dddmes}$.
 Consider the bilinear form $b_{\qm}$ defined by
 \begin{align*}
 	\dom\bracs{b_{\qm}} &= \tgradSob{\ddom}{\dddmes}\times\tgradSob{\ddom}{\dddmes}, \\

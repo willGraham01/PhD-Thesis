@@ -33,7 +33,7 @@ Furthermore, we then obtain the (strong) equation
 \end{align*}
 
 Now we turn our attention to the derivation of the vertex conditions.
-Fix a vertex $v_j\in \vertSet$, and consider functions $\phi\in\psmooth{\ddom}$ with $\supp\phi\cap\graph\subset \mathcal{J}(v_j)\setminus\clbracs{v_j}$ (that is, smooth functions that are only non-zero on $\graph$ close to the vertex $v_j$).
+Fix a vertex $v_j\in \vertSet$, and consider functions $\phi\in\psmooth{\ddom}$ with $\supp\phi\cap\graph\subset \mathcal{J}(v_j)\setminus\clbracs{v_k}_{k\neq j}$ (that is, smooth functions that are only non-zero on $\graph$ close to the vertex $v_j$).
 Using the change of variables $r_{jk}$ on each edge and writing $\tilde{u}^{(jk)} = u^{(jk)} \circ r_{jk}$, $\varphi_{jk} = \phi\circ r_{jk}$ for each $k\con j$, we can work from \eqref{eq:SingularScalarWaveEqn-VariationalForm} to obtain
 \begin{align*}
 	0 &= \sum_{k: \ k\con j} \integral{I_{jk}}{ \bracs{ \tgrad_\ddmes u \cdot \overline{\tgrad\phi} - \omega^2 u\overline{\phi} } }{\lambda_{jk}} 
@@ -57,7 +57,7 @@ Given that \eqref{eq:DerivationVertexConditionWeak} holds for every smooth $\var
 \end{align*}
 
 Repeating the argument for each $v_j\in \vertSet$ then provides us with a condition of this form at each vertex.
-One should note the presence of $\omega^2$ in this equation, so this is not a Kirchoff condition on the derivatives of the edge functions $u^{(jk)}$, and indicates that the problem we have arrived at is defined through an operator acting in an extended space, as mentioned in section \ref{ssec:DiffOpsOnGraphs}.
+One should note the presence of $\omega^2$ in this equation, so this is not in general a Kirchoff condition on the derivatives of the edge functions $u^{(jk)}$, and indicates that the problem we have arrived at is defined through an operator acting in an extended space, as mentioned in section \ref{ssec:DiffOpsOnGraphs}.
 The result of theorem \ref{thm:dddmesTangGradImplication} tells us that functions $u\in\gradSobQM{\ddom}{\dddmes}$ are also continuous at each vertex $v_j$, and thus the following problem (precisely \eqref{eq:SingularWaveEqnQGProblem}) has been derived:
 \begin{subequations}
 	\begin{align*}
@@ -115,7 +115,7 @@ The operators $\mathcal{A}_{\mathrm{ext}}$ and $-\laplacian_{\dddmes}^{\qm}$ pos
 If $\omega^2$, $u$ is an eigenpair of $-\laplacian_{\dddmes}^{\qm}$, then this eigenpair solves \eqref{eq:SingularWaveEqnQGProblem} by virtue of theorem \ref{thm:ScalarDerivation-Theorem}.
 In particular we have that $u\in H^2\bracs{\graph}$ and is continuous through the vertices (as a consequence of theorem \ref{thm:CharOfSobSpaces}), so one has that $\bracs{u,\beta = \clbracs{\alpha_j u(v_j)}_{v_j\in\vertSet}}$ satisfies $\mathcal{A}_{\mathrm{ext}}\bracs{u,\beta} = \omega^2\bracs{u,\beta}$.
 Conversely if $\omega^2, \bracs{u,\beta}$ is an eigenpair of $\mathcal{A}_{\mathrm{ext}}$, then $u\in\tgradSob{\ddom}{\dddmes}$ by theorem \ref{thm:CharOfSobSpaces} (it is continuous through the vertices and $H^1$ on the edges) and takes the values $u(v_j) = \alpha_j^{-1}\beta_j$ at the vertices.
-The pair $omega^2, u$ also solves the system \eqref{eq:SingularWaveEqnQGProblem}, so by theorem \ref{thm:CharOfSobSpaces} also constitutes an eigenpair of $-\laplacian_{\dddmes}^{\qm}$.
+The pair $\omega^2, u$ also solves the system \eqref{eq:SingularWaveEqnQGProblem}, so by theorem \ref{thm:CharOfSobSpaces} also constitutes an eigenpair of $-\laplacian_{\dddmes}^{\qm}$.
 A similar argument also extends to the situation where one considers $f\in L^2\bracs{\graph}\oplus\complex^{\abs{\vertSet}} \cong \ltwo{\ddom}{\dddmes}$ and solution to the problem $\mathcal{A}_{\mathrm{ext}}u=f$ and $-\laplacian_{\qm}^{\dddmes}u=f$. 
 Here one follows a similar procedure to the proof of theorem \ref{thm:ScalarDerivation-Theorem}, realising that the problem $-\laplacian_{\qm}^{\dddmes}u=f$ can be written in the form \eqref{eq:SingularWaveEqnQGProblem}, except replacing $\omega^2 u$ with $f$ in \eqref{eq:SingularWaveEqnQGProblem-1} and $\omega^2\alpha_j u(v_j)$ with $\alpha_j f(v_j)$ in \eqref{eq:SingularWaveEqnQGProblem-3}.
 The fact that $f\in\ltwo{\ddom}{\dddmes}$ is important here, as it provides enough regularity for $u$ to be an element of $H^2\bracs{\graph}$.
