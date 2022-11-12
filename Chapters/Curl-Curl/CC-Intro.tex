@@ -27,14 +27,14 @@ Of course, we should again clarify how we interpret \eqref{eq:SingularCurlEquati
 \begin{align} \label{eq:SingularCurlEquation-VariationalForm}
 	\integral{\ddom}{ \ktcurl{\dddmes}u\cdot\overline{\ktcurl{\dddmes}\phi} }{\dddmes}
 	&= \omega^2 \integral{\ddom}{ u\cdot\overline{\phi} }{\dddmes}, 
-	\qquad \forall \phi\in\psmooth{\ddom}.
+	\qquad \forall \phi\in\psmooth{\ddom}^3.
 \end{align}
 Once again however, we remark that one can define an operator whose spectral problem corresponds to \eqref{eq:SingularCurlEquation-VariationalForm}; first by defining the bilinear form
 \begin{align*}
 	\dom \bracs{c_{\qm}} &= \ktcurlSob{\ddom}{\dddmes} \times \ktcurlSob{\ddom}{\dddmes}, \\
 	c_{\qm}\bracs{u,v} &= \integral{\ddom}{ \ktcurl{\dddmes}u\cdot\overline{\ktcurl{\dddmes}v} }{\dddmes},
 \end{align*}
-and then the operator $\ktcurl{\dddmes}\bracs{ \ktcurl{\dddmes} \cdot }$  via
+and then the operator\footnote{It is worth remarking that $\psmooth{\ddom}$ is the image under the Gelfand transform of $\csmooth{\reals^2}$ (see section \ref{sec:TP-GelfandTransform}). In lieu of how our spaces $\ktcurlSob{\ddom}{\dddmes}$ are then constructed from such functions, which is closure of pairs of smooth functions and their curls, the domain of $c_{\qm}$ consists of the product of two copies of $\ktgradSob{\ddom}{\dddmes}$. There are no distinct ``maximal" and ``minimal" spaces one typically sees when working with the curl operator in $\reals^3$ \cite{birman1987l2}.} $\ktcurl{\dddmes}\bracs{ \ktcurl{\dddmes} \cdot }$  via
 \begin{align*}
 	\dom\bracs{ \ktcurl{\dddmes}\bracs{ \ktcurl{\dddmes} \cdot } }
 	&= \clbracs{ u\in\ktcurlSob{\ddom}{\dddmes} \setVert \exists f\in\pltwo{\ddom}{\dddmes} \text{ s.t. } \right. \\
@@ -45,7 +45,7 @@ with action
 	\ktcurl{\dddmes}\bracs{ \ktcurl{\dddmes} u } &= f,
 \end{align*}
 where $f$ and $u$ are related as in \eqref{eq:CurlCurlOperatorDefinition}.
-As in the case of the acoustic approximation, we can also define an operator $\kcurl{\upsilon}\bracs{ \kcurl{\upsilon} \cdot }$ acting on functions in $\ktcurlSob{\ddom}{\upsilon}$ where $\upsilon$ is the singular measure supporting $\hat{\graph}$, and have that
+As in the case of the acoustic approximation (and mentioned in section \ref{ssec:SobSpacesAndGelfand}), we could also define an operator $\kcurl{\upsilon}\bracs{ \kcurl{\upsilon} \cdot }$ acting on functions in $\ktcurlSob{\ddom}{\upsilon}$ where $\upsilon$ is the singular measure supporting $\hat{\graph}$, and have that
 \begin{align*}
 	\sigma\bracs{ \kcurl{\upsilon}\bracs{ \kcurl{\upsilon} \cdot } }
 	&= \bigcup_{\qm\in[-\pi,\pi)^2} \sigma\bracs{ \ktcurl{\dddmes}\bracs{ \ktcurl{\dddmes} \cdot } }.
